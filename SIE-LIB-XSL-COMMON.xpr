@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="15.2">
+    <meta>
+        <filters directoryPatterns="" filePatterns="" positiveFilePatterns="" showHiddenFiles="false"/>
+        <options/>
+    </meta>
+    <projectTree name="${artifactId}.xpr">
+        <folder name="src/">
+            <folder path="src/main/xsl/"/>
+        </folder>
+        <folder name="test/">
+            <folder path="src/test/xspec/"/>
+        </folder>
+        <file name="pom.xml"/>
+    </projectTree>
+</project>

@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>eu.els.lib.xsl.common</groupId>
+    <artifactId>SIE-LIB-XSL-COMMON</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
+
+    <name>SIE-LIB-XSL-COMMON</name>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>com.oxiane.xml</groupId>
+                <artifactId>catalogBuilder-maven-plugin</artifactId>
+                <version>1.0-SNAPSHOT</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>catalog</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>com.oxiane.xml</groupId>
+                <artifactId>xslcompiler-maven-plugin</artifactId>
+                <version>1.0-SNAPSHOT</version>
+                <executions>
+                    <execution>
+                         <phase>compile</phase>
+                         <goals>
+                             <goal>xsl-compiler</goal>
+                         </goals>
+                     </execution>
+                </executions>
+                <configuration>
+                    <xslDir>src/main/xsl</xslDir>
+                    <!-- post compilers for XSL that can not be identical when running XSpec or in runtime mode -->
+                    <!-- compilers>
+                        <postCompiler>
+                            <postCompiler>src/compiler/make-xsl-available-for-prod.xsl</postCompiler>
+                            <sources>
+                                <source>src/main/xsl/unavailable.xsl</source>
+                            </sources>
+                        </postCompiler>
+                    </compilers -->
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.3</version>
+                <configuration>
+                    <source>1.7</source>
+                    <target>1.7</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>uk.org.adamretter.maven</groupId>
+                <artifactId>xspec-maven-plugin</artifactId>
+                <version>1.4-SNAPSHOT</version>
+                <dependencies>
+                    <dependency>
+                        <groupId>extern.net.sf.saxon</groupId>
+                        <artifactId>saxonee</artifactId>
+                        <type>jar</type>
+                        <version>9.5.1.5</version>
+                    </dependency>
+                    <!-- dependency>
+	                <groupId>net.sf.saxon</groupId>
+	                <artifactId>Saxon-HE</artifactId>
+	                <version>9.7.0-1</version>
+                    </dependency -->
+                </dependencies>
+                <configuration>
+                    <catalogFile>catalog.xml</catalogFile>
+                    <generateSurefireReport>true</generateSurefireReport>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>run-xspec</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>2.6</version>
+                <configuration>
+                    <descriptorRefs>
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
+                    </descriptorRefs>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+    <repositories>
+        <repository>
+            <id>els-nexus-public</id>
+            <url>http://srvic/nexus/content/groups/public</url>
+            <layout>default</layout>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+
+    <distributionManagement>
+        <repository>
+            <id>els-nexus-release</id>
+            <url>http://srvic/nexus/content/repositories/releases</url>
+            <layout>default</layout>
+        </repository>
+        <snapshotRepository>
+            <id>els-nexus-snapshot</id>
+            <url>http://srvic/nexus/content/repositories/snapshots</url>
+            <layout>default</layout>
+        </snapshotRepository>
+    </distributionManagement>
+
+    <pluginRepositories>
+        <pluginRepository>
+            <id>nexus-public</id>
+            <url>http://srvic/nexus/content/groups/public</url>
+            <layout>default</layout>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </pluginRepository>
+    </pluginRepositories>
+
+</project>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<x:description 
+    xmlns:x="http://www.jenitennison.com/xslt/xspec"
+    xmlns:local="fr:els:samples"
+    stylesheet="../../main/xsl/sample.xsl">
+    <x:scenario label="Scenario for testing a function">
+        <x:call function="local:majuscule">
+            <x:param name="value" select="'azerty'"/>
+        </x:call>
+        <x:expect label="AZERTY" select="'AZERTY'"/>
+    </x:scenario>
+</x:description>
