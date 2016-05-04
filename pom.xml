@@ -3,11 +3,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>eu.els.lib.xsl.common</groupId>
-    <artifactId>SIE-LIB-XSL-COMMON</artifactId>
+    <artifactId>xslLib</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>SIE-LIB-XSL-COMMON</name>
+   <name>xslLib</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
