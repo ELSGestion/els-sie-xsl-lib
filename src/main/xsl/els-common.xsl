@@ -23,6 +23,7 @@
 	
 	<xsl:output name="els:xml" method="xml"/>
 	<xsl:output name="els:xml.indent" method="xml" indent="yes"/>
+	<xsl:output name="els:text" method="text"/>
 	
 	<!--===================================================	-->
 	<!--								COMMON VAR			-->
