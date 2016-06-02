@@ -11,7 +11,8 @@
 	
 	<xsl:import href="els-common.xsl"/>
 	
-	<xsl:key name="getDefineByName" match="define" use="@name"/>
+	<xsl:key name="rng:getDefineByName" match="define" use="@name"/>
+	<xsl:key name="rng:getRefByName" match="ref" use="@name"/>
 	
 	<xsl:function name="rng:getRootNamespaceUri" as="xs:string">
 		<xsl:param name="grammar" as="element(rng:grammar)"/>
@@ -20,7 +21,7 @@
 	
 	<xsl:function name="rng:getDefine" as="element(define)*">
 		<xsl:param name="ref" as="element(ref)"/>
-		<xsl:sequence select="key('getDefineByName', $ref/@name, $ref/root())"/>
+		<xsl:sequence select="key('rng:getDefineByName', $ref/@name, $ref/root())"/>
 	</xsl:function>
 	
 	<xsl:function name="rng:defineHasRefName" as="xs:boolean">
@@ -149,6 +150,9 @@
 			<xsl:next-match/>
 		</xsl:if>
 	</xsl:template>
+	
+	<!--Suppression des <define> orphelins-->
+	<xsl:template match="define[not(exists(key('rng:getRefByName', @name)))]" mode="rng:clean"/>
 	
 	<xsl:template match="node() | @*" mode="rng:clean">
 		<xsl:copy>
