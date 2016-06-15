@@ -122,12 +122,15 @@
 					</xsl:for-each>
 				</colgroup>
 			</xsl:if>
+			<xsl:if test="normalize-space(@cols)!='' and not(normalize-space(@cols) castable as xs:integer)">
+				<xsl:message terminate="yes">@cols="<xsl:value-of select="@cols"/>" n'est pas un entier</xsl:message>
+			</xsl:if>
 			<xsl:apply-templates mode="cals2html" select="thead">
 				<xsl:with-param name="colsep" select="(@colsep, $colsep)[1]"/>
 				<xsl:with-param name="rowsep" select="(@rowsep, $rowsep)[1]"/>
 				<xsl:with-param name="align" select="(@align, $align)[1]"/>
 				<xsl:with-param name="valign" select="(@valign, $valign)[1]"/>
-				<xsl:with-param name="nb-cols" select="@cols" tunnel="yes" />
+				<xsl:with-param name="nb-cols" select="@cols[. castable as xs:integer]" tunnel="yes" />
 			</xsl:apply-templates>
 			<xsl:if test="ancestor::table[1]/footnote | ancestor::table[1]/tblNote | tfoot">
 				<tfoot>
@@ -136,7 +139,7 @@
 						<xsl:with-param name="rowsep" select="(@rowsep, $rowsep)[1]"/>
 						<xsl:with-param name="align" select="(@align, $align)[1]"/>
 						<xsl:with-param name="valign" select="(@valign, $valign)[1]"/>
-						<xsl:with-param name="nb-cols" select="@cols" tunnel="yes" />
+						<xsl:with-param name="nb-cols" select="@cols[. castable as xs:integer]" tunnel="yes" />
 					</xsl:apply-templates>
 					<xsl:if test="ancestor::table[1]/footnote | ancestor::table[1]/tblNote">
 						<tr>
@@ -392,7 +395,8 @@
 					<xsl:value-of select="'bg70 '" />
 				</xsl:if>
 				<xsl:value-of select="$txt-style" />
-				<xsl:if test="$nb-cols > $g-nb-cols-max-before-font-reduction and $nb-cols &lt; $g-nb-cols-max-before-large-font-reduction">
+				<xsl:if test="$nb-cols > $g-nb-cols-max-before-font-reduction
+					        and $nb-cols &lt; $g-nb-cols-max-before-large-font-reduction">
 					<xsl:value-of select="' table-contents-font-reduction'" />
 				</xsl:if>
 				<xsl:if test="$nb-cols > $g-nb-cols-max-before-large-font-reduction">
@@ -424,7 +428,7 @@
 			<xsl:choose>
 				<!-- cellule vide ou p avec espaces -->
 				<xsl:when test="empty(./node()) and normalize-space(string(.))=''">
-					<xsl:text>&#xA0;</xsl:text>
+					<!--<xsl:text>&#xA0;</xsl:text>--> <!--NON car pour la conversion xfe:xml2HTML.xsl cela rend le fichier invalide.-->
 				</xsl:when>
 				<xsl:otherwise>
 					<!--Le contenu de la cellule est copié-->
