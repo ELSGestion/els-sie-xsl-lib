@@ -9,6 +9,8 @@
 
    <name>xslLib</name>
 
+   <description>Une librairie regroupant les XSL couramment utilisées. functx.xsl (http://www.xsltfunctions.com). elsCommon.xsl avec plein de fonctions courantes.</description>
+
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
