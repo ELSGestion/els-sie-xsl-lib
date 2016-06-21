@@ -75,7 +75,7 @@
             <plugin>
                 <groupId>uk.org.adamretter.maven</groupId>
                 <artifactId>xspec-maven-plugin</artifactId>
-                <version>1.4-SNAPSHOT</version>
+                <version>1.4.1-SNAPSHOT</version>
                 <dependencies>
                     <dependency>
                         <groupId>extern.net.sf.saxon</groupId>
