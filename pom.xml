@@ -9,6 +9,8 @@
 
    <name>xslLib</name>
 
+   <description>Une librairie regroupant les XSL couramment utilisées. functx.xsl (http://www.xsltfunctions.com). elsCommon.xsl avec plein de fonctions courantes.</description>
+
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
@@ -73,7 +75,7 @@
             <plugin>
                 <groupId>uk.org.adamretter.maven</groupId>
                 <artifactId>xspec-maven-plugin</artifactId>
-                <version>1.4-SNAPSHOT</version>
+                <version>1.4.1-SNAPSHOT</version>
                 <dependencies>
                     <dependency>
                         <groupId>extern.net.sf.saxon</groupId>
