@@ -288,7 +288,7 @@
 		<xsl:param name="dateVerbalized" as="xs:string"/>
 		<xsl:param name="shortMonth" as="xs:boolean"/>
 		<xsl:choose>
-			<xsl:when test="empty($dateVerbalized) or string-length(tokenize($dateVerbalized, ' ')) &lt; 3">
+			<xsl:when test="empty($dateVerbalized) or count(tokenize($dateVerbalized, $els:regAnySpace)) &lt; 3">
 				<xsl:text>[ErreurDate]</xsl:text>
 				<xsl:message>[ERROR][els:date-string-to-number-slash] Impossible de déterminer la date à partir de '<xsl:value-of select="$dateVerbalized"/>'</xsl:message>
 			</xsl:when>
