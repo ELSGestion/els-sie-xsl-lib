@@ -78,7 +78,7 @@
 		<xsl:variable name="define.name" select="$define/@name" as="xs:string"/>
 		<xsl:sequence select="exists($define//ref[@name = $define.name])"/>
 	</xsl:function>
-
+	
 	<xsl:function name="rng:getSRNGdataModelFromXmlElement" as="element(rng:element)">
 		<xsl:param name="e" as="element()"/>
 		<xsl:param name="grammar" as="element(rng:grammar)"/>
@@ -135,16 +135,33 @@
 	</xsl:function>
 	
 	<!--========== rng:clean ==========--> 
-	<!--nettoie du rng (après manip manuelle dessus) pour le garder valide on espère-->
+	<!--nettoyage du rng (après manip manuelle dessus) pour le garder valide on espère-->
 	
-	<xsl:template match="*[local-name(.) = ('optional', 'zeroOrMore', 'oneOrMore', 'group')][not(*)]" mode="rng:clean"/>
+	<!--on aurait pu mettre /grammar ou /* ici mais on laisse le choix de le faire à n'importe quel niveau-->
+	<xsl:template match="/*" mode="rng:clean">
+		<xsl:variable name="step1.deleteEmptyStructuralInstructionInDataModel" as="document-node()">
+			<xsl:document>
+				<xsl:call-template name="rng:deleteEmptyStructuralInstructionInDataModel">
+					<xsl:with-param name="tree" select="."/>
+				</xsl:call-template>
+			</xsl:document>
+		</xsl:variable>
+		<xsl:for-each select="$step1.deleteEmptyStructuralInstructionInDataModel/*">
+			<xsl:copy>
+				<xsl:apply-templates select="@*|node()" mode="#current"/>
+			</xsl:copy>
+		</xsl:for-each>
+		<!--<xsl:apply-templates select="$step1.deleteEmptyStructuralInstructionInDataModel" mode="#current"/> surtout pas : créé une réccursion infinie-->
+	</xsl:template>
 	
+	<!--Déduplication sur ref dans les choice -->
 	<xsl:template match="choice/ref" mode="rng:clean">
 		<xsl:if test="not(preceding-sibling::ref[@name = current()/@name])">
 			<xsl:next-match/>
 		</xsl:if>
 	</xsl:template>
 	
+	<!--Déduplication sur element dans les choice -->
 	<xsl:template match="choice/element" mode="rng:clean">
 		<xsl:if test="not(preceding-sibling::element[deep-equal(., current())])">
 			<xsl:next-match/>
@@ -152,9 +169,54 @@
 	</xsl:template>
 	
 	<!--Suppression des <define> orphelins-->
+	<!--FIXME : il faudrait le faire de manière récursive pour en supprimer davantage !-->
 	<xsl:template match="define[not(exists(key('rng:getRefByName', @name)))]" mode="rng:clean"/>
 	
-	<xsl:template match="node() | @*" mode="rng:clean">
+	<!--=== mode rng:deleteEmptyStructuralInstructionInDataModel ===-->
+	
+	<!--Un template nommé pour initier la récursivité, puis passage dans un mode du même nom-->
+	<xsl:template name="rng:deleteEmptyStructuralInstructionInDataModel">
+		<xsl:param name="tree" required="yes" as="element()"/>
+		<xsl:param name="iteration" select="1" />
+		<!--<xsl:message>[DEBUG][rng:deleteEmptyStructuralInstructionInDataModel] iteration = <xsl:value-of select="$iteration"/></xsl:message>-->
+		<xsl:variable name="tree.new" as="element()">
+			<xsl:apply-templates select="$tree" mode="rng:deleteEmptyStructuralInstructionInDataModel"/>
+		</xsl:variable>
+		<xsl:choose>
+			<!--Il reste des éléments vide après traitement, on repasse le traitement-->
+			<xsl:when test="$tree.new//*[rng:isEmptyStructuralInstructionInDataModel(.)]">
+				<xsl:call-template name="rng:deleteEmptyStructuralInstructionInDataModel">
+					<xsl:with-param name="tree" select="$tree.new"/>
+					<xsl:with-param name="iteration" select="$iteration + 1"/>
+				</xsl:call-template>
+			</xsl:when>
+			<!--sinon, on renvoi l'arbre final-->
+			<xsl:otherwise>
+				<xsl:sequence select="$tree.new"/>
+			</xsl:otherwise>
+		</xsl:choose>
+	</xsl:template>
+	
+	<xsl:template match="*[rng:isEmptyStructuralInstructionInDataModel(.)]" mode="rng:deleteEmptyStructuralInstructionInDataModel">
+		<!--<xsl:message>[INFO] Delete <xsl:value-of select="els:displayNode(.)"/></xsl:message>-->
+	</xsl:template>
+	
+	<!-- === FONCTIONS utile au mode rng:clean === -->
+	
+	<!--Tous les éléments qui servent à construire le data model, à l'exclusion de ce qui forme le contenu (<attribute/>, <element/>, <text/>, ...)
+	FIXME : quid des ref ?-->
+	<xsl:function name="rng:isStructuralInstructionInDataModel" as="xs:boolean">
+		<xsl:param name="e" as="element()"/>
+		<xsl:sequence select="local-name($e) = ('optional', 'zeroOrMore', 'oneOrMore', 'group', 'interleave', 'choice')"/>
+	</xsl:function>
+	
+	<xsl:function name="rng:isEmptyStructuralInstructionInDataModel" as="xs:boolean">
+		<xsl:param name="e" as="element()"/>
+		<xsl:sequence select="rng:isStructuralInstructionInDataModel($e) and not($e/*)"/>
+	</xsl:function>
+	
+	<!--copie par défaut dans le mode rng:clean-->
+	<xsl:template match="node() | @*" mode="rng:clean rng:deleteEmptyStructuralInstructionInDataModel">
 		<xsl:copy>
 			<xsl:apply-templates select="node() | @*" mode="#current"/>
 		</xsl:copy>
