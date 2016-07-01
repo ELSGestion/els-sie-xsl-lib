@@ -137,21 +137,20 @@
 	<!--========== rng:clean ==========--> 
 	<!--nettoyage du rng (après manip manuelle dessus) pour le garder valide on espère-->
 	
-	<!--on aurait pu mettre /grammar ou /* ici mais on laisse le choix de le faire à n'importe quel niveau-->
-	<xsl:template match="/*" mode="rng:clean">
-		<xsl:variable name="step1.deleteEmptyStructuralInstructionInDataModel" as="document-node()">
-			<xsl:document>
-				<xsl:call-template name="rng:deleteEmptyStructuralInstructionInDataModel">
-					<xsl:with-param name="tree" select="."/>
-				</xsl:call-template>
-			</xsl:document>
+	<!--Attention le / est très important, on initie rng:clean sur un document-node(), mais ensuite l'apply-template ci-dessous ne repasse pas par là 
+	car on travail avec element(grammar) ci-dessous, ce qui évite une boucle récursive infinie-->
+	<xsl:template match="/grammar" mode="rng:clean">
+		<xsl:variable name="step1.deleteOrphansDefine" as="element(grammar)">
+			<xsl:call-template name="rng:deleteOrphansDefine">
+				<xsl:with-param name="tree" select="."/>
+			</xsl:call-template>
 		</xsl:variable>
-		<xsl:for-each select="$step1.deleteEmptyStructuralInstructionInDataModel/*">
-			<xsl:copy>
-				<xsl:apply-templates select="@*|node()" mode="#current"/>
-			</xsl:copy>
-		</xsl:for-each>
-		<!--<xsl:apply-templates select="$step1.deleteEmptyStructuralInstructionInDataModel" mode="#current"/> surtout pas : créé une réccursion infinie-->
+		<xsl:variable name="step2.deleteEmptyStructuralInstructionInDataModel" as="element(grammar)">
+			<xsl:call-template name="rng:deleteEmptyStructuralInstructionInDataModel">
+				<xsl:with-param name="tree" select="$step1.deleteOrphansDefine"/>
+			</xsl:call-template>
+		</xsl:variable>
+		<xsl:apply-templates select="$step2.deleteEmptyStructuralInstructionInDataModel" mode="#current"/>
 	</xsl:template>
 	
 	<!--Déduplication sur ref dans les choice -->
@@ -168,9 +167,52 @@
 		</xsl:if>
 	</xsl:template>
 	
+	<!--=== mode rng:deleteOrphansDefine ===-->
 	<!--Suppression des <define> orphelins-->
-	<!--FIXME : il faudrait le faire de manière récursive pour en supprimer davantage !-->
-	<xsl:template match="define[not(exists(key('rng:getRefByName', @name)))]" mode="rng:clean"/>
+	
+	<!--Un template nommé pour initier la récursivité, puis passage dans un mode du même nom-->
+	<xsl:template name="rng:deleteOrphansDefine">
+		<xsl:param name="tree" required="yes" as="element()"/>
+		<xsl:param name="iteration" select="1" />
+		<xsl:message>[DEBUG][rng:deleteOrphansDefine] iteration = <xsl:value-of select="$iteration"/></xsl:message>
+		<xsl:variable name="tree.new" as="element()">
+			<xsl:apply-templates select="$tree" mode="rng:deleteOrphansDefine"/>
+		</xsl:variable>
+		<xsl:choose>
+			<!--Il reste des éléments vide après traitement, on repasse le traitement-->
+			<xsl:when test="$tree.new//define[rng:isOrphanDefine(.)]">
+				<xsl:call-template name="rng:deleteOrphansDefine">
+					<xsl:with-param name="tree" select="$tree.new"/>
+					<xsl:with-param name="iteration" select="$iteration + 1"/>
+				</xsl:call-template>
+			</xsl:when>
+			<!--sinon, on renvoi l'arbre final-->
+			<xsl:otherwise>
+				<xsl:sequence select="$tree.new"/>
+			</xsl:otherwise>
+		</xsl:choose>
+	</xsl:template>
+	
+	<xsl:template match="define[rng:isOrphanDefine(.)]" mode="rng:deleteOrphansDefine">
+		<xsl:message>[INFO][deleteOrphansDefine] Delete <xsl:value-of select="els:displayNode(.)"/></xsl:message>
+	</xsl:template>
+	
+	<!--FIXME : ça ne permets pas de supprimer A qui reférence B qui référence A
+	=> il faudrait revoir l'algo global => partit du start et aller jusqu'à la fin du modèle en suivant les ref
+	En déduire une liste de define utiles et supprimer tous les autres !-->
+	<xsl:function name="rng:isOrphanDefine" as="xs:boolean">
+		<xsl:param name="define" as="element(define)"/>
+		<!--Le 3e arg de key() doit $etre un document-node() : on force la chose puisque tree est un element()-->
+		<xsl:variable name="virtual.root" as="document-node()">
+			<xsl:document>
+				<xsl:sequence select="$define/root()"/>
+			</xsl:document>
+		</xsl:variable>
+		<!--Il n'existe pas de référence à ce define qui ne soit pas déjà dans ce define (cas de ref circulaire)-->
+		<xsl:sequence select="not(exists(
+			key('rng:getRefByName', $define/@name, $virtual.root)[not(ancestor::*[. is $define])]
+			))"/>
+	</xsl:function>
 	
 	<!--=== mode rng:deleteEmptyStructuralInstructionInDataModel ===-->
 	
@@ -216,7 +258,7 @@
 	</xsl:function>
 	
 	<!--copie par défaut dans le mode rng:clean-->
-	<xsl:template match="node() | @*" mode="rng:clean rng:deleteEmptyStructuralInstructionInDataModel">
+	<xsl:template match="node() | @*" mode="rng:clean rng:deleteEmptyStructuralInstructionInDataModel rng:deleteOrphansDefine">
 		<xsl:copy>
 			<xsl:apply-templates select="node() | @*" mode="#current"/>
 		</xsl:copy>
