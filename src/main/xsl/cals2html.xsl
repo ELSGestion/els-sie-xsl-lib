@@ -84,8 +84,8 @@
 					<xsl:value-of select="concat('first', ' ')" />	
 				</xsl:if>
 				<xsl:value-of select="concat('ix_cals', ' ')" />
-				<xsl:value-of select="concat('ix_frame', ../@frame, ' ')" />
-				<xsl:value-of select="concat('ix_orient', ../@orient, ' ')" />
+				<xsl:value-of select="lower-case(concat('ix_frame', ../@frame, ' '))" />
+				<xsl:value-of select="lower-case(concat('ix_orient', ../@orient, ' '))" />
 				<!--fixme-->
 				<xsl:choose>
 					<xsl:when test="not(../@tabstyle) or ends-with(../@tabstyle, 'PY2') or ancestor::*:infoCahier">
@@ -376,17 +376,17 @@
 		<td>
 			<xsl:attribute name="class">
 				<xsl:if test="$colsep-current != $ix_default-colsep and $colsep-current != '0'">
-					<xsl:value-of select="concat('ix_colsep', ' ')" />
+					<xsl:value-of select="lower-case(concat('ix_colsep', ' '))" />
 				</xsl:if>
 				<xsl:if test="$rowsep-current != $ix_default-rowsep and $rowsep-current != '0'">
-					<xsl:value-of select="concat('ix_rowsep', ' ')" />
+					<xsl:value-of select="lower-case(concat('ix_rowsep', ' '))" />
 				</xsl:if>
-				<xsl:value-of select="concat('ix_align', $align-current, ' ')" />
+				<xsl:value-of select="lower-case(concat('ix_align', $align-current, ' '))" />
 				<!--xsl:if test="$align-current != $ix_default-align">
 					<xsl:value-of select="concat('ix_align', $align-current, ' ')" />
 				</xsl:if-->
 				<xsl:if test="$valign-current != $ix_default-valign">
-					<xsl:value-of select="concat('ix_valign', $valign-current, ' ')" />
+					<xsl:value-of select="lower-case(concat('ix_valign', $valign-current, ' '))" />
 				</xsl:if>
 				<xsl:if test="@percent">
 					<xsl:value-of select="concat('ix_pourcent', @percent, ' ')" />
