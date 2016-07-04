@@ -26,7 +26,7 @@
 
 	<xsl:import href="css-parser.xsl"/>
 
-	<xsl:param name="ns.uri" required="yes" as="xs:string"/>
+	<xsl:param name="cals.ns.uri" select="'-//OASIS//DTD XML Exchange Table Model 19990315//EN'" as="xs:string"/>
 	
 	<!-- ===================================================================-->
 	<!-- MAIN mode "xhtml2cals" -->
@@ -81,11 +81,11 @@
 					<xsl:apply-templates select="caption/node()"/>
 				</xsl:element>
 			</xsl:if>-->
-			<xsl:element name="tgroup" namespace="{$ns.uri}">
+			<xsl:element name="tgroup" namespace="{$cals.ns.uri}">
 				<xsl:attribute name="cols" select="$num-cols"/>
 				<xsl:if test="not(.//col)">
 					<xsl:for-each select="1 to $num-cols">
-						<xsl:element name="colspec" namespace="{$ns.uri}">
+						<xsl:element name="colspec" namespace="{$cals.ns.uri}">
 							<xsl:attribute name="colnum" select="."/>
 							<xsl:attribute name="colname" select="concat('col', .)"/>
 						</xsl:element>
@@ -158,7 +158,7 @@
 
 	<xsl:template match="col" mode="convert-to-cals">
 		<xsl:variable name="colnum" select="count(preceding-sibling::*) + 1"/>
-		<xsl:element name="colspec" namespace="{$ns.uri}">
+		<xsl:element name="colspec" namespace="{$cals.ns.uri}">
 			<xsl:attribute name="colnum" select="$colnum"/>
 			<xsl:attribute name="colname" select="concat('col', $colnum)"/>
 			<xsl:copy-of select="@align"/>
@@ -175,13 +175,13 @@
 	<!-- ===================================================================-->
 	
 	<xsl:template match="thead" mode="convert-to-cals">
-		<xsl:element name="thead" namespace="{$ns.uri}">
+		<xsl:element name="thead" namespace="{$cals.ns.uri}">
 			<xsl:apply-templates mode="convert-to-cals"/>
 		</xsl:element>
 	</xsl:template>
 
 	<xsl:template match="tbody" mode="convert-to-cals">
-		<xsl:element name="tbody" namespace="{$ns.uri}">
+		<xsl:element name="tbody" namespace="{$cals.ns.uri}">
 			<xsl:apply-templates mode="convert-to-cals"/>
 			<!-- add tfooter rows at the end of tbody -->
 			<xsl:apply-templates select="../tfoot/tr" mode="convert-to-cals"/>
@@ -193,7 +193,7 @@
 	</xsl:template>
 
 	<xsl:template match="tr" mode="convert-to-cals">
-		<xsl:element name="row" namespace="{$ns.uri}">
+		<xsl:element name="row" namespace="{$cals.ns.uri}">
 			<xsl:apply-templates mode="convert-to-cals"/>
 		</xsl:element>
 	</xsl:template>
@@ -203,7 +203,7 @@
 	<!-- ===================================================================-->
 
 	<xsl:template match="td | th" mode="convert-to-cals">
-		<xsl:element name="entry" namespace="{$ns.uri}">
+		<xsl:element name="entry" namespace="{$cals.ns.uri}">
 			<xsl:variable name="curr-col-num" as="xs:integer" select="count(preceding-sibling::*) + 1"/>
 			<!-- copy attributes with same name -->
 			<!-- If no @valign use col/@valign, @valign="baseline" has no correspondence in CALS -->
