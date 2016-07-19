@@ -326,6 +326,154 @@
 
 	<xd:doc>
 		<xd:desc>
+			<xd:p>Fonction qui fait les remplacements en regex récursivement</xd:p>
+			<xd:p>
+				Principe : 
+				Chaque regex va être passé SUCCESSIVEMENT sur le texte avec le type de traitement indiqué
+				Attention l'ordre est important.
+				Type de traitement :
+				- remplace-brut = replace(string, regex)
+				- remplace-group = replace('text1(reg1)', text1$1)
+				- etc.
+				Par exemple Type "remplace-group" signifie: on remplace par le ReplaceText, suivi par le 1er groupe reconnu par la regex;
+				analogue pour "group-remplace-group", etc. 
+			</xd:p>
+		</xd:desc>
+		<xd:param name="Text">String à traiter</xd:param>
+		<xd:param name="SequenceDeTriplets">
+			Un sequence d'éléments Triplets de la forme :
+			<Triplet xmlns="http://els.eu/ns/els">
+				<Type>remplace-brut</Type>
+				<RegExp>[ ][ ]+</RegExp>
+				<ReplaceText>&#x0020;</ReplaceText>
+			</Triplet>
+			<!--On préfère tout préfixer avec els: pour éviter tout problème de mélange de namespace (notamment lors de l'applatissement des xsl chaine xml)-->
+		</xd:param>
+	</xd:doc>
+	<xsl:function name="els:reccursivReplace">
+		<xsl:param name="Text"/>
+		<xsl:param name="SequenceDeTriplets" as="element(els:Triplet)*"/>
+		<xsl:variable name="FirstTriplet" select="$SequenceDeTriplets[1]" as="element(els:Triplet)"/>
+		<xsl:variable name="ResteDesTriplets" select="subsequence($SequenceDeTriplets,2)" as="element(els:Triplet)*"/>
+		<xsl:variable name="Type" select="$FirstTriplet/els:Type"/>
+		<xsl:message use-when="false()">
+			<xsl:text>$Type : </xsl:text>
+			<xsl:value-of select="$Type"/>
+		</xsl:message>
+		<xsl:variable name="RegExp" select="$FirstTriplet/els:RegExp"/>
+		<xsl:message use-when="false()">
+			<xsl:text>$RegExp : </xsl:text>
+			<xsl:value-of select="$RegExp"/>
+			<xsl:text>		$Text : </xsl:text>
+			<xsl:value-of select="$Text"/>
+		</xsl:message>
+		<xsl:variable name="ReplaceText" select="$FirstTriplet/els:ReplaceText"/>
+		<xsl:message use-when="false()">
+			<xsl:text>$ReplaceText : </xsl:text>
+			<xsl:text>'</xsl:text>
+			<xsl:value-of select="$ReplaceText"/>
+			<xsl:text>'</xsl:text>
+		</xsl:message>
+		<xsl:variable name="Result">
+			<xsl:choose>
+				<xsl:when test="$Type = 'remplace-brut'">
+					<xsl:analyze-string regex="{$RegExp}" select="$Text">
+						<xsl:matching-substring>
+							<xsl:value-of select="$ReplaceText"/>
+						</xsl:matching-substring>
+						<xsl:non-matching-substring>
+							<xsl:sequence select="."/>
+						</xsl:non-matching-substring>
+					</xsl:analyze-string>
+				</xsl:when>
+				<xsl:when test="$Type = 'remplace-group-space'">
+					<xsl:analyze-string regex="{$RegExp}" select="$Text">
+						<xsl:matching-substring>
+							<xsl:value-of select="$ReplaceText"/>
+							<xsl:value-of select="regex-group(1)"/>
+							<xsl:text> </xsl:text>
+						</xsl:matching-substring>
+						<xsl:non-matching-substring>
+							<xsl:sequence select="."/>
+						</xsl:non-matching-substring>
+					</xsl:analyze-string>
+				</xsl:when>
+				<xsl:when test="$Type = 'remplace-group'">
+					<xsl:analyze-string regex="{$RegExp}" select="$Text">
+						<xsl:matching-substring>
+							<xsl:value-of select="$ReplaceText"/>
+							<xsl:value-of select="regex-group(1)"/>
+						</xsl:matching-substring>
+						<xsl:non-matching-substring>
+							<xsl:sequence select="."/>
+						</xsl:non-matching-substring>
+					</xsl:analyze-string>
+				</xsl:when>
+				<xsl:when test="$Type = 'group'">
+					<xsl:analyze-string regex="{$RegExp}" select="$Text">
+						<xsl:matching-substring>
+							<xsl:value-of select="regex-group(1)"/>
+						</xsl:matching-substring>
+						<xsl:non-matching-substring>
+							<xsl:sequence select="."/>
+						</xsl:non-matching-substring>
+					</xsl:analyze-string>
+				</xsl:when>
+				<xsl:when test="$Type = 'space-group-remplace'">
+					<xsl:analyze-string regex="{$RegExp}" select="$Text">
+						<xsl:matching-substring>
+							<xsl:text> </xsl:text>
+							<xsl:value-of select="regex-group(1)"/>
+							<xsl:value-of select="$ReplaceText"/>
+						</xsl:matching-substring>
+						<xsl:non-matching-substring>
+							<xsl:sequence select="."/>
+						</xsl:non-matching-substring>
+					</xsl:analyze-string>
+				</xsl:when>
+				<xsl:when test="$Type = 'group-remplace'">
+					<xsl:analyze-string regex="{$RegExp}" select="$Text">
+						<xsl:matching-substring>
+							<xsl:value-of select="regex-group(1)"/>
+							<xsl:value-of select="$ReplaceText"/>
+						</xsl:matching-substring>
+						<xsl:non-matching-substring>
+							<xsl:sequence select="."/>
+						</xsl:non-matching-substring>
+					</xsl:analyze-string>
+				</xsl:when>
+				<xsl:when test="$Type = 'group-remplace-group'">
+					<xsl:analyze-string regex="{$RegExp}" select="$Text">
+						<xsl:matching-substring>
+							<xsl:value-of select="regex-group(1)"/>
+							<xsl:value-of select="$ReplaceText"/>
+							<xsl:value-of select="regex-group(2)"/>
+						</xsl:matching-substring>
+						<xsl:non-matching-substring>
+							<xsl:sequence select="."/>
+						</xsl:non-matching-substring>
+					</xsl:analyze-string>
+				</xsl:when>
+				<xsl:when test="$Type = 'remplace-group-remplace-group'">
+					<xsl:analyze-string regex="{$RegExp}" select="$Text">
+						<xsl:matching-substring>
+							<xsl:text> </xsl:text>
+							<xsl:value-of select="regex-group(1)"/>
+							<xsl:value-of select="$ReplaceText"/>
+							<xsl:value-of select="regex-group(2)"/>
+						</xsl:matching-substring>
+						<xsl:non-matching-substring>
+							<xsl:sequence select="."/>
+						</xsl:non-matching-substring>
+					</xsl:analyze-string>
+				</xsl:when>
+			</xsl:choose>
+		</xsl:variable>
+		<xsl:sequence select="if (empty($ResteDesTriplets)) then $Result else els:reccursivReplace($Result, $ResteDesTriplets)"/>
+	</xsl:function>
+	
+	<xd:doc>
+		<xd:desc>
 			<xd:p>Normalize the string: remove diacritic marks.</xd:p>
 			<xd:p>Exemple : els:normalize-no-diacritic('éêèàœç')='eeeaœc'</xd:p>
 		</xd:desc>
@@ -916,158 +1064,6 @@
 	<xsl:function name="els:getFolderName" as="xs:string">
 		<xsl:param name="filePath" as="xs:string?"/>
 		<xsl:value-of select="els:getFolderName($filePath,1)"/>
-	</xsl:function>
-	
-	<!--===================================================	-->
-	<!--										STRING													-->
-	<!--===================================================	-->
-	
-	<xd:doc>
-		<xd:desc>
-			<xd:p>Fonction qui fait les remplacements en regex récursivement</xd:p>
-			<xd:p>
-				Principe : 
-				Chaque regex va être passé SUCCESSIVEMENT sur le texte avec le type de traitement indiqué
-				Attention l'ordre est important.
-				Type de traitement :
-				- remplace-brut = replace(string, regex)
-				- remplace-group = replace('text1(reg1)', text1$1)
-				- etc.
-				Par exemple Type "remplace-group" signifie: on remplace par le ReplaceText, suivi par le 1er groupe reconnu par la regex;
-				analogue pour "group-remplace-group", etc. 
-			</xd:p>
-		</xd:desc>
-		<xd:param name="Text">String à traiter</xd:param>
-		<xd:param name="SequenceDeTriplets">
-			Un sequence d'éléments Triplets de la forme :
-			<Triplet xmlns="http://els.eu/ns/els">
-				<Type>remplace-brut</Type>
-				<RegExp>[ ][ ]+</RegExp>
-				<ReplaceText>&#x0020;</ReplaceText>
-			</Triplet>
-			<!--On préfère tout préfixer avec els: pour éviter tout problème de mélange de namespace (notamment lors de l'applatissement des xsl chaine xml)-->
-		</xd:param>
-	</xd:doc>
-	<xsl:function name="els:reccursivReplace">
-		<xsl:param name="Text"/>
-		<xsl:param name="SequenceDeTriplets" as="element(els:Triplet)*"/>
-		<xsl:variable name="FirstTriplet" select="$SequenceDeTriplets[1]" as="element(els:Triplet)"/>
-		<xsl:variable name="ResteDesTriplets" select="subsequence($SequenceDeTriplets,2)" as="element(els:Triplet)*"/>
-		<xsl:variable name="Type" select="$FirstTriplet/els:Type"/>
-		<xsl:message use-when="false()">
-			<xsl:text>$Type : </xsl:text>
-			<xsl:value-of select="$Type"/>
-		</xsl:message>
-		<xsl:variable name="RegExp" select="$FirstTriplet/els:RegExp"/>
-		<xsl:message use-when="false()">
-			<xsl:text>$RegExp : </xsl:text>
-			<xsl:value-of select="$RegExp"/>
-			<xsl:text>		$Text : </xsl:text>
-			<xsl:value-of select="$Text"/>
-		</xsl:message>
-		<xsl:variable name="ReplaceText" select="$FirstTriplet/els:ReplaceText"/>
-		<xsl:message use-when="false()">
-			<xsl:text>$ReplaceText : </xsl:text>
-			<xsl:text>'</xsl:text>
-			<xsl:value-of select="$ReplaceText"/>
-			<xsl:text>'</xsl:text>
-		</xsl:message>
-		<xsl:variable name="Result">
-			<xsl:choose>
-				<xsl:when test="$Type = 'remplace-brut'">
-					<xsl:analyze-string regex="{$RegExp}" select="$Text">
-						<xsl:matching-substring>
-							<xsl:value-of select="$ReplaceText"/>
-						</xsl:matching-substring>
-						<xsl:non-matching-substring>
-							<xsl:sequence select="."/>
-						</xsl:non-matching-substring>
-					</xsl:analyze-string>
-				</xsl:when>
-				<xsl:when test="$Type = 'remplace-group-space'">
-					<xsl:analyze-string regex="{$RegExp}" select="$Text">
-						<xsl:matching-substring>
-							<xsl:value-of select="$ReplaceText"/>
-							<xsl:value-of select="regex-group(1)"/>
-							<xsl:text> </xsl:text>
-						</xsl:matching-substring>
-						<xsl:non-matching-substring>
-							<xsl:sequence select="."/>
-						</xsl:non-matching-substring>
-					</xsl:analyze-string>
-				</xsl:when>
-				<xsl:when test="$Type = 'remplace-group'">
-					<xsl:analyze-string regex="{$RegExp}" select="$Text">
-						<xsl:matching-substring>
-							<xsl:value-of select="$ReplaceText"/>
-							<xsl:value-of select="regex-group(1)"/>
-						</xsl:matching-substring>
-						<xsl:non-matching-substring>
-							<xsl:sequence select="."/>
-						</xsl:non-matching-substring>
-					</xsl:analyze-string>
-				</xsl:when>
-				<xsl:when test="$Type = 'group'">
-					<xsl:analyze-string regex="{$RegExp}" select="$Text">
-						<xsl:matching-substring>
-							<xsl:value-of select="regex-group(1)"/>
-						</xsl:matching-substring>
-						<xsl:non-matching-substring>
-							<xsl:sequence select="."/>
-						</xsl:non-matching-substring>
-					</xsl:analyze-string>
-				</xsl:when>
-				<xsl:when test="$Type = 'space-group-remplace'">
-					<xsl:analyze-string regex="{$RegExp}" select="$Text">
-						<xsl:matching-substring>
-							<xsl:text> </xsl:text>
-							<xsl:value-of select="regex-group(1)"/>
-							<xsl:value-of select="$ReplaceText"/>
-						</xsl:matching-substring>
-						<xsl:non-matching-substring>
-							<xsl:sequence select="."/>
-						</xsl:non-matching-substring>
-					</xsl:analyze-string>
-				</xsl:when>
-				<xsl:when test="$Type = 'group-remplace'">
-					<xsl:analyze-string regex="{$RegExp}" select="$Text">
-						<xsl:matching-substring>
-							<xsl:value-of select="regex-group(1)"/>
-							<xsl:value-of select="$ReplaceText"/>
-						</xsl:matching-substring>
-						<xsl:non-matching-substring>
-							<xsl:sequence select="."/>
-						</xsl:non-matching-substring>
-					</xsl:analyze-string>
-				</xsl:when>
-				<xsl:when test="$Type = 'group-remplace-group'">
-					<xsl:analyze-string regex="{$RegExp}" select="$Text">
-						<xsl:matching-substring>
-							<xsl:value-of select="regex-group(1)"/>
-							<xsl:value-of select="$ReplaceText"/>
-							<xsl:value-of select="regex-group(2)"/>
-						</xsl:matching-substring>
-						<xsl:non-matching-substring>
-							<xsl:sequence select="."/>
-						</xsl:non-matching-substring>
-					</xsl:analyze-string>
-				</xsl:when>
-				<xsl:when test="$Type = 'remplace-group-remplace-group'">
-					<xsl:analyze-string regex="{$RegExp}" select="$Text">
-						<xsl:matching-substring>
-							<xsl:text> </xsl:text>
-							<xsl:value-of select="regex-group(1)"/>
-							<xsl:value-of select="$ReplaceText"/>
-							<xsl:value-of select="regex-group(2)"/>
-						</xsl:matching-substring>
-						<xsl:non-matching-substring>
-							<xsl:sequence select="."/>
-						</xsl:non-matching-substring>
-					</xsl:analyze-string>
-				</xsl:when>
-			</xsl:choose>
-		</xsl:variable>
-		<xsl:sequence select="if (empty($ResteDesTriplets)) then $Result else els:reccursivReplace($Result, $ResteDesTriplets)"/>
 	</xsl:function>
 	
 	<!--****************************************************************************************-->
