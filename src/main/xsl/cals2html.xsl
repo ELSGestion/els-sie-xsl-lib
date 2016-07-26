@@ -88,7 +88,7 @@
 				<xsl:value-of select="lower-case(concat('cals_orient', ../@orient, ' '))" />
 				<!--fixme-->
 				<xsl:choose>
-					<xsl:when test="not(../@tabstyle) or ends-with(../@tabstyle, 'PY2') or ancestor::*:infoCahier">
+					<xsl:when test="not(../@tabstyle) or ends-with(../@tabstyle, 'PY2')">
 						<xsl:value-of select="'full_width_table '" />
 					</xsl:when>
 					<xsl:otherwise>
