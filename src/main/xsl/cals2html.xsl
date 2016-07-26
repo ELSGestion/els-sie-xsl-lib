@@ -20,10 +20,10 @@
 	<!--If the number of columns is greater than g-nb-cols-max-before-font-reduction then the font needs to be reduced-->
 	<xsl:param name="g-nb-cols-max-before-font-reduction" select="8" as="xs:integer"/>
 	<xsl:param name="g-nb-cols-max-before-large-font-reduction" select="14" as="xs:integer"/>
-	<xsl:param name="ix_default-colsep" select="'def-col'" />
-	<xsl:param name="ix_default-rowsep" select="'def-row'" />
-	<xsl:param name="ix_default-align" select="'LEFT'" />
-	<xsl:param name="ix_default-valign" select="'BOTTOM'" />
+	<xsl:param name="cals_default-colsep" select="'def-col'" />
+	<xsl:param name="cals_default-rowsep" select="'def-row'" />
+	<xsl:param name="cals_default-align" select="'LEFT'" />
+	<xsl:param name="cals_default-valign" select="'BOTTOM'" />
 
 	<!-- héritage de rowsep -->
 	<!-- si @rowsep pas défini alors héritage précédent -->
@@ -38,10 +38,10 @@
 		<div class="table{if (normalize-space(@tabstyle)) then (concat(' ', @tabstyle))  else ()}">
 			<xsl:apply-templates select="@id" mode="#current"/>
 			<xsl:apply-templates mode="#current">
-				<xsl:with-param name="colsep" select="(@colsep, $ix_default-colsep)[1]"/>
-				<xsl:with-param name="rowsep" select="(@rowsep, $ix_default-rowsep)[1]"/>
-				<xsl:with-param name="align" select="(@align, $ix_default-align)[1]"/>
-				<xsl:with-param name="valign" select="(@valign, $ix_default-valign)[1]"/>
+				<xsl:with-param name="colsep" select="(@colsep, $cals_default-colsep)[1]"/>
+				<xsl:with-param name="rowsep" select="(@rowsep, $cals_default-rowsep)[1]"/>
+				<xsl:with-param name="align" select="(@align, $cals_default-align)[1]"/>
+				<xsl:with-param name="valign" select="(@valign, $cals_default-valign)[1]"/>
 			</xsl:apply-templates>
 		</div>
 	</xsl:template>
@@ -83,9 +83,9 @@
 				<xsl:if test="position() = 1">
 					<xsl:value-of select="concat('first', ' ')" />	
 				</xsl:if>
-				<xsl:value-of select="concat('ix_cals', ' ')" />
-				<xsl:value-of select="lower-case(concat('ix_frame', ../@frame, ' '))" />
-				<xsl:value-of select="lower-case(concat('ix_orient', ../@orient, ' '))" />
+				<xsl:value-of select="concat('cals_cals', ' ')" />
+				<xsl:value-of select="lower-case(concat('cals_frame', ../@frame, ' '))" />
+				<xsl:value-of select="lower-case(concat('cals_orient', ../@orient, ' '))" />
 				<!--fixme-->
 				<xsl:choose>
 					<xsl:when test="not(../@tabstyle) or ends-with(../@tabstyle, 'PY2') or ancestor::*:infoCahier">
@@ -108,13 +108,13 @@
 			<xsl:if test="$p-compute-column-width-within-colgroup">
 				<colgroup>
 					<xsl:variable name="total-colwidth-sum">
-						<xsl:call-template name="ix_sum-colwidths">
+						<xsl:call-template name="cals_sum-colwidths">
 							<xsl:with-param name="col-list" select="colspec" />
 						</xsl:call-template>
 					</xsl:variable>
 					<xsl:for-each select="colspec">
 						<xsl:variable name="current-colwidth">
-							<xsl:call-template name="ix_sum-colwidths">
+							<xsl:call-template name="cals_sum-colwidths">
 								<xsl:with-param name="col-list" select="." />
 							</xsl:call-template>
 						</xsl:variable>
@@ -255,7 +255,7 @@
 		<xsl:param name="rowsep" />
 		<xsl:param name="align" />
 		<xsl:param name="valign" />
-		<tr class="{if (count(preceding-sibling::row) mod 2 = 0) then 'ix_odd' else 'ix_even'}">
+		<tr class="{if (count(preceding-sibling::row) mod 2 = 0) then 'cals_odd' else 'cals_even'}">
 			<xsl:if test="@bgcolor">
 				<xsl:attribute name="style" select="concat('background-color:',@bgcolor)"/>
 			</xsl:if>
@@ -379,21 +379,21 @@
 		</xsl:variable>
 		<td>
 			<xsl:attribute name="class">
-				<xsl:if test="$colsep-current != $ix_default-colsep and $colsep-current != '0'">
-					<xsl:value-of select="lower-case(concat('ix_colsep', ' '))" />
+				<xsl:if test="$colsep-current != $cals_default-colsep and $colsep-current != '0'">
+					<xsl:value-of select="lower-case(concat('cals_colsep', ' '))" />
 				</xsl:if>
-				<xsl:if test="$rowsep-current != $ix_default-rowsep and $rowsep-current != '0'">
-					<xsl:value-of select="lower-case(concat('ix_rowsep', ' '))" />
+				<xsl:if test="$rowsep-current != $cals_default-rowsep and $rowsep-current != '0'">
+					<xsl:value-of select="lower-case(concat('cals_rowsep', ' '))" />
 				</xsl:if>
-				<xsl:value-of select="lower-case(concat('ix_align', $align-current, ' '))" />
-				<!--xsl:if test="$align-current != $ix_default-align">
-					<xsl:value-of select="concat('ix_align', $align-current, ' ')" />
+				<xsl:value-of select="lower-case(concat('cals_align', $align-current, ' '))" />
+				<!--xsl:if test="$align-current != $cals_default-align">
+					<xsl:value-of select="concat('cals_align', $align-current, ' ')" />
 				</xsl:if-->
-				<xsl:if test="$valign-current != $ix_default-valign">
-					<xsl:value-of select="lower-case(concat('ix_valign', $valign-current, ' '))" />
+				<xsl:if test="$valign-current != $cals_default-valign">
+					<xsl:value-of select="lower-case(concat('cals_valign', $valign-current, ' '))" />
 				</xsl:if>
 				<xsl:if test="@percent">
-					<xsl:value-of select="concat('ix_pourcent', @percent, ' ')" />
+					<xsl:value-of select="concat('cals_pourcent', @percent, ' ')" />
 				</xsl:if>
 				<xsl:if test="number(@background) = 70">
 					<xsl:value-of select="'bg70 '" />
@@ -411,12 +411,12 @@
 				<xsl:attribute name="style" select="concat('background-color:',@bgcolor)"/>
 			</xsl:if>
 			<xsl:variable name="total-colwidth-sum">
-				<xsl:call-template name="ix_sum-colwidths">
+				<xsl:call-template name="cals_sum-colwidths">
 					<xsl:with-param name="col-list" select="$current-tgroup/colspec" />
 				</xsl:call-template>
 			</xsl:variable>
 			<xsl:variable name="current-colwidth">
-				<xsl:call-template name="ix_sum-colwidths">
+				<xsl:call-template name="cals_sum-colwidths">
 					<xsl:with-param name="col-list" select="$current-col-list /colspec" />
 				</xsl:call-template>
 			</xsl:variable>
@@ -492,14 +492,14 @@
 			- soit fixes : “pt” (points), “cm” (centimeters), “mm” (millimeters), “pi” (picas), and “in” (inches)
 		=> FIXME mricaud : j'ai l'impression qu'ici on ne gère que les proportionnel, faut-il prévoir les fixes ?
 	-->
-	<xsl:template name="ix_sum-colwidths">
+	<xsl:template name="cals_sum-colwidths">
 		<xsl:param name="current-sum" select="0" />
 		<xsl:param name="col-list" />
 		<xsl:choose>
 			<xsl:when test="$col-list">
 				<xsl:variable name="colspec" select="$col-list[1]" />
 				<xsl:variable name="colwidth" select="$colspec//@colwidth" />
-				<xsl:call-template name="ix_sum-colwidths">
+				<xsl:call-template name="cals_sum-colwidths">
 					<xsl:with-param name="col-list" select="$col-list[position() > 1]" />
 					<xsl:with-param name="current-sum" select="$current-sum + number(substring-before($colwidth,'*'))" />
 				</xsl:call-template>
