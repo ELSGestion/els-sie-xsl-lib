@@ -212,6 +212,10 @@
 		<!-- no op -->
 	</xsl:template>
 	
+	<xsl:template match="spanspec" mode="cals2html">
+		<!-- no op -->
+	</xsl:template>
+	
 	<!-- pied de tableau (PAS UTILISÉ DANS LE MODÈLE UTILISÉ POUR PMT) -->
 	<!-- MODEL : tfoot ::= colspec*,row+ -->
 	<xsl:template match="tfoot" mode="cals2html">
