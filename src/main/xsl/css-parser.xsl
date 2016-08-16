@@ -18,12 +18,14 @@
         </xsl:non-matching-substring>
       </xsl:analyze-string>
     </xsl:variable>
-    <xsl:variable name="fixed-inline" select="concat('{', $uncommented-css, '}')"/>
+    <xsl:variable name="declaration-block" select="if (contains($uncommented-css, '{')) then $uncommented-css else concat('{', $uncommented-css, '}')"/>
     <xsl:element name="css:css">
-      <xsl:for-each select="tokenize(normalize-space($fixed-inline), '\}')[matches(., '\S')]">
+      <xsl:for-each select="tokenize(normalize-space($declaration-block), '\}')[matches(., '\S')]">
         <xsl:choose>
           <!-- On ne traite pas les déclarations at-rules : -->
           <xsl:when test="matches(normalize-space(.), '^@')"/>
+          <!-- On ne traite pas les déclarations avec classe : -->
+          <xsl:when test="matches(normalize-space(.), '^\.')"/>
           <!-- On ne traite pas les déclarations avec pseudo-classe : -->
           <xsl:when test="matches(normalize-space(.), '^:')"/>
           <xsl:otherwise>
