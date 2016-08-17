@@ -150,9 +150,9 @@
     <xsl:param name="val" />
     <xsl:variable name="new-vals">
       <vals>
-        <style pos-vals="(none|dotted|dashed|solid|double|groove|ridge|inset|outset)" />
-        <width pos-vals="(thin|medium|thick|^[.0-9]+)" />
-        <color pos-vals="(transparent|\(|[a-z]+|#[0-9a-z]+)" />
+        <style pos-vals="(none|hidden|dotted|dashed|solid|double|groove|ridge|inset|outset|initial|inherit)" />
+        <width pos-vals="(thin|medium|thick|initial|inherit|^[.0-9]+)" />
+        <color pos-vals="(transparent|initial|inherit|\(|[a-z]+|#[0-9a-z]+)" />
       </vals>
     </xsl:variable>
     <xsl:for-each select="tokenize($all-pos, '\s+')">
@@ -179,8 +179,8 @@
     <xsl:for-each select="tokenize($value-string, '\s')">
       <xsl:variable name="css-prop-value" select="normalize-space(.)"/>
       <xsl:choose>
-        <xsl:when test="matches($css-prop-value, '^(\d+\.?\d*)(cm|mm|in|px|pt|pc|em|ex|ch|rem|%)?$')">
-          <xsl:analyze-string select="$css-prop-value" regex="^(\d+\.?\d*)(cm|mm|in|px|pt|pc|em|ex|ch|rem|%)?$">
+        <xsl:when test="matches($css-prop-value, '^(\d+\.?\d*)(cm|mm|in|px|pt|pc|em|ex|ch|rem|vh|vw|vmin|vmax|%)?$')">
+          <xsl:analyze-string select="$css-prop-value" regex="^(\d+\.?\d*)(cm|mm|in|px|pt|pc|em|ex|ch|rem|vh|vw|vmin|vmax|%)?$">
             <xsl:matching-substring>
               <xsl:element name="css:dimension">
                 <xsl:choose>
@@ -225,7 +225,7 @@
   <xsl:function name="css:definesBorderRight" as="xs:boolean">
     <xsl:param name="css" as="element(css:css)"/>
     <xsl:choose>
-      <xsl:when test="$css//(css:border-right-style|css:border-right-width)"><xsl:sequence select="true()"/></xsl:when>
+      <xsl:when test="$css//css:border-right-style"><xsl:sequence select="true()"/></xsl:when>
       <xsl:otherwise><xsl:sequence select="false()"/></xsl:otherwise>
     </xsl:choose>
   </xsl:function>
@@ -233,7 +233,7 @@
   <xsl:function name="css:definesBorderLeft" as="xs:boolean">
     <xsl:param name="css" as="element(css:css)"/>
     <xsl:choose>
-      <xsl:when test="$css//(css:border-left-style|css:border-left-width)"><xsl:sequence select="true()"/></xsl:when>
+      <xsl:when test="$css//css:border-left-style"><xsl:sequence select="true()"/></xsl:when>
       <xsl:otherwise><xsl:sequence select="false()"/></xsl:otherwise>
     </xsl:choose>
   </xsl:function>
@@ -241,7 +241,7 @@
   <xsl:function name="css:definesBorderBottom" as="xs:boolean">
     <xsl:param name="css" as="element(css:css)"/>
     <xsl:choose>
-      <xsl:when test="$css//(css:border-bottom-style|css:border-bottom-width)"><xsl:sequence select="true()"/></xsl:when>
+      <xsl:when test="$css//css:border-bottom-style"><xsl:sequence select="true()"/></xsl:when>
       <xsl:otherwise><xsl:sequence select="false()"/></xsl:otherwise>
     </xsl:choose>
   </xsl:function>
@@ -249,7 +249,7 @@
   <xsl:function name="css:definesBorderTop" as="xs:boolean">
     <xsl:param name="css" as="element(css:css)"/>
     <xsl:choose>
-      <xsl:when test="$css//(css:border-top-style|css:border-top-width)"><xsl:sequence select="true()"/></xsl:when>
+      <xsl:when test="$css//css:border-top-style"><xsl:sequence select="true()"/></xsl:when>
       <xsl:otherwise><xsl:sequence select="false()"/></xsl:otherwise>
     </xsl:choose>
   </xsl:function>
