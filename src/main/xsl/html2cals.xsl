@@ -469,7 +469,6 @@
         </xsl:when>
         <xsl:when test="not(@frame) and @border != 0">all</xsl:when>
         <xsl:when test="@style">
-          <xsl:message>frame style test</xsl:message>
           <xsl:choose>
             <!-- FIXME parser le style, au lieu de tenter de reconnaitre ce qu'on a mis lors de la conversion inverse -->
             <xsl:when test="contains(string(@style), 'border-collapse: collapse; border-top:1px solid black;')">top</xsl:when>
