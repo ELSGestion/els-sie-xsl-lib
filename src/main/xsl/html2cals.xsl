@@ -59,26 +59,13 @@
     <xsl:variable name="step2">
       <xsl:apply-templates select="$step1" mode="expand-spans"/>
     </xsl:variable>
-    <xsl:variable name="step3">
-      <xsl:apply-templates select="$step2" mode="convert-to-cals"/>
-    </xsl:variable>
-    <!-- FIXME améliorer ceci -->
-    <xsl:apply-templates select="$step3" mode="table-fixup"/>
+    <xsl:apply-templates select="$step2" mode="convert-to-cals"/>
   </xsl:template>
   
   <xsl:template match="@*|node()" mode="xhtml2cals">
     <xsl:copy>
       <xsl:apply-templates select="@*|node()" mode="#current"/>
     </xsl:copy>
-  </xsl:template>
-  
-  <!-- FIXME  tacher de faire quelque chose en aval pour recoller les infos ici avec celle de 
-        la table englobante associée à un élément DIV -->
-  <xsl:template match="*:table" mode="table-fixup">
-    <xsl:comment> [table <xsl:for-each select="@*">
-        <xsl:sequence select="(local-name(),'= &quot;',.,'&quot;, ')"/>
-      </xsl:for-each> ] </xsl:comment>
-    <xsl:copy-of select="*"/>
   </xsl:template>
 
   <xd:doc>
@@ -444,7 +431,7 @@
   
 
   <xsl:template match="table" mode="convert-to-cals">
-    <xsl:element name="cals:table" namespace="{$cals.ns.uri}">
+    <xsl:element name="table" namespace="{$cals.ns.uri}">
       <xsl:copy-of select="@id | @class | @align | @width" copy-namespaces="no"/>
       <xsl:call-template name="compute-table-borders"/>
       <xsl:call-template name="compute-rowsep-colsep-defaults"/>
@@ -481,6 +468,19 @@
           </xsl:choose>
         </xsl:when>
         <xsl:when test="not(@frame) and @border != 0">all</xsl:when>
+        <xsl:when test="@style">
+          <xsl:message>frame style test</xsl:message>
+          <xsl:choose>
+            <!-- FIXME parser le style, au lieu de tenter de reconnaitre ce qu'on a mis lors de la conversion inverse -->
+            <xsl:when test="contains(string(@style), 'border-collapse: collapse; border-top:1px solid black;')">top</xsl:when>
+            <xsl:when test="contains(string(@style), 'border-collapse: collapse; border-bottom:1px solid black;')">bottom</xsl:when>
+            <xsl:when test="contains(string(@style), 'border-collapse: collapse; border-top:1px solid black; border-bottom:1px solid black;')">topbot</xsl:when>
+            <xsl:when test="contains(string(@style), 'border-collapse: collapse; border-left:1px solid black; border-right:1px solid black;')">sides</xsl:when>
+            <xsl:when test="contains(string(@style), 'border-collapse: collapse; border:1px solid black;')">all</xsl:when>
+            <xsl:when test="contains(string(@style), 'border-collapse: collapse; border:none;')">none</xsl:when>
+            <xsl:otherwise>none</xsl:otherwise>
+          </xsl:choose>
+        </xsl:when>
         <xsl:otherwise>none</xsl:otherwise>
       </xsl:choose>
     </xsl:attribute>
