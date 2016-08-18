@@ -442,9 +442,10 @@
         <xsl:call-template name="make-colspec">
           <xsl:with-param name="context" select="./colgroup | ./col"/>
         </xsl:call-template>
-        <xsl:call-template name="make-spanspec">
+        <!-- FIXME à rebrancher quand on gérera mieux les spanspec dans le modèle -->
+        <!-- <xsl:call-template name="make-spanspec">
           <xsl:with-param name="context" select="./colgroup | ./col"/>
-        </xsl:call-template>
+        </xsl:call-template> -->
         <xsl:apply-templates select="./thead, ./tfoot, ./tbody" mode="#current"/>
       </xsl:element>
     </xsl:element>
