@@ -10,7 +10,7 @@
   
   <xsl:import href="css-parser.xsl"/>
   
-  <xsl:variable name="cals.uri" select="''"/>
+  <xsl:param name="cals.ns.uri" required="yes" as="xs:string"/>
 
   <xd:doc>
     <!-- le namespace tmp est local et ne doit pas apparaitre en dehors de cette feuille de style -->
@@ -59,26 +59,13 @@
     <xsl:variable name="step2">
       <xsl:apply-templates select="$step1" mode="expand-spans"/>
     </xsl:variable>
-    <xsl:variable name="step3">
-      <xsl:apply-templates select="$step2" mode="convert-to-cals"/>
-    </xsl:variable>
-    <!-- FIXME améliorer ceci -->
-    <xsl:apply-templates select="$step3" mode="table-fixup"/>
+    <xsl:apply-templates select="$step2" mode="convert-to-cals"/>
   </xsl:template>
   
   <xsl:template match="@*|node()" mode="xhtml2cals">
     <xsl:copy>
       <xsl:apply-templates select="@*|node()" mode="#current"/>
     </xsl:copy>
-  </xsl:template>
-  
-  <!-- FIXME  tacher de faire quelque chose en aval pour recoller les infos ici avec celle de 
-        la table englobante associée à un élément DIV -->
-  <xsl:template match="*:table" mode="table-fixup">
-    <xsl:comment> [table <xsl:for-each select="@*">
-        <xsl:sequence select="(local-name(),'= &quot;',.,'&quot;, ')"/>
-      </xsl:for-each> ] </xsl:comment>
-    <xsl:copy-of select="*"/>
   </xsl:template>
 
   <xd:doc>
@@ -444,20 +431,21 @@
   
 
   <xsl:template match="table" mode="convert-to-cals">
-    <xsl:element name="cals:table" namespace="{$cals.uri}">
-      <xsl:copy-of select="@id | @class | @style | @align | @width" copy-namespaces="no"/>
+    <xsl:element name="table" namespace="{$cals.ns.uri}">
+      <xsl:copy-of select="@id | @class | @align | @width" copy-namespaces="no"/>
       <xsl:call-template name="compute-table-borders"/>
       <xsl:call-template name="compute-rowsep-colsep-defaults"/>
       <xsl:copy-of select="processing-instruction()|comment()"/>
       <xsl:apply-templates select="./caption" mode="#current"/>
-      <xsl:element name="tgroup" namespace="{$cals.uri}">
+      <xsl:element name="tgroup" namespace="{$cals.ns.uri}">
         <xsl:attribute name="cols" select="xhtml2cals:nb-cols(.)"/>
         <xsl:call-template name="make-colspec">
           <xsl:with-param name="context" select="./colgroup | ./col"/>
         </xsl:call-template>
-        <xsl:call-template name="make-spanspec">
+        <!-- FIXME à rebrancher quand on gérera mieux les spanspec dans le modèle -->
+        <!-- <xsl:call-template name="make-spanspec">
           <xsl:with-param name="context" select="./colgroup | ./col"/>
-        </xsl:call-template>
+        </xsl:call-template> -->
         <xsl:apply-templates select="./thead, ./tfoot, ./tbody" mode="#current"/>
       </xsl:element>
     </xsl:element>
@@ -481,6 +469,18 @@
           </xsl:choose>
         </xsl:when>
         <xsl:when test="not(@frame) and @border != 0">all</xsl:when>
+        <xsl:when test="@style">
+          <xsl:choose>
+            <!-- FIXME parser le style, au lieu de tenter de reconnaitre ce qu'on a mis lors de la conversion inverse -->
+            <xsl:when test="contains(string(@style), 'border-collapse: collapse; border-top:1px solid black;')">top</xsl:when>
+            <xsl:when test="contains(string(@style), 'border-collapse: collapse; border-bottom:1px solid black;')">bottom</xsl:when>
+            <xsl:when test="contains(string(@style), 'border-collapse: collapse; border-top:1px solid black; border-bottom:1px solid black;')">topbot</xsl:when>
+            <xsl:when test="contains(string(@style), 'border-collapse: collapse; border-left:1px solid black; border-right:1px solid black;')">sides</xsl:when>
+            <xsl:when test="contains(string(@style), 'border-collapse: collapse; border:1px solid black;')">all</xsl:when>
+            <xsl:when test="contains(string(@style), 'border-collapse: collapse; border:none;')">none</xsl:when>
+            <xsl:otherwise>none</xsl:otherwise>
+          </xsl:choose>
+        </xsl:when>
         <xsl:otherwise>none</xsl:otherwise>
       </xsl:choose>
     </xsl:attribute>
@@ -553,7 +553,7 @@
           </xsl:when>
           <xsl:otherwise>
             <xsl:for-each select="1 to xs:integer($span)">
-              <xsl:element name="colspec" namespace="{$cals.uri}">
+              <xsl:element name="colspec" namespace="{$cals.ns.uri}">
                 <xsl:attribute name="colname" select="concat('col', ($colnum + .))"/>
                 <xsl:if test=". = 1">
                   <!-- GMA ou pour tous? -->
@@ -603,7 +603,7 @@
         </xsl:variable>
         <xsl:if
           test="(count($context[$index]/col) &gt; 1) or ((count($context[$index]/col) = 0) and ($span &gt; 1))">
-          <xsl:element name="spanspec" namespace="{$cals.uri}">
+          <xsl:element name="spanspec" namespace="{$cals.ns.uri}">
             <xsl:attribute name="spanname" select="concat('span', ($colnum + 1), '-', $span)"/>
             <xsl:attribute name="namest" select="concat('col', ($colnum + 1))"/>
             <xsl:attribute name="nameend" select="concat('col', ($colnum + $span))"/>
@@ -632,14 +632,14 @@
   
   
   <xsl:template match="caption" mode="convert-to-cals">
-    <xsl:element name="title" namespace="{$cals.uri}">
+    <xsl:element name="title" namespace="{$cals.ns.uri}">
       <xsl:copy-of select="@id | @class | @style" copy-namespaces="no"/>
       <xsl:apply-templates select="node()" mode="#current"/>
     </xsl:element>
   </xsl:template>
   
   <xsl:template match="thead" mode="convert-to-cals">
-    <xsl:element name="thead" namespace="{$cals.uri}">
+    <xsl:element name="thead" namespace="{$cals.ns.uri}">
       <xsl:copy-of select="@id | @class | @style | @align | @char | @charoff | @valign"
         copy-namespaces="no"/>
       <xsl:apply-templates select="node()" mode="#current"/>
@@ -647,7 +647,7 @@
   </xsl:template>
   
   <xsl:template match="tfoot" mode="convert-to-cals">
-    <xsl:element name="tfoot" namespace="{$cals.uri}">
+    <xsl:element name="tfoot" namespace="{$cals.ns.uri}">
       <xsl:copy-of select="@id | @class | @style | @align | @char | @charoff | @valign"
         copy-namespaces="no"/>
       <xsl:apply-templates select="node()" mode="#current"/>
@@ -655,7 +655,7 @@
   </xsl:template>
   
   <xsl:template match="tbody" mode="convert-to-cals">
-    <xsl:element name="tbody" namespace="{$cals.uri}">
+    <xsl:element name="tbody" namespace="{$cals.ns.uri}">
       <xsl:copy-of select="@id | @class | @style | @align | @char | @charoff | @valign"
         copy-namespaces="no"/>
       <xsl:apply-templates select="node()" mode="#current"/>
@@ -663,7 +663,7 @@
   </xsl:template>
   
   <xsl:template match="tr" mode="convert-to-cals">
-    <xsl:element name="row" namespace="{$cals.uri}">
+    <xsl:element name="row" namespace="{$cals.ns.uri}">
       <xsl:copy-of select="@id | @class | @style | @align | @char | @charoff | @valign"
         copy-namespaces="no"/>
       <xsl:apply-templates select="node()" mode="#current"/>
@@ -671,7 +671,7 @@
   </xsl:template>
   
   <xsl:template match="td|th" mode="convert-to-cals">
-    <xsl:element name="entry" namespace="{$cals.uri}">
+    <xsl:element name="entry" namespace="{$cals.ns.uri}">
       <xsl:variable name="curr-col-num" as="xs:integer" select="count(preceding-sibling::*) + 1"/>            
       
       <!-- copy attributes with same name -->            
