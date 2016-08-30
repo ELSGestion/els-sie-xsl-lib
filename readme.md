@@ -5,7 +5,7 @@ They must not have no relationship with any specific ELS project !
 They can only be linked to any official XML technology (cals, css, etc.)
 
 There are 2 libraries types : 
-- Libraries (eg. els-common.xsl) that offer a set of functions, named templates and variables : they need a specific namespace prefix so they can be called widthout conflicts from any other XSLT.
+- Libraries (eg. els-common.xsl) that offers a set of functions, named templates and variables : they need a specific namespace prefix so they can be called widthout conflicts from any other XSLT.
 - Libraries (eg. cals2html.xsl) that implement a full specific treatment : they need a specific initial mode (-im in saxon) so they can be called widthout conflicts from any other XSLT.
 
 == Set of functions libraries == 
