@@ -41,7 +41,9 @@
   <xsl:variable name="var">
     <xsl:value-of select="'string'"/>
   </xsl:variable>
-  <xsl:param name="var" select="'test'"/>
+  <xsl:param name="var">
+    <xsl:sequence select="/toto"/>
+  </xsl:param>
   
   <xsl:template match="/">
     <xsl:apply-templates/>

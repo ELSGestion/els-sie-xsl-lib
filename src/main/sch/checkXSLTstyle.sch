@@ -10,6 +10,21 @@
   id="checkXSLTstyle"
   >
   
+  <!--TODO : 
+    - voir : https://google.github.io/styleguide/xmlstyle.html
+    - http://blog.xml.rocks/xslt-naming-conventions
+    - http://blog.xml.rocks/structuring-xslt-code
+    - distinguer l'utilisation de template nommés (création d'éléments) / function (renvois valeurs atomiques)
+    - ordre des template (copy template à la fin, groupement des modes)
+    - template inutiles (match=/ apply-template)
+    - utilisation de value-of au lieu de sequence ?
+    - écriture : 
+      - indentation avec espace 
+      - pas de saut de ligne dans les templates
+      - espace devant les opérateurs ( =, +, > etc)
+      
+  -->
+    
   <!--<xsl:include href="../../developpements/commun/lib/efl-common.xsl"/>-->
   
   <ns prefix="xsl" uri="http://www.w3.org/1999/XSL/Transform"/>
@@ -94,7 +109,7 @@
     </rule>
     <rule context="xsl:param">
       <report id="xslqual-SettingValueOfParamIncorrectly"
-        test="(count(*) = 1) and (count(xsl:value-of) = 1)">
+        test="(count(*) = 1) and (count(xsl:value-of | xsl:sequence) = 1)">
         [xslqual] Assign value to a parameter using the 'select' syntax if assigning a value with xsl:value-of
       </report>
       <report id="xslqual-UnusedFunctionTemplateParameter"
@@ -205,6 +220,12 @@
         and not(matches(@select, '\d'))" 
         role="warning">
         [ELS] Use xsl:apply-template instead of xsl:for-each 
+      </report>
+    </rule>
+    <rule context="xsl:attribute">
+      <report id="els-SettingValueOfXslAttributeIncorrectly"
+        test="(count(*) = 1) and (count(xsl:value-of | xsl:sequence) = 1)">
+        [xslqual] Assign value to an xsl:attribute using the 'select' syntax if assigning a value with xsl:value-of
       </report>
     </rule>
   </pattern>
