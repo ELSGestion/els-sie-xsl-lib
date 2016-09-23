@@ -29,7 +29,7 @@
   
   <ns prefix="xsl" uri="http://www.w3.org/1999/XSL/Transform"/>
   <ns prefix="xd" uri="http://www.oxygenxml.com/ns/doc/xsl"/>
-  <ns prefix="els" uri="http://els.eu/ns/els"/>
+  <ns prefix="els" uri="http://www.lefebvre-sarrut.eu/ns/els"/>
   <ns prefix="saxon" uri="http://saxon.sf.net/"/>
   <ns prefix="local" uri="checkXSLTstyle.sch"/>
   

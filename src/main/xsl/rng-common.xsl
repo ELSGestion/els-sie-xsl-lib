@@ -3,7 +3,7 @@
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 	xmlns:xs="http://www.w3.org/2001/XMLSchema"
 	xmlns:rng="http://relaxng.org/ns/structure/1.0"
-	xmlns:els="http://els.eu/ns/els"
+	xmlns:els="http://www.lefebvre-sarrut.eu/ns/els"
 	xmlns="http://relaxng.org/ns/structure/1.0"
 	xpath-default-namespace="http://relaxng.org/ns/structure/1.0"
 	exclude-result-prefixes="#all"

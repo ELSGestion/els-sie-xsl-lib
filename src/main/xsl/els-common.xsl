@@ -4,7 +4,7 @@
 								xmlns:xs="http://www.w3.org/2001/XMLSchema"
 								xmlns:saxon="http://saxon.sf.net/"
 								xmlns:functx="http://www.functx.com" 
-								xmlns:els="http://els.eu/ns/els"
+								xmlns:els="http://www.lefebvre-sarrut.eu/ns/els"
 								exclude-result-prefixes="#all"
 								version="2.0">
 
@@ -342,7 +342,7 @@
 		<xd:param name="Text">String à traiter</xd:param>
 		<xd:param name="SequenceDeTriplets">
 			Un sequence d'éléments Triplets de la forme :
-			<Triplet xmlns="http://els.eu/ns/els">
+			<Triplet xmlns="http://www.lefebvre-sarrut.eu/ns/els">
 				<Type>remplace-brut</Type>
 				<RegExp>[ ][ ]+</RegExp>
 				<ReplaceText>&#x0020;</ReplaceText>

@@ -4,7 +4,7 @@
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 	xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl" 
 	xmlns:xs="http://www.w3.org/2001/XMLSchema"
-	xmlns:els="http://els.eu/ns/els"
+	xmlns:els="http://www.lefebvre-sarrut.eu/ns/els"
 	xmlns:cals="-//OASIS//DTD XML Exchange Table Model 19990315//EN"
 	xmlns:saxon="http://saxon.sf.net/"
 	xmlns="http://www.w3.org/1999/xhtml"

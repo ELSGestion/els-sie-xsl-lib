@@ -4,7 +4,7 @@
   xmlns:xs="http://www.w3.org/2001/XMLSchema"
   xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl"
   xmlns:saxon="http://saxon.sf.net/"
-  xmlns:efl="http://els.eu/ns/efl"
+  xmlns:efl="http://www.lefebvre-sarrut.eu/ns/efl"
   xmlns:local="local"
   xmlns="http://www.w3.org/1999/xhtml"
   xpath-default-namespace=""

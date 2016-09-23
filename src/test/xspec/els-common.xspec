@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<x:description xmlns:x="http://www.jenitennison.com/xslt/xspec" xmlns:els="http://els.eu/ns/els"
+<x:description xmlns:x="http://www.jenitennison.com/xslt/xspec" xmlns:els="http://www.lefebvre-sarrut.eu/ns/els"
     stylesheet="../../main/xsl/els-common.xsl">
     <x:scenario pending="Not yet implemented"
         label="Scenario for testing function getCurrentIsoDate">

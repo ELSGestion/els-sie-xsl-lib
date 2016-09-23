@@ -1,7 +1,7 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
   xmlns:xs="http://www.w3.org/2001/XMLSchema"
-  xmlns:xhtml2cals="http://els.eu/ns/xmlfirst/xmlEditor/xhtml2cals"
+  xmlns:xhtml2cals="http://www.lefebvre-sarrut.eu/ns/xmlfirst/xmlEditor/xhtml2cals"
   xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl" xmlns:tmp="file://tmp"
   xmlns:xhtml="http://www.w3.org/1999/xhtml" 
   xmlns:css="http://www.w3.org/1996/css"
