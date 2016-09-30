@@ -849,6 +849,72 @@ mais pas mal modifié pour des besoins particuliers : https://btw.mangalamresear
   <xsl:template mode="step7.22"  match="(rng:group|rng:interleave|rng:choice)[count(rng:empty)=2]|rng:oneOrMore[rng:empty]">
     <empty updated="1"/>
   </xsl:template>
-
+  
+ 
+  <!-- ******************************************************************* -->
+  <!--                                                                     -->
+  <!-- ******************************************************************* -->
+  
+  
+  <xsl:template match="/">
+    <xsl:call-template name="apply-steps">
+      <xsl:with-param name="input" select="."/>
+      <xsl:with-param name="step" select="2"/>
+      <xsl:with-param name="last-step" select="22"/>
+    </xsl:call-template>
+  </xsl:template>
+  
+  <xsl:template name="apply-steps">
+    <xsl:param name="input"/>
+    <xsl:param name="step" select="2"/>
+    <xsl:param name="last-step" select="22"/>
+    <xsl:message>Simplification called at step <xsl:value-of select="$step"/></xsl:message>
+    <xsl:variable name="output">
+      <xsl:choose>
+        <!-- un gros switch puisque XSLT n'accepte pas les modes dynamiques -->
+        <xsl:when test="$step &lt; 2" ><xsl:message terminate="yes">Valeur de step incorrecte: <xsl:value-of select="$step"/></xsl:message></xsl:when>
+        <xsl:when test="$step=2" ><xsl:apply-templates select="$input" mode="step7.2" /></xsl:when>
+        <xsl:when test="$step=3" ><xsl:apply-templates select="$input" mode="step7.3" /></xsl:when>
+        <xsl:when test="$step=4" ><xsl:apply-templates select="$input" mode="step7.4" /></xsl:when>
+        <xsl:when test="$step=5" ><xsl:apply-templates select="$input" mode="step7.5" /></xsl:when>
+        <xsl:when test="$step=6" ><xsl:apply-templates select="$input" mode="step7.6" /></xsl:when>
+        <xsl:when test="$step=7" ><xsl:apply-templates select="$input" mode="step7.7" /></xsl:when>
+        <xsl:when test="$step=8" ><xsl:apply-templates select="$input" mode="step7.8" /></xsl:when>
+        <xsl:when test="$step=9" ><xsl:apply-templates select="$input" mode="step7.9" /></xsl:when>
+        <xsl:when test="$step=10"><xsl:apply-templates select="$input" mode="step7.10"/></xsl:when>
+        <xsl:when test="$step=11"><xsl:apply-templates select="$input" mode="step7.11"/></xsl:when>
+        <xsl:when test="$step=12"><xsl:apply-templates select="$input" mode="step7.12"/></xsl:when>
+        <xsl:when test="$step=13"><xsl:apply-templates select="$input" mode="step7.13"/></xsl:when>
+        <xsl:when test="$step=14"><xsl:apply-templates select="$input" mode="step7.14"/></xsl:when>
+        <xsl:when test="$step=15"><xsl:apply-templates select="$input" mode="step7.15"/></xsl:when>
+        <xsl:when test="$step=16"><xsl:apply-templates select="$input" mode="step7.16"/></xsl:when>
+        <xsl:when test="$step=17"><xsl:apply-templates select="$input" mode="step7.17"/></xsl:when>
+        <xsl:when test="$step=18"><xsl:apply-templates select="$input" mode="step7.18"/></xsl:when>
+        <xsl:when test="$step=19"><xsl:apply-templates select="$input" mode="step7.19"/></xsl:when>
+        <xsl:when test="$step=20"><xsl:apply-templates select="$input" mode="step7.20"/></xsl:when>
+        <xsl:when test="$step=21"><xsl:apply-templates select="$input" mode="step7.21"/></xsl:when>
+        <xsl:when test="$step=22"><xsl:apply-templates select="$input" mode="step7.22"/></xsl:when>
+        <xsl:when test="$step &gt; 22" ><xsl:message terminate="yes">Valeur de step incorrecte: <xsl:value-of select="$step"/></xsl:message></xsl:when>
+        <xsl:otherwise><xsl:sequence select="$input"/></xsl:otherwise>
+      </xsl:choose>
+    </xsl:variable>
+    <xsl:result-document href="{concat('step7.', $step, '.rng')}" method="xml" indent="yes">
+      <xsl:copy-of select="$output"/>
+    </xsl:result-document>
+    <xsl:choose>
+      <xsl:when test="$step &lt; $last-step">
+        <xsl:call-template name="apply-steps">
+          <xsl:with-param name="input" select="$output"/>
+          <xsl:with-param name="step" select="$step + 1"/>
+          <xsl:with-param name="last-step" select="$last-step"/>
+        </xsl:call-template>
+      </xsl:when>
+      <xsl:otherwise><xsl:sequence select="$output"/></xsl:otherwise>
+    </xsl:choose>
+  </xsl:template>
+  
+  
+  
+  
   
 </xsl:stylesheet>
