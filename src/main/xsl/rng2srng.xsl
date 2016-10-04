@@ -42,7 +42,7 @@ Je comptais simplifier l’étape de renommage des steps 7.19 et 7.20 qui est un
   <!--                           MAIN                                      -->
   <!-- ******************************************************************* -->
   
-  <xsl:template match="/">
+  <xsl:template match="/" mode="rng2srng">
     <xsl:call-template name="apply-steps">
       <xsl:with-param name="input" select="."/>
       <xsl:with-param name="step" select="2"/>
