@@ -32,7 +32,6 @@ Je comptais simplifier l’étape de renommage des steps 7.19 et 7.20 qui est un
   xmlns="http://relaxng.org/ns/structure/1.0"
   xmlns:rng="http://relaxng.org/ns/structure/1.0"
   xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-  xmlns:xfe="http://els.eu/ns/xmlfirst/xmlEditor"
   xmlns:nsp="namespace_declaration"
   xpath-default-namespace="http://relaxng.org/ns/structure/1.0"
   version="3.0">
