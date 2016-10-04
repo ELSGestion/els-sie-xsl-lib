@@ -19,9 +19,6 @@ mais pas mal modifié pour des besoins particuliers : https://btw.mangalamresear
 -->
 
 <!--FIXME gmarichal :
-J'ai laissé xmlns:nsp="namespace_declaration" en tête de fichier (c’est utilisé plus tard dans un template),
-car je voulais voir si ça pouvait nous être utile (en remplaçant nsp par xfe par exemple), 
-mais je n’ai pas eu le temps de tester, donc tu peux sans doute virer la déclaration et les deux endroits où ça figure dans le code.
 Pour bien comprendre à quoi correspond chaque step, j’ai mis en commentaire la spec iso.
 J’ai corrigé un bug dans le step7.9 et simplifié certains matches en tenant compte des facilités de xslt 3.0 
 Je comptais simplifier l’étape de renommage des steps 7.19 et 7.20 qui est un peu en « brute force » par emploi de generate-id() 
@@ -32,7 +29,6 @@ Je comptais simplifier l’étape de renommage des steps 7.19 et 7.20 qui est un
   xmlns="http://relaxng.org/ns/structure/1.0"
   xmlns:rng="http://relaxng.org/ns/structure/1.0"
   xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-  xmlns:nsp="namespace_declaration"
   xpath-default-namespace="http://relaxng.org/ns/structure/1.0"
   version="3.0">
   
@@ -129,7 +125,7 @@ Je comptais simplifier l’étape de renommage des steps 7.19 et 7.20 qui est un
   
   <xsl:mode name="step7.2" on-no-match="deep-skip"/>
  
-  <xsl:template mode="step7.2" match="/|rng:*|nsp:*|text()|@*[namespace-uri()='']">
+  <xsl:template mode="step7.2" match="/|rng:*|text()|@*[namespace-uri()='']">
     <xsl:copy>
       <xsl:apply-templates select="@*" mode="#current"/>
       <xsl:apply-templates mode="#current"/>
@@ -359,9 +355,9 @@ Je comptais simplifier l’étape de renommage des steps 7.19 et 7.20 qui est un
     <xsl:variable name="prefix" select="substring-before(., ':')"/>
     <name>
       <xsl:attribute name="ns">
-        <xsl:for-each select="ancestor-or-self::*[nsp:namespace]/nsp:namespace">
-          <xsl:if test="current()/@prefix = $prefix">
-            <xsl:value-of select="current()/@uri"/>
+        <xsl:for-each select="namespace::*">
+          <xsl:if test="name()=$prefix">
+            <xsl:value-of select="."/>
           </xsl:if>
         </xsl:for-each>
       </xsl:attribute>
