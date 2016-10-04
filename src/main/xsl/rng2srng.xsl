@@ -796,7 +796,7 @@ Je comptais simplifier l’étape de renommage des steps 7.19 et 7.20 qui est un
     <ref name="__{rng:name}-elt-{generate-id()}"/>
   </xsl:template>
   
-  <xsl:template match="rng:define[not(rng:element)]"/>
+  <xsl:template mode="step7.20" match="rng:define[not(rng:element)]"/>
   
   <xsl:template mode="step7.20" match="rng:ref[@name=/*/rng:define[not(rng:element)]/@name]">
     <xsl:apply-templates select="/*/rng:define[@name=current()/@name]/*" mode="#current"/>
