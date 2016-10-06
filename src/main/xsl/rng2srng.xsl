@@ -126,7 +126,7 @@ Je comptais simplifier l’étape de renommage des steps 7.19 et 7.20 qui est un
   
   <xsl:mode name="rng2srng:step7.2" on-no-match="deep-skip"/>
  
-  <xsl:template mode="rng2srng:step7.2" match="/|rng:*|text()|@*[namespace-uri()='']">
+  <xsl:template mode="rng2srng:step7.2" match="/|*|text()|@*[namespace-uri()='']">
     <xsl:copy>
       <xsl:apply-templates select="@*" mode="#current"/>
       <xsl:apply-templates mode="#current"/>
@@ -145,7 +145,7 @@ Je comptais simplifier l’étape de renommage des steps 7.19 et 7.20 qui est un
   
   <xsl:mode name="rng2srng:step7.3" on-no-match="shallow-copy"/>
   
-  <xsl:template mode="rng2srng:step7.3" match="text()[normalize-space(.)='' and not(parent::rng:param or parent::rng:value)]"/>
+  <xsl:template mode="rng2srng:step7.3" match="text()[normalize-space(.)='' and not(parent::param or parent::value)]"/>
   
   <xsl:template mode="rng2srng:step7.3" match="@name|@type|@combine">
     <xsl:attribute name="{name()}">
@@ -153,7 +153,7 @@ Je comptais simplifier l’étape de renommage des steps 7.19 et 7.20 qui est un
     </xsl:attribute>
   </xsl:template>
   
-  <xsl:template mode="rng2srng:step7.3" match="rng:name/text()">
+  <xsl:template mode="rng2srng:step7.3" match="name/text()">
     <xsl:value-of select="normalize-space(.)"/>
   </xsl:template>
   
@@ -173,7 +173,7 @@ Je comptais simplifier l’étape de renommage des steps 7.19 et 7.20 qui est un
   
   <xsl:template mode="rng2srng:step7.4" match="@datatypeLibrary"/>
   
-  <xsl:template mode="rng2srng:step7.4" match="rng:data|rng:value">
+  <xsl:template mode="rng2srng:step7.4" match="data|value">
     <xsl:copy>
       <xsl:attribute name="datatypeLibrary">
         <xsl:value-of select="ancestor-or-self::*[@datatypeLibrary][1]/@datatypeLibrary"/>
@@ -193,9 +193,9 @@ Je comptais simplifier l’étape de renommage des steps 7.19 et 7.20 qui est un
   
   <xsl:mode name="rng2srng:step7.5" on-no-match="shallow-copy"/>
   
-  <xsl:template mode="rng2srng:step7.5" match="rng:value[not(@type)]/@datatypeLibrary"/>
+  <xsl:template mode="rng2srng:step7.5" match="value[not(@type)]/@datatypeLibrary"/>
   
-  <xsl:template mode="rng2srng:step7.5" match="rng:value[not(@type)]">
+  <xsl:template mode="rng2srng:step7.5" match="value[not(@type)]">
     <value type="token" datatypeLibrary="">
       <xsl:apply-templates select="@*" mode="#current"/>
       <xsl:apply-templates mode="#current"/>
@@ -241,7 +241,7 @@ Je comptais simplifier l’étape de renommage des steps 7.19 et 7.20 qui est un
   
   <xsl:mode name="rng2srng:step7.7" on-no-match="shallow-copy"/>
   
-  <xsl:template mode="rng2srng:step7.7" match="rng:externalRef">
+  <xsl:template mode="rng2srng:step7.7" match="externalRef">
     <xsl:element name="{local-name(document(@href)/*)}" namespace="http://relaxng.org/ns/structure/1.0">
       <xsl:if test="not(document(@href)/*/@ns) and @ns">
         <xsl:attribute name="ns">
@@ -276,12 +276,12 @@ Je comptais simplifier l’étape de renommage des steps 7.19 et 7.20 qui est un
   
   <xsl:mode name="rng2srng:step7.8" on-no-match="shallow-copy"/>
   
-  <xsl:template mode="rng2srng:step7.8" match="rng:include">
+  <xsl:template mode="rng2srng:step7.8" match="include">
     <div>
       <xsl:copy-of select="@*[name() != 'href']"/>
       <xsl:copy-of select="*"/>
-      <xsl:copy-of select="document(@href)/rng:grammar/rng:start[not(current()/rng:start)]"/>
-      <xsl:copy-of select="document(@href)/rng:grammar/rng:define[not(@name = current()/rng:define/@name)]"/>
+      <xsl:copy-of select="document(@href)/grammar/start[not(current()/start)]"/>
+      <xsl:copy-of select="document(@href)/grammar/define[not(@name = current()/define/@name)]"/>
     </div>
   </xsl:template>
   
@@ -296,14 +296,14 @@ Je comptais simplifier l’étape de renommage des steps 7.19 et 7.20 qui est un
   
   <xsl:mode name="rng2srng:step7.9" on-no-match="shallow-copy"/>
   
-  <xsl:template mode="rng2srng:step7.9" match="@name[parent::rng:element|parent::rng:attribute]"/>
+  <xsl:template mode="rng2srng:step7.9" match="@name[parent::element|parent::attribute]"/>
   
   <!-- [gmarichal] Correction d'un bug du code original: déplacement du xsl:if -->
-  <xsl:template mode="rng2srng:step7.9" match="(rng:element|rng:attribute)[@name]">
+  <xsl:template mode="rng2srng:step7.9" match="(element|attribute)[@name]">
     <xsl:copy>
       <xsl:apply-templates select="@*" mode="#current"/>
       <name>
-        <xsl:if test="self::rng:attribute and not(@ns)">
+        <xsl:if test="self::attribute and not(@ns)">
           <xsl:attribute name="ns"/>
         </xsl:if>
         <xsl:value-of select="@name"/>
@@ -331,7 +331,7 @@ Je comptais simplifier l’étape de renommage des steps 7.19 et 7.20 qui est un
   
   <xsl:template mode="rng2srng:step7.10" match="@ns"/>
   
-  <xsl:template mode="rng2srng:step7.10" match="rng:name|rng:nsName|rng:value">
+  <xsl:template mode="rng2srng:step7.10" match="name|nsName|value">
     <xsl:copy>
       <xsl:attribute name="ns">
         <xsl:value-of select="ancestor-or-self::*[@ns][1]/@ns"/>
@@ -352,7 +352,7 @@ Je comptais simplifier l’étape de renommage des steps 7.19 et 7.20 qui est un
   
   <xsl:mode name="rng2srng:step7.11" on-no-match="shallow-copy"/>
   
-  <xsl:template mode="rng2srng:step7.11" match="rng:name[contains(., ':')]">
+  <xsl:template mode="rng2srng:step7.11" match="name[contains(., ':')]">
     <xsl:variable name="prefix" select="substring-before(., ':')"/>
     <name>
       <xsl:attribute name="ns">
@@ -375,7 +375,7 @@ Je comptais simplifier l’étape de renommage des steps 7.19 et 7.20 qui est un
   
   <xsl:mode name="rng2srng:step7.12" on-no-match="shallow-copy"/>
   
-  <xsl:template mode="rng2srng:step7.12" match="rng:div">
+  <xsl:template mode="rng2srng:step7.12" match="div">
     <xsl:apply-templates mode="#current"/>
   </xsl:template>
   
@@ -404,7 +404,7 @@ Je comptais simplifier l’étape de renommage des steps 7.19 et 7.20 qui est un
   
   <xsl:mode name="rng2srng:step7.13" on-no-match="shallow-copy"/>
   
-  <xsl:template mode="rng2srng:step7.13" match="(rng:define|rng:oneOrMore|rng:zeroOrMore|rng:optional|rng:list|rng:mixed)[count(*)>1]">
+  <xsl:template mode="rng2srng:step7.13" match="(define|oneOrMore|zeroOrMore|optional|list|mixed)[count(*)>1]">
     <xsl:copy>
       <xsl:apply-templates select="@*" mode="#current"/>
       <xsl:call-template name="rng2srng:reduce7.13">
@@ -413,7 +413,7 @@ Je comptais simplifier l’étape de renommage des steps 7.19 et 7.20 qui est un
     </xsl:copy>
   </xsl:template>
   
-  <xsl:template mode="rng2srng:step7.13" match="rng:except[count(*)>1]">
+  <xsl:template mode="rng2srng:step7.13" match="except[count(*)>1]">
     <xsl:copy>
       <xsl:apply-templates select="@*" mode="#current"/>
       <xsl:call-template name="rng2srng:reduce7.13">
@@ -422,7 +422,7 @@ Je comptais simplifier l’étape de renommage des steps 7.19 et 7.20 qui est un
     </xsl:copy>
   </xsl:template>
   
-  <xsl:template mode="rng2srng:step7.13" match="rng:attribute[count(*) =1]">
+  <xsl:template mode="rng2srng:step7.13" match="attribute[count(*) =1]">
     <xsl:copy>
       <xsl:apply-templates select="@*" mode="#current"/>
       <xsl:apply-templates select="*" mode="#current"/>
@@ -430,7 +430,7 @@ Je comptais simplifier l’étape de renommage des steps 7.19 et 7.20 qui est un
     </xsl:copy>
   </xsl:template>
   
-  <xsl:template mode="rng2srng:step7.13" match="rng:element[count(*)>2]">
+  <xsl:template mode="rng2srng:step7.13" match="element[count(*)>2]">
     <xsl:copy>
       <xsl:apply-templates select="@*" mode="#current"/>
       <xsl:apply-templates select="*[1]" mode="#current"/>
@@ -447,11 +447,11 @@ Je comptais simplifier l’étape de renommage des steps 7.19 et 7.20 qui est un
     </xsl:copy>
   </xsl:template>
   
-  <xsl:template mode="rng2srng:step7.13" match="(rng:group|rng:choice|rng:interleave)[count(*)=1]">
+  <xsl:template mode="rng2srng:step7.13" match="(group|choice|interleave)[count(*)=1]">
     <xsl:apply-templates select="*" mode="#current"/>
   </xsl:template>
   
-  <xsl:template name="rng2srng:reduce7.13" mode="rng2srng:step7.13" match="(rng:group|rng:choice|rng:interleave)[count(*)>2]">
+  <xsl:template name="rng2srng:reduce7.13" mode="rng2srng:step7.13" match="(group|choice|interleave)[count(*)>2]">
     <xsl:param name="left" select="*[3]"/>
     <xsl:param name="node-name" select="name()"/>
     <xsl:param name="out">
@@ -494,7 +494,7 @@ Je comptais simplifier l’étape de renommage des steps 7.19 et 7.20 qui est un
   
   <xsl:mode name="rng2srng:step7.14" on-no-match="shallow-copy"/>
   
-  <xsl:template mode="rng2srng:step7.14" match="rng:mixed">
+  <xsl:template mode="rng2srng:step7.14" match="mixed">
     <interleave>
       <xsl:apply-templates mode="#current"/>
       <text/>
@@ -513,7 +513,7 @@ Je comptais simplifier l’étape de renommage des steps 7.19 et 7.20 qui est un
   
   <xsl:mode name="rng2srng:step7.15" on-no-match="shallow-copy"/>
   
-  <xsl:template mode="rng2srng:step7.15" match="rng:optional">
+  <xsl:template mode="rng2srng:step7.15" match="optional">
     <choice>
       <xsl:apply-templates mode="#current"/>
       <empty/>
@@ -532,7 +532,7 @@ Je comptais simplifier l’étape de renommage des steps 7.19 et 7.20 qui est un
   
   <xsl:mode name="rng2srng:step7.16" on-no-match="shallow-copy"/>
   
-  <xsl:template mode="rng2srng:step7.16" match="rng:zeroOrMore">
+  <xsl:template mode="rng2srng:step7.16" match="zeroOrMore">
     <choice>
       <oneOrMore>
         <xsl:apply-templates mode="#current"/>
@@ -578,16 +578,16 @@ Je comptais simplifier l’étape de renommage des steps 7.19 et 7.20 qui est un
     attribute for that name. After determining this unique value, the combine attributes are removed. A pair of
     definitions
     <define name="n">
-    p1
+        p1
     </define>
     <define name="n">
-    p2
+       p2
     </define>
     is combined into
     <define name="n">
     <c>
-    p1
-    p2
+       p1
+       p2
     </c>
     </define>
     where c is the value of the combine attribute. Pairs of definitions are combined until there is exactly one define
@@ -601,9 +601,9 @@ Je comptais simplifier l’étape de renommage des steps 7.19 et 7.20 qui est un
   
   <xsl:template mode="rng2srng:step7.18" match="@combine"/>
   
-  <xsl:template mode="rng2srng:step7.18" match="rng:start[preceding-sibling::rng:start]|rng:define[@name=preceding-sibling::rng:define/@name]"/>
+  <xsl:template mode="rng2srng:step7.18" match="start[preceding-sibling::start]|define[@name=preceding-sibling::define/@name]"/>
   
-  <xsl:template mode="rng2srng:step7.18" match="rng:start[not(preceding-sibling::rng:start) and following-sibling::rng:start]">
+  <xsl:template mode="rng2srng:step7.18" match="start[not(preceding-sibling::start) and following-sibling::start]">
     <xsl:copy>
       <xsl:apply-templates select="@*" mode="#current"/>
       <xsl:call-template name="rng2srng:start7.18"/>
@@ -611,12 +611,12 @@ Je comptais simplifier l’étape de renommage des steps 7.19 et 7.20 qui est un
   </xsl:template>
   
   <xsl:template name="rng2srng:start7.18">
-    <xsl:param name="left" select="following-sibling::rng:start[2]"/>
-    <xsl:param name="node-name" select="parent::*/rng:start/@combine"/>
+    <xsl:param name="left" select="following-sibling::start[2]"/>
+    <xsl:param name="node-name" select="parent::*/start/@combine"/>
     <xsl:param name="out">
       <xsl:element name="{$node-name}">
         <xsl:apply-templates select="*" mode="rng2srng:step7.18"/>
-        <xsl:apply-templates select="following-sibling::rng:start[1]/*" mode="rng2srng:step7.18"/>
+        <xsl:apply-templates select="following-sibling::start[1]/*" mode="rng2srng:step7.18"/>
       </xsl:element>
     </xsl:param>
     <xsl:choose>
@@ -628,7 +628,7 @@ Je comptais simplifier l’étape de renommage des steps 7.19 et 7.20 qui est un
           </xsl:element>
         </xsl:variable>
         <xsl:call-template name="rng2srng:start7.18">
-          <xsl:with-param name="left" select="$left/following-sibling::rng:start[1]"/>
+          <xsl:with-param name="left" select="$left/following-sibling::start[1]"/>
           <xsl:with-param name="node-name" select="$node-name"/>
           <xsl:with-param name="out" select="$newOut"/>
         </xsl:call-template>
@@ -639,7 +639,7 @@ Je comptais simplifier l’étape de renommage des steps 7.19 et 7.20 qui est un
     </xsl:choose>
   </xsl:template>
   
-  <xsl:template mode="rng2srng:step7.18" match="rng:define[not(@name=preceding-sibling::rng:define/@name) and @name=following-sibling::rng:define/@name]">
+  <xsl:template mode="rng2srng:step7.18" match="define[not(@name=preceding-sibling::define/@name) and @name=following-sibling::define/@name]">
     <xsl:copy>
       <xsl:apply-templates select="@*" mode="#current"/>
       <xsl:call-template name="rng2srng:define7.18"/>
@@ -647,12 +647,12 @@ Je comptais simplifier l’étape de renommage des steps 7.19 et 7.20 qui est un
   </xsl:template>
   
   <xsl:template name="rng2srng:define7.18">
-    <xsl:param name="left" select="following-sibling::rng:define[@name=current()/@name][2]"/>
-    <xsl:param name="node-name" select="parent::*/rng:define[@name=current()/@name]/@combine"/>
+    <xsl:param name="left" select="following-sibling::define[@name=current()/@name][2]"/>
+    <xsl:param name="node-name" select="parent::*/define[@name=current()/@name]/@combine"/>
     <xsl:param name="out">
       <xsl:element name="{$node-name}">
         <xsl:apply-templates select="*" mode="rng2srng:step7.18"/>
-        <xsl:apply-templates select="following-sibling::rng:define[@name=current()/@name][1]/*" mode="rng2srng:step7.18"/>
+        <xsl:apply-templates select="following-sibling::define[@name=current()/@name][1]/*" mode="rng2srng:step7.18"/>
       </xsl:element>
     </xsl:param>
     <xsl:choose>
@@ -664,7 +664,7 @@ Je comptais simplifier l’étape de renommage des steps 7.19 et 7.20 qui est un
           </xsl:element>
         </xsl:variable>
         <xsl:call-template name="rng2srng:define7.18">
-          <xsl:with-param name="left" select="$left/following-sibling::rng:define[@name=current()/@name][1]"/>
+          <xsl:with-param name="left" select="$left/following-sibling::define[@name=current()/@name][1]"/>
           <xsl:with-param name="node-name" select="$node-name"/>
           <xsl:with-param name="out" select="$newOut"/>
         </xsl:call-template>
@@ -697,14 +697,14 @@ Je comptais simplifier l’étape de renommage des steps 7.19 et 7.20 qui est un
   
   <xsl:mode name="rng2srng:step7.19" on-no-match="shallow-copy"/>
   
-  <xsl:template mode="rng2srng:step7.19" match="/rng:grammar">
+  <xsl:template mode="rng2srng:step7.19" match="/grammar">
     <grammar>
       <xsl:apply-templates mode="#current"/>
-      <xsl:apply-templates select="//rng:define" mode="rng2srng:step7.19-define"/>
+      <xsl:apply-templates select="//define" mode="rng2srng:step7.19-define"/>
     </grammar>
   </xsl:template>
   
-  <xsl:template mode="rng2srng:step7.19" match="/*[not(self::rng:grammar)]">
+  <xsl:template mode="rng2srng:step7.19" match="/*[not(self::grammar)]">
     <grammar>
       <start>
         <xsl:copy>
@@ -715,9 +715,9 @@ Je comptais simplifier l’étape de renommage des steps 7.19 et 7.20 qui est un
     </grammar>
   </xsl:template>
   
-  <xsl:template mode="rng2srng:step7.19" match="rng:define|rng:define/@name|rng:ref/@name|rng:parentRef/@name"/>
+  <xsl:template mode="rng2srng:step7.19" match="define|define/@name|ref/@name|parentRef/@name"/>
   
-  <xsl:template mode="rng2srng:step7.19-define" match="rng:define">
+  <xsl:template mode="rng2srng:step7.19-define" match="define">
     <xsl:copy>
       <xsl:attribute name="name">
         <xsl:value-of select="concat(@name, '-', generate-id())"/>
@@ -727,24 +727,24 @@ Je comptais simplifier l’étape de renommage des steps 7.19 et 7.20 qui est un
     </xsl:copy>
   </xsl:template>
   
-  <xsl:template mode="rng2srng:step7.19" match="rng:grammar">
-    <xsl:apply-templates select="rng:start/*" mode="#current"/>
+  <xsl:template mode="rng2srng:step7.19" match="grammar">
+    <xsl:apply-templates select="start/*" mode="#current"/>
   </xsl:template>
   
-  <xsl:template mode="rng2srng:step7.19" match="rng:ref">
+  <xsl:template mode="rng2srng:step7.19" match="ref">
     <xsl:copy>
       <xsl:attribute name="name">
-        <xsl:value-of select="concat(@name, '-', generate-id(ancestor::rng:grammar[1]/rng:define[@name=current()/@name]))"/>
+        <xsl:value-of select="concat(@name, '-', generate-id(ancestor::grammar[1]/define[@name=current()/@name]))"/>
       </xsl:attribute>
       <xsl:apply-templates select="@*" mode="#current"/>
       <xsl:apply-templates mode="#current"/>
     </xsl:copy>
   </xsl:template>
   
-  <xsl:template mode="rng2srng:step7.19" match="rng:parentRef">
+  <xsl:template mode="rng2srng:step7.19" match="parentRef">
     <ref>
       <xsl:attribute name="name">
-        <xsl:value-of select="concat(@name, '-', generate-id(ancestor::rng:grammar[2]/rng:define[@name=current()/@name]))"/>
+        <xsl:value-of select="concat(@name, '-', generate-id(ancestor::grammar[2]/define[@name=current()/@name]))"/>
       </xsl:attribute>
       <xsl:apply-templates select="@*" mode="#current"/>
       <xsl:apply-templates mode="#current"/>
@@ -773,15 +773,15 @@ Je comptais simplifier l’étape de renommage des steps 7.19 et 7.20 qui est un
   
   <xsl:mode name="rng2srng:step7.20" on-no-match="shallow-copy"/>
   
-  <xsl:template mode="rng2srng:step7.20" match="/rng:grammar">
+  <xsl:template mode="rng2srng:step7.20" match="/grammar">
     <xsl:copy>
       <xsl:apply-templates select="@*" mode="#current"/>
       <xsl:apply-templates mode="#current"/>
-      <xsl:apply-templates select="//rng:element[not(parent::rng:define)]" mode="rng2srng:step7.20-define"/>
+      <xsl:apply-templates select="//element[not(parent::define)]" mode="rng2srng:step7.20-define"/>
     </xsl:copy>
   </xsl:template>
   
-  <xsl:template mode="rng2srng:step7.20-define" match="rng:element">
+  <xsl:template mode="rng2srng:step7.20-define" match="element">
     <define name="__{rng:name}-elt-{generate-id()}">
       <xsl:copy>
         <xsl:apply-templates select="@*" mode="rng2srng:step7.20"/>
@@ -790,14 +790,14 @@ Je comptais simplifier l’étape de renommage des steps 7.19 et 7.20 qui est un
     </define>
   </xsl:template>
   
-  <xsl:template mode="rng2srng:step7.20" match="rng:element[not(parent::rng:define)]">
+  <xsl:template mode="rng2srng:step7.20" match="element[not(parent::define)]">
     <ref name="__{rng:name}-elt-{generate-id()}"/>
   </xsl:template>
   
-  <xsl:template mode="rng2srng:step7.20" match="rng:define[not(rng:element)]"/>
+  <xsl:template mode="rng2srng:step7.20" match="define[not(element)]"/>
   
-  <xsl:template mode="rng2srng:step7.20" match="rng:ref[@name=/*/rng:define[not(rng:element)]/@name]">
-    <xsl:apply-templates select="/*/rng:define[@name=current()/@name]/*" mode="#current"/>
+  <xsl:template mode="rng2srng:step7.20" match="ref[@name=/*/define[not(element)]/@name]">
+    <xsl:apply-templates select="/*/define[@name=current()/@name]/*" mode="#current"/>
   </xsl:template>
   
   <!-- ******************************************************************* -->
@@ -826,7 +826,7 @@ Je comptais simplifier l’étape de renommage des steps 7.19 et 7.20 qui est un
   
   <xsl:template mode="rng2srng:step7.21" match="@updated"/>
   
-  <xsl:template mode="rng2srng:step7.21" match="/rng:grammar">
+  <xsl:template mode="rng2srng:step7.21" match="/grammar">
     <xsl:variable name="thisIteration-rtf">
       <xsl:copy>
         <xsl:apply-templates select="@*" mode="#current"/>
@@ -836,7 +836,7 @@ Je comptais simplifier l’étape de renommage des steps 7.19 et 7.20 qui est un
     <xsl:variable name="thisIteration" select="$thisIteration-rtf"/>
     <xsl:choose>
       <xsl:when test="$thisIteration//@updated|$thisIteration//processing-instruction('updated')">
-        <xsl:apply-templates select="$thisIteration/rng:grammar" mode="#current"/>
+        <xsl:apply-templates select="$thisIteration/grammar" mode="#current"/>
       </xsl:when>
       <xsl:otherwise>
         <xsl:copy-of select="$thisIteration-rtf"/>
@@ -844,17 +844,17 @@ Je comptais simplifier l’étape de renommage des steps 7.19 et 7.20 qui est un
     </xsl:choose>
   </xsl:template>
   
-  <xsl:template mode="rng2srng:step7.21" match="rng:choice[count(rng:notAllowed)=1]">
-    <xsl:apply-templates select="*[not(self::rng:notAllowed)]" mode="#current">
+  <xsl:template mode="rng2srng:step7.21" match="choice[count(notAllowed)=1]">
+    <xsl:apply-templates select="*[not(self::notAllowed)]" mode="#current">
       <xsl:with-param name="updated" select="1"/>
     </xsl:apply-templates>
   </xsl:template>
   
-  <xsl:template mode="rng2srng:step7.21" match="(rng:attribute|rng:list|rng:group|rng:interleave|rng:oneOrMore)[rng:notAllowed]|rng:choice[count(rng:notAllowed)=2]">
+  <xsl:template mode="rng2srng:step7.21" match="(attribute|list|group|interleave|oneOrMore)[notAllowed]|choice[count(notAllowed)=2]">
     <notAllowed updated="1"/>
   </xsl:template>
   
-  <xsl:template mode="rng2srng:step7.21" match="rng:except[rng:notAllowed]">
+  <xsl:template mode="rng2srng:step7.21" match="except[notAllowed]">
     <xsl:processing-instruction name="updated"/>
   </xsl:template>
   
@@ -884,7 +884,7 @@ Je comptais simplifier l’étape de renommage des steps 7.19 et 7.20 qui est un
   
   <xsl:template mode="rng2srng:step7.22"  match="@updated"/>
   
-  <xsl:template  mode="rng2srng:step7.22" match="/rng:grammar">
+  <xsl:template  mode="rng2srng:step7.22" match="/grammar">
     <xsl:variable name="thisIteration-rtf">
       <xsl:copy>
         <xsl:apply-templates select="@*" mode="#current"/>
@@ -894,7 +894,7 @@ Je comptais simplifier l’étape de renommage des steps 7.19 et 7.20 qui est un
     <xsl:variable name="thisIteration" select="$thisIteration-rtf"/>
     <xsl:choose>
       <xsl:when test="$thisIteration//@updated">
-        <xsl:apply-templates select="$thisIteration/rng:grammar" mode="#current"/>
+        <xsl:apply-templates select="$thisIteration/grammar" mode="#current"/>
       </xsl:when>
       <xsl:otherwise>
         <xsl:copy-of select="$thisIteration-rtf"/>
@@ -902,7 +902,7 @@ Je comptais simplifier l’étape de renommage des steps 7.19 et 7.20 qui est un
     </xsl:choose>
   </xsl:template>
   
-  <xsl:template mode="rng2srng:step7.22"  match="rng:choice[*[1][not(self::rng:empty)] and *[2][self::rng:empty]]">
+  <xsl:template mode="rng2srng:step7.22"  match="choice[*[1][not(self::empty)] and *[2][self::empty]]">
     <xsl:copy>
       <xsl:attribute name="updated">1</xsl:attribute>
       <xsl:apply-templates select="*[2]"  mode="#current"/>
@@ -910,13 +910,13 @@ Je comptais simplifier l’étape de renommage des steps 7.19 et 7.20 qui est un
     </xsl:copy>
   </xsl:template>
   
-  <xsl:template mode="rng2srng:step7.22"  match="(rng:group|rng:interleave)[count(rng:empty)=1]">
-    <xsl:apply-templates select="*[not(self::rng:empty)]" mode="#current">
+  <xsl:template mode="rng2srng:step7.22"  match="(group|interleave)[count(empty)=1]">
+    <xsl:apply-templates select="*[not(self::empty)]" mode="#current">
       <xsl:with-param name="updated" select="1"/>
     </xsl:apply-templates>
   </xsl:template>
   
-  <xsl:template mode="rng2srng:step7.22"  match="(rng:group|rng:interleave|rng:choice)[count(rng:empty)=2]|rng:oneOrMore[rng:empty]">
+  <xsl:template mode="rng2srng:step7.22"  match="(group|interleave|choice)[count(empty)=2]|oneOrMore[empty]">
     <empty updated="1"/>
   </xsl:template>
 
