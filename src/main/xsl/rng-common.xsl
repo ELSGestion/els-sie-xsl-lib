@@ -2,12 +2,13 @@
 <xsl:stylesheet 
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl"
 	xmlns:rng="http://relaxng.org/ns/structure/1.0"
 	xmlns:els="http://www.lefebvre-sarrut.eu/ns/els"
 	xmlns="http://relaxng.org/ns/structure/1.0"
 	xpath-default-namespace="http://relaxng.org/ns/structure/1.0"
 	exclude-result-prefixes="#all"
-	version="2.0">
+	version="3.0">
 	
 	<xsl:import href="els-common.xsl"/>
 	
@@ -264,4 +265,43 @@
 		</xsl:copy>
 	</xsl:template>
 	
+	
+  <xd:doc>
+    <xd:desc>
+      <xd:p>Réordonne les define d'un fichier RNG simplifié, en se basant sur le nom de l'élément</xd:p>
+    </xd:desc>
+  </xd:doc>
+  <!--FIXME : impossible d'appeler cette xsl avec initial mode = rng:reorder avec saxon
+  il semble que le nom du mode ne peut pas être préfixé-->
+  
+  <xsl:template match="/grammar" mode="rng:reorder rng_reorder">
+    <xsl:message>[INFO] rng:reorder sur <xsl:value-of select="local-name()"/></xsl:message>
+    <xsl:copy copy-namespaces="yes">
+      <xsl:namespace name="xfe">http://www.lefebvre-sarrut.eu/ns/xmlfirst/xmlEditor</xsl:namespace>
+      <xsl:apply-templates select="@*" mode="#current"/>
+      <xsl:apply-templates select="start" mode="#current"/>
+      <xsl:apply-templates select="define" mode="#current">
+        <xsl:sort select="concat(element[1]/@name | element[1]/name/text(), '_', element[1]//attribute[@name = 'class']/value/text())"/>
+      </xsl:apply-templates>
+    </xsl:copy>
+  </xsl:template>
+  
+  <xsl:template match="define" mode="rng:reorder rng_reorder">
+    <xsl:message use-when="false()">[INFO][rng:reorder] define "<xsl:value-of select="concat(element[1]/@name | element[1]/name/text(), '_', element[1]//attribute[@name = 'class']/value/text())"/>"</xsl:message>
+    <xsl:next-match/>
+  </xsl:template>
+  
+  <xsl:template match="node() | @*" mode="rng:reorder rng_reorder">
+    <xsl:copy>
+      <xsl:apply-templates select="node() | @*" mode="#current"/>
+    </xsl:copy>
+  </xsl:template>
+  
+  <!--tmp pour diff-->
+  <!--<xsl:template match="@datatypeLibrary" mode="rng:reorder rng_reorder"/>
+  <xsl:template match="@ns" mode="rng:reorder rng_reorder"/>
+  <xsl:template match="group | optional" mode="rng:reorder rng_reorder">
+    <xsl:apply-templates mode="#current"/>
+  </xsl:template>-->
+  
 </xsl:stylesheet>
