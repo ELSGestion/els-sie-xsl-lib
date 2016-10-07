@@ -106,12 +106,15 @@ Je comptais simplifier l’étape de renommage des steps 7.19 et 7.20 qui est un
   <!-- ******************************************************************* -->
   <!--     7.1 General                                                     -->
   <!-- ******************************************************************* -->
-  <!-- 
+  <!--
+    cf. http://www.relaxng.org/spec-20011203.html
+    
     The full syntax given in the previous clause is transformed into a simpler syntax by applying the following
    transformation rules in order. The effect shall be as if each rule was applied to all elements in the schema before
    the next rule is applied. A transformation rule may also specify constraints that shall be satisfied by a correct
    schema. The transformation rules are applied at the data model level. Before the transformations are applied, the
    schema is parsed into an element in the data model.
+   
   -->
   
   <!-- ******************************************************************* -->
