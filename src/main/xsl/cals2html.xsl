@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- source-location : svn+ssh://svn02/repositories/dev/projets/xchaines/trunk/developpements/BU/MakeHtmlXml/trunk/transfoHtml_cx/-->
 <xsl:stylesheet version="2.0"
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 	xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl" 
 	xmlns:xs="http://www.w3.org/2001/XMLSchema"
 	xmlns:els="http://www.lefebvre-sarrut.eu/ns/els"
+	xmlns:xslLib="http://www.lefebvre-sarrut.eu/ns/els/xslLib"
 	xmlns:cals="-//OASIS//DTD XML Exchange Table Model 19990315//EN"
 	xmlns:saxon="http://saxon.sf.net/"
 	xmlns="http://www.w3.org/1999/xhtml"
@@ -30,7 +30,7 @@
 	<!-- sinon valeur de @rowsep -->
 	<!-- point d'entrée du module TABLE -->
 	<!-- MODEL : table ::= title, tgroup+ -->
-	<xsl:template match="table" mode="cals2html">
+	<xsl:template match="table" mode="xslLib:cals2html">
 		<!-- on n'applique les templates qu'à tgroup, car c'est lui qui construit le tableau HTML et qui va chercher les éléments nécessaire hors du tgroup.
 		Ainsi, les footnote seront traités par le template tgroup, on ne doit donc pas les traiter à ce niveau 
 		NB : https://www.oasis-open.org/specs/tm9901.html#AEN282 : "All tgroups of a table shall have the same width, so the table frame can surround them uniformly"
@@ -46,7 +46,7 @@
 		</div>
 	</xsl:template>
 	
-	<xsl:template match="@id" mode="cals2html">
+	<xsl:template match="@id" mode="xslLib:cals2html">
 		<xsl:copy copy-namespaces="no"/>
 	</xsl:template>
 	
@@ -54,7 +54,7 @@
 		<xd:desc>on ne génère pas d'élément div, car le titre est traité par la XSLT qui traite les tables CALS : on le met dans un élément caption, qui
 			ne doit pas contenir de div</xd:desc>
 	</-->
-	<xsl:template match="table/titre | table/ttab | table/sttab" mode="cals2html">
+	<xsl:template match="table/titre | table/ttab | table/sttab" mode="xslLib:cals2html">
 		<div class="{local-name(.)}">
 			<xsl:apply-templates  mode="#current" />
 		</div>
@@ -65,14 +65,14 @@
 		<!-\- no op -\-> 
 	</xsl:template>-->
 
-	<xsl:template match="caption" mode="cals2html">
+	<xsl:template match="caption" mode="xslLib:cals2html">
 		<!-- do nothing all has been put in html:table/html:caption element -->
 		<!-- no op --> 
 	</xsl:template>
 	
 	<!-- veritable structure de tableau -->
 	<!-- MODEL : tgroup ::= colspec+, thead?, tbody-->
-	<xsl:template match="tgroup" mode="cals2html">
+	<xsl:template match="tgroup" mode="xslLib:cals2html">
 		<xsl:param name="rowsep" />
 		<xsl:param name="colsep" />
 		<xsl:param name="align" />
@@ -125,7 +125,7 @@
 			<xsl:if test="normalize-space(@cols)!='' and not(normalize-space(@cols) castable as xs:integer)">
 				<xsl:message terminate="yes">@cols="<xsl:value-of select="@cols"/>" n'est pas un entier</xsl:message>
 			</xsl:if>
-			<xsl:apply-templates mode="cals2html" select="thead">
+			<xsl:apply-templates mode="xslLib:cals2html" select="thead">
 				<xsl:with-param name="colsep" select="(@colsep, $colsep)[1]"/>
 				<xsl:with-param name="rowsep" select="(@rowsep, $rowsep)[1]"/>
 				<xsl:with-param name="align" select="(@align, $align)[1]"/>
@@ -152,7 +152,7 @@
 											<xsl:value-of select="concat(concat('NOTE', count(ancestor::table[1]/footnote)), '&#xA0;: ')"/>
 										</strong>
 									</p>
-									<xsl:apply-templates mode="cals2html" select="ancestor::table[1]/footnote">
+									<xsl:apply-templates mode="xslLib:cals2html" select="ancestor::table[1]/footnote">
 										<xsl:with-param name="colsep" select="(@colsep, $colsep)[1]"/>
 										<xsl:with-param name="rowsep" select="(@rowsep, $rowsep)[1]"/>
 										<xsl:with-param name="align" select="(@align, $align)[1]"/>
@@ -167,7 +167,7 @@
 											<xsl:text>&#xA0;:</xsl:text>
 										</strong>
 									</p>-->
-									<xsl:apply-templates select="ancestor::table[1]/tblNote" mode="cals2html">
+									<xsl:apply-templates select="ancestor::table[1]/tblNote" mode="xslLib:cals2html">
 										<!--<xsl:with-param name="colsep" select="(@colsep, $colsep)[1]"/>
 										<xsl:with-param name="rowsep" select="(@rowsep, $rowsep)[1]"/>
 										<xsl:with-param name="align" select="(@align, $align)[1]"/>
@@ -179,7 +179,7 @@
 					</xsl:if>
 				</tfoot>
 			</xsl:if>
-			<xsl:apply-templates select="* except (thead, tfoot) (:head et foot traité explicitement:)" mode="cals2html">
+			<xsl:apply-templates select="* except (thead, tfoot) (:head et foot traité explicitement:)" mode="xslLib:cals2html">
 				<xsl:with-param name="colsep" select="(@colsep, $colsep)[1]"/>
 				<xsl:with-param name="rowsep" select="(@rowsep, $rowsep)[1]"/>
 				<xsl:with-param name="align" select="(@align, $align)[1]"/>
@@ -193,7 +193,7 @@
 	
 	<!-- entete de tableau -->
 	<!-- MODEL : thead ::= colspec*,row+ -->
-	<xsl:template match="thead" mode="cals2html">
+	<xsl:template match="thead" mode="xslLib:cals2html">
 		<xsl:param name="colsep" />
 		<xsl:param name="rowsep" />
 		<xsl:param name="align" />
@@ -208,17 +208,17 @@
 		</thead>
 	</xsl:template>
 	
-	<xsl:template match="colspec" mode="cals2html">
+	<xsl:template match="colspec" mode="xslLib:cals2html">
 		<!-- no op -->
 	</xsl:template>
 	
-	<xsl:template match="spanspec" mode="cals2html">
+	<xsl:template match="spanspec" mode="xslLib:cals2html">
 		<!-- no op -->
 	</xsl:template>
 	
 	<!-- pied de tableau (PAS UTILISÉ DANS LE MODÈLE UTILISÉ POUR PMT) -->
 	<!-- MODEL : tfoot ::= colspec*,row+ -->
-	<xsl:template match="tfoot" mode="cals2html">
+	<xsl:template match="tfoot" mode="xslLib:cals2html">
 		<xsl:param name="colsep" />
 		<xsl:param name="rowsep" />
 		<xsl:param name="align" />
@@ -233,7 +233,7 @@
 	
 	<!-- corps de tableau -->
 	<!-- MODEL : tbody ::= row+-->
-	<xsl:template match="tbody" mode="cals2html">
+	<xsl:template match="tbody" mode="xslLib:cals2html">
 		<xsl:param name="colsep" />
 		<xsl:param name="rowsep" />
 		<xsl:param name="align" />
@@ -250,7 +250,7 @@
 	
 	<!-- ligne de tableaux -->
 	<!-- MODEL : row ::= entry+ -->
-	<xsl:template match="row" mode="cals2html">
+	<xsl:template match="row" mode="xslLib:cals2html">
 		<xsl:param name="colsep" />
 		<xsl:param name="rowsep" />
 		<xsl:param name="align" />
@@ -259,7 +259,7 @@
 			<xsl:if test="@bgcolor">
 				<xsl:attribute name="style" select="concat('background-color:',@bgcolor)"/>
 			</xsl:if>
-			<xsl:apply-templates mode="cals2html">
+			<xsl:apply-templates mode="xslLib:cals2html">
 				<xsl:with-param name="colsep" select="(@colsep, $colsep)[1]"/>
 				<xsl:with-param name="rowsep" select="(@rowsep, $rowsep)[1]"/>
 				<xsl:with-param name="align" select="(@align, $align)[1]"/>
@@ -270,7 +270,7 @@
 
 	<!-- cellule de tableaux -->
 	<!-- MODEL : entry ::= para | al-->
-	<xsl:template match="entry" mode="cals2html">
+	<xsl:template match="entry" mode="xslLib:cals2html">
 		<xsl:param name="colsep" />
 		<xsl:param name="rowsep" />
 		<xsl:param name="align" />
@@ -443,7 +443,7 @@
 	</xsl:template>
 
 	<!-- Notes de tableaux. Les appels de note sont traités dans la XSLT appelante. -->
-	<xsl:template match="footnote" mode="cals2html">
+	<xsl:template match="footnote" mode="xslLib:cals2html">
 		<strong class="note-num">
 			<xsl:apply-templates select="@id" mode="#current"/>
 			<!-- il faut un espace insécable après le nº sinon le paragraphe qui suit est collé au nº (à cause de float:left) -->
@@ -453,14 +453,14 @@
 		<xsl:apply-templates mode="#current" />
 	</xsl:template>
 	
-	<xsl:template match="tblNote" mode="cals2html">
+	<xsl:template match="tblNote" mode="xslLib:cals2html">
 		<div class="notes_container">
 			<xsl:apply-templates mode="#current"/>
 		</div>
 	</xsl:template>
 	
 	<!-- Notes de tableaux. Les appels de note sont traités dans la XSLT appelante. -->
-	<xsl:template match="tblNote/note" mode="cals2html">
+	<xsl:template match="tblNote/note" mode="xslLib:cals2html">
 			<div class="note-num">
 				<xsl:apply-templates select="@id" mode="#current"/>
 				<!-- il faut un espace insécable après le nº sinon le paragraphe qui suit est collé au nº (à cause de float:left) -->
@@ -470,7 +470,7 @@
 			</div>
 	</xsl:template>
 	
-	<xsl:template match="legende" mode="cals2html">
+	<xsl:template match="legende" mode="xslLib:cals2html">
 		<div class="legende-tab">
 			<xsl:apply-templates mode="#current"/>
 		</div>
@@ -480,7 +480,7 @@
 	<!-- COMMON -->
 	<!--=====================================================-->
 
-	<xsl:template match="node() | @*" mode="cals2html">
+	<xsl:template match="node() | @*" mode="xslLib:cals2html">
 		<xsl:copy copy-namespaces="no">
 			<xsl:apply-templates select="node() | @*" mode="#current"/>
 		</xsl:copy>

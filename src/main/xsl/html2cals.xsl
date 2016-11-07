@@ -1,12 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+<xsl:stylesheet 
+  xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
   xmlns:xs="http://www.w3.org/2001/XMLSchema"
-  xmlns:xhtml2cals="http://www.lefebvre-sarrut.eu/ns/xmlfirst/xmlEditor/xhtml2cals"
-  xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl" xmlns:tmp="file://tmp"
+  xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl"
+  xmlns:els="http://www.lefebvre-sarrut.eu/ns/els"
+  xmlns:xslLib="http://www.lefebvre-sarrut.eu/ns/els/xslLib"
+  xmlns:xhtml2cals="http://www.lefebvre-sarrut.eu/ns/els/xhtml2cals"
+  xmlns:tmp="file://tmp"
   xmlns:xhtml="http://www.w3.org/1999/xhtml" 
   xmlns:css="http://www.w3.org/1996/css"
   xpath-default-namespace="http://www.w3.org/1999/xhtml"
-  exclude-result-prefixes="xs" version="3.0">
+  exclude-result-prefixes="#all" 
+  version="3.0">
   
   <xsl:import href="css-parser.xsl"/>
   
@@ -50,19 +55,19 @@
   </xd:doc>
   
   
-  <xsl:template match="table" mode="xhtml2cals">
+  <xsl:template match="table" mode="xslLib:xhtml2cals">
     <xsl:variable name="step1">
-      <xsl:call-template name="normalize-to-xhtml">
+      <xsl:call-template name="xhtml2cals:normalize-to-xhtml">
         <xsl:with-param name="table" select="."/>
       </xsl:call-template>
     </xsl:variable>
     <xsl:variable name="step2">
-      <xsl:apply-templates select="$step1" mode="expand-spans"/>
+      <xsl:apply-templates select="$step1" mode="xhtml2cals:expand-spans"/>
     </xsl:variable>
-    <xsl:apply-templates select="$step2" mode="convert-to-cals"/>
+    <xsl:apply-templates select="$step2" mode="xhtml2cals:convert-to-cals"/>
   </xsl:template>
   
-  <xsl:template match="@*|node()" mode="xhtml2cals">
+  <xsl:template match="@*|node()" mode="xslLib:xhtml2cals">
     <xsl:copy>
       <xsl:apply-templates select="@*|node()" mode="#current"/>
     </xsl:copy>
@@ -86,15 +91,15 @@
       <xd:p>On passe le contexte au template afin de vérifier son type.</xd:p>
     </xd:desc>
   </xd:doc>
-  <xsl:template name="normalize-to-xhtml">
+  <xsl:template name="xhtml2cals:normalize-to-xhtml">
     <xsl:param name="table" as="element(xhtml:table)"/>
     <xsl:if test="$table/((tbody/tr)|tr)">
       <xsl:copy select="$table">
         <xsl:copy-of select="./(@*|processing-instruction()|comment())"/>
-        <xsl:apply-templates select="./caption" mode="normalize-to-xhtml"/>
+        <xsl:apply-templates select="./caption" mode="#current"/>
         <xsl:choose>
           <xsl:when test="./(colgroup|col)">
-            <xsl:apply-templates select="./(colgroup|col)" mode="normalize-to-xhtml"/>
+            <xsl:apply-templates select="./(colgroup|col)" mode="#current"/>
           </xsl:when>
           <xsl:otherwise>
             <!-- On normalise en ajoutant un colgroup générique -->
@@ -103,16 +108,16 @@
             </xsl:element>
           </xsl:otherwise>
         </xsl:choose>
-        <xsl:apply-templates select="./(thead, tfoot)" mode="normalize-to-xhtml"/>
+        <xsl:apply-templates select="./(thead, tfoot)" mode="#current"/>
         <xsl:choose>
           <xsl:when test="./tbody">
-            <xsl:apply-templates select="$table/tbody" mode="normalize-to-xhtml"/>
+            <xsl:apply-templates select="$table/tbody" mode="#current"/>
           </xsl:when>
           <xsl:when test="./tr">
             <!-- On normalise en ajoutant un tbody -->
             <!-- cela simplifie le traitement en bloc en mode expand-spans -->
             <xsl:element name="tbody" namespace="http://www.w3.org/1999/xhtml">
-              <xsl:apply-templates select="./tr" mode="normalize-to-xhtml"/>
+              <xsl:apply-templates select="./tr" mode="#current"/>
             </xsl:element>
           </xsl:when>
         </xsl:choose>
@@ -125,14 +130,14 @@
       <xd:p>En mode <xd:i>normalize-to-xhtml</xd:i>: élimination des éléments hors modèle</xd:p>
     </xd:desc>
   </xd:doc>
-  <xsl:template match="title | summary | script | template" mode="normalize-to-xhtml"/>
+  <xsl:template match="title | summary | script | template" mode="xhtml2cals:normalize-to-xhtml"/>
 
   <xd:doc scope="component" xml:lang="fr">
     <xd:desc>
       <xd:p>En mode <xd:i>normalize-to-xhtml</xd:i>: recopie par défaut</xd:p>
     </xd:desc>
   </xd:doc>
-  <xsl:template match="@* | node()" mode="normalize-to-xhtml">
+  <xsl:template match="@* | node()" mode="xhtml2cals:normalize-to-xhtml">
     <xsl:copy copy-namespaces="yes">
       <xsl:apply-templates select="@*|node()" mode="#current"/>
     </xsl:copy>
@@ -177,7 +182,7 @@
         et le ou les tbody).</xd:p>
     </xd:desc>
   </xd:doc>
-  <xsl:template match="thead | tfoot | tbody" mode="expand-spans">
+  <xsl:template match="thead | tfoot | tbody" mode="xhtml2cals:expand-spans">
     <xsl:copy>
       <xsl:copy-of select="@*"/>
       <xsl:call-template name="process-block">
@@ -422,7 +427,7 @@
       <xd:p>En mode <xd:i>expand-spans</xd:i>: recopie par défaut</xd:p>
     </xd:desc>
   </xd:doc>
-  <xsl:template match="@* | node()" mode="expand-spans">
+  <xsl:template match="@* | node()" mode="xhtml2cals:expand-spans">
     <xsl:copy copy-namespaces="yes">
       <xsl:apply-templates select="@*|node()" mode="#current"/>
     </xsl:copy>
@@ -430,7 +435,7 @@
   
   
 
-  <xsl:template match="table" mode="convert-to-cals">
+  <xsl:template match="table" mode="xhtml2cals:convert-to-cals">
     <xsl:element name="table" namespace="{$cals.ns.uri}">
       <xsl:copy-of select="@id | @class | @align | @width" copy-namespaces="no"/>
       <xsl:call-template name="compute-table-borders"/>
@@ -631,14 +636,14 @@
   </xsl:template>
   
   
-  <xsl:template match="caption" mode="convert-to-cals">
+  <xsl:template match="caption" mode="xhtml2cals:convert-to-cals">
     <xsl:element name="title" namespace="{$cals.ns.uri}">
       <xsl:copy-of select="@id | @class | @style" copy-namespaces="no"/>
       <xsl:apply-templates select="node()" mode="#current"/>
     </xsl:element>
   </xsl:template>
   
-  <xsl:template match="thead" mode="convert-to-cals">
+  <xsl:template match="thead" mode="xhtml2cals:convert-to-cals">
     <xsl:element name="thead" namespace="{$cals.ns.uri}">
       <xsl:copy-of select="@id | @class | @style | @align | @char | @charoff | @valign"
         copy-namespaces="no"/>
@@ -646,7 +651,7 @@
     </xsl:element>
   </xsl:template>
   
-  <xsl:template match="tfoot" mode="convert-to-cals">
+  <xsl:template match="tfoot" mode="xhtml2cals:convert-to-cals">
     <xsl:element name="tfoot" namespace="{$cals.ns.uri}">
       <xsl:copy-of select="@id | @class | @style | @align | @char | @charoff | @valign"
         copy-namespaces="no"/>
@@ -654,7 +659,7 @@
     </xsl:element>
   </xsl:template>
   
-  <xsl:template match="tbody" mode="convert-to-cals">
+  <xsl:template match="tbody" mode="xhtml2cals:convert-to-cals">
     <xsl:element name="tbody" namespace="{$cals.ns.uri}">
       <xsl:copy-of select="@id | @class | @style | @align | @char | @charoff | @valign"
         copy-namespaces="no"/>
@@ -662,7 +667,7 @@
     </xsl:element>
   </xsl:template>
   
-  <xsl:template match="tr" mode="convert-to-cals">
+  <xsl:template match="tr" mode="xhtml2cals:convert-to-cals">
     <xsl:element name="row" namespace="{$cals.ns.uri}">
       <xsl:copy-of select="@id | @class | @style | @align | @char | @charoff | @valign"
         copy-namespaces="no"/>
@@ -670,7 +675,7 @@
     </xsl:element>
   </xsl:template>
   
-  <xsl:template match="td|th" mode="convert-to-cals">
+  <xsl:template match="td|th" mode="xhtml2cals:convert-to-cals">
     <xsl:element name="entry" namespace="{$cals.ns.uri}">
       <xsl:variable name="curr-col-num" as="xs:integer" select="count(preceding-sibling::*) + 1"/>            
       
@@ -748,9 +753,9 @@
     </xsl:element>
   </xsl:template>
   
-  <xsl:template match="(td|th)[@tmp:DummyCell='yes']" mode="convert-to-cals" priority="15"/>
+  <xsl:template match="(td|th)[@tmp:DummyCell='yes']" mode="xhtml2cals:convert-to-cals" priority="15"/>
   
-  <xsl:template match="@* | node()" mode="convert-to-cals">
+  <xsl:template match="@* | node()" mode="xhtml2cals:convert-to-cals">
     <xsl:copy>
       <xsl:apply-templates select="@* | node()" mode="#current"/>
     </xsl:copy>
