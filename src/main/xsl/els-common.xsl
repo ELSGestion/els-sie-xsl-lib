@@ -549,6 +549,13 @@
 		<xsl:sequence select="replace($arg,concat('^.*?',$regex),'')"/>
 	</xsl:function>-->
 	
+	<xd:doc>
+		<xd:desc>
+			<xd:p>return the string value of a node, normalizing white-spaces</xd:p>
+		</xd:desc>
+		<xd:param name="node">Any node</xd:param>
+		<xd:return>String value of the node</xd:return>
+	</xd:doc>
 	<xsl:function name="els:normalized-string" as="xs:string">
 		<xsl:param name="node" as="node()?"/>
 		<xsl:sequence select="string-join($node//text()[normalize-space(.)], ' ')"/>
