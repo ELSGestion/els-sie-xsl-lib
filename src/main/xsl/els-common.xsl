@@ -549,6 +549,11 @@
 		<xsl:sequence select="replace($arg,concat('^.*?',$regex),'')"/>
 	</xsl:function>-->
 	
+	<xsl:function name="els:normalized-string" as="xs:string">
+		<xsl:param name="node" as="node()?"/>
+		<xsl:sequence select="string-join($node//text()[normalize-space(.)], ' ')"/>
+	</xsl:function>
+	
 	<!--=====================-->
 	<!-- MODE els:UPPERCASE -->
 	<!--=====================-->
