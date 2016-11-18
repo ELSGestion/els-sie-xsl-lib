@@ -785,7 +785,7 @@ Je comptais simplifier l’étape de renommage des steps 7.19 et 7.20 qui est un
   </xsl:template>
   
   <xsl:template mode="rng2srng:step7.20-define" match="element">
-    <define name="__{rng:name}-elt-{generate-id()}">
+    <define name="__{name}-elt-{generate-id()}">
       <xsl:copy>
         <xsl:apply-templates select="@*" mode="rng2srng:step7.20"/>
         <xsl:apply-templates mode="rng2srng:step7.20"/>
@@ -794,7 +794,7 @@ Je comptais simplifier l’étape de renommage des steps 7.19 et 7.20 qui est un
   </xsl:template>
   
   <xsl:template mode="rng2srng:step7.20" match="element[not(parent::define)]">
-    <ref name="__{rng:name}-elt-{generate-id()}"/>
+    <ref name="__{name}-elt-{generate-id()}"/>
   </xsl:template>
   
   <xsl:template mode="rng2srng:step7.20" match="define[not(element)]"/>
