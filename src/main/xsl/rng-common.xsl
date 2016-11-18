@@ -274,16 +274,30 @@
   <!--FIXME : impossible d'appeler cette xsl avec initial mode = rng:reorder avec saxon
   il semble que le nom du mode ne peut pas être préfixé-->
   
+  <xsl:param name="rng:reorder_renameDefineRef" select="true()" as="xs:boolean"/>
+  
   <xsl:template match="/grammar" mode="rng:reorder rng_reorder">
     <xsl:message>[INFO] rng:reorder sur <xsl:value-of select="local-name()"/></xsl:message>
-    <xsl:copy copy-namespaces="yes">
-      <xsl:namespace name="xfe">http://www.lefebvre-sarrut.eu/ns/xmlfirst/xmlEditor</xsl:namespace>
-      <xsl:apply-templates select="@*" mode="#current"/>
-      <xsl:apply-templates select="start" mode="#current"/>
-      <xsl:apply-templates select="define" mode="#current">
-        <xsl:sort select="concat(element[1]/@name | element[1]/name/text(), '_', element[1]//attribute[@name = 'class']/value/text())"/>
-      </xsl:apply-templates>
-    </xsl:copy>
+    <xsl:variable name="rng_reorder_step1" as="document-node()">
+      <xsl:document>
+        <xsl:copy copy-namespaces="yes">
+          <xsl:namespace name="xfe">http://www.lefebvre-sarrut.eu/ns/xmlfirst/xmlEditor</xsl:namespace>
+          <xsl:apply-templates select="@*" mode="#current"/>
+          <xsl:apply-templates select="start" mode="#current"/>
+          <xsl:apply-templates select="define" mode="#current">
+            <xsl:sort select="concat(element[1]/@name | element[1]/name/text(), '_', element[1]//attribute[@name = 'class']/value/text())"/>
+          </xsl:apply-templates>
+        </xsl:copy>
+      </xsl:document>
+    </xsl:variable>
+    <xsl:choose>
+      <xsl:when test="$rng:reorder_renameDefineRef">
+        <xsl:apply-templates select="$rng_reorder_step1" mode="rng:renameDefineAndRefByElementNameAndOrder"/>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:sequence select="$rng_reorder_step1"/>
+      </xsl:otherwise>
+    </xsl:choose>
   </xsl:template>
   
   <xsl:template match="define" mode="rng:reorder rng_reorder">
@@ -299,9 +313,82 @@
   
   <!--tmp pour diff-->
   <!--<xsl:template match="@datatypeLibrary" mode="rng:reorder rng_reorder"/>
-  <xsl:template match="@ns" mode="rng:reorder rng_reorder"/>
-  <xsl:template match="group | optional" mode="rng:reorder rng_reorder">
+  <xsl:template match="@ns" mode="rng:reorder rng_reorder"/>-->
+  <!--<xsl:template match="group | optional" mode="rng:reorder rng_reorder">
     <xsl:apply-templates mode="#current"/>
   </xsl:template>-->
+  
+  
+  <xd:doc>
+    <xd:desc>
+      <xd:p>Rename define and ref by element name and order in the rng document</xd:p>
+    </xd:desc>
+  </xd:doc>
+  
+  <xsl:template match="/grammar" mode="rng:renameDefineAndRefByElementNameAndOrder">
+    <xsl:message>[INFO] rng:renameDefineAndRefByElementNameAndOrder sur <xsl:value-of select="local-name()"/></xsl:message>
+    <xsl:next-match/>
+  </xsl:template>
+  
+  <xsl:template match="define/@name" mode="rng:renameDefineAndRefByElementNameAndOrder">
+    <xsl:variable name="define" select="parent::define" as="element()"/>
+    <xsl:variable name="elementName" select="($define/element[1]/@name, $define/element[1]/name)[1]" as="xs:string"/>
+    <xsl:variable name="count" select="count($define/preceding-sibling::define[(element[1]/@name, element[1]/name)[1] = $elementName])" as="xs:integer"/>
+    <xsl:attribute name="{name(.)}">
+      <xsl:choose>
+        <xsl:when test="$count = 0">
+          <xsl:sequence select="$elementName"/>
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:sequence select="concat($elementName, '_', $count + 1)"/>
+        </xsl:otherwise>
+      </xsl:choose>
+    </xsl:attribute>
+  </xsl:template>
+  
+  <xsl:template match="ref/@name" mode="rng:renameDefineAndRefByElementNameAndOrder">
+    <xsl:variable name="ref" select="parent::ref" as="element()"/>
+    <xsl:apply-templates select="rng:getDefine($ref)/@name" mode="#current"/>
+  </xsl:template>
+  
+  <!-- FIXME mricaud : version gmarichal, je n'arrive pas à la faire fonctionner (version oXygen ?)--> 
+  <!--<xsl:variable name="xfe:jingRenameMapping" as="map(xs:string, xs:string?)">
+    <xsl:map>
+      <xsl:for-each-group select="//define/element" group-by="@name">
+        <xsl:for-each select="current-group()">
+          <xsl:choose>
+            <xsl:when test="count(current-group()) &gt; 1">
+              <xsl:map-entry key="../@name" select="concat(xs:string(@name), '_', position())"/>
+            </xsl:when>
+            <xsl:otherwise>
+              <xsl:map-entry key="../@name" select="xs:string(@name)"/>
+            </xsl:otherwise>
+          </xsl:choose>
+        </xsl:for-each>
+      </xsl:for-each-group>
+    </xsl:map>
+  </xsl:variable>
+  
+  <xsl:template match="define|ref" mode="xfe:adaptSrng">
+    <xsl:copy>
+      <xsl:choose>
+        <xsl:when test="map:contains($xfe:jingRenameMapping, @name)">
+          <xsl:message>WHEN</xsl:message>
+          <xsl:attribute name='name' select="map:get($xfe:jingRenameMapping, @name)"/>
+          <xsl:apply-templates select="@* except @name|node()" mode="#current"/>
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:message>OTW</xsl:message>
+          <xsl:apply-templates select="@*|node()" mode="#current"/>
+        </xsl:otherwise>
+      </xsl:choose>
+    </xsl:copy>
+  </xsl:template>-->
+  
+  <xsl:template match="node() | @*" mode="rng:renameDefineAndRefByElementNameAndOrder">
+    <xsl:copy>
+      <xsl:apply-templates select="node() | @*" mode="#current"/>
+    </xsl:copy>
+  </xsl:template>
   
 </xsl:stylesheet>
