@@ -91,7 +91,20 @@
 		<xsl:param name="xpath" as="xs:string"/> <!--attention xpath doit être absolu ici ! ("/a/b/c", pas de "//a" ou "b/c")-->
 		<xsl:param name="grammar" as="element(rng:grammar)"/>
 		<xsl:variable name="xpath.tokenized" select="tokenize($xpath, '/')" as="xs:string*"/>
-		<xsl:sequence select="rng:getSRNGdataModelReccurse(rng:getDefine($grammar/start/ref[1])/element[1], string-join($xpath.tokenized[position() gt 2], '/'))"/>
+	  <xsl:variable name="xpath.rootName" select="$xpath.tokenized[2]" as="xs:string"/>
+	  <xsl:variable name="grammar.start" select="$grammar/start" as="element(rng:start)"/>
+	  <!--dans start on cherche la référence à xpath.rootName-->
+	  <xsl:variable name="rngRootRef" select="$grammar/start//ref[rng:getDefine(.)/element[1]/@name = $xpath.rootName]" as="element(rng:ref)?"/>
+	  <xsl:choose>
+	    <!--Il y en a une ref dans le start, tout va bien : on peut initialiser rng:getSRNGdataModelReccurse()-->
+	    <xsl:when test="count($rngRootRef) = 1">
+	      <xsl:sequence select="rng:getSRNGdataModelReccurse(rng:getDefine($rngRootRef)/element[1], string-join($xpath.tokenized[position() gt 2], '/'))"/>
+	    </xsl:when>
+	    <xsl:when test="count($rngRootRef) = 0">
+	      <xsl:message terminate="yes">[ERROR] Aucun rng:ref trouvé dans le start pour <xsl:value-of select="$xpath.rootName"/>, xpath=<xsl:value-of select="$xpath"/>, snrg uri : <xsl:value-of select="base-uri($grammar)"/> </xsl:message>
+	    </xsl:when>
+	  </xsl:choose>
+		<!--<xsl:sequence select="rng:getSRNGdataModelReccurse(rng:getDefine($grammar/start/ref[1])/element[1], string-join($xpath.tokenized[position() gt 2], '/'))"/>-->
 	</xsl:function>
 	
 	<!--Fonction "PRIVATE" utilisée uniquement pour résoudre rng:getSRNGdataModel()-->
