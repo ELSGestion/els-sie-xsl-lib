@@ -125,7 +125,8 @@
     </rule>
     <rule context="xsl:function">
       <report id="xslqual-UnusedFunction"
-        test="not(some $x in //(@match | @select) satisfies contains($x, @name))">
+        test="not(some $x in //(@match | @select) satisfies contains($x, @name)) 
+          and not(some $x in //(*[not(self::xsl:*)]/@*) satisfies contains($x, concat('{', @name, '(')))">
         [xslqual] Stylesheet function is unused
       </report>
       <report id="xslqual-FunctionComplexity"
