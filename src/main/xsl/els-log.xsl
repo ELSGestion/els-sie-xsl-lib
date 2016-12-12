@@ -47,7 +47,7 @@
     <xd:desc>
       <xd:p>Log des erreurs ou warning xslt</xd:p>
     </xd:desc>
-    <xd:param name="xsltName">Nom de la xslt appelante. Typiquement : "<xsl:variable name="xsltName" select="tokenize(static-base-uri(),'/')[last()]"/>"</xd:param>
+    <xd:param name="xsltName">Nom de la xslt appelante. Typiquement : "els:getFileName(static-base-uri())"</xd:param>
     <xd:param name="level">Level du log : (info | debug | warning | error | fatal | fixme | todo)</xd:param>
     <xd:param name="code">Code erreur pour s'y retrouver plus facilement (peut servir à filter les erreurs "dpm / dsi" ainsi qu'a faire des requête xpath pour compter le nombre d'erreurs d'un code spécifique</xd:param>
     <xd:param name="alert">Détermine si on génère un xsl:message ou pas</xd:param>
@@ -73,20 +73,18 @@
     <xsl:variable name="xpath"
                   select=" if (exists($xpath)) then ($xpath) else (if ($logXpath) then (els:get-xpath($xpathContext)) else (''))"
                   as="xs:string"/>
-    
     <!--checking param-->
     <xsl:variable name="levelValues"
       select="('info','debug','warning','error', 'fatal','fixme','todo')" as="xs:string*"/>
     <xsl:if test="not(some $levelName in $levelValues satisfies $level = $levelName)">
       <xsl:call-template name="els:log">
         <!--<xsl:with-param name="xsltName" select="tokenize(static-base-uri(),'/')[last()]"/> ne fonctionne pas en java pour hervé Rolland -->
-        <xsl:with-param name="xsltName" select="'eflCommon.xsl'"/>
+        <xsl:with-param name="xsltName" select="'els-log.xsl'"/>
         <xsl:with-param name="alert" select="true()"/>
         <xsl:with-param name="markup" select="false()"/>
         <xsl:with-param name="description" xml:space="preserve">Appel du template log avec valeur du parametre level = "<xsl:value-of select="$level"/>" non autorisé</xsl:with-param>
       </xsl:call-template>
     </xsl:if>
-    
     <!--logging par xsl:message si $alert (c'est-à-dire explicitement demandé ou level approprié) et niveau de log configuré pour être traité -->
     <xsl:variable name="alertWithLevelToProcess"
                   select="if (exists($els:log.level.alert)) 
@@ -115,7 +113,7 @@
         <xsl:when test="$level = 'fatal'">
           <!--<xsl:message terminate="yes" select="$msg"/>-->
           <xsl:message terminate="no" select="$msg"/>
-          <!--On préfère ne jamais tuer le process, on pourra compter le nombre d'erreurs fatal mais si risque d'effet "boule de neige"-->
+          <!--On préfère ne jamais tuer le process, on pourra compter le nombre d'erreurs fatal même si risque d'effet "boule de neige"-->
         </xsl:when>
         <xsl:otherwise>
           <xsl:message terminate="no" select="$msg"/>
