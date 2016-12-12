@@ -62,9 +62,9 @@
         <dependencies>
           <dependency>
             <groupId>extern.net.sf.saxon</groupId>
-            <artifactId>saxonee-license</artifactId>
+            <artifactId>saxonee</artifactId>
             <type>jar</type>
-            <version>9.7</version>
+            <version>9.7.0.13</version>
           </dependency>
         </dependencies>
         <configuration>
