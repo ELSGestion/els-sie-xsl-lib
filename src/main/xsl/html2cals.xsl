@@ -11,7 +11,7 @@
   xmlns:css="http://www.w3.org/1996/css"
   xpath-default-namespace="http://www.w3.org/1999/xhtml"
   exclude-result-prefixes="#all" 
-  version="3.0">
+  version="2.0">
   
   <xsl:import href="css-parser.xsl"/>
   
@@ -94,12 +94,12 @@
   <xsl:template name="xhtml2cals:normalize-to-xhtml">
     <xsl:param name="table" as="element(xhtml:table)"/>
     <xsl:if test="$table/((tbody/tr)|tr)">
-      <xsl:copy select="$table">
+        <xsl:element name="table" namespace="http://www.w3.org/1999/xhtml">
         <xsl:copy-of select="./(@*|processing-instruction()|comment())"/>
-        <xsl:apply-templates select="./caption" mode="#current"/>
+          <xsl:apply-templates select="./caption" mode="xhtml2cals:normalize-to-xhtml"/>
         <xsl:choose>
           <xsl:when test="./(colgroup|col)">
-            <xsl:apply-templates select="./(colgroup|col)" mode="#current"/>
+            <xsl:apply-templates select="./(colgroup|col)" mode="xhtml2cals:normalize-to-xhtml"/>
           </xsl:when>
           <xsl:otherwise>
             <!-- On normalise en ajoutant un colgroup générique -->
@@ -108,20 +108,20 @@
             </xsl:element>
           </xsl:otherwise>
         </xsl:choose>
-        <xsl:apply-templates select="./(thead, tfoot)" mode="#current"/>
+          <xsl:apply-templates select="./(thead, tfoot)" mode="xhtml2cals:normalize-to-xhtml"/>
         <xsl:choose>
           <xsl:when test="./tbody">
-            <xsl:apply-templates select="$table/tbody" mode="#current"/>
+            <xsl:apply-templates select="$table/tbody" mode="xhtml2cals:normalize-to-xhtml"/>
           </xsl:when>
           <xsl:when test="./tr">
             <!-- On normalise en ajoutant un tbody -->
             <!-- cela simplifie le traitement en bloc en mode expand-spans -->
             <xsl:element name="tbody" namespace="http://www.w3.org/1999/xhtml">
-              <xsl:apply-templates select="./tr" mode="#current"/>
+              <xsl:apply-templates select="./tr" mode="xhtml2cals:normalize-to-xhtml"/>
             </xsl:element>
           </xsl:when>
         </xsl:choose>
-      </xsl:copy>
+        </xsl:element>
     </xsl:if>
   </xsl:template>
 
@@ -139,7 +139,8 @@
   </xd:doc>
   <xsl:template match="@* | node()" mode="xhtml2cals:normalize-to-xhtml">
     <xsl:copy copy-namespaces="yes">
-      <xsl:apply-templates select="@*|node()" mode="#current"/>
+      <xsl:apply-templates select="@*" mode="#current"/>
+      <xsl:apply-templates select="node()" mode="#current"/>
     </xsl:copy>
   </xsl:template>
 
@@ -753,7 +754,7 @@
     </xsl:element>
   </xsl:template>
   
-  <xsl:template match="(td|th)[@tmp:DummyCell='yes']" mode="xhtml2cals:convert-to-cals" priority="15"/>
+  <xsl:template match="td[@tmp:DummyCell='yes']|th[@tmp:DummyCell='yes']" mode="xhtml2cals:convert-to-cals" priority="15"/>
   
   <xsl:template match="@* | node()" mode="xhtml2cals:convert-to-cals">
     <xsl:copy>
