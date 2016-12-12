@@ -94,54 +94,35 @@
   <xsl:template name="xhtml2cals:normalize-to-xhtml">
     <xsl:param name="table" as="element(xhtml:table)"/>
     <xsl:if test="$table/((tbody/tr)|tr)">
-        <xsl:element name="table" namespace="http://www.w3.org/1999/xhtml">
-        <xsl:copy-of select="./(@*|processing-instruction()|comment())"/>
-          <xsl:apply-templates select="./caption" mode="xhtml2cals:normalize-to-xhtml"/>
+      <xsl:element name="table" namespace="http://www.w3.org/1999/xhtml">
+        <xsl:copy-of select="$table/(@*|processing-instruction()|comment())"/>
+        <xsl:apply-templates select="$table/caption" mode="#current"/>
         <xsl:choose>
-          <xsl:when test="./(colgroup|col)">
-            <xsl:apply-templates select="./(colgroup|col)" mode="xhtml2cals:normalize-to-xhtml"/>
+          <xsl:when test="$table/(colgroup|col)">
+            <xsl:apply-templates select="$table/(colgroup|col)" mode="#current"/>
           </xsl:when>
           <xsl:otherwise>
             <!-- On normalise en ajoutant un colgroup générique -->
             <xsl:element name="colgroup" namespace="http://www.w3.org/1999/xhtml">
-              <xsl:attribute name="span" select="xhtml2cals:nb-cols(.)"/>
+              <xsl:attribute name="span" select="xhtml2cals:nb-cols($table)"/>
             </xsl:element>
           </xsl:otherwise>
         </xsl:choose>
-          <xsl:apply-templates select="./(thead, tfoot)" mode="xhtml2cals:normalize-to-xhtml"/>
+        <xsl:apply-templates select="$table/(thead, tfoot)" mode="#current"/>
         <xsl:choose>
-          <xsl:when test="./tbody">
-            <xsl:apply-templates select="$table/tbody" mode="xhtml2cals:normalize-to-xhtml"/>
+          <xsl:when test="$table/tbody">
+            <xsl:apply-templates select="$table/tbody" mode="#current"/>
           </xsl:when>
-          <xsl:when test="./tr">
+          <xsl:when test="$table/tr">
             <!-- On normalise en ajoutant un tbody -->
             <!-- cela simplifie le traitement en bloc en mode expand-spans -->
             <xsl:element name="tbody" namespace="http://www.w3.org/1999/xhtml">
-              <xsl:apply-templates select="./tr" mode="xhtml2cals:normalize-to-xhtml"/>
+              <xsl:apply-templates select="$table/tr" mode="#current"/>
             </xsl:element>
           </xsl:when>
         </xsl:choose>
-        </xsl:element>
+      </xsl:element>
     </xsl:if>
-  </xsl:template>
-
-  <xd:doc scope="component" xml:lang="fr">
-    <xd:desc>
-      <xd:p>En mode <xd:i>normalize-to-xhtml</xd:i>: élimination des éléments hors modèle</xd:p>
-    </xd:desc>
-  </xd:doc>
-  <xsl:template match="title | summary | script | template" mode="xhtml2cals:normalize-to-xhtml"/>
-
-  <xd:doc scope="component" xml:lang="fr">
-    <xd:desc>
-      <xd:p>En mode <xd:i>normalize-to-xhtml</xd:i>: recopie par défaut</xd:p>
-    </xd:desc>
-  </xd:doc>
-  <xsl:template match="@* | node()" mode="xhtml2cals:normalize-to-xhtml">
-    <xsl:copy copy-namespaces="yes">
-      <xsl:apply-templates select="@*" mode="#current"/>
-      <xsl:apply-templates select="node()" mode="#current"/>
-    </xsl:copy>
   </xsl:template>
 
   <xd:doc scope="component" xml:lang="fr">
@@ -354,7 +335,7 @@
             <xsl:copy-of select="@* except @tmp:rowspan"/>
             <xsl:attribute name="rowspan" namespace="file://tmp" select="number(@tmp:rowspan) - 1"/>
             <xsl:comment>
-              <xsl:copy-of select="./node()"/>
+              <xsl:copy-of select="node()"/>
             </xsl:comment>
           </xsl:copy>
         </xsl:when>
@@ -434,7 +415,6 @@
     </xsl:copy>
   </xsl:template>
   
-  
 
   <xsl:template match="table" mode="xhtml2cals:convert-to-cals">
     <xsl:element name="table" namespace="{$cals.ns.uri}">
@@ -442,17 +422,17 @@
       <xsl:call-template name="compute-table-borders"/>
       <xsl:call-template name="compute-rowsep-colsep-defaults"/>
       <xsl:copy-of select="processing-instruction()|comment()"/>
-      <xsl:apply-templates select="./caption" mode="#current"/>
+      <xsl:apply-templates select="caption" mode="#current"/>
       <xsl:element name="tgroup" namespace="{$cals.ns.uri}">
         <xsl:attribute name="cols" select="xhtml2cals:nb-cols(.)"/>
         <xsl:call-template name="make-colspec">
-          <xsl:with-param name="context" select="./colgroup | ./col"/>
+          <xsl:with-param name="context" select="colgroup | col"/>
         </xsl:call-template>
         <!-- FIXME à rebrancher quand on gérera mieux les spanspec dans le modèle -->
         <!-- <xsl:call-template name="make-spanspec">
-          <xsl:with-param name="context" select="./colgroup | ./col"/>
+          <xsl:with-param name="context" select="colgroup | col"/>
         </xsl:call-template> -->
-        <xsl:apply-templates select="./thead, ./tfoot, ./tbody" mode="#current"/>
+        <xsl:apply-templates select="thead, tfoot, tbody" mode="#current"/>
       </xsl:element>
     </xsl:element>
   </xsl:template>
@@ -613,9 +593,9 @@
             <xsl:attribute name="spanname" select="concat('span', ($colnum + 1), '-', $span)"/>
             <xsl:attribute name="namest" select="concat('col', ($colnum + 1))"/>
             <xsl:attribute name="nameend" select="concat('col', ($colnum + $span))"/>
-            <xsl:copy-of select="./(@align | @charoff | @char)"/>
-            <xsl:if test="./@width">
-              <xsl:attribute name="colwidth" select="./@width"/>
+            <xsl:copy-of select="@align | @charoff | @char"/>
+            <xsl:if test="@width">
+              <xsl:attribute name="colwidth" select="@width"/>
             </xsl:if>
           </xsl:element>
         </xsl:if>
