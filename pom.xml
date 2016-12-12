@@ -35,7 +35,7 @@
       <!--<plugin>
       <groupId>com.oxiane.xml</groupId>
       <artifactId>catalogBuilder-maven-plugin</artifactId>
-      <version>1.0.1-SNAPSHOT</version>
+      <version>1.0.2-SNAPSHOT</version>
       <executions>
         <execution>
           <goals>
@@ -44,42 +44,6 @@
         </execution>
       </executions>
     </plugin>-->
-      
-      <!-- On ne compile plus les xsl c'est le catalog qui gère toutes les dépendances
-        <plugin>
-        <groupId>com.oxiane.xml</groupId>
-        <artifactId>xslcompiler-maven-plugin</artifactId>
-        <version>2.0-SNAPSHOT</version>
-        <executions>
-          <execution>
-            <phase>compile</phase>
-            <goals>
-              <goal>xsl-compiler</goal>
-            </goals>
-          </execution>
-        </executions>
-        <configuration>
-          <sources>
-            <source>
-              <dir>src/main/xsl</dir>
-              <recurse>true</recurse>
-              <filespecs>
-                <filespec>*.xsl</filespec>
-                <filespec>*.xslt</filespec>
-              </filespecs>
-            </source>
-          </sources>
-          <!-\- post compilers for XSL that can not be identical when running XSpec or in runtime mode -\->
-          <!-\- compilers>
-                        <postCompiler>
-                            <postCompiler>src/compiler/make-xsl-available-for-prod.xsl</postCompiler>
-                            <sources>
-                                <source>src/main/xsl/unavailable.xsl</source>
-                            </sources>
-                        </postCompiler>
-                    </compilers -\->
-        </configuration>
-      </plugin>-->
       
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -90,6 +54,7 @@
           <target>1.7</target>
         </configuration>
       </plugin>
+      
       <plugin>
         <groupId>uk.org.adamretter.maven</groupId>
         <artifactId>xspec-maven-plugin</artifactId>
@@ -97,11 +62,10 @@
         <dependencies>
           <dependency>
             <groupId>extern.net.sf.saxon</groupId>
-            <artifactId>saxonee</artifactId>
+            <artifactId>saxonee-license</artifactId>
             <type>jar</type>
-            <version>9.5.1.5</version>
+            <version>9.7</version>
           </dependency>
-          <!-- dependency><groupId>net.sf.saxon</groupId><artifactId>Saxon-HE</artifactId><version>9.7.0-1</version></dependency -->
         </dependencies>
         <configuration>
           <catalogFile>catalog.xml</catalogFile>
