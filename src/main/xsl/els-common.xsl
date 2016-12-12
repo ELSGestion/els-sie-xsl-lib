@@ -190,48 +190,49 @@
 		</xsl:choose>
 	</xsl:function>
 		
-	<xd:doc>
-		<xd:desc>
-			<xd:p>Converti une date sous un format JJ/MM/AAAA (ou JJ-MM-AAAA ou JJ/MM/AA) en format ISO : AAAA-MM-JJ</xd:p>
-			<xd:param name="s">string que l'on veut convertir en date iso</xd:param>
-			<xd:param name="sep">string représentant le séparateur dans la date d'origine ($s)</xd:param>
-		</xd:desc>
-		<xd:return>La date en xs:string (au cas où la conversion échouerai, on renvoie la string d'origine)</xd:return>
-	</xd:doc>
-	<xsl:function name="els:makeIsoDate" as="xs:string">
-		<xsl:param name="s" as="xs:string?"/>
-		<xsl:param name="sep" as="xs:string"/>
-		<xsl:variable name="sToken" select="tokenize($s, $sep)" as="xs:string*"/>
-		<xsl:variable name="regJJMMAAAA" as="xs:string" select="concat('^\d\d', $sep, '\d\d', $sep, '\d\d\d\d$')"/>
-		<xsl:variable name="regJJMMAA" as="xs:string" select="concat('^\d\d', $sep, '\d\d', $sep, '\d\d')"/>
-		<xsl:choose>
-			<!--sans string on ne peut rien faire : on renvoie la string vide-->
-			<xsl:when test="empty($s)">
-				<xsl:value-of select="''"/>
-			</xsl:when>
-			<!--sans séparateur on ne peut rien faire : on renvoie la string-->
-			<xsl:when test="$sep = ''">
-				<xsl:value-of select="$s"/>
-			</xsl:when>
-			<!--La date est dans un format correct JJ/MM/AAAA, on la convertie en "AAAA-MM-JJ" -->
-			<xsl:when test="matches($s, $regJJMMAAAA)">
-				<xsl:value-of select="concat($sToken[3], '-', $sToken[2], '-', $sToken[1])"/>
-			</xsl:when>
-			<!--Le format est correct sauf l'année qui est sur 2 chiffres : on estime qu'au dela de l'année courante on était au siècle dernier -->
-			<xsl:when test="matches($s, $regJJMMAA)">
-				<xsl:variable name="currentAAAA" select="year-from-date(current-date())" as="xs:integer"/>
-				<xsl:variable name="currentAA__" select="substring(string($currentAAAA), 1, 2) cast as xs:integer" as="xs:integer"/>
-				<xsl:variable name="current__AA" select="substring(string($currentAAAA), 3, 2) cast as xs:integer" as="xs:integer"/>
-				<xsl:variable name="AA" select="xs:integer($sToken[3])" as="xs:integer"/>
-				<xsl:variable name="AAAA" select="if ($AA gt $current__AA) then (concat($currentAA__ -1, $AA))  else (concat($currentAA__, $AA))" as="xs:string"/>
-				<xsl:value-of select="concat($AAAA, '-', $sToken[2], '-', $sToken[1])"/>
-			</xsl:when>
-			<!--format non reconnu : on renvoie la string--> 
-			<xsl:otherwise>
-				<xsl:value-of select="$s"/>
-			</xsl:otherwise>
-		</xsl:choose>
-	</xsl:function>
+  <xd:doc>
+    <xd:desc>
+      <xd:p>Convert a string with format "JJ/MM/AAAA" (or "JJ-MM-AAAA" or "JJ/MM/AA") to a string representing an ISO date format "AAAA-MM-JJ"</xd:p>
+      <xd:param name="s">String to convert as iso date string</xd:param>
+      <xd:param name="sep">string representing the separator "/" (or something els) within the original string ($s)</xd:param>
+    </xd:desc>
+    <xd:return>Iso date of $s as a xs:string (if the convesion fails, it will return the original $s string)</xd:return>
+  </xd:doc>
+  <xsl:function name="els:makeIsoDate" as="xs:string">
+    <xsl:param name="s" as="xs:string?"/>
+    <xsl:param name="sep" as="xs:string"/>
+    <xsl:variable name="sToken" select="tokenize($s, $sep)" as="xs:string*"/>
+    <xsl:variable name="regJJMMAAAA" as="xs:string" select="concat('^\d\d', $sep, '\d\d', $sep, '\d\d\d\d$')"/>
+    <xsl:variable name="regJJMMAA" as="xs:string" select="concat('^\d\d', $sep, '\d\d', $sep, '\d\d')"/>
+    <xsl:choose>
+      <!--If $s is empty, we can't do anything : return the empty string-->
+      <xsl:when test="empty($s)">
+        <xsl:value-of select="''"/>
+      </xsl:when>
+      <!--If $sep is empty, we can't do anything : return the original string $s-->
+      <xsl:when test="$sep = ''">
+        <xsl:value-of select="$s"/>
+      </xsl:when>
+      <!--The string $s format is correct "JJ/MM/AAAA" : convert it to "AAAA-MM-JJ" -->
+      <xsl:when test="matches($s, $regJJMMAAAA)">
+        <xsl:value-of select="concat($sToken[3], '-', $sToken[2], '-', $sToken[1])"/>
+      </xsl:when>
+      <!--The string $s format is correct except the year which is on 2 digit "JJ/MM/AA" : convert it to "AAAA-MM-JJ" (trying to guess the century)-->
+      <!--ASSUME : if AA is later than current AA, we consider AA was in the last century-->
+      <xsl:when test="matches($s, $regJJMMAA)">
+        <xsl:variable name="currentAAAA" select="year-from-date(current-date())" as="xs:integer"/>
+        <xsl:variable name="currentAA__" select="substring(string($currentAAAA), 1, 2) cast as xs:integer" as="xs:integer"/>
+        <xsl:variable name="current__AA" select="substring(string($currentAAAA), 3, 2) cast as xs:integer" as="xs:integer"/>
+        <xsl:variable name="AA" select="xs:integer($sToken[3])" as="xs:integer"/>
+        <xsl:variable name="AAAA" select="if ($AA gt $current__AA) then (concat($currentAA__ -1, $AA))  else (concat($currentAA__, $AA))" as="xs:string"/>
+        <xsl:value-of select="concat($AAAA, '-', $sToken[2], '-', $sToken[1])"/>
+      </xsl:when>
+      <!--Unknown format : return the original string $s--> 
+      <xsl:otherwise>
+        <xsl:value-of select="$s"/>
+      </xsl:otherwise>
+    </xsl:choose>
+  </xsl:function>
 		
 	<xsl:function name="els:date-number-slash">
 		<xsl:param name="param" as="xs:string"/>
