@@ -8,7 +8,7 @@
 	xmlns="http://relaxng.org/ns/structure/1.0"
 	xpath-default-namespace="http://relaxng.org/ns/structure/1.0"
 	exclude-result-prefixes="#all"
-	version="3.0">
+	version="2.0">
 	
 	<xsl:import href="els-common.xsl"/>
 	
