@@ -150,7 +150,14 @@
       <xsl:when test="$level='warning'">30000</xsl:when>
       <xsl:when test="$level='info'">20000</xsl:when>
       <xsl:when test="$level='debug'">10000</xsl:when>
-      <xsl:otherwise>0</xsl:otherwise>
+      <!-- TO DO : Fix temporaire suite au problème de compilation de cette XSLT avec Saxon 9.7
+           Bug #3069 remonté auprès de Saxonica (https://saxonica.plan.io/issues/3069)
+           Michael Kay :
+             The diagnostics suggest that it's caused by (some kind of failure during) optimization of the xsl:choose [...]
+             (because all branches have the same form $v=X, it generates a switch expression which uses hashing rather than a sequential search).
+             As a workaround, you could suppress this optimization by adding a dummy branch to the xsl:choose, e.g. xsl:when test="current-date() lt xs:date('1900-01-01'). -->
+      <xsl:when test="current-date() lt xs:date('1900-01-01')">0</xsl:when>
+      <!--<xsl:otherwise>0</xsl:otherwise>-->
     </xsl:choose>
   </xsl:function>
   
