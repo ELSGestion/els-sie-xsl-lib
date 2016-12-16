@@ -17,7 +17,14 @@
 	
 	<xsl:function name="rng:getRootNamespaceUri" as="xs:string">
 		<xsl:param name="grammar" as="element(rng:grammar)"/>
-		<xsl:value-of select="(rng:getDefine($grammar/start/ref[1])/element/ancestor-or-self::*[@ns][1]/@ns, $grammar/descendant-or-self::*[@ns][last()])[1]"/>
+	  <xsl:choose>
+	    <xsl:when test="$grammar/start/choice/ref">
+	      <xsl:value-of select="(rng:getDefine($grammar/start/choice/ref[1])/element/ancestor-or-self::*[@ns][1]/@ns, $grammar/descendant-or-self::*[@ns][last()])[1]"/>
+	    </xsl:when>
+	    <xsl:otherwise>
+	      <xsl:value-of select="(rng:getDefine($grammar/start/ref[1])/element/ancestor-or-self::*[@ns][1]/@ns, $grammar/descendant-or-self::*[@ns][last()])[1]"/>
+	    </xsl:otherwise>
+	  </xsl:choose>
 	</xsl:function>
 	
 	<xsl:function name="rng:getDefine" as="element(define)*">
