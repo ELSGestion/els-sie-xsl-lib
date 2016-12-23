@@ -552,16 +552,24 @@
 	
 	<xd:doc>
 		<xd:desc>
-			<xd:p>return the string value of a node, normalizing white-spaces</xd:p>
+			<xd:p>Return the string value of a node, normalizing white-spaces for each descendant text()</xd:p>
+		  <xd:p>The default separator between 2 text() is an espace, it can be overrided</xd:p>
 		</xd:desc>
-		<xd:param name="node">Any node</xd:param>
-		<xd:return>String value of the node</xd:return>
+		<xd:param name="node">Any node (but it makes sens if the node has text() descendants)</xd:param>
+		<xd:return>Normalize string value of the node</xd:return>
 	</xd:doc>
-	<xsl:function name="els:normalized-string" as="xs:string">
-		<xsl:param name="node" as="node()?"/>
-		<xsl:sequence select="string-join($node//text()[normalize-space(.)], ' ')"/>
-	</xsl:function>
+  <xsl:function name="els:normalized-string" as="xs:string">
+    <xsl:param name="node" as="node()?"/>
+    <xsl:param name="separator" as="xs:string"/>
+    <xsl:sequence select="string-join($node//text()[normalize-space(.)], $separator)"/>
+  </xsl:function>
 	
+	<!--By default the separator isa whitespace character, just like &lt;xsl:value-of--> 
+  <xsl:function name="els:normalized-string" as="xs:string">
+    <xsl:param name="node" as="node()?"/>
+    <xsl:sequence select="els:normalized-string($node, ' ')"/>
+  </xsl:function>
+  
 	<!--=====================-->
 	<!-- MODE els:UPPERCASE -->
 	<!--=====================-->
