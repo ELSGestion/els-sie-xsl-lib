@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<description 
+  xmlns="http://www.jenitennison.com/xslt/xspec" 
+  xmlns:els="http://www.lefebvre-sarrut.eu/ns/els"
+  stylesheet="../../main/xsl/cals2html.xsl">
+  
+  <scenario label="Table jira CHAINE-1885">
+    <context href="data_cals2html/Table_CHAINE-1885.xml"/>
+    <expect label="OK" select="/*" href="data_cals2html/Table_CHAINE-1885.htm"/>
+  </scenario>
+  
+</description>

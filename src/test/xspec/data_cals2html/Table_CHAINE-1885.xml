@@ -1,0 +1,368 @@
+<cals:table
+  xmlns:cals="-//OASIS//DTD XML Exchange Table Model 19990315//EN"
+  xmlns="local"
+  colsep="0" 
+  frame="none" 
+  id="FRCHS_2016-03_UI-FA0B2AD3C0D9F35BF8B349844A1E1A53_TABLE-2" 
+  rowsep="0" 
+  tabstyle="FRCHS-style2"
+  >
+  <titre>Tableau-liste des filiales et des participations</titre>
+  <cals:tgroup cols="9">
+    <cals:colspec align="left" colname="column1" colnum="1" colsep="0" colwidth="20*"/>
+    <cals:colspec align="right" colname="column2" colnum="2" colsep="0" colwidth="10*"/>
+    <cals:colspec align="right" colname="column3" colnum="3" colsep="0" colwidth="10*"/>
+    <cals:colspec align="right" colname="column4" colnum="4" colsep="0" colwidth="10*"/>
+    <cals:colspec align="right" colname="column5" colnum="5" colsep="0" colwidth="10*"/>
+    <cals:colspec align="right" colname="column6" colnum="6" colsep="0" colwidth="10*"/>
+    <cals:colspec align="right" colname="column7" colnum="7" colsep="0" colwidth="10*"/>
+    <cals:colspec align="right" colname="column8" colnum="8" colsep="0" colwidth="10*"/>
+    <cals:colspec align="right" colname="column9" colnum="9" colsep="0" colwidth="10*"/>
+    <cals:tbody valign="top">
+      <cals:row rowsep="1">
+        <cals:entry align="left" colname="column1" colsep="0" rowsep="0" valign="top">
+          <al/>
+        </cals:entry>
+        <cals:entry align="center" colname="column2" colsep="0" rowsep="1" valign="top">
+          <al/>
+        </cals:entry>
+        <cals:entry align="center" colname="column3" colsep="0" rowsep="1" valign="top">
+          <al/>
+        </cals:entry>
+        <cals:entry align="center" colname="column4" colsep="0" rowsep="1" valign="top">
+          <al/>
+        </cals:entry>
+        <cals:entry align="center" colname="column5" colsep="0" rowsep="1" valign="top">
+          <al/>
+        </cals:entry>
+        <cals:entry align="center" colname="column6" colsep="0" rowsep="1" valign="top">
+          <al/>
+        </cals:entry>
+        <cals:entry align="center" colname="column7" colsep="0" rowsep="1" valign="top">
+          <al/>
+        </cals:entry>
+        <cals:entry align="center" colname="column8" colsep="0" rowsep="1" valign="top">
+          <al/>
+        </cals:entry>
+        <cals:entry align="center" colname="column9" colsep="0" rowsep="1" valign="top">
+          <al/>
+        </cals:entry>
+      </cals:row>
+      <cals:row valign="top">
+        <cals:entry align="left" colname="column1" colsep="0" rowsep="0" valign="top">
+          <al>
+            <motRep/>
+          </al>
+        </cals:entry>
+        <cals:entry align="center" colname="column2" colsep="0" rowsep="0" valign="top">
+          <al>
+            <motRep>Capital social</motRep>
+          </al>
+        </cals:entry>
+        <cals:entry align="center" colname="column3" colsep="0" rowsep="0" valign="top">
+          <al>
+            <motRep>CP autres que le capital</motRep>
+          </al>
+        </cals:entry>
+        <cals:entry align="center" colname="column4" colsep="0" rowsep="0" valign="top">
+          <al>
+            <motRep>QP du capital détenue </motRep>
+          </al>
+        </cals:entry>
+        <cals:entry align="center" colname="column5" colsep="0" rowsep="0" valign="top">
+          <al>
+            <motRep>Valeur brute comptable des titres détenus</motRep>
+          </al>
+        </cals:entry>
+        <cals:entry align="center" colname="column6" colsep="0" rowsep="0" valign="top">
+          <al>
+            <motRep>Valeur nette comptable des titres détenus</motRep>
+          </al>
+        </cals:entry>
+        <cals:entry align="center" colname="column7" colsep="0" rowsep="0" valign="top">
+          <al>
+            <motRep>Chiffre d’affaires (HT) 2015 </motRep>
+          </al>
+        </cals:entry>
+        <cals:entry align="center" colname="column8" colsep="0" rowsep="0" valign="top">
+          <al>
+            <motRep>Résultat 2015</motRep>
+          </al>
+        </cals:entry>
+        <cals:entry align="center" colname="column9" colsep="0" rowsep="0" valign="top">
+          <al>
+            <motRep>Dividendes versés en 2015</motRep>
+          </al>
+        </cals:entry>
+      </cals:row>
+      <cals:row rowsep="1" valign="top">
+        <cals:entry align="left" colname="column1" colsep="0" rowsep="0" valign="top">
+          <al>
+            <motRep/>
+          </al>
+        </cals:entry>
+        <cals:entry align="center" colname="column2" colsep="0" rowsep="1" valign="top">
+          <al>(en devise)</al>
+        </cals:entry>
+        <cals:entry align="center" colname="column3" colsep="0" rowsep="1" valign="top">
+          <al>(en devise)</al>
+        </cals:entry>
+        <cals:entry align="center" colname="column4" colsep="0" rowsep="1" valign="top">
+          <al>(en %)</al>
+        </cals:entry>
+        <cals:entry align="center" colname="column5" colsep="0" rowsep="1" valign="top">
+          <al>(en euros)</al>
+        </cals:entry>
+        <cals:entry align="center" colname="column6" colsep="0" rowsep="1" valign="top">
+          <al>(en euros)</al>
+        </cals:entry>
+        <cals:entry align="center" colname="column7" colsep="0" rowsep="1" valign="top">
+          <al>(en euros)</al>
+        </cals:entry>
+        <cals:entry align="center" colname="column8" colsep="0" rowsep="1" valign="top">
+          <al>(en euros)</al>
+        </cals:entry>
+        <cals:entry align="center" colname="column9" colsep="0" rowsep="1" valign="top">
+          <al>(en euros)</al>
+        </cals:entry>
+      </cals:row>
+      <cals:row rowsep="1">
+        <cals:entry align="left" colsep="0" nameend="column9" namest="column1" rowsep="1" valign="top">
+          <al>
+            <motRep>Filiales (détenues à + 50 %)</motRep>
+          </al>
+        </cals:entry>
+      </cals:row>
+      <cals:row rowsep="1" valign="top">
+        <cals:entry align="left" colname="column1" colsep="0" rowsep="1" valign="top">
+          <al>
+            <motRep>SA Your shoes</motRep>
+          </al>
+          <al>Normandie</al>
+          <al>SIREN 123456789</al>
+          <al>Siège : Paris</al>
+        </cals:entry>
+        <cals:entry align="right" colname="column2" colsep="0" rowsep="1" valign="top">
+          <al>2 000 000</al>
+          <al>EUR</al>
+        </cals:entry>
+        <cals:entry align="right" colname="column3" colsep="0" rowsep="1" valign="top">
+          <al>3 458 658</al>
+          <al>EUR</al>
+        </cals:entry>
+        <cals:entry align="right" colname="column4" colsep="0" rowsep="1" valign="top">
+          <al>100 %</al>
+        </cals:entry>
+        <cals:entry align="right" colname="column5" colsep="0" rowsep="1" valign="top">
+          <al>3 346 766</al>
+        </cals:entry>
+        <cals:entry align="right" colname="column6" colsep="0" rowsep="1" valign="top">
+          <al>3 346 766</al>
+        </cals:entry>
+        <cals:entry align="right" colname="column7" colsep="0" rowsep="1" valign="top">
+          <al>9 287 622</al>
+        </cals:entry>
+        <cals:entry align="right" colname="column8" colsep="0" rowsep="1" valign="top">
+          <al>329 323</al>
+        </cals:entry>
+        <cals:entry align="right" colname="column9" colsep="0" rowsep="1" valign="top">
+          <al>–</al>
+        </cals:entry>
+      </cals:row>
+      <cals:row rowsep="1">
+        <cals:entry align="left" colname="column1" colsep="0" rowsep="1" valign="top">
+          <al>
+            <motRep>SA Your shoes</motRep>
+          </al>
+          <al>Picardie</al>
+          <al>SIREN 123456788</al>
+          <al>Siège : Paris</al>
+        </cals:entry>
+        <cals:entry align="right" colname="column2" colsep="0" rowsep="1" valign="top">
+          <al>1 500 000</al>
+          <al>EUR</al>
+        </cals:entry>
+        <cals:entry align="right" colname="column3" colsep="0" rowsep="1" valign="top">
+          <al>10 587 528</al>
+          <al>EUR</al>
+        </cals:entry>
+        <cals:entry align="right" colname="column4" colsep="0" rowsep="1" valign="top">
+          <al>100 %</al>
+        </cals:entry>
+        <cals:entry align="right" colname="column5" colsep="0" rowsep="1" valign="top">
+          <al>2 748 684</al>
+        </cals:entry>
+        <cals:entry align="right" colname="column6" colsep="0" rowsep="1" valign="top">
+          <al>2 748 684</al>
+        </cals:entry>
+        <cals:entry align="right" colname="column7" colsep="0" rowsep="1" valign="top">
+          <al>7 392 742</al>
+        </cals:entry>
+        <cals:entry align="right" colname="column8" colsep="0" rowsep="1" valign="top">
+          <al>529 374</al>
+        </cals:entry>
+        <cals:entry align="right" colname="column9" colsep="0" rowsep="1" valign="top">
+          <al>353 648</al>
+        </cals:entry>
+      </cals:row>
+      <cals:row rowsep="1">
+        <cals:entry align="left" colname="column1" colsep="0" rowsep="1" valign="top">
+          <al>
+            <motRep>SA Your shoes</motRep>
+          </al>
+          <al>Aquitaine</al>
+          <al>SIREN 123456786</al>
+          <al>Siège : Paris</al>
+        </cals:entry>
+        <cals:entry align="right" colname="column2" colsep="0" rowsep="1" valign="top">
+          <al>1 500 000</al>
+          <al>EUR</al>
+        </cals:entry>
+        <cals:entry align="right" colname="column3" colsep="0" rowsep="1" valign="top">
+          <al>4 896 498</al>
+          <al>EUR</al>
+        </cals:entry>
+        <cals:entry align="right" colname="column4" colsep="0" rowsep="1" valign="top">
+          <al>100 %</al>
+        </cals:entry>
+        <cals:entry align="right" colname="column5" colsep="0" rowsep="1" valign="top">
+          <al>2 537 884</al>
+        </cals:entry>
+        <cals:entry align="right" colname="column6" colsep="0" rowsep="1" valign="top">
+          <al>2 537 884</al>
+        </cals:entry>
+        <cals:entry align="right" colname="column7" colsep="0" rowsep="1" valign="top">
+          <al>4 927 430</al>
+        </cals:entry>
+        <cals:entry align="right" colname="column8" colsep="0" rowsep="1" valign="top">
+          <al>339 427</al>
+        </cals:entry>
+        <cals:entry align="right" colname="column9" colsep="0" rowsep="1" valign="top">
+          <al>321 902</al>
+        </cals:entry>
+      </cals:row>
+      <cals:row rowsep="1">
+        <cals:entry align="left" colname="column1" colsep="0" rowsep="1" valign="top">
+          <al>
+            <motRep>Best shoes AU</motRep>
+            <rNote id="FRCHS_2016-03_UI-FA0B2AD3C0D9F35BF8B349844A1E1A53_UI-5C787B3C-D0D7-4A00-9037-2A5AEE0AF928rNote_1" num="1" ref="FRCHS_2016-03_UI-FA0B2AD3C0D9F35BF8B349844A1E1A53_UI-5C787B3C-D0D7-4A00-9037-2A5AEE0AF928"/>
+          </al>
+          <al>Siège : Australia City</al>
+        </cals:entry>
+        <cals:entry align="right" colname="column2" colsep="0" rowsep="1" valign="top">
+          <al>1 000 000</al>
+          <al>AUD</al>
+        </cals:entry>
+        <cals:entry align="right" colname="column3" colsep="0" rowsep="1" valign="top">
+          <al>1 265 692</al>
+          <al>AUD</al>
+        </cals:entry>
+        <cals:entry align="right" colname="column4" colsep="0" rowsep="1" valign="top">
+          <al>100 %</al>
+        </cals:entry>
+        <cals:entry align="right" colname="column5" colsep="0" rowsep="1" valign="top">
+          <al>1 920 928</al>
+        </cals:entry>
+        <cals:entry align="right" colname="column6" colsep="0" rowsep="1" valign="top">
+          <al>1 920 928</al>
+        </cals:entry>
+        <cals:entry align="right" colname="column7" colsep="0" rowsep="1" valign="top">
+          <al>3 681 016</al>
+        </cals:entry>
+        <cals:entry align="right" colname="column8" colsep="0" rowsep="1" valign="top">
+          <al>426 439</al>
+        </cals:entry>
+        <cals:entry align="right" colname="column9" colsep="0" rowsep="1" valign="top">
+          <al>567 480</al>
+        </cals:entry>
+      </cals:row>
+      <cals:row rowsep="1">
+        <cals:entry align="left" colname="column1" colsep="0" rowsep="1" valign="top">
+          <al>
+            <motRep>Your shoes AU</motRep>
+          </al>
+          <al>Corp. <rNote id="FRCHS_2016-03_UI-FA0B2AD3C0D9F35BF8B349844A1E1A53_UI-5C787B3C-D0D7-4A00-9037-2A5AEE0AF928rNote_2" num="1" ref="FRCHS_2016-03_UI-FA0B2AD3C0D9F35BF8B349844A1E1A53_UI-5C787B3C-D0D7-4A00-9037-2A5AEE0AF928"/></al>
+          <al>Siège : Australia City</al>
+        </cals:entry>
+        <cals:entry align="right" colname="column2" colsep="0" rowsep="1" valign="top">
+          <al>1 800 000</al>
+          <al>AUD</al>
+        </cals:entry>
+        <cals:entry align="right" colname="column3" colsep="0" rowsep="1" valign="top">
+          <al>7 019 219</al>
+          <al>AUD</al>
+        </cals:entry>
+        <cals:entry align="right" colname="column4" colsep="0" rowsep="1" valign="top">
+          <al>100 %</al>
+        </cals:entry>
+        <cals:entry align="right" colname="column5" colsep="0" rowsep="1" valign="top">
+          <al>2 986 778</al>
+        </cals:entry>
+        <cals:entry align="right" colname="column6" colsep="0" rowsep="1" valign="top">
+          <al>2 986 778</al>
+        </cals:entry>
+        <cals:entry align="right" colname="column7" colsep="0" rowsep="1" valign="top">
+          <al>5 382 034</al>
+        </cals:entry>
+        <cals:entry align="right" colname="column8" colsep="0" rowsep="1" valign="top">
+          <al>263 940</al>
+        </cals:entry>
+        <cals:entry align="right" colname="column9" colsep="0" rowsep="1" valign="top">
+          <al>27 754</al>
+        </cals:entry>
+      </cals:row>
+      <cals:row rowsep="1">
+        <cals:entry align="left" colname="column1" colsep="0" rowsep="1" valign="top">
+          <al>
+            <motRep>Total</motRep>
+          </al>
+        </cals:entry>
+        <cals:entry align="right" colname="column2" colsep="0" rowsep="1" valign="top">
+          <al>
+            <motRep>– </motRep>
+          </al>
+        </cals:entry>
+        <cals:entry align="right" colname="column3" colsep="0" rowsep="1" valign="top">
+          <al>
+            <motRep>– </motRep>
+          </al>
+        </cals:entry>
+        <cals:entry align="right" colname="column4" colsep="0" rowsep="1" valign="top">
+          <al>
+            <motRep>– </motRep>
+          </al>
+        </cals:entry>
+        <cals:entry align="right" colname="column5" colsep="0" rowsep="1" valign="top">
+          <al>
+            <motRep>13 541 040</motRep>
+          </al>
+        </cals:entry>
+        <cals:entry align="right" colname="column6" colsep="0" rowsep="1" valign="top">
+          <al>
+            <motRep>13 541 040</motRep>
+          </al>
+        </cals:entry>
+        <cals:entry align="right" colname="column7" colsep="0" rowsep="1" valign="top">
+          <al>
+            <motRep>30 670 844</motRep>
+          </al>
+        </cals:entry>
+        <cals:entry align="right" colname="column8" colsep="0" rowsep="1" valign="top">
+          <al>
+            <motRep>1 888 503</motRep>
+          </al>
+        </cals:entry>
+        <cals:entry align="right" colname="column9" colsep="0" rowsep="1" valign="top">
+          <al>
+            <motRep>1 270 784</motRep>
+          </al>
+        </cals:entry>
+      </cals:row>
+    </cals:tbody>
+  </cals:tgroup>
+  <tblNote>
+    <note id="FRCHS_2016-03_UI-FA0B2AD3C0D9F35BF8B349844A1E1A53_UI-5C787B3C-D0D7-4A00-9037-2A5AEE0AF928" num="1">
+      <al>Acquisitions de l’exercice</al>
+    </note>
+  </tblNote>
+</cals:table>

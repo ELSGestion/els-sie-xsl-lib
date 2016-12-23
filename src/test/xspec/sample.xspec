@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<x:description xmlns:x="http://www.jenitennison.com/xslt/xspec" 
-	stylesheet="../../main/xsl/els-common.xsl">
-
-	<x:scenario label="Scenario for testing a function" pending="TODO"/>
-
-</x:description>
