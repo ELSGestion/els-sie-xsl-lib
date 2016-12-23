@@ -634,6 +634,9 @@
 		<xsl:choose>
 			<xsl:when test="function-available('saxon:path')">
 				<xsl:value-of select="saxon:path($node)" use-when="function-available('saxon:path')"/>
+			  <!--Pour éviter un warning à la compilation on prévoit le cas (impossible dans ce when) du use-when inverse 
+			  (sinon saxon indiquera qu'une des branch de la condition pourrait ne pas renvoyer un string)-->
+			  <xsl:value-of select="'This will never happen here'" use-when="not(function-available('saxon:path'))"/>
 			</xsl:when>
 			<xsl:otherwise>
 				<xsl:variable name="xpath">
@@ -930,8 +933,8 @@
 	<xd:doc>
 		<xd:desc>
 			<xd:p>template permettant de faire la même chose que saxon:serialize(node, xsl:output/@name) mais :
-				- sur plusieurs noeuds (pratique pour serialiser du contenu mixte)
-				- par contre pas de choix sur les options de serialisation tel que le xsl:output le permet</xd:p>
+				- sur plusieurs nœuds (pratique pour sérialiser du contenu mixte)
+				- par contre pas de choix sur les options de sérialisation tel que le xsl:output le permet</xd:p>
 		</xd:desc>
 		<xd:param name="nodes">Noeuds XML (typiquement du contenu mixte)</xd:param>
 		<xd:param name="outputName">Nom d'un xsl:ouput qui détermine la sérialisation à appliquer</xd:param>
