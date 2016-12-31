@@ -12,6 +12,16 @@
 	
 	<xsl:import href="els-common.xsl"/>
 	
+  <xd:doc scope="stylesheet">
+    <xd:desc>
+      <xd:p>XSLT functions/templates library to extract information or transform Relax NG schema</xd:p>
+      <xd:p>The RNG schema provided should be simplified (cf. http://www.relaxng.org/spec-20011203.html), 
+        there should be at least one element by define and one define by element.</xd:p>
+    </xd:desc>
+  </xd:doc>
+  
+  <!--FIXME : adding a check on (s)rng format before proceding each step/function ?-->
+  
 	<xsl:key name="rng:getDefineByName" match="define" use="@name"/>
 	<xsl:key name="rng:getRefByName" match="ref" use="@name"/>
 	
