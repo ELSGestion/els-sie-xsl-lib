@@ -298,6 +298,7 @@
   <xd:doc>
     <xd:desc>
       <xd:p>Réordonne les define d'un fichier RNG simplifié, en se basant sur le nom de l'élément</xd:p>
+      <xd:p>Si 2 éléments ont le même nom, l'ordre pourra se faire sur la valeur d'un attribut, par défaut @class</xd:p>
     </xd:desc>
   </xd:doc>
   <!--FIXME : impossible d'appeler cette xsl avec initial mode = rng:reorder avec saxon
@@ -305,16 +306,35 @@
   
   <xsl:param name="rng:reorder_renameDefineRef" select="true()" as="xs:boolean"/>
   
+  <xsl:template match="/" mode="rng:reorder rng_reorder">
+    <xsl:param name="rng:reorder_byAttributeName" select="'class'" as="xs:string?"/>
+    <xsl:param name="rng:reorder_addRootNamespaces" as="node()*">
+      <!--NB : http://markmail.org/message/gfmje533lawarcsg-->
+      <!--<xsl:namespace name="rng">http://relaxng.org/ns/structure/1.0</xsl:namespace>-->
+    </xsl:param>
+    <xsl:apply-templates mode="#current">
+      <xsl:with-param name="rng:reorder_byAttributeName" select="$rng:reorder_byAttributeName"/>
+      <xsl:with-param name="rng:reorder_addGrammarNamespaces" select="$rng:reorder_addRootNamespaces"/>
+    </xsl:apply-templates>
+  </xsl:template> 
+  
   <xsl:template match="/grammar" mode="rng:reorder rng_reorder">
+    <xsl:param name="rng:reorder_byAttributeName" as="xs:string?"/>
+    <xsl:param name="rng:reorder_addGrammarNamespaces" as="node()*"/>
     <xsl:message>[INFO] rng:reorder sur <xsl:value-of select="local-name()"/></xsl:message>
     <xsl:variable name="rng_reorder_step1" as="document-node()">
       <xsl:document>
         <xsl:copy copy-namespaces="yes">
-          <xsl:namespace name="xfe">http://www.lefebvre-sarrut.eu/ns/xmlfirst/xmlEditor</xsl:namespace>
+          <xsl:copy-of select="$rng:reorder_addGrammarNamespaces"/>
           <xsl:apply-templates select="@*" mode="#current"/>
           <xsl:apply-templates select="start" mode="#current"/>
           <xsl:apply-templates select="define" mode="#current">
-            <xsl:sort select="concat(element[1]/@name | element[1]/name/text(), '_', element[1]//attribute[@name = 'class']/value/text())"/>
+            <xsl:sort 
+              select="concat(
+                        (element[1]/@name, element[1]/name)[1]/lower-case(.), 
+                         '_',
+                         element[1]//attribute[@name = $rng:reorder_byAttributeName]/value/text()
+                         )"/>
           </xsl:apply-templates>
         </xsl:copy>
       </xsl:document>
