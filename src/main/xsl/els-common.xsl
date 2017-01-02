@@ -912,22 +912,26 @@
   </xsl:function>
 
   <!-- Application de la fonction saxon:evaluate à un contexte donné, retourne la séquence de noeuds correspondants -->
-  <!-- SSI saxon:evaluate est disponible -->
+  <!-- SSI saxon:eval est disponible -->
   <!--Cette écriture est pratique pour certains prédicats où les 2 paramètres sont indépendants-->
   <xd:doc>
     <xd:desc>
-      <xd:p>Applique (ssi saxon:evaluate est disponible) de la fonction saxon:evaluate à un contexte donné, retourne la séquence correspondantes</xd:p>
+      <xd:p>Applique (ssi saxon:eval est disponible) de la fonction saxon:evaluate à un contexte donné, retourne la séquence correspondantes</xd:p>
     </xd:desc>
     <xd:param name="xpath">xpath a évaluer</xd:param>
     <xd:param name="e">noeud contexte</xd:param>
   </xd:doc>
-  <xsl:function name="els:evaluate-xpath">
+  <xsl:function name="els:evaluate-xpath" as="item()*">
     <xsl:param name="xpath" as="xs:string"/>
     <xsl:param name="e" as="element()"/>
     <!--<xsl:sequence use-when="function-available('saxon:evaluate')" select="$e/saxon:evaluate($xpath)"/>-->
     <xsl:sequence use-when="function-available('saxon:eval') and function-available('saxon:expression')" 
       select="$e/saxon:eval(saxon:expression($xpath, $e))"/>
     <!--le 2e argument de saxon:expression permets de définir le namespace par défaut-->
+    <xsl:message use-when="not(function-available('saxon:eval')) or not(function-available('saxon:expression'))"
+      terminate="yes"
+      >[FATAL][els-common.xsl] function els:evaluate-xpath() has crashed because saxon:eval (saxon:expression) in not available.
+      You must be using SAXON EE or PE to run this function</xsl:message>
   </xsl:function>
   
   <xd:doc>
