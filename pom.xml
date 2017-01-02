@@ -62,6 +62,11 @@
         <dependencies>
           <dependency>
             <groupId>extern.net.sf.saxon</groupId>
+            <artifactId>saxonee-license</artifactId>
+            <version>9.7</version>
+          </dependency>
+          <dependency>
+            <groupId>extern.net.sf.saxon</groupId>
             <artifactId>saxonee</artifactId>
             <type>jar</type>
             <version>9.7.0.13</version>
@@ -102,6 +107,21 @@
     </plugins>
   </build>
 
+  <!--<reporting>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-project-info-reports-plugin</artifactId>
+        <version>2.9</version>
+      </plugin>
+      <plugin>
+        <groupId>top.marchand.xml</groupId>
+        <artifactId>xslDoc-maven-plugin</artifactId>
+        <version>0.5</version>
+      </plugin>
+    </plugins>
+  </reporting>-->
+  
   <repositories>
     <repository>
       <id>els-nexus-public</id>
