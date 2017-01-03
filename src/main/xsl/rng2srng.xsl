@@ -897,6 +897,7 @@ Je comptais simplifier l’étape de renommage des steps 7.19 et 7.20 qui est un
     </xsl:copy>
   </xsl:template>
   
+  <!--Note : new mode (adding "define" in the mode name) : a way to indirectly "move" the definition-->
   <xsl:template mode="rng2srng:step7.20-define" match="element">
     <define name="__{(@name, name)[1]}-elt-{generate-id()}">
       <xsl:copy copy-namespaces="no">
