@@ -9,33 +9,38 @@
   
   <xsl:function name="css:parse-inline" as="element(*)*">
     <xsl:param name="css:inline" as="xs:string*" />
-    <xsl:variable name="uncommented-css">
-      <!-- On élimine les commentaires -->
-      <xsl:analyze-string select="$css:inline" regex="/\*.*?\*/">
-        <xsl:matching-substring/>
-        <xsl:non-matching-substring>
-          <xsl:copy-of select="."/>  
-        </xsl:non-matching-substring>
-      </xsl:analyze-string>
-    </xsl:variable>
-    <xsl:variable name="declaration-block" select="if (contains($uncommented-css, '{')) then $uncommented-css else concat('{', $uncommented-css, '}')"/>
-    <xsl:element name="css:css">
-      <xsl:for-each select="tokenize(normalize-space($declaration-block), '\}')[matches(., '\S')]">
-        <xsl:choose>
-          <!-- On ne traite pas les déclarations at-rules : -->
-          <xsl:when test="matches(normalize-space(.), '^@')"/>
-          <!-- On ne traite pas les déclarations avec classe : -->
-          <xsl:when test="matches(normalize-space(.), '^\.')"/>
-          <!-- On ne traite pas les déclarations avec pseudo-classe : -->
-          <xsl:when test="matches(normalize-space(.), '^:')"/>
-          <xsl:otherwise>
-            <xsl:call-template name="declarations">
-              <xsl:with-param name="raw-declarations" select="normalize-space(substring-after(., '{'))" />
-            </xsl:call-template>
-          </xsl:otherwise>
-        </xsl:choose>
-      </xsl:for-each>
-    </xsl:element>
+    <xsl:choose>
+      <xsl:when test="empty($css:inline)"/>
+      <xsl:otherwise>
+        <xsl:variable name="uncommented-css">
+          <!-- On élimine les commentaires -->
+          <xsl:analyze-string select="$css:inline" regex="/\*.*?\*/">
+            <xsl:matching-substring/>
+            <xsl:non-matching-substring>
+              <xsl:copy-of select="."/>  
+            </xsl:non-matching-substring>
+          </xsl:analyze-string>
+        </xsl:variable>
+        <xsl:variable name="declaration-block" select="if (contains($uncommented-css, '{')) then $uncommented-css else concat('{', $uncommented-css, '}')"/>
+        <xsl:element name="css:css">
+          <xsl:for-each select="tokenize(normalize-space($declaration-block), '\}')[matches(., '\S')]">
+            <xsl:choose>
+              <!-- On ne traite pas les déclarations at-rules : -->
+              <xsl:when test="matches(normalize-space(.), '^@')"/>
+              <!-- On ne traite pas les déclarations avec classe : -->
+              <xsl:when test="matches(normalize-space(.), '^\.')"/>
+              <!-- On ne traite pas les déclarations avec pseudo-classe : -->
+              <xsl:when test="matches(normalize-space(.), '^:')"/>
+              <xsl:otherwise>
+                <xsl:call-template name="declarations">
+                  <xsl:with-param name="raw-declarations" select="normalize-space(substring-after(., '{'))" />
+                </xsl:call-template>
+              </xsl:otherwise>
+            </xsl:choose>
+          </xsl:for-each>
+        </xsl:element>
+      </xsl:otherwise>
+    </xsl:choose>
   </xsl:function>
   
   <!-- Note: on ne vas pas traitera la partie optionelle en !important car cela ne semble pas utile ici 
@@ -223,7 +228,7 @@
   
   
   <xsl:function name="css:definesBorderRight" as="xs:boolean">
-    <xsl:param name="css" as="element(css:css)"/>
+    <xsl:param name="css" as="element(css:css)?"/>
     <xsl:choose>
       <xsl:when test="$css//css:border-right-style"><xsl:sequence select="true()"/></xsl:when>
       <xsl:otherwise><xsl:sequence select="false()"/></xsl:otherwise>
@@ -231,7 +236,7 @@
   </xsl:function>
   
   <xsl:function name="css:definesBorderLeft" as="xs:boolean">
-    <xsl:param name="css" as="element(css:css)"/>
+    <xsl:param name="css" as="element(css:css)?"/>
     <xsl:choose>
       <xsl:when test="$css//css:border-left-style"><xsl:sequence select="true()"/></xsl:when>
       <xsl:otherwise><xsl:sequence select="false()"/></xsl:otherwise>
@@ -239,7 +244,7 @@
   </xsl:function>
   
   <xsl:function name="css:definesBorderBottom" as="xs:boolean">
-    <xsl:param name="css" as="element(css:css)"/>
+    <xsl:param name="css" as="element(css:css)?"/>
     <xsl:choose>
       <xsl:when test="$css//css:border-bottom-style"><xsl:sequence select="true()"/></xsl:when>
       <xsl:otherwise><xsl:sequence select="false()"/></xsl:otherwise>
@@ -247,7 +252,7 @@
   </xsl:function>
   
   <xsl:function name="css:definesBorderTop" as="xs:boolean">
-    <xsl:param name="css" as="element(css:css)"/>
+    <xsl:param name="css" as="element(css:css)?"/>
     <xsl:choose>
       <xsl:when test="$css//css:border-top-style"><xsl:sequence select="true()"/></xsl:when>
       <xsl:otherwise><xsl:sequence select="false()"/></xsl:otherwise>
@@ -255,7 +260,7 @@
   </xsl:function>
   
   <xsl:function name="css:showBorderTop" as="xs:boolean">
-    <xsl:param name="css" as="element(css:css)"/>
+    <xsl:param name="css" as="element(css:css)?"/>
     <xsl:variable name="style" select="
       $css/(css:border-top-style-ruleset, css:border-top-ruleset, css:border-style-ruleset, css:border-ruleset)/css:border-top-style"/>
     <xsl:variable name="width" select="
@@ -285,7 +290,7 @@
   </xsl:function>
   
   <xsl:function name="css:showBorderBottom" as="xs:boolean">
-    <xsl:param name="css" as="element(css:css)"/>
+    <xsl:param name="css" as="element(css:css)?"/>
     <xsl:variable name="style" select="
       $css/(css:border-bottom-style-ruleset, css:border-bottom-ruleset, css:border-style-ruleset, css:border-ruleset)/css:border-bottom-style"/>
     <xsl:variable name="width" select="
@@ -315,7 +320,7 @@
   </xsl:function>
   
   <xsl:function name="css:showBorderRight" as="xs:boolean">
-    <xsl:param name="css" as="element(css:css)"/>
+    <xsl:param name="css" as="element(css:css)?"/>
     <xsl:variable name="style" select="
       $css/(css:border-right-style-ruleset, css:border-right-ruleset, css:border-style-ruleset, css:border-ruleset)/css:border-right-style"/>
     <xsl:variable name="width" select="
@@ -345,7 +350,7 @@
   </xsl:function>
   
   <xsl:function name="css:showBorderLeft" as="xs:boolean">
-    <xsl:param name="css" as="element(css:css)"/>
+    <xsl:param name="css" as="element(css:css)?"/>
     <xsl:variable name="style" select="
       $css/(css:border-left-style-ruleset, css:border-left-ruleset, css:border-style-ruleset, css:border-ruleset)/css:border-left-style"/>
     <xsl:variable name="width" select="
