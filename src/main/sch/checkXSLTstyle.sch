@@ -66,6 +66,7 @@
       - xslqual-NameStartsWithNumeric
     -->
     <rule context="xsl:stylesheet">
+      
       <assert id="xslqual-RedundantNamespaceDeclarations"
         test="every $s in in-scope-prefixes(.)[not(. = 'xml' or . = '')] satisfies 
         exists(//(*[not(xsl:stylesheet)] | @*[not(parent::xsl:*)] | @select[parent::xsl:*] 
@@ -73,8 +74,9 @@
         or starts-with(., concat($s, ':'))])" 
         role="warning">
         <!--[xslqual] There are redundant namespace declarations in the xsl:stylesheet element-->
-        [xslqual] There namespace prefixes that are declared in the xsl:stylesheet element but never used anywhere 
+        [xslqual] There are namespace prefixes that are declared in the xsl:stylesheet element but never used anywhere 
       </assert>
+      
       <!--<report id="xslqual-TooManySmallTemplates"
         test="count(//xsl:template[@match and not(@name)][count(*) &lt; 3]) &gt;= 10"
         role="warning">
@@ -215,7 +217,7 @@
         [ELS] Use a namespace prefix instead of *:
       </report>
     </rule>
-    <rule context="xsl:for-each">
+    <rule context="xsl:for-each" id="xsl_for-each">
       <report test="ancestor::xsl:template 
         and not(starts-with(@select, '$'))
         and not(matches(@select, '\d'))" 

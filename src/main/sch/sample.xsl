@@ -11,6 +11,8 @@
   exclude-result-prefixes="#all"
   >
   
+  <xsl:import href="lib.xsl"/>
+  
   <!--<xd:doc scope="stylesheet">
     <xd:desc>
       <xd:p>XSLT d'exemple pour la validation checkXSLTstyle.sch</xd:p>
@@ -27,7 +29,7 @@
     <xsl:variable name="children" as="element()*">
       <xsl:sequence select="*"/>
     </xsl:variable>
-    <xsl:for-each select="*">
+    <xsl:for-each select="*"><?sch-ignore rule-id="xsl_for-each"?>
       <xsl:message><xsl:value-of select="name()"/></xsl:message>
     </xsl:for-each>
     <xsl:for-each select="1 to 10">
@@ -38,10 +40,20 @@
     </xsl:for-each>
   </xsl:template>
   
-  <xsl:variable name="var">
+  <xsl:variable name="var1">
     <xsl:value-of select="'string'"/>
   </xsl:variable>
-  <xsl:param name="var">
+  
+  <xsl:variable name="var2" as="xs:string">
+    <xsl:value-of select="'string'"/>
+  </xsl:variable>
+  
+  <xsl:variable name="var3" select="'string'" as="xs:string"/>
+    
+  
+  
+  
+  <xsl:param name="var4">
     <xsl:sequence select="/toto"/>
   </xsl:param>
   
