@@ -167,16 +167,35 @@
   <xsl:template match="mixed[optional[count(*)= count(attribute)]] | mixed[attribute]" mode="fixMsvErrorWhenConvertingXSD2RNG:step2">
     <xsl:variable name="attributeContent" select="optional[count(*)= count(attribute)] | attribute" as="element()+"/>
     <xsl:variable name="mixedContent" as="element()*">
-      <xsl:apply-templates select="* except $attributeContent" mode="#current"/>
+      <xsl:sequence select="* except $attributeContent"/>
     </xsl:variable>
-    <xsl:if test="count($mixedContent) = 0">
-      <xsl:message terminate="yes">define <xsl:value-of select="ancestor::define/@name"/> : 0 mixed element inside</xsl:message>
-    </xsl:if>
     <xsl:apply-templates select="$attributeContent" mode="#current"/>
-    <xsl:copy copy-namespaces="no">
-      <xsl:copy-of select="@*"/>
-      <xsl:copy-of select="$mixedContent"/>
-    </xsl:copy>
+    <xsl:choose>
+      <xsl:when test="count($mixedContent) = 0">
+        <xsl:message terminate="yes">define <xsl:value-of select="ancestor::define/@name"/> : 0 mixed element inside</xsl:message>
+      </xsl:when>
+      <!--Only one ref-->
+      <xsl:when test="count($mixedContent) = 1 and $mixedContent/self::ref">
+        <xsl:choose>
+          <!--And this ref is a <mixed>-->
+          <xsl:when test="rng:getDefine($mixedContent/self::ref)/mixed">
+            <xsl:copy-of select="$mixedContent"/>
+          </xsl:when>
+          <xsl:otherwise>
+            <xsl:copy copy-namespaces="no">
+              <xsl:copy-of select="@*"/>
+              <xsl:apply-templates select="$mixedContent" mode="#current"/>
+            </xsl:copy>
+          </xsl:otherwise>
+        </xsl:choose>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:copy copy-namespaces="no">
+          <xsl:copy-of select="@*"/>
+          <xsl:apply-templates select="$mixedContent" mode="#current"/>
+        </xsl:copy>
+      </xsl:otherwise>
+    </xsl:choose>
   </xsl:template>
   
   <!--================================-->
