@@ -5,8 +5,9 @@
   xmlns:xs="http://www.w3.org/2001/XMLSchema"
   xmlns:rng="http://relaxng.org/ns/structure/1.0"
   xmlns:els="http://www.lefebvre-sarrut.eu/ns/els"
+  xmlns:xslLib="http://www.lefebvre-sarrut.eu/ns/els/xslLib"
   xmlns:xf="http://www.lefebvre-sarrut.eu/ns/xmlfirst"
-  xmlns:local="local"
+  xmlns:fixMsvErrorWhenConvertingXSD2RNG="http://www.lefebvre-sarrut.eu/ns/els/xslLib/fixMsvErrorWhenConvertingXSD2RNG"
   xpath-default-namespace="http://relaxng.org/ns/structure/1.0"
   exclude-result-prefixes="#all"
   version="2.0">
@@ -18,26 +19,49 @@
   <xsl:param name="startFrom" select="''" as="xs:string"/>
   <xsl:variable name="reStart" select="$startFrom != ''" as="xs:boolean"/>
   
-  <!--================================-->
+  <!--=============================================================================================-->
+  <!--INIT-->
+  <!--=============================================================================================-->
+  
+  <xsl:template match="/">
+    <xsl:apply-templates select="." mode="fixMsvErrorWhenConvertingXSD2RNG:main"/>
+  </xsl:template>
+  
+  <!--=============================================================================================-->
   <!--MAIN-->
-  <!--================================-->
+  <!--=============================================================================================-->
 
+  <xsl:template match="/" mode="fixMsvErrorWhenConvertingXSD2RNG:main">
+    <xsl:variable name="step1" as="document-node()">
+      <xsl:document>
+        <xsl:apply-templates select="." mode="fixMsvErrorWhenConvertingXSD2RNG:step1"/>
+      </xsl:document>
+    </xsl:variable>
+    <xsl:apply-templates select="$step1" mode="fixMsvErrorWhenConvertingXSD2RNG:step2"/>
+  </xsl:template>
+  
+  <!--========================================================-->
+  <!--STEP 1-->
+  <!--========================================================-->
+  
   <!-- ===== redefinition du start =====-->
   
-  <xsl:template match="start[$reStart]">
+  <xsl:template match="start[$reStart]" mode="fixMsvErrorWhenConvertingXSD2RNG:step1">
     <xsl:copy>
-      <xsl:apply-templates select="@*"/>
+      <xsl:apply-templates select="@*" mode="#current"/>
       <ref name="{$startFrom}"/>
     </xsl:copy>
   </xsl:template>
   
   <!-- ===== Simplification =====-->
+  
   <!--je ne sais pas pourquoi MSV mets systématiquement la structure choice/notAllowed (peut être par rapport au start ?)-->
-  <xsl:template match="choice[notAllowed]">
-    <xsl:apply-templates/>
+  <xsl:template match="choice[notAllowed]" mode="fixMsvErrorWhenConvertingXSD2RNG:step1">
+    <xsl:apply-templates mode="#current"/>
   </xsl:template>
-  <xsl:template match="notAllowed[parent::choice]">
-    <xsl:apply-templates/>
+  
+  <xsl:template match="notAllowed[parent::choice]" mode="fixMsvErrorWhenConvertingXSD2RNG:step1">
+    <xsl:apply-templates mode="#current"/>
   </xsl:template>
   
   <!-- ===== Suppression des <mixed> imbriqués =====-->
@@ -64,21 +88,21 @@
   => ici mieux vaut supprimer le mixed/mixed
   -->
   
-  <xsl:template match="mixed/mixed">
-    <xsl:apply-templates/>
+  <xsl:template match="mixed/mixed" mode="fixMsvErrorWhenConvertingXSD2RNG:step1">
+    <xsl:apply-templates mode="#current"/>
   </xsl:template>
   
-  <xsl:template match="mixed[count(*) = 1 and ref][local:isMixed(rng:getDefine(ref[1]))]">
-    <xsl:apply-templates/>
+  <xsl:template match="mixed[count(*) = 1 and ref][fixMsvErrorWhenConvertingXSD2RNG:isMixed(rng:getDefine(ref[1]))]" mode="fixMsvErrorWhenConvertingXSD2RNG:step1">
+    <xsl:apply-templates mode="#current"/>
   </xsl:template>
-  
   
   <!--===== Co-constraint sur les id =====-->
+  
   <!--Cela peut venir d'un xsd laxiste avec juste <xs:element name="x"/> qui force à créé du any en rng, le mieux est de corriger le xsd-->
   <!--http://zvon.org/xxl/XMLSchemaTutorial/Output/ser_import_st1.html ?? @lax-->
   
-  
   <!-- ===== Element sans @name =====-->
+  
   <!--Exemple 
   <define name="_1">
     <element>
@@ -109,19 +133,57 @@
     </xs:complexType>
   </xs:element>-->
   <!--A éviter pour la lib rng... même si ce n'est pas faux !-->
-  <xsl:template match="define[element[not(@name)]]">
+  <xsl:template match="define[element[not(@name)]]" mode="fixMsvErrorWhenConvertingXSD2RNG:step1">
     <xsl:message>[WARNING]Suppression de define '<xsl:value-of select="@name"/>' !</xsl:message>
   </xsl:template>
   
-  <xsl:template match="ref[rng:getDefine(.)[element[not(@name)]]]">
+  <xsl:template match="ref[rng:getDefine(.)[element[not(@name)]]]" mode="fixMsvErrorWhenConvertingXSD2RNG:step1">
     <empty/>
+  </xsl:template>
+  
+  <!--========================================================-->
+  <!--STEP 2-->
+  <!--========================================================-->
+  
+  <!-- ===== UnAttach attribute involved in mixed content =====-->
+  <!--
+  Example : 
+  <define name="refDocReprise">
+    <element name="refDocReprise">
+      <mixed>
+        <optional>
+          <attribute name="enVigueur">
+            <data type="boolean"/>
+          </attribute>
+        </optional>
+        <zeroOrMore>
+          <ref name="baseTextGroup"/>
+        </zeroOrMore>
+      </mixed>
+    </element>
+  </define>
+  -->
+  
+  <xsl:template match="mixed[optional[count(*)= count(attribute)]] | mixed[attribute]" mode="fixMsvErrorWhenConvertingXSD2RNG:step2">
+    <xsl:variable name="attributeContent" select="optional[count(*)= count(attribute)] | attribute" as="element()+"/>
+    <xsl:variable name="mixedContent" as="element()*">
+      <xsl:apply-templates select="* except $attributeContent" mode="#current"/>
+    </xsl:variable>
+    <xsl:if test="count($mixedContent) = 0">
+      <xsl:message terminate="yes">define <xsl:value-of select="ancestor::define/@name"/> : 0 mixed element inside</xsl:message>
+    </xsl:if>
+    <xsl:apply-templates select="$attributeContent" mode="#current"/>
+    <xsl:copy copy-namespaces="no">
+      <xsl:copy-of select="@*"/>
+      <xsl:copy-of select="$mixedContent"/>
+    </xsl:copy>
   </xsl:template>
   
   <!--================================-->
   <!--COMMON-->
   <!--================================-->
   
-  <xsl:function name="local:isMixed" as="xs:boolean">
+  <xsl:function name="fixMsvErrorWhenConvertingXSD2RNG:isMixed" as="xs:boolean">
     <xsl:param name="define" as="element(define)"/>
     <xsl:choose>
       <xsl:when test="count($define/*) = 1 and $define/mixed">
@@ -133,8 +195,8 @@
     </xsl:choose>
   </xsl:function>
   
-  <!--copie par défaut-->
-  <xsl:template match="node() | @*">
+  <!--Default copy-->
+  <xsl:template match="node() | @*" mode="fixMsvErrorWhenConvertingXSD2RNG:step1 fixMsvErrorWhenConvertingXSD2RNG:step2">
     <xsl:copy>
       <xsl:apply-templates select="node() | @*" mode="#current"/>
     </xsl:copy>
