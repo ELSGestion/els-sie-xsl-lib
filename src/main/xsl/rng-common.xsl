@@ -55,9 +55,14 @@
     <!--<xsl:variable name="ref" select="$rngParent//ref[rng:getDefine(.)/element is $rngElement]" as="element(ref)?"/>
     => FIXME : cette solution devrait être le bonne, on ne peut pas se baser sur le nom de l'élément comme ci-dessous!-->
     <xsl:variable name="ref" select="rng:getRef($rngParent, $rngElement/@name)" as="element(ref)?"/>
+    <xsl:sequence select="rng:refIsInine($ref)"/>
+  </xsl:function>
+  
+  <xsl:function name="rng:refIsInine" as="xs:boolean">
+    <xsl:param name="ref" as="element(rng:ref)"/>
     <!--see http://relaxng.org/spec-20011203.html#IDA0FZR-->
     <!--
-      2 possibilité : 
+      2 possibilités : 
       - mixed qui est converti (srng) en interleave {pattern} text
       ex :
       <interleave>
@@ -71,7 +76,8 @@
         <oneOrMore>
           <choice>
             <text/>
-            <ref name="ITAL"/>-->
+            <ref name="ITAL"/>
+    -->
     <xsl:sequence select="exists($ref/ancestor::interleave/text) or exists($ref/parent::*/text)"/>
   </xsl:function>
   
@@ -165,13 +171,109 @@
     <xsl:sequence select="($rngRef)[1]"/>
   </xsl:function>
   
-  <!--========== rng:clean ==========--> 
+  <!--===========================================================-->
+  <!-- rng:mergeIdenticalDefine -->
+  <!--===========================================================-->
+    
+  <xsl:template match="grammar" mode="rng:mergeIdenticalDefine">
+    <xsl:message>[INFO] rng:mergeIdenticalDefine on <xsl:value-of select="local-name()"/></xsl:message>
+    <xsl:variable name="rng:mergeIdenticalDefine.step1" as="document-node()">
+      <xsl:document>
+        <xsl:apply-templates select="." mode="rng:mergeIdenticalDefine.step1"/>
+      </xsl:document>
+    </xsl:variable>
+    <xsl:apply-templates select="$rng:mergeIdenticalDefine.step1" mode="rng:mergeIdenticalDefine.step2"/>
+  </xsl:template>
+  
+  <!-- === STEP1 === -->
+  
+  <xsl:template match="define" mode="rng:mergeIdenticalDefine.step1">
+    <xsl:variable name="current.define" select="." as="element(define)"/>
+    <xsl:copy copy-namespaces="no">
+      <xsl:apply-templates select="@*" mode="#current"/>
+      <xsl:variable name="is-identical-with" 
+        select="parent::grammar/define[deep-equal(rng:normalizeDefine4Comparing(.), rng:normalizeDefine4Comparing($current.define))]/@name" 
+        as="xs:string*"/>
+        <!--[not(. is $current.define)]-->
+      <xsl:if test="count($is-identical-with) gt 1">
+        <xsl:attribute name="is-identical-with" select="$is-identical-with"/>
+      </xsl:if>
+      <xsl:apply-templates select="node()" mode="#current"/>
+    </xsl:copy>
+  </xsl:template>
+  
+  <!-- === STEP2 === -->
+  
+  <!--keep only the first define when they are multiple identical occurence of it-->
+  <xsl:template match="define[preceding-sibling::define[@is-identical-with = current()/@is-identical-with]]" mode="rng:mergeIdenticalDefine.step2"/>
+  
+  <!--redirect every ref to the first occurence of the multiple define-->
+  <xsl:template match="ref[rng:getDefine(.)/@is-identical-with]" mode="rng:mergeIdenticalDefine.step2">
+    <xsl:variable name="self" select="." as="element(ref)"/>
+    <xsl:variable name="define" select="rng:getDefine(.)" as="element(define)"/>
+    <xsl:variable name="define.is-identical-with.token" select="tokenize($define/@is-identical-with, '\s+')" as="xs:string+"/>
+    <xsl:variable name="identical.define" select="for $name in $define.is-identical-with.token return key('rng:getDefineByName', $name, $self/root())" as="element(define)+"/>
+    <xsl:copy copy-namespaces="no">
+      <xsl:copy-of select="@*"/>
+      <xsl:attribute name="name" select="$identical.define[1]/@name"/>
+    </xsl:copy>
+  </xsl:template>
+
+  <!--delete tmp attribute-->
+  <xsl:template match="@is-identical-with" mode="rng:mergeIdenticalDefine.step2"/>
+  
+  <!--default copy-->
+  <xsl:template match="node() | @*" 
+    mode="rng:mergeIdenticalDefine.step1 
+          rng:mergeIdenticalDefine.step2">
+    <xsl:copy>
+      <xsl:apply-templates select="node() | @*" mode="#current"/>
+    </xsl:copy>
+  </xsl:template>
+  
+  <xsl:function name="rng:normalizeDefine4Comparing" as="element(define)">
+    <xsl:param name="define" as="element(define)"/>
+    <define>
+      <!--@name must be deleted for comparaison-->
+      <xsl:apply-templates select="$define/*" mode="rng:normalizeDefine4Comparing"/>
+    </define>
+  </xsl:function>
+
+  <xsl:template match="*" mode="rng:normalizeDefine4Comparing">
+    <xsl:copy copy-namespaces="no">
+      <xsl:for-each select="@*">
+        <xsl:sort/>
+        <xsl:copy-of select="."/>
+      </xsl:for-each>
+      <xsl:apply-templates select="*" mode="#current">
+        <!--<xsl:sort/> NO, it would change the define-->
+      </xsl:apply-templates>
+    </xsl:copy>
+  </xsl:template>
+  
+  <!--Sorting on "choice" is ok-->
+  <xsl:template match="choice" mode="rng:normalizeDefine4Comparing">
+    <xsl:copy copy-namespaces="no">
+      <xsl:for-each select="@*">
+        <xsl:sort/>
+        <xsl:copy-of select="."/>
+      </xsl:for-each>
+      <xsl:apply-templates select="*" mode="#current">
+        <xsl:sort/>
+      </xsl:apply-templates>
+    </xsl:copy>
+  </xsl:template>
+  
+  <!--===========================================================-->
+  <!-- rng:clean -->
+  <!--===========================================================-->
   <!--nettoyage du rng (après manip manuelle dessus) pour le garder valide on espère-->
   
   <!--Attention le / est très important, on initie rng:clean sur un document-node(), mais ensuite l'apply-template ci-dessous ne repasse pas par là 
   car on travail avec element(grammar) ci-dessous, ce qui évite une boucle récursive infinie-->
   <xsl:template match="/grammar" mode="rng:clean">
-    <xsl:message>[INFO] rng:clean sur <xsl:value-of select="local-name()"/></xsl:message>
+    <xsl:param name="rng:clean_mergeIdenticalDefines" select="false()" as="xs:boolean"/>
+    <xsl:message>[INFO] rng:clean on <xsl:value-of select="local-name()"/></xsl:message>
     <xsl:variable name="step1.deleteOrphansDefine" as="element(grammar)">
       <xsl:call-template name="rng:deleteOrphansDefine">
         <xsl:with-param name="tree" select="."/>
@@ -182,7 +284,17 @@
         <xsl:with-param name="tree" select="$step1.deleteOrphansDefine"/>
       </xsl:call-template>
     </xsl:variable>
-    <xsl:apply-templates select="$step2.deleteEmptyStructuralInstructionInDataModel" mode="#current"/>
+    <xsl:variable name="step3.clean" as="element(grammar)">
+      <xsl:apply-templates select="$step2.deleteEmptyStructuralInstructionInDataModel" mode="#current"/>
+    </xsl:variable>
+    <xsl:choose>
+      <xsl:when test="$rng:clean_mergeIdenticalDefines">
+        <xsl:apply-templates select="$step3.clean" mode="rng:mergeIdenticalDefine"/>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:sequence select="$step3.clean"/>
+      </xsl:otherwise>
+    </xsl:choose>
   </xsl:template>
   
   <!--Déduplication sur ref dans les choice -->
@@ -295,6 +407,10 @@
       <xsl:apply-templates select="node() | @*" mode="#current"/>
     </xsl:copy>
   </xsl:template>
+  
+  <!--===========================================================-->
+  <!-- rng:reorder -->
+  <!--===========================================================-->
   
   <xd:doc>
     <xd:desc>
