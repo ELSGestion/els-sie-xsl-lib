@@ -512,4 +512,112 @@
     </xsl:copy>
   </xsl:template>
   
+  <!--===========================================================-->
+  <!-- rng:getXpathFromDataModel -->
+  <!--===========================================================-->
+  <!--/!\ WARNING : please use this function only for testing, it's just a Proof Of Concept, but this is really greedy !
+                    PLEASE NEVER USE IT IN REAL CODE !
+  -->
+  
+  <xd:doc>
+    <xd:desc>
+      <xd:p>Returns a list of xpath that matches a rng:element definition in the schema</xd:p>
+    </xd:desc>
+    <xd:param name="element">Any rng:element in a simplified RNG schema</xd:param>
+    <xd:param name="xpath.level">Indicate which level of xpath to go up from the element</xd:param>
+    <xd:return>A list of xpath</xd:return>
+  </xd:doc>
+  <xsl:function name="rng:getXpathFromDataModel" as="xs:string*">
+    <xsl:param name="element" as="element(rng:element)"/>
+    <xsl:param name="xpath.level" as="xs:integer"/>
+    <xsl:for-each select="distinct-values(rng:getXpathFromDataModel_debug($element, $xpath.level)/descendant-or-self::xpath/@value)">
+      <xsl:sort/>
+      <xsl:sequence select="."/>
+    </xsl:for-each>
+  </xsl:function>
+  
+  <!--1 arg signature-->
+  <xsl:function name="rng:getXpathFromDataModel" as="xs:string*">
+    <xsl:param name="element" as="element(rng:element)"/>
+    <xsl:sequence select="rng:getXpathFromDataModel($element, -1)"/><!-- "-1" means infinite-->
+  </xsl:function>
+  
+  <xsl:function name="rng:getXpathFromDataModel_debug" as="element(ref)*">
+    <xsl:param name="element" as="element(rng:element)"/>
+    <xsl:param name="xpath.level" as="xs:integer"/>
+    <xsl:apply-templates select="$element/parent::define" mode="rng:backToStartXpath">
+      <xsl:with-param name="xpath.maxLevel" select="$xpath.level" tunnel="yes"/>
+      <xsl:with-param name="xpath.level" select="1"/> <!--init-->
+    </xsl:apply-templates>
+  </xsl:function>
+  
+  <xsl:template match="define" mode="rng:backToStartXpath">
+    <xsl:param name="reverse.xpath" as="xs:string?"/> <!--empty at first iteration-->
+    <xsl:param name="ref.iterated" as="element(rng:ref)*"/>
+    <xsl:param name="xpath.level" required="yes" as="xs:integer"/>
+    <xsl:variable name="element" select="element" as="element(rng:element)"/>
+    <xsl:variable name="refToThis" select="ancestor::grammar//ref[rng:getDefine(.) is current()]" as="element(rng:ref)*"/>
+    <xsl:variable name="refToThis.notCircular" select="$refToThis[not(ancestor::define is current())]" as="element(rng:ref)*"/>
+    <xsl:choose>
+      <xsl:when test="$refToThis.notCircular intersect $ref.iterated">
+        <stop cause="circularRef"/>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:apply-templates select="$refToThis.notCircular" mode="#current">
+          <xsl:with-param name="reverse.xpath" as="xs:string">
+            <xsl:choose>
+              <!--init on first iteration-->
+              <xsl:when test="count($reverse.xpath) = 0">
+                <xsl:value-of select="$element/@name"/>
+              </xsl:when>
+              <xsl:otherwise>
+                <xsl:value-of select="concat($reverse.xpath, '\', $element/@name)"/>
+              </xsl:otherwise>
+            </xsl:choose>
+          </xsl:with-param>
+          <xsl:with-param name="ref.iterated" select="$ref.iterated"/>
+          <xsl:with-param name="xpath.level" select="$xpath.level + 1"/> 
+        </xsl:apply-templates>
+      </xsl:otherwise>
+    </xsl:choose>
+  </xsl:template>
+  
+  <xsl:template match="ref" mode="rng:backToStartXpath">
+    <xsl:param name="reverse.xpath" as="xs:string"/>
+    <xsl:param name="ref.iterated" as="element(rng:ref)*"/>
+    <xsl:param name="xpath.level" as="xs:integer"/>
+    <xsl:param name="xpath.maxLevel" as="xs:integer" tunnel="yes"/>
+    <ref reverse.xpath="{$reverse.xpath}" current-ref="{@name}" current-define="{ancestor::define/@name}" xpath.level="{$xpath.level}">
+      <xsl:choose>
+        <!--<xsl:when test="self::ref intersect $ref.iterated">
+          <xsl:message>[STOP] on est déjà passé par le ref name="<xsl:value-of select="@name"/>" dans le define "<xsl:value-of select="ancestor::define/@name"/>"</xsl:message>
+          <xsl:variable name="reverse.xpath.tokenized" select="tokenize($reverse.xpath, '\\')" as="xs:string*"/>
+          <xsl:variable name="reverse.xpath.tokenized.reverse" select="reverse($reverse.xpath.tokenized)" as="xs:string*"/>
+          <xpath debug="w1" value="{concat('//', string-join($reverse.xpath.tokenized.reverse, '/'))}"/>
+        </xsl:when>-->
+        <xsl:when test="ancestor::start">
+          <xsl:variable name="reverse.xpath.tokenized" select="tokenize($reverse.xpath, '\\')" as="xs:string*"/>
+          <xsl:variable name="reverse.xpath.tokenized.reverse" select="reverse($reverse.xpath.tokenized)" as="xs:string*"/>
+          <xpath debug="w2" value="{concat('/', string-join($reverse.xpath.tokenized.reverse, '/'))}"/>
+        </xsl:when>
+        <xsl:when test="($xpath.maxLevel gt -1) and ($xpath.level gt $xpath.maxLevel)">
+          <stop cause="maxLevel" xpath.level="{$xpath.level}"/>
+          <xsl:variable name="reverse.xpath.tokenized" select="tokenize($reverse.xpath, '\\')" as="xs:string*"/>
+          <xsl:variable name="reverse.xpath.tokenized.reverse" select="reverse($reverse.xpath.tokenized)" as="xs:string*"/>
+          <xpath debug="w3" value="{string-join($reverse.xpath.tokenized.reverse, '/')}"/>
+        </xsl:when>
+        <xsl:when test="ancestor::define">
+          <xsl:apply-templates select="ancestor::define" mode="#current">
+            <xsl:with-param name="reverse.xpath" select="$reverse.xpath" as="xs:string"/>
+            <xsl:with-param name="ref.iterated" select="($ref.iterated, .)" as="element(rng:ref)*"/>
+            <xsl:with-param name="xpath.level" select="$xpath.level"/>
+          </xsl:apply-templates>
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:message terminate="yes">[ERROR] no ancestor define for <xsl:value-of select="els:get-xpath(.)"/></xsl:message>
+        </xsl:otherwise>
+      </xsl:choose>
+    </ref>
+  </xsl:template>
+  
 </xsl:stylesheet>
