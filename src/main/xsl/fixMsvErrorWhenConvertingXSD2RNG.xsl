@@ -68,9 +68,10 @@
     <xsl:apply-templates/>
   </xsl:template>
   
-  <xsl:template match="mixed[count(ref) = 1 and ref][local:isMixed(rng:getDefine(ref[1]))]">
+  <xsl:template match="mixed[count(*) = 1 and ref][local:isMixed(rng:getDefine(ref[1]))]">
     <xsl:apply-templates/>
   </xsl:template>
+  
   
   <!--===== Co-constraint sur les id =====-->
   <!--Cela peut venir d'un xsd laxiste avec juste <xs:element name="x"/> qui force à créé du any en rng, le mieux est de corriger le xsd-->
