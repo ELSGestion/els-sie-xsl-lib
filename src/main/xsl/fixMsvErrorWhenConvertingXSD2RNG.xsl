@@ -16,7 +16,12 @@
   
   <xsl:output indent="yes"/>
   
+  <!--Par défaut les log sont écris à côté du xml-->
+  <xsl:param name="LOG.URI" select="resolve-uri('log', base-uri(.))" as="xs:string"/>
+  <xsl:variable name="log.uri" select="if(ends-with($LOG.URI, '/')) then ($LOG.URI) else(concat($LOG.URI, '/'))" as="xs:string"/>
+  <xsl:param name="debug" select="false()" as="xs:boolean"/>
   <xsl:param name="startFrom" select="''" as="xs:string"/>
+
   <xsl:variable name="reStart" select="$startFrom != ''" as="xs:boolean"/>
   
   <!--=============================================================================================-->
@@ -37,6 +42,13 @@
         <xsl:apply-templates select="." mode="fixMsvErrorWhenConvertingXSD2RNG:step1"/>
       </xsl:document>
     </xsl:variable>
+    <xsl:if test="$debug">
+      <xsl:variable name="step1.log.uri" select="resolve-uri(concat('fixMsvErrorWhenConvertingXSD2RNG.step1.', els:getFileName(base-uri(), false()),'.log.xml'), $log.uri)" as="xs:anyURI"/>
+      <xsl:message>[INFO] writing <xsl:value-of select="$step1.log.uri"/></xsl:message>
+      <xsl:result-document href="{$step1.log.uri}">
+        <xsl:sequence select="$step1"/>
+      </xsl:result-document>
+    </xsl:if>
     <xsl:apply-templates select="$step1" mode="fixMsvErrorWhenConvertingXSD2RNG:step2"/>
   </xsl:template>
   
@@ -162,10 +174,30 @@
       </mixed>
     </element>
   </define>
+  
+  Will be transformed into : 
+  
+  <define name="refDocReprise">
+    <element name="refDocReprise">
+      <optional>
+        <attribute name="enVigueur">
+          <data type="boolean"/>
+        </attribute>
+      </optional>
+      <mixed>
+        <zeroOrMore>
+          <ref name="baseTextGroup"/>
+        </zeroOrMore>
+      </mixed>
+    </element>
+  </define>
+  
+  The same for an attribute which is not optional and for ref to only attribute define
+  
   -->
   
-  <xsl:template match="mixed[optional[count(*)= count(attribute)]] | mixed[attribute]" mode="fixMsvErrorWhenConvertingXSD2RNG:step2">
-    <xsl:variable name="attributeContent" select="optional[count(*)= count(attribute)] | attribute" as="element()+"/>
+  <xsl:template match="mixed[optional[count(*)= count(attribute)]] | mixed[attribute] | mixed[ref[fixMsvErrorWhenConvertingXSD2RNG:isOnlyAttributesDefine(rng:getDefine(.))]]" mode="fixMsvErrorWhenConvertingXSD2RNG:step2">
+    <xsl:variable name="attributeContent" select="optional[count(*)= count(attribute)] | attribute | ref[fixMsvErrorWhenConvertingXSD2RNG:isOnlyAttributesDefine(rng:getDefine(.))]" as="element()+"/>
     <xsl:variable name="mixedContent" as="element()*">
       <xsl:sequence select="* except $attributeContent"/>
     </xsl:variable>
@@ -213,6 +245,26 @@
       </xsl:otherwise>
     </xsl:choose>
   </xsl:function>
+  
+  <xsl:function name="fixMsvErrorWhenConvertingXSD2RNG:isOnlyAttributesDefine" as="xs:boolean">
+    <xsl:param name="define" as="element(define)"/>
+    <xsl:variable name="define.derivated.byAttribute" as="element()*">
+      <xsl:apply-templates select="$define/*" mode="fixMsvErrorWhenConvertingXSD2RNG:refToAttributeOnly"/>
+    </xsl:variable>
+    <xsl:sequence select="every $rngElement in $define.derivated.byAttribute satisfies $rngElement/self::attribute"/>
+  </xsl:function>
+  
+  <xsl:template match="*[rng:isStructuralInstructionInDataModel(.)]" mode="fixMsvErrorWhenConvertingXSD2RNG:refToAttributeOnly">
+    <xsl:apply-templates mode="#current"/>
+  </xsl:template>
+  
+  <xsl:template match="text()" mode="fixMsvErrorWhenConvertingXSD2RNG:refToAttributeOnly"/>
+  
+  <xsl:template match="node() | @*" mode="fixMsvErrorWhenConvertingXSD2RNG:refToAttributeOnly" priority="-1">
+    <xsl:copy>
+      <xsl:apply-templates select="node() | @*" mode="#current"/>
+    </xsl:copy>
+  </xsl:template>
   
   <!--Default copy-->
   <xsl:template match="node() | @*" mode="fixMsvErrorWhenConvertingXSD2RNG:step1 fixMsvErrorWhenConvertingXSD2RNG:step2">
