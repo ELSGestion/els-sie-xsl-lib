@@ -95,7 +95,7 @@
   </xsl:variable>
   
   <!--===================================================  -->
-  <!--          DATE              -->
+  <!-- DATES -->
   <!--===================================================  -->
   
   <xd:doc>
@@ -322,7 +322,7 @@
   </xsl:function>
   
   <!--===================================================  -->
-  <!--          STRING              -->
+  <!-- STRINGS -->
   <!--===================================================  -->
 
   <xd:doc>
@@ -504,7 +504,7 @@
   
   <xd:doc>
     <xd:desc>
-      <xd:p>Signature 0 args de els:crlf() : renvoie par défaut 1 retour charriot.</xd:p>
+      <xd:p>Signature 0 args de els:crlf() : renvoie par défaut 1 retour chariot.</xd:p>
     </xd:desc>
   </xd:doc>
   <xsl:function name="els:crlf" as="xs:string">
@@ -673,144 +673,110 @@
     <xsl:value-of select="string-join(tokenize($xpath,'/'),'/')"/>
   </xsl:function>
 
+  <!--============================-->
+  <!--PSEUDO ATTRIBUTES-->
+  <!--============================-->
+  
   <xd:doc>
     <xd:desc>
-      <xd:p>Récupère tous les "pseudo attributs" d'une pi sous forme d'une liste d'attributs xml</xd:p>
+      <xd:p>Generate xml attribute from a string pseudo attributes</xd:p>
     </xd:desc>
-    <xd:param name="pi">La pi</xd:param>
-    <xd:param name="attQuot">Type de quot pour les attributs</xd:param>
+    <xd:param name="String">Any string with pseudo attributes</xd:param>
+    <xd:param name="attQuot">Quot used in the pattern to recongnize attributes</xd:param>
+    <xd:return>A list of xml attribute, one for each recognized pseudo attribute</xd:return>
   </xd:doc>
-  <xsl:function name="els:getPiAtts"><!--as="xs:string"-->
-    <xsl:param name="pi" as="node()?"/>
+  <xsl:function name="els:pseudoAttributes2xml" as="attribute()*">
+    <xsl:param name="str" as="xs:string?"/>
     <xsl:param name="attQuot" as="xs:string"/>
-    <xsl:if test="$pi/self::processing-instruction()">
-      <xsl:analyze-string select="$pi" regex="([^\s]*)={$attQuot}(.*?){$attQuot}">
+    <xsl:if test="normalize-space($str) != ''">
+      <xsl:analyze-string select="$str" regex="([^\s]*)={$attQuot}(.*?){$attQuot}">
         <xsl:matching-substring>
           <xsl:attribute name="{regex-group(1)}" select="regex-group(2)"/>
         </xsl:matching-substring>
       </xsl:analyze-string>
+      <!--FIXME : faut-il dissocier le 1er attribut (sans espace devant) des autres ?
+      <xsl:analyze-string select="$str" regex="^{$attName}={$attQuot}(.*?){$attQuot}">
+        <xsl:matching-substring>
+          <xsl:value-of select="regex-group(1)"/>
+        </xsl:matching-substring>
+        <xsl:non-matching-substring>
+          <xsl:analyze-string select="." regex="\s+{$attName}={$attQuot}(.*?){$attQuot}">
+            <xsl:matching-substring>
+              <xsl:value-of select="regex-group(1)"/>
+            </xsl:matching-substring>
+          </xsl:analyze-string>
+        </xsl:non-matching-substring>
+      </xsl:analyze-string>-->
     </xsl:if>
   </xsl:function>
   
-  <xsl:function name="els:getPiAtts">
-    <xsl:param name="pi" as="node()?"/>
-    <xsl:sequence select="els:getPiAtts($pi, $els:dquot)"/>
+  <!--Default $attQuot is double quot-->
+  <xsl:function name="els:pseudoAttributes2xml" as="attribute()*">
+    <xsl:param name="str" as="xs:string?"/>
+    <xsl:sequence select="els:pseudoAttributes2xml($str, $els:dquot)"/>
+  </xsl:function>
+  
+  <!--The same function but for only one attribute name.
+  It can return more than one xml attribute in case the string has multiple occurence of the same pseudo attribute-->
+  <xsl:function name="els:pseudoAttribute2xml" as="attribute()*">
+    <xsl:param name="str" as="xs:string"/>
+    <xsl:param name="attName" as="xs:string"/>
+    <xsl:param name="attQuot" as="xs:string"/>
+    <xsl:sequence select="els:pseudoAttributes2xml($str, $attQuot)[name(.) = $attName]"/>
+  </xsl:function>
+  
+  <!--Default $attQuot is double quot-->
+  <xsl:function name="els:pseudoAttribute2xml" as="attribute()*">
+    <xsl:param name="str" as="xs:string?"/>
+    <xsl:param name="attName" as="xs:string"/>
+    <xsl:sequence select="els:pseudoAttribute2xml($str, $attName, $els:dquot)"/>
   </xsl:function>
   
   <xd:doc>
     <xd:desc>
-      <xd:p>Récupère un pseudo attribut d'une PI données.</xd:p>
+      <xd:p>Get a pseudo attribute value within a string</xd:p>
       <xd:p>Exemple : els:getPiAtt('&lt;?xml version= "1.0" encoding="UTF-8"?>','encoding')='utf-8'</xd:p>
     </xd:desc>
-    <xd:param name="pi"></xd:param>
-    <xd:param name="attName"></xd:param>
-    <xd:return></xd:return>
+    <xd:param name="String">Any string with pseudo attributes</xd:param>
+    <xd:param name="attName">Name of the attribute</xd:param>
+    <xd:return>Value of the attribute. 
+      If there are multiple attribute with the same name in the string, the it will return several strings of values</xd:return>
   </xd:doc>
-  <xsl:function name="els:getPiAtt" as="xs:string?">
-    <xsl:param name="pi" as="node()?"/>
+  <!--FIXME : il existe une fonction saxon qui fait ça (saxon:getPseudoAttribute)-->
+  <xsl:function name="els:getPseudoAttributeValue" as="xs:string*">
+    <xsl:param name="str" as="xs:string?"/>
     <xsl:param name="attName" as="xs:string"/>
     <xsl:param name="attQuot" as="xs:string"/>
-    <xsl:if test="$pi/self::processing-instruction()">
-      <xsl:variable name="fct_res" select="els:getPseudoAttribute(string($pi),$attName, $attQuot)"/>
-      <xsl:if test="$fct_res != ''">
-        <xsl:value-of select="$fct_res"/>
-      </xsl:if>
-    </xsl:if>
+    <xsl:for-each select="els:pseudoAttribute2xml($str, $attName, $attQuot)">
+      <xsl:value-of select="."/>
+    </xsl:for-each>
   </xsl:function>
-  <xsl:function name="els:getPiAtt" as="xs:string?">
-    <xsl:param name="pi" as="node()?"/>
+  
+  <!--Default $attQuot is double quot-->
+  <xsl:function name="els:getPseudoAttributeValue" as="xs:string*">
+    <xsl:param name="str" as="xs:string?"/>
     <xsl:param name="attName" as="xs:string"/>
-    <xsl:sequence select="els:getPiAtt($pi, $attName, $els:dquot)"/>
+    <xsl:sequence select="els:getPseudoAttributeValue($str, $attName, $els:dquot)"/>
   </xsl:function>
   
   <!-- Renvoie true/false si une PI contient un attribut donné -->
-  <xsl:function name="els:hasPiAtt" as="xs:boolean?">
-    <xsl:param name="pi" as="node()?"/>
-    <xsl:param name="attName" as="xs:string"/>
-    <xsl:if test="$pi/self::processing-instruction()">
-      <xsl:variable name="fct_res" select="els:isAttInStr(string($pi),$attName)"/>
-      <xsl:if test="$fct_res">
-        <xsl:value-of select="$fct_res"/>
-      </xsl:if>
-    </xsl:if>
-  </xsl:function>
-  
-  <!-- Factorisation des deux fonctions ci-dessus : application à un string -->
-  <xsl:function name="els:getAttInStr" as="xs:string?">
-    <xsl:param name="str" as="xs:string?"/>
-    <xsl:param name="attName" as="xs:string"/>
-    <xsl:variable name="result" select="els:getPseudoAttribute($str,$attName,$els:dquot)"/>
-    <xsl:if test="$result != ''">
-      <xsl:value-of select="$result"/>
-    </xsl:if>
-  </xsl:function>
-  
-  <!--FIXME : il existe une fonction saxon qui fait ça (saxon:getPseudoAttribute)-->
-  <xsl:function name="els:getPseudoAttribute" as="xs:string?">
+  <xsl:function name="els:hasPseudoAttribute" as="xs:boolean">
     <xsl:param name="str" as="xs:string?"/>
     <xsl:param name="attName" as="xs:string"/>
     <xsl:param name="attQuot" as="xs:string"/>
-    <xsl:if test="$str != ''">
-      <xsl:value-of>
-        <xsl:analyze-string select="$str" regex="^{$attName}={$attQuot}(.*?){$attQuot}">
-          <xsl:matching-substring>
-            <xsl:value-of select="regex-group(1)"/>
-          </xsl:matching-substring>
-          <xsl:non-matching-substring>
-            <xsl:analyze-string select="." regex="\s+{$attName}={$attQuot}(.*?){$attQuot}">
-              <xsl:matching-substring>
-                <xsl:value-of select="regex-group(1)"/>
-              </xsl:matching-substring>
-            </xsl:analyze-string>
-          </xsl:non-matching-substring>
-        </xsl:analyze-string>
-      </xsl:value-of>
-    </xsl:if>
+    <xsl:sequence select="count(els:pseudoAttribute2xml($str, $attName, $attQuot)) != 0"/>
   </xsl:function>
   
-  <xsl:function name="els:getAllPseudoAttribute" as="attribute()*">
-    <xsl:param name="str" as="xs:string?"/>
-    <xsl:param name="attQuot" as="xs:string"/>
-    <xsl:analyze-string select="$str" regex="([^\s]*)={$attQuot}(.*?){$attQuot}">
-      <xsl:matching-substring>
-        <xsl:attribute name="{regex-group(1)}" select="regex-group(2)"/>
-      </xsl:matching-substring>
-    </xsl:analyze-string>
-  </xsl:function>
-  
-  <xsl:function name="els:getAllPseudoAttribute" as="attribute()*">
-    <xsl:param name="str" as="xs:string?"/>
-    <xsl:sequence select="els:getAllPseudoAttribute($str, $els:quot)"/>
-  </xsl:function>
-  
-  <xsl:function name="els:isAttInStr" as="xs:boolean?">
+  <!--Default $attQuot is double quot-->
+  <xsl:function name="els:hasPseudoAttribute" as="xs:boolean">
     <xsl:param name="str" as="xs:string?"/>
     <xsl:param name="attName" as="xs:string"/>
-    <xsl:variable name="dquot">"</xsl:variable>
-    <xsl:variable name="fct_res" select="els:isAttInStr($str,$attName,$dquot)"/>
-    <xsl:if test="$fct_res">
-      <xsl:value-of select="$fct_res"/>
-    </xsl:if>
+    <xsl:sequence select="els:hasPseudoAttribute($str, $attName, $els:dquot)"/>
   </xsl:function>
-  <xsl:function name="els:isAttInStr" as="xs:boolean?">
-    <xsl:param name="str" as="xs:string?"/>
-    <xsl:param name="attName" as="xs:string"/>
-    <xsl:param name="quot" as="xs:string"/>
-    <xsl:if test="$str != ''">
-      <xsl:analyze-string select="$str" regex="^{$attName}={$quot}(.*?){$quot}">
-        <xsl:matching-substring>
-          <xsl:value-of select="true()"/>
-        </xsl:matching-substring>
-        <xsl:non-matching-substring>
-          <xsl:analyze-string select="." regex="\s+{$attName}={$quot}(.*?){$quot}">
-            <xsl:matching-substring>
-              <xsl:value-of select="true()"/>
-            </xsl:matching-substring>
-          </xsl:analyze-string>
-        </xsl:non-matching-substring>
-      </xsl:analyze-string>
-    </xsl:if>
-  </xsl:function>
+  
+  <!--==================-->
+  <!--OTHERS XML -->
+  <!--==================-->
   
   <xsl:function name="els:hasAncestor" as="xs:boolean">
     <xsl:param name="node" as="node()"/>
@@ -990,7 +956,7 @@
   </xsl:template>
   
   <!--===================================================  -->
-  <!--                    FILE                            -->
+  <!-- FILES -->
   <!--===================================================  -->
 
   <xd:doc>

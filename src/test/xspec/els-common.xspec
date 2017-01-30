@@ -1,447 +1,425 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<x:description xmlns:x="http://www.jenitennison.com/xslt/xspec" xmlns:els="http://www.lefebvre-sarrut.eu/ns/els"
-    stylesheet="../../main/xsl/els-common.xsl">
-    <x:scenario pending="Not yet implemented"
-        label="Scenario for testing function getCurrentIsoDate">
-        <x:call function="els:getCurrentIsoDate"> </x:call>
-        <x:expect label="Not yet implemented" select="'Not yet implemented'"/>
+<x:description 
+  xmlns:x="http://www.jenitennison.com/xslt/xspec" 
+  xmlns:els="http://www.lefebvre-sarrut.eu/ns/els"
+  stylesheet="../../main/xsl/els-common.xsl">
+  
+  <x:scenario label="DATES">
+
+    <x:scenario label="getCurrentIsoDate" pending="Not yet implemented">
+      <x:call function="els:getCurrentIsoDate"> </x:call>
+      <x:expect label="Not yet implemented" select="'Not yet implemented'"/>
     </x:scenario>
 
-    <x:scenario pending="Not yet implemented"
-        label="Scenario for testing function getYearFromIsoDate">
-        <x:call function="els:getYearFromIsoDate">
-            <x:param name="isoDate" select="''"/>
+    <x:scenario label="getYearFromIsoDate" pending="Not yet implemented">
+      <x:call function="els:getYearFromIsoDate">
+        <x:param name="isoDate" select="''"/>
+      </x:call>
+      <x:expect label="Not yet implemented" select="'Not yet implemented'"/>
+    </x:scenario>
+
+    <x:scenario label="getMonthFromIsoDate" pending="Not yet implemented">
+      <x:call function="els:getMonthFromIsoDate">
+        <x:param name="isoDate" select="''"/>
+      </x:call>
+      <x:expect label="Not yet implemented" select="'Not yet implemented'"/>
+    </x:scenario>
+
+    <x:scenario label="getDayFromIsoDate" pending="Not yet implemented">
+      <x:call function="els:getDayFromIsoDate">
+        <x:param name="isoDate" select="''"/>
+      </x:call>
+      <x:expect label="Not yet implemented" select="'Not yet implemented'"/>
+    </x:scenario>
+
+    <x:scenario label="isIsoDate" pending="Not yet implemented">
+      <x:call function="els:isIsoDate">
+        <x:param name="dateString" select="''"/>
+      </x:call>
+      <x:expect label="Not yet implemented" select="'Not yet implemented'"/>
+    </x:scenario>
+
+    <x:scenario label="verbalizeMonthFromNum" pending="Not yet implemented">
+      <x:call function="els:verbalizeMonthFromNum">
+        <x:param name="monthNumString" select="''"/>
+      </x:call>
+      <x:expect label="Not yet implemented" select="'Not yet implemented'"/>
+    </x:scenario>
+
+    <x:scenario label="getMonthNumFromVerbalizeMonth" pending="Not yet implemented">
+      <x:call function="els:getMonthNumFromVerbalizeMonth">
+        <x:param name="monthString" select="''"/>
+      </x:call>
+      <x:expect label="Not yet implemented" select="'Not yet implemented'"/>
+    </x:scenario>
+
+    <x:scenario label="makeIsoDate">
+      <x:call function="els:makeIsoDate">
+        <x:param name="s" select="'21-10-1972'"/>
+        <x:param name="sep" select="'-'"/>
+      </x:call>
+      <x:expect label="1972-10-21" select="'1972-10-21'"/>
+    </x:scenario>
+
+    <x:scenario label="date-number-slash" pending="Not yet implemented">
+      <x:call function="els:date-number-slash">
+        <x:param name="param" select="''"/>
+      </x:call>
+      <x:expect label="Not yet implemented" select="'Not yet implemented'"/>
+    </x:scenario>
+
+    <x:scenario label="date-number-dash" pending="Not yet implemented">
+      <x:call function="els:date-number-dash">
+        <x:param name="param" select="''"/>
+      </x:call>
+      <x:expect label="Not yet implemented" select="'Not yet implemented'"/>
+    </x:scenario>
+
+    <x:scenario label="date-string" pending="Not yet implemented">
+      <x:call function="els:date-string">
+        <x:param name="param" select="''"/>
+      </x:call>
+      <x:expect label="Not yet implemented" select="'Not yet implemented'"/>
+    </x:scenario>
+
+    <x:scenario label="displayDate" pending="Not yet implemented">
+      <x:call function="els:displayDate">
+        <x:param name="param" select="''"/>
+      </x:call>
+      <x:expect label="Not yet implemented" select="'Not yet implemented'"/>
+    </x:scenario>
+
+    <x:scenario label="date-string-to-number-slash" pending="Not yet implemented">
+      <x:call function="els:date-string-to-number-slash">
+        <x:param name="dateVerbalized" select="''"/>
+        <x:param name="shortMonth" select="''"/>
+      </x:call>
+      <x:expect label="Not yet implemented" select="'Not yet implemented'"/>
+    </x:scenario>
+
+    <x:scenario label="date-string-to-number-slash" pending="Not yet implemented">
+      <x:call function="els:date-string-to-number-slash">
+        <x:param name="dateVerbalized" select="''"/>
+      </x:call>
+      <x:expect label="Not yet implemented" select="'Not yet implemented'"/>
+    </x:scenario>
+
+  </x:scenario>
+
+  <x:scenario label="STRINGS">
+
+    <x:scenario label="reccursivReplace" pending="Not yet implemented">
+      <x:call function="els:reccursivReplace">
+        <x:param name="Text" select="''"/>
+        <x:param name="SequenceDeTriplets" select="''"/>
+      </x:call>
+      <x:expect label="Not yet implemented" select="'Not yet implemented'"/>
+    </x:scenario>
+
+    <x:scenario label="normalize-no-diacritic" pending="Not yet implemented">
+      <x:call function="els:normalize-no-diacritic">
+        <x:param name="string" select="''"/>
+      </x:call>
+      <x:expect label="Not yet implemented" select="'Not yet implemented'"/>
+    </x:scenario>
+
+    <x:scenario label="crlf" pending="Not yet implemented">
+      <x:call function="els:crlf">
+        <x:param name="n" select="''"/>
+      </x:call>
+      <x:expect label="Not yet implemented" select="'Not yet implemented'"/>
+    </x:scenario>
+
+    <x:scenario label="crlf" pending="Not yet implemented">
+      <x:call function="els:crlf"> </x:call>
+      <x:expect label="Not yet implemented" select="'Not yet implemented'"/>
+    </x:scenario>
+
+    <x:scenario label="getFirstChar" pending="Not yet implemented">
+      <x:call function="els:getFirstChar">
+        <x:param name="s" select="''"/>
+      </x:call>
+      <x:expect label="Not yet implemented" select="'Not yet implemented'"/>
+    </x:scenario>
+
+    <x:scenario label="getFirstChar" pending="Not yet implemented">
+      <x:call function="els:getFirstChar">
+        <x:param name="s" select="''"/>
+        <x:param name="n" select="''"/>
+      </x:call>
+      <x:expect label="Not yet implemented" select="'Not yet implemented'"/>
+    </x:scenario>
+
+    <x:scenario label="getStringButFirstChar" pending="Not yet implemented">
+      <x:call function="els:getStringButFirstChar">
+        <x:param name="s" select="''"/>
+      </x:call>
+      <x:expect label="Not yet implemented" select="'Not yet implemented'"/>
+    </x:scenario>
+
+    <x:scenario label="capFirst_lowercase" pending="Not yet implemented">
+      <x:call function="els:capFirst_lowercase">
+        <x:param name="s" select="''"/>
+      </x:call>
+      <x:expect label="Not yet implemented" select="'Not yet implemented'"/>
+    </x:scenario>
+
+    <x:scenario label="capFirst" pending="Not yet implemented">
+      <x:call function="els:capFirst">
+        <x:param name="s" select="''"/>
+      </x:call>
+      <x:expect label="Not yet implemented" select="'Not yet implemented'"/>
+    </x:scenario>
+  </x:scenario>
+
+  <x:scenario label="XML">
+
+    <x:scenario label="get-xpath" pending="Not yet implemented">
+      <x:call function="els:get-xpath">
+        <x:param name="node" select="''"/>
+      </x:call>
+      <x:expect label="Not yet implemented" select="'Not yet implemented'"/>
+    </x:scenario>
+
+    <x:scenario label="get-xpath" pending="Not yet implemented">
+      <x:call function="els:get-xpath">
+        <x:param name="node" select="''"/>
+        <x:param name="nsprefix" select="''"/>
+        <x:param name="display_position" select="''"/>
+      </x:call>
+      <x:expect label="Not yet implemented" select="'Not yet implemented'"/>
+    </x:scenario>
+
+    <x:scenario label="PSEUDO ATTRIBUTES">
+
+      <x:scenario label="els:pseudoAttributes2xml($str, $attQuot)" pending="A finir">
+        <!--DEBUG : cf. cf. http://markmail.org/thread/ez25ul5izykrbguv-->
+        <x:call function="els:pseudoAttributes2xml">
+          <x:param name="str">xml version="1.0" encoding="UTF-8" toto = "tata" x " = not-pseudo=attribute_string</x:param>
+          <x:param name="attQuot">"</x:param>
         </x:call>
-        <x:expect label="Not yet implemented" select="'Not yet implemented'"/>
-    </x:scenario>
+        <x:expect label="2 attributes catched" test="/*/@*">
+          <result version="1.0" encoding="UTF-8"/>
+        </x:expect>
+      </x:scenario>
 
-    <x:scenario pending="Not yet implemented"
-        label="Scenario for testing function getMonthFromIsoDate">
-        <x:call function="els:getMonthFromIsoDate">
-            <x:param name="isoDate" select="''"/>
+      <x:scenario label="els:pseudoAttribute2xml" pending="A finir">
+        <x:call function="els:pseudoAttribute2xml">
+          <x:param name="str">xml version="1.0" encoding="UTF-8" toto = "tata" x " = not-pseudo=attribute_string</x:param>
+          <x:param name="attName" select="'version'"/>
         </x:call>
-        <x:expect label="Not yet implemented" select="'Not yet implemented'"/>
-    </x:scenario>
+        <x:expect label="1 attributes catched" test="/*/@*">
+          <result version="1.0"/>
+        </x:expect>
+      </x:scenario>
 
-    <x:scenario pending="Not yet implemented"
-        label="Scenario for testing function getDayFromIsoDate">
-        <x:call function="els:getDayFromIsoDate">
-            <x:param name="isoDate" select="''"/>
+      <x:scenario label="els:getPseudoAttributeValue">
+        <x:call function="els:getPseudoAttributeValue">
+          <x:param name="str">xml version="1.0" encoding="UTF-8" toto = "tata" x " = not-pseudo=attribute_string</x:param>
+          <x:param name="attName" select="'version'"/>
         </x:call>
-        <x:expect label="Not yet implemented" select="'Not yet implemented'"/>
-    </x:scenario>
+        <x:expect label="1.0" select="'1.0'"/>
+      </x:scenario>
 
-    <x:scenario pending="Not yet implemented" label="Scenario for testing function isIsoDate">
-        <x:call function="els:isIsoDate">
-            <x:param name="dateString" select="''"/>
+      <x:scenario label="els:hasPseudoAttribute">
+        <x:call function="els:hasPseudoAttribute">
+          <x:param name="str">xml version="1.0" encoding="UTF-8" toto = "tata" x " = not-pseudo=attribute_string</x:param>
+          <x:param name="attName" select="'version'"/>
         </x:call>
-        <x:expect label="Not yet implemented" select="'Not yet implemented'"/>
-    </x:scenario>
+        <x:expect label="true" select="true()"/>
+      </x:scenario>
 
-    <x:scenario pending="Not yet implemented"
-        label="Scenario for testing function verbalizeMonthFromNum">
-        <x:call function="els:verbalizeMonthFromNum">
-            <x:param name="monthNumString" select="''"/>
+      <x:scenario label="els:hasPseudoAttribute">
+        <x:call function="els:hasPseudoAttribute">
+          <x:param name="str">xml version="1.0" encoding="UTF-8" toto = "tata" x " = not-pseudo=attribute_string</x:param>
+          <x:param name="attName" select="'foo'"/>
         </x:call>
-        <x:expect label="Not yet implemented" select="'Not yet implemented'"/>
+        <x:expect label="false" select="false()"/>
+      </x:scenario>
+
     </x:scenario>
 
-    <x:scenario pending="Not yet implemented"
-        label="Scenario for testing function getMonthNumFromVerbalizeMonth">
-        <x:call function="els:getMonthNumFromVerbalizeMonth">
-            <x:param name="monthString" select="''"/>
-        </x:call>
-        <x:expect label="Not yet implemented" select="'Not yet implemented'"/>
+    <x:scenario label="hasAncestor" pending="Not yet implemented">
+      <x:call function="els:hasAncestor">
+        <x:param name="node" select="''"/>
+        <x:param name="top" select="''"/>
+      </x:call>
+      <x:expect label="Not yet implemented" select="'Not yet implemented'"/>
     </x:scenario>
 
-    <x:scenario label="Scenario for testing function makeIsoDate">
-        <x:call function="els:makeIsoDate">
-            <x:param name="s" select="'21-10-1972'"/>
-            <x:param name="sep" select="'-'"/>
-        </x:call>
-        <x:expect label="1972-10-21" select="'1972-10-21'"/>
+    <x:scenario label="hasStyle" pending="Not yet implemented">
+      <x:call function="els:hasStyle">
+        <x:param name="e" select="''"/>
+        <x:param name="style" select="''"/>
+      </x:call>
+      <x:expect label="Not yet implemented" select="'Not yet implemented'"/>
     </x:scenario>
 
-    <x:scenario pending="Not yet implemented"
-        label="Scenario for testing function date-number-slash">
-        <x:call function="els:date-number-slash">
-            <x:param name="param" select="''"/>
-        </x:call>
-        <x:expect label="Not yet implemented" select="'Not yet implemented'"/>
+    <x:scenario label="hasClass" pending="Not yet implemented">
+      <x:call function="els:hasClass">
+        <x:param name="e" select="''"/>
+        <x:param name="class" select="''"/>
+      </x:call>
+      <x:expect label="Not yet implemented" select="'Not yet implemented'"/>
     </x:scenario>
 
-    <x:scenario pending="Not yet implemented" label="Scenario for testing function date-number-dash">
-        <x:call function="els:date-number-dash">
-            <x:param name="param" select="''"/>
-        </x:call>
-        <x:expect label="Not yet implemented" select="'Not yet implemented'"/>
+    <x:scenario label="addClass" pending="Not yet implemented">
+      <x:call function="els:addClass">
+        <x:param name="e" select="''"/>
+        <x:param name="class" select="''"/>
+      </x:call>
+      <x:expect label="Not yet implemented" select="'Not yet implemented'"/>
     </x:scenario>
 
-    <x:scenario pending="Not yet implemented" label="Scenario for testing function date-string">
-        <x:call function="els:date-string">
-            <x:param name="param" select="''"/>
-        </x:call>
-        <x:expect label="Not yet implemented" select="'Not yet implemented'"/>
+    <x:scenario label="displayNode" pending="Not yet implemented">
+      <x:call function="els:displayNode">
+        <x:param name="node" select="''"/>
+      </x:call>
+      <x:expect label="Not yet implemented" select="'Not yet implemented'"/>
     </x:scenario>
 
-    <x:scenario pending="Not yet implemented" label="Scenario for testing function displayDate">
-        <x:call function="els:displayDate">
-            <x:param name="param" select="''"/>
-        </x:call>
-        <x:expect label="Not yet implemented" select="'Not yet implemented'"/>
+    <x:scenario label="evaluate-xpath" pending="A finir">
+      <x:call function="els:evaluate-xpath">
+        <x:param name="xpath" select="'//niveau'"/>
+        <x:param name="e">
+          <infoCommentaire>
+            <titre>test</titre>
+            <commentaire id="c1">
+              <niveau id="n1">
+                <titre>Titre 1</titre>
+                <niveau id="n1.1">
+                  <titre>Titre 1.1</titre>
+                </niveau>
+              </niveau>
+            </commentaire>
+          </infoCommentaire>
+        </x:param>
+      </x:call>
+      <x:expect label="Not yet implemented" select="'Not yet implemented'"/>
     </x:scenario>
 
-    <x:scenario pending="Not yet implemented"
-        label="Scenario for testing function date-string-to-number-slash">
-        <x:call function="els:date-string-to-number-slash">
-            <x:param name="dateVerbalized" select="''"/>
-            <x:param name="shortMonth" select="''"/>
-        </x:call>
-        <x:expect label="Not yet implemented" select="'Not yet implemented'"/>
+    <x:scenario label="serialize" pending="Not yet implemented">
+      <x:call function="els:serialize">
+        <x:param name="nodes" select="''"/>
+      </x:call>
+      <x:expect label="Not yet implemented" select="'Not yet implemented'"/>
     </x:scenario>
 
-    <x:scenario pending="Not yet implemented"
-        label="Scenario for testing function date-string-to-number-slash">
-        <x:call function="els:date-string-to-number-slash">
-            <x:param name="dateVerbalized" select="''"/>
-        </x:call>
-        <x:expect label="Not yet implemented" select="'Not yet implemented'"/>
+  </x:scenario>
+
+  <x:scenario label="FILES">
+    <x:scenario label="getFileName" pending="Not yet implemented">
+      <x:call function="els:getFileName">
+        <x:param name="filePath" select="''"/>
+        <x:param name="withExt" select="''"/>
+      </x:call>
+      <x:expect label="Not yet implemented" select="'Not yet implemented'"/>
     </x:scenario>
 
-    <x:scenario pending="Not yet implemented"
-        label="Scenario for testing function normalize-no-diacritic">
-        <x:call function="els:normalize-no-diacritic">
-            <x:param name="string" select="''"/>
-        </x:call>
-        <x:expect label="Not yet implemented" select="'Not yet implemented'"/>
+    <x:scenario label="getFileName" pending="Not yet implemented">
+      <x:call function="els:getFileName">
+        <x:param name="filePath" select="''"/>
+      </x:call>
+      <x:expect label="Not yet implemented" select="'Not yet implemented'"/>
     </x:scenario>
 
-    <x:scenario pending="Not yet implemented" label="Scenario for testing function crlf">
-        <x:call function="els:crlf">
-            <x:param name="n" select="''"/>
-        </x:call>
-        <x:expect label="Not yet implemented" select="'Not yet implemented'"/>
+    <x:scenario label="getFileExt" pending="Not yet implemented">
+      <x:call function="els:getFileExt">
+        <x:param name="filePath" select="''"/>
+      </x:call>
+      <x:expect label="Not yet implemented" select="'Not yet implemented'"/>
     </x:scenario>
 
-    <x:scenario pending="Not yet implemented" label="Scenario for testing function crlf">
-        <x:call function="els:crlf"> </x:call>
-        <x:expect label="Not yet implemented" select="'Not yet implemented'"/>
+    <x:scenario label="getFolderPath" pending="Not yet implemented">
+      <x:call function="els:getFolderPath">
+        <x:param name="filePath" select="''"/>
+        <x:param name="level" select="''"/>
+      </x:call>
+      <x:expect label="Not yet implemented" select="'Not yet implemented'"/>
     </x:scenario>
 
-    <x:scenario pending="Not yet implemented" label="Scenario for testing function getFirstChar">
-        <x:call function="els:getFirstChar">
-            <x:param name="s" select="''"/>
-        </x:call>
-        <x:expect label="Not yet implemented" select="'Not yet implemented'"/>
+    <x:scenario label="getFolderPath" pending="Not yet implemented">
+      <x:call function="els:getFolderPath">
+        <x:param name="filePath" select="''"/>
+      </x:call>
+      <x:expect label="Not yet implemented" select="'Not yet implemented'"/>
     </x:scenario>
 
-    <x:scenario pending="Not yet implemented" label="Scenario for testing function getFirstChar">
-        <x:call function="els:getFirstChar">
-            <x:param name="s" select="''"/>
-            <x:param name="n" select="''"/>
-        </x:call>
-        <x:expect label="Not yet implemented" select="'Not yet implemented'"/>
+    <x:scenario label="getFolderName" pending="Not yet implemented">
+      <x:call function="els:getFolderName">
+        <x:param name="filePath" select="''"/>
+        <x:param name="level" select="''"/>
+      </x:call>
+      <x:expect label="Not yet implemented" select="'Not yet implemented'"/>
     </x:scenario>
 
-    <x:scenario pending="Not yet implemented"
-        label="Scenario for testing function getStringButFirstChar">
-        <x:call function="els:getStringButFirstChar">
-            <x:param name="s" select="''"/>
-        </x:call>
-        <x:expect label="Not yet implemented" select="'Not yet implemented'"/>
+    <x:scenario label="getFolderName" pending="Not yet implemented">
+      <x:call function="els:getFolderName">
+        <x:param name="filePath" select="''"/>
+      </x:call>
+      <x:expect label="Not yet implemented" select="'Not yet implemented'"/>
     </x:scenario>
 
-    <x:scenario pending="Not yet implemented"
-        label="Scenario for testing function capFirst_lowercase">
-        <x:call function="els:capFirst_lowercase">
-            <x:param name="s" select="''"/>
-        </x:call>
-        <x:expect label="Not yet implemented" select="'Not yet implemented'"/>
+  </x:scenario>
+
+  <x:scenario label="MATHS">
+    <x:scenario label="roman2numeric" pending="Not yet implemented">
+      <x:call function="els:roman2numeric">
+        <x:param name="roman" select="''"/>
+      </x:call>
+      <x:expect label="Not yet implemented" select="'Not yet implemented'"/>
     </x:scenario>
 
-    <x:scenario pending="Not yet implemented" label="Scenario for testing function capFirst">
-        <x:call function="els:capFirst">
-            <x:param name="s" select="''"/>
-        </x:call>
-        <x:expect label="Not yet implemented" select="'Not yet implemented'"/>
+    <x:scenario label="litteral2numeric" pending="Not yet implemented">
+      <x:call function="els:litteral2numeric">
+        <x:param name="lit" select="''"/>
+      </x:call>
+      <x:expect label="Not yet implemented" select="'Not yet implemented'"/>
     </x:scenario>
 
-    <x:scenario pending="Not yet implemented" label="Scenario for testing function get-xpath">
-        <x:call function="els:get-xpath">
-            <x:param name="node" select="''"/>
-        </x:call>
-        <x:expect label="Not yet implemented" select="'Not yet implemented'"/>
+    <x:scenario label="isNumber" pending="Not yet implemented">
+      <x:call function="els:isNumber">
+        <x:param name="s" select="''"/>
+      </x:call>
+      <x:expect label="Not yet implemented" select="'Not yet implemented'"/>
     </x:scenario>
 
-    <x:scenario pending="Not yet implemented" label="Scenario for testing function get-xpath">
-        <x:call function="els:get-xpath">
-            <x:param name="node" select="''"/>
-            <x:param name="nsprefix" select="''"/>
-            <x:param name="display_position" select="''"/>
-        </x:call>
-        <x:expect label="Not yet implemented" select="'Not yet implemented'"/>
+    <x:scenario label="isInteger" pending="Not yet implemented">
+      <x:call function="els:isInteger">
+        <x:param name="s" select="''"/>
+      </x:call>
+      <x:expect label="Not yet implemented" select="'Not yet implemented'"/>
     </x:scenario>
 
-    <x:scenario pending="Not yet implemented" label="Scenario for testing function getPiAtts">
-        <x:call function="els:getPiAtts">
-            <x:param name="pi" select="''"/>
-            <x:param name="attQuot" select="''"/>
-        </x:call>
-        <x:expect label="Not yet implemented" select="'Not yet implemented'"/>
+    <x:scenario label="round" pending="Not yet implemented">
+      <x:call function="els:round">
+        <x:param name="number" select="''"/>
+      </x:call>
+      <x:expect label="Not yet implemented" select="'Not yet implemented'"/>
     </x:scenario>
 
-    <x:scenario pending="Not yet implemented" label="Scenario for testing function getPiAtts">
-        <x:call function="els:getPiAtts">
-            <x:param name="pi" select="''"/>
-        </x:call>
-        <x:expect label="Not yet implemented" select="'Not yet implemented'"/>
+    <x:scenario label="round" pending="Not yet implemented">
+      <x:call function="els:round">
+        <x:param name="number" select="''"/>
+        <x:param name="precision" select="''"/>
+      </x:call>
+      <x:expect label="Not yet implemented" select="'Not yet implemented'"/>
     </x:scenario>
 
-    <x:scenario pending="Not yet implemented" label="Scenario for testing function getPiAtt">
-        <x:call function="els:getPiAtt">
-            <x:param name="pi" select="''"/>
-            <x:param name="attName" select="''"/>
-            <x:param name="attQuot" select="''"/>
-        </x:call>
-        <x:expect label="Not yet implemented" select="'Not yet implemented'"/>
+    <x:scenario label="hexToDec" pending="Not yet implemented">
+      <x:call function="els:hexToDec">
+        <x:param name="str" select="''"/>
+      </x:call>
+      <x:expect label="Not yet implemented" select="'Not yet implemented'"/>
     </x:scenario>
 
-    <x:scenario pending="Not yet implemented" label="Scenario for testing function getPiAtt">
-        <x:call function="els:getPiAtt">
-            <x:param name="pi" select="''"/>
-            <x:param name="attName" select="''"/>
-        </x:call>
-        <x:expect label="Not yet implemented" select="'Not yet implemented'"/>
+    <x:scenario label="decToHex" pending="Not yet implemented">
+      <x:call function="els:decToHex">
+        <x:param name="in" select="''"/>
+      </x:call>
+      <x:expect label="Not yet implemented" select="'Not yet implemented'"/>
     </x:scenario>
 
-    <x:scenario pending="Not yet implemented" label="Scenario for testing function hasPiAtt">
-        <x:call function="els:hasPiAtt">
-            <x:param name="pi" select="''"/>
-            <x:param name="attName" select="''"/>
-        </x:call>
-        <x:expect label="Not yet implemented" select="'Not yet implemented'"/>
-    </x:scenario>
+  </x:scenario>
 
-    <x:scenario pending="Not yet implemented" label="Scenario for testing function getAttInStr">
-        <x:call function="els:getAttInStr">
-            <x:param name="str" select="''"/>
-            <x:param name="attName" select="''"/>
-        </x:call>
-        <x:expect label="Not yet implemented" select="'Not yet implemented'"/>
-    </x:scenario>
-
-    <x:scenario pending="Not yet implemented"
-        label="Scenario for testing function getPseudoAttribute">
-        <x:call function="els:getPseudoAttribute">
-            <x:param name="str" select="''"/>
-            <x:param name="attName" select="''"/>
-            <x:param name="attQuot" select="''"/>
-        </x:call>
-        <x:expect label="Not yet implemented" select="'Not yet implemented'"/>
-    </x:scenario>
-
-    <x:scenario pending="Not yet implemented"
-        label="Scenario for testing function getAllPseudoAttribute">
-        <x:call function="els:getAllPseudoAttribute">
-            <x:param name="str" select="''"/>
-            <x:param name="attQuot" select="''"/>
-        </x:call>
-        <x:expect label="Not yet implemented" select="'Not yet implemented'"/>
-    </x:scenario>
-
-    <x:scenario pending="Not yet implemented"
-        label="Scenario for testing function getAllPseudoAttribute">
-        <x:call function="els:getAllPseudoAttribute">
-            <x:param name="str" select="''"/>
-        </x:call>
-        <x:expect label="Not yet implemented" select="'Not yet implemented'"/>
-    </x:scenario>
-
-    <x:scenario pending="Not yet implemented" label="Scenario for testing function isAttInStr">
-        <x:call function="els:isAttInStr">
-            <x:param name="str" select="''"/>
-            <x:param name="attName" select="''"/>
-        </x:call>
-        <x:expect label="Not yet implemented" select="'Not yet implemented'"/>
-    </x:scenario>
-
-    <x:scenario pending="Not yet implemented" label="Scenario for testing function isAttInStr">
-        <x:call function="els:isAttInStr">
-            <x:param name="str" select="''"/>
-            <x:param name="attName" select="''"/>
-            <x:param name="quot" select="''"/>
-        </x:call>
-        <x:expect label="Not yet implemented" select="'Not yet implemented'"/>
-    </x:scenario>
-
-    <x:scenario pending="Not yet implemented" label="Scenario for testing function hasAncestor">
-        <x:call function="els:hasAncestor">
-            <x:param name="node" select="''"/>
-            <x:param name="top" select="''"/>
-        </x:call>
-        <x:expect label="Not yet implemented" select="'Not yet implemented'"/>
-    </x:scenario>
-
-    <x:scenario pending="Not yet implemented" label="Scenario for testing function hasStyle">
-        <x:call function="els:hasStyle">
-            <x:param name="e" select="''"/>
-            <x:param name="style" select="''"/>
-        </x:call>
-        <x:expect label="Not yet implemented" select="'Not yet implemented'"/>
-    </x:scenario>
-
-    <x:scenario pending="Not yet implemented" label="Scenario for testing function hasClass">
-        <x:call function="els:hasClass">
-            <x:param name="e" select="''"/>
-            <x:param name="class" select="''"/>
-        </x:call>
-        <x:expect label="Not yet implemented" select="'Not yet implemented'"/>
-    </x:scenario>
-
-    <x:scenario pending="Not yet implemented" label="Scenario for testing function addClass">
-        <x:call function="els:addClass">
-            <x:param name="e" select="''"/>
-            <x:param name="class" select="''"/>
-        </x:call>
-        <x:expect label="Not yet implemented" select="'Not yet implemented'"/>
-    </x:scenario>
-
-    <x:scenario pending="Not yet implemented" label="Scenario for testing function displayNode">
-        <x:call function="els:displayNode">
-            <x:param name="node" select="''"/>
-        </x:call>
-        <x:expect label="Not yet implemented" select="'Not yet implemented'"/>
-    </x:scenario>
-
-    <x:scenario pending="Not yet implemented" label="Scenario for testing function evaluate-xpath">
-        <x:call function="els:evaluate-xpath">
-            <x:param name="xpath" select="''"/>
-            <x:param name="e" select="''"/>
-        </x:call>
-        <x:expect label="Not yet implemented" select="'Not yet implemented'"/>
-    </x:scenario>
-
-    <x:scenario pending="Not yet implemented" label="Scenario for testing function serialize">
-        <x:call function="els:serialize">
-            <x:param name="nodes" select="''"/>
-        </x:call>
-        <x:expect label="Not yet implemented" select="'Not yet implemented'"/>
-    </x:scenario>
-
-    <x:scenario pending="Not yet implemented" label="Scenario for testing function getFileName">
-        <x:call function="els:getFileName">
-            <x:param name="filePath" select="''"/>
-            <x:param name="withExt" select="''"/>
-        </x:call>
-        <x:expect label="Not yet implemented" select="'Not yet implemented'"/>
-    </x:scenario>
-
-    <x:scenario pending="Not yet implemented" label="Scenario for testing function getFileName">
-        <x:call function="els:getFileName">
-            <x:param name="filePath" select="''"/>
-        </x:call>
-        <x:expect label="Not yet implemented" select="'Not yet implemented'"/>
-    </x:scenario>
-
-    <x:scenario pending="Not yet implemented" label="Scenario for testing function getFileExt">
-        <x:call function="els:getFileExt">
-            <x:param name="filePath" select="''"/>
-        </x:call>
-        <x:expect label="Not yet implemented" select="'Not yet implemented'"/>
-    </x:scenario>
-
-    <x:scenario pending="Not yet implemented" label="Scenario for testing function getFolderPath">
-        <x:call function="els:getFolderPath">
-            <x:param name="filePath" select="''"/>
-            <x:param name="level" select="''"/>
-        </x:call>
-        <x:expect label="Not yet implemented" select="'Not yet implemented'"/>
-    </x:scenario>
-
-    <x:scenario pending="Not yet implemented" label="Scenario for testing function getFolderPath">
-        <x:call function="els:getFolderPath">
-            <x:param name="filePath" select="''"/>
-        </x:call>
-        <x:expect label="Not yet implemented" select="'Not yet implemented'"/>
-    </x:scenario>
-
-    <x:scenario pending="Not yet implemented" label="Scenario for testing function getFolderName">
-        <x:call function="els:getFolderName">
-            <x:param name="filePath" select="''"/>
-            <x:param name="level" select="''"/>
-        </x:call>
-        <x:expect label="Not yet implemented" select="'Not yet implemented'"/>
-    </x:scenario>
-
-    <x:scenario pending="Not yet implemented" label="Scenario for testing function getFolderName">
-        <x:call function="els:getFolderName">
-            <x:param name="filePath" select="''"/>
-        </x:call>
-        <x:expect label="Not yet implemented" select="'Not yet implemented'"/>
-    </x:scenario>
-
-    <x:scenario pending="Not yet implemented" label="Scenario for testing function reccursivReplace">
-        <x:call function="els:reccursivReplace">
-            <x:param name="Text" select="''"/>
-            <x:param name="SequenceDeTriplets" select="''"/>
-        </x:call>
-        <x:expect label="Not yet implemented" select="'Not yet implemented'"/>
-    </x:scenario>
-
-    <x:scenario pending="Not yet implemented" label="Scenario for testing function roman2numeric">
-        <x:call function="els:roman2numeric">
-            <x:param name="roman" select="''"/>
-        </x:call>
-        <x:expect label="Not yet implemented" select="'Not yet implemented'"/>
-    </x:scenario>
-
-    <x:scenario pending="Not yet implemented" label="Scenario for testing function litteral2numeric">
-        <x:call function="els:litteral2numeric">
-            <x:param name="lit" select="''"/>
-        </x:call>
-        <x:expect label="Not yet implemented" select="'Not yet implemented'"/>
-    </x:scenario>
-
-    <x:scenario pending="Not yet implemented" label="Scenario for testing function isNumber">
-        <x:call function="els:isNumber">
-            <x:param name="s" select="''"/>
-        </x:call>
-        <x:expect label="Not yet implemented" select="'Not yet implemented'"/>
-    </x:scenario>
-
-    <x:scenario pending="Not yet implemented" label="Scenario for testing function isInteger">
-        <x:call function="els:isInteger">
-            <x:param name="s" select="''"/>
-        </x:call>
-        <x:expect label="Not yet implemented" select="'Not yet implemented'"/>
-    </x:scenario>
-
-    <x:scenario pending="Not yet implemented" label="Scenario for testing function round">
-        <x:call function="els:round">
-            <x:param name="number" select="''"/>
-        </x:call>
-        <x:expect label="Not yet implemented" select="'Not yet implemented'"/>
-    </x:scenario>
-
-    <x:scenario pending="Not yet implemented" label="Scenario for testing function round">
-        <x:call function="els:round">
-            <x:param name="number" select="''"/>
-            <x:param name="precision" select="''"/>
-        </x:call>
-        <x:expect label="Not yet implemented" select="'Not yet implemented'"/>
-    </x:scenario>
-
-    <x:scenario pending="Not yet implemented" label="Scenario for testing function hexToDec">
-        <x:call function="els:hexToDec">
-            <x:param name="str" select="''"/>
-        </x:call>
-        <x:expect label="Not yet implemented" select="'Not yet implemented'"/>
-    </x:scenario>
-
-    <x:scenario pending="Not yet implemented" label="Scenario for testing function decToHex">
-        <x:call function="els:decToHex">
-            <x:param name="in" select="''"/>
-        </x:call>
-        <x:expect label="Not yet implemented" select="'Not yet implemented'"/>
-    </x:scenario>
 </x:description>
