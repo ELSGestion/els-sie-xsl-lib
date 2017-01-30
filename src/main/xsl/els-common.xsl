@@ -719,7 +719,7 @@
   <!--The same function but for only one attribute name.
   It can return more than one xml attribute in case the string has multiple occurence of the same pseudo attribute-->
   <xsl:function name="els:pseudoAttribute2xml" as="attribute()*">
-    <xsl:param name="str" as="xs:string"/>
+    <xsl:param name="str" as="xs:string?"/>
     <xsl:param name="attName" as="xs:string"/>
     <xsl:param name="attQuot" as="xs:string"/>
     <xsl:sequence select="els:pseudoAttributes2xml($str, $attQuot)[name(.) = $attName]"/>
