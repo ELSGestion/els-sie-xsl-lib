@@ -5,8 +5,8 @@
   xmlns="http://relaxng.org/ns/structure/1.0"
   stylesheet="../../main/xsl/fixMsvErrorWhenConvertingXSD2RNG.xsl">
   
-  <x:scenario label="fixMsvErrorWhenConvertingXSD2RNG:defineHasOnlyAttribute()">
-    <x:call function="fixMsvErrorWhenConvertingXSD2RNG:defineHasOnlyAttribute">
+  <x:scenario label="fixMsvErrorWhenConvertingXSD2RNG:isOnlyAttributesDefine()">
+    <x:call function="fixMsvErrorWhenConvertingXSD2RNG:isOnlyAttributesDefine">
       <x:param name="define">
         <define name="renvoiAttGrp">
           <optional>
