@@ -107,7 +107,7 @@
     </plugins>
   </build>
 
-  <!--<reporting>
+  <reporting>
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -117,10 +117,22 @@
       <plugin>
         <groupId>top.marchand.xml</groupId>
         <artifactId>xslDoc-maven-plugin</artifactId>
-        <version>0.5</version>
+        <version>0.8</version>
+        <configuration>
+          <xslDirEntries>
+            <xslDirEntry>
+              <xslDirectory>src/main/xsl</xslDirectory>
+            </xslDirEntry>
+          </xslDirEntries>
+        </configuration>
+        <!--<configuration>
+          <xslDirectories>
+            <xslDirectory>src/main/xsl</xslDirectory>
+          </xslDirectories>
+        </configuration>-->
       </plugin>
     </plugins>
-  </reporting>-->
+  </reporting>
   
   <repositories>
     <repository>

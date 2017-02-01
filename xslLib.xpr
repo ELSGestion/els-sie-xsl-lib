@@ -4,9 +4,10 @@
         <filters directoryPatterns="" filePatterns="" positiveFilePatterns="" showHiddenFiles="false"/>
         <options/>
     </meta>
-    <projectTree name="${artifactId}.xpr">
+    <projectTree name="xslLib.xpr">
         <folder name="src/">
             <folder path="src/main/xsl/"/>
+            <folder path="src/site/"/>
         </folder>
         <folder name="test/">
             <folder path="src/test/xspec/"/>
