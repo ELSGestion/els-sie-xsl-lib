@@ -137,7 +137,7 @@
         <xsl:sequence select="rng:getSRNGdataModelReccurse(rng:getDefine($rngRootRef)/element[1], string-join($xpath.tokenized[position() gt 2], '/'))"/>
       </xsl:when>
       <xsl:when test="count($rngRootRef) = 0">
-        <xsl:message terminate="yes">[ERROR] Aucun rng:ref trouvé dans le start pour <xsl:value-of select="$xpath.rootName"/>, xpath=<xsl:value-of select="$xpath"/>, snrg uri : <xsl:value-of select="base-uri($grammar)"/> </xsl:message>
+        <xsl:message terminate="yes">[ERROR] Aucun rng:ref trouvé dans le start pour <xsl:value-of select="$xpath.rootName"/>, xpath=<xsl:value-of select="$xpath"/>, srng uri : <xsl:value-of select="base-uri($grammar)"/> </xsl:message>
       </xsl:when>
     </xsl:choose>
     <!--<xsl:sequence select="rng:getSRNGdataModelReccurse(rng:getDefine($grammar/start/ref[1])/element[1], string-join($xpath.tokenized[position() gt 2], '/'))"/>-->
@@ -165,7 +165,7 @@
             <xsl:sequence select="rng:getSRNGdataModelReccurse(rng:getDefine($rngRef[1])/element[1], string-join($xpathFromDataModel.tokenized[not(position() = 1)], '/'))"/>
           </xsl:when>
           <xsl:when test="count($rngRef) = 0">
-            <xsl:message terminate="yes">[ERROR] Aucun rng:ref trouvé pour <xsl:value-of select="els:get-xpath($rngParentElement)"/>, xpath=<xsl:value-of select="$xpathFromDataModel"/>, currentName=<xsl:value-of select="$currentName"/>, snrg uri : <xsl:value-of select="base-uri($rngParentElement)"/> </xsl:message>
+            <xsl:message terminate="yes">[ERROR] Aucun rng:ref trouvé pour <xsl:value-of select="els:get-xpath($rngParentElement)"/>, xpath=<xsl:value-of select="$xpathFromDataModel"/>, currentName=<xsl:value-of select="$currentName"/>, srng uri : <xsl:value-of select="base-uri($rngParentElement)"/> </xsl:message>
           </xsl:when>
         </xsl:choose>
       </xsl:otherwise>
@@ -406,7 +406,9 @@
   FIXME : quid des ref ?-->
   <xsl:function name="rng:isStructuralInstructionInDataModel" as="xs:boolean">
     <xsl:param name="e" as="element()"/>
-    <xsl:sequence select="local-name($e) = ('optional', 'zeroOrMore', 'oneOrMore', 'group', 'interleave', 'choice')"/>
+    <xsl:sequence select="
+      namespace-uri($e) = 'http://relaxng.org/ns/structure/1.0' 
+      and local-name($e) = ('optional', 'zeroOrMore', 'oneOrMore', 'group', 'interleave', 'choice')"/>
   </xsl:function>
   
   <xsl:function name="rng:isEmptyStructuralInstructionInDataModel" as="xs:boolean">
