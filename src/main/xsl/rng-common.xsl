@@ -37,6 +37,19 @@
     </xsl:choose>
   </xsl:function>
   
+  <xd:doc xml:lang="en">
+    <xd:desc>
+      <xd:p>Indicates if there is only one possible root element for a given grammar</xd:p>
+    </xd:desc>
+    <xd:param name="grammar">rng grammar element</xd:param>
+    <xd:return>true/false</xd:return>
+  </xd:doc>
+  <xsl:function name="rng:rootIsSingle" as="xs:boolean">
+    <xsl:param name="grammar" as="element(rng:grammar)"/>
+    <!-- in SRNG, each element is in a new define, attributes are expanded, so the start has only ref to elements-->
+    <xsl:value-of select="count($grammar/start//ref) = 1"/>
+  </xsl:function>
+  
   <xsl:function name="rng:getDefine" as="element(define)*">
     <xsl:param name="ref" as="element(ref)"/>
     <xsl:sequence select="key('rng:getDefineByName', $ref/@name, $ref/root())"/>
@@ -408,36 +421,6 @@
     </xsl:copy>
   </xsl:template>
   
-  
-  <xd:doc>
-    <xd:desc>
-      <xd:p>rng:isSingleRoot</xd:p>
-      <xd:p>Determine si un element est racine unique de son schema</xd:p>
-      <xd:p>Version avec un element d'une granmmaire rng en parametre</xd:p>
-    </xd:desc>
-  </xd:doc>
-  <xsl:function name="rng:isSingleRoot" as="xs:boolean">
-    <xsl:param name="e" as="element(rng:element)"/>
-    <xsl:variable name="name" select="$e/parent::define/@name"/>
-    <!-- On pourra affiner le critere si necessaire -->
-    <xsl:value-of select="($e/ancestor::grammar/start//ref/@name = $name) and  (count($e/ancestor::grammar/start//ref[@name = $name]/../*) = 1)"/>
-  </xsl:function>
-  
-  <xd:doc>
-    <xd:desc>
-      <xd:p>rng:isSingleRoot</xd:p>
-      <xd:p>Determine si un element est racine unique de son schema</xd:p>
-      <xd:p>Version avec le nom de l'element et la grammaire rng</xd:p>
-      <xd:p>Le nom de l'element est la valeur d'un attribut name d'un element define de la grammaire.</xd:p>
-    </xd:desc>
-  </xd:doc>
-  <xsl:function name="rng:isSingleRoot" as="xs:boolean">
-    <xsl:param name="name" as="xs:string"/>
-    <xsl:param name="grammar" as="element(rng:grammar)"/>
-    <!-- On pourra affiner le critere si necessaire -->
-    <xsl:value-of select="($grammar/start//ref/@name = $name) and  (count($grammar/start//ref[@name = $name]/../*) = 1)"/>
-  </xsl:function>
-      
   <!--===========================================================-->
   <!-- rng:reorder -->
   <!--===========================================================-->
