@@ -107,7 +107,7 @@
     </plugins>
   </build>
 
-  <reporting>
+  <!--<reporting>
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -125,14 +125,9 @@
             </xslDirEntry>
           </xslDirEntries>
         </configuration>
-        <!--<configuration>
-          <xslDirectories>
-            <xslDirectory>src/main/xsl</xslDirectory>
-          </xslDirectories>
-        </configuration>-->
       </plugin>
     </plugins>
-  </reporting>
+  </reporting>-->
   
   <repositories>
     <repository>
