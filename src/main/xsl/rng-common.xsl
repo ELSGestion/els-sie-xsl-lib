@@ -41,13 +41,23 @@
     <xd:desc>
       <xd:p>Indicates if there is only one possible root element for a given grammar</xd:p>
     </xd:desc>
-    <xd:param name="grammar">rng grammar element</xd:param>
+    <xd:param name="grammar">SRNG grammar element</xd:param>
     <xd:return>true/false</xd:return>
   </xd:doc>
   <xsl:function name="rng:rootIsSingle" as="xs:boolean">
     <xsl:param name="grammar" as="element(rng:grammar)"/>
     <!-- in SRNG, each element is in a new define, attributes are expanded, so the start has only ref to elements-->
     <xsl:value-of select="count($grammar/start//ref) = 1"/>
+  </xsl:function>
+  
+  <xsl:function name="rng:getRootDefines" as="element(define)*">
+    <xsl:param name="grammar" as="element(rng:grammar)"/>
+    <xsl:sequence select="$grammar/start//ref/rng:getDefine(.)"/>
+  </xsl:function>
+  
+  <xsl:function name="rng:getRootElementsName" as="xs:string*">
+    <xsl:param name="grammar" as="element(rng:grammar)"/>
+    <xsl:sequence select="rng:getRootDefines($grammar)[1]/rng:element/@name"/>
   </xsl:function>
   
   <xsl:function name="rng:getDefine" as="element(define)*">
