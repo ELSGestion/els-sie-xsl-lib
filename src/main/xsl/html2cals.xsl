@@ -139,14 +139,12 @@
     <xsl:choose>
       <!-- Cas d'une table avec des cols -->
       <xsl:when test="$table//col">
-        <xsl:value-of select="count($table//col[not(@span)]) + sum($table//(colgroup|col)/@span)"/>
+        <xsl:sequence select="(count($table//col[not(@span)]) + sum($table//(colgroup|col)/@span)) cast as xs:integer"/>
       </xsl:when>
       <!-- Cas d'une table sans cols, mais avec des tr                            -->
       <!-- Comme nos tables sont valides, il suffit de regarder la première ligne -->
       <xsl:otherwise>
-        <xsl:value-of
-          select="count(($table//tr)[1]/(th|td)[not(@colspan)]) + sum(($table//tr)[1]/(th|td)/@colspan)"
-        />
+        <xsl:sequence select="(count(($table//tr)[1]/(th|td)[not(@colspan)]) + sum(($table//tr)[1]/(th|td)/@colspan)) cast as xs:integer"/>
       </xsl:otherwise>
     </xsl:choose>
   </xsl:function>
