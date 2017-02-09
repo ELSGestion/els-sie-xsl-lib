@@ -126,12 +126,12 @@
 
   <distributionManagement>
     <repository>
-      <id>els-nexus-release</id>
+      <id>nexus-releases</id>
       <url>http://srvic/nexus/content/repositories/releases</url>
       <layout>default</layout>
     </repository>
     <snapshotRepository>
-      <id>els-nexus-snapshot</id>
+      <id>nexus-snapshots</id>
       <url>http://srvic/nexus/content/repositories/snapshots</url>
       <layout>default</layout>
     </snapshotRepository>
