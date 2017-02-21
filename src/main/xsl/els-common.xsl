@@ -1005,27 +1005,25 @@
 
   <xd:doc>
     <xd:desc>
-      <xd:p>Renvoi le path du niveau désiré dans l'arborescence de fichier d'un fichier donné.</xd:p>
+      <xd:p>Get the folder path of a file path, level can be specified to have the parg</xd:p>
     </xd:desc>
-    <xd:param name="filePath">Path du fichier</xd:param>
-    <xd:param name="level">Niveau d'arborescence (1 = dossier parent du fichier, 2 = dossier grand-parent, etc.). Ne
-      peut pas être inférieur à 1</xd:param>
-    <xd:return>Path du dossier</xd:return>
+    <xd:param name="filePath">File path as xs:string (use string(base-uri()) if necessary)</xd:param>
+    <xd:param name="level">Tree level as integer, min = 1 (1 = full path, 2 = full path except last folder, etc.)</xd:param>
+    <xd:return>Folder Path as string</xd:return>
   </xd:doc>
   <xsl:function name="els:getFolderPath" as="xs:string">
     <xsl:param name="filePath" as="xs:string?"/>
     <xsl:param name="level" as="xs:integer"/>
-    <xsl:variable name="normalizedLevel" as="xs:integer" select="if ($level ge 1) then ($level) else (1)"/>
-    <xsl:value-of select="string-join(tokenize($filePath,'/')[position() le last()-$level],'/')"/>
+    <xsl:variable name="level.normalized" as="xs:integer" select="if ($level ge 1) then ($level) else (1)"/>
+    <xsl:value-of select="string-join(tokenize($filePath,'/')[position() le (last() - $level.normalized)],'/')"/>
   </xsl:function>
 
   <xd:doc>
     <xd:desc>
-      <xd:p>Signature 1arg de els:getFolderPath. Par défaut renvoi le path du dossier dans lequel se trouve le fichier
-        (level = 1)</xd:p>
+      <xd:p>1 arg Signature of els:getFolderPath(). Default is to get the full folder path to the file (level = 1)</xd:p>
     </xd:desc>
-    <xd:param name="filePath">Path du fichier</xd:param>
-    <xd:return>Path du dossier dans lequel se trouve le fichier</xd:return>
+    <xd:param name="filePath">File path as xs:string (use string(base-uri()) if necessary)</xd:param>
+    <xd:return>Full folder path of the file path</xd:return>
   </xd:doc>
   <xsl:function name="els:getFolderPath" as="xs:string">
     <xsl:param name="filePath" as="xs:string?"/>
@@ -1034,26 +1032,26 @@
 
   <xd:doc>
     <xd:desc>
-      <xd:p>Récupère le nom d'un dossier d'un fichier donné.</xd:p>
+      <xd:p>Get the folder name of a file path</xd:p>
     </xd:desc>
-    <xd:param name="filePath">Path du fichier</xd:param>
-    <xd:param name="level">Niveau d'arborescence (1 = dossier parent du fichier, 2 = dossier grand-parent, etc.). Ne
-      peut pas être inférieur à 1</xd:param>
-    <xd:return>Nom du dossier (pour un niveau = $level d'arborescence) du path d'un fichier.</xd:return>
+    <xd:param name="filePath">File path as xs:string (use string(base-uri()) if necessary)</xd:param>
+    <xd:param name="level">Tree level as integer, min = 1 (1 = parent folder of the file, 2 = "grand-parent-folderName", etc.)</xd:param>
+    <xd:return>The folder name of the nth parent folder of file</xd:return>
   </xd:doc>
   <xsl:function name="els:getFolderName" as="xs:string">
     <xsl:param name="filePath" as="xs:string?"/>
     <xsl:param name="level" as="xs:integer"/>
-    <xsl:value-of select="tokenize($filePath,'/')[last()-$level]"/>
+    <xsl:variable name="level.normalized" as="xs:integer" select="if ($level ge 1) then ($level) else (1)"/>
+    <xsl:value-of select="tokenize($filePath,'/')[last() - $level.normalized]"/>
   </xsl:function>
 
   <!--par défaut donne le nom du dossier parent-->
   <xd:doc>
     <xd:desc>
-      <xd:p>Signature 1arg de els:getFolderName.</xd:p>
+      <xd:p>1 arg signature of els:getFolderName()</xd:p>
     </xd:desc>
-    <xd:param name="filePath">Path du fichier</xd:param>
-    <xd:return>Nom du dossier dans lequel se trouve le fichier</xd:return>
+    <xd:param name="filePath">File path as xs:string (use string(base-uri()) if necessary)</xd:param>
+    <xd:return>Name of the parent folder of the file</xd:return>
   </xd:doc>
   <xsl:function name="els:getFolderName" as="xs:string">
     <xsl:param name="filePath" as="xs:string?"/>

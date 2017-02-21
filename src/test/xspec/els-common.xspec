@@ -329,36 +329,45 @@
       </x:call>
       <x:expect label="Not yet implemented" select="'Not yet implemented'"/>
     </x:scenario>
-
-    <x:scenario label="getFolderPath" pending="Not yet implemented">
-      <x:call function="els:getFolderPath">
-        <x:param name="filePath" select="''"/>
-        <x:param name="level" select="''"/>
-      </x:call>
-      <x:expect label="Not yet implemented" select="'Not yet implemented'"/>
+    
+    <x:scenario label="getFolderPath()">
+      
+      <x:scenario label="getFolderPath($filePath)">
+        <x:call function="els:getFolderPath">
+          <x:param name="filePath" select="'file:/folder1/folder2/folder3/file.ext'"/>
+        </x:call>
+        <x:expect label="folderPath (level 1 = path complet)" select="'file:/folder1/folder2/folder3'"/>
+      </x:scenario>
+      
+      <x:scenario label="getFolderPath($filePath, 2)">
+        <x:call function="els:getFolderPath">
+          <x:param name="filePath" select="'file:/folder1/folder2/folder3/file.ext'"/>
+          <x:param name="level" select="2"/>
+        </x:call>
+        <x:expect label="folderPath 2" select="'file:/folder1/folder2'"/>
+      </x:scenario>
+      
     </x:scenario>
-
-    <x:scenario label="getFolderPath" pending="Not yet implemented">
-      <x:call function="els:getFolderPath">
-        <x:param name="filePath" select="''"/>
-      </x:call>
-      <x:expect label="Not yet implemented" select="'Not yet implemented'"/>
+    
+    <x:scenario label="getFolderName()">
+      
+      <x:scenario label="getFolderName($filePath)">
+        <x:call function="els:getFolderName">
+          <x:param name="filePath" select="'file:/folder1/folder2/folder3/file.ext'"/>
+        </x:call>
+        <x:expect label="folderPath (level 1 = parent folder name)" select="'folder3'"/>
+      </x:scenario>
+      
+      <x:scenario label="getFolderName($filePath, 2)">
+        <x:call function="els:getFolderName">
+          <x:param name="filePath" select="'file:/folder1/folder2/folder3/file.ext'"/>
+          <x:param name="level" select="2"/>
+        </x:call>
+        <x:expect label="folderPath 2" select="'folder2'"/>
+      </x:scenario>
+      
     </x:scenario>
-
-    <x:scenario label="getFolderName" pending="Not yet implemented">
-      <x:call function="els:getFolderName">
-        <x:param name="filePath" select="''"/>
-        <x:param name="level" select="''"/>
-      </x:call>
-      <x:expect label="Not yet implemented" select="'Not yet implemented'"/>
-    </x:scenario>
-
-    <x:scenario label="getFolderName" pending="Not yet implemented">
-      <x:call function="els:getFolderName">
-        <x:param name="filePath" select="''"/>
-      </x:call>
-      <x:expect label="Not yet implemented" select="'Not yet implemented'"/>
-    </x:scenario>
+    
 
   </x:scenario>
 
