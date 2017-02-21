@@ -156,6 +156,30 @@
   
   <xd:doc>
     <xd:desc>
+      <xd:p>Returns an ISO date (xs:date) from a string (typically: a serialized date), formatted as YYYY-MM-DD.</xd:p>
+      <xd:p>The input parameter (<xd:ref name="date" type="parameter">$date</xd:ref>) is tested and must be castable either as xs:date or xs:dateTime.</xd:p>
+      <xd:p>If the input parameter can be casted as xs:dateTime, only the substring corresponding to the date part is returned.</xd:p>      
+    </xd:desc>
+    <xd:param name="date">[xs:string] A string, which must be a serialized xs:date or xs:dateTime.</xd:param>
+    <xd:return>[xs:string?] The ISO date value of the input string.</xd:return>
+  </xd:doc>
+  <xsl:function name="els:getIsoDateFromString" as="xs:string?">
+    <xsl:param name="date" as="xs:string"/>
+    <xsl:choose>
+      <xsl:when test="$date castable as xs:dateTime">
+        <xsl:value-of select="format-dateTime($date cast as xs:dateTime,'[Y0001]-[M01]-[D01]')"/>
+      </xsl:when>
+      <xsl:when test="$date castable as xs:date">
+        <xsl:value-of select="format-date($date cast as xs:date,'[Y0001]-[M01]-[D01]')"/>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:message>[ERROR][els:getIsoDateFromString] The input date format is not recognized : '<xsl:value-of select="$date"/>'.</xsl:message>
+      </xsl:otherwise>
+    </xsl:choose>
+  </xsl:function>
+  
+  <xd:doc>
+    <xd:desc>
       <xd:p>verbalisation du mois</xd:p>
     </xd:desc>
     <xd:param name="monthNumber">[String] Le numéro du mois sous la forme XX ou X</xd:param>

@@ -60,6 +60,28 @@
       </x:call>
       <x:expect label="1972-10-21" select="'1972-10-21'"/>
     </x:scenario>
+    
+    <x:scenario label="getIsoDateFromString">
+      <x:call function="els:getIsoDateFromString"/>
+      <x:scenario label="/ Parameter is castable as xs:dateTime">
+        <x:call>
+          <x:param name="date" select="'2016-03-07T00:00:00.0Z'"/>
+        </x:call>
+        <x:expect label="Returns a normalized ISO date" select="'2016-03-07'"/>
+      </x:scenario>
+      <x:scenario label="/ Parameter is castable as xs:date">
+        <x:call>
+          <x:param name="date" select="'2016-03-07'"/>
+        </x:call>
+        <x:expect label="Returns a normalized ISO date" select="'2016-03-07'"/>
+      </x:scenario>
+      <x:scenario label="/ Parameter is not a valid xs:date/xs:dateTime">
+        <x:call>
+          <x:param name="date" select="'null'"/>
+        </x:call>
+        <x:expect label="Returns an empty sequence" select="()"/>
+      </x:scenario>
+    </x:scenario>
 
     <x:scenario label="date-number-slash" pending="Not yet implemented">
       <x:call function="els:date-number-slash">
