@@ -28,21 +28,11 @@
     </resources>
 
     <plugins>
-
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.3</version>
-        <configuration>
-          <source>1.7</source>
-          <target>1.7</target>
-        </configuration>
-      </plugin>
-
+      
       <plugin>
         <groupId>io.xspec.maven</groupId>
         <artifactId>xspec-maven-plugin</artifactId>
-        <version>1.4.1-RC1</version>
+        <version>1.5.0-RC1</version>
         <dependencies>
           <dependency>
             <groupId>extern.net.sf.saxon</groupId>
@@ -112,17 +102,6 @@
       </plugin>
     </plugins>
   </reporting>
-
-  <!--repositories>
-    <repository>
-      <id>els-nexus-public</id>
-      <url>http://srvic/nexus/content/groups/public</url>
-      <layout>default</layout>
-      <snapshots>
-        <enabled>true</enabled>
-      </snapshots>
-    </repository>
-  </repositories-->
 
   <distributionManagement>
     <repository>
