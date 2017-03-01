@@ -6,6 +6,7 @@
   xmlns:els="http://www.lefebvre-sarrut.eu/ns/els"
   xmlns:xslLib="http://www.lefebvre-sarrut.eu/ns/els/xslLib"
   xmlns:cals="-//OASIS//DTD XML Exchange Table Model 19990315//EN"
+  xmlns:html="http://www.w3.org/1999/xhtml"
   xmlns:saxon="http://saxon.sf.net/"
   xmlns="http://www.w3.org/1999/xhtml"
   xpath-default-namespace="-//OASIS//DTD XML Exchange Table Model 19990315//EN"
@@ -47,7 +48,7 @@
     Ainsi, les footnote seront traités par le template tgroup, on ne doit donc pas les traiter à ce niveau 
     NB : https://www.oasis-open.org/specs/tm9901.html#AEN282 : "All tgroups of a table shall have the same width, so the table frame can surround them uniformly"
       => ajout d'un tableau englobeur pour assurer cela (CHAINEXML-872) -->
-    <div class="table{if (normalize-space(@tabstyle)) then (concat(' ', @tabstyle))  else ()}">
+    <div class="table blocTableau{if (normalize-space(@tabstyle)) then (concat(' ', @tabstyle))  else ()}">
       <xsl:apply-templates select="@id" mode="#current"/>
       <xsl:apply-templates mode="#current">
         <xsl:with-param name="colsep" select="(@colsep, $cals_default-colsep)[1]"/>
@@ -538,5 +539,113 @@
       </xsl:otherwise>
     </xsl:choose>
   </xsl:function>
+  
+  <!--  CALS STYLE   -->
+  
+  <xsl:variable name="style-prefix" as="xs:string">cals_</xsl:variable>
+  
+  <xsl:variable name="style-values" as="document-node()">
+    <!-- Comme le namespace par defaut est http://www.w3.org/1999/xhtml les elements vont porter ce ns -->
+    <xsl:document>
+      <!-- frame ne se trouve qu'au niveau de l'élément table -->
+      <entry key="{concat($style-prefix, 'frametop')}">border-collapse: collapse; border-top:1px solid black;</entry>
+      <entry key="{concat($style-prefix, 'framebottom')}">border-collapse: collapse; border-bottom:1px solid black;</entry>
+      <entry key="{concat($style-prefix, 'frametopbot')}">border-collapse: collapse; border-top:1px solid black; border-bottom:1px solid black;</entry>
+      <entry key="{concat($style-prefix, 'framesides')}">border-collapse: collapse; border-left:1px solid black; border-right:1px solid black;</entry>
+      <entry key="{concat($style-prefix, 'frameall')}">border-collapse: collapse; border:1px solid black;</entry>
+      <entry key="{concat($style-prefix, 'framenone')}">border-collapse: collapse; border:none;</entry>
+      <!-- align -->
+      <entry key="{concat($style-prefix, 'alignleft')}">text-align:left;</entry>
+      <entry key="{concat($style-prefix, 'alignright')}">text-align:right;</entry>
+      <entry key="{concat($style-prefix, 'aligncenter')}">text-align:center;</entry>
+      <entry key="{concat($style-prefix, 'alignjustify')}">text-align:justify;</entry>
+      <!-- FIXME sera utile pour les tableaux issus de FrameMaker
+    <entry key="{concat($style-prefix, 'alignchar')}">text-align:left;</entry> -->
+      <!-- valign -->
+      <entry key="{concat($style-prefix, 'valigntop')}">vertical-align:top;</entry>
+      <entry key="{concat($style-prefix, 'valignbottom')}">vertical-align:bottom;</entry>
+      <entry key="{concat($style-prefix, 'valignmiddle')}">vertical-align:middle;</entry>
+      <!-- colsep -->
+      <entry key="{concat($style-prefix, 'colsep')}">border-right:1px solid black;</entry>
+      <!-- rowsep -->
+      <entry key="{concat($style-prefix, 'rowsep')}">border-bottom:1px solid black;</entry>
+    </xsl:document>
+  </xsl:variable>
+  
+  <xsl:template match="*:table" mode="xslLib:xml2html_addCalsStyle">
+    <xsl:choose>
+      <xsl:when test="tokenize(@class, '\s+') = 'cals_cals'">
+        <xsl:call-template name="create-style-att">
+          <xsl:with-param name="cals-element" select="."/>
+        </xsl:call-template>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:copy-of select="."/>
+      </xsl:otherwise>
+    </xsl:choose>
+  </xsl:template>
+  
+  <xsl:template match="*:tr | *:td | *:thead | *:tbody | *:tfoot" mode="xslLib:xml2html_addCalsStyle">
+    <xsl:call-template name="create-style-att">
+      <xsl:with-param name="cals-element" select="."/>
+    </xsl:call-template>
+  </xsl:template>
+  
+  <xsl:template name="create-style-att">
+    <xsl:param name = "cals-element"/>
+    <xsl:element name="{local-name($cals-element)}">
+      <xsl:for-each select="$cals-element/@*">
+        <xsl:choose>
+          <xsl:when test="name() = 'class'">
+            <xsl:variable name="style-vals" as="xs:string*">
+              <xsl:for-each select="tokenize(., '\s+')">
+                <xsl:variable name="val" select="lower-case(.)"/>
+                <xsl:if test="starts-with($val, $style-prefix) and $style-values/html:entry[@key=$val]">
+                  <xsl:value-of select="$style-values/html:entry[@key=$val]"/>
+                </xsl:if>
+              </xsl:for-each>
+            </xsl:variable>
+            <xsl:variable name="not-style-vals" as="xs:string*">
+              <xsl:for-each select="tokenize(., '\s+')">
+                <xsl:variable name="val" select="lower-case(.)"/>
+                <xsl:if test="not(starts-with($val, $style-prefix) and $style-values/html:entry[@key=$val])">
+                  <xsl:value-of select="$val"/>
+                </xsl:if>
+              </xsl:for-each>
+            </xsl:variable>
+            <xsl:variable name="not-style-values"
+              select="normalize-space(string-join($not-style-vals, ''))"
+              as="xs:string"/>
+            <xsl:if test="$not-style-values != ''">
+              <xsl:attribute name="class">
+                <xsl:value-of select="$not-style-vals"/>
+              </xsl:attribute>
+            </xsl:if>
+            <xsl:variable name="style-text"
+              select="normalize-space(string-join($style-vals, ''))" as="xs:string"/>
+            <xsl:if test="$style-text != ''">
+              <xsl:attribute name="style">
+                <!-- chercher les strings -->
+                <xsl:value-of select="$style-text"/>
+              </xsl:attribute>
+            </xsl:if>
+          </xsl:when>
+          <xsl:otherwise>
+            <xsl:attribute name="{name(.)}">
+              <xsl:value-of select="."/>
+            </xsl:attribute>
+          </xsl:otherwise>
+        </xsl:choose>
+      </xsl:for-each>
+      <xsl:apply-templates select="$cals-element/(*|node())" mode="xslLib:xml2html_addCalsStyle"/>
+    </xsl:element>
+  </xsl:template>
+  
+  <!--Pour les autres éléments -->
+  <xsl:template match="* | @* | node()" mode="xslLib:xml2html_addCalsStyle">
+    <xsl:copy>
+      <xsl:apply-templates select="@* | node()" mode="#current"/>
+    </xsl:copy>
+  </xsl:template>
   
 </xsl:stylesheet>
