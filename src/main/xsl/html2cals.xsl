@@ -6,7 +6,6 @@
   xmlns:els="http://www.lefebvre-sarrut.eu/ns/els"
   xmlns:xslLib="http://www.lefebvre-sarrut.eu/ns/els/xslLib"
   xmlns:xhtml2cals="http://www.lefebvre-sarrut.eu/ns/els/xhtml2cals"
-  xmlns:tmp="file://tmp"
   xmlns:xhtml="http://www.w3.org/1999/xhtml" 
   xmlns:css="http://www.w3.org/1996/css"
   xpath-default-namespace="http://www.w3.org/1999/xhtml"
@@ -16,10 +15,6 @@
   <xsl:import href="css-parser.xsl"/>
   
   <xsl:param name="xslLib:cals.ns.uri" required="yes" as="xs:string"/>
-
-  <xd:doc>
-    <!-- le namespace tmp est local et ne doit pas apparaitre en dehors de cette feuille de style -->
-  </xd:doc>
 
   <xd:doc scope="stylesheet">
     <xd:desc>
@@ -248,8 +243,8 @@
 
   <xd:doc scope="component" xml:lang="fr">
     <xd:desc>
-      <xd:p>Expanse les colspans s'une ligne. On crée des cellules avec l'attribut tmp:DummyCell pour
-        expanser. L'attribut est converti en tmp:colspan.</xd:p>
+      <xd:p>Expanse les colspans s'une ligne. On crée des cellules avec l'attribut xhtml2cals:DummyCell pour
+        expanser. L'attribut est converti en xhtml2cals:colspan.</xd:p>
     </xd:desc>
   </xd:doc>
   <xsl:function name="xhtml2cals:expand-colspans-test" as="item()+">
@@ -260,15 +255,15 @@
         <xsl:when test="@colspan &gt; 1">
           <xsl:copy>
             <xsl:copy-of select="@* except @colspan"/>
-            <xsl:attribute name="tmp:colspan" select="@colspan"/>
+            <xsl:attribute name="xhtml2cals:colspan" select="@colspan"/>
             <xsl:copy-of select="node()"/>
           </xsl:copy>
           <xsl:variable name="cell" select="."/>
           <xsl:for-each select="reverse(1 to (xs:integer(@colspan)- 1))">
             <xsl:element name="{$cell/name()}">
-              <xsl:attribute name="tmp:DummyCell">yes</xsl:attribute>
+              <xsl:attribute name="xhtml2cals:DummyCell">yes</xsl:attribute>
               <xsl:copy-of select="$cell/(@* except @colspan)"/>
-              <xsl:attribute name="tmp:colspan" select="."/>
+              <xsl:attribute name="xhtml2cals:colspan" select="."/>
               <xsl:comment>
                 <xsl:copy-of select="$cell/node()"/>
               </xsl:comment>
@@ -293,7 +288,7 @@
           inherit-namespaces="no">
           <xsl:copy-of select="$current-cell/@*[not(name() = 'colspan')]" copy-namespaces="no"/>
           <xsl:if test="$current-cell/@colspan">
-            <xsl:attribute name="tmp:colspan" select="$current-cell/@colspan"/>
+            <xsl:attribute name="xhtml2cals:colspan" select="$current-cell/@colspan"/>
           </xsl:if>
           <xsl:copy-of select="$current-cell/child::node()" copy-namespaces="no"/>
         </xsl:element>
@@ -301,9 +296,9 @@
         <xsl:for-each select="2 to (xs:integer(@colspan))">
           <xsl:element name="{$element-name}" namespace="http://www.w3.org/1999/xhtml"
             inherit-namespaces="no">
-            <xsl:attribute name="tmp:DummyCell" select="'yes'"/>
+            <xsl:attribute name="xhtml2cals:DummyCell" select="'yes'"/>
             <xsl:copy-of select="$current-cell/@*[not(name() = 'colspan')]" copy-namespaces="no"/>
-            <xsl:attribute name="tmp:colspan" select="$current-cell/@colspan +1 - ."/>
+            <xsl:attribute name="xhtml2cals:colspan" select="$current-cell/@colspan +1 - ."/>
             <xsl:comment>
 							<xsl:copy-of select="$current-cell/child::node()" copy-namespaces="no"/>
 						</xsl:comment>
@@ -322,16 +317,16 @@
   <xsl:function name="xhtml2cals:expand-rowspans" as="item()+">
     <xsl:param name="source-row" as="element()+"/>
     <xsl:param name="processed-row" as="element()"/>
-    <!-- On parcourt suivant la ligne déjà processée, car elle va porter les attributs tmp:rowspan
+    <!-- On parcourt suivant la ligne déjà processée, car elle va porter les attributs xhtml2cals:rowspan
       indiquant qu'il va y avoir des cellules à expanser dans la ligne cible -->
     <xsl:for-each select="$processed-row/*">
       <xsl:choose>
-        <xsl:when test="@tmp:rowspan &gt; 1">
+        <xsl:when test="@xhtml2cals:rowspan &gt; 1">
           <!-- une cellule à insérer -->
           <xsl:copy>
-            <xsl:attribute name="tmp:DummyCell" select="'yes'"/>
-            <xsl:copy-of select="@* except @tmp:rowspan"/>
-            <xsl:attribute name="tmp:rowspan" select="number(@tmp:rowspan) - 1"/>
+            <xsl:attribute name="xhtml2cals:DummyCell" select="'yes'"/>
+            <xsl:copy-of select="@* except @xhtml2cals:rowspan"/>
+            <xsl:attribute name="xhtml2cals:rowspan" select="number(@xhtml2cals:rowspan) - 1"/>
             <xsl:comment>
               <xsl:copy-of select="node()"/>
             </xsl:comment>
@@ -341,7 +336,7 @@
           <!-- Pas de cellule à insérer, on va copier la cellule de la ligne source  -->
           <xsl:variable name="current-column" select="count(preceding-sibling::*) + 1"/>
           <xsl:variable name="spanned-row-cells"
-            select="count(preceding-sibling::*[@tmp:rowspan &gt; 1])"/>
+            select="count(preceding-sibling::*[@xhtml2cals:rowspan &gt; 1])"/>
           <xsl:copy-of
             select="xhtml2cals:select-cell($current-column - $spanned-row-cells, $source-row, 1, 0)"
             copy-namespaces="no"/>
@@ -375,7 +370,7 @@
         <xsl:choose>
           <xsl:when test="$current-cell/@rowspan">
             <xsl:element name="td" namespace="http://www.w3.org/1999/xhtml" inherit-namespaces="no">
-              <xsl:attribute name="tmp:rowspan" select="$current-cell/@rowspan"/>
+              <xsl:attribute name="xhtml2cals:rowspan" select="$current-cell/@rowspan"/>
               <xsl:copy-of select="$current-cell/(@* except @rowspan)"/>
               <xsl:copy-of select="$current-cell/node()"/>
             </xsl:element>
@@ -663,27 +658,27 @@
       <xsl:copy-of select="(@valign, (../../..//col)[$curr-col-num]/@valign)[1][not(. = 'baseline')]"/>
       <xsl:copy-of select="@id | @class | @align | @char | @charoff "/>
       
-      <xsl:if test="not(@tmp:DummyCell)">
-        <xsl:if test="@tmp:rowspan &gt; 1">
-          <xsl:attribute name="morerows" select="number(@tmp:rowspan)-1"/>
+      <xsl:if test="not(@xhtml2cals:DummyCell)">
+        <xsl:if test="@xhtml2cals:rowspan &gt; 1">
+          <xsl:attribute name="morerows" select="number(@xhtml2cals:rowspan)-1"/>
         </xsl:if>
-        <xsl:if test="@tmp:colspan &gt; 1">
+        <xsl:if test="@xhtml2cals:colspan &gt; 1">
           <xsl:attribute name="namest" select="concat('col', count(preceding-sibling::*)+1)"/>
-          <xsl:attribute name="nameend" select="concat('col', count(preceding-sibling::*)+@tmp:colspan)"/>
+          <xsl:attribute name="nameend" select="concat('col', count(preceding-sibling::*)+@xhtml2cals:colspan)"/>
         </xsl:if>
       </xsl:if>
       
       <!-- check CSS for definition of col or row separator -->
       <xsl:variable name="rowspan" as="xs:integer">
         <xsl:choose>
-          <xsl:when test="@tmp:rowspan">
-            <xsl:value-of select="@tmp:rowspan"/>
+          <xsl:when test="@xhtml2cals:rowspan">
+            <xsl:value-of select="@xhtml2cals:rowspan"/>
           </xsl:when>
           <xsl:otherwise>1</xsl:otherwise>
         </xsl:choose>
       </xsl:variable>
       <!-- the CSS of the next col or row can have an impact on the separator settings -->
-      <xsl:variable name="css-next-col" select="css:parse-inline(following-sibling::*[not(@tmp:DummyCell)][1]/@style)"/>
+      <xsl:variable name="css-next-col" select="css:parse-inline(following-sibling::*[not(@xhtml2cals:DummyCell)][1]/@style)"/>
       <xsl:variable name="css-next-row" select="css:parse-inline(../following-sibling::*[$rowspan]/*[$curr-col-num]/@style)"/>
       <xsl:variable name="css" select="css:parse-inline(@style)"/>
       <!-- take into account rules setting of table -->
@@ -732,7 +727,7 @@
     </xsl:element>
   </xsl:template>
   
-  <xsl:template match="td[@tmp:DummyCell='yes']|th[@tmp:DummyCell='yes']" mode="xhtml2cals:convert-to-cals" priority="15"/>
+  <xsl:template match="td[@xhtml2cals:DummyCell='yes']|th[@xhtml2cals:DummyCell='yes']" mode="xhtml2cals:convert-to-cals" priority="15"/>
   
   <xsl:template match="@* | node()" mode="xhtml2cals:convert-to-cals">
     <xsl:copy>
