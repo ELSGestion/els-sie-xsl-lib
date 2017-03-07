@@ -15,7 +15,7 @@
   
   <xsl:import href="css-parser.xsl"/>
   
-  <xsl:param name="cals.ns.uri" required="yes" as="xs:string"/>
+  <xsl:param name="xslLib:cals.ns.uri" required="yes" as="xs:string"/>
 
   <xd:doc>
     <!-- le namespace tmp est local et ne doit pas apparaitre en dehors de cette feuille de style -->
@@ -260,15 +260,15 @@
         <xsl:when test="@colspan &gt; 1">
           <xsl:copy>
             <xsl:copy-of select="@* except @colspan"/>
-            <xsl:attribute name="colspan" namespace="file://tmp" select="@colspan"/>
+            <xsl:attribute name="tmp:colspan" select="@colspan"/>
             <xsl:copy-of select="node()"/>
           </xsl:copy>
           <xsl:variable name="cell" select="."/>
           <xsl:for-each select="reverse(1 to (xs:integer(@colspan)- 1))">
             <xsl:element name="{$cell/name()}">
-              <xsl:attribute name="DummyCell" namespace="file://tmp">yes</xsl:attribute>
+              <xsl:attribute name="tmp:DummyCell">yes</xsl:attribute>
               <xsl:copy-of select="$cell/(@* except @colspan)"/>
-              <xsl:attribute name="colspan" namespace="file://tmp" select="."/>
+              <xsl:attribute name="tmp:colspan" select="."/>
               <xsl:comment>
                 <xsl:copy-of select="$cell/node()"/>
               </xsl:comment>
@@ -293,7 +293,7 @@
           inherit-namespaces="no">
           <xsl:copy-of select="$current-cell/@*[not(name() = 'colspan')]" copy-namespaces="no"/>
           <xsl:if test="$current-cell/@colspan">
-            <xsl:attribute name="colspan" namespace="file://tmp" select="$current-cell/@colspan"/>
+            <xsl:attribute name="tmp:colspan" select="$current-cell/@colspan"/>
           </xsl:if>
           <xsl:copy-of select="$current-cell/child::node()" copy-namespaces="no"/>
         </xsl:element>
@@ -301,9 +301,9 @@
         <xsl:for-each select="2 to (xs:integer(@colspan))">
           <xsl:element name="{$element-name}" namespace="http://www.w3.org/1999/xhtml"
             inherit-namespaces="no">
-            <xsl:attribute name="DummyCell" namespace="file://tmp" >yes</xsl:attribute>
+            <xsl:attribute name="tmp:DummyCell" select="'yes'"/>
             <xsl:copy-of select="$current-cell/@*[not(name() = 'colspan')]" copy-namespaces="no"/>
-            <xsl:attribute name="colspan" namespace="file://tmp" select="$current-cell/@colspan +1 - ."/>
+            <xsl:attribute name="tmp:colspan" select="$current-cell/@colspan +1 - ."/>
             <xsl:comment>
 							<xsl:copy-of select="$current-cell/child::node()" copy-namespaces="no"/>
 						</xsl:comment>
@@ -329,9 +329,9 @@
         <xsl:when test="@tmp:rowspan &gt; 1">
           <!-- une cellule à insérer -->
           <xsl:copy>
-            <xsl:attribute name="DummyCell" namespace="file://tmp">yes</xsl:attribute>
+            <xsl:attribute name="tmp:DummyCell" select="'yes'"/>
             <xsl:copy-of select="@* except @tmp:rowspan"/>
-            <xsl:attribute name="rowspan" namespace="file://tmp" select="number(@tmp:rowspan) - 1"/>
+            <xsl:attribute name="tmp:rowspan" select="number(@tmp:rowspan) - 1"/>
             <xsl:comment>
               <xsl:copy-of select="node()"/>
             </xsl:comment>
@@ -375,7 +375,7 @@
         <xsl:choose>
           <xsl:when test="$current-cell/@rowspan">
             <xsl:element name="td" namespace="http://www.w3.org/1999/xhtml" inherit-namespaces="no">
-              <xsl:attribute name="rowspan" namespace="file://tmp" select="$current-cell/@rowspan"/>
+              <xsl:attribute name="tmp:rowspan" select="$current-cell/@rowspan"/>
               <xsl:copy-of select="$current-cell/(@* except @rowspan)"/>
               <xsl:copy-of select="$current-cell/node()"/>
             </xsl:element>
@@ -386,7 +386,7 @@
         </xsl:choose>
       </xsl:when>
       <!-- The span total exceeds the current colum.   This means the current cell is not a span boundry & we have gone past -->
-      <xsl:when test="$src-column-no &lt; $current-span-col-total + $current-span">
+      <xsl:when test="$src-column-no lt $current-span-col-total + $current-span">
         <!-- do nothing and exit the recurssion -->
       </xsl:when>
       <!-- The span total is less than the current colum. This means the current cell is not a span boundry. Try the next cell  -->
@@ -415,13 +415,13 @@
   
 
   <xsl:template match="table" mode="xhtml2cals:convert-to-cals">
-    <xsl:element name="table" namespace="{$cals.ns.uri}">
+    <xsl:element name="table" namespace="{$xslLib:cals.ns.uri}">
       <xsl:copy-of select="@id | @class | @align | @width" copy-namespaces="no"/>
       <xsl:call-template name="compute-table-borders"/>
       <xsl:call-template name="compute-rowsep-colsep-defaults"/>
       <xsl:copy-of select="processing-instruction()|comment()"/>
       <xsl:apply-templates select="caption" mode="#current"/>
-      <xsl:element name="tgroup" namespace="{$cals.ns.uri}">
+      <xsl:element name="tgroup" namespace="{$xslLib:cals.ns.uri}">
         <xsl:attribute name="cols" select="xhtml2cals:nb-cols(.)"/>
         <xsl:call-template name="make-colspec">
           <xsl:with-param name="context" select="colgroup | col"/>
@@ -537,7 +537,7 @@
           </xsl:when>
           <xsl:otherwise>
             <xsl:for-each select="1 to xs:integer($span)">
-              <xsl:element name="colspec" namespace="{$cals.ns.uri}">
+              <xsl:element name="colspec" namespace="{$xslLib:cals.ns.uri}">
                 <xsl:attribute name="colname" select="concat('col', ($colnum + .))"/>
                 <xsl:if test=". = 1">
                   <!-- GMA ou pour tous? -->
@@ -587,7 +587,7 @@
         </xsl:variable>
         <xsl:if
           test="(count($context[$index]/col) &gt; 1) or ((count($context[$index]/col) = 0) and ($span &gt; 1))">
-          <xsl:element name="spanspec" namespace="{$cals.ns.uri}">
+          <xsl:element name="spanspec" namespace="{$xslLib:cals.ns.uri}">
             <xsl:attribute name="spanname" select="concat('span', ($colnum + 1), '-', $span)"/>
             <xsl:attribute name="namest" select="concat('col', ($colnum + 1))"/>
             <xsl:attribute name="nameend" select="concat('col', ($colnum + $span))"/>
@@ -616,14 +616,14 @@
   
   
   <xsl:template match="caption" mode="xhtml2cals:convert-to-cals">
-    <xsl:element name="title" namespace="{$cals.ns.uri}">
+    <xsl:element name="title" namespace="{$xslLib:cals.ns.uri}">
       <xsl:copy-of select="@id | @class | @style" copy-namespaces="no"/>
       <xsl:apply-templates select="node()" mode="#current"/>
     </xsl:element>
   </xsl:template>
   
   <xsl:template match="thead" mode="xhtml2cals:convert-to-cals">
-    <xsl:element name="thead" namespace="{$cals.ns.uri}">
+    <xsl:element name="thead" namespace="{$xslLib:cals.ns.uri}">
       <xsl:copy-of select="@id | @class | @style | @align | @char | @charoff | @valign"
         copy-namespaces="no"/>
       <xsl:apply-templates select="node()" mode="#current"/>
@@ -631,7 +631,7 @@
   </xsl:template>
   
   <xsl:template match="tfoot" mode="xhtml2cals:convert-to-cals">
-    <xsl:element name="tfoot" namespace="{$cals.ns.uri}">
+    <xsl:element name="tfoot" namespace="{$xslLib:cals.ns.uri}">
       <xsl:copy-of select="@id | @class | @style | @align | @char | @charoff | @valign"
         copy-namespaces="no"/>
       <xsl:apply-templates select="node()" mode="#current"/>
@@ -639,7 +639,7 @@
   </xsl:template>
   
   <xsl:template match="tbody" mode="xhtml2cals:convert-to-cals">
-    <xsl:element name="tbody" namespace="{$cals.ns.uri}">
+    <xsl:element name="tbody" namespace="{$xslLib:cals.ns.uri}">
       <xsl:copy-of select="@id | @class | @style | @align | @char | @charoff | @valign"
         copy-namespaces="no"/>
       <xsl:apply-templates select="node()" mode="#current"/>
@@ -647,7 +647,7 @@
   </xsl:template>
   
   <xsl:template match="tr" mode="xhtml2cals:convert-to-cals">
-    <xsl:element name="row" namespace="{$cals.ns.uri}">
+    <xsl:element name="row" namespace="{$xslLib:cals.ns.uri}">
       <xsl:copy-of select="@id | @class | @style | @align | @char | @charoff | @valign"
         copy-namespaces="no"/>
       <xsl:apply-templates select="node()" mode="#current"/>
@@ -655,7 +655,7 @@
   </xsl:template>
   
   <xsl:template match="td|th" mode="xhtml2cals:convert-to-cals">
-    <xsl:element name="entry" namespace="{$cals.ns.uri}">
+    <xsl:element name="entry" namespace="{$xslLib:cals.ns.uri}">
       <xsl:variable name="curr-col-num" as="xs:integer" select="count(preceding-sibling::*) + 1"/>            
       
       <!-- copy attributes with same name -->            
