@@ -37,7 +37,14 @@
   </xd:doc>
   <xsl:param name="els:log.level.alert" as="xs:string?" required="no"/>
   <xsl:param name="els:log.level.markup" as="xs:string?" required="no"/>
-
+  
+  <xd:doc>
+    <xd:desc>
+      <xd:p>paramêtre permettant de déactiver complètement les log.</xd:p>
+    </xd:desc>
+  </xd:doc>
+  <xsl:param name="els:log.enable" as="xs:boolean?" required="no" select="true()"/>
+  
 
   <!--===================================================	-->
   <!--							LOG and MESSAGES											-->
@@ -70,72 +77,75 @@
     <xsl:param name="xpath" as="xs:string?" required="no"/>
     <xsl:param name="base-uri" as="xs:string?" required="no"/>
     <!--Si $logXpath=false() pas la peine de risquer une erreur sur un $xpathContext "." qui pourrait ne pas exister (dans un analyze-string par exemple "." est un string pas un context xpath)-->
-    <xsl:variable name="xpath"
-                  select=" if (exists($xpath)) then ($xpath) else (if ($logXpath) then (els:get-xpath($xpathContext)) else (''))"
-                  as="xs:string"/>
-    <!--checking param-->
-    <xsl:variable name="levelValues"
-      select="('info','debug','warning','error', 'fatal','fixme','todo')" as="xs:string*"/>
-    <xsl:if test="not(some $levelName in $levelValues satisfies $level = $levelName)">
-      <xsl:call-template name="els:log">
-        <!--<xsl:with-param name="xsltName" select="tokenize(static-base-uri(),'/')[last()]"/> ne fonctionne pas en java pour hervé Rolland -->
-        <xsl:with-param name="xsltName" select="'els-log.xsl'"/>
-        <xsl:with-param name="alert" select="true()"/>
-        <xsl:with-param name="markup" select="false()"/>
-        <xsl:with-param name="description" xml:space="preserve">Appel du template log avec valeur du parametre level = "<xsl:value-of select="$level"/>" non autorisé</xsl:with-param>
-      </xsl:call-template>
-    </xsl:if>
-    <!--logging par xsl:message si $alert (c'est-à-dire explicitement demandé ou level approprié) et niveau de log configuré pour être traité -->
-    <xsl:variable name="alertWithLevelToProcess"
-                  select="if (exists($els:log.level.alert)) 
-                          then (els:isLogToBeProcessed($level, $els:log.level.alert)) 
-                          else ($alert)"/>
-    <xsl:if test="$alertWithLevelToProcess">
-      <xsl:variable name="msg">
-        <xsl:text>[</xsl:text>
-        <xsl:value-of select="upper-case($level)"/>
-        <xsl:text>][</xsl:text>
-        <xsl:if test="exists($base-uri)">
-          <xsl:value-of select="concat(tokenize($base-uri, '/')[last()], ' / ')"/>
-        </xsl:if>
-        <xsl:value-of select="$xsltName"/>
-        <xsl:text>][</xsl:text>
-        <xsl:value-of select="$code"/>
-        <xsl:text>] </xsl:text>
-        <!--suppression des accents car mal géré au niveau des invites de commande-->
-        <xsl:sequence select="els:normalize-no-diacritic($description)"/>
-        <xsl:if test="$logXpath">
-          <xsl:text>&#10; xpath=</xsl:text>
-          <xsl:value-of select="$xpath"/>
-        </xsl:if>
-      </xsl:variable>
-      <xsl:choose>
-        <xsl:when test="$level = 'fatal'">
-          <!--<xsl:message terminate="yes" select="$msg"/>-->
-          <xsl:message terminate="no" select="$msg"/>
-          <!--On préfère ne jamais tuer le process, on pourra compter le nombre d'erreurs fatal même si risque d'effet "boule de neige"-->
-        </xsl:when>
-        <xsl:otherwise>
-          <xsl:message terminate="no" select="$msg"/>
-        </xsl:otherwise>
-      </xsl:choose>
-    </xsl:if>
-    <!--logging via balise log si $markup et niveau de log configuré pour être traité -->
-    <xsl:variable name="markupAndLevelToProcess"
-                  select="if (exists($els:log.level.markup)) then ($markup and els:isLogToBeProcessed($level, $els:log.level.markup)) else ($markup)"/>
-    <xsl:if test="$markupAndLevelToProcess">
-      <els:log level="{$level}" code="{$code}" xsltName="{$xsltName}">
-        <xsl:if test="$logXpath">
-          <xsl:attribute name="xpath" select="$xpath"/>
-        </xsl:if>
-        <xsl:if test="$xpathContext instance of node()">
-          <!--que l'on soit sur un noeud attribut ou element ou autre, on créer un attribut avec le nom de l'élément "courant"-->
-          <xsl:attribute name="element" select="name(ancestor-or-self::*[1])"/>
-        </xsl:if>
-        <!-- Mise en commentaire permet d'éviter d'ajouter du contenu textuel-->
-        <!-- (Même si $description contient déjà un commentaire ou un "double tiret", la serialisation xsl:comment fonctionnera ! (testé) ) -->
-        <xsl:comment><xsl:sequence select="$description"/></xsl:comment>
-      </els:log>
+    
+    <xsl:if test="$els:log.enable">
+      <xsl:variable name="xpath"
+                    select=" if (exists($xpath)) then ($xpath) else (if ($logXpath) then (els:get-xpath($xpathContext)) else (''))"
+                    as="xs:string"/>
+      <!--checking param-->
+      <xsl:variable name="levelValues"
+        select="('info','debug','warning','error', 'fatal','fixme','todo')" as="xs:string*"/>
+      <xsl:if test="not(some $levelName in $levelValues satisfies $level = $levelName)">
+        <xsl:call-template name="els:log">
+          <!--<xsl:with-param name="xsltName" select="tokenize(static-base-uri(),'/')[last()]"/> ne fonctionne pas en java pour hervé Rolland -->
+          <xsl:with-param name="xsltName" select="'els-log.xsl'"/>
+          <xsl:with-param name="alert" select="true()"/>
+          <xsl:with-param name="markup" select="false()"/>
+          <xsl:with-param name="description" xml:space="preserve">Appel du template log avec valeur du parametre level = "<xsl:value-of select="$level"/>" non autorisé</xsl:with-param>
+        </xsl:call-template>
+      </xsl:if>
+      <!--logging par xsl:message si $alert (c'est-à-dire explicitement demandé ou level approprié) et niveau de log configuré pour être traité -->
+      <xsl:variable name="alertWithLevelToProcess"
+                    select="if (exists($els:log.level.alert)) 
+                            then (els:isLogToBeProcessed($level, $els:log.level.alert)) 
+                            else ($alert)"/>
+      <xsl:if test="$alertWithLevelToProcess">
+        <xsl:variable name="msg">
+          <xsl:text>[</xsl:text>
+          <xsl:value-of select="upper-case($level)"/>
+          <xsl:text>][</xsl:text>
+          <xsl:if test="exists($base-uri)">
+            <xsl:value-of select="concat(tokenize($base-uri, '/')[last()], ' / ')"/>
+          </xsl:if>
+          <xsl:value-of select="$xsltName"/>
+          <xsl:text>][</xsl:text>
+          <xsl:value-of select="$code"/>
+          <xsl:text>] </xsl:text>
+          <!--suppression des accents car mal géré au niveau des invites de commande-->
+          <xsl:sequence select="els:normalize-no-diacritic($description)"/>
+          <xsl:if test="$logXpath">
+            <xsl:text>&#10; xpath=</xsl:text>
+            <xsl:value-of select="$xpath"/>
+          </xsl:if>
+        </xsl:variable>
+        <xsl:choose>
+          <xsl:when test="$level = 'fatal'">
+            <!--<xsl:message terminate="yes" select="$msg"/>-->
+            <xsl:message terminate="no" select="$msg"/>
+            <!--On préfère ne jamais tuer le process, on pourra compter le nombre d'erreurs fatal même si risque d'effet "boule de neige"-->
+          </xsl:when>
+          <xsl:otherwise>
+            <xsl:message terminate="no" select="$msg"/>
+          </xsl:otherwise>
+        </xsl:choose>
+      </xsl:if>
+      <!--logging via balise log si $markup et niveau de log configuré pour être traité -->
+      <xsl:variable name="markupAndLevelToProcess"
+                    select="if (exists($els:log.level.markup)) then ($markup and els:isLogToBeProcessed($level, $els:log.level.markup)) else ($markup)"/>
+      <xsl:if test="$markupAndLevelToProcess">
+        <els:log level="{$level}" code="{$code}" xsltName="{$xsltName}">
+          <xsl:if test="$logXpath">
+            <xsl:attribute name="xpath" select="$xpath"/>
+          </xsl:if>
+          <xsl:if test="$xpathContext instance of node()">
+            <!--que l'on soit sur un noeud attribut ou element ou autre, on créer un attribut avec le nom de l'élément "courant"-->
+            <xsl:attribute name="element" select="name(ancestor-or-self::*[1])"/>
+          </xsl:if>
+          <!-- Mise en commentaire permet d'éviter d'ajouter du contenu textuel-->
+          <!-- (Même si $description contient déjà un commentaire ou un "double tiret", la serialisation xsl:comment fonctionnera ! (testé) ) -->
+          <xsl:comment><xsl:sequence select="$description"/></xsl:comment>
+        </els:log>
+      </xsl:if>
     </xsl:if>
   </xsl:template>
   
