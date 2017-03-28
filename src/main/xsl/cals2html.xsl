@@ -48,7 +48,7 @@
     Ainsi, les footnote seront traités par le template tgroup, on ne doit donc pas les traiter à ce niveau 
     NB : https://www.oasis-open.org/specs/tm9901.html#AEN282 : "All tgroups of a table shall have the same width, so the table frame can surround them uniformly"
       => ajout d'un tableau englobeur pour assurer cela (CHAINEXML-872) -->
-    <div class="table blocTableau{if (normalize-space(@tabstyle)) then (concat(' ', @tabstyle))  else ()}">
+    <div class="table{if (normalize-space(@tabstyle)) then (concat(' ', @tabstyle))  else ()}">
       <xsl:apply-templates select="@id" mode="#current"/>
       <xsl:apply-templates mode="#current">
         <xsl:with-param name="colsep" select="(@colsep, $cals_default-colsep)[1]"/>
