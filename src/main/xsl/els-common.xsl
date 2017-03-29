@@ -156,6 +156,19 @@
   
   <xd:doc>
     <xd:desc>
+      <xd:p>Returns an ISO date (xs:date) from a string formatted as YYYYMMDD.</xd:p>
+    </xd:desc>
+  </xd:doc>
+  <xsl:function name="els:makeIsoDateFromYYYYMMDD" as="xs:string?">
+    <xsl:param name="date" as="xs:string"/>
+    <xsl:variable name="day" select="number(substring($date, 7, 2))"/>
+    <xsl:variable name="month" select="substring($date, 5, 2)"/>
+    <xsl:variable name="year" select="number(substring($date, 1, 4))"/>    
+    <xsl:sequence select="els:getIsoDateFromString(concat($year, '-', $month, '-', $day))"/>
+  </xsl:function>
+  
+  <xd:doc>
+    <xd:desc>
       <xd:p>Returns an ISO date (xs:date) from a string (typically: a serialized date), formatted as YYYY-MM-DD.</xd:p>
       <xd:p>The input parameter (<xd:ref name="date" type="parameter">$date</xd:ref>) is tested and must be castable either as xs:date or xs:dateTime.</xd:p>
       <xd:p>If the input parameter can be casted as xs:dateTime, only the substring corresponding to the date part is returned.</xd:p>      
@@ -348,6 +361,20 @@
   <!--===================================================  -->
   <!-- STRINGS -->
   <!--===================================================  -->
+
+  <xd:doc>
+    <xd:desc>
+      <xd:p>Get a field from an logic id and a key</xd:p>
+    </xd:desc>
+    <xd:param>logic-id : logic id</xd:param>
+    <xd:param>key : key of the search field</xd:param>
+  </xd:doc>
+  <xsl:function name="els:get-logic-id-value" as="xs:string?">
+    <xsl:param name="logic-id"/>
+    <xsl:param name="key"/>
+    <xsl:variable name="chunk" select="tokenize($logic-id, '\|')[matches(., concat($key, ':'))]"/>
+    <xsl:value-of select="if (count($chunk) &gt;= 1) then tokenize($chunk,':')[2] else ''"/>
+  </xsl:function>
 
   <xd:doc>
     <xd:desc>

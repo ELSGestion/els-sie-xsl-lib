@@ -61,6 +61,22 @@
       <x:expect label="1972-10-21" select="'1972-10-21'"/>
     </x:scenario>
     
+    <x:scenario label="makeIsoDateFromYYYYMMDD">
+      <x:call function="els:makeIsoDateFromYYYYMMDD"/>
+      <x:scenario label="/ Parameter is castable as YYYYMMDD">
+        <x:call>
+          <x:param name="date" select="'19721021'"/>
+        </x:call>
+        <x:expect label="1972-10-21" select="'1972-10-21'"/>        
+      </x:scenario>        
+      <x:scenario label="/ Parameter is not castable as YYYYMMDD">
+        <x:call>
+          <x:param name="date" select="'null'"/>
+        </x:call>
+        <x:expect label="Returns an empty sequence" select="()"/>
+      </x:scenario>
+    </x:scenario>
+    
     <x:scenario label="getIsoDateFromString">
       <x:call function="els:getIsoDateFromString"/>
       <x:scenario label="/ Parameter is castable as xs:dateTime">
@@ -130,6 +146,24 @@
 
   <x:scenario label="STRINGS">
 
+    <x:scenario label="get-logic-id-value">
+      <x:call function="els:get-logic-id-value"/>
+      <x:scenario label="/ Field exists into logic id">
+        <x:call>
+      <x:param name="logic-id" select="'TY:t|NAT:Avis|ORG:MinEcolo|DT:20150210|N:ETLL1429768V'"/>
+      <x:param name="key" select="'NAT'"/>
+        </x:call>
+        <x:expect label="'NAT' value" select="'Avis'"/>
+      </x:scenario> 
+      <x:scenario label="/ Field does not exists into logic id">
+        <x:call>
+          <x:param name="logic-id" select="'TY:t|NAT:Avis|ORG:MinEcolo|DT:20150210|N:ETLL1429768V'"/>
+          <x:param name="key" select="'unkownd field'"/>
+        </x:call>
+        <x:expect label="'unkownd field' value" select="''"/>
+      </x:scenario>       
+    </x:scenario>
+    
     <x:scenario label="reccursivReplace" pending="Not yet implemented">
       <x:call function="els:reccursivReplace">
         <x:param name="Text" select="''"/>
