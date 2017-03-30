@@ -161,7 +161,7 @@
   </xd:doc>
   <xsl:function name="els:makeIsoDateFromYYYYMMDD" as="xs:string?">
     <xsl:param name="date" as="xs:string"/>
-    <xsl:variable name="day" select="number(substring($date, 7, 2))"/>
+    <xsl:variable name="day" select="substring($date, 7, 2)"/>
     <xsl:variable name="month" select="substring($date, 5, 2)"/>
     <xsl:variable name="year" select="number(substring($date, 1, 4))"/>    
     <xsl:sequence select="els:getIsoDateFromString(concat($year, '-', $month, '-', $day))"/>
