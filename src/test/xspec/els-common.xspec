@@ -166,7 +166,7 @@
           <x:param name="logic-id" select="'TY:t|NAT:Avis|ORG:MinEcolo|DT:20150210|N:ETLL1429768V'"/>
           <x:param name="key" select="'unkownd field'"/>
         </x:call>
-        <x:expect label="'unkownd field' value" select="''"/>
+        <x:expect label="'unkownd field' value" select="()"/>
       </x:scenario>
       <x:scenario label="/ Field does not exists into logic id">
         <x:call>
