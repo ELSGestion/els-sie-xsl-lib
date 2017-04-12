@@ -373,7 +373,7 @@
     <xsl:param name="logic-id" as="xs:string"/>
     <xsl:param name="key" as="xs:string"/>
     <xsl:variable name="chunk" as="xs:string*" select="tokenize($logic-id, '\|')[matches(., concat('^', $key, ':'))]"/>
-    <xsl:value-of select="if (count($chunk) &gt;= 1) then tokenize($chunk,':')[2] else ()"/>
+    <xsl:sequence select="if (count($chunk) &gt;= 1) then tokenize($chunk,':')[2] else ()"/>
   </xsl:function>
 
   <xd:doc>
