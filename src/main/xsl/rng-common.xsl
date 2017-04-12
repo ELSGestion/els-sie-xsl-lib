@@ -126,14 +126,14 @@
     <xsl:sequence select="exists($define//ref[@name = $define.name])"/>
   </xsl:function>
   
-  <xsl:function name="rng:getSRNGdataModelFromXmlElement" as="element(rng:element)">
+  <xsl:function name="rng:getSRNGdataModelFromXmlElement" as="element(rng:element)?">
     <xsl:param name="e" as="element()"/>
     <xsl:param name="grammar" as="element(rng:grammar)"/>
     <xsl:sequence select="rng:getSRNGdataModelFromXpath(els:get-xpath($e, '',  false()), $grammar)"/>
   </xsl:function>
   
   <!--Attention cette fonction est gourmande, elle parcours tout le schema pour 1 élément xml-->
-  <xsl:function name="rng:getSRNGdataModelFromXpath" as="element(rng:element)">
+  <xsl:function name="rng:getSRNGdataModelFromXpath" as="element(rng:element)?">
     <xsl:param name="xpath" as="xs:string"/> <!--attention xpath doit être absolu ici ! ("/a/b/c", pas de "//a" ou "b/c")-->
     <xsl:param name="grammar" as="element(rng:grammar)"/>
     <xsl:variable name="xpath.tokenized" select="tokenize($xpath, '/')" as="xs:string*"/>
@@ -147,14 +147,18 @@
         <xsl:sequence select="rng:getSRNGdataModelReccurse(rng:getDefine($rngRootRef)/element[1], string-join($xpath.tokenized[position() gt 2], '/'))"/>
       </xsl:when>
       <xsl:when test="count($rngRootRef) = 0">
-        <xsl:message terminate="yes">[ERROR] Aucun rng:ref trouvé dans le start pour <xsl:value-of select="$xpath.rootName"/>, xpath=<xsl:value-of select="$xpath"/>, srng uri : <xsl:value-of select="base-uri($grammar)"/> </xsl:message>
+        <xsl:message terminate="no">
+          <xsl:text>[ERROR] No rng:ref found in rng:start element for </xsl:text><xsl:value-of select="$xpath.rootName"/>
+          <xsl:text>&#10;      xpath=</xsl:text><xsl:value-of select="$xpath"/>
+          <xsl:text>&#10;      srng uri :</xsl:text><xsl:value-of select="base-uri($grammar)"/> 
+        </xsl:message>
       </xsl:when>
     </xsl:choose>
     <!--<xsl:sequence select="rng:getSRNGdataModelReccurse(rng:getDefine($grammar/start/ref[1])/element[1], string-join($xpath.tokenized[position() gt 2], '/'))"/>-->
   </xsl:function>
   
   <!--Fonction "PRIVATE" utilisée uniquement pour résoudre rng:getSRNGdataModel()-->
-  <xsl:function name="rng:getSRNGdataModelReccurse" as="element(rng:element)">
+  <xsl:function name="rng:getSRNGdataModelReccurse" as="element(rng:element)?">
     <xsl:param name="rngParentElement" as="element(rng:element)"/> <!--<element name="a"/>-->
     <xsl:param name="xpathFromDataModel" as="xs:string"/> <!--(a)/b/c/d-->
     <xsl:message use-when="false()">rng:getSRNGdataModelReccurse(<xsl:value-of select="els:displayNode($rngParentElement)"/>, '<xsl:value-of select="$xpathFromDataModel"/>')</xsl:message>
@@ -175,7 +179,14 @@
             <xsl:sequence select="rng:getSRNGdataModelReccurse(rng:getDefine($rngRef[1])/element[1], string-join($xpathFromDataModel.tokenized[not(position() = 1)], '/'))"/>
           </xsl:when>
           <xsl:when test="count($rngRef) = 0">
-            <xsl:message terminate="yes">[ERROR] Aucun rng:ref trouvé pour <xsl:value-of select="els:get-xpath($rngParentElement)"/>, xpath=<xsl:value-of select="$xpathFromDataModel"/>, currentName=<xsl:value-of select="$currentName"/>, srng uri : <xsl:value-of select="base-uri($rngParentElement)"/> </xsl:message>
+            <xsl:message terminate="no">
+              <xsl:text>[ERROR] No rng:ref found for </xsl:text><xsl:value-of select="els:get-xpath($rngParentElement)"/>
+              <xsl:text>&#10;      xpath=</xsl:text><xsl:value-of select="$xpathFromDataModel"/>
+              <xsl:text>&#10;      currentName=</xsl:text><xsl:value-of select="$currentName"/>
+              <xsl:text>&#10;      srng uri :</xsl:text><xsl:value-of select="base-uri($rngParentElement)"/> 
+            </xsl:message>
+            <!--<xsl:message terminate="yes">
+              [ERROR] Aucun rng:ref trouvé pour <xsl:value-of select="els:get-xpath($rngParentElement)"/>, xpath=<xsl:value-of select="$xpathFromDataModel"/>, currentName=<xsl:value-of select="$currentName"/>, srng uri : <xsl:value-of select="base-uri($rngParentElement)"/> </xsl:message>-->
           </xsl:when>
         </xsl:choose>
       </xsl:otherwise>
