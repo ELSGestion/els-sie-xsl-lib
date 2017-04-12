@@ -370,10 +370,10 @@
     <xd:param>key : key of the search field</xd:param>
   </xd:doc>
   <xsl:function name="els:get-logic-id-value" as="xs:string?">
-    <xsl:param name="logic-id"/>
-    <xsl:param name="key"/>
-    <xsl:variable name="chunk" select="tokenize($logic-id, '\|')[matches(., concat('^', $key, ':'))]"/>
-    <xsl:value-of select="if (count($chunk) &gt;= 1) then tokenize($chunk,':')[2] else ''"/>
+    <xsl:param name="logic-id" as="xs:string"/>
+    <xsl:param name="key" as="xs:string"/>
+    <xsl:variable name="chunk" as="xs:string*" select="tokenize($logic-id, '\|')[matches(., concat('^', $key, ':'))]"/>
+    <xsl:sequence select="if (count($chunk) &gt;= 1) then tokenize($chunk,':')[2] else ()"/>
   </xsl:function>
 
   <xd:doc>
