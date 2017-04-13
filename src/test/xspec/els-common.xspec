@@ -151,32 +151,7 @@
   </x:scenario>
 
   <x:scenario label="STRINGS">
-
-    <x:scenario label="get-logic-id-value">
-      <x:call function="els:get-logic-id-value"/>
-      <x:scenario label="/ Field exists into logic id">
-        <x:call>
-      <x:param name="logic-id" select="'TY:t|NAT:Avis|ORG:MinEcolo|DT:20150210|N:ETLL1429768V'"/>
-      <x:param name="key" select="'NAT'"/>
-        </x:call>
-        <x:expect label="'NAT' value" select="'Avis'"/>
-      </x:scenario> 
-      <x:scenario label="/ Field does not exists into logic id">
-        <x:call>
-          <x:param name="logic-id" select="'TY:t|NAT:Avis|ORG:MinEcolo|DT:20150210|N:ETLL1429768V'"/>
-          <x:param name="key" select="'unkownd field'"/>
-        </x:call>
-        <x:expect label="'unkownd field' value" select="()"/>
-      </x:scenario>
-      <x:scenario label="/ Field does not exists into logic id">
-        <x:call>
-          <x:param name="logic-id" select="'TY:t|PUB:BOecolo|ORG:MinEcolo|NPUB:2016-1|DTPUB:2016-01-25|RCPUB:p60'"/>
-          <x:param name="key" select="'PUB'"/>
-        </x:call>
-        <x:expect label="'PUB' value" select="'BOecolo'"/>
-      </x:scenario>
-    </x:scenario>
-    
+   
     <x:scenario label="reccursivReplace" pending="Not yet implemented">
       <x:call function="els:reccursivReplace">
         <x:param name="Text" select="''"/>
