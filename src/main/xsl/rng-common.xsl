@@ -345,6 +345,11 @@
     </xsl:if>
   </xsl:template>
   
+  <!--choice within choice is useless-->
+  <xsl:template match="choice/choice" mode="rng:clean">
+    <xsl:apply-templates mode="#current"/>
+  </xsl:template>
+  
   <!--=== mode rng:deleteOrphansDefine ===-->
   <!--Suppression des <define> orphelins-->
   
