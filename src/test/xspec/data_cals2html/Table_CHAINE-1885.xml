@@ -1,5 +1,5 @@
 <cals:table
-  xmlns:cals="-//OASIS//DTD XML Exchange Table Model 19990315//EN"
+  xmlns:cals="http://docs.oasis-open.org/ns/oasis-exchange/table"
   xmlns="local"
   colsep="0" 
   frame="none" 
