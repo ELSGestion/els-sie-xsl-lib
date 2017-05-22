@@ -133,16 +133,16 @@
   </xsl:function>
   
   <!--2 args signature-->
-  <!--<xsl:function name="rng:getSRNGdataModelFromXpath" as="element(rng:element)?">
+  <xsl:function name="rng:getSRNGdataModelFromXpath" as="element(rng:element)?">
     <xsl:param name="xpath" as="xs:string"/>
     <xsl:param name="grammar" as="element(rng:grammar)"/>
     <xsl:sequence select="rng:getSRNGdataModelFromXpath($xpath, $grammar, ())"/>
-  </xsl:function>-->
+  </xsl:function>
   
   <xd:doc>
     <xd:desc>
       <xd:p>Given an xpath and a (simplified) rng:grammar, this function tries to get the associated "rng:define/rng:element"</xd:p>
-      <xd:p>CAUTION ! This function may take a long time, because she needs to process the whole schema for each part of the xpath</xd:p>
+      <xd:p>CAUTION ! This function may take a long time, because it needs to process the whole schema for each part of the xpath</xd:p>
     </xd:desc>
     <xd:param name="xpath">Absolute xpath of form "/a/b/c" (not "//a" neither "b/c")</xd:param>
     <xd:param name="grammar">the (simplified) RNG root element</xd:param>
@@ -161,7 +161,22 @@
     <xsl:choose>
       <!--Il y en a une ref dans le start, tout va bien : on peut initialiser rng:getSRNGdataModelReccurse()-->
       <xsl:when test="count($rngRootRef) = 1">
-        <xsl:sequence select="rng:getSRNGdataModelReccurse(rng:getDefine($rngRootRef)/element[1], string-join($xpath.tokenized[position() gt 2], '/'), $predicate)"/>
+        <xsl:variable name="getSRNGdataModelReccurse" select="rng:getSRNGdataModelReccurse(rng:getDefine($rngRootRef)/element[1], string-join($xpath.tokenized[position() gt 2], '/'), $predicate)" as="element(rng:element)?"/>
+        <xsl:sequence select="$getSRNGdataModelReccurse"/>
+        <!--<xsl:choose>
+          <xsl:when test="count($getSRNGdataModelReccurse) = 0">
+            <xsl:sequence select="$getSRNGdataModelReccurse"/>
+          </xsl:when>
+          <xsl:otherwise>
+            <xsl:message>
+              <xsl:message terminate="yes">
+                <xsl:text>[ERROR] No rng:ref found in rng:start element for </xsl:text><xsl:value-of select="$xpath.rootName"/>
+                <xsl:text>&#10;      xpath=</xsl:text><xsl:value-of select="$xpath"/>
+                <xsl:text>&#10;      srng uri :</xsl:text><xsl:value-of select="base-uri($grammar)"/> 
+              </xsl:message>
+            </xsl:message>
+          </xsl:otherwise>
+        </xsl:choose>-->
       </xsl:when>
       <xsl:when test="count($rngRootRef) = 0">
         <xsl:message terminate="no">
@@ -266,8 +281,8 @@
        </xsl:otherwise>
       </xsl:choose>  
     </xsl:variable>
-    <xsl:message>DEBUG <xsl:value-of select="$refName"/> : COUNT  <xsl:value-of select="count($rngRef.tmp2)"/></xsl:message>
-    <xsl:message>
+    <xsl:message use-when="false()">DEBUG <xsl:value-of select="$refName"/> : COUNT  <xsl:value-of select="count($rngRef.tmp2)"/></xsl:message>
+    <xsl:message use-when="false()">
       <xsl:for-each select="$rngRef.tmp2/rng:getDefine(.)">
         <xsl:value-of select="@name"/> : <xsl:value-of select="count(.//attribute)"/> attributes (dont <xsl:value-of select="count(.//attribute[.//value])"/> avec value)
       </xsl:for-each>
@@ -275,8 +290,8 @@
     <xsl:variable name="rngRef.min.static-attributes" select="(min($rngRef.tmp2/rng:getDefine(.)/count(.//attribute[.//value])), 0)[1]" as="xs:integer"/>
     <xsl:variable name="rngRef" select="($rngRef.tmp2)[rng:getDefine(.)/count(.//attribute[.//value]) = $rngRef.min.static-attributes]" as="element(rng:ref)*"/>
     <!--($rngRef)[last()] may be empty, keep the last of $rngRef.tmp2 if so-->
-    <!--<xsl:sequence select="(($rngRef)[1], $rngRef.tmp2[1])[1]"/>-->
-    <xsl:sequence select="$rngRef.tmp2[1]"/>
+    <xsl:sequence select="(($rngRef)[1], $rngRef.tmp2[1])[1]"/>
+    <!--<xsl:sequence select="$rngRef.tmp2[1]"/>-->
     <xsl:if test="count($rngRef) gt 1">
       <xsl:message>[WARNING][rng:getRef()] <xsl:value-of select="count($rngRef)"/> rng:ref name="<xsl:value-of select="$refName"/>" found within <xsl:value-of select="els:get-xpath($rngElement)"/>, fallback on last occurence</xsl:message>
       <!--FIXME : ce cas de figure est tout à fait possible quand il y a un choose, ou un mixed, il faut pour cela parser le XML en même temps pour savoir où on est
