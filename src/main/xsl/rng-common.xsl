@@ -75,9 +75,9 @@
     <xsl:param name="rngElement" as="element(rng:element)"/>
     <!--no parent (no ref) for root element--> 
     <xsl:param name="rngParent" as="element(element)?"/>
-    <!--<xsl:variable name="ref" select="$rngParent//ref[rng:getDefine(.)/element is $rngElement]" as="element(ref)?"/>
-    => FIXME : cette solution devrait être le bonne, on ne peut pas se baser sur le nom de l'élément comme ci-dessous!-->
-    <xsl:variable name="ref" select="rng:getRef($rngParent, $rngElement/@name)" as="element(ref)?"/>
+    <xsl:variable name="ref" select="$rngParent//ref[rng:getDefine(.)/element is $rngElement]" as="element(ref)?"/>
+    <!--=> FIXME : cette solution devrait être le bonne, on ne peut pas se baser sur le nom de l'élément comme ci-dessous!
+    <xsl:variable name="ref" select="rng:getRefByElementName($rngParent, $rngElement/@name)" as="element(ref)?"/>-->
     <xsl:sequence select="rng:refIsInine($ref)"/>
   </xsl:function>
   
@@ -129,22 +129,39 @@
   <xsl:function name="rng:getSRNGdataModelFromXmlElement" as="element(rng:element)?">
     <xsl:param name="e" as="element()"/>
     <xsl:param name="grammar" as="element(rng:grammar)"/>
-    <xsl:sequence select="rng:getSRNGdataModelFromXpath(els:get-xpath($e, '',  false()), $grammar)"/>
+    <xsl:sequence select="rng:getSRNGdataModelFromXpath(els:get-xpath($e, '',  false()), $grammar, ())"/>
   </xsl:function>
   
-  <!--Attention cette fonction est gourmande, elle parcours tout le schema pour 1 élément xml-->
-  <xsl:function name="rng:getSRNGdataModelFromXpath" as="element(rng:element)?">
-    <xsl:param name="xpath" as="xs:string"/> <!--attention xpath doit être absolu ici ! ("/a/b/c", pas de "//a" ou "b/c")-->
+  <!--2 args signature-->
+  <!--<xsl:function name="rng:getSRNGdataModelFromXpath" as="element(rng:element)?">
+    <xsl:param name="xpath" as="xs:string"/>
     <xsl:param name="grammar" as="element(rng:grammar)"/>
+    <xsl:sequence select="rng:getSRNGdataModelFromXpath($xpath, $grammar, ())"/>
+  </xsl:function>-->
+  
+  <xd:doc>
+    <xd:desc>
+      <xd:p>Given an xpath and a (simplified) rng:grammar, this function tries to get the associated "rng:define/rng:element"</xd:p>
+      <xd:p>CAUTION ! This function may take a long time, because she needs to process the whole schema for each part of the xpath</xd:p>
+    </xd:desc>
+    <xd:param name="xpath">Absolute xpath of form "/a/b/c" (not "//a" neither "b/c")</xd:param>
+    <xd:param name="grammar">the (simplified) RNG root element</xd:param>
+    <xd:param name="predicate">[OPTIONAL] Specific predicate on the tested element (i.e. "c" if a/b/c)
+      like @foo='bar' (it may helps finding the last ref)</xd:param>
+    <xd:return>Should return the rng:element (within the rng:grammar) corresponding to the xpath</xd:return>
+  </xd:doc>
+  <xsl:function name="rng:getSRNGdataModelFromXpath" as="element(rng:element)?">
+    <xsl:param name="xpath" as="xs:string"/>
+    <xsl:param name="grammar" as="element(rng:grammar)"/>
+    <xsl:param name="predicate" as="xs:string?"/>
     <xsl:variable name="xpath.tokenized" select="tokenize($xpath, '/')" as="xs:string*"/>
     <xsl:variable name="xpath.rootName" select="$xpath.tokenized[2]" as="xs:string"/>
-    <xsl:variable name="grammar.start" select="$grammar/start" as="element(rng:start)"/>
     <!--dans start on cherche la référence à xpath.rootName-->
     <xsl:variable name="rngRootRef" select="$grammar/start//ref[rng:getDefine(.)/element[1]/@name = $xpath.rootName]" as="element(rng:ref)?"/>
     <xsl:choose>
       <!--Il y en a une ref dans le start, tout va bien : on peut initialiser rng:getSRNGdataModelReccurse()-->
       <xsl:when test="count($rngRootRef) = 1">
-        <xsl:sequence select="rng:getSRNGdataModelReccurse(rng:getDefine($rngRootRef)/element[1], string-join($xpath.tokenized[position() gt 2], '/'))"/>
+        <xsl:sequence select="rng:getSRNGdataModelReccurse(rng:getDefine($rngRootRef)/element[1], string-join($xpath.tokenized[position() gt 2], '/'), $predicate)"/>
       </xsl:when>
       <xsl:when test="count($rngRootRef) = 0">
         <xsl:message terminate="no">
@@ -161,6 +178,7 @@
   <xsl:function name="rng:getSRNGdataModelReccurse" as="element(rng:element)?">
     <xsl:param name="rngParentElement" as="element(rng:element)"/> <!--<element name="a"/>-->
     <xsl:param name="xpathFromDataModel" as="xs:string"/> <!--(a)/b/c/d-->
+    <xsl:param name="predicate" as="xs:string?"/>
     <xsl:message use-when="false()">rng:getSRNGdataModelReccurse(<xsl:value-of select="els:displayNode($rngParentElement)"/>, '<xsl:value-of select="$xpathFromDataModel"/>')</xsl:message>
     <xsl:variable name="xpathFromDataModel.tokenized" select="tokenize($xpathFromDataModel, '/')" as="xs:string*"/>
     <xsl:choose>
@@ -172,17 +190,28 @@
       <xsl:otherwise>
         <xsl:variable name="currentName" select="$xpathFromDataModel.tokenized[1]" as="xs:string"/>
         <!--Dans a je cherche la référence à b-->
-        <xsl:variable name="rngRef" select="rng:getRef($rngParentElement, $currentName)" as="element(rng:ref)?"/>
+        <xsl:variable name="rngRef" as="element(rng:ref)?">
+          <xsl:choose>
+            <!--Last step = end of the xpath = tested element : one may add the predicate-->
+            <xsl:when test="count($xpathFromDataModel.tokenized) = 1">
+              <xsl:sequence select="rng:getRefByElementName($rngParentElement, $currentName, $predicate)"/>
+            </xsl:when>
+            <xsl:otherwise>
+              <xsl:sequence select="rng:getRefByElementName($rngParentElement, $currentName)"/>
+            </xsl:otherwise>
+          </xsl:choose>
+        </xsl:variable>
         <xsl:choose>
           <!--Il y en a une ref, tout va bien : on continue avec <element name="b"> et xpath = c/d  -->
           <xsl:when test="count($rngRef) = 1">
-            <xsl:sequence select="rng:getSRNGdataModelReccurse(rng:getDefine($rngRef[1])/element[1], string-join($xpathFromDataModel.tokenized[not(position() = 1)], '/'))"/>
+            <xsl:sequence select="rng:getSRNGdataModelReccurse(rng:getDefine($rngRef[1])/element[1], string-join($xpathFromDataModel.tokenized[not(position() = 1)], '/'), $predicate)"/>
           </xsl:when>
           <xsl:when test="count($rngRef) = 0">
-            <xsl:message terminate="no">
+            <xsl:message terminate="yes">
               <xsl:text>[ERROR] No rng:ref found for </xsl:text><xsl:value-of select="els:get-xpath($rngParentElement)"/>
-              <xsl:text>&#10;      xpath=</xsl:text><xsl:value-of select="$xpathFromDataModel"/>
-              <xsl:text>&#10;      currentName=</xsl:text><xsl:value-of select="$currentName"/>
+              <xsl:text>&#10;      xpath : </xsl:text><xsl:value-of select="$xpathFromDataModel"/>
+              <xsl:text>&#10;      predicate : </xsl:text><xsl:value-of select="$predicate"/>
+              <xsl:text>&#10;      currentName : </xsl:text><xsl:value-of select="$currentName"/>
               <xsl:text>&#10;      srng uri :</xsl:text><xsl:value-of select="base-uri($rngParentElement)"/> 
             </xsl:message>
             <!--<xsl:message terminate="yes">
@@ -193,16 +222,73 @@
     </xsl:choose>
   </xsl:function>
   
-  <xsl:function name="rng:getRef" as="element(rng:ref)?">
+  
+  <xsl:function name="rng:getRefByElementName" as="element(rng:ref)?">
     <xsl:param name="rngElement" as="element(rng:element)"/>
     <xsl:param name="refName" as="xs:string"/>
-    <xsl:variable name="rngRef" select="$rngElement//ref[rng:getDefine(.)[element[1]/@name = $refName]]" as="element(rng:ref)*"/>
+    <xsl:param name="predicate" as="xs:string?"/>
+    <xsl:variable name="rngRef.tmp1" select="$rngElement//ref[rng:getDefine(.)[element[1]/@name = $refName]]" as="element(rng:ref)*"/>
+    <xsl:variable name="rngRef.tmp2" as="element(rng:ref)*">
+      <xsl:choose>
+       <xsl:when test="count($rngRef.tmp1) = 1 ">
+         <xsl:sequence select="$rngRef.tmp1"/>
+       </xsl:when>
+        <xsl:when test="count($predicate[normalize-space(.)]) != 0">
+          <!--If the predicates is of kind @foo = 'bar', maybe there is such a static define in the schema (<attribute name="foo"><value>bar</value></attribute>)
+                (and no other same element's name with the same attribute's name which may have the same value)-->
+          <xsl:variable name="predicate" select="normalize-space($predicate)" as="xs:string"/>
+          <xsl:variable name="xpath.attributeValueTest.reg" as="xs:string">
+            <xsl:text>^@(.*?)\s*=\s*'(.*?)'</xsl:text>
+          </xsl:variable>
+          <xsl:choose>
+            <!--<!-\-DEBUG-\-><xsl:when test="true()"><xsl:sequence select="$rngRef.tmp"/></xsl:when>-->
+            <xsl:when test="matches($predicate, $xpath.attributeValueTest.reg)">
+              <xsl:variable name="att.name" select="replace($predicate, $xpath.attributeValueTest.reg, '$1' )" as="xs:string"/>
+              <xsl:variable name="att.value" select="replace($predicate, $xpath.attributeValueTest.reg, '$2' )" as="xs:string"/>
+              <xsl:message use-when="false()">[DEBUG] MATCHES <xsl:value-of select="$predicate"/> [name=<xsl:value-of select="$att.name"/>][value=<xsl:value-of select="$att.value"/>]</xsl:message>
+              <xsl:variable name="rngRef.tmp.filtered" select="$rngRef.tmp1[rng:getDefine(.)[.//rng:attribute[@name = $att.name][count(*)=1][rng:value = $att.value]]]" as="element()*"/>
+              <xsl:choose>
+                <xsl:when test="count($rngRef.tmp.filtered) != 0">
+                  <xsl:sequence select="$rngRef.tmp.filtered"/>
+                </xsl:when>
+                <xsl:otherwise>
+                  <xsl:sequence select="$rngRef.tmp1"/>
+                </xsl:otherwise>
+              </xsl:choose>
+            </xsl:when>
+            <xsl:otherwise>
+              <xsl:sequence select="$rngRef.tmp1"/>
+            </xsl:otherwise>
+          </xsl:choose>
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:sequence select="$rngRef.tmp1"/>
+       </xsl:otherwise>
+      </xsl:choose>  
+    </xsl:variable>
+    <xsl:message>DEBUG <xsl:value-of select="$refName"/> : COUNT  <xsl:value-of select="count($rngRef.tmp2)"/></xsl:message>
+    <xsl:message>
+      <xsl:for-each select="$rngRef.tmp2/rng:getDefine(.)">
+        <xsl:value-of select="@name"/> : <xsl:value-of select="count(.//attribute)"/> attributes (dont <xsl:value-of select="count(.//attribute[.//value])"/> avec value)
+      </xsl:for-each>
+    </xsl:message>
+    <xsl:variable name="rngRef.min.static-attributes" select="(min($rngRef.tmp2/rng:getDefine(.)/count(.//attribute[.//value])), 0)[1]" as="xs:integer"/>
+    <xsl:variable name="rngRef" select="($rngRef.tmp2)[rng:getDefine(.)/count(.//attribute[.//value]) = $rngRef.min.static-attributes]" as="element(rng:ref)*"/>
+    <!--($rngRef)[last()] may be empty, keep the last of $rngRef.tmp2 if so-->
+    <!--<xsl:sequence select="(($rngRef)[1], $rngRef.tmp2[1])[1]"/>-->
+    <xsl:sequence select="$rngRef.tmp2[1]"/>
     <xsl:if test="count($rngRef) gt 1">
-      <xsl:message>[WARNING][rng:getRef()] <xsl:value-of select="count($rngRef)"/> rng:ref name="<xsl:value-of select="$refName"/>" trouvés dans <xsl:value-of select="els:get-xpath($rngElement)"/>, on a pris la 1ere</xsl:message>
+      <xsl:message>[WARNING][rng:getRef()] <xsl:value-of select="count($rngRef)"/> rng:ref name="<xsl:value-of select="$refName"/>" found within <xsl:value-of select="els:get-xpath($rngElement)"/>, fallback on last occurence</xsl:message>
       <!--FIXME : ce cas de figure est tout à fait possible quand il y a un choose, ou un mixed, il faut pour cela parser le XML en même temps pour savoir où on est
       => utiliser une vraie librairie RNG !-->
     </xsl:if>
-    <xsl:sequence select="($rngRef)[1]"/>
+  </xsl:function>
+  
+  <!--2 args signature of rng:getRefByElementName-->
+  <xsl:function name="rng:getRefByElementName" as="element(rng:ref)?">
+    <xsl:param name="rngElement" as="element(rng:element)"/>
+    <xsl:param name="refName" as="xs:string"/>
+    <xsl:sequence select="rng:getRefByElementName($rngElement, $refName, ())"/>
   </xsl:function>
   
   <!--===========================================================-->
