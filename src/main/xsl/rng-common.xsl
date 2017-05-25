@@ -78,10 +78,10 @@
     <xsl:variable name="ref" select="$rngParent//ref[rng:getDefine(.)/element is $rngElement]" as="element(ref)?"/>
     <!--=> FIXME : cette solution devrait être le bonne, on ne peut pas se baser sur le nom de l'élément comme ci-dessous!
     <xsl:variable name="ref" select="rng:getRefByElementName($rngParent, $rngElement/@name)" as="element(ref)?"/>-->
-    <xsl:sequence select="rng:refIsInine($ref)"/>
+    <xsl:sequence select="rng:refIsInline($ref)"/>
   </xsl:function>
   
-  <xsl:function name="rng:refIsInine" as="xs:boolean">
+  <xsl:function name="rng:refIsInline" as="xs:boolean">
     <xsl:param name="ref" as="element(rng:ref)"/>
     <!--see http://relaxng.org/spec-20011203.html#IDA0FZR-->
     <!--
@@ -457,7 +457,7 @@
   <!--Un template nommé pour initier la récursivité, puis passage dans un mode du même nom-->
   <xsl:template name="rng:deleteOrphansDefine">
     <xsl:param name="tree" required="yes" as="element()"/>
-    <xsl:param name="iteration" select="1" />
+    <xsl:param name="iteration" select="1" as="xs:integer"/>
     <xsl:message>[DEBUG][rng:deleteOrphansDefine] iteration = <xsl:value-of select="$iteration"/></xsl:message>
     <xsl:variable name="tree.new" as="element()">
       <xsl:apply-templates select="$tree" mode="rng:deleteOrphansDefine"/>
@@ -503,7 +503,7 @@
   <!--Un template nommé pour initier la récursivité, puis passage dans un mode du même nom-->
   <xsl:template name="rng:deleteEmptyStructuralInstructionInDataModel">
     <xsl:param name="tree" required="yes" as="element()"/>
-    <xsl:param name="iteration" select="1" />
+    <xsl:param name="iteration" select="1" as="xs:integer"/>
     <!--<xsl:message>[DEBUG][rng:deleteEmptyStructuralInstructionInDataModel] iteration = <xsl:value-of select="$iteration"/></xsl:message>-->
     <xsl:variable name="tree.new" as="element()">
       <xsl:apply-templates select="$tree" mode="rng:deleteEmptyStructuralInstructionInDataModel"/>
