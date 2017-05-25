@@ -75,10 +75,27 @@
     <xsl:param name="rngElement" as="element(rng:element)"/>
     <!--no parent (no ref) for root element--> 
     <xsl:param name="rngParent" as="element(element)?"/>
-    <xsl:variable name="ref" select="$rngParent//ref[rng:getDefine(.)/element is $rngElement]" as="element(ref)?"/>
-    <!--=> FIXME : cette solution devrait être le bonne, on ne peut pas se baser sur le nom de l'élément comme ci-dessous!
-    <xsl:variable name="ref" select="rng:getRefByElementName($rngParent, $rngElement/@name)" as="element(ref)?"/>-->
-    <xsl:sequence select="rng:refIsInline($ref)"/>
+    <xsl:variable name="rngRefs" select="$rngParent//ref[rng:getDefine(.)/element is $rngElement]" as="element(ref)+"/>
+    <xsl:choose>
+      <xsl:when test="count($rngRefs) = 0">
+        <xsl:message terminate="yes">[ERROR][rng:isInline] No rng:ref found for rngElement "<xsl:value-of select="$rngElement/@name"/>" and $rngParent "<xsl:value-of select="$rngParent/@name"/>"</xsl:message>
+      </xsl:when>
+      <xsl:when test="count($rngRefs) = 1">
+        <xsl:sequence select="rng:refIsInline($rngRefs)"/>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:variable name="rngRef.1.isInline" select="rng:refIsInline($rngRefs[1])" as="xs:boolean"/>
+        <xsl:choose>
+          <!--Every ref has the same type (inline or not inline) so we just return the first one-->
+          <xsl:when test="every $rngRef in $rngRefs satisfies rng:refIsInline($rngRef) = $rngRef.1.isInline">
+            <xsl:sequence select="$rngRef.1.isInline"/>
+          </xsl:when>
+          <xsl:otherwise>
+            <xsl:message terminate="yes">[ERROR][rng:isInline] <xsl:value-of select="count($rngRefs)"/> rng:ref found, some are inline and some are not ! rngElement "<xsl:value-of select="$rngElement/@name"/>" and $rngParent "<xsl:value-of select="$rngParent/@name"/>"</xsl:message>
+          </xsl:otherwise>
+        </xsl:choose>
+      </xsl:otherwise>
+    </xsl:choose>
   </xsl:function>
   
   <xsl:function name="rng:refIsInline" as="xs:boolean">
