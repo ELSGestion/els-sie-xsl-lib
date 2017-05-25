@@ -125,27 +125,27 @@
         [xslqual] Don't use empty content for instructions like 'xsl:for-each' 'xsl:if' 'xsl:when' etc.
       </report>
     </rule>
-    <rule context="xsl:function">
+    <rule context="xsl:function[count(//xsl:template[@match][(@mode, '#default')[1] = '#default']) != 0]">
       <report id="xslqual-UnusedFunction"
         test="not(some $x in //(@match | @select) satisfies contains($x, @name)) 
           and not(some $x in //(*[not(self::xsl:*)]/@*) satisfies contains($x, concat('{', @name, '(')))">
         [xslqual] Stylesheet function is unused
       </report>
-      <report id="xslqual-FunctionComplexity"
+      <!--<report id="xslqual-FunctionComplexity"
         test="count(.//xsl:*) &gt; 50">
         Funcrion's size/complexity is high. There is need for refactoring the code.
-      </report>
+      </report>-->
     </rule>
     <rule context="xsl:template">
       <report id="xslqual-UnusedNamedTemplate"
         test="@name and not(@match) and not(//xsl:call-template/@name = @name)">
         [xslqual] Named template in stylesheet in unused
       </report>
-      <report id="xslqual-TemplateComplexity"
+      <!--<report id="xslqual-TemplateComplexity"
         test="count(.//xsl:*) &gt; 50"
         role="info">
         [xslqual] Template's size/complexity is high. There is need for refactoring the code.
-      </report>
+      </report>-->
     </rule>
     <rule context="xsl:element">
       <report id="xslqual-NotCreatingElementCorrectly"
@@ -167,15 +167,15 @@
         and starts-with(., '//')" role="warning">
         [xslqual] Avoid using the operator // near the root of a large tree
       </report>
-      <report id="xslqual-DontUseDoubleSlashOperator"
+      <!--<report id="xslqual-DontUseDoubleSlashOperator"
         test="local-name(.)= ('match', 'select') and (not(matches(., '^''.*''$')))
         and not(starts-with(., '//')) and contains(., '//')" role="warning">
         [xslqual] Avoid using the operator // in XPath expressions
-      </report>
-      <report id="xslqual-UsingNameOrLocalNameFunction" 
+      </report>-->
+      <!--<report id="xslqual-UsingNameOrLocalNameFunction" 
         test="contains(., 'name(') or contains(., 'local-name(')" role="info">
         [xslqual] Using name() function when local-name() could be appropriate (and vice-versa)
-      </report>
+      </report>-->
       <report id="xslqual-IncorrectUseOfBooleanConstants" 
         test="local-name(.)= ('match', 'select') and not(parent::xsl:attribute)
         and ((contains(., 'true') and not(contains(., 'true()'))) or (contains(., 'false') and not(contains(., 'false()'))))">
@@ -212,14 +212,16 @@
         [ELS] Named template should be namespaces prefixed, so they don't generate conflict with imported XSLT
       </assert>
     </rule>
-    <rule context="@match | @select">
+    <!--<rule context="@match | @select">
       <report test="contains(., '*:')">
         [ELS] Use a namespace prefix instead of *:
       </report>
-    </rule>
+    </rule>-->
     <rule context="xsl:for-each" id="xsl_for-each">
       <report test="ancestor::xsl:template 
         and not(starts-with(@select, '$'))
+        and not(starts-with(@select, 'tokenize('))
+        and not(starts-with(@select, 'distinct-values('))
         and not(matches(@select, '\d'))" 
         role="warning">
         [ELS] Use xsl:apply-template instead of xsl:for-each 

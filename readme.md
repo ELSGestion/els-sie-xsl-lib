@@ -37,7 +37,7 @@ There are 2 libraries types :
 
 * ``cals2html.xsl`` : Converts as HTML table any CALS table within an XML document.
   The CALS table elements in the xml document must be in CALS namespace
-  (``-//OASIS//DTD XML Exchange Table Model 19990315//EN``)
+  (``http://docs.oasis-open.org/ns/oasis-exchange/table``)
   Other elements are copied as is.
 
 * ``html2cals.xsl`` : Converts as CALS table any HTML table within an XML/XHTML document.

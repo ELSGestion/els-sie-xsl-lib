@@ -5,11 +5,11 @@
   xmlns:xs="http://www.w3.org/2001/XMLSchema"
   xmlns:els="http://www.lefebvre-sarrut.eu/ns/els"
   xmlns:xslLib="http://www.lefebvre-sarrut.eu/ns/els/xslLib"
-  xmlns:cals="-//OASIS//DTD XML Exchange Table Model 19990315//EN"
+  xmlns:cals="http://docs.oasis-open.org/ns/oasis-exchange/table"
   xmlns:html="http://www.w3.org/1999/xhtml"
   xmlns:saxon="http://saxon.sf.net/"
   xmlns="http://www.w3.org/1999/xhtml"
-  xpath-default-namespace="-//OASIS//DTD XML Exchange Table Model 19990315//EN"
+  xpath-default-namespace="http://docs.oasis-open.org/ns/oasis-exchange/table"
   exclude-result-prefixes="#all" 
   extension-element-prefixes="xd"
   >
