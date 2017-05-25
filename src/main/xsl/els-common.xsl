@@ -960,7 +960,7 @@
   
   <xd:doc>
     <xd:desc>
-      <xd:p>Serialise du XML en string</xd:p>
+      <xd:p>Sérialisation des éléments en mode els:serialize.</xd:p>
     </xd:desc>
   </xd:doc>
   <xsl:template match="*" mode="els:serialize">
@@ -991,6 +991,46 @@
         </xsl:otherwise>
       </xsl:choose>
   </xsl:template>
+  
+  <xd:doc>
+    <xd:desc>
+      <xd:p>Normalisation des espaces dans les noeuds textuels en mode els:serialize.</xd:p>
+    </xd:desc>
+  </xd:doc>
+  <xsl:template match="text()" mode="els:serialize">
+    <xsl:if test="starts-with(.,' ')">
+      <xsl:text> </xsl:text>
+    </xsl:if>
+    <xsl:value-of select="normalize-space(.)"/>
+    <xsl:if test="ends-with(.,' ')">
+      <xsl:text> </xsl:text>
+    </xsl:if>
+  </xsl:template>
+  
+  <xd:doc>
+    <xd:desc>
+      <xd:p>Sérialisation des commentaires en mode els:serialize.</xd:p>
+    </xd:desc>
+  </xd:doc>
+  <xsl:template match="comment()" mode="els:serialize">
+    <xsl:text>&lt;!-- </xsl:text>
+    <xsl:value-of select="."/>
+    <xsl:text> --&gt;</xsl:text>
+  </xsl:template>
+  
+  <xd:doc>
+    <xd:desc>
+      <xd:p>Traitement des PI en mode els:serialize.</xd:p>
+    </xd:desc>
+  </xd:doc>
+  <xsl:template match="processing-instruction()" mode="els:serialize">
+    <xsl:text>&lt;?</xsl:text>
+    <xsl:value-of select="name()"/>
+    <xsl:text> </xsl:text>
+    <xsl:value-of select="."/>
+    <xsl:text>?&gt;</xsl:text>
+  </xsl:template>
+  
   
   <!--===================================================  -->
   <!-- FILES -->
