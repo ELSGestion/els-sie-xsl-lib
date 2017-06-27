@@ -239,15 +239,13 @@
             <xsl:sequence select="rng:getSRNGdataModelReccurse(rng:getDefine($rngRef[1])/element[1], string-join($xpathFromDataModel.tokenized[not(position() = 1)], '/'), $predicate)"/>
           </xsl:when>
           <xsl:when test="count($rngRef) = 0">
-            <xsl:message terminate="yes">
+            <xsl:message terminate="no">
               <xsl:text>[ERROR] No rng:ref found for </xsl:text><xsl:value-of select="els:get-xpath($rngParentElement)"/>
               <xsl:text>&#10;      xpath : </xsl:text><xsl:value-of select="$xpathFromDataModel"/>
               <xsl:text>&#10;      predicate : </xsl:text><xsl:value-of select="$predicate"/>
               <xsl:text>&#10;      currentName : </xsl:text><xsl:value-of select="$currentName"/>
               <xsl:text>&#10;      srng uri :</xsl:text><xsl:value-of select="base-uri($rngParentElement)"/> 
             </xsl:message>
-            <!--<xsl:message terminate="yes">
-              [ERROR] Aucun rng:ref trouvé pour <xsl:value-of select="els:get-xpath($rngParentElement)"/>, xpath=<xsl:value-of select="$xpathFromDataModel"/>, currentName=<xsl:value-of select="$currentName"/>, srng uri : <xsl:value-of select="base-uri($rngParentElement)"/> </xsl:message>-->
           </xsl:when>
         </xsl:choose>
       </xsl:otherwise>
