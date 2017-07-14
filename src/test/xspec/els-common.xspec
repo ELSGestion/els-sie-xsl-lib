@@ -352,6 +352,7 @@
   </x:scenario>
 
   <x:scenario label="FILES">
+    
     <x:scenario label="getFileName" pending="Not yet implemented">
       <x:call function="els:getFileName">
         <x:param name="filePath" select="''"/>
@@ -412,7 +413,18 @@
       
     </x:scenario>
     
-
+    <x:scenario label="getRelativePath()">
+      
+      <x:scenario label="getRelativePath($source, $target)">
+        <x:call function="els:getRelativePath">
+          <x:param name="source" select="'file:/folder1/folder2/folder3'"/>
+          <x:param name="target" select="'file:/folder1/folder2bis/folder3bis/file.ext'"/>
+        </x:call>
+        <x:expect label="getRelativePath($source, $target)" select="'../../folder2bis/folder3bis/file.ext'"/>
+      </x:scenario>
+      
+    </x:scenario>
+    
   </x:scenario>
 
   <x:scenario label="MATHS">
