@@ -345,9 +345,7 @@
             </xsl:otherwise>
           </xsl:choose>
         </xsl:variable>    
-        <xsl:variable name="month">
-          <xsl:value-of select="format-number(els:getMonthNumFromVerbalizeMonth($month), '00')"/>
-        </xsl:variable>
+        <xsl:variable name="month" select="format-number(els:getMonthNumFromVerbalizeMonth($month), '00')"/>
         <xsl:value-of select="string-join(($day, $month, $year), '/')"/>
       </xsl:otherwise>
     </xsl:choose>    
@@ -771,11 +769,12 @@
   
   <xd:doc>
     <xd:desc>
-      <xd:p>Get a pseudo attribute value within a string</xd:p>
-      <xd:p>Exemple : els:getPiAtt('&lt;?xml version= "1.0" encoding="UTF-8"?>','encoding')='utf-8'</xd:p>
+      <xd:p>Get a pseudo attribute value within a string, typicaly a processing-instruction string</xd:p>
+      <xd:p>Exemple : els:getPseudoAttributeValue('&lt;?xml version= "1.0" encoding="UTF-8"?>','encoding')='utf-8'</xd:p>
     </xd:desc>
     <xd:param name="String">Any string with pseudo attributes</xd:param>
     <xd:param name="attName">Name of the attribute</xd:param>
+    <xd:param name="attQuot">Quot type used in the pseudo attribute (" or ')</xd:param>
     <xd:return>Value of the attribute. 
       If there are multiple attribute with the same name in the string, the it will return several strings of values</xd:return>
   </xd:doc>
@@ -944,7 +943,7 @@
         - par contre pas de choix sur les options de sérialisation tel que le xsl:output le permet</xd:p>
     </xd:desc>
     <xd:param name="nodes">Noeuds XML (typiquement du contenu mixte)</xd:param>
-    <xd:param name="outputName">Nom d'un xsl:ouput qui détermine la sérialisation à appliquer</xd:param>
+    <!--<xd:param name="outputName">Nom d'un xsl:ouput qui détermine la sérialisation à appliquer</xd:param>-->
     <xd:return>le xml en string</xd:return>
   </xd:doc>
   <xsl:function name="els:serialize" as="xs:string">
@@ -1133,6 +1132,177 @@
   <xsl:function name="els:getFolderName" as="xs:string">
     <xsl:param name="filePath" as="xs:string?"/>
     <xsl:value-of select="els:getFolderName($filePath,1)"/>
+  </xsl:function>
+  
+  <!--=========================-->
+  <!--RelativeURI-->
+  <!--=========================-->
+  <!--Adapted from https://github.com/cmarchand/xsl-doc/blob/master/src/main/xsl/lib/common.xsl-->
+  <!--FIXME : should parameters be cast as xs:anyUri ??-->
+  
+  <xd:doc>
+    <xd:desc>
+      <xd:p>Returns the relative path from a source folder to a target file.</xd:p>
+      <xd:p>Both source.folder and target.file must be absolute URI</xd:p>
+      <xd:p>If there is no way to walk a relative path from the source folder to the target file, then absolute target file URI is returned</xd:p>
+    </xd:desc>
+    <xd:param name="source.folder">The source folder URI</xd:param>
+    <xd:param name="target.file">The target file URI</xd:param>
+    <xd:return>The relative path to walk from source.folder to target.file</xd:return>
+  </xd:doc>
+  <xsl:function name="els:getRelativePath" as="xs:string">
+    <xsl:param name="source.folder" as="xs:string"/>
+    <xsl:param name="target.file" as="xs:string"/>
+    <xsl:choose>
+      <xsl:when test="$source.folder eq ''">
+        <xsl:message>[ERROR][els:getRelativePath] $source.folder must not be an empty string</xsl:message>
+      </xsl:when>
+      <xsl:when test="els:isAbsoluteUri($source.folder)">
+        <xsl:choose>
+          <xsl:when test="not(els:isAbsoluteUri($target.file))"><xsl:sequence select="string-join((tokenize($source.folder,'/'),tokenize($target.file,'/')),'/')"/></xsl:when>
+          <xsl:otherwise>
+            <!-- If protocols are differents : return $target -->
+            <xsl:variable name="protocol" select="els:getUriProtocol($source.folder)" as="xs:string"/>
+            <xsl:choose>
+              <xsl:when test="$protocol eq els:getUriProtocol($target.file)">
+                <!-- How many identical items are there at the beginning of each uri ?-->
+                <xsl:variable name="sourceSeq" select="tokenize(substring(els:normalizeFilePath($source.folder),string-length($protocol) +1),'/')" as="xs:string*"/>
+                <xsl:variable name="targetSeq" select="tokenize(substring(els:normalizeFilePath($target.file),string-length($protocol) +1),'/')" as="xs:string*"/>
+                <xsl:variable name="nbCommonElements" as="xs:integer" select="els:getNbEqualsItems($sourceSeq, $targetSeq)"/>
+                <xsl:variable name="goUpLevels" as="xs:integer" select="count($sourceSeq) - $nbCommonElements"/>
+                <xsl:variable name="goUp" as="xs:string*" select="(for $i in (1 to $goUpLevels) return '..')" />
+                <xsl:sequence select="string-join(($goUp, subsequence($targetSeq, $nbCommonElements+1)),'/')"></xsl:sequence>
+              </xsl:when>
+              <xsl:otherwise><xsl:sequence select="$target.file"/></xsl:otherwise>
+            </xsl:choose>
+          </xsl:otherwise>
+        </xsl:choose>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:variable name="absoluteSource" as="xs:string" select="xs:string(resolve-uri($source.folder))"/>
+        <xsl:choose>
+          <xsl:when test="els:isAbsoluteUri($absoluteSource)">
+            <xsl:sequence select="els:getRelativePath($absoluteSource, $target.file)"/>
+          </xsl:when>
+          <xsl:otherwise>
+            <xsl:message>[ERROR][els:getRelativePath] $source.folder="<xsl:value-of select="$source.folder"/>" can not be resolved as an absolute URI</xsl:message>
+          </xsl:otherwise>
+        </xsl:choose>
+      </xsl:otherwise>
+    </xsl:choose>
+  </xsl:function>
+  
+  <xd:doc>
+    <xd:desc>Normalize the URI path. I.E. removes any /./ and folder/.. moves</xd:desc>
+    <xd:param name="path">The path to normalize</xd:param>
+    <xd:return>The normalized path, as a <tt>xs:string</tt></xd:return>
+  </xd:doc>
+  <xsl:function name="els:normalizeFilePath">
+    <xsl:param name="path" as="xs:string"/>
+    <xsl:sequence select="els:removeLeadingDotSlash(els:removeSingleDot(els:removeDoubleDot($path)))"/>
+  </xsl:function>
+  
+  <xd:doc>
+    <xd:desc>Removes single dot in path URI. . are always a self reference, so ./ can always be removed safely</xd:desc>
+    <xd:param name="path">The path to remove single dots from</xd:param>
+    <xd:return>The clean path, as xs:string</xd:return>
+  </xd:doc>
+  <xsl:function name="els:removeSingleDot" as="xs:string">
+    <xsl:param name="path" as="xs:string"/>
+    <xsl:variable name="temp" select="replace($path, '/\./','/')" as="xs:string"/>
+    <xsl:choose>
+      <xsl:when test="matches($temp, '/\./')">
+        <xsl:sequence select="els:removeSingleDot($temp)"/>
+      </xsl:when>
+      <xsl:otherwise><xsl:sequence select="$temp"/></xsl:otherwise>
+    </xsl:choose>
+  </xsl:function>
+  
+  <xd:doc>
+    <xd:desc>Removes the leading "./" from the path</xd:desc>
+    <xd:param name="path">The path to clean</xd:param>
+    <xd:return>The clean path</xd:return>
+  </xd:doc>
+  <xsl:function name="els:removeLeadingDotSlash">
+    <xsl:param name="path" as="xs:string"/>
+    <xsl:variable name="temp" select="replace($path, '^\./','')" as="xs:string"/>
+    <xsl:choose>
+      <xsl:when test="starts-with($temp, './')">
+        <xsl:sequence select="els:removeLeadingDotSlash($temp)"/>
+      </xsl:when>
+      <xsl:otherwise><xsl:sequence select="$temp"/></xsl:otherwise>
+    </xsl:choose>
+  </xsl:function>
+  
+  <xd:doc>
+    <xd:desc>Removes .. in an URI when it is preceded by a folder reference. So, removes /xxxx/.. </xd:desc>
+    <xd:param name="path">The path to clean</xd:param>
+    <xd:return>The clean path</xd:return>
+  </xd:doc>
+  <xsl:function name="els:removeDoubleDot" as="xs:string">
+    <xsl:param name="path" as="xs:string"/>
+    <xsl:variable name="temp" as="xs:string" select="replace($path,'/[^./]*/\.\./','/')"/>
+    <xsl:choose>
+      <xsl:when test="matches($temp,'/[^./]*/\.\./')">
+        <xsl:sequence select="els:removeDoubleDot($temp)"></xsl:sequence>
+      </xsl:when>
+      <xsl:otherwise><xsl:sequence select="$temp"/></xsl:otherwise>
+    </xsl:choose>
+  </xsl:function>
+  
+  <xd:doc>
+    <xd:desc>Returns true if the provided URI is absolute, false otherwise</xd:desc>
+    <xd:param name="path">The URI to test</xd:param>
+    <xd:return><tt>true</tt> if the URI is absolute</xd:return>
+  </xd:doc>
+  <xsl:function name="els:isAbsoluteUri" as="xs:boolean">
+    <xsl:param name="path" as="xs:string"/>
+    <xsl:choose>
+      <xsl:when test="$path eq ''">
+        <xsl:sequence select="false()"/>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:sequence select="matches($path,'[a-zA-Z0-9]+:.*')"/>
+      </xsl:otherwise>
+    </xsl:choose>
+  </xsl:function>
+  
+  <xd:doc>
+    <xd:desc>Returns the protocol of an URI</xd:desc>
+    <xd:param name="path">The URI to check</xd:param>
+    <xd:return>The protocol of the URI</xd:return>
+  </xd:doc>
+  <xsl:function name="els:getUriProtocol" as="xs:string">
+    <xsl:param name="path" as="xs:string"/>
+    <xsl:variable name="protocol" select="substring-before($path,':')" as="xs:string"/>
+    <xsl:choose>
+      <xsl:when test="string-length($protocol) gt 0"><xsl:sequence select="$protocol"/></xsl:when>
+      <xsl:otherwise><xsl:message>[ERROR][els:protocol] $path="<xsl:value-of select="$path"/>" must be an absolute URI</xsl:message></xsl:otherwise>
+    </xsl:choose>
+  </xsl:function>
+  
+  <xd:doc>
+    <xd:desc>Compare pair to pair seq1 and seq2 items, and returns the numbers of deeply-equals items</xd:desc>
+    <xd:param name="seq1">The first sequence</xd:param>
+    <xd:param name="seq2">The second sequence</xd:param>
+  </xd:doc>
+  <xsl:function name="els:getNbEqualsItems" as="xs:integer">
+    <xsl:param name="seq1" as="item()*"/>
+    <xsl:param name="seq2" as="item()*"/>
+    <xsl:choose>
+      <xsl:when test="deep-equal($seq1[1],$seq2[1])">
+        <xsl:sequence select="els:getNbEqualsItems(els:tail($seq1), els:tail($seq2))+1"/>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:sequence select="0"/>
+      </xsl:otherwise>
+    </xsl:choose>
+  </xsl:function>
+  
+  <!--FIXME : utiliser la fonction tail native en xpath3.0 (https://www.w3.org/TR/xpath-functions-30/#func-tail)-->
+  <xsl:function name="els:tail" as="item()*">
+    <xsl:param name="seq" as="item()*"/>
+    <xsl:sequence select="subsequence($seq, 2)"/>
   </xsl:function>
   
   <!--****************************************************************************************-->
