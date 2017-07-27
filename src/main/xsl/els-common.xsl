@@ -573,17 +573,29 @@
     <xsl:value-of select="concat(upper-case(els:getFirstChar($s)), els:getStringButFirstChar($s))"/>
   </xsl:function>
   
+  <!--This functions are available with functx-->
   <!--<xsl:function name="els:substring-before-match" as="xs:string">
     <xsl:param name="arg" as="xs:string?"/>
     <xsl:param name="regex" as="xs:string"/>
     <xsl:sequence select="tokenize($arg,$regex)[1]"/>
   </xsl:function>
-  
   <xsl:function name="els:substring-after-match" as="xs:string?">
     <xsl:param name="arg" as="xs:string?"/>
     <xsl:param name="regex" as="xs:string"/>
     <xsl:sequence select="replace($arg,concat('^.*?',$regex),'')"/>
   </xsl:function>-->
+  
+  <xd:doc>
+    <xd:desc>
+      <xd:p>Determin if a string is kind of empty considering any whitespace as empty characters</xd:p>
+    </xd:desc>
+    <xd:param name="s">Any string</xd:param>
+    <xd:return>Boolean : true() if $s is the empty string '' or if it only contains whitespaces, else false()</xd:return>
+  </xd:doc>
+  <xsl:function name="els:is-empty-or-whitespace" as="xs:boolean">
+    <xsl:param name="s" as="xs:string"/>
+    <xsl:sequence select="matches($s, concat('^', $els:regAnySpace, '$'))"/>
+  </xsl:function>
   
   <xd:doc>
     <xd:desc>
