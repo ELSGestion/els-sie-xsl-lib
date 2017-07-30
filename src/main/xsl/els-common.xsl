@@ -1166,8 +1166,13 @@
     <xsl:param name="source.folder" as="xs:string"/>
     <xsl:param name="target.file" as="xs:string"/>
     <xsl:choose>
-      <xsl:when test="$source.folder eq ''">
+      <xsl:when test="normalize-space($source.folder) eq ''">
         <xsl:message>[ERROR][els:getRelativePath] $source.folder must not be an empty string</xsl:message>
+        <xsl:sequence select="($target.file, '')[1]"/>
+      </xsl:when>
+      <xsl:when test="normalize-space($target.file) eq ''">
+        <xsl:message>[ERROR][els:getRelativePath] $target.file must not be an empty string</xsl:message>
+        <xsl:sequence select="($target.file, '')[1]"/>
       </xsl:when>
       <xsl:when test="els:isAbsoluteUri($source.folder)">
         <xsl:choose>
@@ -1198,6 +1203,7 @@
           </xsl:when>
           <xsl:otherwise>
             <xsl:message>[ERROR][els:getRelativePath] $source.folder="<xsl:value-of select="$source.folder"/>" can not be resolved as an absolute URI</xsl:message>
+            <xsl:sequence select="($target.file, '')[1]"/>
           </xsl:otherwise>
         </xsl:choose>
       </xsl:otherwise>
