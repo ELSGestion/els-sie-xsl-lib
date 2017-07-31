@@ -4,18 +4,20 @@
   xmlns:xslLib="http://www.lefebvre-sarrut.eu/ns/els/xslLib"
   stylesheet="../../main/xsl/cals2html.xsl">
   
+  <x:param name="xslLib:cals2html.use-style-insteadOf-class" select="true()"/>
+  
   <x:scenario label="CALS2HTML" xml:base="data_cals2html/">
     <x:scenario label="Table jira CHAINE-1885">
       <x:context href="Table_CHAINE-1885.xml"/>
-      <x:expect label="OK" select="/*" test="/*" href="Table_CHAINE-1885.htm"/>
+      <x:expect label="OK" select="/*" test="/*" href="Table_CHAINE-1885.style.htm"/>
     </x:scenario>
     <x:scenario label="frchs1603cx.tables">
       <x:context href="frchs1603cx.tables.xml"/>
-      <x:expect label="OK" select="/*" test="/*" href="frchs1603cx.tables.htm"/>
+      <x:expect label="OK" select="/*" test="/*" href="frchs1603cx.tables.style.htm"/>
     </x:scenario>
     <x:scenario label="isosts_tables">
       <x:context href="isosts_tables.cals.xml"/>
-      <x:expect label="OK" select="/*" test="/*" href="isosts_tables.cals.htm"/>
+      <x:expect label="OK" select="/*" test="/*" href="isosts_tables.cals.style.htm"/>
     </x:scenario>
   </x:scenario>
   

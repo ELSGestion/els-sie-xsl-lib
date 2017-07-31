@@ -1,0 +1,584 @@
+<?xml version="1.0" encoding="UTF-8"?><!--http://www.iso.org/schema/isosts/cals/test/isosts_tables.xml--><!--cf. http://www.iso.org/schema/isosts/cals/test/isosts_tables.html-->
+<standard>
+  <front>
+    <iso-meta>
+      <title-wrap xml:lang="en">
+        <main/>
+        <full>Test cases for XHTML to CALS conversion</full>
+      </title-wrap>
+      <doc-ident>
+        <sdo/>
+        <proj-id/>
+        <language/>
+        <release-version/>
+      </doc-ident>
+      <std-ident>
+        <originator/>
+        <doc-type/>
+        <doc-number/>
+        <edition/>
+        <version/>
+      </std-ident>
+      <content-language>en</content-language>
+      <std-ref/>
+      <doc-ref>XHTML to CALS</doc-ref>
+      <release-date/>
+      <comm-ref/>
+      <secretariat/>
+      <permissions>
+        <copyright-statement>All rights reserved</copyright-statement>
+        <copyright-year>2013</copyright-year>
+        <copyright-holder>ISO</copyright-holder>
+      </permissions>
+    </iso-meta>
+  </front>
+  <body>
+    <sec id="sec_1">
+      <label>1</label>
+      <title>Test tables</title>
+      <table-wrap id="tab_1">
+        <label>Table 1</label>
+        <caption>
+          <title>No border no col definition table</title>
+        </caption>
+        <div xmlns="http://www.w3.org/1999/xhtml" class="table">
+          <table xmlns="http://docs.oasis-open.org/ns/oasis-exchange/table" class="tgroup cals_cals cals_orient full_width_table " frame="none" colsep="no" rowsep="no">
+            <tgroup cols="2">
+              <colspec colname="col1"/>
+              <tbody>
+                <row>
+                  <entry colsep="yes" rowsep="yes">table cell text</entry>
+                  <entry colsep="yes" rowsep="yes">table cell text</entry>
+                </row>
+                <row>
+                  <entry colsep="yes" rowsep="yes">table cell text</entry>
+                  <entry colsep="yes" rowsep="yes">table cell text</entry>
+                </row>
+              </tbody>
+            </tgroup>
+          </table>
+        </div>
+      </table-wrap>
+      <table-wrap id="tab_2">
+        <label>Table 2</label>
+        <caption>
+          <title>Table with explicit border definitions, 2px table and table header border</title>
+        </caption>
+        <div xmlns="http://www.w3.org/1999/xhtml" class="table">
+          <table xmlns="http://docs.oasis-open.org/ns/oasis-exchange/table" class="tgroup cals_cals cals_orient full_width_table " frame="all" colsep="no" rowsep="no">
+            <tgroup cols="5">
+              <colspec colname="col1"/>
+              <colspec colname="col2"/>
+              <colspec colname="col3"/>
+              <colspec colname="col4"/>
+              <colspec colname="col5"/>
+              <thead>
+                <row>
+                  <entry colsep="yes" rowsep="yes">
+                    <bold xmlns="">header text</bold>
+                  </entry>
+                  <entry colsep="yes" rowsep="yes">
+                    <bold xmlns="">header text</bold>
+                  </entry>
+                  <entry colsep="yes" rowsep="yes">
+                    <bold xmlns="">header text</bold>
+                  </entry>
+                  <entry colsep="yes" rowsep="yes">
+                    <bold xmlns="">header text</bold>
+                  </entry>
+                  <entry colsep="yes" rowsep="yes">
+                    <bold xmlns="">header text</bold>
+                  </entry>
+                </row>
+              </thead>
+              <tbody>
+                <row>
+                  <entry colsep="yes" rowsep="yes">table cell text</entry>
+                  <entry colsep="yes" rowsep="yes">table cell text</entry>
+                  <entry colsep="yes" rowsep="yes">table cell text</entry>
+                  <entry colsep="yes" rowsep="yes">table cell text</entry>
+                  <entry colsep="yes" rowsep="yes">table cell text</entry>
+                </row>
+                <row>
+                  <entry colsep="yes" rowsep="yes">table cell text</entry>
+                  <entry colsep="yes" rowsep="yes">table cell text</entry>
+                  <entry colsep="yes" rowsep="yes">table cell text</entry>
+                  <entry colsep="yes" rowsep="yes">table cell text</entry>
+                  <entry colsep="yes" rowsep="yes">table cell text</entry>
+                </row>
+              </tbody>
+            </tgroup>
+          </table>
+        </div>
+      </table-wrap>
+      <table-wrap id="tab_3">
+        <label>Table 3</label>
+        <caption>
+          <title>Spanning cells in header</title>
+        </caption>
+        <div xmlns="http://www.w3.org/1999/xhtml" class="table">
+          <table xmlns="http://docs.oasis-open.org/ns/oasis-exchange/table" class="tgroup cals_cals cals_orient full_width_table " frame="all" colsep="no" rowsep="no">
+            <tgroup cols="4">
+              <colspec colname="col1"/>
+              <colspec colname="col2"/>
+              <colspec colname="col3"/>
+              <colspec colname="col4"/>
+              <thead>
+                <row>
+                  <entry colsep="yes" rowsep="yes">header text</entry>
+                  <entry namest="col2" nameend="col4" colsep="yes" rowsep="yes">header text</entry>
+                </row>
+                <row>
+                  <entry colsep="yes" rowsep="yes">header text</entry>
+                  <entry colsep="yes" rowsep="yes">header text</entry>
+                  <entry colsep="yes" rowsep="yes">header text</entry>
+                </row>
+              </thead>
+              <tbody>
+                <row>
+                  <entry colsep="yes" rowsep="yes">table cell text</entry>
+                  <entry colsep="yes" rowsep="yes">table cell text</entry>
+                  <entry colsep="yes" rowsep="yes">table cell text</entry>
+                  <entry colsep="yes" rowsep="yes">table cell text</entry>
+                </row>
+                <row>
+                  <entry colsep="yes" rowsep="yes">table cell text</entry>
+                  <entry colsep="yes" rowsep="yes">table cell text</entry>
+                  <entry colsep="yes" rowsep="yes">table cell text</entry>
+                  <entry colsep="yes" rowsep="yes">table cell text</entry>
+                </row>
+              </tbody>
+            </tgroup>
+          </table>
+        </div>
+      </table-wrap>
+      <table-wrap id="tab_4">
+        <label>Table 4</label>
+        <caption>
+          <title>Table with footer</title>
+        </caption>
+        <div xmlns="http://www.w3.org/1999/xhtml" class="table">
+          <table xmlns="http://docs.oasis-open.org/ns/oasis-exchange/table" class="tgroup cals_cals cals_orient full_width_table " frame="all" colsep="no" rowsep="no">
+            <tgroup cols="4">
+              <colspec colname="col1"/>
+              <colspec colname="col2"/>
+              <colspec colname="col3"/>
+              <colspec colname="col4"/>
+              <thead>
+                <row>
+                  <entry colsep="yes" rowsep="yes">header text</entry>
+                  <entry colsep="yes" rowsep="yes">header text</entry>
+                  <entry colsep="yes" rowsep="yes">header text</entry>
+                  <entry colsep="yes" rowsep="yes">header text</entry>
+                </row>
+              </thead>
+              <tbody>
+                <row>
+                  <entry colsep="yes" rowsep="yes">table cell text</entry>
+                  <entry colsep="yes" rowsep="yes">table cell text</entry>
+                  <entry colsep="yes" rowsep="yes">table cell text</entry>
+                  <entry colsep="yes" rowsep="yes">table cell text</entry>
+                </row>
+                <row>
+                  <entry colsep="yes" rowsep="yes">table cell text</entry>
+                  <entry colsep="yes" rowsep="yes">table cell text</entry>
+                  <entry colsep="yes" rowsep="yes">table cell text</entry>
+                  <entry colsep="yes" rowsep="yes">table cell text</entry>
+                </row>
+                <row>
+                  <entry namest="col1" nameend="col4" colsep="yes" rowsep="yes">table footer</entry>
+                </row>
+              </tbody>
+            </tgroup>
+          </table>
+        </div>
+      </table-wrap>
+      <table-wrap id="tab_5">
+        <label>Table 5</label>
+        <caption>
+          <title>Table with various col and rowspans</title>
+        </caption>
+        <div xmlns="http://www.w3.org/1999/xhtml" class="table">
+          <table xmlns="http://docs.oasis-open.org/ns/oasis-exchange/table" class="tgroup cals_cals cals_orient full_width_table " frame="all" colsep="no" rowsep="no">
+            <tgroup cols="6">
+              <colspec colname="col1"/>
+              <colspec colname="col2"/>
+              <colspec colname="col3"/>
+              <colspec colname="col4"/>
+              <colspec colname="col5"/>
+              <colspec colname="col6"/>
+              <thead>
+                <row>
+                  <entry colsep="yes" rowsep="yes">header text</entry>
+                  <entry namest="col2" nameend="col3" colsep="yes" rowsep="yes">header text</entry>
+                  <entry colsep="yes" rowsep="yes">header text</entry>
+                  <entry colsep="yes" rowsep="yes">header text</entry>
+                  <entry colsep="yes" rowsep="yes">header text</entry>
+                </row>
+              </thead>
+              <tbody>
+                <row>
+                  <entry colsep="yes" rowsep="yes">table cell text</entry>
+                  <entry namest="col2" nameend="col3" colsep="yes" rowsep="yes">table cell text</entry>
+                  <entry colsep="yes" rowsep="yes">table cell text</entry>
+                  <entry colsep="yes" rowsep="yes">table cell text</entry>
+                  <entry colsep="yes" rowsep="yes">table cell text</entry>
+                </row>
+                <row>
+                  <entry namest="col1" nameend="col5" colsep="yes" rowsep="yes">table cell text</entry>
+                </row>
+                <row>
+                  <entry namest="col1" nameend="col2" colsep="yes" rowsep="yes">table cell text</entry>
+                  <entry namest="col3" nameend="col5" colsep="yes" rowsep="yes">table cell text</entry>
+                </row>
+                <row>
+                  <entry namest="col1" nameend="col5" colsep="yes" rowsep="yes">table cell text</entry>
+                </row>
+                <row>
+                  <entry namest="col1" nameend="col2" colsep="yes" rowsep="yes">table cell text</entry>
+                  <entry namest="col3" nameend="col5" colsep="yes" rowsep="yes">table cell text</entry>
+                </row>
+                <row>
+                  <entry namest="col1" nameend="col2" colsep="yes" rowsep="yes">table cell text</entry>
+                  <entry namest="col3" nameend="col5" colsep="yes" rowsep="yes">table cell text</entry>
+                </row>
+                <row>
+                  <entry namest="col1" nameend="col2" colsep="yes" rowsep="yes">table cell text</entry>
+                  <entry namest="col3" nameend="col5" colsep="yes" rowsep="yes">table cell text</entry>
+                </row>
+                <row>
+                  <entry namest="col1" nameend="col5" colsep="yes" rowsep="yes">table cell text</entry>
+                </row>
+                <row>
+                  <entry colsep="yes" rowsep="yes">table cell text</entry>
+                  <entry namest="col2" nameend="col5" colsep="yes" rowsep="yes">table cell text</entry>
+                </row>
+                <row>
+                  <entry colsep="yes" rowsep="yes">table cell text</entry>
+                  <entry namest="col2" nameend="col5" colsep="yes" rowsep="yes">table cell text</entry>
+                </row>
+              </tbody>
+            </tgroup>
+          </table>
+        </div>
+      </table-wrap>
+      <table-wrap id="tab_6">
+        <label>Table 6</label>
+        <caption>
+          <title>Table with specific cells having no border</title>
+        </caption>
+        <div xmlns="http://www.w3.org/1999/xhtml" class="table">
+          <table xmlns="http://docs.oasis-open.org/ns/oasis-exchange/table" class="tgroup cals_cals cals_orient full_width_table " frame="all" colsep="no" rowsep="no">
+            <tgroup cols="4">
+              <colspec colname="col1"/>
+              <colspec colname="col2"/>
+              <colspec colname="col3"/>
+              <colspec colname="col4"/>
+              <thead>
+                <row>
+                  <entry colsep="yes" rowsep="yes">header text</entry>
+                  <entry namest="col2" nameend="col4" colsep="yes" rowsep="yes">header text</entry>
+                </row>
+                <row>
+                  <entry colsep="yes" rowsep="yes">header text</entry>
+                  <entry colsep="yes" rowsep="yes">header text</entry>
+                  <entry colsep="yes" rowsep="yes">header text</entry>
+                </row>
+              </thead>
+              <tbody>
+                <row>
+                  <entry colsep="yes" rowsep="yes">table cell text</entry>
+                  <entry colsep="yes" rowsep="yes">table cell text</entry>
+                  <entry colsep="yes" rowsep="yes">table cell text</entry>
+                  <entry colsep="yes" rowsep="yes">table cell text</entry>
+                </row>
+                <row>
+                  <entry colsep="yes" rowsep="yes">table cell text</entry>
+                  <entry colsep="yes" rowsep="yes">table cell text</entry>
+                  <entry colsep="yes" rowsep="yes">table cell text</entry>
+                  <entry colsep="yes" rowsep="yes">table cell text</entry>
+                </row>
+                <row>
+                  <entry colsep="yes" rowsep="yes">table cell text</entry>
+                  <entry colsep="yes" rowsep="yes">table cell text</entry>
+                  <entry colsep="yes" rowsep="yes">table cell text</entry>
+                  <entry colsep="yes" rowsep="yes">table cell text</entry>
+                </row>
+                <row>
+                  <entry colsep="yes" rowsep="yes">table cell text</entry>
+                  <entry colsep="yes" rowsep="yes">table cell text</entry>
+                  <entry colsep="yes" rowsep="yes">table cell text</entry>
+                  <entry colsep="yes" rowsep="yes">table cell text</entry>
+                </row>
+                <row>
+                  <entry colsep="yes" rowsep="yes">table cell text</entry>
+                  <entry colsep="yes" rowsep="yes">table cell text</entry>
+                  <entry colsep="yes" rowsep="yes">table cell text</entry>
+                  <entry colsep="yes" rowsep="yes">table cell text</entry>
+                </row>
+              </tbody>
+            </tgroup>
+          </table>
+        </div>
+      </table-wrap>
+      <table-wrap id="tab_7">
+        <label>Table 7</label>
+        <caption>
+          <title>Table with col and row spans where CSS of neighboring cells defines colsep and rowsep</title>
+        </caption>
+        <div xmlns="http://www.w3.org/1999/xhtml" class="table">
+          <table xmlns="http://docs.oasis-open.org/ns/oasis-exchange/table" class="tgroup cals_cals cals_orient full_width_table " frame="all" colsep="no" rowsep="no">
+            <tgroup cols="4">
+              <colspec colname="col1"/>
+              <colspec colname="col2"/>
+              <colspec colname="col3"/>
+              <colspec colname="col4"/>
+              <thead>
+                <row>
+                  <entry colsep="yes" rowsep="yes">table default</entry>
+                  <entry colsep="yes" rowsep="yes">table default</entry>
+                  <entry colsep="yes" rowsep="yes">table default</entry>
+                  <entry colsep="yes" rowsep="yes">table default</entry>
+                </row>
+              </thead>
+              <tbody>
+                <row>
+                  <entry namest="col1" nameend="col2" colsep="yes" rowsep="yes">rowsep=no</entry>
+                  <entry colsep="yes" rowsep="yes">table default</entry>
+                  <entry colsep="yes" rowsep="yes">rowsep=yes</entry>
+                </row>
+                <row>
+                  <entry namest="col1" nameend="col2" colsep="yes" rowsep="yes">colsep=yes, rowsep=yes</entry>
+                  <entry colsep="yes" rowsep="yes">table default</entry>
+                </row>
+                <row>
+                  <entry colsep="yes" rowsep="yes">table default</entry>
+                  <entry colsep="yes" rowsep="yes">colsep=yes</entry>
+                  <entry colsep="yes" rowsep="yes">table default</entry>
+                </row>
+              </tbody>
+            </tgroup>
+          </table>
+        </div>
+      </table-wrap>
+      <table-wrap id="tab_8">
+        <label>Table 8</label>
+        <caption>
+          <title>Table with @rules="rows" should generate rowsep for all rows</title>
+        </caption>
+        <div xmlns="http://www.w3.org/1999/xhtml" class="table">
+          <table xmlns="http://docs.oasis-open.org/ns/oasis-exchange/table" class="tgroup cals_cals cals_orient full_width_table " frame="none" colsep="no" rowsep="no">
+            <tgroup cols="4">
+              <colspec colname="col1"/>
+              <colspec colname="col2"/>
+              <colspec colname="col3"/>
+              <colspec colname="col4"/>
+              <thead>
+                <row>
+                  <entry colsep="yes" rowsep="yes">rowsep=yes</entry>
+                  <entry colsep="yes" rowsep="yes">rowsep=yes</entry>
+                  <entry colsep="yes" rowsep="yes">rowsep=yes</entry>
+                  <entry colsep="yes" rowsep="yes">rowsep=yes</entry>
+                </row>
+              </thead>
+              <tbody>
+                <row>
+                  <entry colsep="yes" rowsep="yes">rowsep=yes</entry>
+                  <entry colsep="yes" rowsep="yes">rowsep=yes</entry>
+                  <entry colsep="yes" rowsep="yes">rowsep=yes</entry>
+                  <entry colsep="yes" rowsep="yes">rowsep=yes</entry>
+                </row>
+                <row>
+                  <entry colsep="yes" rowsep="yes">rowsep=yes</entry>
+                  <entry colsep="yes" rowsep="yes">rowsep=yes</entry>
+                  <entry colsep="yes" rowsep="yes">rowsep=yes</entry>
+                  <entry colsep="yes" rowsep="yes">rowsep=yes</entry>
+                </row>
+                <row>
+                  <entry colsep="yes" rowsep="yes">rowsep=yes</entry>
+                  <entry colsep="yes" rowsep="yes">rowsep=yes</entry>
+                  <entry colsep="yes" rowsep="yes">rowsep=yes</entry>
+                  <entry colsep="yes" rowsep="yes">rowsep=yes</entry>
+                </row>
+              </tbody>
+            </tgroup>
+          </table>
+        </div>
+      </table-wrap>
+      <table-wrap id="tab_9">
+        <label>Table 9</label>
+        <caption>
+          <title>Table with @rules="cols" should generate colsep for all cells</title>
+        </caption>
+        <div xmlns="http://www.w3.org/1999/xhtml" class="table">
+          <table xmlns="http://docs.oasis-open.org/ns/oasis-exchange/table" class="tgroup cals_cals cals_orient full_width_table " frame="none" colsep="no" rowsep="no">
+            <tgroup cols="4">
+              <colspec colname="col1"/>
+              <colspec colname="col2"/>
+              <colspec colname="col3"/>
+              <colspec colname="col4"/>
+              <thead>
+                <row>
+                  <entry colsep="yes" rowsep="yes">colsep=yes</entry>
+                  <entry colsep="yes" rowsep="yes">colsep=yes</entry>
+                  <entry colsep="yes" rowsep="yes">colsep=yes</entry>
+                  <entry colsep="yes" rowsep="yes">colsep=yes</entry>
+                </row>
+              </thead>
+              <tbody>
+                <row>
+                  <entry colsep="yes" rowsep="yes">colsep=yes</entry>
+                  <entry colsep="yes" rowsep="yes">colsep=yes</entry>
+                  <entry colsep="yes" rowsep="yes">colsep=yes</entry>
+                  <entry colsep="yes" rowsep="yes">colsep=yes</entry>
+                </row>
+                <row>
+                  <entry colsep="yes" rowsep="yes">colsep=yes</entry>
+                  <entry colsep="yes" rowsep="yes">colsep=yes</entry>
+                  <entry colsep="yes" rowsep="yes">colsep=yes</entry>
+                  <entry colsep="yes" rowsep="yes">colsep=yes</entry>
+                </row>
+                <row>
+                  <entry colsep="yes" rowsep="yes">colsep=yes</entry>
+                  <entry colsep="yes" rowsep="yes">colsep=yes</entry>
+                  <entry colsep="yes" rowsep="yes">colsep=yes</entry>
+                  <entry colsep="yes" rowsep="yes">colsep=yes</entry>
+                </row>
+              </tbody>
+            </tgroup>
+          </table>
+        </div>
+      </table-wrap>
+      <table-wrap id="tab_10">
+        <label>Table 10</label>
+        <caption>
+          <title>Table with @rules="groups" which should generate rowsep for last row in theader and table</title>
+        </caption>
+        <div xmlns="http://www.w3.org/1999/xhtml" class="table">
+          <table xmlns="http://docs.oasis-open.org/ns/oasis-exchange/table" class="tgroup cals_cals cals_orient full_width_table " frame="none" colsep="no" rowsep="no">
+            <tgroup cols="4">
+              <colspec colname="col1"/>
+              <colspec colname="col2"/>
+              <colspec colname="col3"/>
+              <colspec colname="col4"/>
+              <thead>
+                <row>
+                  <entry colsep="yes" rowsep="yes">table default</entry>
+                  <entry colsep="yes" rowsep="yes">table default</entry>
+                  <entry colsep="yes" rowsep="yes">table default</entry>
+                  <entry colsep="yes" rowsep="yes">table default</entry>
+                </row>
+                <row>
+                  <entry colsep="yes" rowsep="yes">rowsep=yes</entry>
+                  <entry colsep="yes" rowsep="yes">rowsep=yes</entry>
+                  <entry colsep="yes" rowsep="yes">rowsep=yes</entry>
+                  <entry colsep="yes" rowsep="yes">rowsep=yes</entry>
+                </row>
+              </thead>
+              <tbody>
+                <row>
+                  <entry colsep="yes" rowsep="yes">table default</entry>
+                  <entry colsep="yes" rowsep="yes">table default</entry>
+                  <entry colsep="yes" rowsep="yes">table default</entry>
+                  <entry colsep="yes" rowsep="yes">table default</entry>
+                </row>
+                <row>
+                  <entry colsep="yes" rowsep="yes">rowsep=yes; because its the last tbody row before the tfoot</entry>
+                  <entry colsep="yes" rowsep="yes">rowsep=yes</entry>
+                  <entry colsep="yes" rowsep="yes">rowsep=yes</entry>
+                  <entry colsep="yes" rowsep="yes">rowsep=yes</entry>
+                </row>
+                <row>
+                  <entry colsep="yes" rowsep="yes">table default</entry>
+                  <entry colsep="yes" rowsep="yes">table default</entry>
+                  <entry colsep="yes" rowsep="yes">table default</entry>
+                  <entry colsep="yes" rowsep="yes">table default</entry>
+                </row>
+              </tbody>
+            </tgroup>
+          </table>
+        </div>
+      </table-wrap>
+      <table-wrap id="tab_11">
+        <label>Table 11</label>
+        <caption>
+          <title>Table with @rules="all" which should generate rowsep and rowsep for all</title>
+        </caption>
+        <div xmlns="http://www.w3.org/1999/xhtml" class="table">
+          <table xmlns="http://docs.oasis-open.org/ns/oasis-exchange/table" class="tgroup cals_cals cals_orient full_width_table " frame="none" colsep="no" rowsep="no">
+            <tgroup cols="4">
+              <colspec colname="col1"/>
+              <colspec colname="col2"/>
+              <colspec colname="col3"/>
+              <colspec colname="col4"/>
+              <thead>
+                <row>
+                  <entry colsep="yes" rowsep="yes">colsep=yes, rowsep=yes</entry>
+                  <entry colsep="yes" rowsep="yes">colsep=yes, rowsep=yes</entry>
+                  <entry colsep="yes" rowsep="yes">colsep=yes, rowsep=yes</entry>
+                  <entry colsep="yes" rowsep="yes">colsep=yes, rowsep=yes</entry>
+                </row>
+                <row>
+                  <entry colsep="yes" rowsep="yes">colsep=yes, rowsep=yes</entry>
+                  <entry colsep="yes" rowsep="yes">colsep=yes, rowsep=yes</entry>
+                  <entry colsep="yes" rowsep="yes">colsep=yes, rowsep=yes</entry>
+                  <entry colsep="yes" rowsep="yes">colsep=yes, rowsep=yes</entry>
+                </row>
+              </thead>
+              <tbody>
+                <row>
+                  <entry colsep="yes" rowsep="yes">colsep=yes, rowsep=yes</entry>
+                  <entry colsep="yes" rowsep="yes">colsep=yes, rowsep=yes</entry>
+                  <entry colsep="yes" rowsep="yes">colsep=yes, rowsep=yes</entry>
+                  <entry colsep="yes" rowsep="yes">colsep=yes, rowsep=yes</entry>
+                </row>
+                <row>
+                  <entry colsep="yes" rowsep="yes">colsep=yes, rowsep=yes</entry>
+                  <entry colsep="yes" rowsep="yes">colsep=yes, rowsep=yes</entry>
+                  <entry colsep="yes" rowsep="yes">colsep=yes, rowsep=yes</entry>
+                  <entry colsep="yes" rowsep="yes">colsep=yes, rowsep=yes</entry>
+                </row>
+                <row>
+                  <entry colsep="yes" rowsep="yes">colsep=yes, rowsep=yes</entry>
+                  <entry colsep="yes" rowsep="yes">colsep=yes, rowsep=yes</entry>
+                  <entry colsep="yes" rowsep="yes">colsep=yes, rowsep=yes</entry>
+                  <entry colsep="yes" rowsep="yes">colsep=yes, rowsep=yes</entry>
+                </row>
+              </tbody>
+            </tgroup>
+          </table>
+        </div>
+      </table-wrap>
+      <table-wrap id="tab_12">
+        <label>Table 12</label>
+        <caption>
+          <title>Table cell alignment</title>
+        </caption>
+        <div xmlns="http://www.w3.org/1999/xhtml" class="table">
+          <table xmlns="http://docs.oasis-open.org/ns/oasis-exchange/table" class="tgroup cals_cals cals_orient full_width_table " frame="all" colsep="no" rowsep="no">
+            <tgroup cols="6">
+              <colspec colname="col1"/>
+              <colspec colname="col2"/>
+              <colspec colname="col3"/>
+              <colspec colname="col4"/>
+              <colspec colname="col5"/>
+              <colspec colname="col6"/>
+              <tbody>
+                <row>
+                  <entry colsep="yes" rowsep="yes">just lots of text to see the vertical
+                                    alignment, just lots of text to see the vertical alignment, just lots of text to see the vertical alignment, just lots of text to see the vertical
+                                    alignment</entry>
+                  <entry colsep="yes" rowsep="yes">align="center" valign="middle"</entry>
+                  <entry colsep="yes" rowsep="yes">align="left" valign="top"</entry>
+                  <entry colsep="yes" rowsep="yes">align="right" valign="bottom"</entry>
+                  <entry class="cals_alignchar " colsep="yes" rowsep="yes">align="char"</entry>
+                  <entry colsep="yes" rowsep="yes">align="justify" valign="bottom"</entry>
+                </row>
+              </tbody>
+            </tgroup>
+          </table>
+        </div>
+      </table-wrap>
+    </sec>
+  </body>
+</standard>

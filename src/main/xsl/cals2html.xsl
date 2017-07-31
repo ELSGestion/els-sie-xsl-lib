@@ -17,6 +17,9 @@
   <xsl:import href="els-common.xsl"/>
   
   <!--Paramètres (surchargeable lorque cette xsl est appelée en xsl:import)-->
+  <xsl:param name="xslLib:cals2html.log.uri" select="resolve-uri('log/', base-uri())" as="xs:string"/>
+  <xsl:param name="xslLib:cals2html.debug" select="false()" as="xs:boolean"/>
+  <xsl:param name="xslLib:cals2html.use-style-insteadOf-class" select="false()" as="xs:boolean"/>
   <xsl:param name="p-compute-column-width-within-colgroup" select="true()" as="xs:boolean"/>
   <!--If the number of columns is greater than g-nb-cols-max-before-font-reduction then the font needs to be reduced-->
   <xsl:param name="g-nb-cols-max-before-font-reduction" select="8" as="xs:integer"/>
@@ -37,6 +40,44 @@
   <!--==============================================================================================================================-->
   <!-- MAIN -->
   <!--==============================================================================================================================-->
+  
+  <xsl:template match="/" mode="xslLib:cals2html">
+    <!--STEP1 : xslLib:cals2html-->
+    <xsl:variable name="step1" as="document-node()">
+      <xsl:document>
+        <xsl:apply-templates mode="xslLib:cals2html"/>
+      </xsl:document>
+    </xsl:variable>
+    <xsl:if test="$xslLib:cals2html.debug">
+      <xsl:variable name="step.log.uri" select="resolve-uri('cals2html.step1.xml', $xslLib:cals2html.log.uri)" as="xs:anyURI"/>
+      <xsl:message>[INFO] writing <xsl:value-of select="$step.log.uri"/></xsl:message>
+      <xsl:result-document href="{$step.log.uri}">
+        <xsl:sequence select="$step1"/>
+      </xsl:result-document>
+    </xsl:if>
+    <!--STEP3 : convert class2style-->
+    <xsl:variable name="step2" as="document-node()">
+      <xsl:choose>
+        <xsl:when test="$xslLib:cals2html.use-style-insteadOf-class">
+          <xsl:document>
+            <xsl:apply-templates select="$step1" mode="xslLib:xml2html_addCalsStyle"/>
+          </xsl:document>
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:sequence select="$step1"/>
+        </xsl:otherwise>
+      </xsl:choose>
+    </xsl:variable>
+    <xsl:if test="$xslLib:cals2html.debug">
+      <xsl:variable name="step.log.uri" select="resolve-uri('cals2html.step2.xml', $xslLib:cals2html.log.uri)" as="xs:anyURI"/>
+      <xsl:message>[INFO] writing <xsl:value-of select="$step.log.uri"/></xsl:message>
+      <xsl:result-document href="{$step.log.uri}">
+        <xsl:sequence select="$step2"/>
+      </xsl:result-document>
+    </xsl:if>
+    <!--FINALY-->
+    <xsl:sequence select="$step2"/>
+  </xsl:template>
   
   <!-- héritage de rowsep -->
   <!-- si @rowsep pas défini alors héritage précédent -->
