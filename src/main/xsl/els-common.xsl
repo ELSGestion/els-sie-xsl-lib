@@ -632,6 +632,21 @@
     </xsl:copy>
   </xsl:template>
   
+  <!--=====================-->
+  <!-- MODE els:LOWERCASE -->
+  <!--=====================-->
+  <!--mode pour passer en lowercase (tout en conservant les enrichissements)-->
+  
+  <xsl:template match="text()" mode="els:lowercase" priority="1">
+    <xsl:value-of select="lower-case(.)"/>  
+  </xsl:template>
+  
+  <xsl:template match="node() | @*" mode="els:lowercase">
+    <xsl:copy copy-namespaces="no">
+      <xsl:apply-templates select="node() | @*" mode="#current"/>
+    </xsl:copy>
+  </xsl:template>
+  
   <!--===================================================  -->
   <!--                    XML                              -->
   <!--===================================================  -->
