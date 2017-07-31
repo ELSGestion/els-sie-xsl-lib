@@ -14,7 +14,7 @@
   
   <xsl:import href="css-parser.xsl"/>
   
-  <xsl:param name="xslLib:cals.ns.uri" required="yes" as="xs:string"/>
+  <xsl:param name="xslLib:cals.ns.uri" select="'http://docs.oasis-open.org/ns/oasis-exchange/table'" as="xs:string"/>
 
   <xd:doc scope="stylesheet">
     <xd:desc>
@@ -49,6 +49,21 @@
     </xd:desc>
   </xd:doc>
   
+  <!--==============================================================================================================================-->
+  <!-- INIT -->
+  <!--==============================================================================================================================-->
+  
+  <xsl:template match="/">
+    <xsl:apply-templates select="/" mode="xslLib:xhtml2cals"/>
+  </xsl:template>
+  
+  <!--==============================================================================================================================-->
+  <!-- MAIN -->
+  <!--==============================================================================================================================-->
+  
+  <xsl:template match="/">
+    <xsl:apply-templates select="/" mode="xslLib:xhtml2cals"/>
+  </xsl:template>
   
   <xsl:template match="table" mode="xslLib:xhtml2cals">
     <xsl:variable name="step1">

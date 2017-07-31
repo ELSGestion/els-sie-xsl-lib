@@ -4,19 +4,17 @@
   xmlns:xslLib="http://www.lefebvre-sarrut.eu/ns/els/xslLib"
   stylesheet="../../main/xsl/html2cals.xsl">
   
-  <x:param name="xslLib:cals.ns.uri" select="'http://docs.oasis-open.org/ns/oasis-exchange/table'"/>
-  
   <x:scenario label="HTML2CALS" xml:base="data_cals2html/">
     <x:scenario label="Table jira CHAINE-1885">
-      <x:context href="Table_CHAINE-1885.htm" mode="xslLib:xhtml2cals"/>
+      <x:context href="Table_CHAINE-1885.htm"/>
       <x:expect label="OK" select="/*" href="Table_CHAINE-1885.cals.xml"/>
     </x:scenario>
     <x:scenario label="frchs1603cx.tables" pending="XTTE0780: An empty sequence is not allowed as the result of call to xhtml2cals:expand-rowspans">
-      <x:context href="frchs1603cx.tables.htm" mode="xslLib:xhtml2cals"/>
+      <x:context href="frchs1603cx.tables.htm"/>
       <x:expect label="OK" select="/*" href="frchs1603cx.tables.cals.xml"/>
     </x:scenario>
     <x:scenario label="isosts_tables">
-      <x:context href="isosts_tables.cals.htm" mode="xslLib:xhtml2cals"/>
+      <x:context href="isosts_tables.cals.htm"/>
       <x:expect label="OK" select="/*" test="/*" href="isosts_tables.cals.cals.xml"/>
     </x:scenario>
   </x:scenario>
