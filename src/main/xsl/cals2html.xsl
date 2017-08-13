@@ -434,10 +434,10 @@
         </xsl:if>-->
         <xsl:if test="$nb-cols > $xslLib:cals2html.nb-cols-max-before-font-reduction
           and $nb-cols lt $xslLib:cals2html.nb-cols-max-before-large-font-reduction">
-          <xsl:text>cals_table-contents-font-reduction</xsl:text>
+          <xsl:text>cals_table-font-reduction</xsl:text>
         </xsl:if>
         <xsl:if test="$nb-cols > $xslLib:cals2html.nb-cols-max-before-large-font-reduction">
-          <xsl:text>cals_table-contents-max-font-reduction</xsl:text>
+          <xsl:text>cals_table-max-font-reduction</xsl:text>
         </xsl:if>
       </xsl:variable>
       <xsl:if test="not(empty($class.tmp))">

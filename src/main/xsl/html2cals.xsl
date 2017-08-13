@@ -6,16 +6,17 @@
   xmlns:els="http://www.lefebvre-sarrut.eu/ns/els"
   xmlns:xslLib="http://www.lefebvre-sarrut.eu/ns/els/xslLib"
   xmlns:xhtml2cals="http://www.lefebvre-sarrut.eu/ns/els/xhtml2cals"
-  xmlns:xhtml="http://www.w3.org/1999/xhtml" 
+  xmlns:cals="http://docs.oasis-open.org/ns/oasis-exchange/table"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml"
   xmlns:css="http://www.w3.org/1996/css"
   xpath-default-namespace="http://www.w3.org/1999/xhtml"
+  xmlns="http://docs.oasis-open.org/ns/oasis-exchange/table"
   exclude-result-prefixes="#all" 
   version="2.0">
   
+  <xsl:import href="els-common.xsl"/>
   <xsl:import href="css-parser.xsl"/>
   
-  <xsl:param name="xslLib:cals.ns.uri" select="'http://docs.oasis-open.org/ns/oasis-exchange/table'" as="xs:string"/>
-
   <xd:doc scope="stylesheet">
     <xd:desc>
       <xd:p xml:lang="fr">Cette feuille de style va traiter la conversion de tables xhtml en tables
@@ -46,40 +47,52 @@
     </xd:desc>
   </xd:doc>
   
+  <xsl:param name="xslLib:cals.ns.uri" select="'http://docs.oasis-open.org/ns/oasis-exchange/table'" as="xs:string"/>
+  
   <!--==============================================================================================================================-->
   <!-- INIT -->
   <!--==============================================================================================================================-->
   
   <xsl:template match="/">
-    <xsl:apply-templates select="/" mode="xslLib:xhtml2cals"/>
+    <xsl:apply-templates select="." mode="xslLib:xhtml2cals"/>
   </xsl:template>
   
   <!--==============================================================================================================================-->
   <!-- MAIN -->
   <!--==============================================================================================================================-->
   
-  <xsl:template match="/">
-    <xsl:apply-templates select="/" mode="xslLib:xhtml2cals"/>
+  <xsl:template match="/" mode="xslLib:xhtml2cals">
+    <xsl:variable name="step1" as="document-node()">
+      <xsl:document>
+        <xsl:apply-templates select="." mode="xhtml2cals:normalize-to-xhtml"/>
+      </xsl:document>
+    </xsl:variable>
+    <xsl:variable name="step2" as="document-node()">
+      <xsl:document>
+        <xsl:apply-templates select="$step1" mode="xhtml2cals:expand-spans"/>
+      </xsl:document>
+    </xsl:variable>
+    <xsl:variable name="step3" as="document-node()">
+      <xsl:document>
+        <xsl:apply-templates select="$step2" mode="xhtml2cals:convert-to-cals"/>
+      </xsl:document>
+    </xsl:variable>
+    <xsl:variable name="step4" as="document-node()">
+      <xsl:document>
+        <xsl:apply-templates select="$step3" mode="xhtml2cals:optimize-cals"/>
+      </xsl:document>
+    </xsl:variable>
+    <!--FINALY-->
+    <xsl:choose>
+      <xsl:when test="$xslLib:cals.ns.uri = 'http://docs.oasis-open.org/ns/oasis-exchange/table'">
+        <xsl:sequence select="$step4"/>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:apply-templates select="$step3" mode="xhtml2cals:convert-cals-namespace"/>
+      </xsl:otherwise>
+    </xsl:choose>
   </xsl:template>
   
-  <xsl:template match="table" mode="xslLib:xhtml2cals">
-    <xsl:variable name="step1">
-      <xsl:call-template name="xhtml2cals:normalize-to-xhtml">
-        <xsl:with-param name="table" select="."/>
-      </xsl:call-template>
-    </xsl:variable>
-    <xsl:variable name="step2">
-      <xsl:apply-templates select="$step1" mode="xhtml2cals:expand-spans"/>
-    </xsl:variable>
-    <xsl:apply-templates select="$step2" mode="xhtml2cals:convert-to-cals"/>
-  </xsl:template>
-  
-  <xsl:template match="@*|node()" mode="xslLib:xhtml2cals">
-    <xsl:copy>
-      <xsl:apply-templates select="@*|node()" mode="#current"/>
-    </xsl:copy>
-  </xsl:template>
-
   <xd:doc>
     <!-- ======================================================================-->
     <!-- Mode normalize-to-xhtml: normalisation de la structure de table xhtml -->
@@ -98,38 +111,35 @@
       <xd:p>On passe le contexte au template afin de vérifier son type.</xd:p>
     </xd:desc>
   </xd:doc>
-  <xsl:template name="xhtml2cals:normalize-to-xhtml">
-    <xsl:param name="table" as="element(xhtml:table)"/>
-    <xsl:if test="$table/((tbody/tr)|tr)">
-      <xsl:element name="table" namespace="http://www.w3.org/1999/xhtml">
-        <xsl:copy-of select="$table/(@*|processing-instruction()|comment())"/>
-        <xsl:apply-templates select="$table/caption" mode="#current"/>
-        <xsl:choose>
-          <xsl:when test="$table/(colgroup|col)">
-            <xsl:apply-templates select="$table/(colgroup|col)" mode="#current"/>
-          </xsl:when>
-          <xsl:otherwise>
-            <!-- On normalise en ajoutant un colgroup générique -->
-            <xsl:element name="colgroup" namespace="http://www.w3.org/1999/xhtml">
-              <xsl:attribute name="span" select="xhtml2cals:nb-cols($table)"/>
-            </xsl:element>
-          </xsl:otherwise>
-        </xsl:choose>
-        <xsl:apply-templates select="$table/(thead, tfoot)" mode="#current"/>
-        <xsl:choose>
-          <xsl:when test="$table/tbody">
-            <xsl:apply-templates select="$table/tbody" mode="#current"/>
-          </xsl:when>
-          <xsl:when test="$table/tr">
-            <!-- On normalise en ajoutant un tbody -->
-            <!-- cela simplifie le traitement en bloc en mode expand-spans -->
-            <xsl:element name="tbody" namespace="http://www.w3.org/1999/xhtml">
-              <xsl:apply-templates select="$table/tr" mode="#current"/>
-            </xsl:element>
-          </xsl:when>
-        </xsl:choose>
-      </xsl:element>
-    </xsl:if>
+  <xsl:template match="table[(tbody/tr)|tr]" mode="xhtml2cals:normalize-to-xhtml">
+    <xsl:copy>
+      <xsl:apply-templates select="@* | processing-instruction() | comment()" mode="#current"/>
+      <xsl:apply-templates select="caption" mode="#current"/>
+      <xsl:choose>
+        <xsl:when test="colgroup | col">
+          <xsl:apply-templates select="colgroup | col" mode="#current"/>
+        </xsl:when>
+        <xsl:otherwise>
+          <!-- On normalise en ajoutant un colgroup générique -->
+          <colgroup xmlns="http://www.w3.org/1999/xhtml">
+            <xsl:attribute name="span" select="xhtml2cals:nb-cols(.)"/>
+          </colgroup>
+        </xsl:otherwise>
+      </xsl:choose>
+      <xsl:apply-templates select="thead, tfoot" mode="#current"/>
+      <xsl:choose>
+        <xsl:when test="tbody">
+          <xsl:apply-templates select="tbody" mode="#current"/>
+        </xsl:when>
+        <xsl:when test="tr">
+          <!-- On normalise en ajoutant un tbody -->
+          <!-- cela simplifie le traitement en bloc en mode expand-spans -->
+          <tbody xmlns="http://www.w3.org/1999/xhtml">
+            <xsl:apply-templates select="tr" mode="#current"/>
+          </tbody>
+        </xsl:when>
+      </xsl:choose>
+    </xsl:copy>
   </xsl:template>
 
   <xd:doc scope="component" xml:lang="fr">
@@ -142,7 +152,7 @@
     </xd:desc>
   </xd:doc>
   <xsl:function name="xhtml2cals:nb-cols" as="xs:integer">
-    <xsl:param name="table" as="element(xhtml:table)"/>
+    <xsl:param name="table" as="element(table)"/>
     <xsl:choose>
       <!-- Cas d'une table avec des cols -->
       <xsl:when test="$table//col">
@@ -156,6 +166,13 @@
     </xsl:choose>
   </xsl:function>
 
+  <!--Default copy-->
+  <xsl:template match="node() | @*" mode="xhtml2cals:normalize-to-xhtml">
+    <xsl:copy>
+      <xsl:apply-templates select="node() | @*" mode="#current"/>
+    </xsl:copy>
+  </xsl:template>
+  
   <xd:doc>
     <!-- ===================================================================-->
     <!-- Mode expand-spans: expansion des attributs colspan et rowspan      -->
@@ -173,7 +190,7 @@
     <xsl:copy>
       <xsl:copy-of select="@*"/>
       <xsl:call-template name="process-block">
-        <xsl:with-param name="source-block" select="self::*"/>
+        <xsl:with-param name="source-block" select="."/>
       </xsl:call-template>
     </xsl:copy>
   </xsl:template>
@@ -201,9 +218,9 @@
       <xsl:when test="count($processed-row/node()) = 0">
         <!-- Pas de ligne encore expansée. On est donc à la première ligne du bloc et donc seuls les colspan sont à traiter. -->
         <xsl:variable name="first-row" as="element()+">
-          <xsl:element name="tr" namespace="http://www.w3.org/1999/xhtml" inherit-namespaces="yes">
+          <tr xmlns="http://www.w3.org/1999/xhtml">
             <xsl:copy-of select="xhtml2cals:expand-colspans($source-block/tr[1])"/>
-          </xsl:element>
+          </tr>
         </xsl:variable>
         <!-- On retourne la première ligne expansée et on fait un appel récursif à la procédure pour traiter la ligne suivante. -->
         <xsl:copy-of select="$first-row"/>
@@ -240,15 +257,15 @@
     <xsl:param name="processed-row" as="element()"/>
     <!-- On traite d'abors les rowspans -->
     <xsl:variable name="expanding-row">
-      <xsl:element name="tr" namespace="http://www.w3.org/1999/xhtml" inherit-namespaces="yes">
+      <tr xmlns="http://www.w3.org/1999/xhtml">
         <xsl:copy-of select="xhtml2cals:expand-rowspans($source-row, $processed-row)"/>
-      </xsl:element>
+      </tr>
     </xsl:variable>
     <!-- et dans la ligne ou les rowspans ont été expansés, on traite ensuite les colspans -->
     <xsl:variable name="expanded-row" as="element()">
-      <xsl:element name="tr" namespace="http://www.w3.org/1999/xhtml" inherit-namespaces="yes">
+      <tr xmlns="http://www.w3.org/1999/xhtml">
         <xsl:copy-of select="xhtml2cals:expand-colspans($expanding-row/node())"/>
-      </xsl:element>
+      </tr>
     </xsl:variable>
     <xsl:copy-of select="$expanded-row"/>
   </xsl:function>
@@ -261,7 +278,6 @@
   </xd:doc>
   <xsl:function name="xhtml2cals:expand-colspans-test" as="item()+">
     <xsl:param name="source-row" as="element()"/>
-
     <xsl:for-each select="$source-row/*">
       <xsl:choose>
         <xsl:when test="@colspan &gt; 1">
@@ -381,11 +397,11 @@
       <xsl:when test="$src-column-no = $current-span-col-total + $current-span">
         <xsl:choose>
           <xsl:when test="$current-cell/@rowspan">
-            <xsl:element name="td" namespace="http://www.w3.org/1999/xhtml" inherit-namespaces="no">
+            <td xmlns="http://www.w3.org/1999/xhtml">
               <xsl:attribute name="xhtml2cals:rowspan" select="$current-cell/@rowspan"/>
               <xsl:copy-of select="$current-cell/(@* except @rowspan)"/>
               <xsl:copy-of select="$current-cell/node()"/>
-            </xsl:element>
+            </td>
           </xsl:when>
           <xsl:otherwise>
             <xsl:copy-of select="$current-cell" copy-namespaces="no"/>
@@ -420,15 +436,20 @@
     </xsl:copy>
   </xsl:template>
   
+  <xd:doc>
+    <!-- ===================================================================-->
+    <!-- Mode convert-to-cals  -->
+    <!-- ===================================================================-->
+  </xd:doc>
 
   <xsl:template match="table" mode="xhtml2cals:convert-to-cals">
-    <xsl:element name="table" namespace="{$xslLib:cals.ns.uri}">
+    <table>
       <xsl:copy-of select="@id | @class | @align | @width" copy-namespaces="no"/>
       <xsl:call-template name="compute-table-borders"/>
       <xsl:call-template name="compute-rowsep-colsep-defaults"/>
       <xsl:copy-of select="processing-instruction()|comment()"/>
       <xsl:apply-templates select="caption" mode="#current"/>
-      <xsl:element name="tgroup" namespace="{$xslLib:cals.ns.uri}">
+      <tgroup>
         <xsl:attribute name="cols" select="xhtml2cals:nb-cols(.)"/>
         <xsl:call-template name="make-colspec">
           <xsl:with-param name="context" select="colgroup | col"/>
@@ -438,8 +459,8 @@
           <xsl:with-param name="context" select="colgroup | col"/>
         </xsl:call-template> -->
         <xsl:apply-templates select="thead, tfoot, tbody" mode="#current"/>
-      </xsl:element>
-    </xsl:element>
+      </tgroup>
+    </table>
   </xsl:template>
   
   <xsl:template name="compute-table-borders">
@@ -524,7 +545,7 @@
     </xsl:choose>
   </xsl:template>
   
-  <!-- template recursif: On parcourt la un element col ou colgroup, on génère le ou les colspec 
+  <!-- template recursif: On parcourt un element col ou colgroup, on génère le ou les colspec 
         correspondant, -->
   <xsl:template name="make-colspec">
     <!-- colgroup list or col list -->
@@ -581,7 +602,6 @@
     </xsl:choose>
   </xsl:template>
   
-  
   <!-- template recursif: On parcourt la un element col ou colgroup, on génère le ou les spanspec 
         correspondant, -->
   <xsl:template name="make-spanspec">
@@ -635,55 +655,52 @@
     </xsl:choose>
   </xsl:template>
   
-  
   <xsl:template match="caption" mode="xhtml2cals:convert-to-cals">
-    <xsl:element name="title" namespace="{$xslLib:cals.ns.uri}">
+    <title>
       <xsl:copy-of select="@id | @class | @style" copy-namespaces="no"/>
       <xsl:apply-templates select="node()" mode="#current"/>
-    </xsl:element>
+    </title>
   </xsl:template>
   
   <xsl:template match="thead" mode="xhtml2cals:convert-to-cals">
-    <xsl:element name="thead" namespace="{$xslLib:cals.ns.uri}">
+    <thead>
       <xsl:copy-of select="@id | @class | @style | @align | @char | @charoff | @valign"
         copy-namespaces="no"/>
       <xsl:apply-templates select="node()" mode="#current"/>
-    </xsl:element>
+    </thead>
   </xsl:template>
   
   <xsl:template match="tfoot" mode="xhtml2cals:convert-to-cals">
-    <xsl:element name="tfoot" namespace="{$xslLib:cals.ns.uri}">
+    <tfoot>
       <xsl:copy-of select="@id | @class | @style | @align | @char | @charoff | @valign"
         copy-namespaces="no"/>
       <xsl:apply-templates select="node()" mode="#current"/>
-    </xsl:element>
+    </tfoot>
   </xsl:template>
   
   <xsl:template match="tbody" mode="xhtml2cals:convert-to-cals">
-    <xsl:element name="tbody" namespace="{$xslLib:cals.ns.uri}">
+    <tbody>
       <xsl:copy-of select="@id | @class | @style | @align | @char | @charoff | @valign"
         copy-namespaces="no"/>
       <xsl:apply-templates select="node()" mode="#current"/>
-    </xsl:element>
+    </tbody>
   </xsl:template>
   
   <xsl:template match="tr" mode="xhtml2cals:convert-to-cals">
-    <xsl:element name="row" namespace="{$xslLib:cals.ns.uri}">
+    <row>
       <xsl:copy-of select="@id | @class | @style | @align | @char | @charoff | @valign"
         copy-namespaces="no"/>
       <xsl:apply-templates select="node()" mode="#current"/>
-    </xsl:element>
+    </row>
   </xsl:template>
   
   <xsl:template match="td|th" mode="xhtml2cals:convert-to-cals">
-    <xsl:element name="entry" namespace="{$xslLib:cals.ns.uri}">
+    <entry>
       <xsl:variable name="curr-col-num" as="xs:integer" select="count(preceding-sibling::*) + 1"/>            
-      
       <!-- copy attributes with same name -->            
       <!-- If no @valign use col/@valign, @valign="baseline" has no correspondence in CALS -->
       <xsl:copy-of select="(@valign, (../../..//col)[$curr-col-num]/@valign)[1][not(. = 'baseline')]"/>
       <xsl:copy-of select="@id | @class | @align | @char | @charoff "/>
-      
       <xsl:if test="not(@xhtml2cals:DummyCell)">
         <xsl:if test="@xhtml2cals:rowspan &gt; 1">
           <xsl:attribute name="morerows" select="number(@xhtml2cals:rowspan)-1"/>
@@ -693,16 +710,8 @@
           <xsl:attribute name="nameend" select="concat('col', count(preceding-sibling::*)+@xhtml2cals:colspan)"/>
         </xsl:if>
       </xsl:if>
-      
       <!-- check CSS for definition of col or row separator -->
-      <xsl:variable name="rowspan" as="xs:integer">
-        <xsl:choose>
-          <xsl:when test="@xhtml2cals:rowspan">
-            <xsl:value-of select="@xhtml2cals:rowspan"/>
-          </xsl:when>
-          <xsl:otherwise>1</xsl:otherwise>
-        </xsl:choose>
-      </xsl:variable>
+      <xsl:variable name="rowspan" select="(@xhtml2cals:rowspan, 1)[1]" as="xs:integer"/>
       <!-- the CSS of the next col or row can have an impact on the separator settings -->
       <xsl:variable name="css-next-col" select="css:parse-inline(following-sibling::*[not(@xhtml2cals:DummyCell)][1]/@style)"/>
       <xsl:variable name="css-next-row" select="css:parse-inline(../following-sibling::*[$rowspan]/*[$curr-col-num]/@style)"/>
@@ -711,46 +720,31 @@
       <xsl:variable name="forced-rowsep" as="xs:boolean">
         <xsl:choose>
           <!-- force separator for last row in header and body and footer -->
-          <xsl:when test="ancestor::table[1]/@rules = 'groups' and not(../following-sibling::tr)">true</xsl:when>
-          <xsl:when test="ancestor::table[1]/@rules = 'rows'">true</xsl:when>
-          <xsl:when test="ancestor::table[1]/@rules = 'all'">true</xsl:when>
-          <xsl:otherwise>false</xsl:otherwise>
+          <xsl:when test="ancestor::table[1]/@rules = 'groups' and not(../following-sibling::tr)"><xsl:sequence select="true()"/></xsl:when>
+          <xsl:when test="ancestor::table[1]/@rules = 'rows'"><xsl:sequence select="true()"/></xsl:when>
+          <xsl:when test="ancestor::table[1]/@rules = 'all'"><xsl:sequence select="true()"/></xsl:when>
+          <xsl:otherwise><xsl:sequence select="false()"/></xsl:otherwise>
         </xsl:choose>
       </xsl:variable>
       <xsl:variable name="forced-colsep" as="xs:boolean">
         <xsl:choose>
-          <xsl:when test="ancestor::table[1]/@rules = 'cols'">true</xsl:when>
-          <xsl:when test="ancestor::table[1]/@rules = 'all'">true</xsl:when>
-          <xsl:otherwise>false</xsl:otherwise>
+          <xsl:when test="ancestor::table[1]/@rules = 'cols'"><xsl:sequence select="true()"/></xsl:when>
+          <xsl:when test="ancestor::table[1]/@rules = 'all'"><xsl:sequence select="true()"/></xsl:when>
+          <xsl:otherwise><xsl:sequence select="false()"/></xsl:otherwise>
         </xsl:choose>
       </xsl:variable>
       <xsl:choose>
         <xsl:when test="$forced-colsep or css:definesBorderRight($css) or css:definesBorderLeft($css-next-col)">
-          <xsl:choose>
-            <xsl:when test="$forced-colsep or css:showBorderRight($css) or css:showBorderLeft($css-next-col)">
-              <xsl:attribute name="colsep">yes</xsl:attribute>
-            </xsl:when>
-            <xsl:otherwise>
-              <xsl:attribute name="colsep">no</xsl:attribute>
-            </xsl:otherwise>
-          </xsl:choose>
+          <xsl:attribute name="colsep" select="if ($forced-colsep or css:showBorderRight($css) or css:showBorderLeft($css-next-col)) then('yes') else('no')"/>
         </xsl:when>
       </xsl:choose>
       <xsl:choose>
         <xsl:when test="$forced-rowsep or css:definesBorderBottom($css) or css:definesBorderTop($css-next-row)">
-          <xsl:choose>
-            <xsl:when test="$forced-rowsep or css:showBorderBottom($css) or css:showBorderTop($css-next-row)">
-              <xsl:attribute name="rowsep">yes</xsl:attribute>
-            </xsl:when>
-            <xsl:otherwise>
-              <xsl:attribute name="rowsep">no</xsl:attribute>
-            </xsl:otherwise>
-          </xsl:choose>
+          <xsl:attribute name="rowsep" select="if ($forced-rowsep or css:showBorderBottom($css) or css:showBorderTop($css-next-row)) then ('yes') else ('no')"/>
         </xsl:when>
       </xsl:choose>
-      
       <xsl:apply-templates select="node()" mode="#current"/>
-    </xsl:element>
+    </entry>
   </xsl:template>
   
   <xsl:template match="td[@xhtml2cals:DummyCell='yes']|th[@xhtml2cals:DummyCell='yes']" mode="xhtml2cals:convert-to-cals" priority="15"/>
@@ -760,5 +754,82 @@
       <xsl:apply-templates select="@* | node()" mode="#current"/>
     </xsl:copy>
   </xsl:template>
+  
+  <xd:doc>
+    <!-- ======================================================================-->
+    <!-- Mode xhtml2cals:optimize-cals-->
+    <!-- ======================================================================-->
+  </xd:doc>
+  
+  <xsl:template match="@*|node()" mode="xhtml2cals:optimize-cals">
+    <xsl:copy>
+      <xsl:apply-templates select="@*|node()" mode="#current"/>
+    </xsl:copy>
+  </xsl:template>
+  
+  <xsl:template match="div[els:hasClass(., 'cals_table')][cals:table]" mode="xhtml2cals:optimize-cals">
+    <table>
+      <xsl:apply-templates select="@*" mode="#current"/>
+      <xsl:apply-templates select="cals:table[1]/@*" mode="#current"/>
+      <xsl:apply-templates select="node()" mode="#current"/>
+    </table>
+  </xsl:template>
+  
+  <xsl:template match="div[els:hasClass(., 'cals_table')]/cals:table" mode="xhtml2cals:optimize-cals">
+    <xsl:variable name="precedingTable" select="preceding-sibling::cals:table[1]" as="element(cals:table)?"/>
+    <!--Vérification de principe-->
+    <xsl:if test="exists($precedingTable)">
+      <xsl:for-each select="@*">
+        <xsl:variable name="att.name" select="name(.)" as="xs:string"/>
+        <xsl:variable name="att.value" select="." as="xs:string"/>
+        <xsl:if test="exists($precedingTable/@*[name() = $att.name]) and not($precedingTable/@*[name() = $att.name] = $att.value)">
+          <xsl:message>[ERROR] Attribute <xsl:value-of select="$att.name"/>="<xsl:value-of select="$att.value"/>" is not equal to preceding-sibling table attribute <xsl:value-of select="$att.value"/></xsl:message>
+        </xsl:if>
+      </xsl:for-each>
+    </xsl:if>
+    <xsl:apply-templates select="node()" mode="#current"/>
+  </xsl:template>
+  
+  <!--convert data-cals attributes to cals format when le html originaly comes from ths cals2html.xsl of the repo-->
+  <xsl:template match="@*[starts-with(local-name(), 'data-cals-')]" mode="xhtml2cals:optimize-cals">
+    <xsl:attribute name="{substring-after(local-name(), 'data-cals-')}" select="."/>
+  </xsl:template>
+  
+  <xsl:template match="@class" mode="xhtml2cals:optimize-cals">
+    <xsl:variable name="new-class" as="xs:string*">
+      <xsl:for-each select="tokenize(., '\s+')">
+        <xsl:variable name="value" select="." as="xs:string"/>
+        <xsl:choose>
+          <xsl:when test="starts-with($value, 'cals_')"/>
+          <xsl:otherwise>
+            <xsl:value-of select="$value"/>
+          </xsl:otherwise>
+        </xsl:choose>
+      </xsl:for-each>
+    </xsl:variable>
+    <xsl:if test="count($new-class) != 0">
+      <xsl:attribute name="class" select="string-join($new-class, ' ')"/>
+    </xsl:if>
+  </xsl:template>
+  
+  <xd:doc>
+    <!-- ======================================================================-->
+    <!-- Mode xhtml2cals:convert-cals-namespace -->
+    <!-- ======================================================================-->
+  </xd:doc>
+  
+  <xsl:template match="cals:*" mode="xhtml2cals:convert-cals-namespace">
+    <xsl:element name="{local-name(.)}" namespace="{$xslLib:cals.ns.uri}">
+      <xsl:apply-templates select="@* | node()" mode="#current"/>
+    </xsl:element>
+  </xsl:template>
+  
+  <!--default copy-->
+  <xsl:template match="@*|node()" mode="xhtml2cals:convert-cals-namespace">
+    <xsl:copy>
+      <xsl:apply-templates select="@*|node()" mode="#current"/>
+    </xsl:copy>
+  </xsl:template>
+  
   
 </xsl:stylesheet>
