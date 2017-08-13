@@ -850,7 +850,7 @@
   <xsl:function name="els:hasStyle" as="xs:boolean">
     <xsl:param name="e" as="element()"/>
     <xsl:param name="style" as="xs:string"/>
-    <xsl:sequence select="tokenize($e/@style, '\s+') = $style"/>
+    <xsl:sequence select="tokenize($e/@style, ';') = $style"/>
   </xsl:function>
   
   <xsl:function name="els:hasClass" as="xs:boolean">

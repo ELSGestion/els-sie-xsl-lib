@@ -18,9 +18,6 @@
 
   <xd:doc scope="stylesheet">
     <xd:desc>
-      <xd:p><xd:b>Created on:</xd:b> July 20, 2016</xd:p>
-      <xd:p><xd:b>Author:</xd:b> GMA</xd:p>
-      <xd:p><xd:b>Last Modified:</xd:b> GMA, 2016-08-04</xd:p>
       <xd:p xml:lang="fr">Cette feuille de style va traiter la conversion de tables xhtml en tables
         CALS.</xd:p>
       <xd:p xml:lang="fr">Les tables xhtml à convertir sont supposées valides.</xd:p>
@@ -349,9 +346,9 @@
         </xsl:when>
         <xsl:otherwise>
           <!-- Pas de cellule à insérer, on va copier la cellule de la ligne source  -->
-          <xsl:variable name="current-column" select="count(preceding-sibling::*) + 1"/>
+          <xsl:variable name="current-column" select="count(preceding-sibling::*) + 1" as="xs:integer"/>
           <xsl:variable name="spanned-row-cells"
-            select="count(preceding-sibling::*[@xhtml2cals:rowspan &gt; 1])"/>
+            select="count(preceding-sibling::*[@xhtml2cals:rowspan &gt; 1])" as="xs:integer"/>
           <xsl:copy-of
             select="xhtml2cals:select-cell($current-column - $spanned-row-cells, $source-row, 1, 0)"
             copy-namespaces="no"/>
@@ -464,18 +461,32 @@
         </xsl:when>
         <xsl:when test="not(@frame) and @border != 0">all</xsl:when>
         <xsl:when test="@style">
+          <xsl:variable name="style.parsed" select="css:parse-inline(@style)" as="element(css:css)"/>
+          <!--cf. http://www.datypic.com/sc/cals/a-nons_frame.html-->
           <xsl:choose>
-            <!-- FIXME parser le style, au lieu de tenter de reconnaitre ce qu'on a mis lors de la conversion inverse -->
-            <xsl:when test="contains(string(@style), 'border-collapse: collapse; border-top:1px solid black;')">top</xsl:when>
-            <xsl:when test="contains(string(@style), 'border-collapse: collapse; border-bottom:1px solid black;')">bottom</xsl:when>
-            <xsl:when test="contains(string(@style), 'border-collapse: collapse; border-top:1px solid black; border-bottom:1px solid black;')">topbot</xsl:when>
-            <xsl:when test="contains(string(@style), 'border-collapse: collapse; border-left:1px solid black; border-right:1px solid black;')">sides</xsl:when>
-            <xsl:when test="contains(string(@style), 'border-collapse: collapse; border:1px solid black;')">all</xsl:when>
-            <xsl:when test="contains(string(@style), 'border-collapse: collapse; border:none;')">none</xsl:when>
-            <xsl:otherwise>none</xsl:otherwise>
+            <xsl:when test="css:definesBorderTop($style.parsed) and css:definesBorderRight($style.parsed) and css:definesBorderBottom($style.parsed) and css:definesBorderLeft($style.parsed)">
+              <xsl:text>all</xsl:text>
+            </xsl:when>
+            <xsl:when test="css:definesBorderTop($style.parsed) and not(css:definesBorderRight($style.parsed)) and css:definesBorderBottom($style.parsed) and not(css:definesBorderLeft($style.parsed))">
+              <xsl:text>topbot</xsl:text>
+            </xsl:when>
+            <xsl:when test="not(css:definesBorderTop($style.parsed)) and css:definesBorderRight($style.parsed) and not(css:definesBorderBottom($style.parsed)) and css:definesBorderLeft($style.parsed)">
+              <xsl:text>sides</xsl:text>
+            </xsl:when>
+            <xsl:when test="css:definesBorderTop($style.parsed) and not(css:definesBorderRight($style.parsed)) and not(css:definesBorderBottom($style.parsed)) and not(css:definesBorderLeft($style.parsed))">
+              <xsl:text>top</xsl:text>
+            </xsl:when>
+            <xsl:when test="not(css:definesBorderTop($style.parsed)) and not(css:definesBorderRight($style.parsed)) and css:definesBorderBottom($style.parsed) and not(css:definesBorderLeft($style.parsed))">
+              <xsl:text>bottom</xsl:text>
+            </xsl:when>
+            <xsl:when test="not(css:definesBorderTop($style.parsed)) and not(css:definesBorderRight($style.parsed)) and not(css:definesBorderBottom($style.parsed)) and not(css:definesBorderLeft($style.parsed))">
+              <xsl:text>none</xsl:text>
+            </xsl:when>
           </xsl:choose>
         </xsl:when>
-        <xsl:otherwise>none</xsl:otherwise>
+        <xsl:otherwise>
+          <xsl:text>none</xsl:text>
+        </xsl:otherwise>
       </xsl:choose>
     </xsl:attribute>
   </xsl:template>
