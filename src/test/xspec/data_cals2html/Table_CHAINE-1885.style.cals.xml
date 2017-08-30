@@ -1,363 +1,361 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<div xmlns="http://www.w3.org/1999/xhtml" class="table FRCHS-style2" id="FRCHS_2016-03_UI-FA0B2AD3C0D9F35BF8B349844A1E1A53_TABLE-2">
+<?xml version="1.0" encoding="UTF-8"?><?xml-model href="ext-models:/ext-models/oasis/cals/cals.nvdl" type="application/xml" schematypens="http://purl.oclc.org/dsdl/nvdl/ns/structure/1.0"?>
+<table xmlns="http://docs.oasis-open.org/ns/oasis-exchange/table" id="FRCHS_2016-03_UI-FA0B2AD3C0D9F35BF8B349844A1E1A53_TABLE-2" tabstyle="FRCHS-style2" frame="all" colsep="no" rowsep="no">
   <titre xmlns="local">Tableau-liste des filiales et des participations</titre>
-  <table xmlns="http://docs.oasis-open.org/ns/oasis-exchange/table" class="tgroup cals_cals cals_orient partial_width_table " frame="none" colsep="no" rowsep="no">
-    <tgroup cols="9">
-      <colspec colname="col1"/>
-      <colspec colname="col2"/>
-      <colspec colname="col3"/>
-      <colspec colname="col4"/>
-      <colspec colname="col5"/>
-      <colspec colname="col6"/>
-      <colspec colname="col7"/>
-      <colspec colname="col8"/>
-      <colspec colname="col9"/>
-      <tbody>
-        <row>
-          <entry class="table-contents-font-reduction">
-            <al xmlns="local"/>
-          </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
-            <al xmlns="local"/>
-          </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
-            <al xmlns="local"/>
-          </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
-            <al xmlns="local"/>
-          </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
-            <al xmlns="local"/>
-          </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
-            <al xmlns="local"/>
-          </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
-            <al xmlns="local"/>
-          </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
-            <al xmlns="local"/>
-          </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
-            <al xmlns="local"/>
-          </entry>
-        </row>
-        <row>
-          <entry class="table-contents-font-reduction">
-            <al xmlns="local">
-              <motRep/>
-            </al>
-          </entry>
-          <entry class="table-contents-font-reduction">
-            <al xmlns="local">
-              <motRep>Capital social</motRep>
-            </al>
-          </entry>
-          <entry class="table-contents-font-reduction">
-            <al xmlns="local">
-              <motRep>CP autres que le capital</motRep>
-            </al>
-          </entry>
-          <entry class="table-contents-font-reduction">
-            <al xmlns="local">
-              <motRep>QP du capital détenue </motRep>
-            </al>
-          </entry>
-          <entry class="table-contents-font-reduction">
-            <al xmlns="local">
-              <motRep>Valeur brute comptable des titres détenus</motRep>
-            </al>
-          </entry>
-          <entry class="table-contents-font-reduction">
-            <al xmlns="local">
-              <motRep>Valeur nette comptable des titres détenus</motRep>
-            </al>
-          </entry>
-          <entry class="table-contents-font-reduction">
-            <al xmlns="local">
-              <motRep>Chiffre d’affaires (HT) 2015 </motRep>
-            </al>
-          </entry>
-          <entry class="table-contents-font-reduction">
-            <al xmlns="local">
-              <motRep>Résultat 2015</motRep>
-            </al>
-          </entry>
-          <entry class="table-contents-font-reduction">
-            <al xmlns="local">
-              <motRep>Dividendes versés en 2015</motRep>
-            </al>
-          </entry>
-        </row>
-        <row>
-          <entry class="table-contents-font-reduction">
-            <al xmlns="local">
-              <motRep/>
-            </al>
-          </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
-            <al xmlns="local">(en devise)</al>
-          </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
-            <al xmlns="local">(en devise)</al>
-          </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
-            <al xmlns="local">(en %)</al>
-          </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
-            <al xmlns="local">(en euros)</al>
-          </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
-            <al xmlns="local">(en euros)</al>
-          </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
-            <al xmlns="local">(en euros)</al>
-          </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
-            <al xmlns="local">(en euros)</al>
-          </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
-            <al xmlns="local">(en euros)</al>
-          </entry>
-        </row>
-        <row>
-          <entry class="table-contents-font-reduction" namest="col1" nameend="col9" rowsep="yes">
-            <al xmlns="local">
-              <motRep>Filiales (détenues à + 50 %)</motRep>
-            </al>
-          </entry>
-        </row>
-        <row>
-          <entry class="table-contents-font-reduction" rowsep="yes">
-            <al xmlns="local">
-              <motRep>SA Your shoes</motRep>
-            </al>
-            <al xmlns="local">Normandie</al>
-            <al xmlns="local">SIREN 123456789</al>
-            <al xmlns="local">Siège : Paris</al>
-          </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
-            <al xmlns="local">2 000 000</al>
-            <al xmlns="local">EUR</al>
-          </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
-            <al xmlns="local">3 458 658</al>
-            <al xmlns="local">EUR</al>
-          </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
-            <al xmlns="local">100 %</al>
-          </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
-            <al xmlns="local">3 346 766</al>
-          </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
-            <al xmlns="local">3 346 766</al>
-          </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
-            <al xmlns="local">9 287 622</al>
-          </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
-            <al xmlns="local">329 323</al>
-          </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
-            <al xmlns="local">–</al>
-          </entry>
-        </row>
-        <row>
-          <entry class="table-contents-font-reduction" rowsep="yes">
-            <al xmlns="local">
-              <motRep>SA Your shoes</motRep>
-            </al>
-            <al xmlns="local">Picardie</al>
-            <al xmlns="local">SIREN 123456788</al>
-            <al xmlns="local">Siège : Paris</al>
-          </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
-            <al xmlns="local">1 500 000</al>
-            <al xmlns="local">EUR</al>
-          </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
-            <al xmlns="local">10 587 528</al>
-            <al xmlns="local">EUR</al>
-          </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
-            <al xmlns="local">100 %</al>
-          </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
-            <al xmlns="local">2 748 684</al>
-          </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
-            <al xmlns="local">2 748 684</al>
-          </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
-            <al xmlns="local">7 392 742</al>
-          </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
-            <al xmlns="local">529 374</al>
-          </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
-            <al xmlns="local">353 648</al>
-          </entry>
-        </row>
-        <row>
-          <entry class="table-contents-font-reduction" rowsep="yes">
-            <al xmlns="local">
-              <motRep>SA Your shoes</motRep>
-            </al>
-            <al xmlns="local">Aquitaine</al>
-            <al xmlns="local">SIREN 123456786</al>
-            <al xmlns="local">Siège : Paris</al>
-          </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
-            <al xmlns="local">1 500 000</al>
-            <al xmlns="local">EUR</al>
-          </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
-            <al xmlns="local">4 896 498</al>
-            <al xmlns="local">EUR</al>
-          </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
-            <al xmlns="local">100 %</al>
-          </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
-            <al xmlns="local">2 537 884</al>
-          </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
-            <al xmlns="local">2 537 884</al>
-          </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
-            <al xmlns="local">4 927 430</al>
-          </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
-            <al xmlns="local">339 427</al>
-          </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
-            <al xmlns="local">321 902</al>
-          </entry>
-        </row>
-        <row>
-          <entry class="table-contents-font-reduction" rowsep="yes">
-            <al xmlns="local">
-              <motRep>Best shoes AU</motRep>
-              <rNote id="FRCHS_2016-03_UI-FA0B2AD3C0D9F35BF8B349844A1E1A53_UI-5C787B3C-D0D7-4A00-9037-2A5AEE0AF928rNote_1" num="1" ref="FRCHS_2016-03_UI-FA0B2AD3C0D9F35BF8B349844A1E1A53_UI-5C787B3C-D0D7-4A00-9037-2A5AEE0AF928"/>
-            </al>
-            <al xmlns="local">Siège : Australia City</al>
-          </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
-            <al xmlns="local">1 000 000</al>
-            <al xmlns="local">AUD</al>
-          </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
-            <al xmlns="local">1 265 692</al>
-            <al xmlns="local">AUD</al>
-          </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
-            <al xmlns="local">100 %</al>
-          </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
-            <al xmlns="local">1 920 928</al>
-          </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
-            <al xmlns="local">1 920 928</al>
-          </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
-            <al xmlns="local">3 681 016</al>
-          </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
-            <al xmlns="local">426 439</al>
-          </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
-            <al xmlns="local">567 480</al>
-          </entry>
-        </row>
-        <row>
-          <entry class="table-contents-font-reduction" rowsep="yes">
-            <al xmlns="local">
-              <motRep>Your shoes AU</motRep>
-            </al>
-            <al xmlns="local">Corp. <rNote id="FRCHS_2016-03_UI-FA0B2AD3C0D9F35BF8B349844A1E1A53_UI-5C787B3C-D0D7-4A00-9037-2A5AEE0AF928rNote_2" num="1" ref="FRCHS_2016-03_UI-FA0B2AD3C0D9F35BF8B349844A1E1A53_UI-5C787B3C-D0D7-4A00-9037-2A5AEE0AF928"/></al>
-            <al xmlns="local">Siège : Australia City</al>
-          </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
-            <al xmlns="local">1 800 000</al>
-            <al xmlns="local">AUD</al>
-          </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
-            <al xmlns="local">7 019 219</al>
-            <al xmlns="local">AUD</al>
-          </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
-            <al xmlns="local">100 %</al>
-          </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
-            <al xmlns="local">2 986 778</al>
-          </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
-            <al xmlns="local">2 986 778</al>
-          </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
-            <al xmlns="local">5 382 034</al>
-          </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
-            <al xmlns="local">263 940</al>
-          </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
-            <al xmlns="local">27 754</al>
-          </entry>
-        </row>
-        <row>
-          <entry class="table-contents-font-reduction" rowsep="yes">
-            <al xmlns="local">
-              <motRep>Total</motRep>
-            </al>
-          </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
-            <al xmlns="local">
-              <motRep>– </motRep>
-            </al>
-          </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
-            <al xmlns="local">
-              <motRep>– </motRep>
-            </al>
-          </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
-            <al xmlns="local">
-              <motRep>– </motRep>
-            </al>
-          </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
-            <al xmlns="local">
-              <motRep>13 541 040</motRep>
-            </al>
-          </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
-            <al xmlns="local">
-              <motRep>13 541 040</motRep>
-            </al>
-          </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
-            <al xmlns="local">
-              <motRep>30 670 844</motRep>
-            </al>
-          </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
-            <al xmlns="local">
-              <motRep>1 888 503</motRep>
-            </al>
-          </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
-            <al xmlns="local">
-              <motRep>1 270 784</motRep>
-            </al>
-          </entry>
-        </row>
-      </tbody>
-    </tgroup>
-  </table>
+  <tgroup cols="9">
+    <colspec colname="col1"/>
+    <colspec colname="col2"/>
+    <colspec colname="col3"/>
+    <colspec colname="col4"/>
+    <colspec colname="col5"/>
+    <colspec colname="col6"/>
+    <colspec colname="col7"/>
+    <colspec colname="col8"/>
+    <colspec colname="col9"/>
+    <tbody>
+      <row>
+        <entry class="table-contents-font-reduction">
+          <al xmlns="local"/>
+        </entry>
+        <entry class="table-contents-font-reduction" rowsep="yes">
+          <al xmlns="local"/>
+        </entry>
+        <entry class="table-contents-font-reduction" rowsep="yes">
+          <al xmlns="local"/>
+        </entry>
+        <entry class="table-contents-font-reduction" rowsep="yes">
+          <al xmlns="local"/>
+        </entry>
+        <entry class="table-contents-font-reduction" rowsep="yes">
+          <al xmlns="local"/>
+        </entry>
+        <entry class="table-contents-font-reduction" rowsep="yes">
+          <al xmlns="local"/>
+        </entry>
+        <entry class="table-contents-font-reduction" rowsep="yes">
+          <al xmlns="local"/>
+        </entry>
+        <entry class="table-contents-font-reduction" rowsep="yes">
+          <al xmlns="local"/>
+        </entry>
+        <entry class="table-contents-font-reduction" rowsep="yes">
+          <al xmlns="local"/>
+        </entry>
+      </row>
+      <row>
+        <entry class="table-contents-font-reduction">
+          <al xmlns="local">
+            <motRep/>
+          </al>
+        </entry>
+        <entry class="table-contents-font-reduction">
+          <al xmlns="local">
+            <motRep>Capital social</motRep>
+          </al>
+        </entry>
+        <entry class="table-contents-font-reduction">
+          <al xmlns="local">
+            <motRep>CP autres que le capital</motRep>
+          </al>
+        </entry>
+        <entry class="table-contents-font-reduction">
+          <al xmlns="local">
+            <motRep>QP du capital détenue </motRep>
+          </al>
+        </entry>
+        <entry class="table-contents-font-reduction">
+          <al xmlns="local">
+            <motRep>Valeur brute comptable des titres détenus</motRep>
+          </al>
+        </entry>
+        <entry class="table-contents-font-reduction">
+          <al xmlns="local">
+            <motRep>Valeur nette comptable des titres détenus</motRep>
+          </al>
+        </entry>
+        <entry class="table-contents-font-reduction">
+          <al xmlns="local">
+            <motRep>Chiffre d’affaires (HT) 2015 </motRep>
+          </al>
+        </entry>
+        <entry class="table-contents-font-reduction">
+          <al xmlns="local">
+            <motRep>Résultat 2015</motRep>
+          </al>
+        </entry>
+        <entry class="table-contents-font-reduction">
+          <al xmlns="local">
+            <motRep>Dividendes versés en 2015</motRep>
+          </al>
+        </entry>
+      </row>
+      <row>
+        <entry class="table-contents-font-reduction">
+          <al xmlns="local">
+            <motRep/>
+          </al>
+        </entry>
+        <entry class="table-contents-font-reduction" rowsep="yes">
+          <al xmlns="local">(en devise)</al>
+        </entry>
+        <entry class="table-contents-font-reduction" rowsep="yes">
+          <al xmlns="local">(en devise)</al>
+        </entry>
+        <entry class="table-contents-font-reduction" rowsep="yes">
+          <al xmlns="local">(en %)</al>
+        </entry>
+        <entry class="table-contents-font-reduction" rowsep="yes">
+          <al xmlns="local">(en euros)</al>
+        </entry>
+        <entry class="table-contents-font-reduction" rowsep="yes">
+          <al xmlns="local">(en euros)</al>
+        </entry>
+        <entry class="table-contents-font-reduction" rowsep="yes">
+          <al xmlns="local">(en euros)</al>
+        </entry>
+        <entry class="table-contents-font-reduction" rowsep="yes">
+          <al xmlns="local">(en euros)</al>
+        </entry>
+        <entry class="table-contents-font-reduction" rowsep="yes">
+          <al xmlns="local">(en euros)</al>
+        </entry>
+      </row>
+      <row>
+        <entry class="table-contents-font-reduction" namest="col1" nameend="col9" rowsep="yes">
+          <al xmlns="local">
+            <motRep>Filiales (détenues à + 50 %)</motRep>
+          </al>
+        </entry>
+      </row>
+      <row>
+        <entry class="table-contents-font-reduction" rowsep="yes">
+          <al xmlns="local">
+            <motRep>SA Your shoes</motRep>
+          </al>
+          <al xmlns="local">Normandie</al>
+          <al xmlns="local">SIREN 123456789</al>
+          <al xmlns="local">Siège : Paris</al>
+        </entry>
+        <entry class="table-contents-font-reduction" rowsep="yes">
+          <al xmlns="local">2 000 000</al>
+          <al xmlns="local">EUR</al>
+        </entry>
+        <entry class="table-contents-font-reduction" rowsep="yes">
+          <al xmlns="local">3 458 658</al>
+          <al xmlns="local">EUR</al>
+        </entry>
+        <entry class="table-contents-font-reduction" rowsep="yes">
+          <al xmlns="local">100 %</al>
+        </entry>
+        <entry class="table-contents-font-reduction" rowsep="yes">
+          <al xmlns="local">3 346 766</al>
+        </entry>
+        <entry class="table-contents-font-reduction" rowsep="yes">
+          <al xmlns="local">3 346 766</al>
+        </entry>
+        <entry class="table-contents-font-reduction" rowsep="yes">
+          <al xmlns="local">9 287 622</al>
+        </entry>
+        <entry class="table-contents-font-reduction" rowsep="yes">
+          <al xmlns="local">329 323</al>
+        </entry>
+        <entry class="table-contents-font-reduction" rowsep="yes">
+          <al xmlns="local">–</al>
+        </entry>
+      </row>
+      <row>
+        <entry class="table-contents-font-reduction" rowsep="yes">
+          <al xmlns="local">
+            <motRep>SA Your shoes</motRep>
+          </al>
+          <al xmlns="local">Picardie</al>
+          <al xmlns="local">SIREN 123456788</al>
+          <al xmlns="local">Siège : Paris</al>
+        </entry>
+        <entry class="table-contents-font-reduction" rowsep="yes">
+          <al xmlns="local">1 500 000</al>
+          <al xmlns="local">EUR</al>
+        </entry>
+        <entry class="table-contents-font-reduction" rowsep="yes">
+          <al xmlns="local">10 587 528</al>
+          <al xmlns="local">EUR</al>
+        </entry>
+        <entry class="table-contents-font-reduction" rowsep="yes">
+          <al xmlns="local">100 %</al>
+        </entry>
+        <entry class="table-contents-font-reduction" rowsep="yes">
+          <al xmlns="local">2 748 684</al>
+        </entry>
+        <entry class="table-contents-font-reduction" rowsep="yes">
+          <al xmlns="local">2 748 684</al>
+        </entry>
+        <entry class="table-contents-font-reduction" rowsep="yes">
+          <al xmlns="local">7 392 742</al>
+        </entry>
+        <entry class="table-contents-font-reduction" rowsep="yes">
+          <al xmlns="local">529 374</al>
+        </entry>
+        <entry class="table-contents-font-reduction" rowsep="yes">
+          <al xmlns="local">353 648</al>
+        </entry>
+      </row>
+      <row>
+        <entry class="table-contents-font-reduction" rowsep="yes">
+          <al xmlns="local">
+            <motRep>SA Your shoes</motRep>
+          </al>
+          <al xmlns="local">Aquitaine</al>
+          <al xmlns="local">SIREN 123456786</al>
+          <al xmlns="local">Siège : Paris</al>
+        </entry>
+        <entry class="table-contents-font-reduction" rowsep="yes">
+          <al xmlns="local">1 500 000</al>
+          <al xmlns="local">EUR</al>
+        </entry>
+        <entry class="table-contents-font-reduction" rowsep="yes">
+          <al xmlns="local">4 896 498</al>
+          <al xmlns="local">EUR</al>
+        </entry>
+        <entry class="table-contents-font-reduction" rowsep="yes">
+          <al xmlns="local">100 %</al>
+        </entry>
+        <entry class="table-contents-font-reduction" rowsep="yes">
+          <al xmlns="local">2 537 884</al>
+        </entry>
+        <entry class="table-contents-font-reduction" rowsep="yes">
+          <al xmlns="local">2 537 884</al>
+        </entry>
+        <entry class="table-contents-font-reduction" rowsep="yes">
+          <al xmlns="local">4 927 430</al>
+        </entry>
+        <entry class="table-contents-font-reduction" rowsep="yes">
+          <al xmlns="local">339 427</al>
+        </entry>
+        <entry class="table-contents-font-reduction" rowsep="yes">
+          <al xmlns="local">321 902</al>
+        </entry>
+      </row>
+      <row>
+        <entry class="table-contents-font-reduction" rowsep="yes">
+          <al xmlns="local">
+            <motRep>Best shoes AU</motRep>
+            <rNote id="FRCHS_2016-03_UI-FA0B2AD3C0D9F35BF8B349844A1E1A53_UI-5C787B3C-D0D7-4A00-9037-2A5AEE0AF928rNote_1" num="1" ref="FRCHS_2016-03_UI-FA0B2AD3C0D9F35BF8B349844A1E1A53_UI-5C787B3C-D0D7-4A00-9037-2A5AEE0AF928"/>
+          </al>
+          <al xmlns="local">Siège : Australia City</al>
+        </entry>
+        <entry class="table-contents-font-reduction" rowsep="yes">
+          <al xmlns="local">1 000 000</al>
+          <al xmlns="local">AUD</al>
+        </entry>
+        <entry class="table-contents-font-reduction" rowsep="yes">
+          <al xmlns="local">1 265 692</al>
+          <al xmlns="local">AUD</al>
+        </entry>
+        <entry class="table-contents-font-reduction" rowsep="yes">
+          <al xmlns="local">100 %</al>
+        </entry>
+        <entry class="table-contents-font-reduction" rowsep="yes">
+          <al xmlns="local">1 920 928</al>
+        </entry>
+        <entry class="table-contents-font-reduction" rowsep="yes">
+          <al xmlns="local">1 920 928</al>
+        </entry>
+        <entry class="table-contents-font-reduction" rowsep="yes">
+          <al xmlns="local">3 681 016</al>
+        </entry>
+        <entry class="table-contents-font-reduction" rowsep="yes">
+          <al xmlns="local">426 439</al>
+        </entry>
+        <entry class="table-contents-font-reduction" rowsep="yes">
+          <al xmlns="local">567 480</al>
+        </entry>
+      </row>
+      <row>
+        <entry class="table-contents-font-reduction" rowsep="yes">
+          <al xmlns="local">
+            <motRep>Your shoes AU</motRep>
+          </al>
+          <al xmlns="local">Corp. <rNote id="FRCHS_2016-03_UI-FA0B2AD3C0D9F35BF8B349844A1E1A53_UI-5C787B3C-D0D7-4A00-9037-2A5AEE0AF928rNote_2" num="1" ref="FRCHS_2016-03_UI-FA0B2AD3C0D9F35BF8B349844A1E1A53_UI-5C787B3C-D0D7-4A00-9037-2A5AEE0AF928"/></al>
+          <al xmlns="local">Siège : Australia City</al>
+        </entry>
+        <entry class="table-contents-font-reduction" rowsep="yes">
+          <al xmlns="local">1 800 000</al>
+          <al xmlns="local">AUD</al>
+        </entry>
+        <entry class="table-contents-font-reduction" rowsep="yes">
+          <al xmlns="local">7 019 219</al>
+          <al xmlns="local">AUD</al>
+        </entry>
+        <entry class="table-contents-font-reduction" rowsep="yes">
+          <al xmlns="local">100 %</al>
+        </entry>
+        <entry class="table-contents-font-reduction" rowsep="yes">
+          <al xmlns="local">2 986 778</al>
+        </entry>
+        <entry class="table-contents-font-reduction" rowsep="yes">
+          <al xmlns="local">2 986 778</al>
+        </entry>
+        <entry class="table-contents-font-reduction" rowsep="yes">
+          <al xmlns="local">5 382 034</al>
+        </entry>
+        <entry class="table-contents-font-reduction" rowsep="yes">
+          <al xmlns="local">263 940</al>
+        </entry>
+        <entry class="table-contents-font-reduction" rowsep="yes">
+          <al xmlns="local">27 754</al>
+        </entry>
+      </row>
+      <row>
+        <entry class="table-contents-font-reduction" rowsep="yes">
+          <al xmlns="local">
+            <motRep>Total</motRep>
+          </al>
+        </entry>
+        <entry class="table-contents-font-reduction" rowsep="yes">
+          <al xmlns="local">
+            <motRep>– </motRep>
+          </al>
+        </entry>
+        <entry class="table-contents-font-reduction" rowsep="yes">
+          <al xmlns="local">
+            <motRep>– </motRep>
+          </al>
+        </entry>
+        <entry class="table-contents-font-reduction" rowsep="yes">
+          <al xmlns="local">
+            <motRep>– </motRep>
+          </al>
+        </entry>
+        <entry class="table-contents-font-reduction" rowsep="yes">
+          <al xmlns="local">
+            <motRep>13 541 040</motRep>
+          </al>
+        </entry>
+        <entry class="table-contents-font-reduction" rowsep="yes">
+          <al xmlns="local">
+            <motRep>13 541 040</motRep>
+          </al>
+        </entry>
+        <entry class="table-contents-font-reduction" rowsep="yes">
+          <al xmlns="local">
+            <motRep>30 670 844</motRep>
+          </al>
+        </entry>
+        <entry class="table-contents-font-reduction" rowsep="yes">
+          <al xmlns="local">
+            <motRep>1 888 503</motRep>
+          </al>
+        </entry>
+        <entry class="table-contents-font-reduction" rowsep="yes">
+          <al xmlns="local">
+            <motRep>1 270 784</motRep>
+          </al>
+        </entry>
+      </row>
+    </tbody>
+  </tgroup>
   <tblNote xmlns="local">
     <note id="FRCHS_2016-03_UI-FA0B2AD3C0D9F35BF8B349844A1E1A53_UI-5C787B3C-D0D7-4A00-9037-2A5AEE0AF928" num="1">
       <al>Acquisitions de l’exercice</al>
     </note>
   </tblNote>
-</div>
+</table>
