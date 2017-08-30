@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><!--http://www.iso.org/schema/isosts/cals/test/isosts_tables.xml--><!--cf. http://www.iso.org/schema/isosts/cals/test/isosts_tables.html-->
+<?xml version="1.0" encoding="UTF-8"?><!--cf. http://www.iso.org/schema/isosts/cals/test/isosts_tables.html--><?xml-model href="ext-models:/ext-models/oasis/cals/cals.nvdl" type="application/xml" schematypens="http://purl.oclc.org/dsdl/nvdl/ns/structure/1.0"?>
 <standard>
   <front>
     <iso-meta>
@@ -42,16 +42,16 @@
           <title>No border no col definition table</title>
         </caption>
         <div xmlns="http://www.w3.org/1999/xhtml" class="table">
-          <table class="tgroup cals_cals cals_orient full_width_table " style="border-collapse: collapse; border:none;">
+          <table class="tgroup cals_cals cals_orient full_width_table" style="border-collapse: collapse; border:none;">
             <colgroup/>
             <tbody>
               <tr class="cals_odd">
-                <td style="border-right:1px solid black;border-bottom:1px solid black;text-align:left;">table cell text</td>
-                <td style="border-right:1px solid black;border-bottom:1px solid black;text-align:left;">table cell text</td>
+                <td style="text-align:left;">table cell text</td>
+                <td style="text-align:left;">table cell text</td>
               </tr>
               <tr class="cals_even">
-                <td style="border-right:1px solid black;border-bottom:1px solid black;text-align:left;">table cell text</td>
-                <td style="border-right:1px solid black;border-bottom:1px solid black;text-align:left;">table cell text</td>
+                <td style="text-align:left;">table cell text</td>
+                <td style="text-align:left;">table cell text</td>
               </tr>
             </tbody>
           </table>
@@ -63,7 +63,7 @@
           <title>Table with explicit border definitions, 2px table and table header border</title>
         </caption>
         <div xmlns="http://www.w3.org/1999/xhtml" class="table">
-          <table class="tgroup cals_cals cals_orient full_width_table " style="border-collapse: collapse; border:1px solid black;">
+          <table class="tgroup cals_cals cals_orient full_width_table" style="border-collapse: collapse; border:1px solid black;">
             <colgroup>
               <col style="width:NaN%;"/>
               <col style="width:NaN%;"/>
@@ -115,7 +115,7 @@
           <title>Spanning cells in header</title>
         </caption>
         <div xmlns="http://www.w3.org/1999/xhtml" class="table">
-          <table class="tgroup cals_cals cals_orient full_width_table " style="border-collapse: collapse; border:1px solid black;">
+          <table class="tgroup cals_cals cals_orient full_width_table" style="border-collapse: collapse; border:1px solid black;">
             <colgroup>
               <col style="width:NaN%;"/>
               <col style="width:NaN%;"/>
@@ -156,7 +156,7 @@
           <title>Table with footer</title>
         </caption>
         <div xmlns="http://www.w3.org/1999/xhtml" class="table">
-          <table class="tgroup cals_cals cals_orient full_width_table " style="border-collapse: collapse; border:1px solid black;">
+          <table class="tgroup cals_cals cals_orient full_width_table" style="border-collapse: collapse; border:1px solid black;">
             <colgroup>
               <col style="width:NaN%;"/>
               <col style="width:NaN%;"/>
@@ -197,7 +197,7 @@
           <title>Table with various col and rowspans</title>
         </caption>
         <div xmlns="http://www.w3.org/1999/xhtml" class="table">
-          <table class="tgroup cals_cals cals_orient full_width_table " style="border-collapse: collapse; border:1px solid black;">
+          <table class="tgroup cals_cals cals_orient full_width_table" style="border-collapse: collapse; border:1px solid black;">
             <colgroup>
               <col style="width:NaN%;"/>
               <col style="width:NaN%;"/>
@@ -266,7 +266,7 @@
           <title>Table with specific cells having no border</title>
         </caption>
         <div xmlns="http://www.w3.org/1999/xhtml" class="table">
-          <table class="tgroup cals_cals cals_orient full_width_table " style="border-collapse: collapse; border:1px solid black;">
+          <table class="tgroup cals_cals cals_orient full_width_table" style="border-collapse: collapse; border:1px solid black;">
             <colgroup>
               <col style="width:NaN%;"/>
               <col style="width:NaN%;"/>
@@ -292,10 +292,10 @@
                 <td style="border-right:1px solid black;border-bottom:1px solid black;text-align:center;vertical-align:top;">table cell text</td>
               </tr>
               <tr class="cals_even">
+                <td style="border-right:1px solid black;text-align:center;vertical-align:top;">table cell text</td>
+                <td style="border-bottom:1px solid black;text-align:center;vertical-align:top;">table cell text</td>
                 <td style="border-right:1px solid black;border-bottom:1px solid black;text-align:center;vertical-align:top;">table cell text</td>
-                <td style="border-right:1px solid black;border-bottom:1px solid black;text-align:center;vertical-align:top;">table cell text</td>
-                <td style="border-right:1px solid black;border-bottom:1px solid black;text-align:center;vertical-align:top;">table cell text</td>
-                <td style="border-right:1px solid black;border-bottom:1px solid black;text-align:center;vertical-align:top;">table cell text</td>
+                <td style="border-right:1px solid black;text-align:center;vertical-align:top;">table cell text</td>
               </tr>
               <tr class="cals_odd">
                 <td style="border-right:1px solid black;border-bottom:1px solid black;text-align:center;vertical-align:top;">table cell text</td>
@@ -305,7 +305,7 @@
               </tr>
               <tr class="cals_even">
                 <td style="border-right:1px solid black;border-bottom:1px solid black;text-align:center;vertical-align:top;">table cell text</td>
-                <td style="border-right:1px solid black;border-bottom:1px solid black;text-align:center;vertical-align:top;">table cell text</td>
+                <td style="border-bottom:1px solid black;text-align:center;vertical-align:top;">table cell text</td>
                 <td style="border-right:1px solid black;border-bottom:1px solid black;text-align:center;vertical-align:top;">table cell text</td>
                 <td style="border-right:1px solid black;border-bottom:1px solid black;text-align:center;vertical-align:top;">table cell text</td>
               </tr>
@@ -325,7 +325,7 @@
           <title>Table with col and row spans where CSS of neighboring cells defines colsep and rowsep</title>
         </caption>
         <div xmlns="http://www.w3.org/1999/xhtml" class="table">
-          <table class="tgroup cals_cals cals_orient full_width_table " style="border-collapse: collapse; border:1px solid black;">
+          <table class="tgroup cals_cals cals_orient full_width_table" style="border-collapse: collapse; border:1px solid black;">
             <colgroup>
               <col style="width:NaN%;"/>
               <col style="width:NaN%;"/>
@@ -334,27 +334,27 @@
             </colgroup>
             <thead>
               <tr class="cals_odd">
-                <td style="border-right:1px solid black;border-bottom:1px solid black;text-align:left;">table default</td>
-                <td style="border-right:1px solid black;border-bottom:1px solid black;text-align:left;">table default</td>
-                <td style="border-right:1px solid black;border-bottom:1px solid black;text-align:left;">table default</td>
-                <td style="border-right:1px solid black;border-bottom:1px solid black;text-align:left;">table default</td>
+                <td style="text-align:left;">table default</td>
+                <td style="text-align:left;">table default</td>
+                <td style="text-align:left;">table default</td>
+                <td style="text-align:left;">table default</td>
               </tr>
             </thead>
             <tbody>
               <tr class="cals_odd">
-                <td style="border-right:1px solid black;border-bottom:1px solid black;text-align:left;" colspan="2">rowsep=no</td>
-                <td style="border-right:1px solid black;border-bottom:1px solid black;text-align:left;">table default</td>
-                <td style="border-right:1px solid black;border-bottom:1px solid black;text-align:left;" rowspan="2">rowsep=yes</td>
+                <td style="text-align:left;" colspan="2">rowsep=no</td>
+                <td style="text-align:left;">table default</td>
+                <td style="border-bottom:1px solid black;text-align:left;" rowspan="2">rowsep=yes</td>
               </tr>
               <tr class="cals_even">
                 <td style="border-right:1px solid black;border-bottom:1px solid black;text-align:left;" colspan="2">colsep=yes, rowsep=yes</td>
-                <td style="border-right:1px solid black;border-bottom:1px solid black;text-align:left;">table default</td>
+                <td style="text-align:left;">table default</td>
               </tr>
               <tr class="cals_odd">
-                <td style="border-right:1px solid black;border-bottom:1px solid black;text-align:left;">table default</td>
-                <td style="border-right:1px solid black;border-bottom:1px solid black;text-align:left;">colsep=yes</td>
-                <td style="border-right:1px solid black;border-bottom:1px solid black;text-align:left;">table default</td>
-                <td style="border-right:1px solid black;border-bottom:1px solid black;text-align:left;">table default</td>
+                <td style="text-align:left;">table default</td>
+                <td style="border-right:1px solid black;text-align:left;">colsep=yes</td>
+                <td style="text-align:left;">table default</td>
+                <td style="text-align:left;">table default</td>
               </tr>
             </tbody>
           </table>
@@ -366,7 +366,7 @@
           <title>Table with @rules="rows" should generate rowsep for all rows</title>
         </caption>
         <div xmlns="http://www.w3.org/1999/xhtml" class="table">
-          <table class="tgroup cals_cals cals_orient full_width_table " style="border-collapse: collapse; border:none;">
+          <table class="tgroup cals_cals cals_orient full_width_table" style="border-collapse: collapse; border:none;">
             <colgroup>
               <col style="width:NaN%;"/>
               <col style="width:NaN%;"/>
@@ -375,30 +375,30 @@
             </colgroup>
             <thead>
               <tr class="cals_odd">
-                <td style="border-right:1px solid black;border-bottom:1px solid black;text-align:left;">rowsep=yes</td>
-                <td style="border-right:1px solid black;border-bottom:1px solid black;text-align:left;">rowsep=yes</td>
-                <td style="border-right:1px solid black;border-bottom:1px solid black;text-align:left;">rowsep=yes</td>
-                <td style="border-right:1px solid black;border-bottom:1px solid black;text-align:left;">rowsep=yes</td>
+                <td style="border-bottom:1px solid black;text-align:left;">rowsep=yes</td>
+                <td style="border-bottom:1px solid black;text-align:left;">rowsep=yes</td>
+                <td style="border-bottom:1px solid black;text-align:left;">rowsep=yes</td>
+                <td style="border-bottom:1px solid black;text-align:left;">rowsep=yes</td>
               </tr>
             </thead>
             <tbody>
               <tr class="cals_odd">
-                <td style="border-right:1px solid black;border-bottom:1px solid black;text-align:left;">rowsep=yes</td>
-                <td style="border-right:1px solid black;border-bottom:1px solid black;text-align:left;">rowsep=yes</td>
-                <td style="border-right:1px solid black;border-bottom:1px solid black;text-align:left;">rowsep=yes</td>
-                <td style="border-right:1px solid black;border-bottom:1px solid black;text-align:left;">rowsep=yes</td>
+                <td style="border-bottom:1px solid black;text-align:left;">rowsep=yes</td>
+                <td style="border-bottom:1px solid black;text-align:left;">rowsep=yes</td>
+                <td style="border-bottom:1px solid black;text-align:left;">rowsep=yes</td>
+                <td style="border-bottom:1px solid black;text-align:left;">rowsep=yes</td>
               </tr>
               <tr class="cals_even">
-                <td style="border-right:1px solid black;border-bottom:1px solid black;text-align:left;">rowsep=yes</td>
-                <td style="border-right:1px solid black;border-bottom:1px solid black;text-align:left;">rowsep=yes</td>
-                <td style="border-right:1px solid black;border-bottom:1px solid black;text-align:left;">rowsep=yes</td>
-                <td style="border-right:1px solid black;border-bottom:1px solid black;text-align:left;">rowsep=yes</td>
+                <td style="border-bottom:1px solid black;text-align:left;">rowsep=yes</td>
+                <td style="border-bottom:1px solid black;text-align:left;">rowsep=yes</td>
+                <td style="border-bottom:1px solid black;text-align:left;">rowsep=yes</td>
+                <td style="border-bottom:1px solid black;text-align:left;">rowsep=yes</td>
               </tr>
               <tr class="cals_odd">
-                <td style="border-right:1px solid black;border-bottom:1px solid black;text-align:left;">rowsep=yes</td>
-                <td style="border-right:1px solid black;border-bottom:1px solid black;text-align:left;">rowsep=yes</td>
-                <td style="border-right:1px solid black;border-bottom:1px solid black;text-align:left;">rowsep=yes</td>
-                <td style="border-right:1px solid black;border-bottom:1px solid black;text-align:left;">rowsep=yes</td>
+                <td style="border-bottom:1px solid black;text-align:left;">rowsep=yes</td>
+                <td style="border-bottom:1px solid black;text-align:left;">rowsep=yes</td>
+                <td style="border-bottom:1px solid black;text-align:left;">rowsep=yes</td>
+                <td style="border-bottom:1px solid black;text-align:left;">rowsep=yes</td>
               </tr>
             </tbody>
           </table>
@@ -410,7 +410,7 @@
           <title>Table with @rules="cols" should generate colsep for all cells</title>
         </caption>
         <div xmlns="http://www.w3.org/1999/xhtml" class="table">
-          <table class="tgroup cals_cals cals_orient full_width_table " style="border-collapse: collapse; border:none;">
+          <table class="tgroup cals_cals cals_orient full_width_table" style="border-collapse: collapse; border:none;">
             <colgroup>
               <col style="width:NaN%;"/>
               <col style="width:NaN%;"/>
@@ -419,30 +419,30 @@
             </colgroup>
             <thead>
               <tr class="cals_odd">
-                <td style="border-right:1px solid black;border-bottom:1px solid black;text-align:left;">colsep=yes</td>
-                <td style="border-right:1px solid black;border-bottom:1px solid black;text-align:left;">colsep=yes</td>
-                <td style="border-right:1px solid black;border-bottom:1px solid black;text-align:left;">colsep=yes</td>
-                <td style="border-right:1px solid black;border-bottom:1px solid black;text-align:left;">colsep=yes</td>
+                <td style="border-right:1px solid black;text-align:left;">colsep=yes</td>
+                <td style="border-right:1px solid black;text-align:left;">colsep=yes</td>
+                <td style="border-right:1px solid black;text-align:left;">colsep=yes</td>
+                <td style="border-right:1px solid black;text-align:left;">colsep=yes</td>
               </tr>
             </thead>
             <tbody>
               <tr class="cals_odd">
-                <td style="border-right:1px solid black;border-bottom:1px solid black;text-align:left;">colsep=yes</td>
-                <td style="border-right:1px solid black;border-bottom:1px solid black;text-align:left;">colsep=yes</td>
-                <td style="border-right:1px solid black;border-bottom:1px solid black;text-align:left;">colsep=yes</td>
-                <td style="border-right:1px solid black;border-bottom:1px solid black;text-align:left;">colsep=yes</td>
+                <td style="border-right:1px solid black;text-align:left;">colsep=yes</td>
+                <td style="border-right:1px solid black;text-align:left;">colsep=yes</td>
+                <td style="border-right:1px solid black;text-align:left;">colsep=yes</td>
+                <td style="border-right:1px solid black;text-align:left;">colsep=yes</td>
               </tr>
               <tr class="cals_even">
-                <td style="border-right:1px solid black;border-bottom:1px solid black;text-align:left;">colsep=yes</td>
-                <td style="border-right:1px solid black;border-bottom:1px solid black;text-align:left;">colsep=yes</td>
-                <td style="border-right:1px solid black;border-bottom:1px solid black;text-align:left;">colsep=yes</td>
-                <td style="border-right:1px solid black;border-bottom:1px solid black;text-align:left;">colsep=yes</td>
+                <td style="border-right:1px solid black;text-align:left;">colsep=yes</td>
+                <td style="border-right:1px solid black;text-align:left;">colsep=yes</td>
+                <td style="border-right:1px solid black;text-align:left;">colsep=yes</td>
+                <td style="border-right:1px solid black;text-align:left;">colsep=yes</td>
               </tr>
               <tr class="cals_odd">
-                <td style="border-right:1px solid black;border-bottom:1px solid black;text-align:left;">colsep=yes</td>
-                <td style="border-right:1px solid black;border-bottom:1px solid black;text-align:left;">colsep=yes</td>
-                <td style="border-right:1px solid black;border-bottom:1px solid black;text-align:left;">colsep=yes</td>
-                <td style="border-right:1px solid black;border-bottom:1px solid black;text-align:left;">colsep=yes</td>
+                <td style="border-right:1px solid black;text-align:left;">colsep=yes</td>
+                <td style="border-right:1px solid black;text-align:left;">colsep=yes</td>
+                <td style="border-right:1px solid black;text-align:left;">colsep=yes</td>
+                <td style="border-right:1px solid black;text-align:left;">colsep=yes</td>
               </tr>
             </tbody>
           </table>
@@ -454,7 +454,7 @@
           <title>Table with @rules="groups" which should generate rowsep for last row in theader and table</title>
         </caption>
         <div xmlns="http://www.w3.org/1999/xhtml" class="table">
-          <table class="tgroup cals_cals cals_orient full_width_table " style="border-collapse: collapse; border:none;">
+          <table class="tgroup cals_cals cals_orient full_width_table" style="border-collapse: collapse; border:none;">
             <colgroup>
               <col style="width:NaN%;"/>
               <col style="width:NaN%;"/>
@@ -463,36 +463,36 @@
             </colgroup>
             <thead>
               <tr class="cals_odd">
-                <td style="border-right:1px solid black;border-bottom:1px solid black;text-align:left;">table default</td>
-                <td style="border-right:1px solid black;border-bottom:1px solid black;text-align:left;">table default</td>
-                <td style="border-right:1px solid black;border-bottom:1px solid black;text-align:left;">table default</td>
-                <td style="border-right:1px solid black;border-bottom:1px solid black;text-align:left;">table default</td>
+                <td style="text-align:left;">table default</td>
+                <td style="text-align:left;">table default</td>
+                <td style="text-align:left;">table default</td>
+                <td style="text-align:left;">table default</td>
               </tr>
               <tr class="cals_even">
-                <td style="border-right:1px solid black;border-bottom:1px solid black;text-align:left;">rowsep=yes</td>
-                <td style="border-right:1px solid black;border-bottom:1px solid black;text-align:left;">rowsep=yes</td>
-                <td style="border-right:1px solid black;border-bottom:1px solid black;text-align:left;">rowsep=yes</td>
-                <td style="border-right:1px solid black;border-bottom:1px solid black;text-align:left;">rowsep=yes</td>
+                <td style="border-bottom:1px solid black;text-align:left;">rowsep=yes</td>
+                <td style="border-bottom:1px solid black;text-align:left;">rowsep=yes</td>
+                <td style="border-bottom:1px solid black;text-align:left;">rowsep=yes</td>
+                <td style="border-bottom:1px solid black;text-align:left;">rowsep=yes</td>
               </tr>
             </thead>
             <tbody>
               <tr class="cals_odd">
-                <td style="border-right:1px solid black;border-bottom:1px solid black;text-align:left;">table default</td>
-                <td style="border-right:1px solid black;border-bottom:1px solid black;text-align:left;">table default</td>
-                <td style="border-right:1px solid black;border-bottom:1px solid black;text-align:left;">table default</td>
-                <td style="border-right:1px solid black;border-bottom:1px solid black;text-align:left;">table default</td>
+                <td style="text-align:left;">table default</td>
+                <td style="text-align:left;">table default</td>
+                <td style="text-align:left;">table default</td>
+                <td style="text-align:left;">table default</td>
               </tr>
               <tr class="cals_even">
-                <td style="border-right:1px solid black;border-bottom:1px solid black;text-align:left;">rowsep=yes; because its the last tbody row before the tfoot</td>
-                <td style="border-right:1px solid black;border-bottom:1px solid black;text-align:left;">rowsep=yes</td>
-                <td style="border-right:1px solid black;border-bottom:1px solid black;text-align:left;">rowsep=yes</td>
-                <td style="border-right:1px solid black;border-bottom:1px solid black;text-align:left;">rowsep=yes</td>
+                <td style="border-bottom:1px solid black;text-align:left;">rowsep=yes; because its the last tbody row before the tfoot</td>
+                <td style="border-bottom:1px solid black;text-align:left;">rowsep=yes</td>
+                <td style="border-bottom:1px solid black;text-align:left;">rowsep=yes</td>
+                <td style="border-bottom:1px solid black;text-align:left;">rowsep=yes</td>
               </tr>
               <tr class="cals_odd">
-                <td style="border-right:1px solid black;border-bottom:1px solid black;text-align:left;">table default</td>
-                <td style="border-right:1px solid black;border-bottom:1px solid black;text-align:left;">table default</td>
-                <td style="border-right:1px solid black;border-bottom:1px solid black;text-align:left;">table default</td>
-                <td style="border-right:1px solid black;border-bottom:1px solid black;text-align:left;">table default</td>
+                <td style="border-bottom:1px solid black;text-align:left;">table default</td>
+                <td style="border-bottom:1px solid black;text-align:left;">table default</td>
+                <td style="border-bottom:1px solid black;text-align:left;">table default</td>
+                <td style="border-bottom:1px solid black;text-align:left;">table default</td>
               </tr>
             </tbody>
           </table>
@@ -504,7 +504,7 @@
           <title>Table with @rules="all" which should generate rowsep and rowsep for all</title>
         </caption>
         <div xmlns="http://www.w3.org/1999/xhtml" class="table">
-          <table class="tgroup cals_cals cals_orient full_width_table " style="border-collapse: collapse; border:none;">
+          <table class="tgroup cals_cals cals_orient full_width_table" style="border-collapse: collapse; border:none;">
             <colgroup>
               <col style="width:NaN%;"/>
               <col style="width:NaN%;"/>
@@ -554,7 +554,7 @@
           <title>Table cell alignment</title>
         </caption>
         <div xmlns="http://www.w3.org/1999/xhtml" class="table">
-          <table class="tgroup cals_cals cals_orient full_width_table " style="border-collapse: collapse; border:1px solid black;">
+          <table class="tgroup cals_cals cals_orient full_width_table" style="border-collapse: collapse; border:1px solid black;">
             <colgroup>
               <col style="width:NaN%;"/>
               <col style="width:NaN%;"/>
@@ -565,13 +565,16 @@
             </colgroup>
             <tbody>
               <tr class="cals_odd">
-                <td style="border-right:1px solid black;border-bottom:1px solid black;text-align:left;vertical-align:top;">just lots of text to see the vertical
-                                    alignment, just lots of text to see the vertical alignment, just lots of text to see the vertical alignment, just lots of text to see the vertical
-                                    alignment</td>
+                <td style="border-right:1px solid black;border-bottom:1px solid black;text-align:left;vertical-align:top;">
+                  just lots of text to see the vertical alignment, 
+                  just lots of text to see the vertical alignment, 
+                  just lots of text to see the vertical alignment, 
+                  just lots of text to see the vertical alignment
+                </td>
                 <td style="border-right:1px solid black;border-bottom:1px solid black;text-align:center;vertical-align:middle;">align="center" valign="middle"</td>
                 <td style="border-right:1px solid black;border-bottom:1px solid black;text-align:left;vertical-align:top;">align="left" valign="top"</td>
                 <td style="border-right:1px solid black;border-bottom:1px solid black;text-align:right;vertical-align:bottom;">align="right" valign="bottom"</td>
-                <td class="cals_alignchar " style="border-right:1px solid black;border-bottom:1px solid black;">align="char"</td>
+                <td class="cals_alignchar" style="border-right:1px solid black;border-bottom:1px solid black;">align="char"</td>
                 <td style="border-right:1px solid black;border-bottom:1px solid black;text-align:justify;vertical-align:bottom;">align="justify" valign="bottom"</td>
               </tr>
             </tbody>
