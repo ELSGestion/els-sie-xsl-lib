@@ -41,8 +41,8 @@
         <caption>
           <title>No border no col definition table</title>
         </caption>
-        <div xmlns="http://www.w3.org/1999/xhtml" class="table">
-          <table class="tgroup cals_cals cals_orient full_width_table" style="border-collapse: collapse; border:none;">
+        <div xmlns="http://www.w3.org/1999/xhtml" class="cals_table">
+          <table class="cals_tgroup" style="border-collapse: collapse; border:none;">
             <colgroup/>
             <tbody>
               <tr class="cals_odd">
@@ -62,14 +62,14 @@
         <caption>
           <title>Table with explicit border definitions, 2px table and table header border</title>
         </caption>
-        <div xmlns="http://www.w3.org/1999/xhtml" class="table">
-          <table class="tgroup cals_cals cals_orient full_width_table" style="border-collapse: collapse; border:1px solid black;">
+        <div xmlns="http://www.w3.org/1999/xhtml" class="cals_table">
+          <table class="cals_tgroup" style="border-collapse: collapse; border:1px solid black;">
             <colgroup>
-              <col style="width:NaN%;"/>
-              <col style="width:NaN%;"/>
-              <col style="width:NaN%;"/>
-              <col style="width:NaN%;"/>
-              <col style="width:NaN%;"/>
+              <col style="width:20%;"/>
+              <col style="width:20%;"/>
+              <col style="width:20%;"/>
+              <col style="width:20%;"/>
+              <col style="width:19%;"/>
             </colgroup>
             <thead>
               <tr class="cals_odd">
@@ -114,13 +114,13 @@
         <caption>
           <title>Spanning cells in header</title>
         </caption>
-        <div xmlns="http://www.w3.org/1999/xhtml" class="table">
-          <table class="tgroup cals_cals cals_orient full_width_table" style="border-collapse: collapse; border:1px solid black;">
+        <div xmlns="http://www.w3.org/1999/xhtml" class="cals_table">
+          <table class="cals_tgroup" style="border-collapse: collapse; border:1px solid black;">
             <colgroup>
-              <col style="width:NaN%;"/>
-              <col style="width:NaN%;"/>
-              <col style="width:NaN%;"/>
-              <col style="width:NaN%;"/>
+              <col style="width:25%;"/>
+              <col style="width:25%;"/>
+              <col style="width:25%;"/>
+              <col style="width:25%;"/>
             </colgroup>
             <thead>
               <tr class="cals_odd">
@@ -155,13 +155,13 @@
         <caption>
           <title>Table with footer</title>
         </caption>
-        <div xmlns="http://www.w3.org/1999/xhtml" class="table">
-          <table class="tgroup cals_cals cals_orient full_width_table" style="border-collapse: collapse; border:1px solid black;">
+        <div xmlns="http://www.w3.org/1999/xhtml" class="cals_table">
+          <table class="cals_tgroup" style="border-collapse: collapse; border:1px solid black;">
             <colgroup>
-              <col style="width:NaN%;"/>
-              <col style="width:NaN%;"/>
-              <col style="width:NaN%;"/>
-              <col style="width:NaN%;"/>
+              <col style="width:25%;"/>
+              <col style="width:25%;"/>
+              <col style="width:25%;"/>
+              <col style="width:25%;"/>
             </colgroup>
             <thead>
               <tr class="cals_odd">
@@ -196,15 +196,15 @@
         <caption>
           <title>Table with various col and rowspans</title>
         </caption>
-        <div xmlns="http://www.w3.org/1999/xhtml" class="table">
-          <table class="tgroup cals_cals cals_orient full_width_table" style="border-collapse: collapse; border:1px solid black;">
+        <div xmlns="http://www.w3.org/1999/xhtml" class="cals_table">
+          <table class="cals_tgroup" style="border-collapse: collapse; border:1px solid black;">
             <colgroup>
-              <col style="width:NaN%;"/>
-              <col style="width:NaN%;"/>
-              <col style="width:NaN%;"/>
-              <col style="width:NaN%;"/>
-              <col style="width:NaN%;"/>
-              <col style="width:NaN%;"/>
+              <col style="width:7%;"/>
+              <col style="width:5%;"/>
+              <col style="width:58%;"/>
+              <col style="width:10%;"/>
+              <col style="width:10%;"/>
+              <col style="width:11%;"/>
             </colgroup>
             <thead>
               <tr class="cals_odd">
@@ -265,13 +265,13 @@
         <caption>
           <title>Table with specific cells having no border</title>
         </caption>
-        <div xmlns="http://www.w3.org/1999/xhtml" class="table">
-          <table class="tgroup cals_cals cals_orient full_width_table" style="border-collapse: collapse; border:1px solid black;">
+        <div xmlns="http://www.w3.org/1999/xhtml" class="cals_table">
+          <table class="cals_tgroup" style="border-collapse: collapse; border:1px solid black;">
             <colgroup>
-              <col style="width:NaN%;"/>
-              <col style="width:NaN%;"/>
-              <col style="width:NaN%;"/>
-              <col style="width:NaN%;"/>
+              <col style="width:25%;"/>
+              <col style="width:25%;"/>
+              <col style="width:25%;"/>
+              <col style="width:25%;"/>
             </colgroup>
             <thead>
               <tr class="cals_odd">
@@ -324,13 +324,13 @@
         <caption>
           <title>Table with col and row spans where CSS of neighboring cells defines colsep and rowsep</title>
         </caption>
-        <div xmlns="http://www.w3.org/1999/xhtml" class="table">
-          <table class="tgroup cals_cals cals_orient full_width_table" style="border-collapse: collapse; border:1px solid black;">
+        <div xmlns="http://www.w3.org/1999/xhtml" class="cals_table">
+          <table class="cals_tgroup" style="border-collapse: collapse; border:1px solid black;">
             <colgroup>
-              <col style="width:NaN%;"/>
-              <col style="width:NaN%;"/>
-              <col style="width:NaN%;"/>
-              <col style="width:NaN%;"/>
+              <col style="width:25%;"/>
+              <col style="width:25%;"/>
+              <col style="width:25%;"/>
+              <col style="width:25%;"/>
             </colgroup>
             <thead>
               <tr class="cals_odd">
@@ -365,13 +365,13 @@
         <caption>
           <title>Table with @rules="rows" should generate rowsep for all rows</title>
         </caption>
-        <div xmlns="http://www.w3.org/1999/xhtml" class="table">
-          <table class="tgroup cals_cals cals_orient full_width_table" style="border-collapse: collapse; border:none;">
+        <div xmlns="http://www.w3.org/1999/xhtml" class="cals_table">
+          <table class="cals_tgroup" style="border-collapse: collapse; border:none;">
             <colgroup>
-              <col style="width:NaN%;"/>
-              <col style="width:NaN%;"/>
-              <col style="width:NaN%;"/>
-              <col style="width:NaN%;"/>
+              <col style="width:25%;"/>
+              <col style="width:25%;"/>
+              <col style="width:25%;"/>
+              <col style="width:25%;"/>
             </colgroup>
             <thead>
               <tr class="cals_odd">
@@ -409,13 +409,13 @@
         <caption>
           <title>Table with @rules="cols" should generate colsep for all cells</title>
         </caption>
-        <div xmlns="http://www.w3.org/1999/xhtml" class="table">
-          <table class="tgroup cals_cals cals_orient full_width_table" style="border-collapse: collapse; border:none;">
+        <div xmlns="http://www.w3.org/1999/xhtml" class="cals_table">
+          <table class="cals_tgroup" style="border-collapse: collapse; border:none;">
             <colgroup>
-              <col style="width:NaN%;"/>
-              <col style="width:NaN%;"/>
-              <col style="width:NaN%;"/>
-              <col style="width:NaN%;"/>
+              <col style="width:25%;"/>
+              <col style="width:25%;"/>
+              <col style="width:25%;"/>
+              <col style="width:25%;"/>
             </colgroup>
             <thead>
               <tr class="cals_odd">
@@ -453,13 +453,13 @@
         <caption>
           <title>Table with @rules="groups" which should generate rowsep for last row in theader and table</title>
         </caption>
-        <div xmlns="http://www.w3.org/1999/xhtml" class="table">
-          <table class="tgroup cals_cals cals_orient full_width_table" style="border-collapse: collapse; border:none;">
+        <div xmlns="http://www.w3.org/1999/xhtml" class="cals_table">
+          <table class="cals_tgroup" style="border-collapse: collapse; border:none;">
             <colgroup>
-              <col style="width:NaN%;"/>
-              <col style="width:NaN%;"/>
-              <col style="width:NaN%;"/>
-              <col style="width:NaN%;"/>
+              <col style="width:25%;"/>
+              <col style="width:25%;"/>
+              <col style="width:25%;"/>
+              <col style="width:25%;"/>
             </colgroup>
             <thead>
               <tr class="cals_odd">
@@ -503,13 +503,13 @@
         <caption>
           <title>Table with @rules="all" which should generate rowsep and rowsep for all</title>
         </caption>
-        <div xmlns="http://www.w3.org/1999/xhtml" class="table">
-          <table class="tgroup cals_cals cals_orient full_width_table" style="border-collapse: collapse; border:none;">
+        <div xmlns="http://www.w3.org/1999/xhtml" class="cals_table">
+          <table class="cals_tgroup" style="border-collapse: collapse; border:none;">
             <colgroup>
-              <col style="width:NaN%;"/>
-              <col style="width:NaN%;"/>
-              <col style="width:NaN%;"/>
-              <col style="width:NaN%;"/>
+              <col style="width:25%;"/>
+              <col style="width:25%;"/>
+              <col style="width:25%;"/>
+              <col style="width:25%;"/>
             </colgroup>
             <thead>
               <tr class="cals_odd">
@@ -553,8 +553,8 @@
         <caption>
           <title>Table cell alignment</title>
         </caption>
-        <div xmlns="http://www.w3.org/1999/xhtml" class="table">
-          <table class="tgroup cals_cals cals_orient full_width_table" style="border-collapse: collapse; border:1px solid black;">
+        <div xmlns="http://www.w3.org/1999/xhtml" class="cals_table">
+          <table class="cals_tgroup" style="border-collapse: collapse; border:1px solid black;">
             <colgroup>
               <col style="width:NaN%;"/>
               <col style="width:NaN%;"/>
