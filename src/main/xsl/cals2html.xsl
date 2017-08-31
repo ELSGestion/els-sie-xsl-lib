@@ -22,6 +22,7 @@
     <xd:desc>
       <xd:p>Convert CALS Table to HTML table</xd:p>
       <xd:p>Each cals:table will be converted to an html:div, then each cals:tgroup will be converted to an html:table</xd:p>
+      <xd:p>/!\ Cals element must be in cals namespace before proceding, other elements will be copied as is.</xd:p>
     </xd:desc>
   </xd:doc>
   
@@ -29,7 +30,6 @@
   <xsl:param name="xslLib:cals2html.log.uri" select="resolve-uri('log/', base-uri())" as="xs:string"/>
   <xsl:param name="xslLib:cals2html.debug" select="false()" as="xs:boolean"/>
   <xsl:param name="xslLib:cals2html.use-style-insteadOf-class" select="false()" as="xs:boolean"/>
-  <!--<xsl:param name="xslLib:cals2html.add-odd-even-class" select="true()" as="xs:boolean"/> unusefull : use css pseudo class instead--> 
   <xsl:param name="xslLib:cals2html.compute-column-width-as-width-attribute" select="true()" as="xs:boolean"/> <!--@width is used for html4 output-->
   <xsl:param name="xslLib:cals2html.compute-column-width-within-colgroup" select="true()" as="xs:boolean"/>
   <!--If the number of columns is greater than $nb-cols-max-before-font-reduction then the font needs to be reduced-->
@@ -38,11 +38,11 @@
   <xsl:param name="xslLib:cals2html.default-colsep" select="'def-col'" as="xs:string"/>
   <xsl:param name="xslLib:cals2html.default-rowsep" select="'def-row'" as="xs:string"/>
   <xsl:param name="xslLib:cals2html.default-tgroup-align" select="'left'" as="xs:string"/>
-  <xsl:param name="xslLib:cals2html.default-td-align" select="'left'" as="xs:string"/>
-  <xsl:param name="xslLib:cals2html.default-th-align" select="'center'" as="xs:string"/>
+  <xsl:param name="xslLib:cals2html.default-td-align" select="'left'" as="xs:string"/><!--default browser value-->
+  <xsl:param name="xslLib:cals2html.default-th-align" select="'center'" as="xs:string"/><!--default browser value-->
   <xsl:param name="xslLib:cals2html.default-tgroup-valign" select="'middle'" as="xs:string"/>
-  <xsl:param name="xslLib:cals2html.default-td-valign" select="'middle'" as="xs:string"/>
-  <xsl:param name="xslLib:cals2html.default-th-valign" select="'middle'" as="xs:string"/>
+  <xsl:param name="xslLib:cals2html.default-td-valign" select="'middle'" as="xs:string"/><!--default browser value-->
+  <xsl:param name="xslLib:cals2html.default-th-valign" select="'middle'" as="xs:string"/><!--default browser value-->
 
   <!--==============================================================================================================================-->
   <!-- INIT -->
@@ -137,7 +137,7 @@
   </xsl:template>
   
   <xsl:template match="caption" mode="xslLib:cals2html.main">
-    <!-- no operation : everything all has already been put within html:table/html:caption element -->
+    <!-- no operation : everything has already been put within html:table/html:caption element -->
   </xsl:template>
   
   <!-- TGROUP : start Html Table structure -->
@@ -152,7 +152,7 @@
       <xsl:apply-templates select="@* except (@bgcolor)" mode="xslLib:cals2html.attributes"/> 
       <xsl:variable name="class.tmp" as="xs:string*">
         <xsl:text>cals_tgroup</xsl:text>
-        <!--cals:table/@frame = (none, top, bottom, topbot, sides, all)-->
+        <!--cals:table/@frame = none | top | bottom | topbot | sides | all-->
         <xsl:if test="../@frame">
           <xsl:value-of select="concat('cals_frame-', ../@frame)"/>
         </xsl:if>
@@ -171,7 +171,6 @@
           <xsl:variable name="total-colwidth-sum" select="xslLib:cals2html.cals_sum-colwidths(colspec)" as="xs:double"/>
           <xsl:for-each select="colspec">
             <xsl:variable name="current-colwidth" select="xslLib:cals2html.cals_sum-colwidths(.)" as="xs:double"/>
-            <!--<xsl:message>$current-colwidth="<xsl:value-of select="$current-colwidth"/>" : <xsl:value-of select="saxon:path(.)"/></xsl:message>-->
             <col>
               <xsl:call-template name="xslLib:cals2html.add-column-width">
                 <xsl:with-param name="width" select="concat(round(($current-colwidth div  $total-colwidth-sum) * 100), '%')" as="xs:string"/>
@@ -313,7 +312,7 @@
     <xsl:variable name="current-tgroup" select="ancestor::tgroup[1]" as="element()"/>
     <xsl:variable name="current-colspec-list" as="element(colspec)*">
       <xsl:choose>
-        <!-- on test d'abord si il y a un namestart/nameend avant de prendre le cas simple du colname -->
+        <!-- Firts consider namestart/nameend -->
         <xsl:when test="@namest and @nameend">
           <xsl:variable name="namest.colspec" select="$current-tgroup/colspec[@colname = current()/@namest]" as="element()*"/>
           <xsl:variable name="nameend.colspec" select="$current-tgroup/colspec[@colname = current()/@nameend]" as="element()*"/>
@@ -335,6 +334,7 @@
             </xsl:otherwise>
           </xsl:choose>
         </xsl:when>
+        <!--Then consider @colname-->
         <xsl:when test="@colname">
           <xsl:variable name="colname.colspec" select="$current-tgroup/colspec[@colname = current()/@colname]" as="element()*"/>
           <xsl:if test="count($colname.colspec) != 1">
@@ -342,9 +342,7 @@
           </xsl:if>
           <xsl:sequence select="$colname.colspec"/>
         </xsl:when>
-        <!--<xsl:when test="preceding-sibling::entry[1]/@nameend">
-          <xsl:sequence select="$current-tgroup/colspec[preceding-sibling::entry[1]/@nameend]/following-sibling::colspec[1]"/>
-        </xsl:when>-->
+        <!--Finaly consider position-->
         <xsl:when test="position() > 1 and ../entry[@colname]">
           <xsl:message>[ERROR][cals2html.xsl] @colname missing (<xsl:value-of select="els:getFileName(string(base-uri()))"/> : <xsl:sequence select="els:get-xpath(.)" />)</xsl:message>
         </xsl:when>
@@ -438,10 +436,10 @@
           <xsl:text>cals_rowsep</xsl:text>
         </xsl:if>
         <xsl:if test="$align-current != (if($name = 'td') then($xslLib:cals2html.default-td-align) else($xslLib:cals2html.default-th-align))">
-          <xsl:value-of select="lower-case(concat('cals_align-', $align-current))" />
+          <xsl:value-of select="concat('cals_align-', lower-case($align-current))" />
         </xsl:if>
         <xsl:if test="$valign-current != (if($name = 'td') then($xslLib:cals2html.default-td-valign) else($xslLib:cals2html.default-th-valign))">
-          <xsl:value-of select="lower-case(concat('cals_valign-', $valign-current))" />
+          <xsl:value-of select="concat('cals_valign-', lower-case($valign-current))" />
         </xsl:if>
         <xsl:if test="$nb-cols > $xslLib:cals2html.nb-cols-max-before-font-reduction
           and $nb-cols lt $xslLib:cals2html.nb-cols-max-before-large-font-reduction">
@@ -463,8 +461,6 @@
       <xsl:variable name="total-colwidth-sum" select="xslLib:cals2html.cals_sum-colwidths($current-tgroup/colspec)" as="xs:double"/>
       <xsl:variable name="current-colwidth" select="xslLib:cals2html.cals_sum-colwidths($current-colspec-list)" as="xs:double"/>
       <xsl:if test="not($xslLib:cals2html.compute-column-width-within-colgroup)">
-        <!--<xsl:message>$current-colwidth="<xsl:value-of select="$current-colwidth"/>"</xsl:message>-->
-        <!--<xsl:message>$total-colwidth-sum="<xsl:value-of select="$total-colwidth-sum"/>"</xsl:message>-->
         <xsl:call-template name="xslLib:cals2html.add-column-width">
           <xsl:with-param name="width" select="concat(round(($current-colwidth div  $total-colwidth-sum)*97), '%')" as="xs:string"/>
         </xsl:call-template>
@@ -508,9 +504,9 @@
   <!--==================================-->
   
   <!--cf. https://www.oasis-open.org/specs/tm9901.html#AEN530 : 
-    @colwidth peut être exprimé en différentes unités :
-      - soit proportionnel : ex "5*"
-      - soit fixes : “pt” (points), “cm” (centimeters), “mm” (millimeters), “pi” (picas), and “in” (inches)
+    @colwidth might be express in different units :
+      - proportinal values like : "5*", "10%"
+      - fixed values like : “pt” (points), “cm” (centimeters), “mm” (millimeters), “pi” (picas), and “in” (inches)
     => FIXME mricaud : j'ai l'impression qu'ici on ne gère que les proportionnel, faut-il prévoir les fixes ?
   -->
   
@@ -558,13 +554,13 @@
     </xsl:choose>
   </xsl:template>
   
-  <!--Récupère le @colnum d'un colspec. Si l'attribut est absent on prend la position du colspec parmis les autres colspec-->
+  <!--Get the @colnum of a colspec. If the attribute doesn't exist, the function will return the position of the colspec amongs the other colspec-->
   <xsl:function name="xslLib:cals2html.get-colnum" as="xs:integer">
-    <xsl:param name="entry" as="element(entry)?"/>
+    <xsl:param name="entry" as="element(entry)?"/> <!--only for debug-->
     <xsl:param name="colspec" as="element(colspec)?"/>
     <xsl:choose>
       <xsl:when test="exists($colspec)">
-        <xsl:sequence select="($colspec/@colnum[normalize-space(.)!=''], count($colspec/preceding-sibling::colspec) + 1)[1]"/>
+        <xsl:sequence select="($colspec/@colnum[normalize-space(.) != ''], count($colspec/preceding-sibling::colspec) + 1)[1]"/>
       </xsl:when>
       <xsl:otherwise>
         <xsl:message terminate="yes">[ERROR][cals2html.xsl] Calling xslLib:cals2html.get-colnum() with $colspec empty argument&#10;<xsl:sequence select="els:get-xpath($entry)"/></xsl:message>
