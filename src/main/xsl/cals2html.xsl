@@ -37,8 +37,12 @@
   <xsl:param name="xslLib:cals2html.nb-cols-max-before-large-font-reduction" select="14" as="xs:integer"/>
   <xsl:param name="xslLib:cals2html.default-colsep" select="'def-col'" as="xs:string"/>
   <xsl:param name="xslLib:cals2html.default-rowsep" select="'def-row'" as="xs:string"/>
-  <xsl:param name="xslLib:cals2html.default-align" select="'LEFT'" as="xs:string"/>
-  <xsl:param name="xslLib:cals2html.default-valign" select="'BOTTOM'" as="xs:string"/>
+  <xsl:param name="xslLib:cals2html.default-tgroup-align" select="'left'" as="xs:string"/>
+  <xsl:param name="xslLib:cals2html.default-td-align" select="'left'" as="xs:string"/>
+  <xsl:param name="xslLib:cals2html.default-th-align" select="'center'" as="xs:string"/>
+  <xsl:param name="xslLib:cals2html.default-tgroup-valign" select="'middle'" as="xs:string"/>
+  <xsl:param name="xslLib:cals2html.default-td-valign" select="'middle'" as="xs:string"/>
+  <xsl:param name="xslLib:cals2html.default-th-valign" select="'middle'" as="xs:string"/>
 
   <!--==============================================================================================================================-->
   <!-- INIT -->
@@ -126,8 +130,8 @@
       <xsl:apply-templates mode="#current">
         <xsl:with-param name="colsep" select="(@colsep, $xslLib:cals2html.default-colsep)[1]" as="xs:string"/>
         <xsl:with-param name="rowsep" select="(@rowsep, $xslLib:cals2html.default-rowsep)[1]" as="xs:string"/>
-        <xsl:with-param name="align" select="(@align, $xslLib:cals2html.default-align)[1]" as="xs:string"/>
-        <xsl:with-param name="valign" select="(@valign, $xslLib:cals2html.default-valign)[1]" as="xs:string"/>
+        <xsl:with-param name="align" select="(@align, $xslLib:cals2html.default-tgroup-align)[1]" as="xs:string"/>
+        <xsl:with-param name="valign" select="(@valign, $xslLib:cals2html.default-tgroup-valign)[1]" as="xs:string"/>
       </xsl:apply-templates>
     </div>
   </xsl:template>
@@ -433,19 +437,12 @@
         <xsl:if test="$rowsep-current != $xslLib:cals2html.default-rowsep and $rowsep-current != '0'">
           <xsl:text>cals_rowsep</xsl:text>
         </xsl:if>
-        <xsl:value-of select="lower-case(concat('cals_align-', $align-current))" />
-        <!--<xsl:if test="$align-current != $cals_default-align"> FIXME : correct non ?
-          <xsl:value-of select="concat('cals_align', $align-current, ' ')" />
-        </xsl:if>-->
-        <xsl:if test="$valign-current != $xslLib:cals2html.default-valign">
+        <xsl:if test="$align-current != (if($name = 'td') then($xslLib:cals2html.default-td-align) else($xslLib:cals2html.default-th-align))">
+          <xsl:value-of select="lower-case(concat('cals_align-', $align-current))" />
+        </xsl:if>
+        <xsl:if test="$valign-current != (if($name = 'td') then($xslLib:cals2html.default-td-valign) else($xslLib:cals2html.default-th-valign))">
           <xsl:value-of select="lower-case(concat('cals_valign-', $valign-current))" />
         </xsl:if>
-        <!--<xsl:if test="@percent">
-          <xsl:value-of select="concat('cals_pourcent-', @percent)" />
-        </xsl:if>-->
-        <!--<xsl:if test="number(@background) = 70">
-          <xsl:value-of select="'bg70'" />
-        </xsl:if>-->
         <xsl:if test="$nb-cols > $xslLib:cals2html.nb-cols-max-before-font-reduction
           and $nb-cols lt $xslLib:cals2html.nb-cols-max-before-large-font-reduction">
           <xsl:text>cals_table-font-reduction</xsl:text>
