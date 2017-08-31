@@ -29,7 +29,7 @@
   <xsl:param name="xslLib:cals2html.log.uri" select="resolve-uri('log/', base-uri())" as="xs:string"/>
   <xsl:param name="xslLib:cals2html.debug" select="false()" as="xs:boolean"/>
   <xsl:param name="xslLib:cals2html.use-style-insteadOf-class" select="false()" as="xs:boolean"/>
-  <xsl:param name="xslLib:cals2html.add-odd-even-class" select="true()" as="xs:boolean"/> <!--TODO LATER : unusefull : use css pseudo class instead-->
+  <!--<xsl:param name="xslLib:cals2html.add-odd-even-class" select="true()" as="xs:boolean"/> unusefull : use css pseudo class instead--> 
   <xsl:param name="xslLib:cals2html.compute-column-width-as-width-attribute" select="true()" as="xs:boolean"/> <!--@width is used for html4 output-->
   <xsl:param name="xslLib:cals2html.compute-column-width-within-colgroup" select="true()" as="xs:boolean"/>
   <!--If the number of columns is greater than $nb-cols-max-before-font-reduction then the font needs to be reduced-->
@@ -170,8 +170,7 @@
             <!--<xsl:message>$current-colwidth="<xsl:value-of select="$current-colwidth"/>" : <xsl:value-of select="saxon:path(.)"/></xsl:message>-->
             <col>
               <xsl:call-template name="xslLib:cals2html.add-column-width">
-                <!--<xsl:with-param name="width" select="concat(round(($current-colwidth div  $total-colwidth-sum) * 100), '%')" as="xs:string"/> TODO LATER-->
-                <xsl:with-param name="width" select="concat(round(($current-colwidth div  $total-colwidth-sum) * 100), '%;')" as="xs:string"/>
+                <xsl:with-param name="width" select="concat(round(($current-colwidth div  $total-colwidth-sum) * 100), '%')" as="xs:string"/>
               </xsl:call-template>
             </col>
           </xsl:for-each>
@@ -276,9 +275,9 @@
       <!--attributes that doesn't generate @style or @class like : ../@orient | @id ?-->
       <xsl:apply-templates select="@* except (@bgcolor | @rowsep | @colsep | @valign | @align)" mode="xslLib:cals2html.attributes"/> 
       <xsl:variable name="class.tmp" as="xs:string*">
-        <xsl:if test="$xslLib:cals2html.add-odd-even-class">
+        <!--<xsl:if test="$xslLib:cals2html.add-odd-even-class">
           <xsl:value-of select="if (count(preceding-sibling::row) mod 2 = 0) then 'cals_odd' else 'cals_even'"/>
-        </xsl:if>
+        </xsl:if>-->
       </xsl:variable>
       <xsl:if test="not(empty($class.tmp))">
         <xsl:attribute name="class" select="string-join($class.tmp, ' ')"/>
@@ -423,8 +422,7 @@
         </xsl:otherwise>
       </xsl:choose>
     </xsl:variable>
-    <!--<xsl:variable name="name" select="if(ancestor::thead) then ('th') else('td')" as="xs:string"/> TODO LATER-->
-    <xsl:variable name="name" select="'td'" as="xs:string"/>
+    <xsl:variable name="name" select="if(ancestor::thead) then ('th') else('td')" as="xs:string"/>
     <xsl:element name="{$name}">
       <!--attributes that doesn't generate @style or @class like : ../@orient | @id ?-->
       <xsl:apply-templates select="@*" mode="xslLib:cals2html.attributes"/> 
@@ -435,14 +433,12 @@
         <xsl:if test="$rowsep-current != $xslLib:cals2html.default-rowsep and $rowsep-current != '0'">
           <xsl:text>cals_rowsep</xsl:text>
         </xsl:if>
-        <!--<xsl:value-of select="lower-case(concat('cals_align-', $align-current))" /> TODO LATER-->
-        <xsl:value-of select="lower-case(concat('cals_align', $align-current))" />
-        <!--<xsl:if test="$align-current != $cals_default-align">
+        <xsl:value-of select="lower-case(concat('cals_align-', $align-current))" />
+        <!--<xsl:if test="$align-current != $cals_default-align"> FIXME : correct non ?
           <xsl:value-of select="concat('cals_align', $align-current, ' ')" />
         </xsl:if>-->
         <xsl:if test="$valign-current != $xslLib:cals2html.default-valign">
-          <!--<xsl:value-of select="lower-case(concat('cals_valign-', $valign-current))" /> TODO LATER-->
-          <xsl:value-of select="lower-case(concat('cals_valign', $valign-current))" />
+          <xsl:value-of select="lower-case(concat('cals_valign-', $valign-current))" />
         </xsl:if>
         <!--<xsl:if test="@percent">
           <xsl:value-of select="concat('cals_pourcent-', @percent)" />
@@ -452,12 +448,10 @@
         </xsl:if>-->
         <xsl:if test="$nb-cols > $xslLib:cals2html.nb-cols-max-before-font-reduction
           and $nb-cols lt $xslLib:cals2html.nb-cols-max-before-large-font-reduction">
-          <!--<xsl:text>cals_table-font-reduction</xsl:text> TODO LATER-->
-          <xsl:text>table-contents-font-reduction</xsl:text>
+          <xsl:text>cals_table-font-reduction</xsl:text>
         </xsl:if>
         <xsl:if test="$nb-cols > $xslLib:cals2html.nb-cols-max-before-large-font-reduction">
-          <!--<xsl:text>cals_table-max-font-reduction</xsl:text> TODO LATER-->
-          <xsl:text>table-contents-max-font-reduction</xsl:text>
+          <xsl:text>cals_table-max-font-reduction</xsl:text>
         </xsl:if>
       </xsl:variable>
       <xsl:if test="not(empty($class.tmp))">
@@ -588,54 +582,29 @@
   
   <xsl:variable name="xslLib:cals2html.class2style.mapping" as="element()">
     <!--Using cals namespace here so we can match elements with the xpath default namespace-->
-    <!--TODO LATER-->
-    <!--<mapping xmlns="http://docs.oasis-open.org/ns/oasis-exchange/table">
-      <!-\- frame ne se trouve qu'au niveau de l'élément table -\->
+    <mapping xmlns="http://docs.oasis-open.org/ns/oasis-exchange/table">
+      <!-- frame ne se trouve qu'au niveau de l'élément table -->
       <entry key="cals_frame-top">border-top:1px solid</entry>
       <entry key="cals_frame-bottom">border-bottom:1px solid</entry>
       <entry key="cals_frame-topbot">border-top:1px solid; border-bottom:1px solid</entry>
       <entry key="cals_frame-sides">border-left:1px solid; border-right:1px solid</entry>
       <entry key="cals_frame-all">border:1px solid</entry>
       <entry key="cals_frame-none">border:none</entry>
-      <!-\- align -\->
+      <!-- align -->
       <entry key="cals_align-left">text-align:left</entry>
       <entry key="cals_align-right">text-align:right</entry>
       <entry key="cals_align-center">text-align:center</entry>
       <entry key="cals_align-justify">text-align:justify</entry>
-      <!-\- FIXME sera utile pour les tableaux issus de FrameMaker
-      <entry key="cals_alignchar">text-align:left</entry> -\->
-      <!-\- valign -\->
-      <entry key="cals_valign-top">vertical-align:top</entry>
-      <entry key="cals_valign-bottom">vertical-align:bottom</entry>
-      <entry key="cals_valign-middle">vertical-align:middle</entry>
-      <!-\- colsep -\->
-      <entry key="cals_colsep">border-right:1px solid</entry>
-      <!-\- rowsep -\->
-      <entry key="cals_rowsep">border-bottom:1px solid</entry>
-    </mapping>-->
-    <mapping xmlns="http://docs.oasis-open.org/ns/oasis-exchange/table">
-      <!-- frame ne se trouve qu'au niveau de l'élément table -->
-      <entry key="cals_frame-top">border-collapse: collapse; border-top:1px solid black</entry>
-      <entry key="cals_frame-bottom">border-collapse: collapse; border-bottom:1px solid black</entry>
-      <entry key="cals_frame-topbot">border-collapse: collapse; border-top:1px solid black; border-bottom:1px solid black</entry>
-      <entry key="cals_frame-sides">border-collapse: collapse; border-left:1px solid black; border-right:1px solid black</entry>
-      <entry key="cals_frame-all">border-collapse: collapse; border:1px solid black</entry>
-      <entry key="cals_frame-none">border-collapse: collapse; border:none</entry>
-      <!-- align -->
-      <entry key="cals_alignleft">text-align:left</entry>
-      <entry key="cals_alignright">text-align:right</entry>
-      <entry key="cals_aligncenter">text-align:center</entry>
-      <entry key="cals_alignjustify">text-align:justify</entry>
       <!-- FIXME sera utile pour les tableaux issus de FrameMaker
       <entry key="cals_alignchar">text-align:left</entry> -->
       <!-- valign -->
-      <entry key="cals_valigntop">vertical-align:top</entry>
-      <entry key="cals_valignbottom">vertical-align:bottom</entry>
-      <entry key="cals_valignmiddle">vertical-align:middle</entry>
+      <entry key="cals_valign-top">vertical-align:top</entry>
+      <entry key="cals_valign-bottom">vertical-align:bottom</entry>
+      <entry key="cals_valign-middle">vertical-align:middle</entry>
       <!-- colsep -->
-      <entry key="cals_colsep">border-right:1px solid black</entry>
+      <entry key="cals_colsep">border-right:1px solid</entry>
       <!-- rowsep -->
-      <entry key="cals_rowsep">border-bottom:1px solid black</entry>
+      <entry key="cals_rowsep">border-bottom:1px solid</entry>
     </mapping>
   </xsl:variable>
   
@@ -643,7 +612,7 @@
     | html:table[els:hasClass(., 'cals_tgroup')]//*[local-name(.) = ('tr', 'td', 'th', 'thead', 'tbody', 'tfoot')]" 
     mode="xslLib:cals2html.class2style">
     <xsl:copy>
-      <!--<xsl:copy-of select="@* except (@class | @style)"/> TODO later-->
+      <xsl:copy-of select="@* except (@class | @style)"/>
       <xsl:variable name="class" select="tokenize(@class, '\s+')[not(. = $xslLib:cals2html.class2style.mapping/entry/@key)]" as="xs:string*"/>
       <xsl:if test="not(empty($class))">
         <xsl:attribute name="class" select="string-join($class, ' ')"/>
@@ -656,8 +625,7 @@
         </xsl:for-each>
       </xsl:variable>
       <xsl:if test="not(empty($style))">
-        <!--<xsl:attribute name="style" select="string-join($style, '; ')"/> TODO LATER-->
-        <xsl:attribute name="style" select="concat(string-join($style, ';'), ';')"/>
+        <xsl:attribute name="style" select="string-join($style, '; ')"/>
       </xsl:if>
       <xsl:copy-of select="@* except (@class | @style)"/>
       <xsl:apply-templates mode="#current"/>
