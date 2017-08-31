@@ -523,32 +523,32 @@
   <xsl:template name="xhtml2cals:compute-rowsep-colsep-defaults">
     <xsl:choose>
       <xsl:when test="@border !=0 and not(@rules)">
-        <xsl:attribute name="colsep">yes</xsl:attribute>
-        <xsl:attribute name="rowsep">yes</xsl:attribute>
+        <xsl:attribute name="colsep" select="'1'"/>
+        <xsl:attribute name="rowsep" select="'1'"/>
       </xsl:when>
       <xsl:when test="@rules">
         <xsl:choose>
           <xsl:when test="@rules = 'all'">
-            <xsl:attribute name="colsep">yes</xsl:attribute>
-            <xsl:attribute name="rowsep">yes</xsl:attribute>
+            <xsl:attribute name="colsep" select="'1'"/>
+            <xsl:attribute name="rowsep" select="'1'"/>
           </xsl:when>
           <xsl:when test="@rules = 'rows'">
-            <xsl:attribute name="colsep">no</xsl:attribute>
-            <xsl:attribute name="rowsep">yes</xsl:attribute>
+            <xsl:attribute name="colsep" select="'0'"/>
+            <xsl:attribute name="rowsep" select="'1'"/>
           </xsl:when>
           <xsl:when test="@rules = 'cols'">
-            <xsl:attribute name="colsep">yes</xsl:attribute>
-            <xsl:attribute name="rowsep">no</xsl:attribute>
+            <xsl:attribute name="colsep" select="'1'"/>
+            <xsl:attribute name="rowsep" select="'0'"/>
           </xsl:when>
           <xsl:otherwise>
-            <xsl:attribute name="colsep">no</xsl:attribute>
-            <xsl:attribute name="rowsep">no</xsl:attribute>
+            <xsl:attribute name="colsep" select="'0'"/>
+            <xsl:attribute name="rowsep" select="'0'"/>
           </xsl:otherwise>
         </xsl:choose>
       </xsl:when>
       <xsl:otherwise>
-        <xsl:attribute name="colsep">no</xsl:attribute>
-        <xsl:attribute name="rowsep">no</xsl:attribute>
+        <xsl:attribute name="colsep" select="'0'"/>
+        <xsl:attribute name="rowsep" select="'0'"/>
       </xsl:otherwise>
     </xsl:choose>
   </xsl:template>
@@ -734,19 +734,19 @@
       <xsl:variable name="forced-colsep" select="(ancestor::table[1]/@rules = 'cols') or (ancestor::table[1]/@rules = 'all')" as="xs:boolean"/>
       <xsl:choose>
         <xsl:when test="$forced-colsep or css:definesBorderRight($css) or css:definesBorderLeft($css-next-col)">
-          <xsl:attribute name="colsep" select="if ($forced-colsep or css:showBorderRight($css) or css:showBorderLeft($css-next-col)) then('yes') else('no')"/>
+          <xsl:attribute name="colsep" select="if ($forced-colsep or css:showBorderRight($css) or css:showBorderLeft($css-next-col)) then('1') else('0')"/>
         </xsl:when>
       </xsl:choose>
       <xsl:choose>
         <xsl:when test="$forced-rowsep or css:definesBorderBottom($css) or css:definesBorderTop($css-next-row)">
-          <xsl:attribute name="rowsep" select="if ($forced-rowsep or css:showBorderBottom($css) or css:showBorderTop($css-next-row)) then ('yes') else ('no')"/>
+          <xsl:attribute name="rowsep" select="if ($forced-rowsep or css:showBorderBottom($css) or css:showBorderTop($css-next-row)) then ('1') else ('0')"/>
         </xsl:when>
       </xsl:choose>
       <xsl:apply-templates select="node()" mode="#current"/>
     </entry>
   </xsl:template>
   
-  <xsl:template match="td[@xhtml2cals:DummyCell='yes']|th[@xhtml2cals:DummyCell='yes']" mode="xhtml2cals:convert-to-cals" priority="15"/>
+  <xsl:template match="td[@xhtml2cals:DummyCell='yes'] | th[@xhtml2cals:DummyCell='yes']" mode="xhtml2cals:convert-to-cals" priority="15"/>
   
   <xsl:template match="@* | node()" mode="xhtml2cals:convert-to-cals">
     <xsl:copy>

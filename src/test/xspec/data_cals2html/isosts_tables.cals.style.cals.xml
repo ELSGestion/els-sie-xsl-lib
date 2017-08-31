@@ -41,7 +41,7 @@
         <caption>
           <title>No border no col definition table</title>
         </caption>
-        <table xmlns="http://docs.oasis-open.org/ns/oasis-exchange/table" frame="all" colsep="no" rowsep="no">
+        <table xmlns="http://docs.oasis-open.org/ns/oasis-exchange/table" frame="all" colsep="0" rowsep="0">
           <tgroup cols="2">
             <colspec colname="col1"/>
             <tbody>
@@ -62,7 +62,7 @@
         <caption>
           <title>Table with explicit border definitions, 2px table and table header border</title>
         </caption>
-        <table xmlns="http://docs.oasis-open.org/ns/oasis-exchange/table" frame="all" colsep="no" rowsep="no">
+        <table xmlns="http://docs.oasis-open.org/ns/oasis-exchange/table" frame="all" colsep="0" rowsep="0">
           <tgroup cols="5">
             <colspec colname="col1"/>
             <colspec colname="col2"/>
@@ -71,37 +71,37 @@
             <colspec colname="col5"/>
             <thead>
               <row>
-                <entry colsep="yes" rowsep="yes">
+                <entry colsep="1" rowsep="1">
                   <bold xmlns="">header text</bold>
                 </entry>
-                <entry colsep="yes" rowsep="yes">
+                <entry colsep="1" rowsep="1">
                   <bold xmlns="">header text</bold>
                 </entry>
-                <entry colsep="yes" rowsep="yes">
+                <entry colsep="1" rowsep="1">
                   <bold xmlns="">header text</bold>
                 </entry>
-                <entry colsep="yes" rowsep="yes">
+                <entry colsep="1" rowsep="1">
                   <bold xmlns="">header text</bold>
                 </entry>
-                <entry colsep="yes" rowsep="yes">
+                <entry colsep="1" rowsep="1">
                   <bold xmlns="">header text</bold>
                 </entry>
               </row>
             </thead>
             <tbody>
               <row>
-                <entry colsep="yes" rowsep="yes">table cell text</entry>
-                <entry colsep="yes" rowsep="yes">table cell text</entry>
-                <entry colsep="yes" rowsep="yes">table cell text</entry>
-                <entry colsep="yes" rowsep="yes">table cell text</entry>
-                <entry colsep="yes" rowsep="yes">table cell text</entry>
+                <entry colsep="1" rowsep="1">table cell text</entry>
+                <entry colsep="1" rowsep="1">table cell text</entry>
+                <entry colsep="1" rowsep="1">table cell text</entry>
+                <entry colsep="1" rowsep="1">table cell text</entry>
+                <entry colsep="1" rowsep="1">table cell text</entry>
               </row>
               <row>
-                <entry colsep="yes" rowsep="yes">table cell text</entry>
-                <entry colsep="yes" rowsep="yes">table cell text</entry>
-                <entry colsep="yes" rowsep="yes">table cell text</entry>
-                <entry colsep="yes" rowsep="yes">table cell text</entry>
-                <entry colsep="yes" rowsep="yes">table cell text</entry>
+                <entry colsep="1" rowsep="1">table cell text</entry>
+                <entry colsep="1" rowsep="1">table cell text</entry>
+                <entry colsep="1" rowsep="1">table cell text</entry>
+                <entry colsep="1" rowsep="1">table cell text</entry>
+                <entry colsep="1" rowsep="1">table cell text</entry>
               </row>
             </tbody>
           </tgroup>
@@ -112,7 +112,7 @@
         <caption>
           <title>Spanning cells in header</title>
         </caption>
-        <table xmlns="http://docs.oasis-open.org/ns/oasis-exchange/table" frame="all" colsep="no" rowsep="no">
+        <table xmlns="http://docs.oasis-open.org/ns/oasis-exchange/table" frame="all" colsep="0" rowsep="0">
           <tgroup cols="4">
             <colspec colname="col1"/>
             <colspec colname="col2"/>
@@ -120,27 +120,27 @@
             <colspec colname="col4"/>
             <thead>
               <row>
-                <entry colsep="yes" rowsep="yes">header text</entry>
-                <entry namest="col2" nameend="col4" colsep="yes" rowsep="yes">header text</entry>
+                <entry colsep="1" rowsep="1">header text</entry>
+                <entry namest="col2" nameend="col4" colsep="1" rowsep="1">header text</entry>
               </row>
               <row>
-                <entry colsep="yes" rowsep="yes">header text</entry>
-                <entry colsep="yes" rowsep="yes">header text</entry>
-                <entry colsep="yes" rowsep="yes">header text</entry>
+                <entry colsep="1" rowsep="1">header text</entry>
+                <entry colsep="1" rowsep="1">header text</entry>
+                <entry colsep="1" rowsep="1">header text</entry>
               </row>
             </thead>
             <tbody>
               <row>
-                <entry colsep="yes" rowsep="yes">table cell text</entry>
-                <entry colsep="yes" rowsep="yes">table cell text</entry>
-                <entry colsep="yes" rowsep="yes">table cell text</entry>
-                <entry colsep="yes" rowsep="yes">table cell text</entry>
+                <entry colsep="1" rowsep="1">table cell text</entry>
+                <entry colsep="1" rowsep="1">table cell text</entry>
+                <entry colsep="1" rowsep="1">table cell text</entry>
+                <entry colsep="1" rowsep="1">table cell text</entry>
               </row>
               <row>
-                <entry colsep="yes" rowsep="yes">table cell text</entry>
-                <entry colsep="yes" rowsep="yes">table cell text</entry>
-                <entry colsep="yes" rowsep="yes">table cell text</entry>
-                <entry colsep="yes" rowsep="yes">table cell text</entry>
+                <entry colsep="1" rowsep="1">table cell text</entry>
+                <entry colsep="1" rowsep="1">table cell text</entry>
+                <entry colsep="1" rowsep="1">table cell text</entry>
+                <entry colsep="1" rowsep="1">table cell text</entry>
               </row>
             </tbody>
           </tgroup>
@@ -151,7 +151,7 @@
         <caption>
           <title>Table with footer</title>
         </caption>
-        <table xmlns="http://docs.oasis-open.org/ns/oasis-exchange/table" frame="all" colsep="no" rowsep="no">
+        <table xmlns="http://docs.oasis-open.org/ns/oasis-exchange/table" frame="all" colsep="0" rowsep="0">
           <tgroup cols="4">
             <colspec colname="col1"/>
             <colspec colname="col2"/>
@@ -159,27 +159,27 @@
             <colspec colname="col4"/>
             <thead>
               <row>
-                <entry colsep="yes" rowsep="yes">header text</entry>
-                <entry colsep="yes" rowsep="yes">header text</entry>
-                <entry colsep="yes" rowsep="yes">header text</entry>
-                <entry colsep="yes" rowsep="yes">header text</entry>
+                <entry colsep="1" rowsep="1">header text</entry>
+                <entry colsep="1" rowsep="1">header text</entry>
+                <entry colsep="1" rowsep="1">header text</entry>
+                <entry colsep="1" rowsep="1">header text</entry>
               </row>
             </thead>
             <tbody>
               <row>
-                <entry colsep="yes" rowsep="yes">table cell text</entry>
-                <entry colsep="yes" rowsep="yes">table cell text</entry>
-                <entry colsep="yes" rowsep="yes">table cell text</entry>
-                <entry colsep="yes" rowsep="yes">table cell text</entry>
+                <entry colsep="1" rowsep="1">table cell text</entry>
+                <entry colsep="1" rowsep="1">table cell text</entry>
+                <entry colsep="1" rowsep="1">table cell text</entry>
+                <entry colsep="1" rowsep="1">table cell text</entry>
               </row>
               <row>
-                <entry colsep="yes" rowsep="yes">table cell text</entry>
-                <entry colsep="yes" rowsep="yes">table cell text</entry>
-                <entry colsep="yes" rowsep="yes">table cell text</entry>
-                <entry colsep="yes" rowsep="yes">table cell text</entry>
+                <entry colsep="1" rowsep="1">table cell text</entry>
+                <entry colsep="1" rowsep="1">table cell text</entry>
+                <entry colsep="1" rowsep="1">table cell text</entry>
+                <entry colsep="1" rowsep="1">table cell text</entry>
               </row>
               <row>
-                <entry namest="col1" nameend="col4" colsep="yes" rowsep="yes">table footer</entry>
+                <entry namest="col1" nameend="col4" colsep="1" rowsep="1">table footer</entry>
               </row>
             </tbody>
           </tgroup>
@@ -190,7 +190,7 @@
         <caption>
           <title>Table with various col and rowspans</title>
         </caption>
-        <table xmlns="http://docs.oasis-open.org/ns/oasis-exchange/table" frame="all" colsep="no" rowsep="no">
+        <table xmlns="http://docs.oasis-open.org/ns/oasis-exchange/table" frame="all" colsep="0" rowsep="0">
           <tgroup cols="6">
             <colspec colname="col1"/>
             <colspec colname="col2"/>
@@ -200,53 +200,53 @@
             <colspec colname="col6"/>
             <thead>
               <row>
-                <entry colsep="yes" rowsep="yes">header text</entry>
-                <entry namest="col2" nameend="col3" colsep="yes" rowsep="yes">header text</entry>
-                <entry colsep="yes" rowsep="yes">header text</entry>
-                <entry colsep="yes" rowsep="yes">header text</entry>
-                <entry colsep="yes" rowsep="yes">header text</entry>
+                <entry colsep="1" rowsep="1">header text</entry>
+                <entry namest="col2" nameend="col3" colsep="1" rowsep="1">header text</entry>
+                <entry colsep="1" rowsep="1">header text</entry>
+                <entry colsep="1" rowsep="1">header text</entry>
+                <entry colsep="1" rowsep="1">header text</entry>
               </row>
             </thead>
             <tbody>
               <row>
-                <entry colsep="yes" rowsep="yes">table cell text</entry>
-                <entry namest="col2" nameend="col3" colsep="yes" rowsep="yes">table cell text</entry>
-                <entry colsep="yes" rowsep="yes">table cell text</entry>
-                <entry colsep="yes" rowsep="yes">table cell text</entry>
-                <entry colsep="yes" rowsep="yes">table cell text</entry>
+                <entry colsep="1" rowsep="1">table cell text</entry>
+                <entry namest="col2" nameend="col3" colsep="1" rowsep="1">table cell text</entry>
+                <entry colsep="1" rowsep="1">table cell text</entry>
+                <entry colsep="1" rowsep="1">table cell text</entry>
+                <entry colsep="1" rowsep="1">table cell text</entry>
               </row>
               <row>
-                <entry namest="col1" nameend="col5" colsep="yes" rowsep="yes">table cell text</entry>
+                <entry namest="col1" nameend="col5" colsep="1" rowsep="1">table cell text</entry>
               </row>
               <row>
-                <entry namest="col1" nameend="col2" colsep="yes" rowsep="yes">table cell text</entry>
-                <entry namest="col3" nameend="col5" colsep="yes" rowsep="yes">table cell text</entry>
+                <entry namest="col1" nameend="col2" colsep="1" rowsep="1">table cell text</entry>
+                <entry namest="col3" nameend="col5" colsep="1" rowsep="1">table cell text</entry>
               </row>
               <row>
-                <entry namest="col1" nameend="col5" colsep="yes" rowsep="yes">table cell text</entry>
+                <entry namest="col1" nameend="col5" colsep="1" rowsep="1">table cell text</entry>
               </row>
               <row>
-                <entry namest="col1" nameend="col2" colsep="yes" rowsep="yes">table cell text</entry>
-                <entry namest="col3" nameend="col5" colsep="yes" rowsep="yes">table cell text</entry>
+                <entry namest="col1" nameend="col2" colsep="1" rowsep="1">table cell text</entry>
+                <entry namest="col3" nameend="col5" colsep="1" rowsep="1">table cell text</entry>
               </row>
               <row>
-                <entry namest="col1" nameend="col2" colsep="yes" rowsep="yes">table cell text</entry>
-                <entry namest="col3" nameend="col5" colsep="yes" rowsep="yes">table cell text</entry>
+                <entry namest="col1" nameend="col2" colsep="1" rowsep="1">table cell text</entry>
+                <entry namest="col3" nameend="col5" colsep="1" rowsep="1">table cell text</entry>
               </row>
               <row>
-                <entry namest="col1" nameend="col2" colsep="yes" rowsep="yes">table cell text</entry>
-                <entry namest="col3" nameend="col5" colsep="yes" rowsep="yes">table cell text</entry>
+                <entry namest="col1" nameend="col2" colsep="1" rowsep="1">table cell text</entry>
+                <entry namest="col3" nameend="col5" colsep="1" rowsep="1">table cell text</entry>
               </row>
               <row>
-                <entry namest="col1" nameend="col5" colsep="yes" rowsep="yes">table cell text</entry>
+                <entry namest="col1" nameend="col5" colsep="1" rowsep="1">table cell text</entry>
               </row>
               <row>
-                <entry colsep="yes" rowsep="yes">table cell text</entry>
-                <entry namest="col2" nameend="col5" colsep="yes" rowsep="yes">table cell text</entry>
+                <entry colsep="1" rowsep="1">table cell text</entry>
+                <entry namest="col2" nameend="col5" colsep="1" rowsep="1">table cell text</entry>
               </row>
               <row>
-                <entry colsep="yes" rowsep="yes">table cell text</entry>
-                <entry namest="col2" nameend="col5" colsep="yes" rowsep="yes">table cell text</entry>
+                <entry colsep="1" rowsep="1">table cell text</entry>
+                <entry namest="col2" nameend="col5" colsep="1" rowsep="1">table cell text</entry>
               </row>
             </tbody>
           </tgroup>
@@ -257,7 +257,7 @@
         <caption>
           <title>Table with specific cells having no border</title>
         </caption>
-        <table xmlns="http://docs.oasis-open.org/ns/oasis-exchange/table" frame="all" colsep="no" rowsep="no">
+        <table xmlns="http://docs.oasis-open.org/ns/oasis-exchange/table" frame="all" colsep="0" rowsep="0">
           <tgroup cols="4">
             <colspec colname="col1"/>
             <colspec colname="col2"/>
@@ -265,45 +265,45 @@
             <colspec colname="col4"/>
             <thead>
               <row>
-                <entry colsep="yes" rowsep="yes">header text</entry>
-                <entry namest="col2" nameend="col4" colsep="yes" rowsep="yes">header text</entry>
+                <entry colsep="1" rowsep="1">header text</entry>
+                <entry namest="col2" nameend="col4" colsep="1" rowsep="1">header text</entry>
               </row>
               <row>
-                <entry colsep="yes" rowsep="yes">header text</entry>
-                <entry colsep="yes" rowsep="yes">header text</entry>
-                <entry colsep="yes" rowsep="yes">header text</entry>
+                <entry colsep="1" rowsep="1">header text</entry>
+                <entry colsep="1" rowsep="1">header text</entry>
+                <entry colsep="1" rowsep="1">header text</entry>
               </row>
             </thead>
             <tbody>
               <row>
-                <entry colsep="yes" rowsep="yes">table cell text</entry>
-                <entry colsep="yes" rowsep="yes">table cell text</entry>
-                <entry colsep="yes" rowsep="yes">table cell text</entry>
-                <entry colsep="yes" rowsep="yes">table cell text</entry>
+                <entry colsep="1" rowsep="1">table cell text</entry>
+                <entry colsep="1" rowsep="1">table cell text</entry>
+                <entry colsep="1" rowsep="1">table cell text</entry>
+                <entry colsep="1" rowsep="1">table cell text</entry>
               </row>
               <row>
-                <entry colsep="yes">table cell text</entry>
-                <entry rowsep="yes">table cell text</entry>
-                <entry colsep="yes" rowsep="yes">table cell text</entry>
-                <entry colsep="yes">table cell text</entry>
+                <entry colsep="1">table cell text</entry>
+                <entry rowsep="1">table cell text</entry>
+                <entry colsep="1" rowsep="1">table cell text</entry>
+                <entry colsep="1">table cell text</entry>
               </row>
               <row>
-                <entry colsep="yes" rowsep="yes">table cell text</entry>
-                <entry colsep="yes" rowsep="yes">table cell text</entry>
-                <entry colsep="yes" rowsep="yes">table cell text</entry>
-                <entry colsep="yes" rowsep="yes">table cell text</entry>
+                <entry colsep="1" rowsep="1">table cell text</entry>
+                <entry colsep="1" rowsep="1">table cell text</entry>
+                <entry colsep="1" rowsep="1">table cell text</entry>
+                <entry colsep="1" rowsep="1">table cell text</entry>
               </row>
               <row>
-                <entry colsep="yes" rowsep="yes">table cell text</entry>
-                <entry rowsep="yes">table cell text</entry>
-                <entry colsep="yes" rowsep="yes">table cell text</entry>
-                <entry colsep="yes" rowsep="yes">table cell text</entry>
+                <entry colsep="1" rowsep="1">table cell text</entry>
+                <entry rowsep="1">table cell text</entry>
+                <entry colsep="1" rowsep="1">table cell text</entry>
+                <entry colsep="1" rowsep="1">table cell text</entry>
               </row>
               <row>
-                <entry colsep="yes" rowsep="yes">table cell text</entry>
-                <entry colsep="yes" rowsep="yes">table cell text</entry>
-                <entry colsep="yes" rowsep="yes">table cell text</entry>
-                <entry colsep="yes" rowsep="yes">table cell text</entry>
+                <entry colsep="1" rowsep="1">table cell text</entry>
+                <entry colsep="1" rowsep="1">table cell text</entry>
+                <entry colsep="1" rowsep="1">table cell text</entry>
+                <entry colsep="1" rowsep="1">table cell text</entry>
               </row>
             </tbody>
           </tgroup>
@@ -314,7 +314,7 @@
         <caption>
           <title>Table with col and row spans where CSS of neighboring cells defines colsep and rowsep</title>
         </caption>
-        <table xmlns="http://docs.oasis-open.org/ns/oasis-exchange/table" frame="all" colsep="no" rowsep="no">
+        <table xmlns="http://docs.oasis-open.org/ns/oasis-exchange/table" frame="all" colsep="0" rowsep="0">
           <tgroup cols="4">
             <colspec colname="col1"/>
             <colspec colname="col2"/>
@@ -332,15 +332,15 @@
               <row>
                 <entry namest="col1" nameend="col2">rowsep=no</entry>
                 <entry>table default</entry>
-                <entry rowsep="yes">rowsep=yes</entry>
+                <entry rowsep="1">rowsep=yes</entry>
               </row>
               <row>
-                <entry namest="col1" nameend="col2" colsep="yes" rowsep="yes">colsep=yes, rowsep=yes</entry>
+                <entry namest="col1" nameend="col2" colsep="1" rowsep="1">colsep=yes, rowsep=yes</entry>
                 <entry>table default</entry>
               </row>
               <row>
                 <entry>table default</entry>
-                <entry colsep="yes">colsep=yes</entry>
+                <entry colsep="1">colsep=yes</entry>
                 <entry>table default</entry>
               </row>
             </tbody>
@@ -352,7 +352,7 @@
         <caption>
           <title>Table with @rules="rows" should generate rowsep for all rows</title>
         </caption>
-        <table xmlns="http://docs.oasis-open.org/ns/oasis-exchange/table" frame="all" colsep="no" rowsep="no">
+        <table xmlns="http://docs.oasis-open.org/ns/oasis-exchange/table" frame="all" colsep="0" rowsep="0">
           <tgroup cols="4">
             <colspec colname="col1"/>
             <colspec colname="col2"/>
@@ -360,30 +360,30 @@
             <colspec colname="col4"/>
             <thead>
               <row>
-                <entry rowsep="yes">rowsep=yes</entry>
-                <entry rowsep="yes">rowsep=yes</entry>
-                <entry rowsep="yes">rowsep=yes</entry>
-                <entry rowsep="yes">rowsep=yes</entry>
+                <entry rowsep="1">rowsep=yes</entry>
+                <entry rowsep="1">rowsep=yes</entry>
+                <entry rowsep="1">rowsep=yes</entry>
+                <entry rowsep="1">rowsep=yes</entry>
               </row>
             </thead>
             <tbody>
               <row>
-                <entry rowsep="yes">rowsep=yes</entry>
-                <entry rowsep="yes">rowsep=yes</entry>
-                <entry rowsep="yes">rowsep=yes</entry>
-                <entry rowsep="yes">rowsep=yes</entry>
+                <entry rowsep="1">rowsep=yes</entry>
+                <entry rowsep="1">rowsep=yes</entry>
+                <entry rowsep="1">rowsep=yes</entry>
+                <entry rowsep="1">rowsep=yes</entry>
               </row>
               <row>
-                <entry rowsep="yes">rowsep=yes</entry>
-                <entry rowsep="yes">rowsep=yes</entry>
-                <entry rowsep="yes">rowsep=yes</entry>
-                <entry rowsep="yes">rowsep=yes</entry>
+                <entry rowsep="1">rowsep=yes</entry>
+                <entry rowsep="1">rowsep=yes</entry>
+                <entry rowsep="1">rowsep=yes</entry>
+                <entry rowsep="1">rowsep=yes</entry>
               </row>
               <row>
-                <entry rowsep="yes">rowsep=yes</entry>
-                <entry rowsep="yes">rowsep=yes</entry>
-                <entry rowsep="yes">rowsep=yes</entry>
-                <entry rowsep="yes">rowsep=yes</entry>
+                <entry rowsep="1">rowsep=yes</entry>
+                <entry rowsep="1">rowsep=yes</entry>
+                <entry rowsep="1">rowsep=yes</entry>
+                <entry rowsep="1">rowsep=yes</entry>
               </row>
             </tbody>
           </tgroup>
@@ -394,7 +394,7 @@
         <caption>
           <title>Table with @rules="cols" should generate colsep for all cells</title>
         </caption>
-        <table xmlns="http://docs.oasis-open.org/ns/oasis-exchange/table" frame="all" colsep="no" rowsep="no">
+        <table xmlns="http://docs.oasis-open.org/ns/oasis-exchange/table" frame="all" colsep="0" rowsep="0">
           <tgroup cols="4">
             <colspec colname="col1"/>
             <colspec colname="col2"/>
@@ -402,30 +402,30 @@
             <colspec colname="col4"/>
             <thead>
               <row>
-                <entry colsep="yes">colsep=yes</entry>
-                <entry colsep="yes">colsep=yes</entry>
-                <entry colsep="yes">colsep=yes</entry>
-                <entry colsep="yes">colsep=yes</entry>
+                <entry colsep="1">colsep=yes</entry>
+                <entry colsep="1">colsep=yes</entry>
+                <entry colsep="1">colsep=yes</entry>
+                <entry colsep="1">colsep=yes</entry>
               </row>
             </thead>
             <tbody>
               <row>
-                <entry colsep="yes">colsep=yes</entry>
-                <entry colsep="yes">colsep=yes</entry>
-                <entry colsep="yes">colsep=yes</entry>
-                <entry colsep="yes">colsep=yes</entry>
+                <entry colsep="1">colsep=yes</entry>
+                <entry colsep="1">colsep=yes</entry>
+                <entry colsep="1">colsep=yes</entry>
+                <entry colsep="1">colsep=yes</entry>
               </row>
               <row>
-                <entry colsep="yes">colsep=yes</entry>
-                <entry colsep="yes">colsep=yes</entry>
-                <entry colsep="yes">colsep=yes</entry>
-                <entry colsep="yes">colsep=yes</entry>
+                <entry colsep="1">colsep=yes</entry>
+                <entry colsep="1">colsep=yes</entry>
+                <entry colsep="1">colsep=yes</entry>
+                <entry colsep="1">colsep=yes</entry>
               </row>
               <row>
-                <entry colsep="yes">colsep=yes</entry>
-                <entry colsep="yes">colsep=yes</entry>
-                <entry colsep="yes">colsep=yes</entry>
-                <entry colsep="yes">colsep=yes</entry>
+                <entry colsep="1">colsep=yes</entry>
+                <entry colsep="1">colsep=yes</entry>
+                <entry colsep="1">colsep=yes</entry>
+                <entry colsep="1">colsep=yes</entry>
               </row>
             </tbody>
           </tgroup>
@@ -436,7 +436,7 @@
         <caption>
           <title>Table with @rules="groups" which should generate rowsep for last row in theader and table</title>
         </caption>
-        <table xmlns="http://docs.oasis-open.org/ns/oasis-exchange/table" frame="all" colsep="no" rowsep="no">
+        <table xmlns="http://docs.oasis-open.org/ns/oasis-exchange/table" frame="all" colsep="0" rowsep="0">
           <tgroup cols="4">
             <colspec colname="col1"/>
             <colspec colname="col2"/>
@@ -450,10 +450,10 @@
                 <entry>table default</entry>
               </row>
               <row>
-                <entry rowsep="yes">rowsep=yes</entry>
-                <entry rowsep="yes">rowsep=yes</entry>
-                <entry rowsep="yes">rowsep=yes</entry>
-                <entry rowsep="yes">rowsep=yes</entry>
+                <entry rowsep="1">rowsep=yes</entry>
+                <entry rowsep="1">rowsep=yes</entry>
+                <entry rowsep="1">rowsep=yes</entry>
+                <entry rowsep="1">rowsep=yes</entry>
               </row>
             </thead>
             <tbody>
@@ -464,16 +464,16 @@
                 <entry>table default</entry>
               </row>
               <row>
-                <entry rowsep="yes">rowsep=yes; because its the last tbody row before the tfoot</entry>
-                <entry rowsep="yes">rowsep=yes</entry>
-                <entry rowsep="yes">rowsep=yes</entry>
-                <entry rowsep="yes">rowsep=yes</entry>
+                <entry rowsep="1">rowsep=yes; because its the last tbody row before the tfoot</entry>
+                <entry rowsep="1">rowsep=yes</entry>
+                <entry rowsep="1">rowsep=yes</entry>
+                <entry rowsep="1">rowsep=yes</entry>
               </row>
               <row>
-                <entry rowsep="yes">table default</entry>
-                <entry rowsep="yes">table default</entry>
-                <entry rowsep="yes">table default</entry>
-                <entry rowsep="yes">table default</entry>
+                <entry rowsep="1">table default</entry>
+                <entry rowsep="1">table default</entry>
+                <entry rowsep="1">table default</entry>
+                <entry rowsep="1">table default</entry>
               </row>
             </tbody>
           </tgroup>
@@ -484,7 +484,7 @@
         <caption>
           <title>Table with @rules="all" which should generate rowsep and rowsep for all</title>
         </caption>
-        <table xmlns="http://docs.oasis-open.org/ns/oasis-exchange/table" frame="all" colsep="no" rowsep="no">
+        <table xmlns="http://docs.oasis-open.org/ns/oasis-exchange/table" frame="all" colsep="0" rowsep="0">
           <tgroup cols="4">
             <colspec colname="col1"/>
             <colspec colname="col2"/>
@@ -492,36 +492,36 @@
             <colspec colname="col4"/>
             <thead>
               <row>
-                <entry colsep="yes" rowsep="yes">colsep=yes, rowsep=yes</entry>
-                <entry colsep="yes" rowsep="yes">colsep=yes, rowsep=yes</entry>
-                <entry colsep="yes" rowsep="yes">colsep=yes, rowsep=yes</entry>
-                <entry colsep="yes" rowsep="yes">colsep=yes, rowsep=yes</entry>
+                <entry colsep="1" rowsep="1">colsep=yes, rowsep=yes</entry>
+                <entry colsep="1" rowsep="1">colsep=yes, rowsep=yes</entry>
+                <entry colsep="1" rowsep="1">colsep=yes, rowsep=yes</entry>
+                <entry colsep="1" rowsep="1">colsep=yes, rowsep=yes</entry>
               </row>
               <row>
-                <entry colsep="yes" rowsep="yes">colsep=yes, rowsep=yes</entry>
-                <entry colsep="yes" rowsep="yes">colsep=yes, rowsep=yes</entry>
-                <entry colsep="yes" rowsep="yes">colsep=yes, rowsep=yes</entry>
-                <entry colsep="yes" rowsep="yes">colsep=yes, rowsep=yes</entry>
+                <entry colsep="1" rowsep="1">colsep=yes, rowsep=yes</entry>
+                <entry colsep="1" rowsep="1">colsep=yes, rowsep=yes</entry>
+                <entry colsep="1" rowsep="1">colsep=yes, rowsep=yes</entry>
+                <entry colsep="1" rowsep="1">colsep=yes, rowsep=yes</entry>
               </row>
             </thead>
             <tbody>
               <row>
-                <entry colsep="yes" rowsep="yes">colsep=yes, rowsep=yes</entry>
-                <entry colsep="yes" rowsep="yes">colsep=yes, rowsep=yes</entry>
-                <entry colsep="yes" rowsep="yes">colsep=yes, rowsep=yes</entry>
-                <entry colsep="yes" rowsep="yes">colsep=yes, rowsep=yes</entry>
+                <entry colsep="1" rowsep="1">colsep=yes, rowsep=yes</entry>
+                <entry colsep="1" rowsep="1">colsep=yes, rowsep=yes</entry>
+                <entry colsep="1" rowsep="1">colsep=yes, rowsep=yes</entry>
+                <entry colsep="1" rowsep="1">colsep=yes, rowsep=yes</entry>
               </row>
               <row>
-                <entry colsep="yes" rowsep="yes">colsep=yes, rowsep=yes</entry>
-                <entry colsep="yes" rowsep="yes">colsep=yes, rowsep=yes</entry>
-                <entry colsep="yes" rowsep="yes">colsep=yes, rowsep=yes</entry>
-                <entry colsep="yes" rowsep="yes">colsep=yes, rowsep=yes</entry>
+                <entry colsep="1" rowsep="1">colsep=yes, rowsep=yes</entry>
+                <entry colsep="1" rowsep="1">colsep=yes, rowsep=yes</entry>
+                <entry colsep="1" rowsep="1">colsep=yes, rowsep=yes</entry>
+                <entry colsep="1" rowsep="1">colsep=yes, rowsep=yes</entry>
               </row>
               <row>
-                <entry colsep="yes" rowsep="yes">colsep=yes, rowsep=yes</entry>
-                <entry colsep="yes" rowsep="yes">colsep=yes, rowsep=yes</entry>
-                <entry colsep="yes" rowsep="yes">colsep=yes, rowsep=yes</entry>
-                <entry colsep="yes" rowsep="yes">colsep=yes, rowsep=yes</entry>
+                <entry colsep="1" rowsep="1">colsep=yes, rowsep=yes</entry>
+                <entry colsep="1" rowsep="1">colsep=yes, rowsep=yes</entry>
+                <entry colsep="1" rowsep="1">colsep=yes, rowsep=yes</entry>
+                <entry colsep="1" rowsep="1">colsep=yes, rowsep=yes</entry>
               </row>
             </tbody>
           </tgroup>
@@ -532,7 +532,7 @@
         <caption>
           <title>Table cell alignment</title>
         </caption>
-        <table xmlns="http://docs.oasis-open.org/ns/oasis-exchange/table" frame="all" colsep="no" rowsep="no">
+        <table xmlns="http://docs.oasis-open.org/ns/oasis-exchange/table" frame="all" colsep="0" rowsep="0">
           <tgroup cols="6">
             <colspec colname="col1"/>
             <colspec colname="col2"/>
@@ -542,17 +542,17 @@
             <colspec colname="col6"/>
             <tbody>
               <row>
-                <entry colsep="yes" rowsep="yes">
+                <entry colsep="1" rowsep="1">
                   just lots of text to see the vertical alignment, 
                   just lots of text to see the vertical alignment, 
                   just lots of text to see the vertical alignment, 
                   just lots of text to see the vertical alignment
                 </entry>
-                <entry colsep="yes" rowsep="yes">align="center" valign="middle"</entry>
-                <entry colsep="yes" rowsep="yes">align="left" valign="top"</entry>
-                <entry colsep="yes" rowsep="yes">align="right" valign="bottom"</entry>
-                <entry colsep="yes" rowsep="yes">align="char"</entry>
-                <entry colsep="yes" rowsep="yes">align="justify" valign="bottom"</entry>
+                <entry colsep="1" rowsep="1">align="center" valign="middle"</entry>
+                <entry colsep="1" rowsep="1">align="left" valign="top"</entry>
+                <entry colsep="1" rowsep="1">align="right" valign="bottom"</entry>
+                <entry colsep="1" rowsep="1">align="char"</entry>
+                <entry colsep="1" rowsep="1">align="justify" valign="bottom"</entry>
               </row>
             </tbody>
           </tgroup>
