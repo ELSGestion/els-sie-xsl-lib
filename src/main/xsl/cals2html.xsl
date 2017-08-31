@@ -276,7 +276,7 @@
     <xsl:param name="valign" as="xs:string"/>
     <tr>
       <!--attributes that doesn't generate @style or @class like : ../@orient | @id ?-->
-      <xsl:apply-templates select="@* except (@bgcolor | @rowsep | @colsep | @valign | @align)" mode="xslLib:cals2html.attributes"/> 
+      <xsl:apply-templates select="@* except (@bgcolor | @rowsep | @colsep | @valign | @align | @morerows)" mode="xslLib:cals2html.attributes"/> 
       <xsl:variable name="class.tmp" as="xs:string*">
         <!--<xsl:if test="$xslLib:cals2html.add-odd-even-class">
           <xsl:value-of select="if (count(preceding-sibling::row) mod 2 = 0) then 'cals_odd' else 'cals_even'"/>
@@ -333,6 +333,10 @@
                 [xslLib:cals2html.get-colnum($entry, .) le $colnumend]"/>
             </xsl:otherwise>
           </xsl:choose>
+        </xsl:when>
+        <!--If there is no namest/nameend, look if the first preceding entry has a nameend col, if so use the next col-->
+        <xsl:when test="preceding-sibling::entry[1]/@nameend">
+          <xsl:copy-of select="$current-tgroup/colspec[@colname = current()/preceding-sibling::entry[1]/@nameend]/following-sibling::colspec[1]" copy-namespaces="no"/>
         </xsl:when>
         <!--Then consider @colname-->
         <xsl:when test="@colname">
@@ -477,7 +481,7 @@
 
   <!-- === COMMON : STEP 2 === -->
   
-  <xsl:template match="table/@frame | tgroup/@cols | entry/@namest | entry/@nameend | entry/@colname | @rowsep | @colsep | @valign | @align | @bgcolor" mode="xslLib:cals2html.attributes"/>
+  <xsl:template match="table/@frame | tgroup/@cols | entry/@namest | entry/@nameend | entry/@colname | entry/@morerows | @rowsep | @colsep | @valign | @align | @bgcolor" mode="xslLib:cals2html.attributes"/>
   
   <xsl:template match="@orient | @tabstyle" mode="xslLib:cals2html.attributes">
     <xsl:attribute name="data-cals-{local-name(.)}" select="."/>
