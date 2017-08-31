@@ -29,7 +29,7 @@
   <xsl:param name="xslLib:cals2html.log.uri" select="resolve-uri('log/', base-uri())" as="xs:string"/>
   <xsl:param name="xslLib:cals2html.debug" select="false()" as="xs:boolean"/>
   <xsl:param name="xslLib:cals2html.use-style-insteadOf-class" select="false()" as="xs:boolean"/>
-  <!--<xsl:param name="xslLib:cals2html.add-odd-even-class" select="true()" as="xs:boolean"/> unusefull : use css pseudo class instead-->
+  <xsl:param name="xslLib:cals2html.add-odd-even-class" select="true()" as="xs:boolean"/> <!--TODO LATER : unusefull : use css pseudo class instead-->
   <xsl:param name="xslLib:cals2html.compute-column-width-as-width-attribute" select="true()" as="xs:boolean"/> <!--@width is used for html4 output-->
   <xsl:param name="xslLib:cals2html.compute-column-width-within-colgroup" select="true()" as="xs:boolean"/>
   <!--If the number of columns is greater than $nb-cols-max-before-font-reduction then the font needs to be reduced-->
@@ -164,28 +164,21 @@
       </xsl:if>
       <xsl:if test="$xslLib:cals2html.compute-column-width-within-colgroup">
         <colgroup>
-          <xsl:variable name="total-colwidth-sum">
-            <xsl:call-template name="xslLib:cals2html.cals_sum-colwidths">
-              <xsl:with-param name="col-list" select="colspec" as="element(colspec)*"/>
-            </xsl:call-template>
-          </xsl:variable>
+          <xsl:variable name="total-colwidth-sum" select="xslLib:cals2html.cals_sum-colwidths(colspec)" as="xs:double"/>
           <xsl:for-each select="colspec">
-            <xsl:variable name="current-colwidth">
-              <xsl:call-template name="xslLib:cals2html.cals_sum-colwidths">
-                <xsl:with-param name="col-list" select="." as="element(colspec)*" />
-              </xsl:call-template>
-            </xsl:variable>
+            <xsl:variable name="current-colwidth" select="xslLib:cals2html.cals_sum-colwidths(.)" as="xs:double"/>
             <!--<xsl:message>$current-colwidth="<xsl:value-of select="$current-colwidth"/>" : <xsl:value-of select="saxon:path(.)"/></xsl:message>-->
             <col>
               <xsl:call-template name="xslLib:cals2html.add-column-width">
-                <xsl:with-param name="width" select="concat(round((number(replace($current-colwidth,'\*','')) div  $total-colwidth-sum) * 100), '%')" as="xs:string"/>
+                <!--<xsl:with-param name="width" select="concat(round(($current-colwidth div  $total-colwidth-sum) * 100), '%')" as="xs:string"/> TODO LATER-->
+                <xsl:with-param name="width" select="concat(round(($current-colwidth div  $total-colwidth-sum) * 100), '%;')" as="xs:string"/>
               </xsl:call-template>
             </col>
           </xsl:for-each>
         </colgroup>
       </xsl:if>
       <xsl:if test="normalize-space(@cols) != '' and not(normalize-space(@cols) castable as xs:integer)">
-        <xsl:message terminate="yes">[ERROR][xslLib:cals2html] @cols="<xsl:value-of select="@cols"/>" is not an integer</xsl:message>
+        <xsl:message terminate="no">[ERROR][xslLib:cals2html] @cols="<xsl:value-of select="@cols"/>" is not an integer</xsl:message>
       </xsl:if>
       <xsl:apply-templates mode="xslLib:cals2html.main" select="thead">
         <xsl:with-param name="colsep" select="(@colsep, $colsep)[1]" as="xs:string"/>
@@ -283,9 +276,9 @@
       <!--attributes that doesn't generate @style or @class like : ../@orient | @id ?-->
       <xsl:apply-templates select="@* except (@bgcolor | @rowsep | @colsep | @valign | @align)" mode="xslLib:cals2html.attributes"/> 
       <xsl:variable name="class.tmp" as="xs:string*">
-        <!--<xsl:if test="$xslLib:cals2html.add-odd-even-class">
+        <xsl:if test="$xslLib:cals2html.add-odd-even-class">
           <xsl:value-of select="if (count(preceding-sibling::row) mod 2 = 0) then 'cals_odd' else 'cals_even'"/>
-        </xsl:if>-->
+        </xsl:if>
       </xsl:variable>
       <xsl:if test="not(empty($class.tmp))">
         <xsl:attribute name="class" select="string-join($class.tmp, ' ')"/>
@@ -312,48 +305,65 @@
     <xsl:param name="rowsep" as="xs:string"/>
     <xsl:param name="align" as="xs:string"/>
     <xsl:param name="valign" as="xs:string"/>
-    <xsl:param name="nb-cols" tunnel="yes" />
+    <xsl:param name="nb-cols" as="xs:integer" tunnel="yes" />
     <xsl:variable name="entry" select="self::*" as="element(entry)"/>
     <xsl:variable name="current-tgroup" select="ancestor::tgroup[1]" as="element()"/>
-    <xsl:variable name="current-col-list">
+    <xsl:variable name="current-colspec-list" as="element(colspec)*">
       <xsl:choose>
         <!-- on test d'abord si il y a un namestart/nameend avant de prendre le cas simple du colname -->
         <xsl:when test="@namest and @nameend">
-          <xsl:variable as="xs:integer" name="colnumst"
-            select="xslLib:cals2html.get-colnum($entry, $current-tgroup/colspec[@colname = current()/@namest])" />
-          <xsl:variable as="xs:integer" name="colnumend"
-            select="xslLib:cals2html.get-colnum($entry, $current-tgroup/colspec[@colname = current()/@nameend])" />
-          <xsl:copy-of select="$current-tgroup/colspec[xslLib:cals2html.get-colnum($entry, .) ge $colnumst][xslLib:cals2html.get-colnum($entry, .) le $colnumend]" copy-namespaces="no"/>
+          <xsl:variable name="namest.colspec" select="$current-tgroup/colspec[@colname = current()/@namest]" as="element()*"/>
+          <xsl:variable name="nameend.colspec" select="$current-tgroup/colspec[@colname = current()/@nameend]" as="element()*"/>
+          <xsl:choose>
+            <xsl:when test="count($namest.colspec) != 1">
+              <xsl:message terminate="no">[ERROR][cals2html.xsl] No colspec exists in the current tgroup with @colname equals to current @namest="<xsl:value-of select="@namest"/>"</xsl:message>
+            </xsl:when>
+            <xsl:when test="count($nameend.colspec) != 1">
+              <xsl:message terminate="no">[ERROR][cals2html.xsl] No colspec exists in the current tgroup with @colname equals to current @nameend="<xsl:value-of select="@nameend"/>"</xsl:message>
+            </xsl:when>
+            <xsl:otherwise>
+              <!--FIXME : a-t-on vraiment besoin de passer par colnum, ne pourrait-on pas prendre les colspec situés entre namest.colspec et nameend.colspec dans le xml ?--> 
+              <xsl:variable name="colnumst" select="xslLib:cals2html.get-colnum($entry, $namest.colspec)" as="xs:integer"/>
+              <xsl:variable name="colnumend" select="xslLib:cals2html.get-colnum($entry, $nameend.colspec)" as="xs:integer"/>
+              <xsl:sequence 
+                select="$current-tgroup/colspec
+                [xslLib:cals2html.get-colnum($entry, .) ge $colnumst]
+                [xslLib:cals2html.get-colnum($entry, .) le $colnumend]"/>
+            </xsl:otherwise>
+          </xsl:choose>
         </xsl:when>
         <xsl:when test="@colname">
-          <xsl:copy-of select="$current-tgroup/colspec[@colname = current()/@colname]" copy-namespaces="no"/>
+          <xsl:variable name="colname.colspec" select="$current-tgroup/colspec[@colname = current()/@colname]" as="element()*"/>
+          <xsl:if test="count($colname.colspec) != 1">
+            <xsl:message terminate="no">[ERROR][cals2html.xsl] No colspec exists in the current tgroup with @colname equals to current @colname="<xsl:value-of select="@colname"/>"</xsl:message>
+          </xsl:if>
+          <xsl:sequence select="$colname.colspec"/>
         </xsl:when>
-        <xsl:when test="preceding-sibling::entry[1]/@nameend">
-          <xsl:copy-of select="$current-tgroup/colspec[preceding-sibling::entry[1]/@nameend]/following-sibling::colspec[1]" copy-namespaces="no"/>
-        </xsl:when>
+        <!--<xsl:when test="preceding-sibling::entry[1]/@nameend">
+          <xsl:sequence select="$current-tgroup/colspec[preceding-sibling::entry[1]/@nameend]/following-sibling::colspec[1]"/>
+        </xsl:when>-->
         <xsl:when test="position() > 1 and ../entry[@colname]">
           <xsl:message>[ERROR][cals2html.xsl] @colname missing (<xsl:value-of select="els:getFileName(string(base-uri()))"/> : <xsl:sequence select="els:get-xpath(.)" />)</xsl:message>
         </xsl:when>
-        <xsl:when test="position() > 1 and ../entry[(position() &lt; last() and (@namest and @nameend))]">
+        <xsl:when test="position() > 1 and ../entry[(position() lt last() and (@namest and @nameend))]">
           <xsl:message>[ERROR][cals2html.xsl] Too much columns (<xsl:value-of select="els:getFileName(string(base-uri()))"/> : <xsl:sequence select="els:get-xpath(.)" />)</xsl:message>
         </xsl:when>
         <xsl:otherwise>
-          <xsl:variable name="pos" select="count(preceding-sibling::entry) + 1"/>
+          <xsl:variable name="pos" select="count(preceding-sibling::entry) + 1" as="xs:integer"/>
           <xsl:sequence select="$current-tgroup/colspec[$pos]"/>
         </xsl:otherwise>
       </xsl:choose>
     </xsl:variable>
-    <xsl:variable name="colsep-current">
+    <xsl:variable name="colsep-current" as="xs:string">
       <xsl:choose>
         <xsl:when test="@colsep">
           <xsl:value-of select="@colsep" />
         </xsl:when>
         <xsl:otherwise>
-          <!-- FIXME : que se passe t il lors d'un colspan ? a priori c'est le namest qui gagne-->
-          <xsl:variable name="colspec-colsep" select="$current-col-list//@colsep" />
+          <!-- FIXME : que se passe-t-il lors d'un colspan ? a priori c'est le namest qui gagne-->
           <xsl:choose>
-            <xsl:when test="not(../@colsep) and not(../../@colsep) and $colspec-colsep">
-              <xsl:value-of select="($current-col-list)//@colsep[1]" />
+            <xsl:when test="not(../@colsep) and not(../../@colsep) and $current-colspec-list//@colsep">
+              <xsl:value-of select="($current-colspec-list)//@colsep[1]" />
             </xsl:when>
             <xsl:otherwise>
               <xsl:value-of select="$colsep" />
@@ -362,15 +372,15 @@
         </xsl:otherwise>
       </xsl:choose>
     </xsl:variable>
-    <xsl:variable name="rowsep-current">
+    <xsl:variable name="rowsep-current" as="xs:string">
       <xsl:choose>
         <xsl:when test="@rowsep">
           <xsl:value-of select="@rowsep" />
         </xsl:when>
         <xsl:otherwise>
           <xsl:choose>
-            <xsl:when test="not(../@rowsep) and not(../../@rowsep) and $current-col-list//@rowsep">
-              <xsl:value-of select="($current-col-list//@rowsep)[1]" />
+            <xsl:when test="not(../@rowsep) and not(../../@rowsep) and $current-colspec-list//@rowsep">
+              <xsl:value-of select="($current-colspec-list//@rowsep)[1]" />
             </xsl:when>
             <xsl:otherwise>
               <xsl:value-of select="$rowsep" />
@@ -379,16 +389,15 @@
         </xsl:otherwise>
       </xsl:choose>
     </xsl:variable>
-    <!-- TODO add the same mechanism as rowsepcurrent and colsepcurrent -->
-    <xsl:variable name="align-current">
+    <xsl:variable name="align-current" as="xs:string">
       <xsl:choose>
         <xsl:when test="@align">
           <xsl:value-of select="@align" />
         </xsl:when>
         <xsl:otherwise>
           <xsl:choose>
-            <xsl:when test="not(../@align) and not(../../@align) and $current-col-list//@align">
-              <xsl:value-of select="($current-col-list//@align)[1]" />
+            <xsl:when test="not(../@align) and not(../../@align) and $current-colspec-list//@align">
+              <xsl:value-of select="($current-colspec-list//@align)[1]" />
             </xsl:when>
             <xsl:otherwise>
               <xsl:value-of select="$align" />
@@ -397,18 +406,25 @@
         </xsl:otherwise>
       </xsl:choose>
     </xsl:variable>
-    <!-- TODO add the same mechanism as rowsepcurrent and colsepcurrent -->
-    <xsl:variable name="valign-current">
+    <xsl:variable name="valign-current" as="xs:string">
       <xsl:choose>
         <xsl:when test="@valign">
           <xsl:value-of select="@valign" />
         </xsl:when>
         <xsl:otherwise>
-          <xsl:value-of select="$valign" />
+          <xsl:choose>
+            <xsl:when test="not(../@valign) and not(../../@valign) and $current-colspec-list//@valign">
+              <xsl:value-of select="($current-colspec-list//@valign)[1]" />
+            </xsl:when>
+            <xsl:otherwise>
+              <xsl:value-of select="$valign" />
+            </xsl:otherwise>
+          </xsl:choose>
         </xsl:otherwise>
       </xsl:choose>
     </xsl:variable>
-    <xsl:variable name="name" select="if(ancestor::thead) then ('th') else('td')" as="xs:string"/>
+    <!--<xsl:variable name="name" select="if(ancestor::thead) then ('th') else('td')" as="xs:string"/> TODO LATER-->
+    <xsl:variable name="name" select="'td'" as="xs:string"/>
     <xsl:element name="{$name}">
       <!--attributes that doesn't generate @style or @class like : ../@orient | @id ?-->
       <xsl:apply-templates select="@*" mode="xslLib:cals2html.attributes"/> 
@@ -419,12 +435,14 @@
         <xsl:if test="$rowsep-current != $xslLib:cals2html.default-rowsep and $rowsep-current != '0'">
           <xsl:text>cals_rowsep</xsl:text>
         </xsl:if>
-        <xsl:value-of select="lower-case(concat('cals_align-', $align-current))" />
+        <!--<xsl:value-of select="lower-case(concat('cals_align-', $align-current))" /> TODO LATER-->
+        <xsl:value-of select="lower-case(concat('cals_align', $align-current))" />
         <!--<xsl:if test="$align-current != $cals_default-align">
           <xsl:value-of select="concat('cals_align', $align-current, ' ')" />
         </xsl:if>-->
         <xsl:if test="$valign-current != $xslLib:cals2html.default-valign">
-          <xsl:value-of select="lower-case(concat('cals_valign-', $valign-current))" />
+          <!--<xsl:value-of select="lower-case(concat('cals_valign-', $valign-current))" /> TODO LATER-->
+          <xsl:value-of select="lower-case(concat('cals_valign', $valign-current))" />
         </xsl:if>
         <!--<xsl:if test="@percent">
           <xsl:value-of select="concat('cals_pourcent-', @percent)" />
@@ -434,10 +452,12 @@
         </xsl:if>-->
         <xsl:if test="$nb-cols > $xslLib:cals2html.nb-cols-max-before-font-reduction
           and $nb-cols lt $xslLib:cals2html.nb-cols-max-before-large-font-reduction">
-          <xsl:text>cals_table-font-reduction</xsl:text>
+          <!--<xsl:text>cals_table-font-reduction</xsl:text> TODO LATER-->
+          <xsl:text>table-contents-font-reduction</xsl:text>
         </xsl:if>
         <xsl:if test="$nb-cols > $xslLib:cals2html.nb-cols-max-before-large-font-reduction">
-          <xsl:text>cals_table-max-font-reduction</xsl:text>
+          <!--<xsl:text>cals_table-max-font-reduction</xsl:text> TODO LATER-->
+          <xsl:text>table-contents-max-font-reduction</xsl:text>
         </xsl:if>
       </xsl:variable>
       <xsl:if test="not(empty($class.tmp))">
@@ -449,16 +469,8 @@
       <xsl:if test="not(empty($style.tmp))">
         <xsl:attribute name="style" select="string-join($style.tmp, ' ')"/>
       </xsl:if>
-      <xsl:variable name="total-colwidth-sum">
-        <xsl:call-template name="xslLib:cals2html.cals_sum-colwidths">
-          <xsl:with-param name="col-list" select="$current-tgroup/colspec" />
-        </xsl:call-template>
-      </xsl:variable>
-      <xsl:variable name="current-colwidth">
-        <xsl:call-template name="xslLib:cals2html.cals_sum-colwidths">
-          <xsl:with-param name="col-list" select="$current-col-list /colspec" />
-        </xsl:call-template>
-      </xsl:variable>
+      <xsl:variable name="total-colwidth-sum" select="xslLib:cals2html.cals_sum-colwidths($current-tgroup/colspec)" as="xs:double"/>
+      <xsl:variable name="current-colwidth" select="xslLib:cals2html.cals_sum-colwidths($current-colspec-list)" as="xs:double"/>
       <xsl:if test="not($xslLib:cals2html.compute-column-width-within-colgroup)">
         <!--<xsl:message>$current-colwidth="<xsl:value-of select="$current-colwidth"/>"</xsl:message>-->
         <!--<xsl:message>$total-colwidth-sum="<xsl:value-of select="$total-colwidth-sum"/>"</xsl:message>-->
@@ -466,11 +478,11 @@
           <xsl:with-param name="width" select="concat(round(($current-colwidth div  $total-colwidth-sum)*97), '%')" as="xs:string"/>
         </xsl:call-template>
       </xsl:if>
-      <xsl:if test="count($current-col-list/colspec) > 1">
-        <xsl:attribute name="colspan" select="count($current-col-list/colspec)"/>
+      <xsl:if test="count($current-colspec-list) > 1">
+        <xsl:attribute name="colspan" select="count($current-colspec-list)"/>
       </xsl:if>
       <xsl:if test="normalize-space(@morerows) != '' and normalize-space(@morerows) castable as xs:integer">
-        <xsl:attribute name="rowspan" select="@morerows + 1"/>
+        <xsl:attribute name="rowspan" select="xs:integer(@morerows) + 1"/>
       </xsl:if>
       <xsl:apply-templates mode="#current"/>
     </xsl:element>
@@ -511,32 +523,30 @@
     => FIXME mricaud : j'ai l'impression qu'ici on ne gère que les proportionnel, faut-il prévoir les fixes ?
   -->
   
-  <!--<xsl:function name="xslLib:cals2html.cals_sum-colwidths" as="xs:integer">
-    <xsl:param name="current-sum" as="xs:integer"/>
-    <xsl:param name="col-list" as="element(colspec)*"/>
-    
-  </xsl:function>-->
+  <!--1 argument signature to initiate reccursion from 0 by additionning colwidth-->
+  <xsl:function name="xslLib:cals2html.cals_sum-colwidths" as="xs:double">
+    <xsl:param name="colspec-list" as="element(colspec)*"/>
+    <xsl:sequence select="xslLib:cals2html.cals_sum-colwidths($colspec-list, 0)"/>
+  </xsl:function>
   
-  <xsl:template name="xslLib:cals2html.cals_sum-colwidths">
-    <xsl:param name="current-sum" select="0" as="xs:double"/>
-    <xsl:param name="col-list" as="element(colspec)*"/>
+  <!--Given a list of colspec, this function make the sum of each colwidth-->
+  <xsl:function name="xslLib:cals2html.cals_sum-colwidths" as="xs:double">
+    <xsl:param name="colspec-list" as="element(colspec)*"/>
+    <xsl:param name="current-sum" as="xs:double"/>
     <xsl:choose>
-      <xsl:when test="count($col-list) != 0">
-        <xsl:variable name="colspec" select="$col-list[1]" as="element(colspec)"/>
+      <xsl:when test="count($colspec-list) != 0">
+        <xsl:variable name="colspec" select="$colspec-list[1]" as="element(colspec)"/>
         <xsl:variable name="colwidth" select="$colspec/@colwidth" as="xs:string?"/>
         <!--<xsl:message>colwidth= <xsl:value-of select="$colwidth"/></xsl:message>-->
         <xsl:variable name="colwidth.normalized" select="replace($colwidth, '(\*|%)', '')" as="xs:string"/>
         <xsl:variable name="colwidth.as-number" select=" if($colwidth.normalized castable as xs:double) then(number($colwidth.normalized)) else(0) " as="xs:double"/>
-        <xsl:call-template name="xslLib:cals2html.cals_sum-colwidths">
-          <xsl:with-param name="col-list" select="$col-list[position() gt 1]" />
-          <xsl:with-param name="current-sum" select="$current-sum + $colwidth.as-number" />
-        </xsl:call-template>
+        <xsl:sequence select="xslLib:cals2html.cals_sum-colwidths($colspec-list[position() gt 1], $current-sum + $colwidth.as-number)"/>
       </xsl:when>
       <xsl:otherwise>
-        <xsl:value-of select="$current-sum" />
+        <xsl:sequence select="$current-sum" />
       </xsl:otherwise>
     </xsl:choose>
-  </xsl:template>
+  </xsl:function>
   
   <!--Add @width or @style="width:..." on current element-->
   <xsl:template name="xslLib:cals2html.add-column-width">
@@ -559,14 +569,14 @@
   
   <!--Récupère le @colnum d'un colspec. Si l'attribut est absent on prend la position du colspec parmis les autres colspec-->
   <xsl:function name="xslLib:cals2html.get-colnum" as="xs:integer">
-    <xsl:param name="context" as="element()?"/>
+    <xsl:param name="entry" as="element(entry)?"/>
     <xsl:param name="colspec" as="element(colspec)?"/>
     <xsl:choose>
       <xsl:when test="exists($colspec)">
         <xsl:sequence select="($colspec/@colnum[normalize-space(.)!=''], count($colspec/preceding-sibling::colspec) + 1)[1]"/>
       </xsl:when>
       <xsl:otherwise>
-        <xsl:message>[ERROR][cals2html.xsl] Calling xslLib:cals2html.get-colnum() with $colspec empty argument&#10;<xsl:sequence select="els:get-xpath($context)"/></xsl:message>
+        <xsl:message terminate="yes">[ERROR][cals2html.xsl] Calling xslLib:cals2html.get-colnum() with $colspec empty argument&#10;<xsl:sequence select="els:get-xpath($entry)"/></xsl:message>
         <xsl:sequence select="0"/>
       </xsl:otherwise>
     </xsl:choose>
@@ -578,29 +588,54 @@
   
   <xsl:variable name="xslLib:cals2html.class2style.mapping" as="element()">
     <!--Using cals namespace here so we can match elements with the xpath default namespace-->
-    <mapping xmlns="http://docs.oasis-open.org/ns/oasis-exchange/table">
-      <!-- frame ne se trouve qu'au niveau de l'élément table -->
+    <!--TODO LATER-->
+    <!--<mapping xmlns="http://docs.oasis-open.org/ns/oasis-exchange/table">
+      <!-\- frame ne se trouve qu'au niveau de l'élément table -\->
       <entry key="cals_frame-top">border-top:1px solid</entry>
       <entry key="cals_frame-bottom">border-bottom:1px solid</entry>
       <entry key="cals_frame-topbot">border-top:1px solid; border-bottom:1px solid</entry>
       <entry key="cals_frame-sides">border-left:1px solid; border-right:1px solid</entry>
       <entry key="cals_frame-all">border:1px solid</entry>
       <entry key="cals_frame-none">border:none</entry>
-      <!-- align -->
+      <!-\- align -\->
       <entry key="cals_align-left">text-align:left</entry>
       <entry key="cals_align-right">text-align:right</entry>
       <entry key="cals_align-center">text-align:center</entry>
       <entry key="cals_align-justify">text-align:justify</entry>
-      <!-- FIXME sera utile pour les tableaux issus de FrameMaker
-      <entry key="cals_alignchar">text-align:left</entry> -->
-      <!-- valign -->
+      <!-\- FIXME sera utile pour les tableaux issus de FrameMaker
+      <entry key="cals_alignchar">text-align:left</entry> -\->
+      <!-\- valign -\->
       <entry key="cals_valign-top">vertical-align:top</entry>
       <entry key="cals_valign-bottom">vertical-align:bottom</entry>
       <entry key="cals_valign-middle">vertical-align:middle</entry>
-      <!-- colsep -->
+      <!-\- colsep -\->
       <entry key="cals_colsep">border-right:1px solid</entry>
-      <!-- rowsep -->
+      <!-\- rowsep -\->
       <entry key="cals_rowsep">border-bottom:1px solid</entry>
+    </mapping>-->
+    <mapping xmlns="http://docs.oasis-open.org/ns/oasis-exchange/table">
+      <!-- frame ne se trouve qu'au niveau de l'élément table -->
+      <entry key="cals_frame-top">border-collapse: collapse; border-top:1px solid black</entry>
+      <entry key="cals_frame-bottom">border-collapse: collapse; border-bottom:1px solid black</entry>
+      <entry key="cals_frame-topbot">border-collapse: collapse; border-top:1px solid black; border-bottom:1px solid black</entry>
+      <entry key="cals_frame-sides">border-collapse: collapse; border-left:1px solid black; border-right:1px solid black</entry>
+      <entry key="cals_frame-all">border-collapse: collapse; border:1px solid black</entry>
+      <entry key="cals_frame-none">border-collapse: collapse; border:none</entry>
+      <!-- align -->
+      <entry key="cals_alignleft">text-align:left</entry>
+      <entry key="cals_alignright">text-align:right</entry>
+      <entry key="cals_aligncenter">text-align:center</entry>
+      <entry key="cals_alignjustify">text-align:justify</entry>
+      <!-- FIXME sera utile pour les tableaux issus de FrameMaker
+      <entry key="cals_alignchar">text-align:left</entry> -->
+      <!-- valign -->
+      <entry key="cals_valigntop">vertical-align:top</entry>
+      <entry key="cals_valignbottom">vertical-align:bottom</entry>
+      <entry key="cals_valignmiddle">vertical-align:middle</entry>
+      <!-- colsep -->
+      <entry key="cals_colsep">border-right:1px solid black</entry>
+      <!-- rowsep -->
+      <entry key="cals_rowsep">border-bottom:1px solid black</entry>
     </mapping>
   </xsl:variable>
   
@@ -608,11 +643,7 @@
     | html:table[els:hasClass(., 'cals_tgroup')]//*[local-name(.) = ('tr', 'td', 'th', 'thead', 'tbody', 'tfoot')]" 
     mode="xslLib:cals2html.class2style">
     <xsl:copy>
-      <xsl:copy-of select="@* except (@class | @style)"/>
-      <xsl:if test="self::html:table">
-        <xsl:message>@class=<xsl:value-of select="@class"/></xsl:message>
-        <xsl:message>$class=<xsl:value-of select="tokenize(@class, '\s+')[not(. = $xslLib:cals2html.class2style.mapping/entry/@key)]" separator=", "/></xsl:message>
-      </xsl:if>
+      <!--<xsl:copy-of select="@* except (@class | @style)"/> TODO later-->
       <xsl:variable name="class" select="tokenize(@class, '\s+')[not(. = $xslLib:cals2html.class2style.mapping/entry/@key)]" as="xs:string*"/>
       <xsl:if test="not(empty($class))">
         <xsl:attribute name="class" select="string-join($class, ' ')"/>
@@ -625,8 +656,10 @@
         </xsl:for-each>
       </xsl:variable>
       <xsl:if test="not(empty($style))">
-        <xsl:attribute name="style" select="string-join($style, '; ')"/>
+        <!--<xsl:attribute name="style" select="string-join($style, '; ')"/> TODO LATER-->
+        <xsl:attribute name="style" select="concat(string-join($style, ';'), ';')"/>
       </xsl:if>
+      <xsl:copy-of select="@* except (@class | @style)"/>
       <xsl:apply-templates mode="#current"/>
     </xsl:copy>
   </xsl:template>
