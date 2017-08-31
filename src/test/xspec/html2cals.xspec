@@ -7,11 +7,11 @@
   <x:scenario label="HTML2CALS - with class" xml:base="data_cals2html/">
     <x:scenario label="Table jira CHAINE-1885">
       <x:context href="Table_CHAINE-1885.htm"/>
-      <x:expect label="OK" select="/*" href="Table_CHAINE-1885.cals.xml"/>
+      <x:expect label="OK" select="/*" test="/*" href="Table_CHAINE-1885.cals.xml"/>
     </x:scenario>
-    <x:scenario label="frchs1603cx.tables" pending="XTTE0780: An empty sequence is not allowed as the result of call to xhtml2cals:expand-rowspans">
+    <x:scenario label="frchs1603cx.tables">
       <x:context href="frchs1603cx.tables.htm"/>
-      <x:expect label="OK" select="/*" href="frchs1603cx.tables.cals.xml"/>
+      <x:expect label="OK" select="/*" test="/*" href="frchs1603cx.tables.cals.xml"/>
     </x:scenario>
     <x:scenario label="isosts_tables">
       <x:context href="isosts_tables.cals.htm"/>
@@ -22,11 +22,11 @@
   <x:scenario label="HTML2CALS - with style" xml:base="data_cals2html/">
     <x:scenario label="Table jira CHAINE-1885">
       <x:context href="Table_CHAINE-1885.style.htm"/>
-      <x:expect label="OK" select="/*" href="Table_CHAINE-1885.style.cals.xml"/>
+      <x:expect label="OK" select="/*" test="/*" href="Table_CHAINE-1885.style.cals.xml"/>
     </x:scenario>
-    <x:scenario label="frchs1603cx.tables" pending="XTTE0780: An empty sequence is not allowed as the result of call to xhtml2cals:expand-rowspans">
+    <x:scenario label="frchs1603cx.tables">
       <x:context href="frchs1603cx.tables.style.htm"/>
-      <x:expect label="OK" select="/*" href="frchs1603cx.tables.style.cals.xml"/>
+      <x:expect label="OK" select="/*" test="/*" href="frchs1603cx.tables.style.cals.xml"/>
     </x:scenario>
     <x:scenario label="isosts_tables">
       <x:context href="isosts_tables.cals.style.htm"/>

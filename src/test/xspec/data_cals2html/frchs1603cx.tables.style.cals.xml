@@ -2827,92 +2827,92 @@
       <colspec colname="col9"/>
       <tbody>
         <row>
-          <entry class="table-contents-font-reduction">
+          <entry>
             <al xmlns="local">
               <motRep/>
             </al>
           </entry>
-          <entry class="table-contents-font-reduction">
+          <entry>
             <al xmlns="local">
               <motRep>Capital social</motRep>
             </al>
           </entry>
-          <entry class="table-contents-font-reduction">
+          <entry>
             <al xmlns="local">
               <motRep>CP autres que le capital</motRep>
             </al>
           </entry>
-          <entry class="table-contents-font-reduction">
+          <entry>
             <al xmlns="local">
               <motRep>QP du capital détenue </motRep>
             </al>
           </entry>
-          <entry class="table-contents-font-reduction">
+          <entry>
             <al xmlns="local">
               <motRep>Valeur brute comptable des titres détenus</motRep>
             </al>
           </entry>
-          <entry class="table-contents-font-reduction">
+          <entry>
             <al xmlns="local">
               <motRep>Valeur nette comptable des titres détenus</motRep>
             </al>
           </entry>
-          <entry class="table-contents-font-reduction">
+          <entry>
             <al xmlns="local">
               <motRep>Chiffre d’affaires (HT) 2015 </motRep>
             </al>
           </entry>
-          <entry class="table-contents-font-reduction">
+          <entry>
             <al xmlns="local">
               <motRep>Résultat 2015</motRep>
             </al>
           </entry>
-          <entry class="table-contents-font-reduction">
+          <entry>
             <al xmlns="local">
               <motRep>Dividendes versés en 2015</motRep>
             </al>
           </entry>
         </row>
         <row>
-          <entry class="table-contents-font-reduction">
+          <entry>
             <al xmlns="local">
               <motRep/>
             </al>
           </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
+          <entry rowsep="yes">
             <al xmlns="local">(en devise)</al>
           </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
+          <entry rowsep="yes">
             <al xmlns="local">(en devise)</al>
           </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
+          <entry rowsep="yes">
             <al xmlns="local">(en %)</al>
           </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
+          <entry rowsep="yes">
             <al xmlns="local">(en euros)</al>
           </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
+          <entry rowsep="yes">
             <al xmlns="local">(en euros)</al>
           </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
+          <entry rowsep="yes">
             <al xmlns="local">(en euros)</al>
           </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
+          <entry rowsep="yes">
             <al xmlns="local">(en euros)</al>
           </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
+          <entry rowsep="yes">
             <al xmlns="local">(en euros)</al>
           </entry>
         </row>
         <row>
-          <entry class="table-contents-font-reduction" namest="col1" nameend="col9" colsep="yes" rowsep="yes">
+          <entry namest="col1" nameend="col9" colsep="yes" rowsep="yes">
             <al xmlns="local">
               <motRep>Filiales (détenues à + 50 %)</motRep>
             </al>
           </entry>
         </row>
         <row>
-          <entry class="table-contents-font-reduction" rowsep="yes">
+          <entry rowsep="yes">
             <al xmlns="local">
               <motRep>SA Your shoes</motRep>
             </al>
@@ -2922,35 +2922,35 @@
               <al>Siège : Paris</al>
             </complement>
           </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
+          <entry rowsep="yes">
             <al xmlns="local">2 000 000</al>
             <al xmlns="local">EUR</al>
           </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
+          <entry rowsep="yes">
             <al xmlns="local">3 458 658</al>
             <al xmlns="local">EUR</al>
           </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
+          <entry rowsep="yes">
             <al xmlns="local">100 %</al>
           </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
+          <entry rowsep="yes">
             <al xmlns="local">3 346 766</al>
           </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
+          <entry rowsep="yes">
             <al xmlns="local">3 346 766</al>
           </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
+          <entry rowsep="yes">
             <al xmlns="local">9 287 622</al>
           </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
+          <entry rowsep="yes">
             <al xmlns="local">329 323</al>
           </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
+          <entry rowsep="yes">
             <al xmlns="local">–</al>
           </entry>
         </row>
         <row>
-          <entry class="table-contents-font-reduction" rowsep="yes">
+          <entry rowsep="yes">
             <al xmlns="local">
               <motRep>SA Your shoes</motRep>
             </al>
@@ -2960,35 +2960,35 @@
               <al>Siège : Paris</al>
             </complement>
           </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
+          <entry rowsep="yes">
             <al xmlns="local">1 500 000</al>
             <al xmlns="local">EUR</al>
           </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
+          <entry rowsep="yes">
             <al xmlns="local">10 587 528</al>
             <al xmlns="local">EUR</al>
           </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
+          <entry rowsep="yes">
             <al xmlns="local">100 %</al>
           </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
+          <entry rowsep="yes">
             <al xmlns="local">2 748 684</al>
           </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
+          <entry rowsep="yes">
             <al xmlns="local">2 748 684</al>
           </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
+          <entry rowsep="yes">
             <al xmlns="local">7 392 742</al>
           </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
+          <entry rowsep="yes">
             <al xmlns="local">529 374</al>
           </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
+          <entry rowsep="yes">
             <al xmlns="local">353 648</al>
           </entry>
         </row>
         <row>
-          <entry class="table-contents-font-reduction" rowsep="yes">
+          <entry rowsep="yes">
             <al xmlns="local">
               <motRep>SA Your shoes</motRep>
             </al>
@@ -2998,35 +2998,35 @@
               <al>Siège : Paris</al>
             </complement>
           </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
+          <entry rowsep="yes">
             <al xmlns="local">1 500 000</al>
             <al xmlns="local">EUR</al>
           </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
+          <entry rowsep="yes">
             <al xmlns="local">4 896 498</al>
             <al xmlns="local">EUR</al>
           </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
+          <entry rowsep="yes">
             <al xmlns="local">100 %</al>
           </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
+          <entry rowsep="yes">
             <al xmlns="local">2 537 884</al>
           </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
+          <entry rowsep="yes">
             <al xmlns="local">2 537 884</al>
           </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
+          <entry rowsep="yes">
             <al xmlns="local">4 927 430</al>
           </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
+          <entry rowsep="yes">
             <al xmlns="local">339 427</al>
           </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
+          <entry rowsep="yes">
             <al xmlns="local">321 902</al>
           </entry>
         </row>
         <row>
-          <entry class="table-contents-font-reduction" rowsep="yes">
+          <entry rowsep="yes">
             <al xmlns="local">
               <motRep>Best shoes AU</motRep>
               <rNote id="FRCHS_2016-03_UI-1928767E-4A2F-4941-B449-6EF20A507026_UI-5C787B3C-D0D7-4A00-9037-2A5AEE0AF928rNote_1" num="1" ref="FRCHS_2016-03_UI-1928767E-4A2F-4941-B449-6EF20A507026_UI-5C787B3C-D0D7-4A00-9037-2A5AEE0AF928"/>
@@ -3035,35 +3035,35 @@
               <al>Siège : Australia City</al>
             </complement>
           </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
+          <entry rowsep="yes">
             <al xmlns="local">1 000 000</al>
             <al xmlns="local">AUD</al>
           </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
+          <entry rowsep="yes">
             <al xmlns="local">1 265 692</al>
             <al xmlns="local">AUD</al>
           </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
+          <entry rowsep="yes">
             <al xmlns="local">100 %</al>
           </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
+          <entry rowsep="yes">
             <al xmlns="local">1 920 928</al>
           </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
+          <entry rowsep="yes">
             <al xmlns="local">1 920 928</al>
           </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
+          <entry rowsep="yes">
             <al xmlns="local">3 681 016</al>
           </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
+          <entry rowsep="yes">
             <al xmlns="local">426 439</al>
           </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
+          <entry rowsep="yes">
             <al xmlns="local">567 480</al>
           </entry>
         </row>
         <row>
-          <entry class="table-contents-font-reduction" rowsep="yes">
+          <entry rowsep="yes">
             <al xmlns="local">
               <motRep>Your shoes AU</motRep>
             </al>
@@ -3072,106 +3072,106 @@
               <al>Siège : Australia City</al>
             </complement>
           </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
+          <entry rowsep="yes">
             <al xmlns="local">1 800 000</al>
             <al xmlns="local">AUD</al>
           </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
+          <entry rowsep="yes">
             <al xmlns="local">7 019 219</al>
             <al xmlns="local">AUD</al>
           </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
+          <entry rowsep="yes">
             <al xmlns="local">100 %</al>
           </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
+          <entry rowsep="yes">
             <al xmlns="local">2 986 778</al>
           </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
+          <entry rowsep="yes">
             <al xmlns="local">2 986 778</al>
           </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
+          <entry rowsep="yes">
             <al xmlns="local">5 382 034</al>
           </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
+          <entry rowsep="yes">
             <al xmlns="local">263 940</al>
           </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
+          <entry rowsep="yes">
             <al xmlns="local">27 754</al>
           </entry>
         </row>
         <row>
-          <entry class="table-contents-font-reduction" rowsep="yes">
+          <entry rowsep="yes">
             <al xmlns="local">
               <motRep>Total</motRep>
             </al>
           </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
+          <entry rowsep="yes">
             <al xmlns="local">
               <motRep>– </motRep>
             </al>
           </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
+          <entry rowsep="yes">
             <al xmlns="local">
               <motRep>– </motRep>
             </al>
           </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
+          <entry rowsep="yes">
             <al xmlns="local">
               <motRep>– </motRep>
             </al>
           </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
+          <entry rowsep="yes">
             <al xmlns="local">
               <motRep>13 541 040</motRep>
             </al>
           </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
+          <entry rowsep="yes">
             <al xmlns="local">
               <motRep>13 541 040</motRep>
             </al>
           </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
+          <entry rowsep="yes">
             <al xmlns="local">
               <motRep>30 670 844</motRep>
             </al>
           </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
+          <entry rowsep="yes">
             <al xmlns="local">
               <motRep>1 888 503</motRep>
             </al>
           </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
+          <entry rowsep="yes">
             <al xmlns="local">
               <motRep>1 270 784</motRep>
             </al>
           </entry>
         </row>
         <row>
-          <entry class="table-contents-font-reduction">
+          <entry>
             <al xmlns="local"/>
           </entry>
-          <entry class="table-contents-font-reduction">
+          <entry>
             <al xmlns="local"/>
           </entry>
-          <entry class="table-contents-font-reduction">
+          <entry>
             <al xmlns="local"/>
           </entry>
-          <entry class="table-contents-font-reduction">
+          <entry>
             <al xmlns="local"/>
           </entry>
-          <entry class="table-contents-font-reduction">
+          <entry>
             <al xmlns="local"/>
           </entry>
-          <entry class="table-contents-font-reduction">
+          <entry>
             <al xmlns="local"/>
           </entry>
-          <entry class="table-contents-font-reduction">
+          <entry>
             <al xmlns="local"/>
           </entry>
-          <entry class="table-contents-font-reduction">
+          <entry>
             <al xmlns="local"/>
           </entry>
-          <entry class="table-contents-font-reduction">
+          <entry>
             <al xmlns="local"/>
           </entry>
         </row>
@@ -13760,625 +13760,625 @@
       <colspec colname="col9"/>
       <tbody>
         <row>
-          <entry class="table-contents-font-reduction" namest="col1" nameend="col9">
+          <entry namest="col1" nameend="col9">
             <al xmlns="local">(en milliers d’euros sauf indication contraire)</al>
           </entry>
         </row>
         <row>
-          <entry class="table-contents-font-reduction">
+          <entry>
             <al xmlns="local"/>
           </entry>
-          <entry class="table-contents-font-reduction" namest="col2" nameend="col7" rowsep="yes">
+          <entry namest="col2" nameend="col7" rowsep="yes">
             <al xmlns="local">
               <motRep>Part du groupe</motRep>
             </al>
           </entry>
-          <entry class="table-contents-font-reduction">
+          <entry>
             <al xmlns="local"/>
           </entry>
-          <entry class="table-contents-font-reduction">
+          <entry>
             <al xmlns="local"/>
           </entry>
         </row>
         <row>
-          <entry class="table-contents-font-reduction" rowsep="yes">
+          <entry rowsep="yes">
             <al xmlns="local"/>
           </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
+          <entry rowsep="yes">
             <al xmlns="local">
               <motRep>N<e>o</e></motRep>
             </al>
           </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
+          <entry rowsep="yes">
             <al xmlns="local">
               <motRep>Capital</motRep>
             </al>
           </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
+          <entry rowsep="yes">
             <al xmlns="local">
               <motRep>Primes</motRep>
             </al>
           </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
+          <entry rowsep="yes">
             <al xmlns="local">
               <motRep>Réserves consolidées</motRep>
             </al>
           </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
+          <entry rowsep="yes">
             <al xmlns="local">
               <motRep>Résultat de l’exercice</motRep>
             </al>
           </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
+          <entry rowsep="yes">
             <al xmlns="local">
               <motRep>Ecarts de conversion</motRep>
             </al>
           </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
+          <entry rowsep="yes">
             <al xmlns="local">
               <motRep>Intérêts minoritaires</motRep>
             </al>
           </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
+          <entry rowsep="yes">
             <al xmlns="local">
               <motRep>Total des capitaux propres</motRep>
             </al>
           </entry>
         </row>
         <row>
-          <entry class="table-contents-font-reduction" rowsep="yes">
+          <entry rowsep="yes">
             <al xmlns="local">
               <motRep>Solde au 1-1-2014</motRep>
             </al>
           </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
+          <entry rowsep="yes">
             <al xmlns="local"/>
           </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
+          <entry rowsep="yes">
             <al xmlns="local">
               <motRep>25 000</motRep>
             </al>
           </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
+          <entry rowsep="yes">
             <al xmlns="local">
               <motRep>105</motRep>
             </al>
           </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
+          <entry rowsep="yes">
             <al xmlns="local">
               <motRep>812</motRep>
             </al>
           </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
+          <entry rowsep="yes">
             <al xmlns="local">
               <motRep>3 862</motRep>
             </al>
           </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
+          <entry rowsep="yes">
             <al xmlns="local">
               <motRep>(1)</motRep>
             </al>
           </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
+          <entry rowsep="yes">
             <al xmlns="local">
               <motRep>126</motRep>
             </al>
           </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
+          <entry rowsep="yes">
             <al xmlns="local">
               <motRep>29 904</motRep>
             </al>
           </entry>
         </row>
         <row>
-          <entry class="table-contents-font-reduction">
+          <entry>
             <al xmlns="local">Affectation du résultat</al>
           </entry>
-          <entry class="table-contents-font-reduction">
+          <entry>
             <al xmlns="local"/>
           </entry>
-          <entry class="table-contents-font-reduction">
+          <entry>
             <al xmlns="local">–</al>
           </entry>
-          <entry class="table-contents-font-reduction">
+          <entry>
             <al xmlns="local">–</al>
           </entry>
-          <entry class="table-contents-font-reduction">
+          <entry>
             <al xmlns="local">3 862</al>
           </entry>
-          <entry class="table-contents-font-reduction">
+          <entry>
             <al xmlns="local">(3 862)</al>
           </entry>
-          <entry class="table-contents-font-reduction">
+          <entry>
             <al xmlns="local">–</al>
           </entry>
-          <entry class="table-contents-font-reduction">
+          <entry>
             <al xmlns="local">–</al>
           </entry>
-          <entry class="table-contents-font-reduction">
+          <entry>
             <al xmlns="local">–</al>
           </entry>
         </row>
         <row>
-          <entry class="table-contents-font-reduction">
+          <entry>
             <al xmlns="local">Résultat de l’exercice</al>
           </entry>
-          <entry class="table-contents-font-reduction">
+          <entry>
             <al xmlns="local"/>
           </entry>
-          <entry class="table-contents-font-reduction">
+          <entry>
             <al xmlns="local">–</al>
           </entry>
-          <entry class="table-contents-font-reduction">
+          <entry>
             <al xmlns="local">–</al>
           </entry>
-          <entry class="table-contents-font-reduction">
+          <entry>
             <al xmlns="local">–</al>
           </entry>
-          <entry class="table-contents-font-reduction">
+          <entry>
             <al xmlns="local">(1 939)</al>
           </entry>
-          <entry class="table-contents-font-reduction">
+          <entry>
             <al xmlns="local">–</al>
           </entry>
-          <entry class="table-contents-font-reduction">
+          <entry>
             <al xmlns="local">(292)</al>
           </entry>
-          <entry class="table-contents-font-reduction">
+          <entry>
             <al xmlns="local">(2 231)</al>
           </entry>
         </row>
         <row>
-          <entry class="table-contents-font-reduction">
+          <entry>
             <al xmlns="local">Augmentation de capital</al>
           </entry>
-          <entry class="table-contents-font-reduction">
+          <entry>
             <al xmlns="local"/>
           </entry>
-          <entry class="table-contents-font-reduction">
+          <entry>
             <al xmlns="local">–</al>
           </entry>
-          <entry class="table-contents-font-reduction">
+          <entry>
             <al xmlns="local">–</al>
           </entry>
-          <entry class="table-contents-font-reduction">
+          <entry>
             <al xmlns="local">–</al>
           </entry>
-          <entry class="table-contents-font-reduction">
+          <entry>
             <al xmlns="local">–</al>
           </entry>
-          <entry class="table-contents-font-reduction">
+          <entry>
             <al xmlns="local">–</al>
           </entry>
-          <entry class="table-contents-font-reduction">
+          <entry>
             <al xmlns="local">1</al>
           </entry>
-          <entry class="table-contents-font-reduction">
+          <entry>
             <al xmlns="local">1</al>
           </entry>
         </row>
         <row>
-          <entry class="table-contents-font-reduction">
+          <entry>
             <al xmlns="local">Augmentation de capital – souscription de BSA<rNote id="FRCHS_2016-03_UI-BE3ACA34-253B-4B35-A930-45E65010D8A9_UI-A8A1173D-846A-4BF9-940F-A7203C3E92C2rNote_10" num="1" ref="FRCHS_2016-03_UI-BE3ACA34-253B-4B35-A930-45E65010D8A9_UI-A8A1173D-846A-4BF9-940F-A7203C3E92C2"/></al>
           </entry>
-          <entry class="table-contents-font-reduction">
+          <entry>
             <al xmlns="local">
               <renvoiAutrui annee="2016" docId="R-ACEA7E35-A5BC-464E-87F6-51BC180C41EC" numeroInfo="" numeroOrdre="03" produitCx="FRCHS" uiId="FRCHS_2016-03_UI-26A09ED8-CC60-4984-8EB3-985DF731FF46">13</renvoiAutrui>
             </al>
           </entry>
-          <entry class="table-contents-font-reduction">
+          <entry>
             <al xmlns="local">–</al>
           </entry>
-          <entry class="table-contents-font-reduction">
+          <entry>
             <al xmlns="local">119</al>
           </entry>
-          <entry class="table-contents-font-reduction">
+          <entry>
             <al xmlns="local">–</al>
           </entry>
-          <entry class="table-contents-font-reduction">
+          <entry>
             <al xmlns="local">–</al>
           </entry>
-          <entry class="table-contents-font-reduction">
+          <entry>
             <al xmlns="local">–</al>
           </entry>
-          <entry class="table-contents-font-reduction">
+          <entry>
             <al xmlns="local">–</al>
           </entry>
-          <entry class="table-contents-font-reduction">
+          <entry>
             <al xmlns="local">119</al>
           </entry>
         </row>
         <row>
-          <entry class="table-contents-font-reduction">
+          <entry>
             <al xmlns="local">Variation des taux de change</al>
           </entry>
-          <entry class="table-contents-font-reduction">
+          <entry>
             <al xmlns="local"/>
           </entry>
-          <entry class="table-contents-font-reduction">
+          <entry>
             <al xmlns="local">–</al>
           </entry>
-          <entry class="table-contents-font-reduction">
+          <entry>
             <al xmlns="local">–</al>
           </entry>
-          <entry class="table-contents-font-reduction">
+          <entry>
             <al xmlns="local">–</al>
           </entry>
-          <entry class="table-contents-font-reduction">
+          <entry>
             <al xmlns="local">–</al>
           </entry>
-          <entry class="table-contents-font-reduction">
+          <entry>
             <al xmlns="local">(633)</al>
           </entry>
-          <entry class="table-contents-font-reduction">
+          <entry>
             <al xmlns="local">–</al>
           </entry>
-          <entry class="table-contents-font-reduction">
+          <entry>
             <al xmlns="local">(633)</al>
           </entry>
         </row>
         <row>
-          <entry class="table-contents-font-reduction">
+          <entry>
             <al xmlns="local">Autres mouvements - ORA<rNote id="FRCHS_2016-03_UI-BE3ACA34-253B-4B35-A930-45E65010D8A9_UI-854A755B-A4AC-4116-804D-FAED88F5F47ErNote_11" num="2" ref="FRCHS_2016-03_UI-BE3ACA34-253B-4B35-A930-45E65010D8A9_UI-854A755B-A4AC-4116-804D-FAED88F5F47E"/></al>
           </entry>
-          <entry class="table-contents-font-reduction">
+          <entry>
             <al xmlns="local">
               <renvoiAutrui annee="2016" docId="R-ACEA7E35-A5BC-464E-87F6-51BC180C41EC" numeroInfo="" numeroOrdre="03" produitCx="FRCHS" uiId="FRCHS_2016-03_UI-44E48229-A630-4C6C-B6C2-F83E9CF6F8D2">14</renvoiAutrui>
             </al>
           </entry>
-          <entry class="table-contents-font-reduction">
+          <entry>
             <al xmlns="local">4 461</al>
           </entry>
-          <entry class="table-contents-font-reduction">
+          <entry>
             <al xmlns="local">5 538</al>
           </entry>
-          <entry class="table-contents-font-reduction">
+          <entry>
             <al xmlns="local">–</al>
           </entry>
-          <entry class="table-contents-font-reduction">
+          <entry>
             <al xmlns="local">–</al>
           </entry>
-          <entry class="table-contents-font-reduction">
+          <entry>
             <al xmlns="local">–</al>
           </entry>
-          <entry class="table-contents-font-reduction">
+          <entry>
             <al xmlns="local">–</al>
           </entry>
-          <entry class="table-contents-font-reduction">
+          <entry>
             <al xmlns="local">9 999</al>
           </entry>
         </row>
         <row>
-          <entry class="table-contents-font-reduction">
+          <entry>
             <al xmlns="local">Autres mouvements</al>
           </entry>
-          <entry class="table-contents-font-reduction">
+          <entry>
             <al xmlns="local"/>
           </entry>
-          <entry class="table-contents-font-reduction">
+          <entry>
             <al xmlns="local">–</al>
           </entry>
-          <entry class="table-contents-font-reduction">
+          <entry>
             <al xmlns="local">–</al>
           </entry>
-          <entry class="table-contents-font-reduction">
+          <entry>
             <al xmlns="local">219</al>
           </entry>
-          <entry class="table-contents-font-reduction">
+          <entry>
             <al xmlns="local">–</al>
           </entry>
-          <entry class="table-contents-font-reduction">
+          <entry>
             <al xmlns="local">–</al>
           </entry>
-          <entry class="table-contents-font-reduction">
+          <entry>
             <al xmlns="local">–</al>
           </entry>
-          <entry class="table-contents-font-reduction">
+          <entry>
             <al xmlns="local">219</al>
           </entry>
         </row>
         <row>
-          <entry class="table-contents-font-reduction" rowsep="yes">
+          <entry rowsep="yes">
             <al xmlns="local">Autres mouvements – sortie de périmètre<rNote id="FRCHS_2016-03_UI-BE3ACA34-253B-4B35-A930-45E65010D8A9_UI-17C49FD7-930E-4E64-B488-CCB9AECB3961rNote_12" num="3" ref="FRCHS_2016-03_UI-BE3ACA34-253B-4B35-A930-45E65010D8A9_UI-17C49FD7-930E-4E64-B488-CCB9AECB3961"/></al>
           </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
+          <entry rowsep="yes">
             <al xmlns="local">
               <renvoiAutrui annee="2016" docId="R-ACEA7E35-A5BC-464E-87F6-51BC180C41EC" numeroInfo="" numeroOrdre="03" produitCx="FRCHS" uiId="FRCHS_2016-03_UI-F9B17B51-5204-439D-9D6A-16170B7E5081">28</renvoiAutrui>
             </al>
           </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
+          <entry rowsep="yes">
             <al xmlns="local">–</al>
           </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
+          <entry rowsep="yes">
             <al xmlns="local">–</al>
           </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
+          <entry rowsep="yes">
             <al xmlns="local">–</al>
           </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
+          <entry rowsep="yes">
             <al xmlns="local">–</al>
           </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
+          <entry rowsep="yes">
             <al xmlns="local">–</al>
           </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
+          <entry rowsep="yes">
             <al xmlns="local">1 553</al>
           </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
+          <entry rowsep="yes">
             <al xmlns="local">1 553</al>
           </entry>
         </row>
         <row>
-          <entry class="table-contents-font-reduction" rowsep="yes">
+          <entry rowsep="yes">
             <al xmlns="local">
               <motRep>Solde au 31-12-2014</motRep>
             </al>
           </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
+          <entry rowsep="yes">
             <al xmlns="local"/>
           </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
+          <entry rowsep="yes">
             <al xmlns="local">
               <motRep>29 461</motRep>
             </al>
           </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
+          <entry rowsep="yes">
             <al xmlns="local">
               <motRep>5 762</motRep>
             </al>
           </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
+          <entry rowsep="yes">
             <al xmlns="local">
               <motRep>4 893</motRep>
             </al>
           </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
+          <entry rowsep="yes">
             <al xmlns="local">
               <motRep>(1 939)</motRep>
             </al>
           </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
+          <entry rowsep="yes">
             <al xmlns="local">
               <motRep>(634)</motRep>
             </al>
           </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
+          <entry rowsep="yes">
             <al xmlns="local">
               <motRep>1 388</motRep>
             </al>
           </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
+          <entry rowsep="yes">
             <al xmlns="local">
               <motRep>38 931</motRep>
             </al>
           </entry>
         </row>
         <row>
-          <entry class="table-contents-font-reduction">
+          <entry>
             <al xmlns="local">Affectation du résultat</al>
           </entry>
-          <entry class="table-contents-font-reduction">
+          <entry>
             <al xmlns="local"/>
           </entry>
-          <entry class="table-contents-font-reduction">
+          <entry>
             <al xmlns="local">–</al>
           </entry>
-          <entry class="table-contents-font-reduction">
+          <entry>
             <al xmlns="local">–</al>
           </entry>
-          <entry class="table-contents-font-reduction">
+          <entry>
             <al xmlns="local">(1 939)</al>
           </entry>
-          <entry class="table-contents-font-reduction">
+          <entry>
             <al xmlns="local">1 939</al>
           </entry>
-          <entry class="table-contents-font-reduction">
+          <entry>
             <al xmlns="local">–</al>
           </entry>
-          <entry class="table-contents-font-reduction">
+          <entry>
             <al xmlns="local">–</al>
           </entry>
-          <entry class="table-contents-font-reduction">
+          <entry>
             <al xmlns="local">–</al>
           </entry>
         </row>
         <row>
-          <entry class="table-contents-font-reduction">
+          <entry>
             <al xmlns="local">Résultat de l’exercice</al>
           </entry>
-          <entry class="table-contents-font-reduction">
+          <entry>
             <al xmlns="local"/>
           </entry>
-          <entry class="table-contents-font-reduction">
+          <entry>
             <al xmlns="local">–</al>
           </entry>
-          <entry class="table-contents-font-reduction">
+          <entry>
             <al xmlns="local">–</al>
           </entry>
-          <entry class="table-contents-font-reduction">
+          <entry>
             <al xmlns="local">–</al>
           </entry>
-          <entry class="table-contents-font-reduction">
+          <entry>
             <al xmlns="local">677</al>
           </entry>
-          <entry class="table-contents-font-reduction">
+          <entry>
             <al xmlns="local">–</al>
           </entry>
-          <entry class="table-contents-font-reduction">
+          <entry>
             <al xmlns="local">188</al>
           </entry>
-          <entry class="table-contents-font-reduction">
+          <entry>
             <al xmlns="local">865</al>
           </entry>
         </row>
         <row>
-          <entry class="table-contents-font-reduction">
+          <entry>
             <al xmlns="local">Augmentation de capital</al>
           </entry>
-          <entry class="table-contents-font-reduction">
+          <entry>
             <al xmlns="local"/>
           </entry>
-          <entry class="table-contents-font-reduction">
+          <entry>
             <al xmlns="local">–</al>
           </entry>
-          <entry class="table-contents-font-reduction">
+          <entry>
             <al xmlns="local">–</al>
           </entry>
-          <entry class="table-contents-font-reduction">
+          <entry>
             <al xmlns="local">–</al>
           </entry>
-          <entry class="table-contents-font-reduction">
+          <entry>
             <al xmlns="local">–</al>
           </entry>
-          <entry class="table-contents-font-reduction">
+          <entry>
             <al xmlns="local">–</al>
           </entry>
-          <entry class="table-contents-font-reduction">
+          <entry>
             <al xmlns="local">116</al>
           </entry>
-          <entry class="table-contents-font-reduction">
+          <entry>
             <al xmlns="local">116</al>
           </entry>
         </row>
         <row>
-          <entry class="table-contents-font-reduction">
+          <entry>
             <al xmlns="local">Augmentation de capital – souscription de BSA<rNote id="FRCHS_2016-03_UI-BE3ACA34-253B-4B35-A930-45E65010D8A9_UI-A8A1173D-846A-4BF9-940F-A7203C3E92C2rNote_13" num="1" ref="FRCHS_2016-03_UI-BE3ACA34-253B-4B35-A930-45E65010D8A9_UI-A8A1173D-846A-4BF9-940F-A7203C3E92C2"/></al>
           </entry>
-          <entry class="table-contents-font-reduction">
+          <entry>
             <al xmlns="local">
               <renvoiAutrui annee="2016" docId="R-ACEA7E35-A5BC-464E-87F6-51BC180C41EC" numeroInfo="" numeroOrdre="03" produitCx="FRCHS" uiId="FRCHS_2016-03_UI-26A09ED8-CC60-4984-8EB3-985DF731FF46">13</renvoiAutrui>
             </al>
           </entry>
-          <entry class="table-contents-font-reduction">
+          <entry>
             <al xmlns="local">–</al>
           </entry>
-          <entry class="table-contents-font-reduction">
+          <entry>
             <al xmlns="local">119</al>
           </entry>
-          <entry class="table-contents-font-reduction">
+          <entry>
             <al xmlns="local">–</al>
           </entry>
-          <entry class="table-contents-font-reduction">
+          <entry>
             <al xmlns="local">–</al>
           </entry>
-          <entry class="table-contents-font-reduction">
+          <entry>
             <al xmlns="local">–</al>
           </entry>
-          <entry class="table-contents-font-reduction">
+          <entry>
             <al xmlns="local">–</al>
           </entry>
-          <entry class="table-contents-font-reduction">
+          <entry>
             <al xmlns="local">119</al>
           </entry>
         </row>
         <row>
-          <entry class="table-contents-font-reduction">
+          <entry>
             <al xmlns="local">Variation des taux de change</al>
           </entry>
-          <entry class="table-contents-font-reduction">
+          <entry>
             <al xmlns="local"/>
           </entry>
-          <entry class="table-contents-font-reduction">
+          <entry>
             <al xmlns="local">–</al>
           </entry>
-          <entry class="table-contents-font-reduction">
+          <entry>
             <al xmlns="local">–</al>
           </entry>
-          <entry class="table-contents-font-reduction">
+          <entry>
             <al xmlns="local">1</al>
           </entry>
-          <entry class="table-contents-font-reduction">
+          <entry>
             <al xmlns="local">–</al>
           </entry>
-          <entry class="table-contents-font-reduction">
+          <entry>
             <al xmlns="local">(1 491)</al>
           </entry>
-          <entry class="table-contents-font-reduction">
+          <entry>
             <al xmlns="local">(36)</al>
           </entry>
-          <entry class="table-contents-font-reduction">
+          <entry>
             <al xmlns="local">(1 525)</al>
           </entry>
         </row>
         <row>
-          <entry class="table-contents-font-reduction" rowsep="yes">
+          <entry rowsep="yes">
             <al xmlns="local">Autres mouvements – sortie de périmètre<rNote id="FRCHS_2016-03_UI-BE3ACA34-253B-4B35-A930-45E65010D8A9_UI-17C49FD7-930E-4E64-B488-CCB9AECB3961rNote_14" num="3" ref="FRCHS_2016-03_UI-BE3ACA34-253B-4B35-A930-45E65010D8A9_UI-17C49FD7-930E-4E64-B488-CCB9AECB3961"/></al>
           </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
+          <entry rowsep="yes">
             <al xmlns="local">
               <renvoiAutrui annee="2016" docId="R-ACEA7E35-A5BC-464E-87F6-51BC180C41EC" numeroInfo="" numeroOrdre="03" produitCx="FRCHS" uiId="FRCHS_2016-03_UI-F9B17B51-5204-439D-9D6A-16170B7E5081">28</renvoiAutrui>
             </al>
           </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
+          <entry rowsep="yes">
             <al xmlns="local">–</al>
           </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
+          <entry rowsep="yes">
             <al xmlns="local">–</al>
           </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
+          <entry rowsep="yes">
             <al xmlns="local">–</al>
           </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
+          <entry rowsep="yes">
             <al xmlns="local">–</al>
           </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
+          <entry rowsep="yes">
             <al xmlns="local">–</al>
           </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
+          <entry rowsep="yes">
             <al xmlns="local">(1 721)</al>
           </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
+          <entry rowsep="yes">
             <al xmlns="local">(1 721)</al>
           </entry>
         </row>
         <row>
-          <entry class="table-contents-font-reduction" rowsep="yes">
+          <entry rowsep="yes">
             <al xmlns="local">
               <motRep>Solde au 31-12-2015</motRep>
             </al>
           </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
+          <entry rowsep="yes">
             <al xmlns="local"/>
           </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
+          <entry rowsep="yes">
             <al xmlns="local">
               <motRep>29 461</motRep>
             </al>
           </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
+          <entry rowsep="yes">
             <al xmlns="local">
               <motRep>5 881</motRep>
             </al>
           </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
+          <entry rowsep="yes">
             <al xmlns="local">
               <motRep>2 955</motRep>
             </al>
           </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
+          <entry rowsep="yes">
             <al xmlns="local">
               <motRep>677</motRep>
             </al>
           </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
+          <entry rowsep="yes">
             <al xmlns="local">
               <motRep>(2 125)</motRep>
             </al>
           </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
+          <entry rowsep="yes">
             <al xmlns="local">
               <motRep>(65)</motRep>
               <rNote id="FRCHS_2016-03_UI-BE3ACA34-253B-4B35-A930-45E65010D8A9_UI-218ED026-8934-40A2-B51F-9AEC2C7F1069rNote_15" num="4" ref="FRCHS_2016-03_UI-BE3ACA34-253B-4B35-A930-45E65010D8A9_UI-218ED026-8934-40A2-B51F-9AEC2C7F1069"/>
             </al>
           </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
+          <entry rowsep="yes">
             <al xmlns="local">
               <motRep>36 784</motRep>
             </al>
           </entry>
         </row>
         <row>
-          <entry class="table-contents-font-reduction" namest="col1" nameend="col9">
+          <entry namest="col1" nameend="col9">
             <complement xmlns="local" id="FRCHS_2016-03_UI-BE3ACA34-253B-4B35-A930-45E65010D8A9_UI-5E8BC896-66DA-444A-BB43-B425FFF4517B">
               <al>Le tableau de variation des capitaux propres peut être présenté dans une note annexe (<REFDOC2 ID="REFDOC-FRCHS_2016-03-289" NATURE="PCG Conso" REF="424"><LINK COL="BU" FILE="conso.sgm" LINKID="A3027BAC9CAC148A-EFL" SUPP="CONSO">Règl. CRC n<e>o</e> 99-02 § 424 b.</LINK></REFDOC2>)</al>
             </complement>
@@ -15464,120 +15464,120 @@
       <colspec colname="col9"/>
       <tbody>
         <row>
-          <entry class="table-contents-font-reduction">
+          <entry>
             <al xmlns="local"/>
           </entry>
-          <entry class="table-contents-font-reduction" namest="col2" nameend="col5" colsep="yes" rowsep="yes">
+          <entry namest="col2" nameend="col5" colsep="yes" rowsep="yes">
             <al xmlns="local">
               <motRep>Vente en gros</motRep>
             </al>
           </entry>
-          <entry class="table-contents-font-reduction" namest="col6" nameend="col9" rowsep="yes">
+          <entry namest="col6" nameend="col9" rowsep="yes">
             <al xmlns="local">
               <motRep>Vente au détail</motRep>
             </al>
           </entry>
         </row>
         <row>
-          <entry class="table-contents-font-reduction">
+          <entry>
             <al xmlns="local"/>
           </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
+          <entry rowsep="yes">
             <al xmlns="local">
               <motRep>Zone euro</motRep>
             </al>
           </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
+          <entry rowsep="yes">
             <al xmlns="local">
               <motRep>Etats-Unis</motRep>
             </al>
           </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
+          <entry rowsep="yes">
             <al xmlns="local">
               <motRep>Royaume-Uni</motRep>
             </al>
           </entry>
-          <entry class="table-contents-font-reduction" colsep="yes" rowsep="yes">
+          <entry colsep="yes" rowsep="yes">
             <al xmlns="local">
               <motRep>Autres</motRep>
             </al>
           </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
+          <entry rowsep="yes">
             <al xmlns="local">
               <motRep>Zone euro</motRep>
             </al>
           </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
+          <entry rowsep="yes">
             <al xmlns="local">
               <motRep>Etats-Unis</motRep>
             </al>
           </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
+          <entry rowsep="yes">
             <al xmlns="local">
               <motRep>Royaume-Uni</motRep>
             </al>
           </entry>
-          <entry class="table-contents-font-reduction" rowsep="yes">
+          <entry rowsep="yes">
             <al xmlns="local">
               <motRep>Autres</motRep>
             </al>
           </entry>
         </row>
         <row>
-          <entry class="table-contents-font-reduction">
+          <entry>
             <al xmlns="local">Taux de croissance<rNote id="FRCHS_2016-03_UI-858AE4EB-F60E-45C0-B95A-D449CBD65D11_UI-1B8FCF7C-B573-452E-9A2B-E1B63EC293B5rNote_19" num="1" ref="FRCHS_2016-03_UI-858AE4EB-F60E-45C0-B95A-D449CBD65D11_UI-1B8FCF7C-B573-452E-9A2B-E1B63EC293B5"/></al>
           </entry>
-          <entry class="table-contents-font-reduction">
+          <entry>
             <al xmlns="local">n.a</al>
           </entry>
-          <entry class="table-contents-font-reduction">
+          <entry>
             <al xmlns="local">2,8 %</al>
           </entry>
-          <entry class="table-contents-font-reduction">
+          <entry>
             <al xmlns="local">3 %</al>
           </entry>
-          <entry class="table-contents-font-reduction" colsep="yes">
+          <entry colsep="yes">
             <al xmlns="local">1,2 %</al>
           </entry>
-          <entry class="table-contents-font-reduction">
+          <entry>
             <al xmlns="local">n.a</al>
           </entry>
-          <entry class="table-contents-font-reduction">
+          <entry>
             <al xmlns="local">3 %</al>
           </entry>
-          <entry class="table-contents-font-reduction">
+          <entry>
             <al xmlns="local">2,8 %</al>
           </entry>
-          <entry class="table-contents-font-reduction">
+          <entry>
             <al xmlns="local">1 %</al>
           </entry>
         </row>
         <row>
-          <entry class="table-contents-font-reduction">
+          <entry>
             <al xmlns="local">Taux d’actualisation<rNote id="FRCHS_2016-03_UI-858AE4EB-F60E-45C0-B95A-D449CBD65D11_UI-9F8FBCA0-71F0-4D9E-947F-716DC6FD394ArNote_20" num="2" ref="FRCHS_2016-03_UI-858AE4EB-F60E-45C0-B95A-D449CBD65D11_UI-9F8FBCA0-71F0-4D9E-947F-716DC6FD394A"/></al>
           </entry>
-          <entry class="table-contents-font-reduction">
+          <entry>
             <al xmlns="local">n.a</al>
           </entry>
-          <entry class="table-contents-font-reduction">
+          <entry>
             <al xmlns="local">12,5 %</al>
           </entry>
-          <entry class="table-contents-font-reduction">
+          <entry>
             <al xmlns="local">12,7 %</al>
           </entry>
-          <entry class="table-contents-font-reduction" colsep="yes">
+          <entry colsep="yes">
             <al xmlns="local">12 %</al>
           </entry>
-          <entry class="table-contents-font-reduction">
+          <entry>
             <al xmlns="local">n.a</al>
           </entry>
-          <entry class="table-contents-font-reduction">
+          <entry>
             <al xmlns="local">12,5 %</al>
           </entry>
-          <entry class="table-contents-font-reduction">
+          <entry>
             <al xmlns="local">12,7 %</al>
           </entry>
-          <entry class="table-contents-font-reduction">
+          <entry>
             <al xmlns="local">12 %</al>
           </entry>
         </row>

@@ -1,3 +1,4 @@
+<?xml-model href="ext-models:/ext-models/oasis/cals/cals.nvdl" type="application/xml" schematypens="http://purl.oclc.org/dsdl/nvdl/ns/structure/1.0"?>
 <cals:table
   xmlns:cals="http://docs.oasis-open.org/ns/oasis-exchange/table"
   xmlns="local"
@@ -9,15 +10,15 @@
   >
   <titre>Tableau-liste des filiales et des participations</titre>
   <cals:tgroup cols="9">
-    <cals:colspec align="left" colname="column1" colnum="1" colsep="0" colwidth="20*"/>
-    <cals:colspec align="right" colname="column2" colnum="2" colsep="0" colwidth="10*"/>
-    <cals:colspec align="right" colname="column3" colnum="3" colsep="0" colwidth="10*"/>
-    <cals:colspec align="right" colname="column4" colnum="4" colsep="0" colwidth="10*"/>
-    <cals:colspec align="right" colname="column5" colnum="5" colsep="0" colwidth="10*"/>
-    <cals:colspec align="right" colname="column6" colnum="6" colsep="0" colwidth="10*"/>
-    <cals:colspec align="right" colname="column7" colnum="7" colsep="0" colwidth="10*"/>
-    <cals:colspec align="right" colname="column8" colnum="8" colsep="0" colwidth="10*"/>
-    <cals:colspec align="right" colname="column9" colnum="9" colsep="0" colwidth="10*"/>
+    <cals:colspec align="left" colname="column1" colnum="1" colsep="0" colwidth="200*"/>
+    <cals:colspec align="right" colname="column2" colnum="2" colsep="0" colwidth="100*"/>
+    <cals:colspec align="right" colname="column3" colnum="3" colsep="0" colwidth="100*"/>
+    <cals:colspec align="right" colname="column4" colnum="4" colsep="0" colwidth="100*"/>
+    <cals:colspec align="right" colname="column5" colnum="5" colsep="0" colwidth="100*"/>
+    <cals:colspec align="right" colname="column6" colnum="6" colsep="0" colwidth="100*"/>
+    <cals:colspec align="right" colname="column7" colnum="7" colsep="0" colwidth="100*"/>
+    <cals:colspec align="right" colname="column8" colnum="8" colsep="0" colwidth="100*"/>
+    <cals:colspec align="right" colname="column9" colnum="9" colsep="0" colwidth="100*"/>
     <cals:tbody valign="top">
       <cals:row rowsep="1">
         <cals:entry align="left" colname="column1" colsep="0" rowsep="0" valign="top">
