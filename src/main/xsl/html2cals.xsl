@@ -19,8 +19,7 @@
   
   <xd:doc scope="stylesheet">
     <xd:desc>
-      <xd:p xml:lang="fr">Cette feuille de style va traiter la conversion de tables xhtml en tables
-        CALS.</xd:p>
+      <xd:p xml:lang="fr">Cette feuille de style va traiter la conversion de tables xhtml en tables CALS.</xd:p>
       <xd:p xml:lang="fr">Les tables xhtml à convertir sont supposées valides.</xd:p>
       <xd:p xml:lang="fr">
         <xd:b>Note sur les tables (x)html:</xd:b> leur modèle de contenu à varié avec les specs W3C. <xd:ul>
@@ -30,20 +29,18 @@
           <xd:li><xd:pre>[html 5.0]  table ::= (caption?, colgroup*, thead?, ((tbody* | tr+) &amp; tfoot?)) +(script | template)</xd:pre></xd:li>
           <xd:li><xd:pre>[html 5.1]  table ::= (caption?, colgroup*, thead?, (tbody* | tr+), tfoot?) +(script | template)</xd:pre></xd:li>
           <xd:li><xd:pre>[html 5.2] identique au modèle html 5.1</xd:pre></xd:li>
-        </xd:ul></xd:p>
-      <xd:p xml:lang="fr">En html 4.0 le contenu final est en fait <xd:i>(thead?, tfoot?,
-          tbody+)</xd:i> mais la minimisation de <xd:i>tbody</xd:i> impose un modèle de contenu
-        modifié en xhtml. Le modèle xhtml 2.0 qui n'a pas eu de suite, ne sera que partiellement pris
-        en compte ici.</xd:p>
-      <xd:p xml:lang="fr">On supposera que l'on n'a pas d'élément <xd:i>script</xd:i> et
-          <xd:i>template</xd:i> dans nos données et on va se placer dans le cadre d'un modèle
-        compatible avec le maximum de cas:
+        </xd:ul>
+      </xd:p>
+      <xd:p xml:lang="fr">En html 4.0 le contenu final est en fait <xd:i>(thead?, tfoot?, tbody+)</xd:i> 
+        mais la minimisation de <xd:i>tbody</xd:i> impose un modèle de contenu modifié en xhtml.
+        Le modèle xhtml 2.0 qui n'a pas eu de suite, ne sera que partiellement pris en compte ici.</xd:p>
+      <xd:p xml:lang="fr">On supposera que l'on n'a pas d'élément <xd:i>script</xd:i> et <xd:i>template</xd:i> 
+        dans nos données et on va se placer dans le cadre d'un modèle compatible avec le maximum de cas :
         <xd:pre>table ::= (caption?, colgroup*, thead?, ((tbody* | tr+) &amp; tfoot?))</xd:pre></xd:p>
-      <xd:p xml:lang="fr">La structure des tableaux CALS résultant de la transformation est la
-        suivante:
+      <xd:p xml:lang="fr">La structure des tableaux CALS résultant de la transformation est la suivante:
         <xd:pre>table ::= title? tgroup+ (ou tgroup ::= colspec*,spanspec*,thead?,tfoot?,tbody)</xd:pre>
-        Le contenu des lignes des tableaux CALS sera limité à l'élément <xd:i>entry</xd:i> (i.e. pas
-        d'élément <xd:i>entrytbl</xd:i>)</xd:p>
+        Le contenu des lignes des tableaux CALS sera limité à l'élément <xd:i>entry</xd:i> 
+        (i.e. pas d'élément <xd:i>entrytbl</xd:i>)</xd:p>
     </xd:desc>
   </xd:doc>
   
@@ -84,9 +81,11 @@
     </xsl:variable>
     <!--FINALY-->
     <xsl:choose>
+      <!--Element has already been created in cals namespace (default xsl namespace) which is the intended one-->
       <xsl:when test="$xslLib:cals.ns.uri = 'http://docs.oasis-open.org/ns/oasis-exchange/table'">
         <xsl:sequence select="$step4"/>
       </xsl:when>
+      <!--if not : convert cals element to the intended namespace--> 
       <xsl:otherwise>
         <xsl:apply-templates select="$step3" mode="xhtml2cals:convert-cals-namespace"/>
       </xsl:otherwise>
@@ -279,6 +278,7 @@
   <xsl:function name="xhtml2cals:expand-colspans-test" as="item()+">
     <xsl:param name="source-row" as="element()"/>
     <xsl:for-each select="$source-row/*">
+      <xsl:variable name="cell" select="." as="element()"/>
       <xsl:choose>
         <xsl:when test="@colspan &gt; 1">
           <xsl:copy>
@@ -286,8 +286,7 @@
             <xsl:attribute name="xhtml2cals:colspan" select="@colspan"/>
             <xsl:copy-of select="node()"/>
           </xsl:copy>
-          <xsl:variable name="cell" select="."/>
-          <xsl:for-each select="reverse(1 to (xs:integer(@colspan)- 1))">
+          <xsl:for-each select="reverse(1 to (xs:integer(@colspan) - 1))">
             <xsl:element name="{$cell/name()}">
               <xsl:attribute name="xhtml2cals:DummyCell">yes</xsl:attribute>
               <xsl:copy-of select="$cell/(@* except @colspan)"/>
@@ -308,12 +307,11 @@
   <xsl:function name="xhtml2cals:expand-colspans" as="item()+">
     <!-- row will have colspans expanded -->
     <xsl:param name="source-row" as="element()"/>
-    <xsl:variable name="expand-columns">
+    <xsl:variable name="expand-columns" as="element()*">
       <xsl:for-each select="$source-row/*">
-        <xsl:variable name="element-name" select="local-name()"/>
-        <xsl:variable name="current-cell" select="self::node()"/>
-        <xsl:element name="{$element-name}" namespace="http://www.w3.org/1999/xhtml"
-          inherit-namespaces="no">
+        <xsl:variable name="element-name" select="local-name()" as="xs:string"/>
+        <xsl:variable name="current-cell" select="self::*" as="element()"/>
+        <xsl:element name="{$element-name}" namespace="http://www.w3.org/1999/xhtml" inherit-namespaces="no">
           <xsl:copy-of select="$current-cell/@*[not(name() = 'colspan')]" copy-namespaces="no"/>
           <xsl:if test="$current-cell/@colspan">
             <xsl:attribute name="xhtml2cals:colspan" select="$current-cell/@colspan"/>
@@ -328,8 +326,8 @@
             <xsl:copy-of select="$current-cell/@*[not(name() = 'colspan')]" copy-namespaces="no"/>
             <xsl:attribute name="xhtml2cals:colspan" select="$current-cell/@colspan +1 - ."/>
             <xsl:comment>
-							<xsl:copy-of select="$current-cell/child::node()" copy-namespaces="no"/>
-						</xsl:comment>
+              <xsl:copy-of select="$current-cell/child::node()" copy-namespaces="no"/>
+            </xsl:comment>
           </xsl:element>
         </xsl:for-each>
       </xsl:for-each>
@@ -365,9 +363,19 @@
           <xsl:variable name="current-column" select="count(preceding-sibling::*) + 1" as="xs:integer"/>
           <xsl:variable name="spanned-row-cells"
             select="count(preceding-sibling::*[@xhtml2cals:rowspan &gt; 1])" as="xs:integer"/>
-          <xsl:copy-of
+          <xsl:choose>
+            <xsl:when test="count(xhtml2cals:select-cell($current-column - $spanned-row-cells, $source-row, 1, 0)) != 0">
+              <xsl:copy-of
+                select="xhtml2cals:select-cell($current-column - $spanned-row-cells, $source-row, 1, 0)"
+                copy-namespaces="no"/>
+            </xsl:when>
+            <xsl:otherwise>
+              <xsl:message terminate="no">ERROR $current-column= <xsl:value-of select="$current-column"/>, $spanned-row-cells= <xsl:value-of select="$spanned-row-cells"/> </xsl:message>
+            </xsl:otherwise>
+          </xsl:choose>
+          <!--<xsl:copy-of
             select="xhtml2cals:select-cell($current-column - $spanned-row-cells, $source-row, 1, 0)"
-            copy-namespaces="no"/>
+            copy-namespaces="no"/>-->
         </xsl:otherwise>
       </xsl:choose>
     </xsl:for-each>
@@ -383,8 +391,8 @@
     <!-- Total of the spans already checked -->
     <xsl:param name="current-span-col-total" as="xs:double"/>
     <!-- colspan of the current cell being examined-->
-    <xsl:variable name="current-cell" select="$source-row/*[$current-column-count]"/>
-    <xsl:variable name="current-span">
+    <xsl:variable name="current-cell" select="$source-row/*[$current-column-count]"/> <!--as="element()*"-->
+    <xsl:variable name="current-span"> <!-- as="xs:integer" select="($current-cell/@colspan[. castable as xs:integer], 1)[1]"-->
       <xsl:choose>
         <xsl:when test="$current-cell/@colspan">
           <xsl:value-of select="$current-cell/@colspan"/>
@@ -445,13 +453,13 @@
   <xsl:template match="table" mode="xhtml2cals:convert-to-cals">
     <table>
       <xsl:copy-of select="@id | @class | @align | @width" copy-namespaces="no"/>
-      <xsl:call-template name="compute-table-borders"/>
-      <xsl:call-template name="compute-rowsep-colsep-defaults"/>
+      <xsl:call-template name="xhtml2cals:compute-table-borders"/>
+      <xsl:call-template name="xhtml2cals:compute-rowsep-colsep-defaults"/>
       <xsl:copy-of select="processing-instruction()|comment()"/>
       <xsl:apply-templates select="caption" mode="#current"/>
       <tgroup>
         <xsl:attribute name="cols" select="xhtml2cals:nb-cols(.)"/>
-        <xsl:call-template name="make-colspec">
+        <xsl:call-template name="xhtml2cals:make-colspec">
           <xsl:with-param name="context" select="colgroup | col"/>
         </xsl:call-template>
         <!-- FIXME à rebrancher quand on gérera mieux les spanspec dans le modèle -->
@@ -463,7 +471,7 @@
     </table>
   </xsl:template>
   
-  <xsl:template name="compute-table-borders">
+  <xsl:template name="xhtml2cals:compute-table-borders">
     <xsl:attribute name="frame">
       <xsl:choose>
         <xsl:when test="@frame and (not(@border) or @border!=0)">
@@ -512,7 +520,7 @@
     </xsl:attribute>
   </xsl:template>
   
-  <xsl:template name="compute-rowsep-colsep-defaults">
+  <xsl:template name="xhtml2cals:compute-rowsep-colsep-defaults">
     <xsl:choose>
       <xsl:when test="@border !=0 and not(@rules)">
         <xsl:attribute name="colsep">yes</xsl:attribute>
@@ -547,22 +555,21 @@
   
   <!-- template recursif: On parcourt un element col ou colgroup, on génère le ou les colspec 
         correspondant, -->
-  <xsl:template name="make-colspec">
+  <xsl:template name="xhtml2cals:make-colspec">
     <!-- colgroup list or col list -->
     <xsl:param name="context" as="element()*"/>
     <!-- index in the list of the colgroup or col to be processed -->
-    <xsl:param name="index" as="xs:integer">1</xsl:param>
+    <xsl:param name="index" select="1" as="xs:integer"/>
     <!-- next colspec number -->
-    <xsl:param name="colnum">0</xsl:param>
+    <xsl:param name="colnum" select="0" as="xs:integer"/>
     <xsl:choose>
-      <xsl:when test="count($context) = 0"/>
-      <xsl:when test="$index > count($context)"/>
+      <xsl:when test="count($context) = 0"><!--no operation--></xsl:when>
+      <xsl:when test="$index > count($context)"><!--no operation--></xsl:when>
       <xsl:otherwise>
-        <xsl:variable name="span">
+        <xsl:variable name="span" as="xs:integer">
           <xsl:choose>
             <xsl:when test="$context[$index]/col">
-              <xsl:value-of
-                select="count($context[$index]/col[not(@span)]) + sum($context[$index]/col/@span)"/>
+              <xsl:value-of select="count($context[$index]/col[not(@span)]) + sum($context[$index]/col/@span)"/>
             </xsl:when>
             <xsl:otherwise>
               <xsl:value-of select="max(($context[$index]/@span, 1))"/>
@@ -571,7 +578,7 @@
         </xsl:variable>
         <xsl:choose>
           <xsl:when test="$context[$index]/col">
-            <xsl:call-template name="make-colspec">
+            <xsl:call-template name="xhtml2cals:make-colspec">
               <xsl:with-param name="context" select="$context[$index]/col"/>
               <xsl:with-param name="index" select="1"/>
               <xsl:with-param name="colnum" select="$colnum"/>
@@ -579,8 +586,7 @@
           </xsl:when>
           <xsl:otherwise>
             <xsl:for-each select="1 to xs:integer($span)">
-              <xsl:element name="colspec" namespace="{$xslLib:cals.ns.uri}">
-                <xsl:attribute name="colname" select="concat('col', ($colnum + .))"/>
+              <colspec colname="{concat('col', ($colnum + .))}">
                 <xsl:if test=". = 1">
                   <!-- GMA ou pour tous? -->
                   <xsl:copy-of select="$context[$index]/(@align | @charoff | @char)"/>
@@ -588,12 +594,12 @@
                 <xsl:if test="$context[$index]/@width">
                   <xsl:attribute name="colwidth" select="$context[$index]/@width"/>
                 </xsl:if>
-              </xsl:element>
+              </colspec>
             </xsl:for-each>
           </xsl:otherwise>
         </xsl:choose>
         <!-- Tail recursion -->
-        <xsl:call-template name="make-colspec">
+        <xsl:call-template name="xhtml2cals:make-colspec">
           <xsl:with-param name="context" select="$context"/>
           <xsl:with-param name="index" select="$index + 1"/>
           <xsl:with-param name="colnum" select="$colnum + $span"/>
@@ -604,22 +610,21 @@
   
   <!-- template recursif: On parcourt la un element col ou colgroup, on génère le ou les spanspec 
         correspondant, -->
-  <xsl:template name="make-spanspec">
+  <xsl:template name="xhtml2cals:make-spanspec">
     <!-- colgroup list or col list -->
     <xsl:param name="context" as="element()*"/>
     <!-- index in the list of the colgroup or col to be processed -->
-    <xsl:param name="index" as="xs:integer">1</xsl:param>
+    <xsl:param name="index" select="1" as="xs:integer"/>
     <!-- next colspec number -->
-    <xsl:param name="colnum">0</xsl:param>
+    <xsl:param name="colnum" select="0" as="xs:integer"/>
     <xsl:choose>
-      <xsl:when test="count($context) = 0"/>
-      <xsl:when test="$index > count($context)"/>
+      <xsl:when test="count($context) = 0"><!--no operation--></xsl:when>
+      <xsl:when test="$index > count($context)"><!--no operation--></xsl:when>
       <xsl:otherwise>
-        <xsl:variable name="span">
+        <xsl:variable name="span" as="xs:integer">
           <xsl:choose>
             <xsl:when test="$context[$index]/col">
-              <xsl:value-of
-                select="count($context[$index]/col[not(@span)]) + sum($context[$index]/col/@span)"/>
+              <xsl:value-of select="count($context[$index]/col[not(@span)]) + sum($context[$index]/col/@span)"/>
             </xsl:when>
             <xsl:otherwise>
               <xsl:value-of select="max(($context[$index]/@span, 1))"/>
@@ -628,25 +633,25 @@
         </xsl:variable>
         <xsl:if
           test="(count($context[$index]/col) &gt; 1) or ((count($context[$index]/col) = 0) and ($span &gt; 1))">
-          <xsl:element name="spanspec" namespace="{$xslLib:cals.ns.uri}">
-            <xsl:attribute name="spanname" select="concat('span', ($colnum + 1), '-', $span)"/>
-            <xsl:attribute name="namest" select="concat('col', ($colnum + 1))"/>
-            <xsl:attribute name="nameend" select="concat('col', ($colnum + $span))"/>
+          <spanspec 
+            spanname="{concat('span', ($colnum + 1), '-', $span)}" 
+            namest="{concat('col', ($colnum + 1))}" 
+            nameend="{concat('col', ($colnum + $span))}">
             <xsl:copy-of select="@align | @charoff | @char"/>
             <xsl:if test="@width">
               <xsl:attribute name="colwidth" select="@width"/>
             </xsl:if>
-          </xsl:element>
+          </spanspec>
         </xsl:if>
         <xsl:if test="$context[$index]/col">
-          <xsl:call-template name="make-spanspec">
+          <xsl:call-template name="xhtml2cals:make-spanspec">
             <xsl:with-param name="context" select="$context[$index]/col"/>
             <xsl:with-param name="index" select="1"/>
             <xsl:with-param name="colnum" select="$colnum"/>
           </xsl:call-template>
         </xsl:if>
         <!-- Tail recursion -->
-        <xsl:call-template name="make-spanspec">
+        <xsl:call-template name="xhtml2cals:make-spanspec">
           <xsl:with-param name="context" select="$context"/>
           <xsl:with-param name="index" select="$index + 1"/>
           <xsl:with-param name="colnum" select="$colnum + $span"/>
@@ -713,9 +718,9 @@
       <!-- check CSS for definition of col or row separator -->
       <xsl:variable name="rowspan" select="(@xhtml2cals:rowspan, 1)[1]" as="xs:integer"/>
       <!-- the CSS of the next col or row can have an impact on the separator settings -->
-      <xsl:variable name="css-next-col" select="css:parse-inline(following-sibling::*[not(@xhtml2cals:DummyCell)][1]/@style)"/>
-      <xsl:variable name="css-next-row" select="css:parse-inline(../following-sibling::*[$rowspan]/*[$curr-col-num]/@style)"/>
-      <xsl:variable name="css" select="css:parse-inline(@style)"/>
+      <xsl:variable name="css-next-col" select="css:parse-inline(following-sibling::*[not(@xhtml2cals:DummyCell)][1]/@style)" as="element(css:css)?"/>
+      <xsl:variable name="css-next-row" select="css:parse-inline(../following-sibling::*[$rowspan]/*[$curr-col-num]/@style)" as="element(css:css)?"/>
+      <xsl:variable name="css" select="css:parse-inline(@style)" as="element(css:css)?"/>
       <!-- take into account rules setting of table -->
       <xsl:variable name="forced-rowsep" as="xs:boolean">
         <xsl:choose>
@@ -726,13 +731,7 @@
           <xsl:otherwise><xsl:sequence select="false()"/></xsl:otherwise>
         </xsl:choose>
       </xsl:variable>
-      <xsl:variable name="forced-colsep" as="xs:boolean">
-        <xsl:choose>
-          <xsl:when test="ancestor::table[1]/@rules = 'cols'"><xsl:sequence select="true()"/></xsl:when>
-          <xsl:when test="ancestor::table[1]/@rules = 'all'"><xsl:sequence select="true()"/></xsl:when>
-          <xsl:otherwise><xsl:sequence select="false()"/></xsl:otherwise>
-        </xsl:choose>
-      </xsl:variable>
+      <xsl:variable name="forced-colsep" select="(ancestor::table[1]/@rules = 'cols') or (ancestor::table[1]/@rules = 'all')" as="xs:boolean"/>
       <xsl:choose>
         <xsl:when test="$forced-colsep or css:definesBorderRight($css) or css:definesBorderLeft($css-next-col)">
           <xsl:attribute name="colsep" select="if ($forced-colsep or css:showBorderRight($css) or css:showBorderLeft($css-next-col)) then('yes') else('no')"/>
@@ -800,7 +799,9 @@
       <xsl:for-each select="tokenize(., '\s+')">
         <xsl:variable name="value" select="." as="xs:string"/>
         <xsl:choose>
-          <xsl:when test="starts-with($value, 'cals_')"/>
+          <xsl:when test="starts-with($value, 'cals_')">
+            <!--delete cals specific cals attribute value inerited from conversion cals2html.xsl--> 
+          </xsl:when>
           <xsl:otherwise>
             <xsl:value-of select="$value"/>
           </xsl:otherwise>
