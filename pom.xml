@@ -18,6 +18,15 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
 
+  <dependencies>
+    <!--Validation cals-->
+    <dependency>
+      <groupId>eu.els.sie.models</groupId>
+      <artifactId>ext-models</artifactId>
+      <version>1.0.1-SNAPSHOT</version>
+    </dependency>
+  </dependencies>
+  
   <build>
 
     <resources>
@@ -28,6 +37,31 @@
     </resources>
 
     <plugins>
+      
+      <plugin>
+        <groupId>top.marchand.xml.maven</groupId>
+        <artifactId>catalogBuilder-maven-plugin</artifactId>
+        <version>1.0.4</version>
+        <executions>
+          <execution>
+            <id>preparation</id>
+            <goals>
+              <goal>catalog</goal>
+            </goals>
+          </execution>
+          <execution>
+            <id>packaging</id>
+            <phase>package</phase>
+            <goals>
+              <goal>catalog</goal>
+            </goals>
+            <configuration>
+              <rewriteToProtocol>cp</rewriteToProtocol>
+              <catalogFileName>target/generated-catalog/catalog.xml</catalogFileName>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
       
       <plugin>
         <groupId>io.xspec.maven</groupId>
