@@ -2183,7 +2183,7 @@
         </row>
       </tbody>
     </tgroup>
-    <tblNote>
+    <tblNote xmlns="local">
       <note id="FRCHS_2016-03_UI-9BEB236A-C39F-4282-9D3E-67E59701C33D_UI-CB0F29AC-C7CB-4602-A912-B0323C6269DA" num="1">
         <al>Les frais de recherche et développement sont engagés afin d’améliorer la performance des chaussures et notamment la résistance et la souplesse des baskets.</al>
       </note>
@@ -2814,7 +2814,7 @@
     </tgroup>
   </table>
   <table xmlns="http://docs.oasis-open.org/ns/oasis-exchange/table" id="FRCHS_2016-03_UI-1928767E-4A2F-4941-B449-6EF20A507026_TABLE-2" tabstyle="FRCHS-style2" frame="all" colsep="no" rowsep="no">
-    <titre>Tableau-liste des filiales et des participations</titre>
+    <titre xmlns="local">Tableau-liste des filiales et des participations</titre>
     <tgroup cols="9">
       <colspec colname="col1"/>
       <colspec colname="col2"/>
@@ -3177,7 +3177,7 @@
         </row>
       </tbody>
     </tgroup>
-    <tblNote>
+    <tblNote xmlns="local">
       <note id="FRCHS_2016-03_UI-1928767E-4A2F-4941-B449-6EF20A507026_UI-5C787B3C-D0D7-4A00-9037-2A5AEE0AF928" num="1">
         <al>Acquisitions de l’exercice</al>
       </note>
@@ -5665,7 +5665,7 @@
         </row>
       </tbody>
     </tgroup>
-    <tblNote>
+    <tblNote xmlns="local">
       <note id="FRCHS_2016-03_UI-B59FF261-0E72-4AC1-9D6D-3478BFEE377F_UI-39E8FDD4-FB24-4FD3-BF4D-A6DEDAA3A449" num="1">
         <al>Nominal et intérêts courus.</al>
       </note>
@@ -7680,7 +7680,7 @@
         </row>
       </tbody>
     </tgroup>
-    <tblNote>
+    <tblNote xmlns="local">
       <note id="FRCHS_2016-03_UI-3913A26C-6B39-41E6-BFF3-4D6077F974AE_TABLENOTE-1E03F13AC" num="1">
         <al>Ou une simple mention avec renvoi aux notes sur les postes de bilan ou du compte de résultat où figurent les informations nécessaires.</al>
       </note>
@@ -9599,7 +9599,7 @@
         </row>
       </tbody>
     </tgroup>
-    <tblNote>
+    <tblNote xmlns="local">
       <note id="FRCHS_2016-03_UI-73824E88-AE7D-471A-8F80-10C6DB20793B_UI-043EC24A-EEDE-42BF-965E-06E4F8549DD3" num="1">
         <al>L’émission en est désormais interdite dans les sociétés par actions. Seules peuvent donc subsister les parts bénéficiaires émises.</al>
       </note>
@@ -10773,7 +10773,7 @@
         </row>
       </tbody>
     </tgroup>
-    <tblNote>
+    <tblNote xmlns="local">
       <note id="FRCHS_2016-03_UI-494F0038-4444-44A7-B10F-66ED5F7B13C4_UI-C842E2D3-B239-46A4-ADF2-10D1A5C672DA" num="1">
         <al>Omission possible en cas de préjudice potentiel grave. Le caractère incomplet de la note doit alors être mentionné.</al>
       </note>
@@ -11031,7 +11031,7 @@
         </row>
       </tbody>
     </tgroup>
-    <tblNote>
+    <tblNote xmlns="local">
       <note id="FRCHS_2016-03_UI-996B9069-80BE-4530-BEC6-6C82DD0E3CE0_TABLENOTE-161959670" num="1">
         <al>Cette information n’est pas requise pour les sociétés autres que les SA produisant une annexe simplifiée.</al>
       </note>
@@ -14386,7 +14386,7 @@
         </row>
       </tbody>
     </tgroup>
-    <tblNote>
+    <tblNote xmlns="local">
       <note id="FRCHS_2016-03_UI-BE3ACA34-253B-4B35-A930-45E65010D8A9_UI-A8A1173D-846A-4BF9-940F-A7203C3E92C2" num="1">
         <al>Au cours de l’exercice 2012, l’Assemblée générale de la société 99-02 SA, a décidé l’émission de 1 125 000 bons de souscription d’actions (BSA), au prix de 0,30 € par BSA, donnant le droit de souscrire, au moyen de chaque bon, une action de la société. Les BSA émis ont été libérés en trois versements dont les deux derniers sont intervenus pour 119 k€ en 2014 et 2015 (<renvoiAutrui annee="2016" docId="R-ACEA7E35-A5BC-464E-87F6-51BC180C41EC" numeroInfo="" numeroOrdre="03" produitCx="FRCHS" uiId="FRCHS_2016-03_UI-26A09ED8-CC60-4984-8EB3-985DF731FF46">voir n<e>o</e> 13</renvoiAutrui>).</al>
       </note>
@@ -15024,7 +15024,7 @@
         </row>
       </tbody>
     </tgroup>
-    <tblNote>
+    <tblNote xmlns="local">
       <note id="FRCHS_2016-03_UI-1F5DA98E-E0B7-4E89-9A76-A69E58AE5B31_UI-61E0D1F8-BBE4-4C0A-A78F-7CDDAF304119" num="1">
         <al>Hors dépréciations sur l’actif circulant</al>
       </note>
@@ -15583,7 +15583,7 @@
         </row>
       </tbody>
     </tgroup>
-    <tblNote>
+    <tblNote xmlns="local">
       <note id="FRCHS_2016-03_UI-858AE4EB-F60E-45C0-B95A-D449CBD65D11_UI-1B8FCF7C-B573-452E-9A2B-E1B63EC293B5" num="1">
         <al>Taux de croissance moyen pondéré utilisé pour extrapoler les flux de trésorerie au-delà de la période couverte par le budget.</al>
       </note>
@@ -15950,7 +15950,7 @@
         </row>
       </tbody>
     </tgroup>
-    <tblNote>
+    <tblNote xmlns="local">
       <note id="FRCHS_2016-03_UI-858AE4EB-F60E-45C0-B95A-D449CBD65D11_UI-0DC6A2DE-FCA3-4098-B927-54AA364B7FB6" num="1">
         <al>Les frais de recherche et développement sont engagés afin d’améliorer la performance des chaussures et notamment la résistance et la souplesse des baskets.</al>
       </note>
@@ -20061,7 +20061,7 @@
         </row>
       </tbody>
     </tgroup>
-    <tblNote>
+    <tblNote xmlns="local">
       <note id="FRCHS_2016-03_UI-51FFB344-2F29-4001-8F71-22759FC6E5AC_UI-EC74E9AA-342B-4B6F-BC49-4C35D99CEC31" num="1">
         <al>Effectif moyen employé par les entreprises consolidées par intégration globale et quote-part contrôlée des effectifs employés par les entreprises consolidées par intégration proportionnelle.</al>
       </note>
