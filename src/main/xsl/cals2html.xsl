@@ -16,6 +16,8 @@
   >
   
   <xsl:import href="els-common.xsl"/>
+  <xsl:import href="setXmlBase.xsl"/>
+  <xsl:import href="removeXmlBase.xsl"/>
   <xsl:import href="normalizeCalsTable.xsl"/>
   
   <xd:doc scope="stylesheet">
@@ -57,10 +59,16 @@
   <!--==============================================================================================================================-->
   
   <xsl:template match="/" mode="xslLib:cals2html">
+    <!--STEP0 : set xml:base to init multi-step-->
+    <xsl:variable name="step0" as="document-node()">
+      <xsl:document>
+        <xsl:apply-templates select="." mode="xslLib:setXmlBase"/>
+      </xsl:document>
+    </xsl:variable>
     <!--STEP1 : normalize cals table-->
     <xsl:variable name="step1" as="document-node()">
       <xsl:document>
-        <xsl:apply-templates select="." mode="xslLib:normalizeCalsTable"/>
+        <xsl:apply-templates select="$step0" mode="xslLib:normalizeCalsTable"/>
       </xsl:document>
     </xsl:variable>
     <xsl:if test="$xslLib:cals2html.debug">
@@ -104,7 +112,7 @@
       </xsl:result-document>
     </xsl:if>
     <!--FINALY-->
-    <xsl:sequence select="$step3"/>
+    <xsl:apply-templates select="$step3" mode="xslLib:removeXmlBase"/>
   </xsl:template>
   
   <!--==============================================================================================================================-->
