@@ -61,8 +61,8 @@
       <colspec align="left" colname="column1" colsep="0" colwidth="4*"/>
       <colspec align="left" colname="column2" colwidth="46*"/>
       <colspec align="right" colname="column3" colwidth="12*"/>
-      <colspec align="right" colname="column4" colwidth="14*"/>
-      <colspec align="right" colname="column5" colwidth="12*"/>
+      <colspec align="center" colname="column4" colwidth="14*"/>
+      <colspec align="justify" colname="column5" colwidth="12*"/>
       <colspec align="right" colname="column6" colwidth="12*"/>
       <thead valign="middle">
         <row rowsep="1" valign="middle">
@@ -107,22 +107,22 @@
       </thead>
       <tbody>
         <row>
-          <entry colsep="1" nameend="column2" namest="column1">
+          <entry colsep="1" namest="column1" nameend="column2">
             <al xmlns="local">
               <motRep>ACTIF IMMOBILISE</motRep>
             </al>
           </entry>
           <entry>
-            <al xmlns="local"/>
+            <al xmlns="local">colnum3</al>
           </entry>
           <entry>
-            <al xmlns="local"/>
+            <al xmlns="local">colnum4</al>
           </entry>
           <entry>
-            <al xmlns="local"/>
+            <al xmlns="local">colnum5</al>
           </entry>
           <entry>
-            <al xmlns="local"/>
+            <al xmlns="local">colnum6</al>
           </entry>
         </row>
         <row>
@@ -5605,31 +5605,31 @@
     <tgroup cols="6">
       <colspec align="left" colname="c1" colwidth="30*"/>
       <colspec align="right" colname="c2" colwidth="10*"/>
-      <colspec align="right" colname="c3" colsep="0" colwidth="15*"/>
-      <colspec align="right" colname="c4" colwidth="15*"/>
-      <colspec align="right" colname="c5" colwidth="15*"/>
+      <colspec align="center" colname="c3" colsep="0" colwidth="15*"/>
+      <colspec align="justify" colname="c4" colwidth="15*"/>
+      <colspec align="left" colname="c5" colwidth="15*"/>
       <colspec align="right" colname="c6" colwidth="15*"/>
       <tbody>
         <row>
           <entry morerows="1" rowsep="1" valign="middle">
             <al xmlns="local">En milliers - Au 31-12-2015</al>
           </entry>
-          <entry align="center" morerows="1" rowsep="1" valign="top">
+          <entry morerows="1" rowsep="1" valign="top">
             <al xmlns="local">
               <motRep>Valeur comptable (euros)</motRep>
             </al>
           </entry>
-          <entry align="center" colsep="1" nameend="c4" namest="c3" rowsep="1" valign="top">
+          <entry colsep="1" namest="c3" nameend="c4" rowsep="1" valign="bottom">
             <al xmlns="local">
               <motRep>Valeur d’utilité</motRep>
             </al>
           </entry>
-          <entry align="center" morerows="1" rowsep="1" valign="top">
+          <entry morerows="1" rowsep="1" valign="top">
             <al xmlns="local">
               <motRep>(ECA) / ECP sur emprunt</motRep>
             </al>
           </entry>
-          <entry align="center" morerows="1" rowsep="1" valign="top">
+          <entry morerows="1" rowsep="1" valign="middle">
             <al xmlns="local">
               <motRep>Résultat latent sur titres après prise en compte de la couverture</motRep>
               <rNote id="FRCHS_2016-03_UI-B59FF261-0E72-4AC1-9D6D-3478BFEE377F_UI-3FB76785-3FA8-48ED-86B2-731741C2BEA0rNote_3" num="2" ref="FRCHS_2016-03_UI-B59FF261-0E72-4AC1-9D6D-3478BFEE377F_UI-3FB76785-3FA8-48ED-86B2-731741C2BEA0"/>

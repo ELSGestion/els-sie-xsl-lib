@@ -312,7 +312,7 @@
     <xsl:variable name="current-tgroup" select="ancestor::tgroup[1]" as="element()"/>
     <xsl:variable name="current-colspec-list" as="element(colspec)*">
       <xsl:choose>
-        <!-- Firts consider namestart/nameend -->
+        <!-- Firts consider @namestart/nameend -->
         <xsl:when test="@namest and @nameend">
           <xsl:variable name="namest.colspec" select="$current-tgroup/colspec[@colname = current()/@namest]" as="element()*"/>
           <xsl:variable name="nameend.colspec" select="$current-tgroup/colspec[@colname = current()/@nameend]" as="element()*"/>
@@ -334,11 +334,38 @@
             </xsl:otherwise>
           </xsl:choose>
         </xsl:when>
-        <!--If there is no namest/nameend, look if the first preceding entry has a nameend col, if so use the next col-->
-        <xsl:when test="preceding-sibling::entry[1]/@nameend">
-          <xsl:copy-of select="$current-tgroup/colspec[@colname = current()/preceding-sibling::entry[1]/@nameend]/following-sibling::colspec[1]" copy-namespaces="no"/>
+        <!--If one of the following/preceding entry has a namest/nameend colum, then consider the current colspec *from* this point, example : 
+            <tgroup>
+              <colspec ... colname="c1"/>
+              <colspec ... colname="c2"/>
+              <colspec ... colname="c3"/>
+              <colspec ... colname="c4"/>
+              <colspec ... colname="c5"/>
+              <colspec ... colname="c6"/>
+              <tbody>
+                <row>
+                  <entry ... /> => c1
+                  <entry ... /> => c2
+                  <entry ... namest="c3" nameend="c4"/> => c3/c4
+                  <entry ... /> => c5 
+                  <entry ... /> => c6
+                </row>
+              </tbody>
+            </tgroup>
+        -->
+        <!--There is no current namest/nameend, look if there is a preceding entry with a "nameend" column, if so then use the next colspec by position-->
+        <xsl:when test="preceding-sibling::entry[@nameend]">
+          <xsl:variable name="psib1.entry-nameend" select="preceding-sibling::entry[@nameend][1]" as="element()"/>
+          <xsl:variable name="distance" select="count(preceding-sibling::entry[. >> $psib1.entry-nameend]) + 1" as="xs:integer"/>
+          <xsl:sequence select="$current-tgroup/colspec[@colname = $psib1.entry-nameend/@nameend]/following-sibling::colspec[$distance]"/>
         </xsl:when>
-        <!--Then consider @colname-->
+        <!--There is no namest/nameend, look if there is a following entry with a "namest" column, if so then use the preceding colspec by position-->
+        <xsl:when test="following-sibling::entry[@namest]">
+          <xsl:variable name="fsib1.entry-namest" select="following-sibling::entry[@namest][1]" as="element()"/>
+          <xsl:variable name="distance" select="count(following-sibling::entry[. &lt;&lt; $fsib1.entry-namest]) + 1" as="xs:integer"/>
+          <xsl:sequence select="$current-tgroup/colspec[@colname = $fsib1.entry-namest/@namest]/preceding-sibling::colspec[$distance]"/>
+        </xsl:when>
+        <!--There is no namest/nameend at all in the current row, let's consider @colname-->
         <xsl:when test="@colname">
           <xsl:variable name="colname.colspec" select="$current-tgroup/colspec[@colname = current()/@colname]" as="element()*"/>
           <xsl:if test="count($colname.colspec) != 1">
@@ -348,10 +375,10 @@
         </xsl:when>
         <!--Finaly consider position-->
         <xsl:when test="position() > 1 and ../entry[@colname]">
-          <xsl:message>[ERROR][cals2html.xsl] @colname missing (<xsl:value-of select="els:getFileName(string(base-uri()))"/> : <xsl:sequence select="els:get-xpath(.)" />)</xsl:message>
+          <xsl:message>[ERROR][cals2html.xsl] Unable to get colspec for this entry. @colname might be missing ? (<xsl:value-of select="els:getFileName(string(base-uri()))"/> : <xsl:sequence select="els:get-xpath(.)" />)</xsl:message>
         </xsl:when>
         <xsl:when test="position() > 1 and ../entry[(position() lt last() and (@namest and @nameend))]">
-          <xsl:message>[ERROR][cals2html.xsl] Too much columns (<xsl:value-of select="els:getFileName(string(base-uri()))"/> : <xsl:sequence select="els:get-xpath(.)" />)</xsl:message>
+          <xsl:message>[ERROR][cals2html.xsl] Unable to get colspec for this entry. Too much columns (<xsl:value-of select="els:getFileName(string(base-uri()))"/> : <xsl:sequence select="els:get-xpath(.)" />)</xsl:message>
         </xsl:when>
         <xsl:otherwise>
           <xsl:variable name="pos" select="count(preceding-sibling::entry) + 1" as="xs:integer"/>
