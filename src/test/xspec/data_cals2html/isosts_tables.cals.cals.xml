@@ -43,7 +43,7 @@
         </caption>
         <table xmlns="http://docs.oasis-open.org/ns/oasis-exchange/table" frame="none" colsep="0" rowsep="0">
           <tgroup cols="2">
-            <colspec colname="col1"/>
+            <colspec colname="c1"/>
             <tbody>
               <row>
                 <entry>table cell text</entry>
@@ -64,11 +64,11 @@
         </caption>
         <table xmlns="http://docs.oasis-open.org/ns/oasis-exchange/table" frame="none" colsep="0" rowsep="0">
           <tgroup cols="5">
-            <colspec colname="col1"/>
-            <colspec colname="col2"/>
-            <colspec colname="col3"/>
-            <colspec colname="col4"/>
-            <colspec colname="col5"/>
+            <colspec colname="c1"/>
+            <colspec colname="c2"/>
+            <colspec colname="c3"/>
+            <colspec colname="c4"/>
+            <colspec colname="c5"/>
             <thead>
               <row>
                 <entry>
@@ -114,14 +114,14 @@
         </caption>
         <table xmlns="http://docs.oasis-open.org/ns/oasis-exchange/table" frame="none" colsep="0" rowsep="0">
           <tgroup cols="4">
-            <colspec colname="col1"/>
-            <colspec colname="col2"/>
-            <colspec colname="col3"/>
-            <colspec colname="col4"/>
+            <colspec colname="c1"/>
+            <colspec colname="c2"/>
+            <colspec colname="c3"/>
+            <colspec colname="c4"/>
             <thead>
               <row>
                 <entry>header text</entry>
-                <entry namest="col2" nameend="col4">header text</entry>
+                <entry namest="c2" nameend="c4">header text</entry>
               </row>
               <row>
                 <entry>header text</entry>
@@ -153,10 +153,10 @@
         </caption>
         <table xmlns="http://docs.oasis-open.org/ns/oasis-exchange/table" frame="none" colsep="0" rowsep="0">
           <tgroup cols="4">
-            <colspec colname="col1"/>
-            <colspec colname="col2"/>
-            <colspec colname="col3"/>
-            <colspec colname="col4"/>
+            <colspec colname="c1"/>
+            <colspec colname="c2"/>
+            <colspec colname="c3"/>
+            <colspec colname="c4"/>
             <thead>
               <row>
                 <entry>header text</entry>
@@ -179,7 +179,7 @@
                 <entry>table cell text</entry>
               </row>
               <row>
-                <entry namest="col1" nameend="col4">table footer</entry>
+                <entry namest="c1" nameend="c4">table footer</entry>
               </row>
             </tbody>
           </tgroup>
@@ -192,16 +192,16 @@
         </caption>
         <table xmlns="http://docs.oasis-open.org/ns/oasis-exchange/table" frame="none" colsep="0" rowsep="0">
           <tgroup cols="6">
-            <colspec colname="col1"/>
-            <colspec colname="col2"/>
-            <colspec colname="col3"/>
-            <colspec colname="col4"/>
-            <colspec colname="col5"/>
-            <colspec colname="col6"/>
+            <colspec colname="c1"/>
+            <colspec colname="c2"/>
+            <colspec colname="c3"/>
+            <colspec colname="c4"/>
+            <colspec colname="c5"/>
+            <colspec colname="c6"/>
             <thead>
               <row>
                 <entry>header text</entry>
-                <entry namest="col2" nameend="col3">header text</entry>
+                <entry namest="c2" nameend="c3">header text</entry>
                 <entry>header text</entry>
                 <entry>header text</entry>
                 <entry>header text</entry>
@@ -210,43 +210,43 @@
             <tbody>
               <row>
                 <entry>table cell text</entry>
-                <entry namest="col2" nameend="col3">table cell text</entry>
+                <entry namest="c2" nameend="c3">table cell text</entry>
                 <entry>table cell text</entry>
                 <entry>table cell text</entry>
                 <entry>table cell text</entry>
               </row>
               <row>
-                <entry namest="col1" nameend="col5">table cell text</entry>
+                <entry namest="c1" nameend="c5">table cell text</entry>
               </row>
               <row>
-                <entry namest="col1" nameend="col2">table cell text</entry>
-                <entry namest="col3" nameend="col5">table cell text</entry>
+                <entry namest="c1" nameend="c2">table cell text</entry>
+                <entry namest="c3" nameend="c5">table cell text</entry>
               </row>
               <row>
-                <entry namest="col1" nameend="col5">table cell text</entry>
+                <entry namest="c1" nameend="c5">table cell text</entry>
               </row>
               <row>
-                <entry namest="col1" nameend="col2">table cell text</entry>
-                <entry namest="col3" nameend="col5">table cell text</entry>
+                <entry namest="c1" nameend="c2">table cell text</entry>
+                <entry namest="c3" nameend="c5">table cell text</entry>
               </row>
               <row>
-                <entry namest="col1" nameend="col2">table cell text</entry>
-                <entry namest="col3" nameend="col5">table cell text</entry>
+                <entry namest="c1" nameend="c2">table cell text</entry>
+                <entry namest="c3" nameend="c5">table cell text</entry>
               </row>
               <row>
-                <entry namest="col1" nameend="col2">table cell text</entry>
-                <entry namest="col3" nameend="col5">table cell text</entry>
+                <entry namest="c1" nameend="c2">table cell text</entry>
+                <entry namest="c3" nameend="c5">table cell text</entry>
               </row>
               <row>
-                <entry namest="col1" nameend="col5">table cell text</entry>
-              </row>
-              <row>
-                <entry>table cell text</entry>
-                <entry namest="col2" nameend="col5">table cell text</entry>
+                <entry namest="c1" nameend="c5">table cell text</entry>
               </row>
               <row>
                 <entry>table cell text</entry>
-                <entry namest="col2" nameend="col5">table cell text</entry>
+                <entry namest="c2" nameend="c5">table cell text</entry>
+              </row>
+              <row>
+                <entry>table cell text</entry>
+                <entry namest="c2" nameend="c5">table cell text</entry>
               </row>
             </tbody>
           </tgroup>
@@ -259,14 +259,14 @@
         </caption>
         <table xmlns="http://docs.oasis-open.org/ns/oasis-exchange/table" frame="none" colsep="0" rowsep="0">
           <tgroup cols="4">
-            <colspec colname="col1"/>
-            <colspec colname="col2"/>
-            <colspec colname="col3"/>
-            <colspec colname="col4"/>
+            <colspec colname="c1"/>
+            <colspec colname="c2"/>
+            <colspec colname="c3"/>
+            <colspec colname="c4"/>
             <thead>
               <row>
                 <entry>header text</entry>
-                <entry namest="col2" nameend="col4">header text</entry>
+                <entry namest="c2" nameend="c4">header text</entry>
               </row>
               <row>
                 <entry>header text</entry>
@@ -316,10 +316,10 @@
         </caption>
         <table xmlns="http://docs.oasis-open.org/ns/oasis-exchange/table" frame="none" colsep="0" rowsep="0">
           <tgroup cols="4">
-            <colspec colname="col1"/>
-            <colspec colname="col2"/>
-            <colspec colname="col3"/>
-            <colspec colname="col4"/>
+            <colspec colname="c1"/>
+            <colspec colname="c2"/>
+            <colspec colname="c3"/>
+            <colspec colname="c4"/>
             <thead>
               <row>
                 <entry>table default</entry>
@@ -330,12 +330,12 @@
             </thead>
             <tbody>
               <row>
-                <entry namest="col1" nameend="col2">rowsep=no</entry>
+                <entry namest="c1" nameend="c2">rowsep=no</entry>
                 <entry>table default</entry>
                 <entry>rowsep=yes</entry>
               </row>
               <row>
-                <entry namest="col1" nameend="col2">colsep=yes, rowsep=yes</entry>
+                <entry namest="c1" nameend="c2">colsep=yes, rowsep=yes</entry>
                 <entry>table default</entry>
               </row>
               <row>
@@ -354,10 +354,10 @@
         </caption>
         <table xmlns="http://docs.oasis-open.org/ns/oasis-exchange/table" frame="none" colsep="0" rowsep="0">
           <tgroup cols="4">
-            <colspec colname="col1"/>
-            <colspec colname="col2"/>
-            <colspec colname="col3"/>
-            <colspec colname="col4"/>
+            <colspec colname="c1"/>
+            <colspec colname="c2"/>
+            <colspec colname="c3"/>
+            <colspec colname="c4"/>
             <thead>
               <row>
                 <entry>rowsep=yes</entry>
@@ -396,10 +396,10 @@
         </caption>
         <table xmlns="http://docs.oasis-open.org/ns/oasis-exchange/table" frame="none" colsep="0" rowsep="0">
           <tgroup cols="4">
-            <colspec colname="col1"/>
-            <colspec colname="col2"/>
-            <colspec colname="col3"/>
-            <colspec colname="col4"/>
+            <colspec colname="c1"/>
+            <colspec colname="c2"/>
+            <colspec colname="c3"/>
+            <colspec colname="c4"/>
             <thead>
               <row>
                 <entry>colsep=yes</entry>
@@ -438,10 +438,10 @@
         </caption>
         <table xmlns="http://docs.oasis-open.org/ns/oasis-exchange/table" frame="none" colsep="0" rowsep="0">
           <tgroup cols="4">
-            <colspec colname="col1"/>
-            <colspec colname="col2"/>
-            <colspec colname="col3"/>
-            <colspec colname="col4"/>
+            <colspec colname="c1"/>
+            <colspec colname="c2"/>
+            <colspec colname="c3"/>
+            <colspec colname="c4"/>
             <thead>
               <row>
                 <entry>table default</entry>
@@ -486,10 +486,10 @@
         </caption>
         <table xmlns="http://docs.oasis-open.org/ns/oasis-exchange/table" frame="none" colsep="0" rowsep="0">
           <tgroup cols="4">
-            <colspec colname="col1"/>
-            <colspec colname="col2"/>
-            <colspec colname="col3"/>
-            <colspec colname="col4"/>
+            <colspec colname="c1"/>
+            <colspec colname="c2"/>
+            <colspec colname="c3"/>
+            <colspec colname="c4"/>
             <thead>
               <row>
                 <entry>colsep=yes, rowsep=yes</entry>
@@ -534,12 +534,12 @@
         </caption>
         <table xmlns="http://docs.oasis-open.org/ns/oasis-exchange/table" frame="none" colsep="0" rowsep="0">
           <tgroup cols="6">
-            <colspec colname="col1"/>
-            <colspec colname="col2"/>
-            <colspec colname="col3"/>
-            <colspec colname="col4"/>
-            <colspec colname="col5"/>
-            <colspec colname="col6"/>
+            <colspec colname="c1"/>
+            <colspec colname="c2"/>
+            <colspec colname="c3"/>
+            <colspec colname="c4"/>
+            <colspec colname="c5"/>
+            <colspec colname="c6"/>
             <tbody>
               <row>
                 <entry>

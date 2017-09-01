@@ -586,7 +586,7 @@
           </xsl:when>
           <xsl:otherwise>
             <xsl:for-each select="1 to xs:integer($span)">
-              <colspec colname="{concat('col', ($colnum + .))}">
+              <colspec colname="{concat('c', ($colnum + .))}">
                 <xsl:if test=". = 1">
                   <!-- GMA ou pour tous? -->
                   <xsl:copy-of select="$context[$index]/(@align | @charoff | @char)"/>
@@ -635,8 +635,8 @@
           test="(count($context[$index]/col) &gt; 1) or ((count($context[$index]/col) = 0) and ($span &gt; 1))">
           <spanspec 
             spanname="{concat('span', ($colnum + 1), '-', $span)}" 
-            namest="{concat('col', ($colnum + 1))}" 
-            nameend="{concat('col', ($colnum + $span))}">
+            namest="{concat('c', ($colnum + 1))}" 
+            nameend="{concat('c', ($colnum + $span))}">
             <xsl:copy-of select="@align | @charoff | @char"/>
             <xsl:if test="@width">
               <xsl:attribute name="colwidth" select="@width"/>
@@ -711,8 +711,8 @@
           <xsl:attribute name="morerows" select="number(@xhtml2cals:rowspan)-1"/>
         </xsl:if>
         <xsl:if test="@xhtml2cals:colspan &gt; 1">
-          <xsl:attribute name="namest" select="concat('col', count(preceding-sibling::*)+1)"/>
-          <xsl:attribute name="nameend" select="concat('col', count(preceding-sibling::*)+@xhtml2cals:colspan)"/>
+          <xsl:attribute name="namest" select="concat('c', count(preceding-sibling::*) + 1)"/>
+          <xsl:attribute name="nameend" select="concat('c', count(preceding-sibling::*) + @xhtml2cals:colspan)"/>
         </xsl:if>
       </xsl:if>
       <!-- check CSS for definition of col or row separator -->

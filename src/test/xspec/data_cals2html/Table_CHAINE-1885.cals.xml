@@ -2,15 +2,15 @@
 <table xmlns="http://docs.oasis-open.org/ns/oasis-exchange/table" id="FRCHS_2016-03_UI-FA0B2AD3C0D9F35BF8B349844A1E1A53_TABLE-2" tabstyle="FRCHS-style2" frame="none" colsep="0" rowsep="0">
   <titre xmlns="local">Tableau-liste des filiales et des participations</titre>
   <tgroup cols="9">
-    <colspec colname="col1"/>
-    <colspec colname="col2"/>
-    <colspec colname="col3"/>
-    <colspec colname="col4"/>
-    <colspec colname="col5"/>
-    <colspec colname="col6"/>
-    <colspec colname="col7"/>
-    <colspec colname="col8"/>
-    <colspec colname="col9"/>
+    <colspec colname="c1"/>
+    <colspec colname="c2"/>
+    <colspec colname="c3"/>
+    <colspec colname="c4"/>
+    <colspec colname="c5"/>
+    <colspec colname="c6"/>
+    <colspec colname="c7"/>
+    <colspec colname="c8"/>
+    <colspec colname="c9"/>
     <tbody>
       <row>
         <entry>
@@ -120,7 +120,7 @@
         </entry>
       </row>
       <row>
-        <entry namest="col1" nameend="col9">
+        <entry namest="c1" nameend="c9">
           <al xmlns="local">
             <motRep>Filiales (détenues à + 50 %)</motRep>
           </al>
