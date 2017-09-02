@@ -246,16 +246,16 @@
     </xsl:choose>
   </xsl:template>
   
-  <xd:doc scope="component" xml:lang="fr">
+  <xd:doc scope="component">
     <xd:desc>
-      <xd:p>Expanse une ligne, en traitant d'abord les rowspans, puis les colspans.</xd:p>
+      <xd:p>Expand a table row by first process the rowspans then the colspans.</xd:p>
     </xd:desc>
   </xd:doc>
   <xsl:function name="xhtml2cals:expand-table-row" as="element()">
     <xsl:param name="source-row" as="element()"/>
     <xsl:param name="processed-row" as="element()"/>
     <!-- On traite d'abors les rowspans -->
-    <xsl:variable name="expanding-row">
+    <xsl:variable name="expanding-row" as="element()">
       <tr xmlns="http://www.w3.org/1999/xhtml">
         <xsl:copy-of select="xhtml2cals:expand-rowspans($source-row, $processed-row)"/>
       </tr>
@@ -263,47 +263,17 @@
     <!-- et dans la ligne ou les rowspans ont été expansés, on traite ensuite les colspans -->
     <xsl:variable name="expanded-row" as="element()">
       <tr xmlns="http://www.w3.org/1999/xhtml">
-        <xsl:copy-of select="xhtml2cals:expand-colspans($expanding-row/node())"/>
+        <xsl:copy-of select="xhtml2cals:expand-colspans($expanding-row)"/>
       </tr>
     </xsl:variable>
-    <xsl:copy-of select="$expanded-row"/>
+    <xsl:sequence select="$expanded-row"/>
   </xsl:function>
 
-  <xd:doc scope="component" xml:lang="fr">
+  <xd:doc scope="component">
     <xd:desc>
-      <xd:p>Expanse les colspans s'une ligne. On crée des cellules avec l'attribut xhtml2cals:DummyCell pour
-        expanser. L'attribut est converti en xhtml2cals:colspan.</xd:p>
+      <xd:p>Expand colspans. Created cell will have an attribut "xhtml2cals:DummyCell". L'attribut est converti en xhtml2cals:colspan.</xd:p>
     </xd:desc>
   </xd:doc>
-  <xsl:function name="xhtml2cals:expand-colspans-test" as="item()+">
-    <xsl:param name="source-row" as="element()"/>
-    <xsl:for-each select="$source-row/*">
-      <xsl:variable name="cell" select="." as="element()"/>
-      <xsl:choose>
-        <xsl:when test="@colspan > 1">
-          <xsl:copy>
-            <xsl:copy-of select="@* except @colspan"/>
-            <xsl:attribute name="xhtml2cals:colspan" select="@colspan"/>
-            <xsl:copy-of select="node()"/>
-          </xsl:copy>
-          <xsl:for-each select="reverse(1 to (xs:integer(@colspan) - 1))">
-            <xsl:element name="{$cell/name()}">
-              <xsl:attribute name="xhtml2cals:DummyCell">yes</xsl:attribute>
-              <xsl:copy-of select="$cell/(@* except @colspan)"/>
-              <xsl:attribute name="xhtml2cals:colspan" select="."/>
-              <xsl:comment>
-                <xsl:copy-of select="$cell/node()"/>
-              </xsl:comment>
-            </xsl:element>
-          </xsl:for-each>
-        </xsl:when>
-        <xsl:otherwise>
-          <xsl:copy-of select="."/>
-        </xsl:otherwise>
-      </xsl:choose>
-    </xsl:for-each>
-  </xsl:function>
-  
   <xsl:function name="xhtml2cals:expand-colspans" as="item()+">
     <!-- row will have colspans expanded -->
     <xsl:param name="source-row" as="element()"/>
@@ -335,56 +305,52 @@
     <xsl:copy-of select="$expand-columns"/>
   </xsl:function>
   
-  <xd:doc scope="component" xml:lang="fr">
+  <xd:doc scope="component">
     <xd:desc>
-      <xd:p>Expanse une ligne, en tenant compte des expansions verticales de la ligne précédente.</xd:p>
+      <xd:p>Expand a row by taking into acount the rowspans of the preceding row</xd:p>
     </xd:desc>
   </xd:doc>
   <xsl:function name="xhtml2cals:expand-rowspans" as="item()+">
-    <xsl:param name="source-row" as="element()+"/>
-    <xsl:param name="processed-row" as="element()"/>
-    <!-- On parcourt suivant la ligne déjà processée, car elle va porter les attributs xhtml2cals:rowspan
-      indiquant qu'il va y avoir des cellules à expanser dans la ligne cible -->
-    <xsl:for-each select="$processed-row/*">
+    <xsl:param name="current-row" as="element()+"/>
+    <xsl:param name="preceding-row" as="element()"/>
+    <xsl:for-each select="$preceding-row/*">
       <xsl:choose>
         <xsl:when test="@xhtml2cals:rowspan > 1">
-          <!-- une cellule à insérer -->
+          <!--Insert a cell-->
           <xsl:copy>
             <xsl:attribute name="xhtml2cals:DummyCell" select="'yes'"/>
             <xsl:copy-of select="@* except @xhtml2cals:rowspan"/>
             <xsl:attribute name="xhtml2cals:rowspan" select="number(@xhtml2cals:rowspan) - 1"/>
-            <xsl:comment>
-              <xsl:copy-of select="node()"/>
-            </xsl:comment>
           </xsl:copy>
         </xsl:when>
         <xsl:otherwise>
-          <!-- Pas de cellule à insérer, on va copier la cellule de la ligne source  -->
+          <!-- No cell to insert, copy the current cell-->
           <xsl:variable name="current-column" select="count(preceding-sibling::*) + 1" as="xs:integer"/>
-          <xsl:variable name="spanned-row-cells"
-            select="count(preceding-sibling::*[@xhtml2cals:rowspan > 1])" as="xs:integer"/>
-          <xsl:choose>
-            <xsl:when test="count(xhtml2cals:select-cell($current-column - $spanned-row-cells, $source-row, 1, 0)) != 0">
-              <xsl:copy-of
-                select="xhtml2cals:select-cell($current-column - $spanned-row-cells, $source-row, 1, 0)"
-                copy-namespaces="no"/>
+          <xsl:variable name="spanned-row-cells" select="count(preceding-sibling::*[@xhtml2cals:rowspan > 1])" as="xs:integer"/>
+          <xsl:sequence select="xhtml2cals:select-cell($current-column - $spanned-row-cells, $current-row, 1, 0)"/>
+          <!-- FIXME
+            <xsl:choose>
+            <xsl:when test="count(xhtml2cals:select-cell($current-column - $spanned-row-cells, $current-row, 1, 0)) != 0">
+              <xsl:sequence select="xhtml2cals:select-cell($current-column - $spanned-row-cells, $current-row, 1, 0)"/>
             </xsl:when>
             <xsl:otherwise>
               <xsl:message terminate="no">ERROR $current-column= <xsl:value-of select="$current-column"/>, $spanned-row-cells= <xsl:value-of select="$spanned-row-cells"/> </xsl:message>
             </xsl:otherwise>
-          </xsl:choose>
-          <!--<xsl:copy-of
-            select="xhtml2cals:select-cell($current-column - $spanned-row-cells, $source-row, 1, 0)"
-            copy-namespaces="no"/>-->
+          </xsl:choose>-->
         </xsl:otherwise>
       </xsl:choose>
     </xsl:for-each>
   </xsl:function>
 
+  <xd:doc scope="component">
+    <xd:desc>
+      <xd:p>Expand a row by taking into acount the rowspans of the preceding rows</xd:p>
+    </xd:desc>
+  </xd:doc>
   <xsl:function name="xhtml2cals:select-cell">
     <!-- Current Column Being Processed  -->
     <xsl:param name="src-column-no" as="xs:integer"/>
-    <!-- Current table show being processed -->
+    <!-- Current table row being processed -->
     <xsl:param name="source-row" as="element()+"/>
     <!-- Current column being examised to copy -->
     <xsl:param name="current-column-count" as="xs:integer"/>
@@ -392,16 +358,16 @@
     <xsl:param name="current-span-col-total" as="xs:double"/>
     <!-- colspan of the current cell being examined-->
     <xsl:variable name="current-cell" select="$source-row/*[$current-column-count]"/> <!--as="element()*"-->
-    <xsl:variable name="current-span"> <!-- as="xs:integer" select="($current-cell/@colspan[. castable as xs:integer], 1)[1]"-->
-      <xsl:choose>
+    <xsl:variable name="current-span" select="($current-cell/@colspan[. castable as xs:integer], 1)[1]"> <!-- as="xs:integer"-->
+      <!--<xsl:choose>
         <xsl:when test="$current-cell/@colspan">
           <xsl:value-of select="$current-cell/@colspan"/>
         </xsl:when>
         <xsl:otherwise>1</xsl:otherwise>
-      </xsl:choose>
+      </xsl:choose>-->
     </xsl:variable>
     <xsl:choose>
-      <!-- Current column being processed matches the end of the span. i.e. span finishes here.  Output cell -->
+      <!-- Current column being processed matches the end of the span. i.e. span finishes here. Output cell -->
       <xsl:when test="$src-column-no = $current-span-col-total + $current-span">
         <xsl:choose>
           <xsl:when test="$current-cell/@rowspan">
@@ -451,7 +417,8 @@
 
   <xsl:template match="table" mode="xhtml2cals:convert-to-cals">
     <table>
-      <xsl:copy-of select="@id | @class | @align | @width" copy-namespaces="no"/>
+      <xsl:apply-templates select="@*" mode="xhtml2cals:convert-attributes-to-cals"/>
+      <!--<xsl:copy-of select="@id | @class | @align | @width" copy-namespaces="no"/>-->
       <xsl:call-template name="xhtml2cals:compute-table-borders"/>
       <xsl:call-template name="xhtml2cals:compute-rowsep-colsep-defaults"/>
       <xsl:copy-of select="processing-instruction()|comment()"/>
@@ -552,7 +519,7 @@
     </xsl:choose>
   </xsl:template>
   
-  <!-- template recursif: On parcourt un element col ou colgroup, on génère le ou les colspec correspondant, -->
+  <!-- template recursif: On parcourt un element col ou colgroup, on génère le ou les colspec correspondant-->
   <xsl:template name="xhtml2cals:make-colspec">
     <!-- colgroup list or col list -->
     <xsl:param name="context" as="element()*"/> <!--colgroup or col-->
@@ -606,8 +573,7 @@
     </xsl:choose>
   </xsl:template>
   
-  <!-- template recursif: On parcourt la un element col ou colgroup, on génère le ou les spanspec 
-        correspondant, -->
+  <!-- template recursif: On parcourt la un element col ou colgroup, on génère le ou les spanspec correspondant-->
   <xsl:template name="xhtml2cals:make-spanspec">
     <xsl:param name="context" as="element()*"/><!-- colgroup* or col* -->
     <!-- index in the list of the colgroup or col to be processed -->
@@ -657,41 +623,44 @@
     </xsl:choose>
   </xsl:template>
   
+  <!--FIXME : tfoot doesn't exists in cals (according to http://www.datypic.com/sc/cals/s-soextblx.xsd.html)-->
   <xsl:template match="caption" mode="xhtml2cals:convert-to-cals">
     <title>
-      <xsl:copy-of select="@id | @class | @style" copy-namespaces="no"/>
+      <xsl:apply-templates select="@*" mode="xhtml2cals:convert-attributes-to-cals"/>
+      <!--<xsl:copy-of select="@id | @class | @style" copy-namespaces="no"/>-->
       <xsl:apply-templates select="node()" mode="#current"/>
     </title>
   </xsl:template>
   
   <xsl:template match="thead" mode="xhtml2cals:convert-to-cals">
     <thead>
-      <xsl:copy-of select="@id | @class | @style | @align | @char | @charoff | @valign"
-        copy-namespaces="no"/>
+      <xsl:apply-templates select="@*" mode="xhtml2cals:convert-attributes-to-cals"/>
+      <!--<xsl:copy-of select="@id | @class | @style | @align | @char | @charoff | @valign" copy-namespaces="no"/>-->
       <xsl:apply-templates select="node()" mode="#current"/>
     </thead>
   </xsl:template>
   
+  <!--FIXME : tfoot doesn't exists in cals (according to http://www.datypic.com/sc/cals/s-soextblx.xsd.html)-->
   <xsl:template match="tfoot" mode="xhtml2cals:convert-to-cals">
     <tfoot>
-      <xsl:copy-of select="@id | @class | @style | @align | @char | @charoff | @valign"
-        copy-namespaces="no"/>
+      <xsl:apply-templates select="@*" mode="xhtml2cals:convert-attributes-to-cals"/>
+      <!--<xsl:copy-of select="@id | @class | @style | @align | @char | @charoff | @valign" copy-namespaces="no"/>-->
       <xsl:apply-templates select="node()" mode="#current"/>
     </tfoot>
   </xsl:template>
   
   <xsl:template match="tbody" mode="xhtml2cals:convert-to-cals">
     <tbody>
-      <xsl:copy-of select="@id | @class | @style | @align | @char | @charoff | @valign"
-        copy-namespaces="no"/>
+      <xsl:apply-templates select="@*" mode="xhtml2cals:convert-attributes-to-cals"/>
+      <!--<xsl:copy-of select="@id | @class | @style | @align | @char | @charoff | @valign" copy-namespaces="no"/>-->
       <xsl:apply-templates select="node()" mode="#current"/>
     </tbody>
   </xsl:template>
   
   <xsl:template match="tr" mode="xhtml2cals:convert-to-cals">
     <row>
-      <xsl:copy-of select="@id | @class | @style | @align | @char | @charoff | @valign"
-        copy-namespaces="no"/>
+      <xsl:apply-templates select="@*" mode="xhtml2cals:convert-attributes-to-cals"/>
+      <!--<xsl:copy-of select="@id | @class | @style | @align | @char | @charoff | @valign" copy-namespaces="no"/>-->
       <xsl:apply-templates select="node()" mode="#current"/>
     </row>
   </xsl:template>
