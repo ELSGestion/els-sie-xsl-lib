@@ -29,16 +29,20 @@
   </xd:doc>
   
   <!--PARAMETERS-->
+  <!--common-->
   <xsl:param name="xslLib:cals2html.log.uri" select="resolve-uri('log/', base-uri())" as="xs:string"/>
   <xsl:param name="xslLib:cals2html.debug" select="false()" as="xs:boolean"/>
+  <!--structure-->
   <xsl:param name="xslLib:cals2html.use-style-insteadOf-class" select="false()" as="xs:boolean"/>
   <xsl:param name="xslLib:cals2html.compute-column-width-as-width-attribute" select="true()" as="xs:boolean"/> <!--@width is used for html4 output-->
   <xsl:param name="xslLib:cals2html.compute-column-width-within-colgroup" select="true()" as="xs:boolean"/>
   <!--If the number of columns is greater than $nb-cols-max-before-font-reduction then the font needs to be reduced-->
   <xsl:param name="xslLib:cals2html.nb-cols-max-before-font-reduction" select="8" as="xs:integer"/>
   <xsl:param name="xslLib:cals2html.nb-cols-max-before-large-font-reduction" select="14" as="xs:integer"/>
+  <!--default colsep/rowsep-->
   <xsl:param name="xslLib:cals2html.default-colsep" select="'def-col'" as="xs:string"/>
   <xsl:param name="xslLib:cals2html.default-rowsep" select="'def-row'" as="xs:string"/>
+  <!--default align/valign-->
   <xsl:param name="xslLib:cals2html.default-tgroup-align" select="'left'" as="xs:string"/>
   <xsl:param name="xslLib:cals2html.default-td-align" select="'left'" as="xs:string"/><!--default browser value-->
   <xsl:param name="xslLib:cals2html.default-th-align" select="'center'" as="xs:string"/><!--default browser value-->
@@ -160,7 +164,7 @@
       <xsl:apply-templates select="@* except (@bgcolor)" mode="xslLib:cals2html.attributes"/> 
       <xsl:variable name="class.tmp" as="xs:string*">
         <xsl:text>cals_tgroup</xsl:text>
-        <!--cals:table/@frame = none | top | bottom | topbot | sides | all-->
+        <!--cals:table/@frame ::= none | top | bottom | topbot | sides | all-->
         <xsl:if test="../@frame">
           <xsl:value-of select="concat('cals_frame-', ../@frame)"/>
         </xsl:if>

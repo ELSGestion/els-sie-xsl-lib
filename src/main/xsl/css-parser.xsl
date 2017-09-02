@@ -1,11 +1,41 @@
 <xsl:stylesheet version="2.0"
   xmlns:xsl="http://www.w3.org/1999/XSL/Transform" 
   xmlns:xs="http://www.w3.org/2001/XMLSchema"
+  xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl"
   xmlns:html="http://www.w3.org/1999/xhtml"
   xmlns:css="http://www.w3.org/1996/css"
   exclude-result-prefixes="xs">
   
-  <!-- Heavily modified code from the CSS parser by Grit Rolewski -->
+  <xd:doc  scope="stylesheet">
+    <xd:desc>
+      <xd:p>CSS parser by Grit Rolewskim heavily modified by ELS</xd:p>
+      <xd:p>The xml css representation looks like this :
+        <css:css xmlns:css="http://www.w3.org/1996/css">
+          <css:border-right-ruleset>
+            <css:border-right-width>
+              <css:dimension unit="px">1</css:dimension>
+            </css:border-right-width>
+            <css:border-right-style>
+              <css:solid/>
+            </css:border-right-style>
+          </css:border-right-ruleset>
+          <css:border-bottom-ruleset>
+            <css:border-bottom-width>
+              <css:dimension unit="px">1</css:dimension>
+            </css:border-bottom-width>
+            <css:border-bottom-style>
+              <css:solid/>
+            </css:border-bottom-style>
+          </css:border-bottom-ruleset>
+          <css:text-align-ruleset>
+            <css:text-align>
+              <css:left/>
+            </css:text-align>
+          </css:text-align-ruleset>
+        </css:css>
+      </xd:p>
+    </xd:desc>
+  </xd:doc>
   
   <xsl:function name="css:parse-inline" as="element(*)*">
     <xsl:param name="css:inline" as="xs:string*" />
@@ -43,7 +73,7 @@
     </xsl:choose>
   </xsl:function>
   
-  <!-- Note: on ne vas pas traitera la partie optionelle en !important car cela ne semble pas utile ici 
+  <!-- Note: on ne vas pas traiter la partie optionelle en !important car cela ne semble pas utile ici 
        néanmoins, ou pourrait la mettre en attribut si nécessaire -->
   <xsl:template name="declarations">
     <xsl:param name="raw-declarations" />
@@ -59,7 +89,6 @@
         <xsl:when test="$vals-count = 0">
           <xsl:element name="css:error">Erreur pas de valeur associée à la propriété: "<xsl:value-of select="$prop" />"</xsl:element>
         </xsl:when>
-        
         <xsl:when test="$prop='border'">
           <xsl:choose>
             <xsl:when test="$vals-count le 3">
@@ -75,7 +104,6 @@
             </xsl:otherwise>
           </xsl:choose>
         </xsl:when>
-        
         <xsl:when test="$prop=('border-style', 'border-width')">
           <xsl:variable name="new-props">
             <props count="1"><top seq="1" /><right seq="1" /><bottom seq="1" /><left seq="1" /></props>
@@ -99,7 +127,6 @@
             </xsl:otherwise>
           </xsl:choose>
         </xsl:when>
-        
         <xsl:when test="$prop=('border-top', 'border-left', 'border-bottom', 'border-right')">
           <xsl:element name="css:{$prop}-ruleset">
             <xsl:choose>
@@ -115,7 +142,6 @@
             </xsl:choose>
           </xsl:element>
         </xsl:when>
-        
         <xsl:when test="$prop=('border-top-style', 'border-left-style', 'border-bottom-style', 'border-right-style')">
           <xsl:element name="css:{$prop}-ruleset">
             <xsl:choose>
@@ -130,7 +156,6 @@
             </xsl:choose>
           </xsl:element>
         </xsl:when>
-        
         <xsl:when test="$prop=('border-top-width', 'border-left-width', 'border-bottom-width', 'border-right-width')">
           <xsl:element name="css:{$prop}-ruleset">
             <xsl:choose>
@@ -145,7 +170,21 @@
             </xsl:choose>
           </xsl:element>
         </xsl:when>
-        
+        <!--FIXME : added by mricaud so every property is represented in xml, but why so much when complexity here ?-->
+        <xsl:otherwise>
+          <xsl:element name="css:{$prop}-ruleset">
+            <xsl:choose>
+              <xsl:when test="$vals-count le 1">
+                <xsl:element name="css:{$prop}">
+                  <xsl:copy-of select="css:build-generic-values($val)" />
+                </xsl:element>
+              </xsl:when>
+              <xsl:otherwise>
+                <xsl:element name="css:error">Erreur dans la propriété "<xsl:value-of select="$prop" />: <xsl:value-of select="$val" />"</xsl:element>
+              </xsl:otherwise>
+            </xsl:choose>
+          </xsl:element>
+        </xsl:otherwise>
       </xsl:choose>
     </xsl:for-each>
   </xsl:template>
@@ -377,6 +416,25 @@
         <xsl:copy-of select="false()"/>
       </xsl:otherwise>
     </xsl:choose>
+  </xsl:function>
+  
+  <!--=== CSS UTILITIES ===-->
+  
+ <xsl:function name="css:getPropertyValue" as="xs:string?">
+   <xsl:param name="css" as="element(css:css)"/>
+   <xsl:param name="name" as="xs:string"/>
+   <xsl:variable name="property" select="$css/css:*[css:getPropertyName(.) = $name]/*" as="element()*"/>
+   <xsl:sequence select="$property[last()]/*/local-name(.)"/>
+ </xsl:function>
+  
+  <xsl:function name="css:getPropertyName" as="xs:string">
+    <xsl:param name="property" as="element(*)"/> <!--ex : <css:text-align-ruleset>-->
+    <xsl:sequence select="substring-before(local-name($property), '-ruleset')"/>
+  </xsl:function>
+  
+  <xsl:function name="css:getProperties" as="element()*">
+    <xsl:param name="css" as="element(css:css)"/>
+    <xsl:sequence select="$css/*"/>
   </xsl:function>
   
 </xsl:stylesheet>

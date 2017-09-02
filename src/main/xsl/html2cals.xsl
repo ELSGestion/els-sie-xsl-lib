@@ -701,8 +701,9 @@
       <xsl:variable name="curr-col-num" as="xs:integer" select="count(preceding-sibling::*) + 1"/>            
       <!-- copy attributes with same name -->            
       <!-- If no @valign use col/@valign, @valign="baseline" has no correspondence in CALS -->
-      <xsl:copy-of select="(@valign, (../../..//col)[$curr-col-num]/@valign)[1][not(. = 'baseline')]"/>
-      <xsl:copy-of select="@id | @class | @align | @char | @charoff "/>
+      <!--<xsl:copy-of select="(@valign, (../../..//col)[$curr-col-num]/@valign)[1][not(. = 'baseline')]"/>
+      <xsl:copy-of select="@id | @class | @align | @char | @charoff "/>-->
+      <xsl:apply-templates select="@*" mode="xhtml2cals:convert-attributes-to-cals"/>
       <xsl:if test="not(@xhtml2cals:DummyCell)">
         <xsl:if test="@xhtml2cals:rowspan > 1">
           <xsl:attribute name="morerows" select="number(@xhtml2cals:rowspan)-1"/>
@@ -745,6 +746,82 @@
   
   <xsl:template match="td[@xhtml2cals:DummyCell = 'yes'] | th[@xhtml2cals:DummyCell = 'yes']" mode="xhtml2cals:convert-to-cals" priority="15"/>
   
+  <!-- === Converting attributes === -->
+  
+  <!--Attributes which has the same name in html and cals are beeing copied-->
+  <xsl:template match="@align | @valign | @char | @charoff" mode="xhtml2cals:convert-attributes-to-cals">
+    <xsl:copy-of select="."/>
+  </xsl:template>
+  
+  <!--FIXME : add a first step to convert @style to html @ then convert them to cals, avoid code duplication-->
+  
+  <!--@valign="baseline" has no correspondence in CALS-->
+  <xsl:template match="@valign[. = 'baseline']" mode="xhtml2cals:convert-attributes-to-cals">
+    <xsl:attribute name="valign" select="'left'"/>
+  </xsl:template>
+  
+  <xsl:template match="@valign[. = 'center']" mode="xhtml2cals:convert-attributes-to-cals">
+    <xsl:attribute name="valign" select="'middle'"/>
+  </xsl:template>
+  
+  <!--keep some specific attributes-->
+  <xsl:template match="@id" mode="xhtml2cals:convert-attributes-to-cals">
+    <xsl:copy-of select="."/>
+  </xsl:template>
+  
+  <!--some class values might come from cals conversion, let's keep others class values-->
+  <xsl:template match="@class" mode="xhtml2cals:convert-attributes-to-cals">
+    <xsl:variable name="class.tok" select="tokenize(., '\s+')" as="xs:string*"/>
+    <xsl:variable name="class.except-cals" select="string-join($class.tok[not(starts-with(., 'cals_'))], ' ')" as="xs:string"/>
+    <xsl:if test="$class.except-cals">
+      <xsl:attribute name="class" select="$class.except-cals"/>
+    </xsl:if>
+  </xsl:template>
+  
+  <xsl:template match="@*[starts-with(local-name(), 'data-cals-')]" mode="xhtml2cals:convert-attributes-to-cals">
+    <xsl:attribute name="{substring-after(local-name(), 'data-cals-')}" select="."/>
+  </xsl:template>
+  
+  <xsl:template match="@style" mode="xhtml2cals:convert-attributes-to-cals">
+    <xsl:variable name="css" select="css:parse-inline(.)" as="element(css:css)?"/>
+    <xsl:for-each select="css:getProperties($css)">
+      <xsl:choose>
+        <xsl:when test="css:getPropertyName(.) = 'text-align'">
+          <xsl:attribute name="align" select="css:getPropertyValue($css, 'text-align')"/>
+        </xsl:when>
+        <xsl:when test="css:getPropertyName(.) = 'vertical-align'">
+          <xsl:choose>
+            <xsl:when test="css:getPropertyValue($css, 'vertical-align') = ('center', 'central')">
+              <xsl:attribute name="valign" select="'middle'"/>
+            </xsl:when>
+            <xsl:when test="css:getPropertyValue($css, 'vertical-align') = 'baseline'">
+              <!--"baseline" has no correspondence in CALS-->
+              <xsl:attribute name="valign" select="'left'"/>
+            </xsl:when>
+            <xsl:otherwise>
+              <xsl:attribute name="valign" select="css:getPropertyValue($css, 'vertical-align')"/>
+            </xsl:otherwise>
+          </xsl:choose>
+        </xsl:when>
+        <xsl:when test="starts-with(css:getPropertyName(.), 'border')">
+          <!--rowsep and colsep has already been processed-->
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:message>[WARNING][html2cals.xsl] unmatched css property "<xsl:value-of select="css:getPropertyName(.)"/>"</xsl:message>
+        </xsl:otherwise>
+      </xsl:choose>
+    </xsl:for-each>
+  </xsl:template>
+  
+  <!--attributes to delete-->
+  <xsl:template match="@colspan | @rowspan | @xhtml2cals:colspan | @xhtml2cals:rowspan" mode="xhtml2cals:convert-attributes-to-cals"/>
+  
+  <!--default copy template-->
+  <xsl:template match="@*" mode="xhtml2cals:convert-attributes-to-cals">
+    <xsl:message>[WARNING][html2cals.xsl] @<xsl:value-of select="name()"/> unmatched in mode="xhtml2cals:convert-attributes-to-cals"</xsl:message>
+  </xsl:template>
+  
+  <!--default copy template-->
   <xsl:template match="@* | node()" mode="xhtml2cals:convert-to-cals">
     <xsl:copy>
       <xsl:apply-templates select="@* | node()" mode="#current"/>
