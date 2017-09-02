@@ -211,7 +211,7 @@
     <!-- Dernière ligne venant d'être expansée -->
     <xsl:param name="processed-row" as="element()?"/>
     <xsl:choose>
-      <xsl:when test="$index &gt; count($source-block/tr)">
+      <xsl:when test="$index > count($source-block/tr)">
         <!-- Indice supérieur au nombre de lignes: on a traité toute les lignes -->
       </xsl:when>
       <xsl:when test="count($processed-row/node()) = 0">
@@ -280,7 +280,7 @@
     <xsl:for-each select="$source-row/*">
       <xsl:variable name="cell" select="." as="element()"/>
       <xsl:choose>
-        <xsl:when test="@colspan &gt; 1">
+        <xsl:when test="@colspan > 1">
           <xsl:copy>
             <xsl:copy-of select="@* except @colspan"/>
             <xsl:attribute name="xhtml2cals:colspan" select="@colspan"/>
@@ -347,7 +347,7 @@
       indiquant qu'il va y avoir des cellules à expanser dans la ligne cible -->
     <xsl:for-each select="$processed-row/*">
       <xsl:choose>
-        <xsl:when test="@xhtml2cals:rowspan &gt; 1">
+        <xsl:when test="@xhtml2cals:rowspan > 1">
           <!-- une cellule à insérer -->
           <xsl:copy>
             <xsl:attribute name="xhtml2cals:DummyCell" select="'yes'"/>
@@ -362,7 +362,7 @@
           <!-- Pas de cellule à insérer, on va copier la cellule de la ligne source  -->
           <xsl:variable name="current-column" select="count(preceding-sibling::*) + 1" as="xs:integer"/>
           <xsl:variable name="spanned-row-cells"
-            select="count(preceding-sibling::*[@xhtml2cals:rowspan &gt; 1])" as="xs:integer"/>
+            select="count(preceding-sibling::*[@xhtml2cals:rowspan > 1])" as="xs:integer"/>
           <xsl:choose>
             <xsl:when test="count(xhtml2cals:select-cell($current-column - $spanned-row-cells, $source-row, 1, 0)) != 0">
               <xsl:copy-of
@@ -432,7 +432,6 @@
     </xsl:choose>
   </xsl:function>
   
-  
   <xd:doc scope="component" xml:lang="fr">
     <xd:desc>
       <xd:p>En mode <xd:i>expand-spans</xd:i>: recopie par défaut</xd:p>
@@ -474,7 +473,7 @@
   <xsl:template name="xhtml2cals:compute-table-borders">
     <xsl:attribute name="frame">
       <xsl:choose>
-        <xsl:when test="@frame and (not(@border) or @border!=0)">
+        <xsl:when test="@frame and (not(@border) or @border != 0)">
           <xsl:choose>
             <xsl:when test="@frame='box'">all</xsl:when>
             <xsl:when test="@frame='above'">top</xsl:when>
@@ -522,7 +521,7 @@
   
   <xsl:template name="xhtml2cals:compute-rowsep-colsep-defaults">
     <xsl:choose>
-      <xsl:when test="@border !=0 and not(@rules)">
+      <xsl:when test="@border != 0 and not(@rules)">
         <xsl:attribute name="colsep" select="'1'"/>
         <xsl:attribute name="rowsep" select="'1'"/>
       </xsl:when>
@@ -553,11 +552,10 @@
     </xsl:choose>
   </xsl:template>
   
-  <!-- template recursif: On parcourt un element col ou colgroup, on génère le ou les colspec 
-        correspondant, -->
+  <!-- template recursif: On parcourt un element col ou colgroup, on génère le ou les colspec correspondant, -->
   <xsl:template name="xhtml2cals:make-colspec">
     <!-- colgroup list or col list -->
-    <xsl:param name="context" as="element()*"/>
+    <xsl:param name="context" as="element()*"/> <!--colgroup or col-->
     <!-- index in the list of the colgroup or col to be processed -->
     <xsl:param name="index" select="1" as="xs:integer"/>
     <!-- next colspec number -->
@@ -611,8 +609,7 @@
   <!-- template recursif: On parcourt la un element col ou colgroup, on génère le ou les spanspec 
         correspondant, -->
   <xsl:template name="xhtml2cals:make-spanspec">
-    <!-- colgroup list or col list -->
-    <xsl:param name="context" as="element()*"/>
+    <xsl:param name="context" as="element()*"/><!-- colgroup* or col* -->
     <!-- index in the list of the colgroup or col to be processed -->
     <xsl:param name="index" select="1" as="xs:integer"/>
     <!-- next colspec number -->
@@ -632,7 +629,7 @@
           </xsl:choose>
         </xsl:variable>
         <xsl:if
-          test="(count($context[$index]/col) &gt; 1) or ((count($context[$index]/col) = 0) and ($span &gt; 1))">
+          test="(count($context[$index]/col) > 1) or ((count($context[$index]/col) = 0) and ($span > 1))">
           <spanspec 
             spanname="{concat('span', ($colnum + 1), '-', $span)}" 
             namest="{concat('c', ($colnum + 1))}" 
@@ -699,7 +696,7 @@
     </row>
   </xsl:template>
   
-  <xsl:template match="td|th" mode="xhtml2cals:convert-to-cals">
+  <xsl:template match="td | th" mode="xhtml2cals:convert-to-cals">
     <entry>
       <xsl:variable name="curr-col-num" as="xs:integer" select="count(preceding-sibling::*) + 1"/>            
       <!-- copy attributes with same name -->            
@@ -707,10 +704,10 @@
       <xsl:copy-of select="(@valign, (../../..//col)[$curr-col-num]/@valign)[1][not(. = 'baseline')]"/>
       <xsl:copy-of select="@id | @class | @align | @char | @charoff "/>
       <xsl:if test="not(@xhtml2cals:DummyCell)">
-        <xsl:if test="@xhtml2cals:rowspan &gt; 1">
+        <xsl:if test="@xhtml2cals:rowspan > 1">
           <xsl:attribute name="morerows" select="number(@xhtml2cals:rowspan)-1"/>
         </xsl:if>
-        <xsl:if test="@xhtml2cals:colspan &gt; 1">
+        <xsl:if test="@xhtml2cals:colspan > 1">
           <xsl:attribute name="namest" select="concat('c', count(preceding-sibling::*) + 1)"/>
           <xsl:attribute name="nameend" select="concat('c', count(preceding-sibling::*) + @xhtml2cals:colspan)"/>
         </xsl:if>
@@ -746,7 +743,7 @@
     </entry>
   </xsl:template>
   
-  <xsl:template match="td[@xhtml2cals:DummyCell='yes'] | th[@xhtml2cals:DummyCell='yes']" mode="xhtml2cals:convert-to-cals" priority="15"/>
+  <xsl:template match="td[@xhtml2cals:DummyCell = 'yes'] | th[@xhtml2cals:DummyCell = 'yes']" mode="xhtml2cals:convert-to-cals" priority="15"/>
   
   <xsl:template match="@* | node()" mode="xhtml2cals:convert-to-cals">
     <xsl:copy>
