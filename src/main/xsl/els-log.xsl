@@ -139,7 +139,7 @@
           </xsl:if>
           <xsl:if test="$xpathContext instance of node()">
             <!--que l'on soit sur un noeud attribut ou element ou autre, on créer un attribut avec le nom de l'élément "courant"-->
-            <xsl:attribute name="element" select="name(ancestor-or-self::*[1])"/>
+            <xsl:attribute name="element" select="name($xpathContext/ancestor-or-self::*[1])"/>
           </xsl:if>
           <!-- Mise en commentaire permet d'éviter d'ajouter du contenu textuel-->
           <!-- (Même si $description contient déjà un commentaire ou un "double tiret", la serialisation xsl:comment fonctionnera ! (testé) ) -->
