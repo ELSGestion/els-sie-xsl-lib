@@ -319,7 +319,7 @@
     <xsl:param name="rowsep" as="xs:string"/>
     <xsl:param name="align" as="xs:string"/>
     <xsl:param name="valign" as="xs:string"/>
-    <xsl:param name="nb-cols" as="xs:integer" tunnel="yes" />
+    <xsl:param name="nb-cols" as="xs:integer?" tunnel="yes" />
     <xsl:variable name="entry" select="self::*" as="element(entry)"/>
     <xsl:variable name="current-tgroup" select="ancestor::tgroup[1]" as="element()"/>
     <xsl:variable name="current-colspec-list" as="element(colspec)*">
@@ -484,12 +484,14 @@
         <xsl:if test="$valign-current != (if($name = 'td') then($xslLib:cals2html.default-td-valign) else($xslLib:cals2html.default-th-valign))">
           <xsl:value-of select="concat('cals_valign-', lower-case($valign-current))" />
         </xsl:if>
-        <xsl:if test="$nb-cols > $xslLib:cals2html.nb-cols-max-before-font-reduction
-          and $nb-cols lt $xslLib:cals2html.nb-cols-max-before-large-font-reduction">
-          <xsl:text>cals_table-font-reduction</xsl:text>
-        </xsl:if>
-        <xsl:if test="$nb-cols > $xslLib:cals2html.nb-cols-max-before-large-font-reduction">
-          <xsl:text>cals_table-max-font-reduction</xsl:text>
+        <xsl:if test="not(empty($nb-cols))">
+          <xsl:if test="$nb-cols > $xslLib:cals2html.nb-cols-max-before-font-reduction
+            and $nb-cols lt $xslLib:cals2html.nb-cols-max-before-large-font-reduction">
+            <xsl:text>cals_table-font-reduction</xsl:text>
+          </xsl:if>
+          <xsl:if test="$nb-cols > $xslLib:cals2html.nb-cols-max-before-large-font-reduction">
+            <xsl:text>cals_table-max-font-reduction</xsl:text>
+          </xsl:if>
         </xsl:if>
       </xsl:variable>
       <xsl:if test="not(empty($class.tmp))">
