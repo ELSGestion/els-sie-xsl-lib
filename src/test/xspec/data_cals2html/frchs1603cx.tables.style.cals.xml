@@ -1837,7 +1837,7 @@
       <colspec colname="c6"/>
       <tbody>
         <row>
-          <entry namest="c1" nameend="c6" colsep="1" rowsep="1">
+          <entry namest="c1" nameend="c6" rowsep="1">
             <al xmlns="local"/>
           </entry>
         </row>
@@ -2199,7 +2199,7 @@
       <colspec colname="c6"/>
       <tbody>
         <row>
-          <entry namest="c1" nameend="c6" colsep="1" rowsep="1">
+          <entry namest="c1" nameend="c6" rowsep="1">
             <al xmlns="local"/>
           </entry>
         </row>
@@ -2905,7 +2905,7 @@
           </entry>
         </row>
         <row>
-          <entry valign="top" namest="c1" nameend="c9" colsep="1" rowsep="1">
+          <entry valign="top" namest="c1" nameend="c9" rowsep="1">
             <al xmlns="local">
               <motRep>Filiales (détenues à + 50 %)</motRep>
             </al>
@@ -3290,7 +3290,7 @@
       <colspec colname="c5"/>
       <tbody>
         <row>
-          <entry namest="c1" nameend="c2" colsep="1">
+          <entry namest="c1" nameend="c2">
             <al xmlns="local"/>
           </entry>
           <entry align="right" rowsep="1">
@@ -3535,7 +3535,7 @@
           <entry>
             <al xmlns="local"/>
           </entry>
-          <entry align="right" namest="c2" nameend="c3" colsep="1" rowsep="1">
+          <entry align="right" namest="c2" nameend="c3" rowsep="1">
             <al xmlns="local"/>
           </entry>
         </row>
@@ -3630,7 +3630,7 @@
           <entry>
             <al xmlns="local"/>
           </entry>
-          <entry align="right" namest="c2" nameend="c3" colsep="1" rowsep="1">
+          <entry align="right" namest="c2" nameend="c3" rowsep="1">
             <al xmlns="local"/>
           </entry>
         </row>
@@ -3725,7 +3725,7 @@
           <entry>
             <al xmlns="local"/>
           </entry>
-          <entry align="right" namest="c2" nameend="c3" colsep="1" rowsep="1">
+          <entry align="right" namest="c2" nameend="c3" rowsep="1">
             <al xmlns="local"/>
           </entry>
         </row>
@@ -3820,7 +3820,7 @@
           <entry>
             <al xmlns="local"/>
           </entry>
-          <entry align="right" namest="c2" nameend="c3" colsep="1" rowsep="1">
+          <entry align="right" namest="c2" nameend="c3" rowsep="1">
             <al xmlns="local"/>
           </entry>
         </row>
@@ -3915,7 +3915,7 @@
           <entry>
             <al xmlns="local"/>
           </entry>
-          <entry align="right" namest="c2" nameend="c3" colsep="1" rowsep="1">
+          <entry align="right" namest="c2" nameend="c3" rowsep="1">
             <al xmlns="local"/>
           </entry>
         </row>
@@ -5036,7 +5036,7 @@
       <colspec colname="c5"/>
       <tbody>
         <row>
-          <entry valign="top" namest="c1" nameend="c5" colsep="1" rowsep="1"/>
+          <entry valign="top" namest="c1" nameend="c5" rowsep="1"/>
         </row>
         <row>
           <entry valign="top" rowsep="1">
@@ -5858,7 +5858,7 @@
           <entry>
             <al xmlns="local"/>
           </entry>
-          <entry align="right" namest="c2" nameend="c3" colsep="1" rowsep="1">
+          <entry align="right" namest="c2" nameend="c3" rowsep="1">
             <al xmlns="local"/>
           </entry>
         </row>
@@ -6178,7 +6178,7 @@
           <entry>
             <al xmlns="local"/>
           </entry>
-          <entry align="right" namest="c2" nameend="c3" colsep="1" rowsep="1">
+          <entry align="right" namest="c2" nameend="c3" rowsep="1">
             <al xmlns="local"/>
           </entry>
         </row>
@@ -6317,7 +6317,7 @@
           </entry>
         </row>
         <row>
-          <entry namest="c1" nameend="c3" colsep="1">
+          <entry namest="c1" nameend="c3">
             <al xmlns="local">Les différences de change ont été constatées sur les ventes et les achats en devises non couvertes.</al>
           </entry>
         </row>
@@ -6336,7 +6336,7 @@
               <motRep/>
             </al>
           </entry>
-          <entry align="right" namest="c2" nameend="c3" colsep="1" rowsep="1">
+          <entry align="right" namest="c2" nameend="c3" rowsep="1">
             <al xmlns="local"/>
           </entry>
         </row>
@@ -6531,7 +6531,7 @@
           <entry>
             <al xmlns="local"/>
           </entry>
-          <entry align="right" namest="c2" nameend="c3" colsep="1" rowsep="1">
+          <entry align="right" namest="c2" nameend="c3" rowsep="1">
             <al xmlns="local"/>
           </entry>
         </row>
@@ -6720,7 +6720,7 @@
           </entry>
         </row>
         <row>
-          <entry namest="c1" nameend="c3" colsep="1">
+          <entry namest="c1" nameend="c3">
             <al xmlns="local">
               <motRep>Accroissements de la dette future d’impôt</motRep>
             </al>
@@ -6755,7 +6755,7 @@
           </entry>
         </row>
         <row>
-          <entry namest="c1" nameend="c3" colsep="1">
+          <entry namest="c1" nameend="c3">
             <al xmlns="local">
               <motRep>Allégements de la dette future d’impôt</motRep>
             </al>
@@ -6813,7 +6813,7 @@
           <entry>
             <al xmlns="local"/>
           </entry>
-          <entry align="right" namest="c2" nameend="c3" colsep="1" rowsep="1">
+          <entry align="right" namest="c2" nameend="c3" rowsep="1">
             <al xmlns="local"/>
           </entry>
         </row>

@@ -139,12 +139,7 @@
     <div class="cals_table">
       <!--@id | @tabstyle-->
       <xsl:apply-templates select="@*" mode="xslLib:cals2html.attributes"/>
-      <xsl:apply-templates mode="#current">
-        <xsl:with-param name="colsep" select="(@colsep, $xslLib:cals2html.default-colsep)[1]" as="xs:string"/>
-        <xsl:with-param name="rowsep" select="(@rowsep, $xslLib:cals2html.default-rowsep)[1]" as="xs:string"/>
-        <xsl:with-param name="align" select="(@align, $xslLib:cals2html.default-tgroup-align)[1]" as="xs:string"/>
-        <xsl:with-param name="valign" select="(@valign, $xslLib:cals2html.default-tgroup-valign)[1]" as="xs:string"/>
-      </xsl:apply-templates>
+      <xsl:apply-templates mode="#current"/>
     </div>
   </xsl:template>
   
@@ -155,10 +150,6 @@
   <!-- TGROUP : start Html Table structure -->
   <!-- CALS MODEL : tgroup ::= colspec+, thead?, tbody-->
   <xsl:template match="tgroup" mode="xslLib:cals2html.main">
-    <xsl:param name="rowsep" as="xs:string"/>
-    <xsl:param name="colsep" as="xs:string"/>
-    <xsl:param name="align" as="xs:string"/>
-    <xsl:param name="valign" as="xs:string"/>
     <table>
       <!--attributes that doesn't generate @style or @class like : ../@orient | @id ?-->
       <xsl:apply-templates select="@* except (@bgcolor)" mode="xslLib:cals2html.attributes"/> 
@@ -194,48 +185,21 @@
       <xsl:if test="normalize-space(@cols) != '' and not(normalize-space(@cols) castable as xs:integer)">
         <xsl:message terminate="no">[ERROR][xslLib:cals2html] @cols="<xsl:value-of select="@cols"/>" is not an integer</xsl:message>
       </xsl:if>
-      <xsl:apply-templates mode="xslLib:cals2html.main" select="thead">
-        <xsl:with-param name="colsep" select="(@colsep, $colsep)[1]" as="xs:string"/>
-        <xsl:with-param name="rowsep" select="(@rowsep, $rowsep)[1]" as="xs:string"/>
-        <xsl:with-param name="align" select="(@align, $align)[1]" as="xs:string"/>
-        <xsl:with-param name="valign" select="(@valign, $valign)[1]" as="xs:string"/>
-        <xsl:with-param name="nb-cols" select="@cols[. castable as xs:integer]" as="xs:integer?" tunnel="yes" />
-      </xsl:apply-templates>
+      <xsl:apply-templates mode="xslLib:cals2html.main" select="thead"/>
       <xsl:if test="tfoot">
         <tfoot>
-          <xsl:apply-templates select="tfoot" mode="#current" >
-            <xsl:with-param name="colsep" select="(@colsep, $colsep)[1]" as="xs:string"/>
-            <xsl:with-param name="rowsep" select="(@rowsep, $rowsep)[1]" as="xs:string"/>
-            <xsl:with-param name="align" select="(@align, $align)[1]" as="xs:string"/>
-            <xsl:with-param name="valign" select="(@valign, $valign)[1]" as="xs:string"/>
-            <xsl:with-param name="nb-cols" select="@cols[. castable as xs:integer]" as="xs:integer?" tunnel="yes" />
-          </xsl:apply-templates>
+          <xsl:apply-templates select="tfoot" mode="#current"/>
         </tfoot>
       </xsl:if>
-      <xsl:apply-templates select="* except (thead, tfoot) (:head and foot has already been processed :)" mode="#current">
-        <xsl:with-param name="colsep" select="(@colsep, $colsep)[1]" as="xs:string"/>
-        <xsl:with-param name="rowsep" select="(@rowsep, $rowsep)[1]" as="xs:string"/>
-        <xsl:with-param name="align" select="(@align, $align)[1]" as="xs:string"/>
-        <xsl:with-param name="valign" select="(@valign, $valign)[1]" as="xs:string"/>
-        <xsl:with-param name="nb-cols" select="@cols[. castable as xs:integer]" as="xs:integer?" tunnel="yes" />
-      </xsl:apply-templates>
+      <xsl:apply-templates select="* except (thead, tfoot) (:head and foot has already been processed :)" mode="#current"/>
     </table>
   </xsl:template>
   
   <!-- Table Head -->
   <!-- CALS MODEL : thead ::= colspec*,row+ -->
   <xsl:template match="thead" mode="xslLib:cals2html.main">
-    <xsl:param name="colsep" as="xs:string"/>
-    <xsl:param name="rowsep" as="xs:string"/>
-    <xsl:param name="align" as="xs:string"/>
-    <xsl:param name="valign" as="xs:string"/>
     <thead>
-      <xsl:apply-templates mode="#current">
-        <xsl:with-param name="colsep" select="(@colsep, $colsep)[1]" as="xs:string"/>
-        <xsl:with-param name="rowsep" select="(@rowsep, $rowsep)[1]" as="xs:string"/>
-        <xsl:with-param name="align" select="(@align, $align)[1]" as="xs:string"/>
-        <xsl:with-param name="valign" select="(@valign, $valign)[1]" as="xs:string"/>
-      </xsl:apply-templates>
+      <xsl:apply-templates mode="#current"/>
     </thead>
   </xsl:template>
   
@@ -250,42 +214,20 @@
   <!-- Table Foot -->
   <!-- CALS MODEL : tfoot ::= colspec*,row+ -->
   <xsl:template match="tfoot" mode="xslLib:cals2html.main">
-    <xsl:param name="colsep" as="xs:string"/>
-    <xsl:param name="rowsep" as="xs:string"/>
-    <xsl:param name="align" as="xs:string"/>
-    <xsl:param name="valign" as="xs:string"/>
-    <xsl:apply-templates select="*" mode="#current">
-      <xsl:with-param name="colsep" select="(@colsep, $colsep)[1]"/>
-      <xsl:with-param name="rowsep" select="(@rowsep, $rowsep)[1]"/>
-      <xsl:with-param name="align" select="(@align, $align)[1]"/>
-      <xsl:with-param name="valign" select="(@valign, $valign)[1]"/>
-    </xsl:apply-templates>
+    <xsl:apply-templates select="*" mode="#current"/>
   </xsl:template>
   
   <!-- Table bocy -->
   <!-- CALS MODEL : tbody ::= row+-->
   <xsl:template match="tbody" mode="xslLib:cals2html.main">
-    <xsl:param name="colsep" as="xs:string"/>
-    <xsl:param name="rowsep" as="xs:string"/>
-    <xsl:param name="align" as="xs:string"/>
-    <xsl:param name="valign" as="xs:string"/>
     <tbody>
-      <xsl:apply-templates mode="#current">
-        <xsl:with-param name="colsep" select="(@colsep, $colsep)[1]" as="xs:string"/>
-        <xsl:with-param name="rowsep" select="(@rowsep, $rowsep)[1]" as="xs:string"/>
-        <xsl:with-param name="align" select="(@align, $align)[1]" as="xs:string"/>
-        <xsl:with-param name="valign" select="(@valign, $valign)[1]" as="xs:string"/>
-      </xsl:apply-templates>
+      <xsl:apply-templates mode="#current"/>
     </tbody>
   </xsl:template>
   
   <!-- Table Row -->
   <!-- CALS MODEL : row ::= entry+ -->
   <xsl:template match="row" mode="xslLib:cals2html.main">
-    <xsl:param name="colsep" as="xs:string"/>
-    <xsl:param name="rowsep" as="xs:string"/>
-    <xsl:param name="align" as="xs:string"/>
-    <xsl:param name="valign" as="xs:string"/>
     <tr>
       <!--attributes that doesn't generate @style or @class like : ../@orient | @id ?-->
       <xsl:apply-templates select="@* except (@bgcolor | @rowsep | @colsep | @valign | @align | @morerows)" mode="xslLib:cals2html.attributes"/> 
@@ -303,23 +245,14 @@
       <xsl:if test="not(empty($style.tmp))">
         <xsl:attribute name="style" select="string-join($style.tmp, ' ')"/>
       </xsl:if>
-      <xsl:apply-templates mode="#current">
-        <xsl:with-param name="colsep" select="(@colsep, $colsep)[1]" as="xs:string"/>
-        <xsl:with-param name="rowsep" select="(@rowsep, $rowsep)[1]" as="xs:string"/>
-        <xsl:with-param name="align" select="(@align, $align)[1]" as="xs:string"/>
-        <xsl:with-param name="valign" select="(@valign, $valign)[1]" as="xs:string"/>
-      </xsl:apply-templates>
+      <xsl:apply-templates mode="#current"/>
     </tr>
   </xsl:template>
 
   <!-- Table Cell -->
   <!-- CALS MODEL : entry ::=  "global model dependent"-->
   <xsl:template match="entry" mode="xslLib:cals2html.main">
-    <xsl:param name="colsep" as="xs:string"/>
-    <xsl:param name="rowsep" as="xs:string"/>
-    <xsl:param name="align" as="xs:string"/>
-    <xsl:param name="valign" as="xs:string"/>
-    <xsl:param name="nb-cols" as="xs:integer?" tunnel="yes" />
+    <xsl:variable name="nb-cols" select="ancestor::tgroup[1]/@cols[. castable as xs:integer]" as="xs:integer?"/>
     <xsl:variable name="entry" select="self::*" as="element(entry)"/>
     <xsl:variable name="current-tgroup" select="ancestor::tgroup[1]" as="element()"/>
     <xsl:variable name="current-colspec-list" as="element(colspec)*">
@@ -401,69 +334,68 @@
     <xsl:variable name="colsep-current" as="xs:string">
       <xsl:choose>
         <xsl:when test="@colsep">
-          <xsl:value-of select="@colsep" />
+          <xsl:value-of select="@colsep"/>
+        </xsl:when>
+        <!-- FIXME : que se passe-t-il lors d'un colspan ? a priori c'est le namest qui gagne-->
+        <xsl:when test="$current-colspec-list[1]/@colsep">
+          <xsl:value-of select="$current-colspec-list[1]/@colsep" />
+        </xsl:when>
+        <xsl:when test="ancestor::*/@colsep">
+          <xsl:value-of select="ancestor::*[@colsep][1]/@colsep" />
         </xsl:when>
         <xsl:otherwise>
-          <!-- FIXME : que se passe-t-il lors d'un colspan ? a priori c'est le namest qui gagne-->
-          <xsl:choose>
-            <xsl:when test="not(../@colsep) and not(../../@colsep) and $current-colspec-list//@colsep">
-              <xsl:value-of select="($current-colspec-list)//@colsep[1]" />
-            </xsl:when>
-            <xsl:otherwise>
-              <xsl:value-of select="$colsep" />
-            </xsl:otherwise>
-          </xsl:choose>
+          <xsl:value-of select="$xslLib:cals2html.default-colsep"/>
         </xsl:otherwise>
       </xsl:choose>
     </xsl:variable>
     <xsl:variable name="rowsep-current" as="xs:string">
       <xsl:choose>
         <xsl:when test="@rowsep">
-          <xsl:value-of select="@rowsep" />
+          <xsl:value-of select="@rowsep"/>
+        </xsl:when>
+        <!-- FIXME : que se passe-t-il lors d'un colspan ? a priori c'est le namest qui gagne-->
+        <xsl:when test="$current-colspec-list[1]/@rowsep">
+          <xsl:value-of select="$current-colspec-list[1]/@rowsep"/>
+        </xsl:when>
+        <xsl:when test="ancestor::*/@rowsep">
+          <xsl:value-of select="ancestor::*[@rowsep][1]/@rowsep"/>
         </xsl:when>
         <xsl:otherwise>
-          <xsl:choose>
-            <xsl:when test="not(../@rowsep) and not(../../@rowsep) and $current-colspec-list//@rowsep">
-              <xsl:value-of select="($current-colspec-list//@rowsep)[1]" />
-            </xsl:when>
-            <xsl:otherwise>
-              <xsl:value-of select="$rowsep" />
-            </xsl:otherwise>
-          </xsl:choose>
+          <xsl:value-of select="$xslLib:cals2html.default-rowsep"/>
         </xsl:otherwise>
       </xsl:choose>
     </xsl:variable>
     <xsl:variable name="align-current" as="xs:string">
       <xsl:choose>
         <xsl:when test="@align">
-          <xsl:value-of select="@align" />
+          <xsl:value-of select="@align"/>
+        </xsl:when>
+        <!-- FIXME : que se passe-t-il lors d'un colspan ? a priori c'est le namest qui gagne-->
+        <xsl:when test="$current-colspec-list[1]/@align">
+          <xsl:value-of select="$current-colspec-list[1]/@align"/>
+        </xsl:when>
+        <xsl:when test="ancestor::*/@align">
+          <xsl:value-of select="ancestor::*[@align][1]/@align"/>
         </xsl:when>
         <xsl:otherwise>
-          <xsl:choose>
-            <xsl:when test="not(../@align) and not(../../@align) and $current-colspec-list//@align">
-              <xsl:value-of select="($current-colspec-list//@align)[1]" />
-            </xsl:when>
-            <xsl:otherwise>
-              <xsl:value-of select="$align" />
-            </xsl:otherwise>
-          </xsl:choose>
+          <xsl:value-of select="$xslLib:cals2html.default-tgroup-align"/>
         </xsl:otherwise>
       </xsl:choose>
     </xsl:variable>
     <xsl:variable name="valign-current" as="xs:string">
       <xsl:choose>
         <xsl:when test="@valign">
-          <xsl:value-of select="@valign" />
+          <xsl:value-of select="@valign"/>
+        </xsl:when>
+        <!-- FIXME : que se passe-t-il lors d'un colspan ? a priori c'est le namest qui gagne-->
+        <xsl:when test="$current-colspec-list[1]/@valign">
+          <xsl:value-of select="$current-colspec-list[1]/@valign" />
+        </xsl:when>
+        <xsl:when test="ancestor::*/@valign">
+          <xsl:value-of select="ancestor::*[@valign][1]/@valign" />
         </xsl:when>
         <xsl:otherwise>
-          <xsl:choose>
-            <xsl:when test="not(../@valign) and not(../../@valign) and $current-colspec-list//@valign">
-              <xsl:value-of select="($current-colspec-list//@valign)[1]" />
-            </xsl:when>
-            <xsl:otherwise>
-              <xsl:value-of select="$valign" />
-            </xsl:otherwise>
-          </xsl:choose>
+          <xsl:value-of select="$xslLib:cals2html.default-tgroup-valign"/>
         </xsl:otherwise>
       </xsl:choose>
     </xsl:variable>
