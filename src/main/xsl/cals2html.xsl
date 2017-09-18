@@ -404,10 +404,10 @@
       <!--attributes that doesn't generate @style or @class like : ../@orient | @id ?-->
       <xsl:apply-templates select="@*" mode="xslLib:cals2html.attributes"/> 
       <xsl:variable name="class.tmp" as="xs:string*">
-        <xsl:if test="$colsep-current != 'no'">
+        <xsl:if test="$colsep-current != '0'">
           <xsl:text>cals_colsep</xsl:text>
         </xsl:if>
-        <xsl:if test="$rowsep-current != 'no'">
+        <xsl:if test="$rowsep-current != '0'">
           <xsl:text>cals_rowsep</xsl:text>
         </xsl:if>
         <xsl:if test="$align-current != (if($name = 'td') then($xslLib:cals2html.default-td-align) else($xslLib:cals2html.default-th-align))">

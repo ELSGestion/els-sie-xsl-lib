@@ -41,12 +41,11 @@
     entrytbl/@colsep | entrytbl/@rowsep |
     entry/@colsep | entry/@rowsep | entry/@rotate" mode="xslLib:normalizeCalsTable">
     <xsl:choose>
-      <xsl:when test=". = ('yes', 'no')">
+      <xsl:when test=". = ('0', '1')">
         <xsl:next-match/>
       </xsl:when>
-      <xsl:when test=". castable as xs:boolean">
-        <xsl:variable name="value.boolean" select=". cast as xs:boolean" as="xs:boolean"/>
-        <xsl:attribute name="{name(.)}" select="if($value.boolean) then('yes') else('no')"/>
+      <xsl:when test=". = ('yes', 'no')">
+        <xsl:attribute name="{name(.)}" select="if(. = 'yes') then ('1') else('0')"/>
       </xsl:when>
       <xsl:otherwise>
         <xsl:message>[ERROR][normalizeCalsTable.xsl] attribute <xsl:value-of select="name()"/>="<xsl:value-of select="."/>" should be a boolean value, it has been ignored </xsl:message>

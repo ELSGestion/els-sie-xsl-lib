@@ -45,7 +45,8 @@
   </xd:doc>
   
   <xsl:param name="xslLib:html2cals.cals.ns.uri" select="'http://docs.oasis-open.org/ns/oasis-exchange/table'" as="xs:string"/>
-  <xsl:param name="xslLib:html2cals.use-0or1-values-for-colsep-rowsep" select="false()" as="xs:boolean"/> <!--when false the default values are yes or no-->
+  <xsl:param name="xslLib:html2cals.use-yesorno-values-for-colsep-rowsep" select="false()" as="xs:boolean"/>
+  <!--when false the default values are 0 or 1 as says the CALS spec-->
   
   <!--==============================================================================================================================-->
   <!-- INIT -->
@@ -491,32 +492,32 @@
   <xsl:template name="xhtml2cals:compute-rowsep-colsep-defaults">
     <xsl:choose>
       <xsl:when test="@border != 0 and not(@rules)">
-        <xsl:attribute name="colsep" select="'yes'"/>
-        <xsl:attribute name="rowsep" select="'yes'"/>
+        <xsl:attribute name="colsep" select="'1'"/>
+        <xsl:attribute name="rowsep" select="'1'"/>
       </xsl:when>
       <xsl:when test="@rules">
         <xsl:choose>
           <xsl:when test="@rules = 'all'">
-            <xsl:attribute name="colsep" select="'yes'"/>
-            <xsl:attribute name="rowsep" select="'yes'"/>
+            <xsl:attribute name="colsep" select="'1'"/>
+            <xsl:attribute name="rowsep" select="'1'"/>
           </xsl:when>
           <xsl:when test="@rules = 'rows'">
-            <xsl:attribute name="colsep" select="'no'"/>
-            <xsl:attribute name="rowsep" select="'yes'"/>
+            <xsl:attribute name="colsep" select="'0'"/>
+            <xsl:attribute name="rowsep" select="'1'"/>
           </xsl:when>
           <xsl:when test="@rules = 'cols'">
-            <xsl:attribute name="colsep" select="'yes'"/>
-            <xsl:attribute name="rowsep" select="'no'"/>
+            <xsl:attribute name="colsep" select="'1'"/>
+            <xsl:attribute name="rowsep" select="'0'"/>
           </xsl:when>
           <xsl:otherwise>
-            <xsl:attribute name="colsep" select="'no'"/>
-            <xsl:attribute name="rowsep" select="'no'"/>
+            <xsl:attribute name="colsep" select="'0'"/>
+            <xsl:attribute name="rowsep" select="'0'"/>
           </xsl:otherwise>
         </xsl:choose>
       </xsl:when>
       <xsl:otherwise>
-        <xsl:attribute name="colsep" select="'no'"/>
-        <xsl:attribute name="rowsep" select="'no'"/>
+        <xsl:attribute name="colsep" select="'0'"/>
+        <xsl:attribute name="rowsep" select="'0'"/>
       </xsl:otherwise>
     </xsl:choose>
   </xsl:template>
@@ -703,12 +704,12 @@
       <xsl:variable name="forced-colsep" select="(ancestor::table[1]/@rules = 'cols') or (ancestor::table[1]/@rules = 'all')" as="xs:boolean"/>
       <xsl:choose>
         <xsl:when test="$forced-colsep or css:definesBorderRight($css) or css:definesBorderLeft($css-next-col)">
-          <xsl:attribute name="colsep" select="if ($forced-colsep or css:showBorderRight($css) or css:showBorderLeft($css-next-col)) then('yes') else('no')"/>
+          <xsl:attribute name="colsep" select="if ($forced-colsep or css:showBorderRight($css) or css:showBorderLeft($css-next-col)) then('1') else('0')"/>
         </xsl:when>
       </xsl:choose>
       <xsl:choose>
         <xsl:when test="$forced-rowsep or css:definesBorderBottom($css) or css:definesBorderTop($css-next-row)">
-          <xsl:attribute name="rowsep" select="if ($forced-rowsep or css:showBorderBottom($css) or css:showBorderTop($css-next-row)) then ('yes') else ('no')"/>
+          <xsl:attribute name="rowsep" select="if ($forced-rowsep or css:showBorderBottom($css) or css:showBorderTop($css-next-row)) then ('1') else ('0')"/>
         </xsl:when>
       </xsl:choose>
       <xsl:apply-templates select="node()" mode="#current"/>
@@ -805,11 +806,11 @@
     <!-- ======================================================================-->
   </xd:doc>
   
-  <!--colsep/rowsep : use 0 or 1 instead of yes or no-->
+  <!--colsep/rowsep : use 'yes' or 'no' instead of '1' or '0'-->
   <xsl:template match="cals:*/@colsep | cals:*/@rowsep" mode="xhtml2cals:optimize-cals">
     <xsl:choose>
-      <xsl:when test="$xslLib:html2cals.use-0or1-values-for-colsep-rowsep">
-        <xsl:attribute name="{name(.)}" select="if(. = 'yes') then('1') else('0')"/>
+      <xsl:when test="$xslLib:html2cals.use-yesorno-values-for-colsep-rowsep">
+        <xsl:attribute name="{name(.)}" select="if(. = '1') then('yes') else('no')"/>
       </xsl:when>
       <xsl:otherwise>
         <xsl:next-match/>

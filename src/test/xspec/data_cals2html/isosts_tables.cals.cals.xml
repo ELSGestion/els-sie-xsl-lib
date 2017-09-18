@@ -45,7 +45,7 @@
         <caption>
           <title>No border no col definition table</title>
         </caption>
-        <table xmlns="http://docs.oasis-open.org/ns/oasis-exchange/table" frame="none" colsep="no" rowsep="no">
+        <table xmlns="http://docs.oasis-open.org/ns/oasis-exchange/table" frame="none" colsep="0" rowsep="0">
           <tgroup cols="2">
             <colspec colname="c1"/>
             <tbody>
@@ -66,7 +66,7 @@
         <caption>
           <title>Table with explicit border definitions, 2px table and table header border</title>
         </caption>
-        <table xmlns="http://docs.oasis-open.org/ns/oasis-exchange/table" frame="none" colsep="no" rowsep="no">
+        <table xmlns="http://docs.oasis-open.org/ns/oasis-exchange/table" frame="none" colsep="0" rowsep="0">
           <tgroup cols="5">
             <colspec colname="c1"/>
             <colspec colname="c2"/>
@@ -116,7 +116,7 @@
         <caption>
           <title>Spanning cells in header</title>
         </caption>
-        <table xmlns="http://docs.oasis-open.org/ns/oasis-exchange/table" frame="none" colsep="no" rowsep="no">
+        <table xmlns="http://docs.oasis-open.org/ns/oasis-exchange/table" frame="none" colsep="0" rowsep="0">
           <tgroup cols="4">
             <colspec colname="c1"/>
             <colspec colname="c2"/>
@@ -155,7 +155,7 @@
         <caption>
           <title>Table with footer</title>
         </caption>
-        <table xmlns="http://docs.oasis-open.org/ns/oasis-exchange/table" frame="none" colsep="no" rowsep="no">
+        <table xmlns="http://docs.oasis-open.org/ns/oasis-exchange/table" frame="none" colsep="0" rowsep="0">
           <tgroup cols="4">
             <colspec colname="c1"/>
             <colspec colname="c2"/>
@@ -194,7 +194,7 @@
         <caption>
           <title>Table with various col and rowspans</title>
         </caption>
-        <table xmlns="http://docs.oasis-open.org/ns/oasis-exchange/table" frame="none" colsep="no" rowsep="no">
+        <table xmlns="http://docs.oasis-open.org/ns/oasis-exchange/table" frame="none" colsep="0" rowsep="0">
           <tgroup cols="6">
             <colspec colname="c1"/>
             <colspec colname="c2"/>
@@ -261,7 +261,7 @@
         <caption>
           <title>Table with specific cells having no border</title>
         </caption>
-        <table xmlns="http://docs.oasis-open.org/ns/oasis-exchange/table" frame="none" colsep="no" rowsep="no">
+        <table xmlns="http://docs.oasis-open.org/ns/oasis-exchange/table" frame="none" colsep="0" rowsep="0">
           <tgroup cols="4">
             <colspec colname="c1"/>
             <colspec colname="c2"/>
@@ -318,7 +318,7 @@
         <caption>
           <title>Table with col and row spans where CSS of neighboring cells defines colsep and rowsep</title>
         </caption>
-        <table xmlns="http://docs.oasis-open.org/ns/oasis-exchange/table" frame="none" colsep="no" rowsep="no">
+        <table xmlns="http://docs.oasis-open.org/ns/oasis-exchange/table" frame="none" colsep="0" rowsep="0">
           <tgroup cols="4">
             <colspec colname="c1"/>
             <colspec colname="c2"/>
@@ -356,7 +356,7 @@
         <caption>
           <title>Table with @rules="rows" should generate rowsep for all rows</title>
         </caption>
-        <table xmlns="http://docs.oasis-open.org/ns/oasis-exchange/table" frame="none" colsep="no" rowsep="no">
+        <table xmlns="http://docs.oasis-open.org/ns/oasis-exchange/table" frame="none" colsep="0" rowsep="0">
           <tgroup cols="4">
             <colspec colname="c1"/>
             <colspec colname="c2"/>
@@ -398,7 +398,7 @@
         <caption>
           <title>Table with @rules="cols" should generate colsep for all cells</title>
         </caption>
-        <table xmlns="http://docs.oasis-open.org/ns/oasis-exchange/table" frame="none" colsep="no" rowsep="no">
+        <table xmlns="http://docs.oasis-open.org/ns/oasis-exchange/table" frame="none" colsep="0" rowsep="0">
           <tgroup cols="4">
             <colspec colname="c1"/>
             <colspec colname="c2"/>
@@ -440,7 +440,7 @@
         <caption>
           <title>Table with @rules="groups" which should generate rowsep for last row in theader and table</title>
         </caption>
-        <table xmlns="http://docs.oasis-open.org/ns/oasis-exchange/table" frame="none" colsep="no" rowsep="no">
+        <table xmlns="http://docs.oasis-open.org/ns/oasis-exchange/table" frame="none" colsep="0" rowsep="0">
           <tgroup cols="4">
             <colspec colname="c1"/>
             <colspec colname="c2"/>
@@ -488,7 +488,7 @@
         <caption>
           <title>Table with @rules="all" which should generate rowsep and rowsep for all</title>
         </caption>
-        <table xmlns="http://docs.oasis-open.org/ns/oasis-exchange/table" frame="none" colsep="no" rowsep="no">
+        <table xmlns="http://docs.oasis-open.org/ns/oasis-exchange/table" frame="none" colsep="0" rowsep="0">
           <tgroup cols="4">
             <colspec colname="c1"/>
             <colspec colname="c2"/>
@@ -536,7 +536,7 @@
         <caption>
           <title>Table cell alignment</title>
         </caption>
-        <table xmlns="http://docs.oasis-open.org/ns/oasis-exchange/table" frame="none" colsep="no" rowsep="no">
+        <table xmlns="http://docs.oasis-open.org/ns/oasis-exchange/table" frame="none" colsep="0" rowsep="0">
           <tgroup cols="6">
             <colspec colname="c1"/>
             <colspec colname="c2"/>
