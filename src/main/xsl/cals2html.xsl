@@ -155,10 +155,9 @@
       <xsl:apply-templates select="@* except (@bgcolor)" mode="xslLib:cals2html.attributes"/> 
       <xsl:variable name="class.tmp" as="xs:string*">
         <xsl:text>cals_tgroup</xsl:text>
-        <!--cals:table/@frame ::= none | top | bottom | topbot | sides | all-->
-        <xsl:if test="../@frame">
-          <xsl:value-of select="concat('cals_frame-', ../@frame)"/>
-        </xsl:if>
+        <!--cals:table/@frame ::= none | top | bottom | topbot | sides | all
+        default is "all"-->
+        <xsl:value-of select="concat('cals_frame-', (../@frame, 'all')[1])"/>
       </xsl:variable>
       <xsl:if test="not(empty($class.tmp))">
         <xsl:attribute name="class" select="string-join($class.tmp, ' ')"/>
