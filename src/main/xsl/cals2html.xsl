@@ -34,7 +34,7 @@
   <xsl:param name="xslLib:cals2html.debug" select="false()" as="xs:boolean"/>
   <!--structure-->
   <xsl:param name="xslLib:cals2html.html-version" select="5" as="xs:double"/> <!--4 or 5 for example-->
-  <xsl:param name="xslLib:cals2html.use-style-insteadOf-class" select="false()" as="xs:boolean"/>
+  <xsl:param name="xslLib:cals2html.use-style-insteadOf-class" select="true()" as="xs:boolean"/>
   <xsl:param name="xslLib:cals2html.compute-column-width-as-width-attribute" select="true()" as="xs:boolean"/> <!--@width is used for html4 output-->
   <xsl:param name="xslLib:cals2html.compute-column-width-within-colgroup" select="true()" as="xs:boolean"/>
   <!--If the number of columns is greater than $nb-cols-max-before-font-reduction then the font needs to be reduced-->
