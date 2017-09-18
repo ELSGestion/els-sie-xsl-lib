@@ -33,6 +33,7 @@
   <xsl:param name="xslLib:cals2html.log.uri" select="resolve-uri('log/', base-uri())" as="xs:string"/>
   <xsl:param name="xslLib:cals2html.debug" select="false()" as="xs:boolean"/>
   <!--structure-->
+  <xsl:param name="xslLib:cals2html.html-version" select="5" as="xs:double"/> <!--4 or 5 for example-->
   <xsl:param name="xslLib:cals2html.use-style-insteadOf-class" select="false()" as="xs:boolean"/>
   <xsl:param name="xslLib:cals2html.compute-column-width-as-width-attribute" select="true()" as="xs:boolean"/> <!--@width is used for html4 output-->
   <xsl:param name="xslLib:cals2html.compute-column-width-within-colgroup" select="true()" as="xs:boolean"/>
@@ -137,7 +138,7 @@
          "All tgroups of a table shall have the same width, so the table frame can surround them uniformly"
           FIXME => adding a table container to ensure this ? (CHAINEXML-872)-->
     <div class="cals_table">
-      <!--@id | @tabstyle-->
+      <!--@id | @tabstyle | @orient | @pgwide | @shortentry | @ tocentry-->
       <xsl:apply-templates select="@*" mode="xslLib:cals2html.attributes"/>
       <xsl:apply-templates mode="#current"/>
     </div>
@@ -152,7 +153,7 @@
   <xsl:template match="tgroup" mode="xslLib:cals2html.main">
     <table>
       <!--attributes that doesn't generate @style or @class like : ../@orient | @id ?-->
-      <xsl:apply-templates select="@* except (@bgcolor)" mode="xslLib:cals2html.attributes"/> 
+      <xsl:apply-templates select="@*" mode="xslLib:cals2html.attributes"/> 
       <xsl:variable name="class.tmp" as="xs:string*">
         <xsl:text>cals_tgroup</xsl:text>
         <!--cals:table/@frame ::= none | top | bottom | topbot | sides | all
@@ -163,7 +164,9 @@
         <xsl:attribute name="class" select="string-join($class.tmp, ' ')"/>
       </xsl:if>
       <xsl:variable name="style.tmp" as="xs:string*">
-        <xsl:sequence select="@bgcolor"/>
+        <xsl:if test="../@pgwide = '1'">
+          <xsl:text>width:100%</xsl:text>
+        </xsl:if>
       </xsl:variable>
       <xsl:if test="not(empty($style.tmp))">
         <xsl:attribute name="style" select="string-join($style.tmp, ' ')"/>
@@ -228,8 +231,7 @@
   <!-- CALS MODEL : row ::= entry+ -->
   <xsl:template match="row" mode="xslLib:cals2html.main">
     <tr>
-      <!--attributes that doesn't generate @style or @class like : ../@orient | @id ?-->
-      <xsl:apply-templates select="@* except (@bgcolor | @rowsep | @colsep | @valign | @align | @morerows)" mode="xslLib:cals2html.attributes"/> 
+      <xsl:apply-templates select="@*" mode="xslLib:cals2html.attributes"/> 
       <xsl:variable name="class.tmp" as="xs:string*">
         <!--<xsl:if test="$xslLib:cals2html.add-odd-even-class">
           <xsl:value-of select="if (count(preceding-sibling::row) mod 2 = 0) then 'cals_odd' else 'cals_even'"/>
@@ -239,7 +241,7 @@
         <xsl:attribute name="class" select="string-join($class.tmp, ' ')"/>
       </xsl:if>
       <xsl:variable name="style.tmp" as="xs:string*">
-        <xsl:sequence select="@bgcolor"/>
+        <!--<xsl:sequence select="@bgcolor"/>-->
       </xsl:variable>
       <xsl:if test="not(empty($style.tmp))">
         <xsl:attribute name="style" select="string-join($style.tmp, ' ')"/>
@@ -400,7 +402,6 @@
     </xsl:variable>
     <xsl:variable name="name" select="if(ancestor::thead) then ('th') else('td')" as="xs:string"/>
     <xsl:element name="{$name}">
-      <!--attributes that doesn't generate @style or @class like : ../@orient | @id ?-->
       <xsl:apply-templates select="@*" mode="xslLib:cals2html.attributes"/> 
       <xsl:variable name="class.tmp" as="xs:string*">
         <xsl:if test="$colsep-current != '0'">
@@ -429,7 +430,7 @@
         <xsl:attribute name="class" select="string-join($class.tmp, ' ')"/>
       </xsl:if>
       <xsl:variable name="style.tmp" as="xs:string*">
-        <xsl:sequence select="@bgcolor"/>
+        <!--<xsl:sequence select="@bgcolor"/>-->
       </xsl:variable>
       <xsl:if test="not(empty($style.tmp))">
         <xsl:attribute name="style" select="string-join($style.tmp, ' ')"/>
@@ -453,13 +454,32 @@
 
   <!-- === COMMON : STEP 2 === -->
   
-  <xsl:template match="table/@frame | tgroup/@cols | entry/@namest | entry/@nameend | entry/@colname | entry/@morerows | @rowsep | @colsep | @valign | @align | @bgcolor" mode="xslLib:cals2html.attributes"/>
+  <!--Attributes to ignore here because they have already been processed before-->
+  <xsl:template match="table/@frame | tgroup/@cols | entry/@namest | entry/@nameend | entry/@colname | entry/@morerows |
+    cals:*/@rowsep | cals:*/@colsep | cals:*/@valign | cals:*/@align | table/@pgwide" mode="xslLib:cals2html.attributes"/>
   
-  <xsl:template match="@orient | @tabstyle" mode="xslLib:cals2html.attributes">
-    <xsl:attribute name="data-cals-{local-name(.)}" select="."/>
+  <xsl:template match="table/@orient | table/@tabstyle | table/@shortentry | table/@tocentry | 
+    tgroup/@tgroupstyle | entry/@rotate" mode="xslLib:cals2html.attributes" priority="1">
+    <!--FIXME : rotate could be done with css3-->
+    <xsl:choose>
+      <xsl:when test="$xslLib:cals2html.html-version = 5">
+        <xsl:attribute name="data-cals-{local-name(.)}" select="."/>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:next-match/>
+      </xsl:otherwise>
+    </xsl:choose>
   </xsl:template>
   
-  <xsl:template match="@id" mode="xslLib:cals2html.attributes">
+  <xsl:template match="tgroup/@char | tgroup/@charoff | entry/@char | entry/@charoff" 
+    mode="xslLib:cals2html.attributes">
+    <xsl:if test="$xslLib:cals2html.html-version le 4">
+      <xsl:copy-of select="."/>
+    </xsl:if>
+  </xsl:template>
+  
+  <!--Attributes to keep as is-->
+  <xsl:template match="@xml:* | @id" mode="xslLib:cals2html.attributes">
     <xsl:copy copy-namespaces="no"/>
   </xsl:template>
   
