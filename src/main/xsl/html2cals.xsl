@@ -45,7 +45,7 @@
   </xd:doc>
   
   <xsl:param name="xslLib:html2cals.cals.ns.uri" select="'http://docs.oasis-open.org/ns/oasis-exchange/table'" as="xs:string"/>
-  <xsl:param name="xslLib:html2cals.use-yesorno-values-for-colsep-rowsep" select="true()" as="xs:boolean"/> <!--when false use 0 or 1-->
+  <xsl:param name="xslLib:html2cals.use-0or1-values-for-colsep-rowsep" select="false()" as="xs:boolean"/> <!--when false the default values are yes or no-->
   
   <!--==============================================================================================================================-->
   <!-- INIT -->
@@ -88,7 +88,7 @@
       </xsl:when>
       <!--if not : convert cals element to the intended namespace--> 
       <xsl:otherwise>
-        <xsl:apply-templates select="$step3" mode="xhtml2cals:convert-cals-namespace"/>
+        <xsl:apply-templates select="$step4" mode="xhtml2cals:convert-cals-namespace"/>
       </xsl:otherwise>
     </xsl:choose>
   </xsl:template>
@@ -808,11 +808,11 @@
   <!--colsep/rowsep : use 0 or 1 instead of yes or no-->
   <xsl:template match="cals:*/@colsep | cals:*/@rowsep" mode="xhtml2cals:optimize-cals">
     <xsl:choose>
-      <xsl:when test="$xslLib:html2cals.use-yesorno-values-for-colsep-rowsep">
-        <xsl:next-match/>
+      <xsl:when test="$xslLib:html2cals.use-0or1-values-for-colsep-rowsep">
+        <xsl:attribute name="{name(.)}" select="if(. = 'yes') then('1') else('0')"/>
       </xsl:when>
       <xsl:otherwise>
-        <xsl:attribute name="{name()}" select="if(. = 'yes') then('1') else('0')"/>
+        <xsl:next-match/>
       </xsl:otherwise>
     </xsl:choose>
   </xsl:template>
