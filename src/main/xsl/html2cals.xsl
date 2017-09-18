@@ -44,7 +44,8 @@
     </xd:desc>
   </xd:doc>
   
-  <xsl:param name="xslLib:cals.ns.uri" select="'http://docs.oasis-open.org/ns/oasis-exchange/table'" as="xs:string"/>
+  <xsl:param name="xslLib:html2cals.cals.ns.uri" select="'http://docs.oasis-open.org/ns/oasis-exchange/table'" as="xs:string"/>
+  <xsl:param name="xslLib:html2cals.use-yesorno-values-for-colsep-rowsep" select="true()" as="xs:boolean"/> <!--when false use 0 or 1-->
   
   <!--==============================================================================================================================-->
   <!-- INIT -->
@@ -82,7 +83,7 @@
     <!--FINALY-->
     <xsl:choose>
       <!--Element has already been created in cals namespace (default xsl namespace) which is the intended one-->
-      <xsl:when test="$xslLib:cals.ns.uri = 'http://docs.oasis-open.org/ns/oasis-exchange/table'">
+      <xsl:when test="$xslLib:html2cals.cals.ns.uri = 'http://docs.oasis-open.org/ns/oasis-exchange/table'">
         <xsl:sequence select="$step4"/>
       </xsl:when>
       <!--if not : convert cals element to the intended namespace--> 
@@ -149,6 +150,7 @@
         tailles de toutes les lignes, mais on peut se limiter à la première dans notre cas, puisque le
         tableau est valide.</xd:p>
     </xd:desc>
+    <xd:param name="table">html table</xd:param>
   </xd:doc>
   <xsl:function name="xhtml2cals:nb-cols" as="xs:integer">
     <xsl:param name="table" as="element(table)"/>
@@ -489,32 +491,32 @@
   <xsl:template name="xhtml2cals:compute-rowsep-colsep-defaults">
     <xsl:choose>
       <xsl:when test="@border != 0 and not(@rules)">
-        <xsl:attribute name="colsep" select="'1'"/>
-        <xsl:attribute name="rowsep" select="'1'"/>
+        <xsl:attribute name="colsep" select="'yes'"/>
+        <xsl:attribute name="rowsep" select="'yes'"/>
       </xsl:when>
       <xsl:when test="@rules">
         <xsl:choose>
           <xsl:when test="@rules = 'all'">
-            <xsl:attribute name="colsep" select="'1'"/>
-            <xsl:attribute name="rowsep" select="'1'"/>
+            <xsl:attribute name="colsep" select="'yes'"/>
+            <xsl:attribute name="rowsep" select="'yes'"/>
           </xsl:when>
           <xsl:when test="@rules = 'rows'">
-            <xsl:attribute name="colsep" select="'0'"/>
-            <xsl:attribute name="rowsep" select="'1'"/>
+            <xsl:attribute name="colsep" select="'no'"/>
+            <xsl:attribute name="rowsep" select="'yes'"/>
           </xsl:when>
           <xsl:when test="@rules = 'cols'">
-            <xsl:attribute name="colsep" select="'1'"/>
-            <xsl:attribute name="rowsep" select="'0'"/>
+            <xsl:attribute name="colsep" select="'yes'"/>
+            <xsl:attribute name="rowsep" select="'no'"/>
           </xsl:when>
           <xsl:otherwise>
-            <xsl:attribute name="colsep" select="'0'"/>
-            <xsl:attribute name="rowsep" select="'0'"/>
+            <xsl:attribute name="colsep" select="'no'"/>
+            <xsl:attribute name="rowsep" select="'no'"/>
           </xsl:otherwise>
         </xsl:choose>
       </xsl:when>
       <xsl:otherwise>
-        <xsl:attribute name="colsep" select="'0'"/>
-        <xsl:attribute name="rowsep" select="'0'"/>
+        <xsl:attribute name="colsep" select="'no'"/>
+        <xsl:attribute name="rowsep" select="'no'"/>
       </xsl:otherwise>
     </xsl:choose>
   </xsl:template>
@@ -701,12 +703,12 @@
       <xsl:variable name="forced-colsep" select="(ancestor::table[1]/@rules = 'cols') or (ancestor::table[1]/@rules = 'all')" as="xs:boolean"/>
       <xsl:choose>
         <xsl:when test="$forced-colsep or css:definesBorderRight($css) or css:definesBorderLeft($css-next-col)">
-          <xsl:attribute name="colsep" select="if ($forced-colsep or css:showBorderRight($css) or css:showBorderLeft($css-next-col)) then('1') else('0')"/>
+          <xsl:attribute name="colsep" select="if ($forced-colsep or css:showBorderRight($css) or css:showBorderLeft($css-next-col)) then('yes') else('no')"/>
         </xsl:when>
       </xsl:choose>
       <xsl:choose>
         <xsl:when test="$forced-rowsep or css:definesBorderBottom($css) or css:definesBorderTop($css-next-row)">
-          <xsl:attribute name="rowsep" select="if ($forced-rowsep or css:showBorderBottom($css) or css:showBorderTop($css-next-row)) then ('1') else ('0')"/>
+          <xsl:attribute name="rowsep" select="if ($forced-rowsep or css:showBorderBottom($css) or css:showBorderTop($css-next-row)) then ('yes') else ('no')"/>
         </xsl:when>
       </xsl:choose>
       <xsl:apply-templates select="node()" mode="#current"/>
@@ -803,10 +805,16 @@
     <!-- ======================================================================-->
   </xd:doc>
   
-  <xsl:template match="@*|node()" mode="xhtml2cals:optimize-cals">
-    <xsl:copy>
-      <xsl:apply-templates select="@*|node()" mode="#current"/>
-    </xsl:copy>
+  <!--colsep/rowsep : use 0 or 1 instead of yes or no-->
+  <xsl:template match="cals:*/@colsep | cals:*/@rowsep" mode="xhtml2cals:optimize-cals">
+    <xsl:choose>
+      <xsl:when test="$xslLib:html2cals.use-yesorno-values-for-colsep-rowsep">
+        <xsl:next-match/>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:attribute name="{name()}" select="if(. = 'yes') then('1') else('0')"/>
+      </xsl:otherwise>
+    </xsl:choose>
   </xsl:template>
   
   <xsl:template match="div[els:hasClass(., 'cals_table')][cals:table]" mode="xhtml2cals:optimize-cals">
@@ -856,6 +864,13 @@
     </xsl:if>
   </xsl:template>
   
+  <!--copy template-->
+  <xsl:template match="@* | node()" mode="xhtml2cals:optimize-cals">
+    <xsl:copy>
+      <xsl:apply-templates select="@* | node()" mode="#current"/>
+    </xsl:copy>
+  </xsl:template>
+  
   <xd:doc>
     <!-- ======================================================================-->
     <!-- Mode xhtml2cals:convert-cals-namespace -->
@@ -863,7 +878,7 @@
   </xd:doc>
   
   <xsl:template match="cals:*" mode="xhtml2cals:convert-cals-namespace">
-    <xsl:element name="{local-name(.)}" namespace="{$xslLib:cals.ns.uri}">
+    <xsl:element name="{local-name(.)}" namespace="{$xslLib:html2cals.cals.ns.uri}">
       <xsl:apply-templates select="@* | node()" mode="#current"/>
     </xsl:element>
   </xsl:template>

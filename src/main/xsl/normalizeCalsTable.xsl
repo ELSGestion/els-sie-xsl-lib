@@ -31,6 +31,29 @@
   <!-- MAIN -->
   <!--==============================================================================================================================-->
   
+  <!--Normalize yesorno values (0/false or 1/true becomes yes/no)-->
+  <xsl:template match="
+    table/@colsep | table/@rowsep | table/@tocentry | table/@shortentry | table/@pgwide |
+    tgroup/@colsep | tgroup/@rowsep |
+    colspec/@colsep | colspec/@rowsep |
+    spanspec/@colsep | spanspec/@rowsep |
+    row/@rowsep  |
+    entrytbl/@colsep | entrytbl/@rowsep |
+    entry/@colsep | entry/@rowsep | entry/@rotate" mode="xslLib:normalizeCalsTable">
+    <xsl:choose>
+      <xsl:when test=". = ('yes', 'no')">
+        <xsl:next-match/>
+      </xsl:when>
+      <xsl:when test=". castable as xs:boolean">
+        <xsl:variable name="value.boolean" select=". cast as xs:boolean" as="xs:boolean"/>
+        <xsl:attribute name="{name(.)}" select="if($value.boolean) then('yes') else('no')"/>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:message>[ERROR][normalizeCalsTable.xsl] attribute <xsl:value-of select="name()"/>="<xsl:value-of select="."/>" should be a boolean value, it has been ignored </xsl:message>
+      </xsl:otherwise>
+    </xsl:choose>
+  </xsl:template>
+  
   <!--copy template-->
   <xsl:template match="* | @* | node()" mode="xslLib:normalizeCalsTable">
     <xsl:copy>
