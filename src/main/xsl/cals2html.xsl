@@ -40,8 +40,8 @@
   <xsl:param name="xslLib:cals2html.nb-cols-max-before-font-reduction" select="8" as="xs:integer"/>
   <xsl:param name="xslLib:cals2html.nb-cols-max-before-large-font-reduction" select="14" as="xs:integer"/>
   <!--default colsep/rowsep-->
-  <xsl:param name="xslLib:cals2html.default-colsep" select="'def-col'" as="xs:string"/>
-  <xsl:param name="xslLib:cals2html.default-rowsep" select="'def-row'" as="xs:string"/>
+  <xsl:param name="xslLib:cals2html.default-colsep" select="'yes'" as="xs:string"/>
+  <xsl:param name="xslLib:cals2html.default-rowsep" select="'yes'" as="xs:string"/>
   <!--default align/valign-->
   <xsl:param name="xslLib:cals2html.default-tgroup-align" select="'left'" as="xs:string"/>
   <xsl:param name="xslLib:cals2html.default-td-align" select="'left'" as="xs:string"/><!--default browser value-->
@@ -404,10 +404,10 @@
       <!--attributes that doesn't generate @style or @class like : ../@orient | @id ?-->
       <xsl:apply-templates select="@*" mode="xslLib:cals2html.attributes"/> 
       <xsl:variable name="class.tmp" as="xs:string*">
-        <xsl:if test="$colsep-current != $xslLib:cals2html.default-colsep and $colsep-current != 'no'">
+        <xsl:if test="$colsep-current != 'no'">
           <xsl:text>cals_colsep</xsl:text>
         </xsl:if>
-        <xsl:if test="$rowsep-current != $xslLib:cals2html.default-rowsep and $rowsep-current != 'no'">
+        <xsl:if test="$rowsep-current != 'no'">
           <xsl:text>cals_rowsep</xsl:text>
         </xsl:if>
         <xsl:if test="$align-current != (if($name = 'td') then($xslLib:cals2html.default-td-align) else($xslLib:cals2html.default-th-align))">
