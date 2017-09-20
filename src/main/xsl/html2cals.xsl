@@ -293,8 +293,7 @@
         </xsl:element>
         <!-- If there is a colspan add padding cells  -->
         <xsl:for-each select="2 to (xs:integer(@colspan))">
-          <xsl:element name="{$element-name}" namespace="http://www.w3.org/1999/xhtml"
-            inherit-namespaces="no">
+          <xsl:element name="{$element-name}" namespace="http://www.w3.org/1999/xhtml" inherit-namespaces="no">
             <xsl:attribute name="xhtml2cals:DummyCell" select="'yes'"/>
             <xsl:copy-of select="$current-cell/@*[not(name() = 'colspan')]" copy-namespaces="no"/>
             <xsl:attribute name="xhtml2cals:colspan" select="$current-cell/@colspan +1 - ."/>
@@ -361,7 +360,7 @@
     <xsl:param name="current-span-col-total" as="xs:double"/>
     <!-- colspan of the current cell being examined-->
     <xsl:variable name="current-cell" select="$source-row/*[$current-column-count]"/> <!--as="element()*"-->
-    <xsl:variable name="current-span" select="($current-cell/@colspan[. castable as xs:integer], 1)[1]"> <!-- as="xs:integer"-->
+    <xsl:variable name="current-span" select="($current-cell/@colspan[. castable as xs:integer], 1)[1]" as="xs:integer">
       <!--<xsl:choose>
         <xsl:when test="$current-cell/@colspan">
           <xsl:value-of select="$current-cell/@colspan"/>
@@ -577,15 +576,15 @@
   </xsl:template>
   
   <!-- template recursif: On parcourt la un element col ou colgroup, on génère le ou les spanspec correspondant-->
-  <xsl:template name="xhtml2cals:make-spanspec">
-    <xsl:param name="context" as="element()*"/><!-- colgroup* or col* -->
-    <!-- index in the list of the colgroup or col to be processed -->
+  <!--<xsl:template name="xhtml2cals:make-spanspec">
+    <xsl:param name="context" as="element()*"/><!-\- colgroup* or col* -\->
+    <!-\- index in the list of the colgroup or col to be processed -\->
     <xsl:param name="index" select="1" as="xs:integer"/>
-    <!-- next colspec number -->
+    <!-\- next colspec number -\->
     <xsl:param name="colnum" select="0" as="xs:integer"/>
     <xsl:choose>
-      <xsl:when test="count($context) = 0"><!--no operation--></xsl:when>
-      <xsl:when test="$index > count($context)"><!--no operation--></xsl:when>
+      <xsl:when test="count($context) = 0"><!-\-no operation-\-></xsl:when>
+      <xsl:when test="$index > count($context)"><!-\-no operation-\-></xsl:when>
       <xsl:otherwise>
         <xsl:variable name="span" as="xs:integer">
           <xsl:choose>
@@ -616,7 +615,7 @@
             <xsl:with-param name="colnum" select="$colnum"/>
           </xsl:call-template>
         </xsl:if>
-        <!-- Tail recursion -->
+        <!-\- Tail recursion -\->
         <xsl:call-template name="xhtml2cals:make-spanspec">
           <xsl:with-param name="context" select="$context"/>
           <xsl:with-param name="index" select="$index + 1"/>
@@ -624,15 +623,16 @@
         </xsl:call-template>
       </xsl:otherwise>
     </xsl:choose>
-  </xsl:template>
+  </xsl:template>-->
   
-  <!--FIXME : tfoot doesn't exists in cals (according to http://www.datypic.com/sc/cals/s-soextblx.xsd.html)-->
   <xsl:template match="caption" mode="xhtml2cals:convert-to-cals">
-    <title>
+    <!--<title>
       <xsl:apply-templates select="@*" mode="xhtml2cals:convert-attributes-to-cals"/>
-      <!--<xsl:copy-of select="@id | @class | @style" copy-namespaces="no"/>-->
+      <!-\-<xsl:copy-of select="@id | @class | @style" copy-namespaces="no"/>-\->
       <xsl:apply-templates select="node()" mode="#current"/>
-    </title>
+    </title>-->
+    <!--FIXME : title doesn't exist in cals model-->
+    <xsl:message terminate="no">[ERROR] caption can not be converted as cals element, there is no equivalent in cals model</xsl:message>
   </xsl:template>
   
   <xsl:template match="thead" mode="xhtml2cals:convert-to-cals">
@@ -643,7 +643,6 @@
     </thead>
   </xsl:template>
   
-  <!--FIXME : tfoot doesn't exists in cals (according to http://www.datypic.com/sc/cals/s-soextblx.xsd.html)-->
   <xsl:template match="tfoot" mode="xhtml2cals:convert-to-cals">
     <tfoot>
       <xsl:apply-templates select="@*" mode="xhtml2cals:convert-attributes-to-cals"/>

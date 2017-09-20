@@ -14,73 +14,13 @@
                                 </field>
                                 <field name="scenarioIds">
                                     <list>
-                                        <String>cals2html.xsl</String>
-                                        <String>cals2html.xsl - xslLib:cals2html.use-style-insteadOf-class=true</String>
+                                        <String>cals2html.xsl - with @class</String>
+                                        <String>cals2html.xsl - with @style</String>
                                     </list>
                                 </field>
                                 <field name="scenarioTypes">
                                     <list>
                                         <String>XSL</String>
-                                        <String>XSL</String>
-                                    </list>
-                                </field>
-                            </scenarioAssociation>
-                            <scenarioAssociation>
-                                <field name="url">
-                                    <String>src/test/xspec/data_cals2html/isosts_tables.cals.style.htm</String>
-                                </field>
-                                <field name="scenarioIds">
-                                    <list>
-                                        <String>html2cals.xsl</String>
-                                    </list>
-                                </field>
-                                <field name="scenarioTypes">
-                                    <list>
-                                        <String>XSL</String>
-                                    </list>
-                                </field>
-                            </scenarioAssociation>
-                            <scenarioAssociation>
-                                <field name="url">
-                                    <String>src/test/xspec/data_cals2html/isosts_tables.cals.htm</String>
-                                </field>
-                                <field name="scenarioIds">
-                                    <list>
-                                        <String>html2cals.xsl</String>
-                                    </list>
-                                </field>
-                                <field name="scenarioTypes">
-                                    <list>
-                                        <String>XSL</String>
-                                    </list>
-                                </field>
-                            </scenarioAssociation>
-                            <scenarioAssociation>
-                                <field name="url">
-                                    <String>src/test/xspec/data_cals2html/frchs1603cx.tables.style.htm</String>
-                                </field>
-                                <field name="scenarioIds">
-                                    <list>
-                                        <String>html2cals.xsl</String>
-                                    </list>
-                                </field>
-                                <field name="scenarioTypes">
-                                    <list>
-                                        <String>XSL</String>
-                                    </list>
-                                </field>
-                            </scenarioAssociation>
-                            <scenarioAssociation>
-                                <field name="url">
-                                    <String>src/test/xspec/data_cals2html/frchs1603cx.tables.htm</String>
-                                </field>
-                                <field name="scenarioIds">
-                                    <list>
-                                        <String>html2cals.xsl</String>
-                                    </list>
-                                </field>
-                                <field name="scenarioTypes">
-                                    <list>
                                         <String>XSL</String>
                                     </list>
                                 </field>
@@ -117,34 +57,60 @@
                             </scenarioAssociation>
                             <scenarioAssociation>
                                 <field name="url">
-                                    <String>src/test/xspec/data_cals2html/isosts_tables.cals.xml</String>
+                                    <String>src/test/xspec/data_cals2html/isosts_tables.cals.style.htm</String>
                                 </field>
                                 <field name="scenarioIds">
                                     <list>
-                                        <String>cals2html.xsl - xslLib:cals2html.use-style-insteadOf-class=true</String>
-                                        <String>cals2html.xsl</String>
+                                        <String>html2cals.xsl</String>
                                     </list>
                                 </field>
                                 <field name="scenarioTypes">
                                     <list>
-                                        <String>XSL</String>
                                         <String>XSL</String>
                                     </list>
                                 </field>
                             </scenarioAssociation>
                             <scenarioAssociation>
                                 <field name="url">
-                                    <String>src/test/xspec/data_cals2html/frchs1603cx.tables.xml</String>
+                                    <String>src/test/xspec/data_cals2html/frchs1603cx.tables.style.htm</String>
                                 </field>
                                 <field name="scenarioIds">
                                     <list>
-                                        <String>cals2html.xsl - xslLib:cals2html.use-style-insteadOf-class=true</String>
-                                        <String>cals2html.xsl</String>
+                                        <String>html2cals.xsl</String>
                                     </list>
                                 </field>
                                 <field name="scenarioTypes">
                                     <list>
                                         <String>XSL</String>
+                                    </list>
+                                </field>
+                            </scenarioAssociation>
+                            <scenarioAssociation>
+                                <field name="url">
+                                    <String>src/test/xspec/data_cals2html/isosts_tables.cals.htm</String>
+                                </field>
+                                <field name="scenarioIds">
+                                    <list>
+                                        <String>html2cals.xsl</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioTypes">
+                                    <list>
+                                        <String>XSL</String>
+                                    </list>
+                                </field>
+                            </scenarioAssociation>
+                            <scenarioAssociation>
+                                <field name="url">
+                                    <String>src/test/xspec/data_cals2html/frchs1603cx.tables.htm</String>
+                                </field>
+                                <field name="scenarioIds">
+                                    <list>
+                                        <String>html2cals.xsl</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioTypes">
+                                    <list>
                                         <String>XSL</String>
                                     </list>
                                 </field>
@@ -164,21 +130,6 @@
                                     </list>
                                 </field>
                             </scenarioAssociation>
-                            <scenarioAssociation>
-                                <field name="url">
-                                    <String>src/test/xspec/data_cals2html/frchs1603cx.tables_error.xml</String>
-                                </field>
-                                <field name="scenarioIds">
-                                    <list>
-                                        <String>cals2html.xsl - xslLib:cals2html.use-style-insteadOf-class=true</String>
-                                    </list>
-                                </field>
-                                <field name="scenarioTypes">
-                                    <list>
-                                        <String>XSL</String>
-                                    </list>
-                                </field>
-                            </scenarioAssociation>
                         </scenarioAssociation-array>
                     </entry>
                     <entry>
@@ -189,7 +140,7 @@
                                     <null/>
                                 </field>
                                 <field name="name">
-                                    <String>cals2html.xsl</String>
+                                    <String>cals2html.xsl - with @class</String>
                                 </field>
                                 <field name="baseURL">
                                     <String></String>
@@ -258,7 +209,29 @@
                                     <Boolean>true</Boolean>
                                 </field>
                                 <field name="xsltParams">
-                                    <list/>
+                                    <list>
+                                        <transformationParameter>
+                                            <field name="paramDescription">
+                                                <paramDescriptor>
+                                                    <field name="localName">
+                                                        <String>cals2html.use-style-insteadOf-class</String>
+                                                    </field>
+                                                    <field name="prefix">
+                                                        <null/>
+                                                    </field>
+                                                    <field name="namespace">
+                                                        <String>http://www.lefebvre-sarrut.eu/ns/els/xslLib</String>
+                                                    </field>
+                                                </paramDescriptor>
+                                            </field>
+                                            <field name="value">
+                                                <String>0</String>
+                                            </field>
+                                            <field name="hasXPathValue">
+                                                <Boolean>false</Boolean>
+                                            </field>
+                                        </transformationParameter>
+                                    </list>
                                 </field>
                                 <field name="cascadingStylesheets">
                                     <String-array/>
@@ -275,7 +248,7 @@
                                     <null/>
                                 </field>
                                 <field name="name">
-                                    <String>cals2html.xsl - xslLib:cals2html.use-style-insteadOf-class=true</String>
+                                    <String>cals2html.xsl - with @style</String>
                                 </field>
                                 <field name="baseURL">
                                     <String></String>
