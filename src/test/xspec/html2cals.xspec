@@ -4,7 +4,7 @@
   xmlns:xslLib="http://www.lefebvre-sarrut.eu/ns/els/xslLib"
   stylesheet="../../main/xsl/html2cals.xsl">
   
-  <x:scenario label="HTML2CALS - with class" xml:base="data_cals2html/">
+  <x:scenario label="HTML2CALS - with class" xml:base="data/">
     <x:scenario label="Table jira CHAINE-1885">
       <x:context href="Table_CHAINE-1885.htm"/>
       <x:expect label="OK" select="/*" test="/*" href="Table_CHAINE-1885.cals.xml"/>
@@ -19,7 +19,7 @@
     </x:scenario>
   </x:scenario>
   
-  <x:scenario label="HTML2CALS - with style" xml:base="data_cals2html/">
+  <x:scenario label="HTML2CALS - with style" xml:base="data/">
     <x:scenario label="Table jira CHAINE-1885">
       <x:context href="Table_CHAINE-1885.style.htm"/>
       <x:expect label="OK" select="/*" test="/*" href="Table_CHAINE-1885.style.cals.xml"/>
