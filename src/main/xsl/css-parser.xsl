@@ -27,11 +27,29 @@
               <css:solid/>
             </css:border-bottom-style>
           </css:border-bottom-ruleset>
+          <css:border-left-color>
+            <css:black/>
+          </css:border-left-color>
           <css:text-align-ruleset>
             <css:text-align>
               <css:left/>
             </css:text-align>
           </css:text-align-ruleset>
+          <css:padding-right-ruleset>
+            <css:padding-right>
+              <css:dimension unit="px">0</css:dimension>
+            </css:padding-right>
+          </css:padding-right-ruleset>
+          <css:padding-ruleset>
+            <css:padding>
+              <css:dimension unit="px">0</css:dimension>
+            </css:padding>
+          </css:padding-ruleset>
+          <css:width-ruleset>
+            <css:width>
+              <css:dimension unit="%">100</css:dimension>
+            </css:width>
+          </css:width-ruleset>
         </css:css>
       </xd:p>
     </xd:desc>
@@ -170,7 +188,7 @@
             </xsl:choose>
           </xsl:element>
         </xsl:when>
-        <!--FIXME : added by mricaud so every property is represented in xml, but why so much when complexity here ?-->
+        <!--FIXME : added by mricaud so every property is represented in xml, but why so much complexity here ?-->
         <xsl:otherwise>
           <xsl:element name="css:{$prop}-ruleset">
             <xsl:choose>
@@ -307,23 +325,23 @@
     <xsl:choose>
       <!-- specific settings for border-bottom overwrite general -->
       <xsl:when test="$style[1]/(css:none, css:hidden)">
-        <xsl:copy-of select="false()"/>
+        <xsl:sequence select="false()"/>
       </xsl:when>
       <xsl:when test="$width[1]/css:dimension">
         <xsl:choose>
           <xsl:when test="number($width[1]/css:dimension) &gt; 0">
-            <xsl:copy-of select="true()"/>
+            <xsl:sequence select="true()"/>
           </xsl:when>
           <xsl:otherwise>
-            <xsl:copy-of select="false()"/>
+            <xsl:sequence select="false()"/>
           </xsl:otherwise>
         </xsl:choose>
       </xsl:when>
       <xsl:when test="$width[1]">
-        <xsl:copy-of select="true()"/>
+        <xsl:sequence select="true()"/>
       </xsl:when>
       <xsl:otherwise>
-        <xsl:copy-of select="false()"/>
+        <xsl:sequence select="false()"/>
       </xsl:otherwise>
     </xsl:choose>
   </xsl:function>
@@ -337,23 +355,23 @@
     <xsl:choose>
       <!-- specific settings for border-bottom overwrite general -->
       <xsl:when test="$style[1]/(css:none, css:hidden)">
-        <xsl:copy-of select="false()"/>
+        <xsl:sequence select="false()"/>
       </xsl:when>
       <xsl:when test="$width[1][self::css:dimension]">
         <xsl:choose>
           <xsl:when test="xs:integer($width[1]/node()) &gt; 0">
-            <xsl:copy-of select="true()"/>
+            <xsl:sequence select="true()"/>
           </xsl:when>
           <xsl:otherwise>
-            <xsl:copy-of select="false()"/>
+            <xsl:sequence select="false()"/>
           </xsl:otherwise>
         </xsl:choose>
       </xsl:when>
       <xsl:when test="$width[1]">
-        <xsl:copy-of select="true()"/>
+        <xsl:sequence select="true()"/>
       </xsl:when>
       <xsl:otherwise>
-        <xsl:copy-of select="false()"/>
+        <xsl:sequence select="false()"/>
       </xsl:otherwise>
     </xsl:choose>
   </xsl:function>
@@ -367,23 +385,23 @@
     <xsl:choose>
       <!-- specific settings for border-bottom overwrite general -->
       <xsl:when test="$style[1]/(css:none, css:hidden)">
-        <xsl:copy-of select="false()"/>
+        <xsl:sequence select="false()"/>
       </xsl:when>
       <xsl:when test="$width[1][self::css:dimension]">
         <xsl:choose>
           <xsl:when test="xs:integer($width[1]/node()) &gt; 0">
-            <xsl:copy-of select="true()"/>
+            <xsl:sequence select="true()"/>
           </xsl:when>
           <xsl:otherwise>
-            <xsl:copy-of select="false()"/>
+            <xsl:sequence select="false()"/>
           </xsl:otherwise>
         </xsl:choose>
       </xsl:when>
       <xsl:when test="$width[1]">
-        <xsl:copy-of select="true()"/>
+        <xsl:sequence select="true()"/>
       </xsl:when>
       <xsl:otherwise>
-        <xsl:copy-of select="false()"/>
+        <xsl:sequence select="false()"/>
       </xsl:otherwise>
     </xsl:choose>
   </xsl:function>
@@ -397,23 +415,35 @@
     <xsl:choose>
       <!-- specific settings for border-bottom overwrite general -->
       <xsl:when test="$style[1]/(css:none, css:hidden)">
-        <xsl:copy-of select="false()"/>
+        <xsl:sequence select="false()"/>
       </xsl:when>
       <xsl:when test="$width[1][self::css:dimension]">
         <xsl:choose>
           <xsl:when test="xs:integer($width[1]/node()) &gt; 0">
-            <xsl:copy-of select="true()"/>
+            <xsl:sequence select="true()"/>
           </xsl:when>
           <xsl:otherwise>
-            <xsl:copy-of select="false()"/>
+            <xsl:sequence select="false()"/>
           </xsl:otherwise>
         </xsl:choose>
       </xsl:when>
       <xsl:when test="$width[1]">
-        <xsl:copy-of select="true()"/>
+        <xsl:sequence select="true()"/>
       </xsl:when>
       <xsl:otherwise>
-        <xsl:copy-of select="false()"/>
+        <xsl:sequence select="false()"/>
+      </xsl:otherwise>
+    </xsl:choose>
+  </xsl:function>
+  
+  <xsl:function name="css:showAllBorders" as="xs:boolean">
+    <xsl:param name="css" as="element(css:css)?"/>
+    <xsl:choose>
+      <xsl:when test="css:showBorderTop($css) and css:showBorderRight($css) and css:showBorderBottom($css) and css:showBorderLeft($css)">
+        <xsl:sequence select="true()"/>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:sequence select="false()"/>
       </xsl:otherwise>
     </xsl:choose>
   </xsl:function>
@@ -421,10 +451,18 @@
   <!--=== CSS UTILITIES ===-->
   
  <xsl:function name="css:getPropertyValue" as="xs:string?">
-   <xsl:param name="css" as="element(css:css)"/>
+   <xsl:param name="css" as="element(css:css)?"/>
    <xsl:param name="name" as="xs:string"/>
-   <xsl:variable name="property" select="$css/css:*[css:getPropertyName(.) = $name]/*" as="element()*"/>
-   <xsl:sequence select="$property[last()]/*/local-name(.)"/>
+   <xsl:variable name="property" select="css:getProperty($css, $name)" as="element()*"/>
+   <xsl:variable name="property.last.child" select="$property[last()]/*" as="element()?"/>
+   <xsl:choose>
+     <xsl:when test="$property.last.child/self::css:dimension">
+       <xsl:sequence select="concat($property.last.child, $property.last.child/@unit)"/>
+     </xsl:when>
+     <xsl:when test="count($property.last.child) != 0">
+       <xsl:sequence select="local-name($property.last.child)"/>
+     </xsl:when>
+   </xsl:choose>
  </xsl:function>
   
   <xsl:function name="css:getPropertyName" as="xs:string">
@@ -432,8 +470,14 @@
     <xsl:sequence select="substring-before(local-name($property), '-ruleset')"/>
   </xsl:function>
   
+  <xsl:function name="css:getProperty" as="element()*">
+    <xsl:param name="css" as="element(css:css)?"/>
+    <xsl:param name="name" as="xs:string"/>
+    <xsl:sequence select="$css/css:*[css:getPropertyName(.) = $name]/*"/>
+  </xsl:function>
+  
   <xsl:function name="css:getProperties" as="element()*">
-    <xsl:param name="css" as="element(css:css)"/>
+    <xsl:param name="css" as="element(css:css)?"/>
     <xsl:sequence select="$css/*"/>
   </xsl:function>
   
