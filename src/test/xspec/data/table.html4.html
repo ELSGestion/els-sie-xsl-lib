@@ -1,0 +1,83 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title>Table</title>
+    <!--<style type="text/css">
+      table, td, th{
+       border:1px solid;
+       padding: 1em;
+      }
+    </style>-->
+  </head>
+  <body>
+    <h2>Test 1 : table @style vs @html4-attributes</h2>
+    <table style="width:100%; border-collapse:collapse; border:1px solid black" border="0" width="80%">
+      <tbody>
+        <tr>
+          <th width="20%" style="width:60%;">th1</th>
+          <th align="center" style="text-align:right">th2</th>
+          <th valign="top" style="vertical-align:bottom; height:200px">th3</th>
+        </tr>
+        <tr>
+          <td colspan="2" bgcolor="green" style="background-color:red">td1</td>
+          <td valign="top" bgcolor="green" style="height:200px">td2</td>
+        </tr>
+      </tbody>
+    </table>
+    <br/><br/>
+    <table style="border-collapse:collapse; border:5px dotted blue; border-bottom:0;" border="1" width="80%" align="center">
+      <tbody>
+        <tr>
+          <th width="20%" style="width:60%;">th1</th>
+          <th align="center" style="text-align:right">th2</th>
+          <th valign="top" style="vertical-align:bottom; height:200px">th3</th>
+        </tr>
+        <tr>
+          <td>td1</td>
+          <td height="150px">td2</td>
+          <td>td3</td>
+        </tr>
+        <tr>
+          <td colspan="2" bgcolor="green" style="background-color:red" align="center">td1</td>
+          <td valign="top" bgcolor="green" style="height:200px">td2</td>
+        </tr>
+      </tbody>
+    </table>
+    <br/><br/>
+    <table style="border-collapse:collapse;" border="1" width="60%" align="right">
+      <tbody>
+        <tr>
+          <th>th1</th>
+          <th>th2</th>
+          <th>th3</th>
+        </tr>
+        <tr align="center">
+          <td>td1</td>
+          <td>td2</td>
+          <td>td3</td>
+        </tr>
+      </tbody>
+    </table>
+    <br/><br/><br/><br/>
+    <h2>Test 2 : complete table with every html4 specific attributes</h2>
+    <table align="center" cellspacing="12" cellpadding="10" border="1" width="100%" summary="text" bgcolor="green"
+      style="border-color:coral;">
+      <colgroup align="right" valign="middle" char="a" charoff="4" span="2" width="20%" style="width:30%;">
+        <col align="right" valign="middle" char="a" charoff="4" span="2" width="30%" style="width:70%"/>
+      </colgroup>
+      <tbody align="justify" valign="middle" char="a" charoff="2">
+        <tr align="justify" valign="middle" char="a" charoff="2" bgcolor="red">
+          <th abbr="text" align="justify" axis="xxx" bgcolor="gray" char="a" charoff="2" height="100px" 
+            headers="id1 id2" nowrap="nowrap" scope="col" sorted="reversed" valign="middle" width="70%"
+            style="border-top:2px solid; width:80%;">css width 70% should not be added</th>
+          <td style="border-top:2px solid" width="30%">css width 30% should be added</td>
+          <th width="200">css width 200px should be added</th>
+        </tr>
+        <tr>
+          <td align="center" valign="bottom">Alfreds Futterkiste</td>
+          <th style="padding-right:0">padding-right 0 and others 10px</th>
+          <td style="padding:0">padding 0</td>
+        </tr>
+      </tbody>
+    </table>
+  </body>
+</html>

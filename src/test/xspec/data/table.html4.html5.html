@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title>Table</title>
+    <!--<style type="text/css">
+      table, td, th{
+       border:1px solid;
+       padding: 1em;
+      }
+    </style>-->
+  </head>
+  <body>
+    <h2>Test 1 : table @style vs @html4-attributes</h2>
+    <table style="width:100%; border-collapse:collapse; border:1px solid black">
+      <tbody>
+        <tr>
+          <th style="width:60%;">th1</th>
+          <th style="text-align:right">th2</th>
+          <th style="vertical-align:bottom; height:200px">th3</th>
+        </tr>
+        <tr>
+          <td colspan="2" style="background-color:red">td1</td>
+          <td style="vertical-align:top; background-color:green; height:200px">td2</td>
+        </tr>
+      </tbody>
+    </table>
+    <br />
+    <br />
+    <table style="width:80%; margin-left:auto; margin-right:auto; border-collapse:collapse; border:5px dotted blue; border-bottom:0;">
+      <tbody>
+        <tr>
+          <th style="border-right:1px solid; border-bottom:1px solid; width:60%;">th1</th>
+          <th style="border-right:1px solid; border-bottom:1px solid; border-left:1px solid; text-align:right">th2</th>
+          <th style="border-bottom:1px solid; border-left:1px solid; vertical-align:bottom; height:200px">th3</th>
+        </tr>
+        <tr>
+          <td style="border-top:1px solid; border-right:1px solid; border-bottom:1px solid">td1</td>
+          <td style="border:1px solid; height:150px">td2</td>
+          <td style="border-top:1px solid; border-bottom:1px solid; border-left:1px solid">td3</td>
+        </tr>
+        <tr>
+          <td colspan="2" style="border-top:1px solid; border-right:1px solid; text-align:center; background-color:red">td1</td>
+          <td style="border-top:1px solid; border-left:1px solid; vertical-align:top; background-color:green; height:200px">td2</td>
+        </tr>
+      </tbody>
+    </table>
+    <br />
+    <br />
+    <table style="border:1px solid; width:60%; margin-left:auto; margin-right:0; border-collapse:collapse;">
+      <tbody>
+        <tr>
+          <th style="border-right:1px solid; border-bottom:1px solid">th1</th>
+          <th style="border-right:1px solid; border-bottom:1px solid; border-left:1px solid">th2</th>
+          <th style="border-bottom:1px solid; border-left:1px solid">th3</th>
+        </tr>
+        <tr style="text-align:center">
+          <td style="border-top:1px solid; border-right:1px solid">td1</td>
+          <td style="border-top:1px solid; border-right:1px solid; border-left:1px solid">td2</td>
+          <td style="border-top:1px solid; border-left:1px solid">td3</td>
+        </tr>
+      </tbody>
+    </table>
+    <br />
+    <br />
+    <br />
+    <br />
+    <h2>Test 2 : complete table with every html4 specific attributes</h2>
+    <table style="border:1px solid; border-spacing:12; width:100%; margin-left:auto; margin-right:auto; background-color:green; border-color:coral;">
+      <colgroup span="2" style="text-align:right; vertical-align:middle; width:30%;">
+        <col span="2" style="text-align:right; vertical-align:middle; width:70%" />
+      </colgroup>
+      <tbody style="text-align:justify; vertical-align:middle">
+        <tr style="text-align:justify; vertical-align:middle; background-color:red">
+          <th headers="id1 id2" sorted="reversed" style="border-right:1px solid; border-bottom:1px solid; padding:10px; height:100px; text-align:justify; vertical-align:middle; background-color:gray; border-top:2px solid; width:80%;">css width 70% should not be added</th>
+          <td style="border-right:1px solid; border-bottom:1px solid; border-left:1px solid; padding:10px; width:30%; border-top:2px solid">css width 30% should be added</td>
+          <th style="border-bottom:1px solid; border-left:1px solid; padding:10px; width:200px">css width 200px should be added</th>
+        </tr>
+        <tr>
+          <td style="border-top:1px solid; border-right:1px solid; padding:10px; text-align:center; vertical-align:bottom">Alfreds Futterkiste</td>
+          <th style="border-top:1px solid; border-right:1px solid; border-left:1px solid; padding-top:10px; padding-bottom:10px; padding-left:10px; padding-right:0">padding-right 0 and others 10px</th>
+          <td style="border-top:1px solid; border-left:1px solid; padding:0">padding 0</td>
+        </tr>
+      </tbody>
+    </table>
+  </body>
+</html>

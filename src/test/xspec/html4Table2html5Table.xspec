@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<x:description 
+  xmlns:x="http://www.jenitennison.com/xslt/xspec" 
+  stylesheet="../../main/xsl/html4Table2html5Table.xsl">
+  
+  <x:scenario label="html4Table2html5Table" xml:base="data/">
+    <x:scenario label="table.html4.html > table.html4.html5.html">
+      <x:context href="table.html4.html"/>
+      <x:expect label="OK" select="/*" test="/*" href="table.html4.html5.html"/>
+    </x:scenario>
+  </x:scenario>
+  
+</x:description>
