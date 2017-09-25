@@ -970,15 +970,18 @@
         - par contre pas de choix sur les options de sérialisation tel que le xsl:output le permet</xd:p>
     </xd:desc>
     <xd:param name="nodes">Noeuds XML (typiquement du contenu mixte)</xd:param>
+    <xd:param name="copyNS">Copie des déclarations d'espaces de noms sur les "éléments racines" (= éléments de <xd:ref name="nodes" type="parameter">$nodes</xd:ref> qui n'ont pas d'élément parent)</xd:param>
     <!--<xd:param name="outputName">Nom d'un xsl:ouput qui détermine la sérialisation à appliquer</xd:param>-->
     <xd:return>le xml en string</xd:return>
   </xd:doc>
   <xsl:function name="els:serialize" as="xs:string">
     <xsl:param name="nodes" as="node()*"/>
+    <xsl:param name="copyNS" as="xs:boolean"/>
     <!--<xsl:param name="outputName" as="xs:string"/>-->
     <xsl:variable name="serialize-xml-as-string" as="xs:string*">
       <xsl:apply-templates select="$nodes" mode="els:serialize">
         <!--<xsl:with-param name="outputName" select="$outputName" tunnel="yes" as="xs:string"/>-->
+        <xsl:with-param name="copyNSOnRootElements" select="$copyNS" tunnel="yes" as="xs:boolean"/>
       </xsl:apply-templates>
     </xsl:variable>
     <xsl:sequence select="string-join($serialize-xml-as-string, '')"/>
@@ -986,15 +989,41 @@
   
   <xd:doc>
     <xd:desc>
+      <xd:p>Signature à 1 argument de la fonction els:serialize($nodes as node()*, $copyNS as xs:boolean).</xd:p>
+      <xd:p>Par défaut, la copie des déclarations d'espaces de noms sur les "éléments racines" est désactivée.</xd:p>
+      <xd:p>TO DO : $copyNS est à false() par défaut pour conserver un comportement ISO de la signature à 1 argument de la fonction -> voir pour passer sa valeur à true() si pas d'impact.</xd:p>
+    </xd:desc>
+    <xd:param name="nodes">Noeuds XML (typiquement du contenu mixte)</xd:param>
+    <xd:return>le xml en string</xd:return>
+  </xd:doc>
+  <xsl:function name="els:serialize" as="xs:string">
+    <xsl:param name="nodes" as="node()*"/>
+    <xsl:sequence select="els:serialize($nodes,false())"/>
+  </xsl:function>
+  
+  <xd:doc>
+    <xd:desc>
       <xd:p>Sérialisation des éléments en mode els:serialize.</xd:p>
+      <xd:p>TO DO : $copyNSOnRootElements conservé avec une valeur par défaut pour rétro-compatibilité (au cas où le template serait appelé en dehors de la fonction).</xd:p>
     </xd:desc>
   </xd:doc>
   <xsl:template match="*" mode="els:serialize">
+    <xsl:param name="copyNSOnRootElements" tunnel="yes" select="false()" as="xs:boolean"/>
     <!--fixme : utilisation de saxon:serialize ? oui mais il faut passer le output et je n'y arrive pas-->
       <!--<xsl:param name="outputName" required="yes" tunnel="yes" as="xs:string"/>
       <xsl:value-of select="saxon:serialize(., $outputName)"/>-->
       <xsl:text>&lt;</xsl:text>
       <xsl:value-of select="name()"/>
+      <!-- Copie des déclarations de NS si $copyNSOnRootElements + l'élément n'a pas de parent -->
+      <xsl:if test="$copyNSOnRootElements and not(parent::*)">
+        <xsl:for-each select="namespace::node()">
+          <xsl:text> xmlns:</xsl:text>
+          <xsl:value-of select="name()"/>
+          <xsl:text>="</xsl:text>
+          <xsl:value-of select="."/>
+          <xsl:text>"</xsl:text>
+        </xsl:for-each>
+      </xsl:if>
       <xsl:for-each select="@*">
         <xsl:text> </xsl:text>
         <xsl:value-of select="name()"/>
