@@ -461,22 +461,22 @@
           <xsl:variable name="style.parsed" select="css:parse-inline(@style)" as="element(css:css)"/>
           <!--cf. http://www.datypic.com/sc/cals/a-nons_frame.html-->
           <xsl:choose>
-            <xsl:when test="css:definesBorderTop($style.parsed) and css:definesBorderRight($style.parsed) and css:definesBorderBottom($style.parsed) and css:definesBorderLeft($style.parsed)">
+            <xsl:when test="css:showBorderTop($style.parsed) and css:showBorderRight($style.parsed) and css:showBorderBottom($style.parsed) and css:showBorderLeft($style.parsed)">
               <xsl:text>all</xsl:text>
             </xsl:when>
-            <xsl:when test="css:definesBorderTop($style.parsed) and not(css:definesBorderRight($style.parsed)) and css:definesBorderBottom($style.parsed) and not(css:definesBorderLeft($style.parsed))">
+            <xsl:when test="css:showBorderTop($style.parsed) and not(css:showBorderRight($style.parsed)) and css:showBorderBottom($style.parsed) and not(css:showBorderLeft($style.parsed))">
               <xsl:text>topbot</xsl:text>
             </xsl:when>
-            <xsl:when test="not(css:definesBorderTop($style.parsed)) and css:definesBorderRight($style.parsed) and not(css:definesBorderBottom($style.parsed)) and css:definesBorderLeft($style.parsed)">
+            <xsl:when test="not(css:showBorderTop($style.parsed)) and css:showBorderRight($style.parsed) and not(css:showBorderBottom($style.parsed)) and css:showBorderLeft($style.parsed)">
               <xsl:text>sides</xsl:text>
             </xsl:when>
-            <xsl:when test="css:definesBorderTop($style.parsed) and not(css:definesBorderRight($style.parsed)) and not(css:definesBorderBottom($style.parsed)) and not(css:definesBorderLeft($style.parsed))">
+            <xsl:when test="css:showBorderTop($style.parsed) and not(css:showBorderRight($style.parsed)) and not(css:showBorderBottom($style.parsed)) and not(css:showBorderLeft($style.parsed))">
               <xsl:text>top</xsl:text>
             </xsl:when>
-            <xsl:when test="not(css:definesBorderTop($style.parsed)) and not(css:definesBorderRight($style.parsed)) and css:definesBorderBottom($style.parsed) and not(css:definesBorderLeft($style.parsed))">
+            <xsl:when test="not(css:showBorderTop($style.parsed)) and not(css:showBorderRight($style.parsed)) and css:showBorderBottom($style.parsed) and not(css:showBorderLeft($style.parsed))">
               <xsl:text>bottom</xsl:text>
             </xsl:when>
-            <xsl:when test="not(css:definesBorderTop($style.parsed)) and not(css:definesBorderRight($style.parsed)) and not(css:definesBorderBottom($style.parsed)) and not(css:definesBorderLeft($style.parsed))">
+            <xsl:when test="not(css:showBorderTop($style.parsed)) and not(css:showBorderRight($style.parsed)) and not(css:showBorderBottom($style.parsed)) and not(css:showBorderLeft($style.parsed))">
               <xsl:text>none</xsl:text>
             </xsl:when>
           </xsl:choose>
@@ -740,7 +740,7 @@
     <xsl:copy-of select="."/>
   </xsl:template>
   
-  <!--some class values might come from cals conversion, let's keep others class values-->
+  <!--some class values might come from cals conversion, delete them but keep others class values-->
   <xsl:template match="@class" mode="xhtml2cals:convert-attributes-to-cals">
     <xsl:variable name="class.tok" select="tokenize(., '\s+')" as="xs:string*"/>
     <xsl:variable name="class.except-cals" select="string-join($class.tok[not(starts-with(., 'cals_'))], ' ')" as="xs:string"/>
