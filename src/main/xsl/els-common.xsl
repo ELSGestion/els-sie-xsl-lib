@@ -1016,9 +1016,12 @@
       <xsl:value-of select="name()"/>
       <!-- Copie des déclarations de NS si $copyNSOnRootElements + l'élément n'a pas de parent -->
       <xsl:if test="$copyNSOnRootElements and not(parent::*)">
-        <xsl:for-each select="namespace::node()">
-          <xsl:text> xmlns:</xsl:text>
-          <xsl:value-of select="name()"/>
+        <!-- Can't redefine 'xml' prefix (already implicit) -->
+        <xsl:for-each select="namespace::node()[name() != 'xml']">
+          <xsl:text> xmlns</xsl:text>
+          <xsl:if test="name() != ''">
+            <xsl:value-of select="concat(':',name())"/>
+          </xsl:if>
           <xsl:text>="</xsl:text>
           <xsl:value-of select="."/>
           <xsl:text>"</xsl:text>
