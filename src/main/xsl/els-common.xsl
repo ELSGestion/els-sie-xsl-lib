@@ -893,6 +893,13 @@
     </xsl:copy>
   </xsl:template>
   
+  <!--Generic copy template-->
+  <xsl:template match="node() | @*" mode="els:copy">
+    <xsl:copy>
+      <xsl:apply-templates select="node() | @*" mode="#current"/>
+    </xsl:copy>
+  </xsl:template>
+  
   <xd:doc>
     <xd:desc>
       <xd:p>Fonction qui affiche un noeud (élément, attribut ...) sous forme de string lisible</xd:p>
