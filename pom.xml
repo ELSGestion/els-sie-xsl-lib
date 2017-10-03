@@ -7,7 +7,7 @@
 
   <groupId>eu.els.sie.lib.xsl.common</groupId>
   <artifactId>xslLib</artifactId>
-  <version>1.0.9</version>
+  <version>1.0.9.1</version>
   <packaging>jar</packaging>
 
   <name>xslLib</name>
@@ -23,7 +23,7 @@
     <dependency>
       <groupId>eu.els.sie.models</groupId>
       <artifactId>ext-models</artifactId>
-      <version>1.0.1-SNAPSHOT</version>
+      <version>1.0.1</version>
     </dependency>
   </dependencies>
   
