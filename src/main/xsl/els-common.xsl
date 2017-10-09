@@ -879,7 +879,30 @@
       </xsl:otherwise>
     </xsl:choose>
   </xsl:function>
-  
+
+  <!-- supprime l'item $classToRemove de l'attribut @class de l'élément $element -->
+  <xd:doc>
+    <xd:desc>
+      <xd:p>Cette fonction permet de supprimer un item de l'attribut @class de l'élément</xd:p>
+    </xd:desc>
+    <xd:param name="e">element à gérer</xd:param>
+    <xd:param name="classToRemove">item à supprimer</xd:param>
+  </xd:doc>
+  <xsl:function name="els:removeOneClass" as="attribute(class)?">
+    <xsl:param name="e" as="element()"/>
+    <xsl:param name="classToRemove" as="xs:string"/>
+    <xsl:choose>
+      <xsl:when test="els:hasClass($e, $classToRemove)">
+        <xsl:attribute name="class">
+          <xsl:sequence select="string-join(tokenize($e/@class, '\s+')[. != $classToRemove], ' ')"/>
+        </xsl:attribute>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:copy-of select="$e/@class"/>
+      </xsl:otherwise>
+    </xsl:choose>
+  </xsl:function>
+
   <xd:doc>
     <xd:desc>
       <xd:p>Copie un élément et ses attributs et "continue" le traitement dans le mode courant (ou sans mode si

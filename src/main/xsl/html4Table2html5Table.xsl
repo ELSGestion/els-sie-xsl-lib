@@ -52,7 +52,7 @@
     table/tbody | table/thead | table/tfoot | 
     table/*/tr | table/*/tr/td | table/*/tr/th" 
     mode="xslLib:html4table2html5table">
-    <xsl:copy>
+    <xsl:copy copy-namespaces="no">
       <xsl:apply-templates select="@* except (@style, @*[name() = $xslLib:html5.unsupported-table-attributes])" mode="#current"/>
       <xsl:variable name="css" select="css:parse-inline(@style)" as="element(css:css)?"/>
       <!--@border="1" on table element defines a border for each cell-->

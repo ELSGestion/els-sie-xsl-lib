@@ -315,6 +315,63 @@
       <x:expect label="Not yet implemented" select="'Not yet implemented'"/>
     </x:scenario>
 
+    <x:scenario label="removeOneClass">
+      <x:call function="els:removeOneClass">
+        <x:param name="e">
+          <element class="try1 try2 try3"/>          
+        </x:param>
+      </x:call>
+      <x:scenario label="try1">
+        <x:call>
+          <x:param name="classToRemove" as="xs:string" select="'try1'"/>
+        </x:call>
+        <x:expect label="OK" select="/*/@class">
+          <temp class="try2 try3"/>
+        </x:expect>        
+      </x:scenario>
+      <x:scenario label="try2">
+        <x:call>
+          <x:param name="classToRemove" as="xs:string" select="'try2'"/>
+        </x:call>
+        <x:expect label="OK" select="/*/@class">
+          <temp class="try1 try3"/>
+        </x:expect>        
+      </x:scenario>
+      <x:scenario label="try3">
+        <x:call>
+          <x:param name="classToRemove" as="xs:string" select="'try3'"/>
+        </x:call>
+        <x:expect label="OK" select="/*/@class">
+          <temp class="try1 try2"/>
+        </x:expect>        
+      </x:scenario>      
+    </x:scenario>
+
+<!--    <x:scenario label="meta:get-word-index-lower-than-limit" focus="yes">
+      <x:call function="meta:get-word-index-lower-than-limit">
+        <x:param name="string" as="xs:string" select="'word1 word2 word3'"/>
+      </x:call>
+      <x:scenario label="$limit = 5">
+        <x:call>
+          <x:param name="limit" as="xs:integer" select="5"/>
+        </x:call>
+        <x:expect label="test" select="1"/>
+      </x:scenario>
+      <x:scenario label="$limit = 8">
+        <x:call>
+          <x:param name="limit" as="xs:integer" select="11"/>
+        </x:call>
+        <x:expect label="test" select="2"/>
+      </x:scenario>
+      <x:scenario label="$limit = 17">
+        <x:call>
+          <x:param name="limit" as="xs:integer" select="17"/>
+        </x:call>
+        <x:expect label="test" select="3"/>
+      </x:scenario>
+    </x:scenario>-->
+    
+
     <x:scenario label="displayNode" pending="Not yet implemented">
       <x:call function="els:displayNode">
         <x:param name="node" select="''"/>

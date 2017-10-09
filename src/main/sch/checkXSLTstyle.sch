@@ -127,7 +127,7 @@
     </rule>
     <rule context="xsl:function[count(//xsl:template[@match][(@mode, '#default')[1] = '#default']) != 0]">
       <report id="xslqual-UnusedFunction"
-        test="not(some $x in //(@match | @select) satisfies contains($x, @name)) 
+        test="not(some $x in //(xsl:template/@match | xsl:*/@select | xsl:when/@test) satisfies contains($x, @name)) 
           and not(some $x in //(*[not(self::xsl:*)]/@*) satisfies contains($x, concat('{', @name, '(')))">
         [xslqual] Stylesheet function is unused
       </report>
@@ -176,11 +176,11 @@
         test="contains(., 'name(') or contains(., 'local-name(')" role="info">
         [xslqual] Using name() function when local-name() could be appropriate (and vice-versa)
       </report>-->
-      <report id="xslqual-IncorrectUseOfBooleanConstants" 
+      <!--<report id="xslqual-IncorrectUseOfBooleanConstants" role="warning"
         test="local-name(.)= ('match', 'select') and not(parent::xsl:attribute)
         and ((contains(., 'true') and not(contains(., 'true()'))) or (contains(., 'false') and not(contains(., 'false()'))))">
         [xslqual] Incorrectly using the boolean constants as 'true' or 'false'
-      </report>
+      </report>-->
       <report id="xslqual-UsingNamespaceAxis" 
         test="/xsl:stylesheet/@version = '2.0' and local-name(.)= ('match', 'select') and contains(., 'namespace::')">
         [xslqual] Using the deprecated namespace axis, when working in XSLT 2.0 mode
@@ -224,13 +224,18 @@
         and not(starts-with(@select, 'distinct-values('))
         and not(matches(@select, '\d'))" 
         role="warning">
-        [ELS] Use xsl:apply-template instead of xsl:for-each 
+        [ELS] Should you use xsl:apply-template instead of xsl:for-each 
       </report>
     </rule>
     <rule context="xsl:attribute">
       <report id="els-SettingValueOfXslAttributeIncorrectly"
         test="(count(*) = 1) and (count(xsl:value-of | xsl:sequence) = 1)">
         [xslqual] Assign value to an xsl:attribute using the 'select' syntax if assigning a value with xsl:value-of
+      </report>
+    </rule>
+    <rule context="xsl:template/@match | xsl:*/@select | xsl:when/@test">
+      <report test="contains(., 'document(concat(') or contains(., 'doc(concat(')">
+        Don't use concat within document() or doc() function, use resolve-uri instead (you may use static-base-uri() or base-uri())
       </report>
     </rule>
   </pattern>

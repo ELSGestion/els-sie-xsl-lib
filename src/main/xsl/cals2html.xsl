@@ -172,14 +172,21 @@
         <xsl:attribute name="style" select="string-join($style.tmp, ' ')"/>
       </xsl:if>
       <xsl:if test="$xslLib:cals2html.compute-column-width-within-colgroup">
+        <!--FIXME : here we get the new colwidth as percent ("500*, 500*" would be converted as "50%, 50%")
+        But we should treat differently by unit :
+        - unit : % => let it the same
+        - unit : * => make it %
+        - unit px  => let it the same (or make it %) ?-->
         <colgroup>
           <xsl:variable name="total-colwidth-sum" select="xslLib:cals2html.cals_sum-colwidths(colspec)" as="xs:double"/>
           <xsl:for-each select="colspec">
             <xsl:variable name="current-colwidth" select="xslLib:cals2html.cals_sum-colwidths(.)" as="xs:double"/>
             <col>
-              <xsl:call-template name="xslLib:cals2html.add-column-width">
-                <xsl:with-param name="width" select="concat(round(($current-colwidth div  $total-colwidth-sum) * 100), '%')" as="xs:string"/>
-              </xsl:call-template>
+              <xsl:if test="$total-colwidth-sum != 0">
+                <xsl:call-template name="xslLib:cals2html.add-column-width">
+                  <xsl:with-param name="width" select="concat(round(($current-colwidth div $total-colwidth-sum) * 100), '%')" as="xs:string"/>
+                </xsl:call-template>
+              </xsl:if>
             </col>
           </xsl:for-each>
         </colgroup>
@@ -439,7 +446,7 @@
       <xsl:variable name="current-colwidth" select="xslLib:cals2html.cals_sum-colwidths($current-colspec-list)" as="xs:double"/>
       <xsl:if test="not($xslLib:cals2html.compute-column-width-within-colgroup)">
         <xsl:call-template name="xslLib:cals2html.add-column-width">
-          <xsl:with-param name="width" select="concat(round(($current-colwidth div  $total-colwidth-sum)*97), '%')" as="xs:string"/>
+          <xsl:with-param name="width" select="concat(round(($current-colwidth div  $total-colwidth-sum) * 100), '%')" as="xs:string"/>
         </xsl:call-template>
       </xsl:if>
       <xsl:if test="count($current-colspec-list) > 1">
@@ -522,7 +529,7 @@
         <xsl:variable name="colwidth" select="$colspec/@colwidth" as="xs:string?"/>
         <!--<xsl:message>colwidth= <xsl:value-of select="$colwidth"/></xsl:message>-->
         <xsl:variable name="colwidth.normalized" select="replace($colwidth, '(\*|%)', '')" as="xs:string"/>
-        <xsl:variable name="colwidth.as-number" select=" if($colwidth.normalized castable as xs:double) then(number($colwidth.normalized)) else(0) " as="xs:double"/>
+        <xsl:variable name="colwidth.as-number" select="if($colwidth.normalized castable as xs:double) then(number($colwidth.normalized)) else(0)" as="xs:double"/>
         <xsl:sequence select="xslLib:cals2html.cals_sum-colwidths($colspec-list[position() gt 1], $current-sum + $colwidth.as-number)"/>
       </xsl:when>
       <xsl:otherwise>
