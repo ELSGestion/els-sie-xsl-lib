@@ -25,7 +25,7 @@
       
   -->
     
-  <!--<xsl:include href="../../developpements/commun/lib/efl-common.xsl"/>-->
+  <!--<xsl:include href="../xsl/els-common.xsl"/>-->
   
   <ns prefix="xsl" uri="http://www.w3.org/1999/XSL/Transform"/>
   <ns prefix="xd" uri="http://www.oxygenxml.com/ns/doc/xsl"/>
@@ -34,6 +34,8 @@
   <ns prefix="local" uri="checkXSLTstyle.sch"/>
   
   <xsl:key name="getElementById" match="*" use="@id"/>
+  
+  <xsl:variable name="els:quot" as="xs:string">'</xsl:variable>
   
   <!--====================================-->
   <!--            DIAGNOSTICS             -->
@@ -210,6 +212,15 @@
     <rule context="xsl:template/@match | xsl:*/@select | xsl:when/@test">
       <report test="contains(., 'document(concat(') or contains(., 'doc(concat(')">
         Don't use concat within document() or doc() function, use resolve-uri instead (you may use static-base-uri() or base-uri())
+      </report>
+    </rule>
+    <rule context="xsl:message[not(@use-when)][not(
+      empty(./node()) and @terminate = 'yes' 
+      and exists(preceding-sibling::*[1]/self::xsl:call-template[@name = 'els:log'][xsl:with-param[@name = 'level'][@select =  concat($els:quot, 'fatal', $els:quot)]])
+      )]">
+      <!--els:log does not permit to throught a fatal error, so when it's necessary we use an xsl:message terminate="yes" alone just after the els:log-->
+      <report test="true()" role="warning">
+        Use a call template to els:log instead of xsl:message
       </report>
     </rule>
   </pattern>
