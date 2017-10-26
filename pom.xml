@@ -2,33 +2,35 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>eu.els.sie.lib.xsl.common</groupId>
   <artifactId>xslLib</artifactId>
-  <version>1.0.10</version>
+  <version>1.0.11-SNAPSHOT</version>
   <packaging>jar</packaging>
 
   <name>xslLib</name>
-
   <description>Une librairie regroupant les XSL couramment utilisées. functx.xsl (http://www.xsltfunctions.com). elsCommon.xsl avec plein de fonctions courantes.</description>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
 
+  <scm>
+    <developerConnection>scm:git:git@bitbucket.org:elsgestion/sie-lib-xsl-common.git</developerConnection>
+    <tag>HEAD</tag>
+  </scm>
+
   <dependencies>
     <!--Validation cals-->
     <dependency>
       <groupId>eu.els.sie.models</groupId>
       <artifactId>ext-models</artifactId>
-      <version>1.0.1</version>
+      <version>1.0.3</version>
     </dependency>
   </dependencies>
   
   <build>
-
     <resources>
       <resource>
         <directory>src/main/xsl</directory>
@@ -37,11 +39,10 @@
     </resources>
 
     <plugins>
-      
       <plugin>
         <groupId>top.marchand.xml.maven</groupId>
         <artifactId>catalogBuilder-maven-plugin</artifactId>
-        <version>1.0.4</version>
+        <version>1.0.5</version>
         <executions>
           <execution>
             <id>preparation</id>
@@ -66,7 +67,7 @@
       <plugin>
         <groupId>io.xspec.maven</groupId>
         <artifactId>xspec-maven-plugin</artifactId>
-        <version>1.5.0-RC6</version>
+        <version>1.5.1-RC6</version>
         <dependencies>
           <dependency>
             <groupId>extern.net.sf.saxon</groupId>
@@ -111,7 +112,6 @@
           </execution>
         </executions>
       </plugin>
-
     </plugins>
   </build>
 
@@ -166,36 +166,39 @@
       <id>release</id>
       <build>
         <plugins>
-          <!--plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-gpg-plugin</artifactId>
-            <version>1.6</version>
-            <executions>
-              <execution>
-                <id>sign-artifacts</id>
-                <phase>verify</phase>
-                <goals>
-                  <goal>sign</goal>
-                </goals>
-              </execution>
-            </executions>
-          </plugin-->
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-release-plugin</artifactId>
             <version>2.5.3</version>
+            <dependencies>
+              <dependency>
+                <groupId>org.apache.maven.scm</groupId>
+                <artifactId>maven-scm-provider-gitexe</artifactId>
+                <version>1.8.1</version>
+              </dependency>
+            </dependencies>
           </plugin>
-          <!--plugin>
-            <groupId>org.sonatype.plugins</groupId>
-            <artifactId>nexus-staging-maven-plugin</artifactId>
-            <version>1.6.7</version>
-            <extensions>true</extensions>
-            <configuration>
-              <serverId>ossrh</serverId>
-              <nexusUrl>https://oss.sonatype.org/</nexusUrl>
-              <autoReleaseAfterClose>true</autoReleaseAfterClose>
-            </configuration>
-          </plugin-->
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-enforcer-plugin</artifactId>
+            <version>3.0.0-M1</version>
+            <executions>
+              <execution>
+                <id>enforce-no-snapshots</id>
+                <goals>
+                  <goal>enforce</goal>
+                </goals>
+                <configuration>
+                  <rules>
+                    <requireReleaseDeps>
+                      <message>No Snapshots Allowed!</message>
+                    </requireReleaseDeps>
+                  </rules>
+                  <fail>true</fail>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
         </plugins>
       </build>
     </profile>
