@@ -25,7 +25,7 @@
       
   -->
     
-  <!--<xsl:include href="../../developpements/commun/lib/efl-common.xsl"/>-->
+  <!--<xsl:include href="../xsl/els-common.xsl"/>-->
   
   <ns prefix="xsl" uri="http://www.w3.org/1999/XSL/Transform"/>
   <ns prefix="xd" uri="http://www.oxygenxml.com/ns/doc/xsl"/>
@@ -34,6 +34,8 @@
   <ns prefix="local" uri="checkXSLTstyle.sch"/>
   
   <xsl:key name="getElementById" match="*" use="@id"/>
+  
+  <xsl:variable name="els:quot" as="xs:string">'</xsl:variable>
   
   <!--====================================-->
   <!--            DIAGNOSTICS             -->
@@ -196,27 +198,7 @@
     </rule>
   </pattern>
   
-  <pattern id="common_els">
-    <rule context="/xsl:stylesheet">
-      <assert test="xd:doc[@scope = 'stylesheet']">
-        [ELS] Please add a documentation block for the whole stylesheet : &lt;xd:doc scope="stylesheet">
-      </assert>
-    </rule>
-    <rule context="xsl:variable | xsl:param">
-      <assert test="@as" diagnostics="addType">
-        [ELS] <name/> is not typed
-      </assert>
-    </rule>
-    <rule context="xsl:template[@name]">
-      <assert test="matches(@name, '^\w+:.*')" role="warning">
-        [ELS] Named template should be namespaces prefixed, so they don't generate conflict with imported XSLT
-      </assert>
-    </rule>
-    <!--<rule context="@match | @select">
-      <report test="contains(., '*:')">
-        [ELS] Use a namespace prefix instead of *:
-      </report>
-    </rule>-->
+  <pattern id="els_common">
     <rule context="xsl:for-each" id="xsl_for-each">
       <report test="ancestor::xsl:template 
         and not(starts-with(@select, '$'))
@@ -227,17 +209,60 @@
         [ELS] Should you use xsl:apply-template instead of xsl:for-each 
       </report>
     </rule>
-    <rule context="xsl:attribute">
-      <report id="els-SettingValueOfXslAttributeIncorrectly"
-        test="(count(*) = 1) and (count(xsl:value-of | xsl:sequence) = 1)">
-        [xslqual] Assign value to an xsl:attribute using the 'select' syntax if assigning a value with xsl:value-of
-      </report>
-    </rule>
     <rule context="xsl:template/@match | xsl:*/@select | xsl:when/@test">
       <report test="contains(., 'document(concat(') or contains(., 'doc(concat(')">
         Don't use concat within document() or doc() function, use resolve-uri instead (you may use static-base-uri() or base-uri())
       </report>
     </rule>
+    <rule context="xsl:message[not(@use-when)][not(
+      empty(./node()) and @terminate = 'yes' 
+      and exists(preceding-sibling::*[1]/self::xsl:call-template[@name = 'els:log'][xsl:with-param[@name = 'level'][@select =  concat($els:quot, 'fatal', $els:quot)]])
+      )]">
+      <!--els:log does not permit to throught a fatal error, so when it's necessary we use an xsl:message terminate="yes" alone just after the els:log-->
+      <report test="true()" role="warning">
+        Use a call template to els:log instead of xsl:message
+      </report>
+    </rule>
   </pattern>
+  
+  <pattern id="els_documentation">
+    <rule context="/xsl:stylesheet">
+      <assert test="xd:doc[@scope = 'stylesheet']">
+        [ELS] Please add a documentation block for the whole stylesheet : &lt;xd:doc scope="stylesheet">
+      </assert>
+    </rule>
+  </pattern>
+  
+  <pattern id="els_typing">
+    <rule context="xsl:variable | xsl:param">
+      <assert test="@as" diagnostics="addType">
+        [ELS] <name/> is not typed
+      </assert>
+    </rule>
+  </pattern>
+  
+  <pattern id="els_namespaces">
+    <rule context="xsl:template/@name | xsl:template/@mode | /*/xsl:variable/@name | /*/xsl:param/@name">
+      <assert test="matches(., '^\w+:.*')" role="warning">
+        [ELS] <value-of select="local-name(parent::*)"/> @<name/> should be namespaces prefixed, so they don't generate conflict with imported XSLT (or when this xslt is imported)
+      </assert>
+    </rule>
+    <!--<rule context="@match | @select">
+      <report test="contains(., '*:')">
+        [ELS] Use a namespace prefix instead of *:
+      </report>
+    </rule>-->
+  </pattern>
+  
+  <pattern id="els_writing">
+    <rule context="xsl:attribute | xsl:namespace | xsl:variable | xsl:param | xsl:with-param">
+      <report id="els-useSeletWhenPossible"
+        test="not(@select) and (count(* | text()[normalize-space(.)]) = 1) and (count(xsl:value-of | xsl:sequence | text()[normalize-space(.)]) = 1)">
+        [xslqual] Use @select to assign a value to <name/>
+      </report>
+    </rule>
+  </pattern>
+  
+  
   
 </schema>

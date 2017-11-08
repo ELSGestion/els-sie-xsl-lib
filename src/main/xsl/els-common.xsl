@@ -7,7 +7,7 @@
   xmlns:functx="http://www.functx.com" 
   xmlns:els="http://www.lefebvre-sarrut.eu/ns/els"
   exclude-result-prefixes="#all"
-  version="2.0">
+  version="3.0">
   
   <xd:doc scope="stylesheet">
     <xd:desc>
