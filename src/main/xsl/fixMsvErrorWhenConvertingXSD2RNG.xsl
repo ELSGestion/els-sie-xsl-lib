@@ -10,7 +10,7 @@
   xmlns:fixMsvErrorWhenConvertingXSD2RNG="http://www.lefebvre-sarrut.eu/ns/els/xslLib/fixMsvErrorWhenConvertingXSD2RNG"
   xpath-default-namespace="http://relaxng.org/ns/structure/1.0"
   exclude-result-prefixes="#all"
-  version="2.0">
+  version="3.0">
   
   <xsl:import href="rng-common.xsl"/>
   

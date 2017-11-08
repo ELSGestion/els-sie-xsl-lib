@@ -31,7 +31,7 @@ Je comptais simplifier l’étape de renommage des steps 7.19 et 7.20 qui est un
   xmlns:rng2srng="http://relaxng.org/ns/rng2srng"
   xmlns="http://relaxng.org/ns/structure/1.0"
   xpath-default-namespace="http://relaxng.org/ns/structure/1.0"
-  version="2.0">
+  version="3.0">
   
   <xsl:output method="xml" indent="yes"/>
   

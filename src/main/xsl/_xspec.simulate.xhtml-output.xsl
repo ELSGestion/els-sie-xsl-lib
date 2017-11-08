@@ -7,7 +7,7 @@
   xmlns="http://www.w3.org/1999/xhtml"
   xpath-default-namespace="http://www.w3.org/1999/xhtml"
   exclude-result-prefixes="#all"
-  version="2.0">
+  version="3.0">
   
   <xd:doc scope="stylesheet">
     <xd:desc>

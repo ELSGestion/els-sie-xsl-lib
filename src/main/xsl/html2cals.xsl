@@ -12,7 +12,7 @@
   xpath-default-namespace="http://www.w3.org/1999/xhtml"
   xmlns="http://docs.oasis-open.org/ns/oasis-exchange/table"
   exclude-result-prefixes="#all" 
-  version="2.0">
+  version="3.0">
   
   <xsl:import href="els-common.xsl"/>
   <xsl:import href="html4Table2html5Table.xsl"/>
