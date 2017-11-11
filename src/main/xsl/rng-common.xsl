@@ -25,6 +25,18 @@
   <xsl:key name="rng:getDefineByName" match="define" use="@name"/>
   <xsl:key name="rng:getRefByName" match="ref" use="@name"/>
   
+  <!--
+    NEED context item here !
+    <xsl:function name="rng:getDefineByName" as="element(define)*">
+    <xsl:param name="name" as="xs:string"/>
+    <xsl:sequence select="key('rng:getDefineByName', $name)"/>
+  </xsl:function>
+  
+  <xsl:function name="rng:getRefByName" as="element(define)*">
+    <xsl:param name="name" as="xs:string"/>
+    <xsl:sequence select="key('rng:getRefByName', $name)"/>
+  </xsl:function>-->
+  
   <xsl:function name="rng:getRootNamespaceUri" as="xs:string">
     <xsl:param name="grammar" as="element(rng:grammar)"/>
     <xsl:choose>
@@ -128,12 +140,30 @@
       select="every $rngParent in $rngElement/root()//define//ref[@name = $rngDefine/@name]/ancestor::define/rng:element[1] 
       satisfies rng:isInline($rngElement, $rngParent)"/>
   </xsl:function>
-  
+
+  <xsl:function name="rng:isInlineOnly" as="xs:boolean">
+    <xsl:param name="rngElement" as="element(rng:element)"/>
+    <xsl:param name="parents.name.scope" as="xs:string*"/>
+    <xsl:variable name="rngDefine" select="$rngElement/parent::define" as="element(define)"/>
+    <xsl:sequence 
+      select="every $rngParent in $rngElement/root()//define//ref[@name = $rngDefine/@name]/ancestor::define/rng:element[1][@name = $parents.name.scope] 
+      satisfies rng:isInline($rngElement, $rngParent)"/>
+  </xsl:function>
+
   <xsl:function name="rng:isBlockOnly" as="xs:boolean">
     <xsl:param name="rngElement" as="element(rng:element)"/>
     <xsl:variable name="rngDefine" select="$rngElement/parent::define" as="element(define)"/>
     <xsl:sequence 
       select="every $rngParent in $rngElement/root()//define//ref[@name = $rngDefine/@name]/ancestor::define/rng:element[1] 
+      satisfies not(rng:isInline($rngElement, $rngParent))"/>
+  </xsl:function>
+  
+  <xsl:function name="rng:isBlockOnly" as="xs:boolean">
+    <xsl:param name="rngElement" as="element(rng:element)"/>
+    <xsl:param name="parents.name.scope" as="xs:string*"/>
+    <xsl:variable name="rngDefine" select="$rngElement/parent::define" as="element(define)"/>
+    <xsl:sequence 
+      select="every $rngParent in $rngElement/root()//define//ref[@name = $rngDefine/@name]/ancestor::define/rng:element[1][@name = $parents.name.scope] 
       satisfies not(rng:isInline($rngElement, $rngParent))"/>
   </xsl:function>
   
@@ -604,12 +634,14 @@
           <xsl:apply-templates select="@*" mode="#current"/>
           <xsl:apply-templates select="start" mode="#current"/>
           <xsl:apply-templates select="define" mode="#current">
+            <!--when converting dtd2rng trang.jar generates <define name="attlist.elementName">, so we keep this next to the define <define name="elementName">
+              => Not really usefull because in this case trang.jar  already order defines in a good way !--> 
             <xsl:sort 
               select="concat(
-                        (element[1]/@name, element[1]/name)[1]/lower-case(.), 
-                         '_',
-                         element[1]//attribute[@name = $rng:reorder_byAttributeName]/value/text()
-                         )"/>
+              (element[1]/@name, element[1]/name)[1]/lower-case(replace(., '^attlist\.', '')), 
+               '_',
+               element[1]//attribute[@name = $rng:reorder_byAttributeName]/value/text()
+               )"/>
           </xsl:apply-templates>
         </xsl:copy>
       </xsl:document>
