@@ -1137,10 +1137,13 @@
     <xsl:param name="filePath" as="xs:string?"/>
     <xsl:param name="withExt" as="xs:boolean"/>
     <!-- -->
-    <xsl:variable name="fileNameWithExt" select="functx:substring-after-last-match($filePath,'/')"/>
-    <xsl:variable name="fileNameNoExt" select="functx:substring-before-last-match($fileNameWithExt,'\.')"/>
-    <xsl:variable name="ext" select="els:getFileExt($fileNameWithExt)"/>
-    <xsl:sequence select="concat('', $fileNameNoExt, if ($withExt) then (concat('.',$ext)) else (''))"/>
+    <xsl:variable name="fileNameWithExt" select="functx:substring-after-last-match($filePath,'/')" as="xs:string?"/>
+    <xsl:variable name="fileNameNoExt" select="functx:substring-before-last-match($fileNameWithExt,'\.')" as="xs:string?"/>
+    <!-- Si le nom du fichier n'a pas d'extension (ex. : toto), els:getFileExt() renvoie le nom du fichier... ce qui n'est pas bon
+    <xsl:variable name="ext" select="concat('.',els:getFileExt($fileNameWithExt))" as="xs:string"/>-->
+    <!-- Cette version fonctionne avec les noms de fichiers sans extension -> $ext est une chaîne vide dans ces cas-là -->
+    <xsl:variable name="ext" select="functx:substring-after-match($fileNameWithExt,$fileNameNoExt)" as="xs:string?"/>
+    <xsl:sequence select="concat('', $fileNameNoExt, if ($withExt) then ($ext) else (''))"/>
   </xsl:function>
 
   <xd:doc>
