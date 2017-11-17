@@ -637,4 +637,28 @@
 
   </x:scenario>
 
+  <x:scenario label="URI">
+    <!-- value is not an URI -->
+    <x:scenario label="isURI false">
+      <x:call function="els:isAnyUri">
+        <x:param name="item" select="'http://test.web.site.fr#toto#toto'"/>
+      </x:call>
+      <x:expect label="isURI false" select="false()"/>
+    </x:scenario>
+    <!-- value is an URI -->
+    <x:scenario label="isURI true">
+      <x:call function="els:isAnyUri">
+        <x:param name="item" select="'http://test.web.site.fr'"/>
+      </x:call>
+      <x:expect label="isURI true" select="true()"/>
+    </x:scenario>
+    <!-- value is empty -->
+    <x:scenario label="isURI empty">
+      <x:call function="els:isAnyUri">
+        <x:param name="item" select="''"/>
+      </x:call>
+      <x:expect label="isURI empty" select="true()"/>
+    </x:scenario>      
+  </x:scenario> 
+
 </x:description>

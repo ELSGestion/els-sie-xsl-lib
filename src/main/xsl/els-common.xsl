@@ -1485,6 +1485,17 @@
     <xsl:value-of select="$s castable as xs:integer"/>
   </xsl:function>
   
+  <xd:doc>
+    <xd:desc>
+      <xd:p>Check if item is an anyURI type</xd:p>
+    </xd:desc>
+    <xd:param name="item">variable to check</xd:param>
+  </xd:doc>
+  <xsl:function name="els:isAnyUri" as="xs:boolean">
+    <xsl:param name="item" as="item()?"/>
+    <xsl:value-of select="$item castable as xs:anyURI"/>
+  </xsl:function>
+  
   <xsl:function name="els:round" as="xs:integer">
     <xsl:param name="number" as="xs:double"/>
     <xsl:value-of select="els:round($number,0) cast as xs:integer"/>
