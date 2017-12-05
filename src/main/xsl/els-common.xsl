@@ -1539,5 +1539,18 @@
       substring('0123456789ABCDEF',
       ($in mod 16) + 1, 1))"/>
   </xsl:function>
+
+  <!-- Conversion d'un item en boolean. -->
+  <!-- Si la valeur est 1 ou "OUI" ou "TRUE", retourne true() sinon false() -->
+  <xsl:function name="els:convertToBoolean" as="xs:boolean">
+    <xsl:param name="var" as="item()?" />
+    <xsl:value-of select="if (not(exists($var))) then (false())
+                          else (if ($var instance of xs:boolean) then ($var)
+                          else (if ($var instance of xs:integer) then (boolean($var))
+                                 else (if ($var instance of xs:string) then (boolean(upper-case($var)='OUI' or upper-case($var)='TRUE' or upper-case($var)='VRAI'))
+                                       else (false())
+                                 )
+                           ))"/>
+  </xsl:function>
   
 </xsl:stylesheet>

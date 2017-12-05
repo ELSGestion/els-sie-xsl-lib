@@ -661,4 +661,42 @@
     </x:scenario>      
   </x:scenario> 
 
+  <x:scenario label="Conversion booleen">
+     <x:scenario label="depuis booleen">
+      <x:call function="els:convertToBoolean">
+        <x:param name="var" select="true()" />
+      </x:call>
+      <x:expect label="vrai" select="true()"></x:expect>
+     </x:scenario>
+    <x:scenario label="depuis string 'true'">
+      <x:call function="els:convertToBoolean">
+        <x:param name="var" select="'true'" />
+      </x:call>
+      <x:expect label="vrai" select="true()"></x:expect>
+    </x:scenario>
+    <x:scenario label="depuis string 'oui'">
+      <x:call function="els:convertToBoolean">
+        <x:param name="var" select="'OUI'" />
+      </x:call>
+      <x:expect label="vrai" select="true()"></x:expect>
+    </x:scenario>
+    <x:scenario label="depuis string 'non'">
+      <x:call function="els:convertToBoolean">
+        <x:param name="var" select="'non'" />
+      </x:call>
+      <x:expect label="faux" select="false()"></x:expect>
+    </x:scenario>
+    <x:scenario label="depuis int '0'">
+      <x:call function="els:convertToBoolean">
+        <x:param name="var" select="0" />
+      </x:call>
+      <x:expect label="faux" select="false()"></x:expect>
+    </x:scenario>
+    <x:scenario label="depuis int '1'">
+      <x:call function="els:convertToBoolean">
+        <x:param name="var" select="1" />
+      </x:call>
+      <x:expect label="vrai" select="true()"></x:expect>
+    </x:scenario>
+  </x:scenario>
 </x:description>
