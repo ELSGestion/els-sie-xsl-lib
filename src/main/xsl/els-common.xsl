@@ -1137,10 +1137,13 @@
     <xsl:param name="filePath" as="xs:string?"/>
     <xsl:param name="withExt" as="xs:boolean"/>
     <!-- -->
-    <xsl:variable name="fileNameWithExt" select="functx:substring-after-last-match($filePath,'/')"/>
-    <xsl:variable name="fileNameNoExt" select="functx:substring-before-last-match($fileNameWithExt,'\.')"/>
-    <xsl:variable name="ext" select="els:getFileExt($fileNameWithExt)"/>
-    <xsl:sequence select="concat('', $fileNameNoExt, if ($withExt) then (concat('.',$ext)) else (''))"/>
+    <xsl:variable name="fileNameWithExt" select="functx:substring-after-last-match($filePath,'/')" as="xs:string?"/>
+    <xsl:variable name="fileNameNoExt" select="functx:substring-before-last-match($fileNameWithExt,'\.')" as="xs:string?"/>
+    <!-- Si le nom du fichier n'a pas d'extension (ex. : toto), els:getFileExt() renvoie le nom du fichier... ce qui n'est pas bon
+    <xsl:variable name="ext" select="concat('.',els:getFileExt($fileNameWithExt))" as="xs:string"/>-->
+    <!-- Cette version fonctionne avec les noms de fichiers sans extension -> $ext est une chaîne vide dans ces cas-là -->
+    <xsl:variable name="ext" select="functx:substring-after-match($fileNameWithExt,$fileNameNoExt)" as="xs:string?"/>
+    <xsl:sequence select="concat('', $fileNameNoExt, if ($withExt) then ($ext) else (''))"/>
   </xsl:function>
 
   <xd:doc>
@@ -1482,6 +1485,17 @@
     <xsl:value-of select="$s castable as xs:integer"/>
   </xsl:function>
   
+  <xd:doc>
+    <xd:desc>
+      <xd:p>Check if item is an anyURI type</xd:p>
+    </xd:desc>
+    <xd:param name="item">variable to check</xd:param>
+  </xd:doc>
+  <xsl:function name="els:isAnyUri" as="xs:boolean">
+    <xsl:param name="item" as="item()?"/>
+    <xsl:value-of select="$item castable as xs:anyURI"/>
+  </xsl:function>
+  
   <xsl:function name="els:round" as="xs:integer">
     <xsl:param name="number" as="xs:double"/>
     <xsl:value-of select="els:round($number,0) cast as xs:integer"/>
@@ -1524,6 +1538,19 @@
       else '',
       substring('0123456789ABCDEF',
       ($in mod 16) + 1, 1))"/>
+  </xsl:function>
+
+  <!-- Conversion d'un item en boolean. -->
+  <!-- Si la valeur est 1 ou "OUI" ou "TRUE", retourne true() sinon false() -->
+  <xsl:function name="els:convertToBoolean" as="xs:boolean">
+    <xsl:param name="var" as="item()?" />
+    <xsl:value-of select="if (not(exists($var))) then (false())
+                          else (if ($var instance of xs:boolean) then ($var)
+                          else (if ($var instance of xs:integer) then (boolean($var))
+                                 else (if ($var instance of xs:string) then (boolean(upper-case($var)='OUI' or upper-case($var)='TRUE' or upper-case($var)='VRAI'))
+                                       else (false())
+                                 )
+                           ))"/>
   </xsl:function>
   
 </xsl:stylesheet>
