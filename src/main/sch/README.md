@@ -1,0 +1,1 @@
+cf. https://bitbucket.org/elsgestion/sie-xml-dev/wiki/OXYGEN_reglages-els.md#markdown-header-schematron-sur-la-qualite-xslt-oxygen-v19-only
