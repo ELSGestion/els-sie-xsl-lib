@@ -446,6 +446,12 @@
           </x:call>
           <x:expect label="File name only (missing ext)" select="'file'"/>
         </x:scenario>
+        <x:scenario label="$filePath = ''">
+          <x:call>
+            <x:param name="filePath" select="''" position="1"/>
+          </x:call>
+          <x:expect label="Empty string" select="''"/>
+        </x:scenario>
       </x:scenario>
       <x:scenario label="$withExt = false() (file name without extension)">
         <x:call>
