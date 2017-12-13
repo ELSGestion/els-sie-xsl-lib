@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<x:description 
+  xmlns:x="http://www.jenitennison.com/xslt/xspec" 
+  xmlns:xslLib="http://www.lefebvre-sarrut.eu/ns/els/xslLib"
+  stylesheet="../../main/xsl/xml2json/xvrl2xjson.xsl"
+  xslt-version="3.0">
+  
+  <x:scenario label="sample.xvrl > sample.xvrl.xjson" xml:base="data_xml2json/">
+    <x:context href="sample.xvrl"/>
+    <x:expect label="sample.xvrl.xjson" href="sample.xvrl.xjson" select="/" test="/"/>
+  </x:scenario>
+  
+</x:description>

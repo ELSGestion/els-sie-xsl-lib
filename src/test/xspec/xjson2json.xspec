@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<x:description 
+  xmlns:x="http://www.jenitennison.com/xslt/xspec" 
+  xmlns:xslLib="http://www.lefebvre-sarrut.eu/ns/els/xslLib"
+  stylesheet="_xspec.override-xslt/xjson2json.xsl"
+  xslt-version="3.0">
+  
+  <x:param name="sample.xvrl.xjson.json.uri" select="resolve-uri('data_xml2json/sample.xvrl.xjson.json', base-uri(/))"/>
+  
+  <x:scenario label="sample.xvrl.xjson > sample.xvrl.xjson.json" xml:base="data_xml2json/">
+    <x:context href="sample.xvrl.xjson"/>
+    <x:expect label="sample.xvrl.xjson.json" select="unparsed-text($sample.xvrl.xjson.json.uri)"/>
+  </x:scenario>
+  
+</x:description>

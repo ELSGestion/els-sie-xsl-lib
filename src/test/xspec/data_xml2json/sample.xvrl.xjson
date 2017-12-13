@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fn:map xmlns:fn="http://www.w3.org/2005/xpath-functions" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.w3.org/2005/xpath-functions ext-models:/ext-models/w3c/xjson/schema-for-json.xsd">
+  <fn:map key="metadata">
+    <fn:map key="system-id">
+      <fn:string key="text">xxxx.xml</fn:string>
+    </fn:map>
+    <fn:map key="result">
+      <fn:boolean key="valid">false</fn:boolean>
+      <fn:number key="errors">2</fn:number>
+      <fn:number key="warnings">1</fn:number>
+    </fn:map>
+    <fn:map key="run">
+      <fn:string key="at">2017-12-04T12:21:37.381+01:00</fn:string>
+    </fn:map>
+  </fn:map>
+  <fn:array key="validation-reports">
+    <fn:map>
+      <fn:map key="metadata">
+        <fn:map key="validator">
+          <fn:string key="name">jing</fn:string>
+          <fn:string key="version">1.0</fn:string>
+        </fn:map>
+        <fn:map key="result">
+          <fn:boolean key="valid">false</fn:boolean>
+          <fn:number key="errors">2</fn:number>
+          <fn:number key="warnings">0</fn:number>
+        </fn:map>
+        <fn:map key="schema">
+          <fn:string key="system-id">xxx.rng</fn:string>
+          <fn:string key="schematypens">http://relaxng.org/ns/structure/1.0</fn:string>
+          <fn:string key="version">1.0</fn:string>
+        </fn:map>
+      </fn:map>
+      <fn:array key="reports">
+        <fn:map>
+          <fn:string key="role">error</fn:string>
+          <fn:number key="line">11</fn:number>
+          <fn:number key="column">22</fn:number>
+          <fn:string key="code">error-code-xxx</fn:string>
+          <fn:string key="path">/foo/bar[1]/test[1]</fn:string>
+          <fn:array key="message">
+            <fn:map>
+              <fn:string key="xml:lang">en</fn:string>
+              <fn:string key="text">Error message</fn:string>
+            </fn:map>
+            <fn:map>
+              <fn:string key="xml:lang">fr</fn:string>
+              <fn:string key="text">Message d’erreur</fn:string>
+            </fn:map>
+          </fn:array>
+        </fn:map>
+        <fn:map>
+          <fn:string key="role">error</fn:string>
+          <fn:number key="line">12</fn:number>
+          <fn:number key="column">24</fn:number>
+          <fn:string key="code">invalid_attribute_value</fn:string>
+          <fn:string key="path">/foo/bar[1]/test[2]</fn:string>
+          <fn:array key="message">
+            <fn:map>
+              <fn:string key="xml:lang">en</fn:string>
+              <fn:string key="text">value of attribute "test" is invalid; must be equal to "xxx" or "yyy"</fn:string>
+            </fn:map>
+            <fn:map>
+              <fn:string key="xml:lang">fr</fn:string>
+              <fn:string key="text">La valeur de l'attribut "test" est invalide ; doit être égale à "xxx" ou "yyy"</fn:string>
+            </fn:map>
+          </fn:array>
+        </fn:map>
+      </fn:array>
+    </fn:map>
+    <fn:map>
+      <fn:map key="metadata">
+        <fn:map key="validator">
+          <fn:string key="name">saxon</fn:string>
+          <fn:string key="version">9.8</fn:string>
+        </fn:map>
+        <fn:map key="result">
+          <fn:boolean key="valid">false</fn:boolean>
+          <fn:number key="errors">2</fn:number>
+          <fn:number key="warnings">0</fn:number>
+        </fn:map>
+        <fn:map key="schema">
+          <fn:string key="system-id">my-schema.xsd</fn:string>
+          <fn:string key="schematypens">http://www.w3.org/2001/XMLSchema</fn:string>
+          <fn:string key="version">1.1</fn:string>
+        </fn:map>
+      </fn:map>
+      <fn:array key="reports">
+        <fn:map>
+          <fn:string key="role">error</fn:string>
+          <fn:number key="line">8</fn:number>
+          <fn:number key="column">20</fn:number>
+          <fn:string key="code">invalid_attribute_value</fn:string>
+          <fn:string key="path">/foo/bar[1]/test[2]</fn:string>
+          <fn:array key="message">
+            <fn:map>
+              <fn:string key="xml:lang">en</fn:string>
+              <fn:string key="text">value of attribute "test" is invalid; must be equal to "xxx" or "yyy"</fn:string>
+            </fn:map>
+            <fn:map>
+              <fn:string key="xml:lang">fr</fn:string>
+              <fn:string key="text">La valeur de l'attribut "test" est invalide ; doit être égale à "xxx" ou "yyy"</fn:string>
+            </fn:map>
+          </fn:array>
+        </fn:map>
+        <fn:map>
+          <fn:string key="role">error</fn:string>
+          <fn:number key="line">12</fn:number>
+          <fn:number key="column">24</fn:number>
+          <fn:string key="code">invalid_attribute_value</fn:string>
+          <fn:string key="path">/foo/bar[1]/test[2]</fn:string>
+          <fn:array key="message">
+            <fn:map>
+              <fn:string key="xml:lang">en</fn:string>
+              <fn:string key="text">value of attribute "test" is invalid; must be equal to "xxx" or "yyy"</fn:string>
+            </fn:map>
+            <fn:map>
+              <fn:string key="xml:lang">fr</fn:string>
+              <fn:string key="text">La valeur de l'attribut "test" est invalide ; doit être égale à "xxx" ou "yyy"</fn:string>
+            </fn:map>
+          </fn:array>
+        </fn:map>
+      </fn:array>
+    </fn:map>
+    <fn:map>
+      <fn:map key="metadata">
+        <fn:map key="validator">
+          <fn:string key="name">saxon</fn:string>
+          <fn:string key="version">9.8</fn:string>
+        </fn:map>
+        <fn:map key="result">
+          <fn:boolean key="valid">false</fn:boolean>
+          <fn:number key="errors">2</fn:number>
+          <fn:number key="warnings">0</fn:number>
+        </fn:map>
+        <fn:map key="schema">
+          <fn:string key="system-id">my-schema.sch</fn:string>
+          <fn:string key="schematypens">http://xml.ascc.net/schematron/</fn:string>
+          <fn:string key="version">1.5</fn:string>
+        </fn:map>
+      </fn:map>
+      <fn:array key="reports">
+        <fn:map>
+          <fn:string key="role">error</fn:string>
+          <fn:number key="line">8</fn:number>
+          <fn:number key="column">20</fn:number>
+          <fn:string key="code">bad-col-number</fn:string>
+          <fn:string key="path">/foo/bar[1]/table[1]</fn:string>
+          <fn:array key="message">
+            <fn:map>
+              <fn:string key="xml:lang">en</fn:string>
+              <fn:string key="text">Number of column is not correct</fn:string>
+            </fn:map>
+            <fn:map>
+              <fn:string key="xml:lang">fr</fn:string>
+              <fn:string key="text">Le nombre de colonnes n'est pas correct</fn:string>
+            </fn:map>
+          </fn:array>
+        </fn:map>
+        <fn:map>
+          <fn:string key="role">warning</fn:string>
+          <fn:number key="line">26</fn:number>
+          <fn:number key="column">17</fn:number>
+          <fn:string key="code">sum-cols-should-be-100</fn:string>
+          <fn:string key="path">/foo/bar[1]/table[1]</fn:string>
+          <fn:array key="message">
+            <fn:map>
+              <fn:string key="xml:lang">en</fn:string>
+              <fn:string key="text">The sum of these column values should be equal to 100</fn:string>
+            </fn:map>
+            <fn:map>
+              <fn:string key="xml:lang">fr</fn:string>
+              <fn:string key="text">La somme des valeurs de cette colonnes devrait être égale à 100</fn:string>
+            </fn:map>
+          </fn:array>
+        </fn:map>
+      </fn:array>
+    </fn:map>
+  </fn:array>
+</fn:map>

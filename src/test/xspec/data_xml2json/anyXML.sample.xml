@@ -1,0 +1,7 @@
+<root xmlns="my-xmlns">
+  <a attribute="value" xml:id="test">
+    <b id="id1"/>
+    <c id="id2"/>
+    <d id="id3"/>
+  </a>
+</root>
