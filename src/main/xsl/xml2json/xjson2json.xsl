@@ -26,6 +26,10 @@
   -->
   <xsl:output method="text" name="xslLib:xjson2json"/>
   
+  <!--Default serialization option for json-->
+  <!--cf. https://www.w3.org/TR/xslt-30/#func-xml-to-json-->
+  <xsl:param name="xslLib:xjson2json.options" select="map{'indent':false()}" as="map(*)"/>
+  
   <!--==============================================-->
   <!--INIT-->
   <!--==============================================-->
@@ -48,7 +52,7 @@
   <!--1 arg signature-->
   <xsl:function name="xslLib:xjson2json" as="xs:string">
     <xsl:param name="xjson" as="element(fn:map)"/>
-    <xsl:sequence select="xslLib:xjson2json($xjson, map{})"/>
+    <xsl:sequence select="xslLib:xjson2json($xjson, $xslLib:xjson2json.options)"/>
   </xsl:function>
   
   <xsl:function name="xslLib:xjson2json" as="xs:string">

@@ -24,6 +24,9 @@
   
   <xsl:import href="xjson2json.xsl"/>
   
+  <!--Default serialization option for json-->
+  <xsl:param name="xslLib:anyXML2json.options" select="map{'indent':false()}" as="map(*)"/>
+  
   <!--==============================================-->
   <!--INIT-->
   <!--==============================================-->
@@ -45,7 +48,7 @@
   
   <xsl:function name="xslLib:anyXML2json" as="xs:string">
     <xsl:param name="e" as="element()"/>
-    <xsl:sequence select="xslLib:anyXML2json($e, map{})"/>
+    <xsl:sequence select="xslLib:anyXML2json($e, $xslLib:anyXML2json.options)"/>
   </xsl:function>
   
   <xsl:function name="xslLib:anyXML2json" as="xs:string">
