@@ -56,7 +56,7 @@
     <xsl:param name="options" as="map(*)"/>
     <xsl:try select="xml-to-json($xjson, $options)">
       <xsl:catch>
-        <!--conversion erros are also jsonified-->
+        <!--conversion errors are also jsonified-->
         <xsl:variable name="err" as="element()">
           <fn:map><fn:string key="error"><xsl:value-of select="$err:code || ' : ' || $err:description"/></fn:string></fn:map>
         </xsl:variable>
