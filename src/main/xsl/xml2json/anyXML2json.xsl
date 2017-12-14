@@ -41,9 +41,9 @@
   
   <xsl:template match="/" mode="xslLib:anyXML2json">
     <xsl:variable name="root" select="*[1]" as="element()"/>
-    <xsl:result-document format="xslLib:xjson2json">
-      <xsl:sequence select="xslLib:anyXML2json($root)"/>
-    </xsl:result-document>
+    <xsl:call-template name="xslLib:xjson2json.serialize-as-json">
+      <xsl:with-param name="json" select="xslLib:anyXML2json($root)" as="xs:string"/>
+    </xsl:call-template>
   </xsl:template>
   
   <xsl:function name="xslLib:anyXML2json" as="xs:string">

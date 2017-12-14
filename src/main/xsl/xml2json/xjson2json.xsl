@@ -43,9 +43,21 @@
   <!--==============================================-->
   
   <xsl:template match="/" mode="xslLib:xjson2json">
+    <xsl:call-template name="xslLib:xjson2json.serialize-as-json">
+      <xsl:with-param name="json" select="xslLib:xjson2json(fn:*)" as="xs:string"/>
+    </xsl:call-template>
+  </xsl:template>
+
+  <!--Specific template to serialize to JSON with
+    Has been made specific because XSPEC would raise the error : XTDE1480: Cannot execute xsl:result-document while evaluating variable
+    (xspec creates a variable with the ouput) 
+    When using XSPEC : override this template (get rid of the xsl:result-document here)
+  -->
+  <xsl:template name="xslLib:xjson2json.serialize-as-json">
+    <xsl:param name="json" required="yes" as="xs:string"/>
     <!--no @href cause we juste want to use the xsl:output defined for json on the main result-->
     <xsl:result-document format="xslLib:xjson2json">
-      <xsl:sequence select="xslLib:xjson2json(fn:*)"/>
+      <xsl:sequence select="$json"/>
     </xsl:result-document>
   </xsl:template>
   
