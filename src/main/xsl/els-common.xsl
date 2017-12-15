@@ -1119,6 +1119,115 @@
     <xsl:text>?&gt;</xsl:text>
   </xsl:template>
   
+  <!--===============================-->
+  <!--GROUP and WRAP XML-->
+  <!--===============================-->
+  
+  <xd:doc>3 args signature of els:wrap-elements-adjacent-by-names()</xd:doc>
+  <xsl:function name="els:wrap-elements-adjacent-by-names" as="element()">
+    <xsl:param name="context" as="element()"/>
+    <xsl:param name="adjacent-names" as="xs:string+"/>
+    <xsl:param name="wrapper" as="element()"/>
+    <xsl:sequence select="els:wrap-elements-adjacent-by-names($context, $adjacent-names, $wrapper, true())"/>
+  </xsl:function>
+  
+  <xd:doc>
+    <xd:desc>
+      <xd:p>Wrap adjacent by name elements into a new element "wrapper".</xd:p>
+      <xd:p>CAUTION : any text, pi, comment within context will be loose !</xd:p>
+    </xd:desc>
+    <xd:param name="context">Parent of the adjacents elements to wrap</xd:param>
+    <xd:param name="adjacent-names">sequence of names to set adjacent elements</xd:param>
+    <xd:param name="wrapper">element wrapper</xd:param>
+    <xd:param name="keep-context">Say if the context shoulb be kept or not in the result</xd:param>
+    <xd:return>context (or its content) with wrapped adjacents element</xd:return>
+  </xd:doc>
+  <xsl:function name="els:wrap-elements-adjacent-by-names" as="element()*">
+    <xsl:param name="context" as="element()"/>
+    <xsl:param name="adjacent-names" as="xs:string+"/>
+    <xsl:param name="wrapper" as="element()"/>
+    <xsl:param name="keep-context" as="xs:boolean"/>
+    <xsl:for-each select="$context">
+      <xsl:variable name="content" as="item()*">
+        <xsl:for-each-group select="*" group-adjacent="local-name() = $adjacent-names">
+          <xsl:variable name="cg" select="current-group()" as="element()*"/>
+          <xsl:choose>
+            <xsl:when test="current-grouping-key()">
+              <xsl:for-each select="$wrapper">
+                <xsl:copy>
+                  <xsl:copy-of select="@*"/>
+                  <xsl:copy-of select="$cg"/>
+                </xsl:copy>
+              </xsl:for-each>
+            </xsl:when>
+            <xsl:otherwise>
+              <xsl:copy-of select="current-group()"/>
+            </xsl:otherwise>
+          </xsl:choose>
+        </xsl:for-each-group>
+      </xsl:variable>
+      <xsl:choose>
+        <xsl:when test="$keep-context">
+          <xsl:copy>
+            <xsl:copy-of select="@*"/>
+            <xsl:sequence select="$content"/>
+          </xsl:copy>
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:sequence select="$content"/>
+        </xsl:otherwise>
+      </xsl:choose>
+    </xsl:for-each>
+  </xsl:function>
+  
+  <xd:doc>3 args signature of els:wrap-elements-adjacent-by-names()</xd:doc>
+  <xsl:function name="els:wrap-elements-starting-with-names" as="element()">
+    <xsl:param name="context" as="element()"/>
+    <xsl:param name="starts-names" as="xs:string+"/>
+    <xsl:param name="wrapper" as="element()"/>
+    <xsl:sequence select="els:wrap-elements-starting-with-names($context, $starts-names, $wrapper, true())"/>
+  </xsl:function>
+  
+  <xd:doc>
+    <xd:desc>
+      <xd:p>Wrap elements starting with specific names into a new element "wrapper" </xd:p>
+    </xd:desc>
+    <xd:param name="context">Parent of the adjacents elements to wrap</xd:param>
+    <xd:param name="starts-names">sequence of names to set starting elements</xd:param>
+    <xd:param name="wrapper">element wrapper</xd:param>
+    <xd:param name="keep-context">Say if the context shoulb be kept or not in the result</xd:param>
+    <xd:return>context (or its content) with wrapped adjacents element</xd:return>
+  </xd:doc>
+  <xsl:function name="els:wrap-elements-starting-with-names" as="element()*">
+    <xsl:param name="context" as="element()"/>
+    <xsl:param name="starts-names" as="xs:string+"/>
+    <xsl:param name="wrap-element" as="element()"/>
+    <xsl:param name="keep-context" as="xs:boolean"/>
+    <xsl:variable name="content" as="item()*">
+      <xsl:for-each-group select="$context/node()" group-starting-with="*[local-name(.) = $starts-names]">
+        <xsl:variable name="cg" select="current-group()" as="item()*"/>
+        <xsl:for-each select="$wrap-element">
+          <xsl:copy>
+            <xsl:copy-of select="@*"/>
+            <xsl:copy-of select="$cg"/>
+          </xsl:copy>
+        </xsl:for-each>
+      </xsl:for-each-group>
+    </xsl:variable>
+    <xsl:choose>
+      <xsl:when test="$keep-context">
+        <xsl:for-each select="$context">
+          <xsl:copy>
+            <xsl:copy-of select="@*"/>
+            <xsl:sequence select="$content"/>
+          </xsl:copy>
+        </xsl:for-each>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:sequence select="$content"/>
+      </xsl:otherwise>
+    </xsl:choose>
+  </xsl:function>
   
   <!--===================================================  -->
   <!-- FILES -->
