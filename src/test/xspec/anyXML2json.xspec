@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<x:description 
+  xmlns:x="http://www.jenitennison.com/xslt/xspec" 
+  xmlns:xslLib="http://www.lefebvre-sarrut.eu/ns/els/xslLib"
+  stylesheet="_xspec.override-xslt/anyXML2json.xsl"
+  xslt-version="3.0">
+  
+  <x:param name="anyXML.sample.json.uri" select="resolve-uri('data_xml2json/anyXML.sample.json', base-uri(/))"/>
+  <!--<x:param name="xslLib:anyXML2json.options" select="map{'indent':true()}"/>-->
+  
+  <x:scenario label="anyXML.sample.xml > sample.xvrl.xjson.json" xml:base="data_xml2json/">
+    <x:context href="anyXML.sample.xml"/>
+    <x:expect label="anyXML.sample.json" select="unparsed-text($anyXML.sample.json.uri)"/>
+  </x:scenario>
+  
+</x:description>

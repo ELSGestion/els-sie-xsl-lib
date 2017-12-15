@@ -405,6 +405,109 @@
       </x:call>
       <x:expect label="Not yet implemented" select="'Not yet implemented'"/>
     </x:scenario>
+    
+    <x:scenario label="els:wrap-elements-adjacent-by-names">
+      <x:call function="els:wrap-elements-adjacent-by-names">
+        <x:param name="context">
+          <context xmlns:p="prefix">
+            <a foo="bar">lorem ipsum</a>
+            <a>lorem ipsum</a>
+            <b foo="bar">lorem ipsum</b>
+            <!-- comment -->
+            <p:b>lorem ipsum</p:b>
+            <c foo="bar">lorem ipsum</c>
+            <c>lorem ipsum</c>
+            <?pi?>
+            <p:a>lorem ipsum</p:a>
+            <b foo="bar">lorem ipsum</b>
+            <c>lorem ipsum</c>
+            <b foo="bar">lorem ipsum</b>
+            text
+          </context>
+        </x:param>
+        <x:param name="adjacent-names" select="('a', 'b')"/>
+        <x:param name="wrapper">
+          <WRAPPER adjacent="a or b"/>
+        </x:param>
+        <x:param name="keep-context" select="true()"/>
+      </x:call>
+      <x:expect label="result">
+        <context xmlns:p="prefix">
+          <WRAPPER adjacent="a or b">
+            <a foo="bar">lorem ipsum</a>
+            <a>lorem ipsum</a>
+            <b foo="bar">lorem ipsum</b>
+            <p:b>lorem ipsum</p:b>
+          </WRAPPER>
+          <c foo="bar">lorem ipsum</c>
+          <c>lorem ipsum</c>
+          <WRAPPER adjacent="a or b">
+            <p:a>lorem ipsum</p:a>
+            <b foo="bar">lorem ipsum</b>
+          </WRAPPER>
+          <c>lorem ipsum</c>
+          <WRAPPER adjacent="a or b">
+            <b foo="bar">lorem ipsum</b>
+          </WRAPPER>
+        </context>
+      </x:expect>
+    </x:scenario>
+    
+    <x:scenario label="els:wrap-elements-starting-with-names">
+      <x:call function="els:wrap-elements-starting-with-names">
+        <x:param name="context">
+          <context xmlns:p="prefix">
+            <a foo="bar">lorem ipsum</a>
+            <a>lorem ipsum</a>
+            <b foo="bar">lorem ipsum</b>
+            <!-- comment -->
+            <p:b>lorem ipsum</p:b>
+            <c foo="bar">lorem ipsum</c>
+            <c>lorem ipsum</c>
+            <?pi?>
+            <p:a>lorem ipsum</p:a>
+            <b foo="bar">lorem ipsum</b>
+            <c>lorem ipsum</c>
+            <b foo="bar">lorem ipsum</b>
+            text
+          </context>
+        </x:param>
+        <x:param name="starts-names" select="('a', 'c')"/>
+        <x:param name="wrapper">
+          <WRAPPER starts="a or c"/>
+        </x:param>
+        <x:param name="keep-context" select="true()"/>
+      </x:call>
+      <x:expect label="result">
+        <context xmlns:p="prefix">
+          <WRAPPER starts="a or c">
+            <a foo="bar">lorem ipsum</a>
+          </WRAPPER>
+          <WRAPPER starts="a or c">
+            <a>lorem ipsum</a>
+            <b foo="bar">lorem ipsum</b>
+            <!-- comment -->
+            <p:b>lorem ipsum</p:b>
+          </WRAPPER>
+          <WRAPPER starts="a or c">
+            <c foo="bar">lorem ipsum</c>
+          </WRAPPER>
+          <WRAPPER starts="a or c">
+            <c>lorem ipsum</c>
+            <?pi ?>
+          </WRAPPER>
+          <WRAPPER starts="a or c">
+            <p:a>lorem ipsum</p:a>
+            <b foo="bar">lorem ipsum</b>
+          </WRAPPER>
+          <WRAPPER starts="a or c">
+            <c>lorem ipsum</c>
+            <b foo="bar">lorem ipsum</b>
+            text
+          </WRAPPER>
+        </context>
+      </x:expect>
+    </x:scenario>
 
   </x:scenario>
 

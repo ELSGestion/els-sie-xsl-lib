@@ -19,9 +19,16 @@
     </xd:desc>
   </xd:doc>
   
-  <!--Use the xml method so the output might be indented with oXygen-->
-  <!--<xsl:output method="xml" omit-xml-declaration="yes"/>-->
-  <xsl:output method="json"/>
+  <!--Named output so it does't take precedence when this XSLT is called.
+    This XSLT produce a JSON string so the output should be "text" :
+    - "json" output would be wrong cause it will escape the json string one more time
+    - "xml" would also work with omit-xml-declaration setted to true
+  -->
+  <xsl:output method="text" name="xslLib:xjson2json"/>
+  
+  <!--Default serialization option for json-->
+  <!--cf. https://www.w3.org/TR/xslt-30/#func-xml-to-json-->
+  <xsl:param name="xslLib:xjson2json.options" select="map{'indent':false()}" as="map(*)"/>
   
   <!--==============================================-->
   <!--INIT-->
@@ -36,18 +43,40 @@
   <!--==============================================-->
   
   <xsl:template match="/" mode="xslLib:xjson2json">
-    <xsl:sequence select="xslLib:xjson2json(fn:*)"/>
+    <xsl:call-template name="xslLib:xjson2json.serialize-as-json">
+      <xsl:with-param name="json" select="xslLib:xjson2json(fn:*)" as="xs:string"/>
+    </xsl:call-template>
   </xsl:template>
+
+  <!--Specific template to serialize to JSON with
+    Has been made specific because XSPEC would raise the error : XTDE1480: Cannot execute xsl:result-document while evaluating variable
+    (xspec creates a variable with the ouput) 
+    When using XSPEC : override this template (get rid of the xsl:result-document here)
+  -->
+  <xsl:template name="xslLib:xjson2json.serialize-as-json">
+    <xsl:param name="json" required="yes" as="xs:string"/>
+    <!--no @href cause we juste want to use the xsl:output defined for json on the main result-->
+    <xsl:result-document format="xslLib:xjson2json">
+      <xsl:sequence select="$json"/>
+    </xsl:result-document>
+  </xsl:template>
+  
+  <!--1 arg signature-->
+  <xsl:function name="xslLib:xjson2json" as="xs:string">
+    <xsl:param name="xjson" as="element(fn:map)"/>
+    <xsl:sequence select="xslLib:xjson2json($xjson, $xslLib:xjson2json.options)"/>
+  </xsl:function>
   
   <xsl:function name="xslLib:xjson2json" as="xs:string">
     <xsl:param name="xjson" as="element(fn:map)"/>
-    <xsl:try select="xml-to-json($xjson)">
+    <xsl:param name="options" as="map(*)"/>
+    <xsl:try select="xml-to-json($xjson, $options)">
       <xsl:catch>
-        <!--conversion erros are also jsonified-->
+        <!--conversion errors are also jsonified-->
         <xsl:variable name="err" as="element()">
           <fn:map><fn:string key="error"><xsl:value-of select="$err:code || ' : ' || $err:description"/></fn:string></fn:map>
         </xsl:variable>
-        <xsl:value-of select="xml-to-json($err)"/>
+        <xsl:value-of select="xml-to-json($err, $options)"/>
       </xsl:catch>
     </xsl:try>
   </xsl:function>

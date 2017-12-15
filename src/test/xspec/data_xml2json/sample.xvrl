@@ -1,0 +1,53 @@
+<?xml-model href="../../main/grammars/xvrl/xvrl.rng" type="application/xml" schematypens="http://relaxng.org/ns/structure/1.0"?>
+<validation-reports xmlns="http://www.lefebvre-sarrut.eu/ns/els/xvrl">
+  <metadata>
+    <system-id>xxxx.xml</system-id>
+    <result valid="false" errors="2" warnings="1"/>
+    <run at="2017-12-04T12:21:37.381+01:00"/>
+  </metadata>
+  <validation-report>
+    <metadata>
+      <validator name="jing" version="1.0"/>
+      <result valid="false" errors="2" warnings="0"/>
+      <schema system-id="xxx.rng" schematypens="http://relaxng.org/ns/structure/1.0" version="1.0"/>
+    </metadata>
+    <report role="error" line="11" column="22" code="error-code-xxx" path="/foo/bar[1]/test[1]">
+      <message xml:lang="en">Error message</message>
+      <message xml:lang="fr">Message d’erreur</message>
+    </report>
+    <report role="error" line="12" column="24" code="invalid_attribute_value" path="/foo/bar[1]/test[2]">
+      <message xml:lang="en">value of attribute "test" is invalid; must be equal to "xxx" or "yyy"</message>
+      <message xml:lang="fr">La valeur de l'attribut "test" est invalide ; doit être égale à "xxx" ou "yyy"</message>
+    </report>
+  </validation-report>
+  <validation-report>
+    <metadata>
+      <validator name="saxon" version="9.8"/>
+      <result valid="false" errors="2" warnings="0"/>
+      <schema system-id="my-schema.xsd" schematypens="http://www.w3.org/2001/XMLSchema" version="1.1"/>
+    </metadata>
+    <report role="error" line="8" column="20" code="invalid_attribute_value" path="/foo/bar[1]/test[2]">
+      <message xml:lang="en">value of attribute "test" is invalid; must be equal to "xxx" or "yyy"</message>
+      <message xml:lang="fr">La valeur de l'attribut "test" est invalide ; doit être égale à "xxx" ou "yyy"</message>
+    </report>
+    <report role="error" line="12" column="24" code="invalid_attribute_value" path="/foo/bar[1]/test[2]">
+      <message xml:lang="en">value of attribute "test" is invalid; must be equal to "xxx" or "yyy"</message>
+      <message xml:lang="fr">La valeur de l'attribut "test" est invalide ; doit être égale à "xxx" ou "yyy"</message>
+    </report>
+  </validation-report>
+  <validation-report>
+    <metadata>
+      <validator name="saxon" version="9.8"/>
+      <result valid="false" errors="2" warnings="0"/>
+      <schema system-id="my-schema.sch" schematypens="http://xml.ascc.net/schematron/" version="1.5"/>
+    </metadata>
+    <report role="error" line="8" column="20" code="bad-col-number" path="/foo/bar[1]/table[1]">
+      <message xml:lang="en">Number of column is not correct</message>
+      <message xml:lang="fr">Le nombre de colonnes n'est pas correct</message>
+    </report>
+    <report role="warning" line="26" column="17" code="sum-cols-should-be-100" path="/foo/bar[1]/table[1]">
+      <message xml:lang="en">The sum of these column values should be equal to 100</message>
+      <message xml:lang="fr">La somme des valeurs de cette colonnes devrait être égale à 100</message>
+    </report>
+  </validation-report>
+</validation-reports>

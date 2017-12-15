@@ -24,12 +24,40 @@
   
   <xsl:import href="xjson2json.xsl"/>
   
+  <!--Default serialization option for json-->
+  <xsl:param name="xslLib:anyXML2json.options" select="map{'indent':false()}" as="map(*)"/>
+  
+  <!--==============================================-->
+  <!--INIT-->
+  <!--==============================================-->
+  
+  <xsl:template match="/">
+    <xsl:apply-templates select="." mode="xslLib:anyXML2json"/>
+  </xsl:template>
+  
+  <!--==============================================-->
+  <!--MAIN-->
+  <!--==============================================-->
+  
+  <xsl:template match="/" mode="xslLib:anyXML2json">
+    <xsl:variable name="root" select="*[1]" as="element()"/>
+    <xsl:call-template name="xslLib:xjson2json.serialize-as-json">
+      <xsl:with-param name="json" select="xslLib:anyXML2json($root)" as="xs:string"/>
+    </xsl:call-template>
+  </xsl:template>
+  
   <xsl:function name="xslLib:anyXML2json" as="xs:string">
     <xsl:param name="e" as="element()"/>
+    <xsl:sequence select="xslLib:anyXML2json($e, $xslLib:anyXML2json.options)"/>
+  </xsl:function>
+  
+  <xsl:function name="xslLib:anyXML2json" as="xs:string">
+    <xsl:param name="e" as="element()"/>
+    <xsl:param name="options" as="map(*)"/> <!--json options-->
     <xsl:variable name="xjson" as="element(fn:map)">
       <xsl:apply-templates select="$e" mode="xslLib:anyXML2xjson"/>
     </xsl:variable>
-    <xsl:sequence select="xslLib:xjson2json($xjson)"/>
+    <xsl:sequence select="xslLib:xjson2json($xjson, $options)"/>
   </xsl:function>
   
   <!--=============================-->
