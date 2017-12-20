@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<x:description 
+  xmlns:x="http://www.jenitennison.com/xslt/xspec" 
+  xmlns:xslLib="http://www.lefebvre-sarrut.eu/ns/els/xslLib"
+  stylesheet="_xspec.override-xslt/nest-html-titles.xsl"
+  xslt-version="3.0">
+  
+  <x:scenario label="Nest HTML Titles" xml:base="data-nest-titles/">
+    <x:context href="sample.html-headings.html"/>
+    <x:expect label="OK" select="/" test="/" href="sample.html-headings.nested.html"/>
+  </x:scenario>
+  
+</x:description>
