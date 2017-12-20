@@ -291,20 +291,44 @@
       <x:expect label="Not yet implemented" select="'Not yet implemented'"/>
     </x:scenario>
 
-    <x:scenario label="hasStyle" pending="Not yet implemented">
+    <x:scenario label="els:hasStyle" pending="Not yet implemented">
       <x:call function="els:hasStyle">
-        <x:param name="e" select="''"/>
-        <x:param name="style" select="''"/>
+        <x:param name="e">
+          <foo style="color:red; font-size: 1em ; display:inline-block"/>
+        </x:param>
+        <x:param name="style" select="'font-size: 1em'"/>
       </x:call>
-      <x:expect label="Not yet implemented" select="'Not yet implemented'"/>
+      <x:expect label="true" select="true()"/>
     </x:scenario>
 
-    <x:scenario label="hasClass" pending="Not yet implemented">
+    <x:scenario label="els:hasClass">
       <x:call function="els:hasClass">
-        <x:param name="e" select="''"/>
-        <x:param name="class" select="''"/>
+        <x:param name="e">
+          <foo class="one bar any"/>
+        </x:param>
+        <x:param name="class" select="'bar'"/>
       </x:call>
-      <x:expect label="Not yet implemented" select="'Not yet implemented'"/>
+      <x:expect label="true" select="true()"/>
+    </x:scenario>
+    
+    <x:scenario label="els:hasClass">
+      <x:call function="els:hasClass">
+        <x:param name="e">
+          <foo class="one barjo any"/>
+        </x:param>
+        <x:param name="class" select="'bar'"/>
+      </x:call>
+      <x:expect label="false" select="false()"/>
+    </x:scenario>
+    
+    <x:scenario label="els:hasClassMatchingRegex">
+      <x:call function="els:hasClassMatchingRegex">
+        <x:param name="e">
+          <foo class="foo heading-12 bar"/>
+        </x:param>
+        <x:param name="class.regex" select="'heading-\d+'"/>
+      </x:call>
+      <x:expect label="true" select="true()"/>
     </x:scenario>
 
     <x:scenario label="addClass" pending="Not yet implemented">
