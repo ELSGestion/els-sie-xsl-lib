@@ -15,9 +15,9 @@
       <xd:p>When titles elements are flat, this XSLT nest them reccusrively by deep-level</xd:p>
     </xd:desc>
   </xd:doc>
-
+  
   <xsl:import href="els-common.xsl"/>
-
+  
   <!--===================================================-->  
   <!--INIT-->
   <!--===================================================-->  
@@ -45,7 +45,7 @@
   
   <xsl:template name="xslLib:nest-titles">
     <xsl:param name="current.seq" required="no" select="node()" as="node()*"/> <!--sequence of elements (or nodes) to work on-->
-    <xsl:param name="current.deepLevel" required="no" select="(min($current.seq[self::*[xslLib:nest-title.getDeepLevel(.) != -1]]/xslLib:nest-title.getDeepLevel(.)), -1)[1]" as="xs:integer"/>
+    <xsl:param name="current.deepLevel" required="no" select="(min($current.seq[self::*[xslLib:nest-title.isTitle(.)]]/xslLib:nest-title.getDeepLevel(.)), -1)[1]" as="xs:integer"/>
     <xsl:choose>
       <!--No titles in the sequence-->
       <xsl:when test="$current.deepLevel = -1">
@@ -56,13 +56,13 @@
           <xsl:variable name="cg" select="current-group()" as="node()*"/>
           <xsl:choose>
             <!--No elements in the current-group-->
-            <xsl:when test="count($cg[self::*]) = 0">
+            <xsl:when test="count($cg[self::*[xslLib:nest-title.isTitle(.)]]) = 0">
               <xsl:apply-templates select="$cg" mode="xslLib:nest-titles.main"/>
             </xsl:when>
             <!--First group might start with 
               - an non element (text, pi, comments) 
               - or might contains title from a higher deep level-->
-            <xsl:when test="not($cg[1]/self::*) or $cg[1]/self::*[xslLib:nest-title.getDeepLevel(.) gt $current.deepLevel]">
+            <xsl:when test="not($cg[1]/self::*[xslLib:nest-title.isTitle(.)]) or $cg[1]/self::*[xslLib:nest-title.getDeepLevel(.) gt $current.deepLevel]">
               <!--Reccusrion : call back the template incrementing the deep level-->
               <xsl:call-template name="xslLib:nest-titles">
                 <xsl:with-param name="current.seq" select="$cg" as="node()*"/>
@@ -82,6 +82,14 @@
       </xsl:otherwise>
     </xsl:choose>
   </xsl:template>
+  
+  <!--Do not override this function, it's for ease of use within this XSLT-->  
+  <xsl:function name="xslLib:nest-title.isTitle" as="xs:boolean">
+    <!--FIXME : override="false" : SXWN9014: The xsl:function/@override attribute is deprecated; use override-extension-function-->
+    <xsl:param name="e" as="element()"/>
+    <xsl:sequence select="xslLib:nest-title.getDeepLevel($e) ne -1"/>
+  </xsl:function>
+  
   
   <!--===================================================-->
   <!--INTERFACES-->
