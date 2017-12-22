@@ -35,8 +35,8 @@
   <!--structure-->
   <xsl:param name="xslLib:cals2html.html-version" select="5" as="xs:double"/> <!--4 or 5 for example-->
   <xsl:param name="xslLib:cals2html.use-style-insteadOf-class" select="true()" as="xs:boolean"/>
-  <xsl:param name="xslLib:cals-keep-unmatched-attributes" select="false()" as="xs:boolean"/>
-  <xsl:param name="xslLib:cals-unmatched-attributes-prefix" select="'data-cals2html-'" as="xs:string"/>
+  <xsl:param name="xslLib:cals2html-keep-unmatched-attributes" select="false()" as="xs:boolean"/>
+  <xsl:param name="xslLib:cals2html-unmatched-attributes-prefix" select="'data-cals2html-'" as="xs:string"/>
   <xsl:param name="xslLib:cals2html.compute-column-width-as-width-attribute" select="true()" as="xs:boolean"/> <!--@width is used for html4 output-->
   <xsl:param name="xslLib:cals2html.compute-column-width-within-colgroup" select="true()" as="xs:boolean"/>
   <!--If the number of columns is greater than $nb-cols-max-before-font-reduction then the font needs to be reduced-->
@@ -494,8 +494,8 @@
   
   <xsl:template match="@*" mode="xslLib:cals2html.attributes">
     <xsl:choose>
-      <xsl:when test="$xslLib:cals-keep-unmatched-attributes">
-        <xsl:attribute name="{concat($xslLib:cals-unmatched-attributes-prefix, local-name(.))}" select="."/>
+      <xsl:when test="$xslLib:cals2html-keep-unmatched-attributes">
+        <xsl:attribute name="{concat($xslLib:cals2html-unmatched-attributes-prefix, local-name(.))}" select="."/>
       </xsl:when>
       <xsl:otherwise>
         <xsl:message>[ERROR] <xsl:value-of select="name(parent::*)"/>/@<xsl:value-of select="name()"/> unmatched in mode "xslLib:cals2html.attributes"</xsl:message>

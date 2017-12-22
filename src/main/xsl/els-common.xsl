@@ -859,6 +859,13 @@
     <xsl:sequence select="tokenize($e/@class, '\s+') = $class"/>
   </xsl:function>
   
+  <xsl:function name="els:hasClassMatchingRegex" as="xs:boolean">
+    <xsl:param name="e" as="element()"/>
+    <xsl:param name="class.regex" as="xs:string*"/>
+    <xsl:variable name="class.regex.delimited" select="concat('^', $class.regex, '$')" as="xs:string"/>
+    <xsl:sequence select="some $class in tokenize($e/@class, '\s+') satisfies matches($class, $class.regex.delimited)"/>
+  </xsl:function>
+  
   <!--Exemple d'utilisation :
   <xsl:copy>
     <xsl:copy-of select="@*"/> <!-\-"except @class" n'est pas nécessaire en fait, il sera surchargé-\->
