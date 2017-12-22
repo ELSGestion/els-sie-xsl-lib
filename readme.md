@@ -47,7 +47,7 @@ There are 2 libraries types :
     ("`http://www.w3.org/1999/xhtml`") and the style properties must be within a
     style attribute, not in an external css file. Other elements are copied as is.
   
-* [xml2json](xml2json/README.md) : conversion tools for xml to json (may be used as standalone treatment XSLT or library)
+* [xml2json](./xml2json/README.md) : conversion tools for xml to json (may be used as standalone treatment XSLT or library)
     
     * `xjson2json.xsl` : convert any valid XJSON (w3c XML representation of JSON) to json
     * `anyXML2json.xsl` : tries to convert any XML element to JSON.
@@ -58,3 +58,6 @@ There are 2 libraries types :
 
         XVRL is a XML Validation Report Language : `els-models:/els-models/xvrl/xvrl.rng`
 
+* `nest-titles.xsl` : a generic XSLT aiming at nesting title in an XML document
+  
+    * `nest-html-titles.xsl` : is an example of using the generic XSLT. It needs to implement 2 interfaces (a function and a template).
