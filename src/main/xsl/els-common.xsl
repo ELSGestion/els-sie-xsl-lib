@@ -362,6 +362,55 @@
 
   <xd:doc>
     <xd:desc>
+      <xd:p>Perform successiv regex replace on a string</xd:p>
+    </xd:desc>
+    <xd:param name="string">The string to work on</xd:param>
+    <xd:param name="replace-list">An element els:replace-list with any els:replace as children. 
+      Example:
+      <xd:pre>
+      &lt;replace-list flags="[optionnal attribut for regex flags]" xmlns="http://www.lefebvre-sarrut.eu/ns/els">
+      &lt;replace flags="[optionnal attribut for regex flags]">
+        &lt;pattern>[any regex]&lt;/pattern>
+        &lt;replacement>[replacement using $1, $2, etc. as regex-group replacement, like replace() third arg]&lt;/replacement>
+      &lt;/replace>
+      &lt;replace flags="x">
+        &lt;pattern>(x) (x) (x)&lt;/pattern>
+        &lt;replacement>Y$2Y&lt;/replacement>
+      &lt;/replace>
+      &lt;/replace-list>
+      </xd:pre>
+    </xd:param>
+    <xd:return>The string after performing all regex replacements succesively</xd:return>
+  </xd:doc>
+  <xsl:function name="els:replace-multiple" as="xs:string">
+    <xsl:param name="string" as="xs:string"/>
+    <xsl:param name="replace-list" as="element(els:replace-list)"/>
+    <xsl:choose>
+      <xsl:when test="empty($replace-list/els:replace)">
+        <xsl:sequence select="$string"/>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:variable name="replace-1" select="$replace-list/els:replace[1]" as="element(els:replace)"/>
+        <!--Flags : 
+              m: multiline mode
+              s : dot-all mode
+              i : case-insensitive
+              x : ignore whitespace within the regex-->
+        <xsl:variable name="flags" select="string($replace-1/ancestor-or-self::*[@flags][1]/@flags)" as="xs:string"/>
+        <xsl:variable name="string.replaced" select="replace($string, string($replace-1/els:pattern), string($replace-1/els:replacement), $flags)" as="xs:string"/>
+        <xsl:variable name="replace-list.new" as="element(els:replace-list)">
+          <els:replace-list>
+            <xsl:copy-of select="$replace-list/@*"/>
+            <xsl:sequence select="subsequence($replace-list/els:replace, 2)"/>
+          </els:replace-list>
+        </xsl:variable>
+        <xsl:sequence select="els:replace-multiple($string.replaced, $replace-list.new)"/>
+      </xsl:otherwise>
+    </xsl:choose>
+  </xsl:function>
+
+  <xd:doc>
+    <xd:desc>
       <xd:p>Fonction qui fait les remplacements en regex récursivement</xd:p>
       <xd:p>
         Principe : 
@@ -391,25 +440,10 @@
     <xsl:param name="SequenceDeTriplets" as="element(els:Triplet)*"/>
     <xsl:variable name="FirstTriplet" select="$SequenceDeTriplets[1]" as="element(els:Triplet)"/>
     <xsl:variable name="ResteDesTriplets" select="subsequence($SequenceDeTriplets,2)" as="element(els:Triplet)*"/>
+    <xsl:message>[WARNING][ELSSIEXDC-13] "els:reccursivReplace" is obsolete, please use the more generic function "els:replace-multiple" instead</xsl:message>
     <xsl:variable name="Type" select="$FirstTriplet/els:Type"/>
-    <xsl:message use-when="false()">
-      <xsl:text>$Type : </xsl:text>
-      <xsl:value-of select="$Type"/>
-    </xsl:message>
     <xsl:variable name="RegExp" select="$FirstTriplet/els:RegExp"/>
-    <xsl:message use-when="false()">
-      <xsl:text>$RegExp : </xsl:text>
-      <xsl:value-of select="$RegExp"/>
-      <xsl:text>    $Text : </xsl:text>
-      <xsl:value-of select="$Text"/>
-    </xsl:message>
     <xsl:variable name="ReplaceText" select="$FirstTriplet/els:ReplaceText"/>
-    <xsl:message use-when="false()">
-      <xsl:text>$ReplaceText : </xsl:text>
-      <xsl:text>'</xsl:text>
-      <xsl:value-of select="$ReplaceText"/>
-      <xsl:text>'</xsl:text>
-    </xsl:message>
     <xsl:variable name="Result">
       <xsl:choose>
         <xsl:when test="$Type = 'remplace-brut'">
