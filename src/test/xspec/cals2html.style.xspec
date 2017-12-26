@@ -2,7 +2,8 @@
 <x:description 
   xmlns:x="http://www.jenitennison.com/xslt/xspec" 
   xmlns:xslLib="http://www.lefebvre-sarrut.eu/ns/els/xslLib"
-  stylesheet="../../main/xsl/cals2html.xsl">
+  stylesheet="../../main/xsl/cals2html.xsl"
+  xslt-version="3.0">
   
   <x:param name="xslLib:cals2html.use-style-insteadOf-class" select="true()"/>
   

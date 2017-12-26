@@ -3,7 +3,8 @@
   xmlns:x="http://www.jenitennison.com/xslt/xspec"
   xmlns:fixMsvErrorWhenConvertingXSD2RNG="http://www.lefebvre-sarrut.eu/ns/els/xslLib/fixMsvErrorWhenConvertingXSD2RNG"
   xmlns="http://relaxng.org/ns/structure/1.0"
-  stylesheet="../../main/xsl/fixMsvErrorWhenConvertingXSD2RNG.xsl">
+  stylesheet="../../main/xsl/fixMsvErrorWhenConvertingXSD2RNG.xsl"
+  xslt-version="3.0">
   
   <x:scenario label="fixMsvErrorWhenConvertingXSD2RNG:isOnlyAttributesDefine()">
     <x:call function="fixMsvErrorWhenConvertingXSD2RNG:isOnlyAttributesDefine">

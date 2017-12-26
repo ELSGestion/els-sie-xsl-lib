@@ -473,7 +473,7 @@
             text
           </context>
         </x:param>
-        <x:param name="adjacent-names" select="('a', 'b')"/>
+        <x:param name="adjacent.names" select="('a', 'b')"/>
         <x:param name="wrapper">
           <WRAPPER adjacent="a or b"/>
         </x:param>
@@ -485,12 +485,12 @@
             <a foo="bar">lorem ipsum</a>
             <a>lorem ipsum</a>
             <b foo="bar">lorem ipsum</b>
-            <p:b>lorem ipsum</p:b>
           </WRAPPER>
+          <p:b>lorem ipsum</p:b>
           <c foo="bar">lorem ipsum</c>
           <c>lorem ipsum</c>
+          <p:a>lorem ipsum</p:a>
           <WRAPPER adjacent="a or b">
-            <p:a>lorem ipsum</p:a>
             <b foo="bar">lorem ipsum</b>
           </WRAPPER>
           <c>lorem ipsum</c>
@@ -543,8 +543,6 @@
           <WRAPPER starts="a or c">
             <c>lorem ipsum</c>
             <?pi ?>
-          </WRAPPER>
-          <WRAPPER starts="a or c">
             <p:a>lorem ipsum</p:a>
             <b foo="bar">lorem ipsum</b>
           </WRAPPER>
@@ -556,7 +554,15 @@
         </context>
       </x:expect>
     </x:scenario>
-
+    
+    <x:scenario label="els:wrap-elements-adjacent" pending="els:wrap-elements-adjacent-by-names is already an implementation of this function">
+      <x:call function="els:wrap-elements-adjacent"/>
+    </x:scenario>
+    
+    <x:scenario label="els:wrap-elements-starting-with" pending="els:wrap-elements-starting-with-names is already an implementation of this function">
+      <x:call function="els:wrap-elements-starting-with"/>
+    </x:scenario>
+    
   </x:scenario>
 
   <x:scenario label="FILES">
