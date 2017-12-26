@@ -362,21 +362,21 @@
 
   <xd:doc>
     <xd:desc>
-      <xd:p>Perform successiv regex replace on a string</xd:p>
+      <xd:p>Perform successiv regex replacements on a string</xd:p>
     </xd:desc>
     <xd:param name="string">The string to work on</xd:param>
     <xd:param name="replace-list">An element els:replace-list with any els:replace as children. 
       Example:
       <xd:pre>
       &lt;replace-list flags="[optionnal attribut for regex flags]" xmlns="http://www.lefebvre-sarrut.eu/ns/els">
-      &lt;replace flags="[optionnal attribut for regex flags]">
-        &lt;pattern>[any regex]&lt;/pattern>
-        &lt;replacement>[replacement using $1, $2, etc. as regex-group replacement, like replace() third arg]&lt;/replacement>
-      &lt;/replace>
-      &lt;replace flags="x">
-        &lt;pattern>(x) (x) (x)&lt;/pattern>
-        &lt;replacement>Y$2Y&lt;/replacement>
-      &lt;/replace>
+        &lt;replace flags="[optionnal attribut for regex flags]">
+          &lt;pattern>[any regex]&lt;/pattern>
+          &lt;replacement>[replacement using $1, $2, etc. as regex-group replacement, like replace() third arg]&lt;/replacement>
+        &lt;/replace>
+        &lt;replace flags="x">
+          &lt;pattern>(x) (x) (x)&lt;/pattern>
+          &lt;replacement>Y$2Y&lt;/replacement>
+        &lt;/replace>
       &lt;/replace-list>
       </xd:pre>
     </xd:param>
