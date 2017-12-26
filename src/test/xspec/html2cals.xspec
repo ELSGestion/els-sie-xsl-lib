@@ -2,7 +2,8 @@
 <x:description 
   xmlns:x="http://www.jenitennison.com/xslt/xspec" 
   xmlns:xslLib="http://www.lefebvre-sarrut.eu/ns/els/xslLib"
-  stylesheet="../../main/xsl/html2cals.xsl">
+  stylesheet="../../main/xsl/html2cals.xsl"
+  xslt-version="3.0">
   
   <x:scenario label="HTML2CALS any html" xml:base="data/">
     <x:scenario label="table.html">
