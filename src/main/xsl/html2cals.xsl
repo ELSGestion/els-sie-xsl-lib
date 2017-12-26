@@ -168,9 +168,7 @@
         </xsl:when>
         <xsl:otherwise>
           <!-- On normalise en ajoutant un colgroup générique -->
-          <colgroup xmlns="http://www.w3.org/1999/xhtml">
-            <xsl:attribute name="span" select="xhtml2cals:nb-cols(.)"/>
-          </colgroup>
+          <colgroup span="{xhtml2cals:nb-cols(.)}" xmlns="http://www.w3.org/1999/xhtml"/>
         </xsl:otherwise>
       </xsl:choose>
       <xsl:apply-templates select="thead, tfoot" mode="#current"/>
@@ -846,7 +844,7 @@
   </xsl:template>
   
   <!--attributes to delete-->
-  <xsl:template match="@colspan | @rowspan | @xhtml2cals:colspan | @xhtml2cals:rowspan" mode="xhtml2cals:convert-attributes-to-cals"/>
+  <xsl:template match="colgroup/@span | @colspan | @rowspan | @xhtml2cals:colspan | @xhtml2cals:rowspan" mode="xhtml2cals:convert-attributes-to-cals"/>
   
   <!--default copy template-->
   <xsl:template match="@*" mode="xhtml2cals:convert-attributes-to-cals">
