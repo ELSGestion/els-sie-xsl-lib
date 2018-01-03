@@ -150,6 +150,7 @@
       <id>xslLib</id>
       <name>xslLib website</name>
       <url>file:///var/www/html/Artefact/${project.groupId}/${project.artifactId}/${project.version}/</url>
+      <!--Site : http://srvicprd/Artefact/-->
     </site>
   </distributionManagement>
 
