@@ -67,7 +67,7 @@
 
   <xd:doc>
     <xd:desc>
-      <xd:p>Fonction qui fait les remplacements en regex récursivement</xd:p>
+      <xd:p>DEPRECATED! Fonction qui fait les remplacements en regex récursivement</xd:p>
       <xd:p>
         Principe : 
         Chaque regex va être passé SUCCESSIVEMENT sur le texte avec le type de traitement indiqué
