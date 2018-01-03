@@ -5,7 +5,7 @@
   stylesheet="_xspec.override-xslt/nest-html-titles.xsl"
   xslt-version="3.0">
   
-  <x:scenario label="Nest HTML Titles" xml:base="data-nest-titles/">
+  <x:scenario label="Nest HTML Titles" xml:base="../samples/nest-titles/">
     <x:context href="sample.html-headings.html"/>
     <x:expect label="OK" select="/" test="/" href="sample.html-headings.nested.html"/>
   </x:scenario>

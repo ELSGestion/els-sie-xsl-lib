@@ -5,7 +5,7 @@
   stylesheet="../../main/xsl/xml2json/xvrl2xjson.xsl"
   xslt-version="3.0">
   
-  <x:scenario label="sample.xvrl > sample.xvrl.xjson" xml:base="data_xml2json/">
+  <x:scenario label="sample.xvrl > sample.xvrl.xjson" xml:base="../samples/xml2json/">
     <x:context href="sample.xvrl"/>
     <x:expect label="sample.xvrl.xjson" href="sample.xvrl.xjson" select="/" test="/"/>
   </x:scenario>

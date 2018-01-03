@@ -5,14 +5,14 @@
   stylesheet="../../main/xsl/html2cals.xsl"
   xslt-version="3.0">
   
-  <x:scenario label="HTML2CALS any html" xml:base="data_table/">
+  <x:scenario label="HTML2CALS any html" xml:base="../samples/tables/">
     <x:scenario label="table.html">
       <x:context href="table.html"/>
       <x:expect label="OK" select="/*" test="/*" href="table.cals.xml"/>
     </x:scenario>
   </x:scenario>
   
-  <x:scenario label="HTML2CALS - with class" xml:base="data_table/">
+  <x:scenario label="HTML2CALS - with class" xml:base="../samples/tables/">
     <x:scenario label="Table jira CHAINE-1885">
       <x:context href="Table_CHAINE-1885.htm"/>
       <x:expect label="OK" select="/*" test="/*" href="Table_CHAINE-1885.cals.xml"/>
@@ -27,7 +27,7 @@
     </x:scenario>
   </x:scenario>
   
-  <x:scenario label="HTML2CALS - with style" xml:base="data_table/">
+  <x:scenario label="HTML2CALS - with style" xml:base="../samples/tables/">
     <x:scenario label="Table jira CHAINE-1885">
       <x:context href="Table_CHAINE-1885.style.htm"/>
       <x:expect label="OK" select="/*" test="/*" href="Table_CHAINE-1885.style.cals.xml"/>

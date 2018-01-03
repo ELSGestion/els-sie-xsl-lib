@@ -4,7 +4,7 @@
   stylesheet="../../main/xsl/html4Table2html5Table.xsl"
   xslt-version="3.0">
   
-  <x:scenario label="html4Table2html5Table" xml:base="data_table/">
+  <x:scenario label="html4Table2html5Table" xml:base="../samples/tables/">
     <x:scenario label="table.html4.html > table.html4.html5.html">
       <x:context href="table.html4.html"/>
       <x:expect label="OK" select="/*" test="/*" href="table.html4.html5.html"/>
