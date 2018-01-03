@@ -15,59 +15,59 @@ There are 2 libraries types:
 
 ## XSL Documentation
 
-This Maven project is build by jenkins which generates a [site](http://srvicprd:8080/view/Libs/job/SIE-LIB-XSL-COMMON_BUILD/site) 
+This Maven project is build by jenkins which generates this [site](http://srvicprd/Artefact/eu.els.sie.lib.xsl.common/xslLib/3.1.1-SNAPSHOT/). 
 
 #### Common utilies
 
-* [`functx.xsl`](http://srvicprd/Artefact/eu.els.sie.lib.xsl.common/xslLib/3.0.1-SNAPSHOT/xsldoc/functx.html)
-* [`els-common.xsl`](http://srvicprd/Artefact/eu.els.sie.lib.xsl.common/xslLib/3.0.1-SNAPSHOT/xsldoc/els-common.html)
+* [`functx.xsl`](http://srvicprd/Artefact/eu.els.sie.lib.xsl.common/xslLib/3.1.1-SNAPSHOT/xsldoc/functx.html)
+* [`els-common.xsl`](http://srvicprd/Artefact/eu.els.sie.lib.xsl.common/xslLib/3.1.1-SNAPSHOT/xsldoc/els-common.html)
 
-    * [`els-common_constants.xsl`](http://srvicprd/Artefact/eu.els.sie.lib.xsl.common/xslLib/3.0.1-SNAPSHOT/xsldoc/els-common_constants.html)
-    * [`els-common_dates.xsl`](http://srvicprd/Artefact/eu.els.sie.lib.xsl.common/xslLib/3.0.1-SNAPSHOT/xsldoc/els-common_dates.html)
-    * [`els-common_strings.xsl`](http://srvicprd/Artefact/eu.els.sie.lib.xsl.common/xslLib/3.0.1-SNAPSHOT/xsldoc/els-common_strings.html)
-    * [`els-common_xml.xsl`](http://srvicprd/Artefact/eu.els.sie.lib.xsl.common/xslLib/3.0.1-SNAPSHOT/xsldoc/els-common_xml.html)
-    * [`els-common_files.xsl`](http://srvicprd/Artefact/eu.els.sie.lib.xsl.common/xslLib/3.0.1-SNAPSHOT/xsldoc/els-common_files.html)
-    * [`els-common_convert-cast.xsl`](http://srvicprd/Artefact/eu.els.sie.lib.xsl.common/xslLib/3.0.1-SNAPSHOT/xsldoc/els-common_convert-cast.html)
+    * [`els-common_constants.xsl`](http://srvicprd/Artefact/eu.els.sie.lib.xsl.common/xslLib/3.1.1-SNAPSHOT/xsldoc/els-common_constants.html)
+    * [`els-common_dates.xsl`](http://srvicprd/Artefact/eu.els.sie.lib.xsl.common/xslLib/3.1.1-SNAPSHOT/xsldoc/els-common_dates.html)
+    * [`els-common_strings.xsl`](http://srvicprd/Artefact/eu.els.sie.lib.xsl.common/xslLib/3.1.1-SNAPSHOT/xsldoc/els-common_strings.html)
+    * [`els-common_xml.xsl`](http://srvicprd/Artefact/eu.els.sie.lib.xsl.common/xslLib/3.1.1-SNAPSHOT/xsldoc/els-common_xml.html)
+    * [`els-common_files.xsl`](http://srvicprd/Artefact/eu.els.sie.lib.xsl.common/xslLib/3.1.1-SNAPSHOT/xsldoc/els-common_files.html)
+    * [`els-common_convert-cast.xsl`](http://srvicprd/Artefact/eu.els.sie.lib.xsl.common/xslLib/3.1.1-SNAPSHOT/xsldoc/els-common_convert-cast.html)
 
-* [setXmlBase.xsl](http://srvicprd/Artefact/eu.els.sie.lib.xsl.common/xslLib/3.0.1-SNAPSHOT/xsldoc/setXmlBase.html)
-* [removeXmlBase.xsl](http://srvicprd/Artefact/eu.els.sie.lib.xsl.common/xslLib/3.0.1-SNAPSHOT/xsldoc/removeXmlBase.html)
+* [setXmlBase.xsl](http://srvicprd/Artefact/eu.els.sie.lib.xsl.common/xslLib/3.1.1-SNAPSHOT/xsldoc/setXmlBase.html)
+* [removeXmlBase.xsl](http://srvicprd/Artefact/eu.els.sie.lib.xsl.common/xslLib/3.1.1-SNAPSHOT/xsldoc/removeXmlBase.html)
 
 #### Log utilities
 
-* [els-log.xsl](http://srvicprd/Artefact/eu.els.sie.lib.xsl.common/xslLib/3.0.1-SNAPSHOT/xsldoc/els-log.html)
+* [els-log.xsl](http://srvicprd/Artefact/eu.els.sie.lib.xsl.common/xslLib/3.1.1-SNAPSHOT/xsldoc/els-log.html)
 
 #### XSPEC utilities
 
-* [`xspec.simulate.xhtml-output.xsl`](http://srvicprd/Artefact/eu.els.sie.lib.xsl.common/xslLib/3.0.1-SNAPSHOT/xsldoc/xspec.simulate.xhtml-output.html)
+* [`xspec.simulate.xhtml-output.xsl`](http://srvicprd/Artefact/eu.els.sie.lib.xsl.common/xslLib/3.1.1-SNAPSHOT/xsldoc/xspec.simulate.xhtml-output.html)
 
 #### TABLES utilies
 
-* [`html2cals.xsl`](http://srvicprd/Artefact/eu.els.sie.lib.xsl.common/xslLib/3.0.1-SNAPSHOT/xsldoc/html2cals.html)
-* [`cals2html.xsl`](http://srvicprd/Artefact/eu.els.sie.lib.xsl.common/xslLib/3.0.1-SNAPSHOT/xsldoc/cals2html.html)
-* [`html4Table2html5Table.xsl`](http://srvicprd/Artefact/eu.els.sie.lib.xsl.common/xslLib/3.0.1-SNAPSHOT/xsldoc/html4Table2html5Table.html)
-* [`normalizeCalsTable.xsl`](http://srvicprd/Artefact/eu.els.sie.lib.xsl.common/xslLib/3.0.1-SNAPSHOT/xsldoc/normalizeCalsTable.html)
+* [`html2cals.xsl`](http://srvicprd/Artefact/eu.els.sie.lib.xsl.common/xslLib/3.1.1-SNAPSHOT/xsldoc/html2cals.html)
+* [`cals2html.xsl`](http://srvicprd/Artefact/eu.els.sie.lib.xsl.common/xslLib/3.1.1-SNAPSHOT/xsldoc/cals2html.html)
+* [`html4Table2html5Table.xsl`](http://srvicprd/Artefact/eu.els.sie.lib.xsl.common/xslLib/3.1.1-SNAPSHOT/xsldoc/html4Table2html5Table.html)
+* [`normalizeCalsTable.xsl`](http://srvicprd/Artefact/eu.els.sie.lib.xsl.common/xslLib/3.1.1-SNAPSHOT/xsldoc/normalizeCalsTable.html)
 
 #### Relax NG utilies 
 
-* [`rng-common.xsl`](http://srvicprd/Artefact/eu.els.sie.lib.xsl.common/xslLib/3.0.1-SNAPSHOT/xsldoc/rng-common.html)
-* [`rng2srng.xsl`](http://srvicprd/Artefact/eu.els.sie.lib.xsl.common/xslLib/3.0.1-SNAPSHOT/xsldoc/rng2srng.html)
+* [`rng-common.xsl`](http://srvicprd/Artefact/eu.els.sie.lib.xsl.common/xslLib/3.1.1-SNAPSHOT/xsldoc/rng-common.html)
+* [`rng2srng.xsl`](http://srvicprd/Artefact/eu.els.sie.lib.xsl.common/xslLib/3.1.1-SNAPSHOT/xsldoc/rng2srng.html)
 
 #### JSON utilies
 
-* [`anyXML2json.xsl`](http://srvicprd/Artefact/eu.els.sie.lib.xsl.common/xslLib/3.0.1-SNAPSHOT/xsldoc/xml2json/anyXML2json.html)
-* [`xjson2json.xsl`](http://srvicprd/Artefact/eu.els.sie.lib.xsl.common/xslLib/3.0.1-SNAPSHOT/xsldoc/xml2json/xjson2json.html)
-* [`xvrl2xjson.xsl`](http://srvicprd/Artefact/eu.els.sie.lib.xsl.common/xslLib/3.0.1-SNAPSHOT/xsldoc/xml2json/xvrl2xjson.html)
-* [`xvrl2xjson.xsl`](http://srvicprd/Artefact/eu.els.sie.lib.xsl.common/xslLib/3.0.1-SNAPSHOT/xsldoc/xml2json/xvrl2xjson.html)
+* [`anyXML2json.xsl`](http://srvicprd/Artefact/eu.els.sie.lib.xsl.common/xslLib/3.1.1-SNAPSHOT/xsldoc/xml2json/anyXML2json.html)
+* [`xjson2json.xsl`](http://srvicprd/Artefact/eu.els.sie.lib.xsl.common/xslLib/3.1.1-SNAPSHOT/xsldoc/xml2json/xjson2json.html)
+* [`xvrl2xjson.xsl`](http://srvicprd/Artefact/eu.els.sie.lib.xsl.common/xslLib/3.1.1-SNAPSHOT/xsldoc/xml2json/xvrl2xjson.html)
+* [`xvrl2xjson.xsl`](http://srvicprd/Artefact/eu.els.sie.lib.xsl.common/xslLib/3.1.1-SNAPSHOT/xsldoc/xml2json/xvrl2xjson.html)
 
 #### CSS utilities
 
-* [`css-parser.xsl`](http://srvicprd/Artefact/eu.els.sie.lib.xsl.common/xslLib/3.0.1-SNAPSHOT/xsldoc/css-parser.html)
+* [`css-parser.xsl`](http://srvicprd/Artefact/eu.els.sie.lib.xsl.common/xslLib/3.1.1-SNAPSHOT/xsldoc/css-parser.html)
 
 #### Other utilities
-* [`nest-titles.xsl`](http://srvicprd/Artefact/eu.els.sie.lib.xsl.common/xslLib/3.0.1-SNAPSHOT/xsldoc/nest-titles.html)
-* [`nest-html-titles.xsl`](http://srvicprd/Artefact/eu.els.sie.lib.xsl.common/xslLib/3.0.1-SNAPSHOT/xsldoc/nest-html-titles.html)
-* [`xml2simpleHtml.xsl`](http://srvicprd/Artefact/eu.els.sie.lib.xsl.common/xslLib/3.0.1-SNAPSHOT/xsldoc/xml2simpleHtml.html)
-* [`fixMsvErrorWhenConvertingXSD2RNG.xsl`](http://srvicprd/Artefact/eu.els.sie.lib.xsl.common/xslLib/3.0.1-SNAPSHOT/xsldoc/fixMsvErrorWhenConvertingXSD2RNG.html)
+* [`nest-titles.xsl`](http://srvicprd/Artefact/eu.els.sie.lib.xsl.common/xslLib/3.1.1-SNAPSHOT/xsldoc/nest-titles.html)
+* [`nest-html-titles.xsl`](http://srvicprd/Artefact/eu.els.sie.lib.xsl.common/xslLib/3.1.1-SNAPSHOT/xsldoc/nest-html-titles.html)
+* [`xml2simpleHtml.xsl`](http://srvicprd/Artefact/eu.els.sie.lib.xsl.common/xslLib/3.1.1-SNAPSHOT/xsldoc/xml2simpleHtml.html)
+* [`fixMsvErrorWhenConvertingXSD2RNG.xsl`](http://srvicprd/Artefact/eu.els.sie.lib.xsl.common/xslLib/3.1.1-SNAPSHOT/xsldoc/fixMsvErrorWhenConvertingXSD2RNG.html)
 
 
 ## Set of functions libraries
