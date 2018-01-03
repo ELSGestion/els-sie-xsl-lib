@@ -146,6 +146,11 @@
       <url>http://srvic/nexus/content/repositories/snapshots</url>
       <layout>default</layout>
     </snapshotRepository>
+    <site>
+      <id>xslLib</id>
+      <name>xslLib website</name>
+      <url>file:///var/www/html/Artefact/${project.groupId}/${project.artifactId}/${project.version}/</url>
+    </site>
   </distributionManagement>
 
   <pluginRepositories>
