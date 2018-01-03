@@ -74,14 +74,14 @@ This Maven project is build by jenkins which generates this [site](http://srvicp
 
 * `els-common.xsl`: Common library of XSLT functions, templates and variables.
 
-  The file is splitted into 6 submodules: 
+    The file is splitted into 6 submodules: 
   
-    * COMMON VAR
+    * CONSTANTS
     * DATE
     * STRING
     * XML
     * FILE
-    * MATH and NUMBERS
+    * CONVERT and CAST
 
     Each modules might be used independantly.
 
