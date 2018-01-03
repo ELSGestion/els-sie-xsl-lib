@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<x:description 
+  xmlns:x="http://www.jenitennison.com/xslt/xspec" 
+  xmlns:els="http://www.lefebvre-sarrut.eu/ns/els"
+  stylesheet="../../main/xsl/els-common_strings.xsl"
+  xslt-version="3.0">
+  
+  <x:scenario label="els:els:replace-multiple()">
+    <x:call function="els:replace-multiple">
+      <x:param name="string" select="'Text test_12 xxx text/ZZZ'"/>
+      <x:param name="replace.list" as="element(els:replace-list)">
+        <replace-list xmlns="http://www.lefebvre-sarrut.eu/ns/els">
+          <replace>
+            <pattern>test_(\d+)</pattern>
+            <replacement>Test n°$1</replacement>
+          </replace>
+          <replace flags="x">
+            <pattern>(x) (x) (x)</pattern>
+            <replacement>Y$2Y</replacement>
+          </replace>
+          <replace flags="xi">
+            <pattern>(zzz)</pattern>
+            <replacement>A</replacement>
+          </replace>
+        </replace-list>
+      </x:param>
+    </x:call>
+    <x:expect label="String with replacements" select="'Text Test n°12 YxY text/A'"/>
+  </x:scenario>
+  
+  <x:scenario label="els:reccursivReplace" pending="DEPRECATED">
+    <x:call function="els:reccursivReplace">
+      <x:param name="Text" select="''"/>
+      <x:param name="SequenceDeTriplets" select="''"/>
+    </x:call>
+    <x:expect label="Not yet implemented" select="'Not yet implemented'"/>
+  </x:scenario>
+  
+  <x:scenario label="els:normalize-no-diacritic">
+    <x:call function="els:normalize-no-diacritic">
+      <x:param name="string" select="'abcçdéêèàœ'"/>
+    </x:call>
+    <x:expect label="abccdeeeeœ" select="'abccdeeeaœ'"/>
+  </x:scenario>
+  
+  <x:scenario label="els:crlf">
+    <x:call function="els:crlf">
+      <x:param name="n" select="3"/>
+    </x:call>
+    <x:expect label="3 carriage return" select="('&#10;', '&#10;', '&#10;')"/>
+  </x:scenario>
+  
+  <x:scenario label="els:crlf">
+    <x:call function="els:crlf"/> 
+    <x:expect label="1 carriage return" select="'&#10;'"/>
+  </x:scenario>
+  
+  <x:scenario label="els:getFirstChar">
+    <x:call function="els:getFirstChar">
+      <x:param name="s" select="'foobar'"/>
+    </x:call>
+    <x:expect label="f" select="'f'"/>
+  </x:scenario>
+  
+  <x:scenario label="els:getFirstChar">
+    <x:call function="els:getFirstChar">
+      <x:param name="s" select="'foobar'"/>
+      <x:param name="n" select="3"/>
+    </x:call>
+    <x:expect label="foo" select="'foo'"/>
+  </x:scenario>
+  
+  <x:scenario label="els:getStringButFirstChar">
+    <x:call function="els:getStringButFirstChar">
+      <x:param name="s" select="'foobar'"/>
+    </x:call>
+    <x:expect label="oobar" select="'oobar'"/>
+  </x:scenario>
+  
+  <x:scenario label="els:capFirst_lowercase">
+    <x:call function="els:capFirst_lowercase">
+      <x:param name="s" select="'fooBaR'"/>
+    </x:call>
+    <x:expect label="Foobar" select="'Foobar'"/>
+  </x:scenario>
+  
+  <x:scenario label="els:capFirst">
+    <x:call function="els:capFirst">
+      <x:param name="s" select="'fooBaR'"/>
+    </x:call>
+    <x:expect label="FooBaR" select="'FooBaR'"/>
+  </x:scenario>
+  
+  <x:scenario label="els:lowercase">
+    <x:context mode="els:lowercase">
+      <t>This Is <strong>bOLD</strong> And <em>ItaL</em></t>
+    </x:context>
+    <x:expect label="els:lowercase">
+      <t>this is <strong>bold</strong> and <em>ital</em></t>
+    </x:expect>
+  </x:scenario>
+  
+  <x:scenario label="els:uppercase">
+    <x:context mode="els:uppercase">
+      <t>This Is <strong>bOLD</strong> And <em>ItaL</em></t>
+    </x:context>
+    <x:expect label="els:uppercase">
+      <t>THIS IS <strong>BOLD</strong> AND <em>ITAL</em></t>
+    </x:expect>
+  </x:scenario>
+  
+</x:description>
