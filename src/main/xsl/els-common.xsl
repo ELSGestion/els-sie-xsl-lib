@@ -1568,7 +1568,7 @@
   </xsl:function>
   
   <!--****************************************************************************************-->
-  <!-- MATH AND NUMBER-->
+  <!--CONVERSION AND CASTING-->
   <!--****************************************************************************************-->
   
   <!--conversion roman2numeric adapted from http://users.atw.hu/xsltcookbook2/xsltckbk2-chp-3-sect-3.html-->

@@ -284,28 +284,6 @@
       </x:expect>
     </x:scenario>
     
-    <x:scenario label="els:isURI()">
-      <x:call function="els:isAnyUri"/>
-      <x:scenario label="Value is not an URI">
-        <x:call>
-          <x:param name="item" select="'http://test.web.site.fr#toto#toto'"/>
-        </x:call>
-        <x:expect label="isURI false" select="false()"/>
-      </x:scenario>
-      <x:scenario label="Value is an URI">
-        <x:call>
-          <x:param name="item" select="'http://test.web.site.fr'"/>
-        </x:call>
-        <x:expect label="isURI true" select="true()"/>
-      </x:scenario>
-      <x:scenario label="Value is empty">
-        <x:call>
-          <x:param name="item" select="''"/>
-        </x:call>
-        <x:expect label="isURI empty" select="true()"/>
-      </x:scenario>
-    </x:scenario>
-    
   </x:scenario>
 
   <x:scenario label="XML">
@@ -894,7 +872,7 @@
     
   </x:scenario>
 
-  <x:scenario label="MATHS">
+  <x:scenario label="CONVERSION AND CASTING">
     
     <x:scenario label="els:roman2numeric">
       <x:call function="els:roman2numeric">
@@ -966,6 +944,28 @@
       </x:scenario>
     </x:scenario>
 
+    <x:scenario label="els:isAnyUri">
+      <x:call function="els:isAnyUri"/>
+      <x:scenario label="Value is not an URI">
+        <x:call>
+          <x:param name="item" select="'http://test.web.site.fr#toto#toto'"/>
+        </x:call>
+        <x:expect label="isURI false" select="false()"/>
+      </x:scenario>
+      <x:scenario label="Value is an URI">
+        <x:call>
+          <x:param name="item" select="'http://test.web.site.fr'"/>
+        </x:call>
+        <x:expect label="isURI true" select="true()"/>
+      </x:scenario>
+      <x:scenario label="Value is empty">
+        <x:call>
+          <x:param name="item" select="''"/>
+        </x:call>
+        <x:expect label="isURI empty" select="true()"/>
+      </x:scenario>
+    </x:scenario>
+    
     <x:scenario label="els:round">
       <x:call function="els:round"/>
       <x:scenario label="2.45">
