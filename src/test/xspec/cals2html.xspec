@@ -7,7 +7,7 @@
   
   <x:param name="xslLib:cals2html.use-style-insteadOf-class" select="false()"/>
   
-  <x:scenario label="CALS2HTML" xml:base="data/">
+  <x:scenario label="CALS2HTML" xml:base="data_table/">
     <x:scenario label="Table jira CHAINE-1885">
       <x:context href="Table_CHAINE-1885.xml"/>
       <x:expect label="OK" select="/*" test="/*" href="Table_CHAINE-1885.htm"/>
