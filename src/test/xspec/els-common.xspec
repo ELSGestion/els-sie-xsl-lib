@@ -137,28 +137,28 @@
       <x:call function="els:date-number-slash">
         <x:param name="param" select="'2016-03-07'"/>
       </x:call>
-      <x:expect label="DD/MM/YYY" test="$x:result = '07/03/2016'"/>
+      <x:expect label="DD/MM/YYY" select="'07/03/2016'"/>
     </x:scenario>
 
     <x:scenario label="els:date-number-dash">
       <x:call function="els:date-number-dash">
         <x:param name="param" select="'2016-03-07'"/>
       </x:call>
-      <x:expect label="DD-MM-YYY" test="$x:result = '07-03-2016'"/>
+      <x:expect label="DD-MM-YYY" select="'07-03-2016'"/>
     </x:scenario>
 
     <x:scenario label="els:date-string">
       <x:call function="els:date-string">
         <x:param name="param" select="'2016-03-07'"/>
       </x:call>
-      <x:expect label="DD MM YYY" test="$x:result = '7 mars 2016'"/>
+      <x:expect label="DD MM YYY" select="'7 mars 2016'"/>
     </x:scenario>
 
     <x:scenario label="els:displayDate">
       <x:call function="els:displayDate">
         <x:param name="param" select="'19750910'"/>
       </x:call>
-      <x:expect label="10 Septembre 1975" test="$x:result = '10 septembre 1975'"/>
+      <x:expect label="10 Septembre 1975" select="'10 septembre 1975'"/>
     </x:scenario>
 
     <x:scenario label="els:date-string-to-number-slash">
@@ -166,14 +166,14 @@
         <x:param name="dateVerbalized" select="'10 septembre 1975'"/>
         <x:param name="shortMonth" select="true()"/>
       </x:call>
-      <x:expect label="19750910" test="$x:result = '10/09/1975'"/>
+      <x:expect label="19750910" select="'10/09/1975'"/>
     </x:scenario>
 
     <x:scenario label="els:date-string-to-number-slash">
       <x:call function="els:date-string-to-number-slash">
         <x:param name="dateVerbalized" select="'10 septembre 1975'"/>
       </x:call>
-      <x:expect label="19750910" test="$x:result = '10/09/1975'"/>
+      <x:expect label="19750910" select="'10/09/1975'"/>
     </x:scenario>
 
   </x:scenario>
@@ -395,19 +395,19 @@
 
     <x:scenario label="els:hasAncestor">
       <x:call function="els:hasAncestor">
-        <x:param name="node" select="//test">
+        <x:param name="node" select="//node">
           <doc xmlns="">
-            <top>
+            <ancestor>
               <b/>
               <b>
-                <c>text <test/></c>
+                <node>text</node>
               </b>
-            </top>
+            </ancestor>
           </doc>
         </x:param>
-        <x:param name="top" select="$node/ancestor::top[1]"/>
+        <x:param name="ancestor" select="$node/ancestor::ancestor[1]"/>
       </x:call>
-      <x:expect label="test hasAncestor top" select="true()"/>
+      <x:expect label="$node hasAncestor $ancestor" select="true()"/>
     </x:scenario>
 
     <x:scenario label="els:hasStyle">
@@ -948,16 +948,15 @@
       </x:scenario>
       <x:scenario label="-2">
         <x:call>
-          <x:param name="s" select="-2"/>
+          <x:param name="s" select="'-2'"/>
         </x:call>
         <x:expect label="true" select="true()"/>
       </x:scenario>
       <x:scenario label="2.5">
         <x:call>
-          <x:param name="s" select="2.5"/>
+          <x:param name="s" select="'2.5'"/>
         </x:call>
-        <!--FIXME 2.5 cast as xs:integer = 2 !!!-->
-        <x:expect label="true" select="true()"/>
+        <x:expect label="false" select="false()"/>
       </x:scenario>
       <x:scenario label="foo">
         <x:call>
@@ -1017,7 +1016,7 @@
       <x:call function="els:hexToDec">
         <x:param name="str" select="'1A'"/>
       </x:call>
-      <x:expect label="26" test="$x:result = 26"/>
+      <x:expect label="26" select="26"/>
     </x:scenario>
 
     <x:scenario label="els:decToHex">
