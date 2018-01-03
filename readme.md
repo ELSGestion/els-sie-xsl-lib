@@ -54,10 +54,10 @@ This Maven project is build by jenkins which generates a [site](http://srvicprd:
 
 #### JSON utilies
 
-* [`anyXML2json.xsl`](http://srvicprd:8080/view/Libs/job/SIE-LIB-XSL-COMMON_BUILD/site/xsldoc/anyXML2json.html)
-* [`xjson2json.xsl`](http://srvicprd:8080/view/Libs/job/SIE-LIB-XSL-COMMON_BUILD/site/xsldoc/xjson2json.html)
-* [`xvrl2xjson.xsl`](http://srvicprd:8080/view/Libs/job/SIE-LIB-XSL-COMMON_BUILD/site/xsldoc/xvrl2xjson.html)
-* [`xvrl2xjson.xsl`](http://srvicprd:8080/view/Libs/job/SIE-LIB-XSL-COMMON_BUILD/site/xsldoc/xvrl2xjson.html)
+* [`anyXML2json.xsl`](http://srvicprd:8080/view/Libs/job/SIE-LIB-XSL-COMMON_BUILD/site/xsldoc/xml2json/anyXML2json.html)
+* [`xjson2json.xsl`](http://srvicprd:8080/view/Libs/job/SIE-LIB-XSL-COMMON_BUILD/site/xsldoc/xml2json/xjson2json.html)
+* [`xvrl2xjson.xsl`](http://srvicprd:8080/view/Libs/job/SIE-LIB-XSL-COMMON_BUILD/site/xsldoc/xml2json/xvrl2xjson.html)
+* [`xvrl2xjson.xsl`](http://srvicprd:8080/view/Libs/job/SIE-LIB-XSL-COMMON_BUILD/site/xsldoc/xml2json/xvrl2xjson.html)
 
 #### CSS utilities
 
