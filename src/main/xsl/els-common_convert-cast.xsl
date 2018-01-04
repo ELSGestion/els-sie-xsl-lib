@@ -86,22 +86,43 @@
   </xsl:function>
   
   <xd:doc>Check if atomic value is an "number"</xd:doc>
+  <!--FIXME : cf. http://www.xsltfunctions.com/xsl/functx_is-a-number.html-->
   <xsl:function name="els:isNumber" as="xs:boolean">
-    <xsl:param name="s" as="xs:string"/>
-    <xsl:value-of select="number($s) = number($s)"/>
-    <!--cf. http://www.xsltfunctions.com/xsl/functx_is-a-number.html-->
+    <xsl:param name="s" as="xs:string?"/>
+    <xsl:choose>
+      <xsl:when test="empty($s)">
+        <xsl:sequence select="false()"/>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:sequence select="number($s) = number($s)"/>
+      </xsl:otherwise>
+    </xsl:choose>
   </xsl:function>
   
   <xd:doc>Check if atomic value is an integer</xd:doc>
   <xsl:function name="els:isInteger" as="xs:boolean">
-    <xsl:param name="s" as="xs:string"/>
-    <xsl:value-of select="$s castable as xs:integer"/>
+    <xsl:param name="s" as="xs:string?"/>
+    <xsl:choose>
+      <xsl:when test="empty($s)">
+        <xsl:sequence select="false()"/>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:sequence select="$s castable as xs:integer"/>
+      </xsl:otherwise>
+    </xsl:choose>
   </xsl:function>
   
   <xd:doc>Check if atomic value is an anyURI</xd:doc>
   <xsl:function name="els:isAnyUri" as="xs:boolean">
     <xsl:param name="item" as="item()?"/>
-    <xsl:value-of select="$item castable as xs:anyURI"/>
+    <xsl:choose>
+      <xsl:when test="empty($item)">
+        <xsl:sequence select="false()"/>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:sequence select="$item castable as xs:anyURI"/>
+      </xsl:otherwise>
+    </xsl:choose>
   </xsl:function>
   
   <xd:doc>1 arg signature of els:round. Default $precision = 0 (that's why it returns an integer)</xd:doc>

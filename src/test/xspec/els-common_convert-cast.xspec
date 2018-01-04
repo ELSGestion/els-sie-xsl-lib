@@ -21,27 +21,33 @@
 
   <x:scenario label="els:isNumber">
     <x:call function="els:isNumber"/>
-    <x:scenario label="isNumber(12)">
+    <x:scenario label="12">
       <x:call>
         <x:param name="s" select="'12'"/>
       </x:call>
       <x:expect label="true" select="true()"/>
     </x:scenario>
-    <x:scenario label="isNumber(12,5)">
+    <x:scenario label="12,5">
       <x:call>
         <x:param name="s" select="'12,5'"/>
       </x:call>
       <x:expect label="false" select="false()"/>
     </x:scenario>
-    <x:scenario label="isNumber(12.5)">
+    <x:scenario label="12.5">
       <x:call>
         <x:param name="s" select="'12.5'"/>
       </x:call>
       <x:expect label="true" select="true()"/>
     </x:scenario>
-    <x:scenario label="isNumber(foo)">
+    <x:scenario label="foo">
       <x:call>
         <x:param name="s" select="'foo'"/>
+      </x:call>
+      <x:expect label="false" select="false()"/>
+    </x:scenario>
+    <x:scenario label="()">
+      <x:call>
+        <x:param name="s" select="()"/>
       </x:call>
       <x:expect label="false" select="false()"/>
     </x:scenario>
@@ -73,6 +79,12 @@
       </x:call>
       <x:expect label="false" select="false()"/>
     </x:scenario>
+    <x:scenario label="()">
+      <x:call>
+        <x:param name="s" select="()"/>
+      </x:call>
+      <x:expect label="false" select="false()"/>
+    </x:scenario>
   </x:scenario>
 
   <x:scenario label="els:isAnyUri">
@@ -81,19 +93,25 @@
       <x:call>
         <x:param name="item" select="'http://test.web.site.fr#toto#toto'"/>
       </x:call>
-      <x:expect label="isURI false" select="false()"/>
+      <x:expect label="false" select="false()"/>
     </x:scenario>
     <x:scenario label="Value is an URI">
       <x:call>
         <x:param name="item" select="'http://test.web.site.fr'"/>
       </x:call>
-      <x:expect label="isURI true" select="true()"/>
+      <x:expect label="true" select="true()"/>
     </x:scenario>
-    <x:scenario label="Value is empty">
+    <x:scenario label="Value is the empty string">
       <x:call>
         <x:param name="item" select="''"/>
       </x:call>
-      <x:expect label="isURI empty" select="true()"/>
+      <x:expect label="true" select="true()"/>
+    </x:scenario>
+    <x:scenario label="Value is empty">
+      <x:call>
+        <x:param name="item" select="()"/>
+      </x:call>
+      <x:expect label="false" select="false()"/>
     </x:scenario>
   </x:scenario>
   
