@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<x:description 
+  xmlns:x="http://www.jenitennison.com/xslt/xspec" 
+  xmlns:els="http://www.lefebvre-sarrut.eu/ns/els"
+  stylesheet="../../main/xsl/els-common_convert-cast.xsl"
+  xslt-version="3.0">
+    
+  <x:scenario label="els:roman2numeric">
+    <x:call function="els:roman2numeric">
+      <x:param name="roman" select="'MDCV'"/>
+    </x:call>
+    <x:expect label="1605" select="'1605'"/>
+  </x:scenario>
+
+  <x:scenario label="els:litteral2numeric">
+    <x:call function="els:litteral2numeric">
+      <x:param name="lit" select="'C'"/>
+    </x:call>
+    <x:expect label="3" select="3"/>
+  </x:scenario>
+
+  <x:scenario label="els:isNumber">
+    <x:call function="els:isNumber"/>
+    <x:scenario label="12">
+      <x:call>
+        <x:param name="s" select="'12'"/>
+      </x:call>
+      <x:expect label="true" select="true()"/>
+    </x:scenario>
+    <x:scenario label="12,5">
+      <x:call>
+        <x:param name="s" select="'12,5'"/>
+      </x:call>
+      <x:expect label="false" select="false()"/>
+    </x:scenario>
+    <x:scenario label="12.5">
+      <x:call>
+        <x:param name="s" select="'12.5'"/>
+      </x:call>
+      <x:expect label="true" select="true()"/>
+    </x:scenario>
+    <x:scenario label="foo">
+      <x:call>
+        <x:param name="s" select="'foo'"/>
+      </x:call>
+      <x:expect label="false" select="false()"/>
+    </x:scenario>
+    <x:scenario label="()">
+      <x:call>
+        <x:param name="s" select="()"/>
+      </x:call>
+      <x:expect label="false" select="false()"/>
+    </x:scenario>
+  </x:scenario>
+
+  <x:scenario label="els:isInteger">
+    <x:call function="els:isInteger"/>
+    <x:scenario label="2">
+      <x:call>
+        <x:param name="s" select="'2'"/>
+      </x:call>
+      <x:expect label="true" select="true()"/>
+    </x:scenario>
+    <x:scenario label="-2">
+      <x:call>
+        <x:param name="s" select="'-2'"/>
+      </x:call>
+      <x:expect label="true" select="true()"/>
+    </x:scenario>
+    <x:scenario label="2.5">
+      <x:call>
+        <x:param name="s" select="'2.5'"/>
+      </x:call>
+      <x:expect label="false" select="false()"/>
+    </x:scenario>
+    <x:scenario label="foo">
+      <x:call>
+        <x:param name="s" select="'foo'"/>
+      </x:call>
+      <x:expect label="false" select="false()"/>
+    </x:scenario>
+    <x:scenario label="()">
+      <x:call>
+        <x:param name="s" select="()"/>
+      </x:call>
+      <x:expect label="false" select="false()"/>
+    </x:scenario>
+  </x:scenario>
+
+  <x:scenario label="els:isAnyUri">
+    <x:call function="els:isAnyUri"/>
+    <x:scenario label="Value is not an URI">
+      <x:call>
+        <x:param name="item" select="'http://test.web.site.fr#toto#toto'"/>
+      </x:call>
+      <x:expect label="false" select="false()"/>
+    </x:scenario>
+    <x:scenario label="Value is an URI">
+      <x:call>
+        <x:param name="item" select="'http://test.web.site.fr'"/>
+      </x:call>
+      <x:expect label="true" select="true()"/>
+    </x:scenario>
+    <x:scenario label="Value is the empty string">
+      <x:call>
+        <x:param name="item" select="''"/>
+      </x:call>
+      <x:expect label="true" select="true()"/>
+    </x:scenario>
+    <x:scenario label="Value is empty">
+      <x:call>
+        <x:param name="item" select="()"/>
+      </x:call>
+      <x:expect label="false" select="false()"/>
+    </x:scenario>
+  </x:scenario>
+  
+  <x:scenario label="els:round">
+    <x:call function="els:round"/>
+    <x:scenario label="2.45">
+      <x:call>
+        <x:param name="number" select="2.45"/>
+      </x:call>
+      <x:expect label="2" select="2"/>
+    </x:scenario>
+    <x:scenario label="2.50">
+      <x:call>
+        <x:param name="number" select="2.50"/>
+      </x:call>
+      <x:expect label="3" select="3"/>
+    </x:scenario>
+    <x:scenario label="2.63">
+      <x:call>
+        <x:param name="number" select="2.63"/>
+      </x:call>
+      <x:expect label="3" select="3"/>
+    </x:scenario>
+  </x:scenario>
+
+  <x:scenario label="els:round with precision 1">
+    <x:call function="els:round">
+      <x:param name="precision" position="2" select="1"/>
+    </x:call>
+    <x:scenario label="> 2.45">
+      <x:call>
+        <x:param name="number" select="2.45"/>
+      </x:call>
+      <x:expect label="2.5" select="2.5"/>
+    </x:scenario>
+    <x:scenario label="> 2.50">
+      <x:call>
+        <x:param name="number" select="2.50"/>
+      </x:call>
+      <x:expect label="2.5" select="2.5"/>
+    </x:scenario>
+    <x:scenario label="> 2.63">
+      <x:call>
+        <x:param name="number" select="2.63"/>
+      </x:call>
+      <x:expect label="2.6" select="2.6"/>
+    </x:scenario>
+  </x:scenario>
+
+  <x:scenario label="els:hexToDec">
+    <x:call function="els:hexToDec">
+      <x:param name="str" select="'1A'"/>
+    </x:call>
+    <x:expect label="26" select="26"/>
+  </x:scenario>
+
+  <x:scenario label="els:decToHex">
+    <x:call function="els:decToHex">
+      <x:param name="in" select="26"/>
+    </x:call>
+    <x:expect label="1A" select="'1A'"/>
+  </x:scenario>
+
+  <x:scenario label="els:convertToBoolean">
+    <x:call function="els:convertToBoolean"/>
+    <x:scenario label="true()">
+      <x:call>
+        <x:param name="var" select="true()" />
+      </x:call>
+      <x:expect label="true" select="true()"/>
+    </x:scenario>
+    <x:scenario label="'true'">
+      <x:call>
+        <x:param name="var" select="'true'" />
+      </x:call>
+      <x:expect label="true" select="true()"/>
+    </x:scenario>
+    <x:scenario label="'OUI'">
+      <x:call>
+        <x:param name="var" select="'OUI'" />
+      </x:call>
+      <x:expect label="true" select="true()"/>
+    </x:scenario>
+    <x:scenario label="'non'">
+      <x:call>
+        <x:param name="var" select="'non'" />
+      </x:call>
+      <x:expect label="false" select="false()"/>
+    </x:scenario>
+    <x:scenario label="0">
+      <x:call>
+        <x:param name="var" select="0" />
+      </x:call>
+      <x:expect label="faux" select="false()"/>
+    </x:scenario>
+    <x:scenario label="1">
+      <x:call>
+        <x:param name="var" select="1"/>
+      </x:call>
+      <x:expect label="true" select="true()"/>
+    </x:scenario>
+  </x:scenario>
+
+</x:description>

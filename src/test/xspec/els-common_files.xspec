@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<x:description 
+  xmlns:x="http://www.jenitennison.com/xslt/xspec" 
+  xmlns:els="http://www.lefebvre-sarrut.eu/ns/els"
+  stylesheet="../../main/xsl/els-common_files.xsl"
+  xslt-version="3.0">
+  
+  <x:scenario label="els:getFileName (2 parameters)">
+    <x:call function="els:getFileName"/>
+    <x:scenario label="$withExt = true() (file name + extension)">
+      <x:call>
+        <x:param name="withExt" select="true()" position="2"/>
+      </x:call>
+      <x:scenario label="$filePath = 'file.ext'">
+        <x:call>
+          <x:param name="filePath" select="'file.ext'" position="1"/>
+        </x:call>
+        <x:expect label="File name + ext" select="'file.ext'"/>
+      </x:scenario>
+      <x:scenario label="$filePath = 'folder1/folder2/folder3/file.ext'">
+        <x:call>
+          <x:param name="filePath" select="'folder1/folder2/folder3/file.ext'" position="1"/>
+        </x:call>
+        <x:expect label="File name + ext" select="'file.ext'"/>
+      </x:scenario>
+      <x:scenario label="$filePath = 'folder1/../folder2/./folder3/file.ext'">
+        <x:call>
+          <x:param name="filePath" select="'folder1/../folder2/./folder3/file.ext'" position="1"/>
+        </x:call>
+        <x:expect label="File name + ext" select="'file.ext'"/>
+      </x:scenario>
+      <x:scenario label="$filePath = 'file' (file name that has no extension)">
+        <x:call>
+          <x:param name="filePath" select="'file'" position="1"/>
+        </x:call>
+        <x:expect label="File name only (missing ext)" select="'file'"/>
+      </x:scenario>
+      <x:scenario label="$filePath = 'folder1/folder2/folder3/file' (file name that has no extension)">
+        <x:call>
+          <x:param name="filePath" select="'folder1/folder2/folder3/file'" position="1"/>
+        </x:call>
+        <x:expect label="File name only (missing ext)" select="'file'"/>
+      </x:scenario>
+      <x:scenario label="$filePath = ''">
+        <x:call>
+          <x:param name="filePath" select="''" position="1"/>
+        </x:call>
+        <x:expect label="Empty string" select="''"/>
+      </x:scenario>
+    </x:scenario>
+    <x:scenario label="$withExt = false() (file name without extension)">
+      <x:call>
+        <x:param name="withExt" select="false()" position="2"/>
+      </x:call>
+      <x:scenario label="$filePath = 'file.ext'">
+        <x:call>
+          <x:param name="filePath" select="'file.ext'" position="1"/>
+        </x:call>
+        <x:expect label="File name only" select="'file'"/>
+      </x:scenario>
+      <x:scenario label="$filePath = 'folder1/folder2/folder3/file.ext'">
+        <x:call>
+          <x:param name="filePath" select="'folder1/folder2/folder3/file.ext'" position="1"/>
+        </x:call>
+        <x:expect label="File name only" select="'file'"/>
+      </x:scenario>
+      <x:scenario label="$filePath = 'folder1/../folder2/./folder3/file.ext'">
+        <x:call>
+          <x:param name="filePath" select="'folder1/../folder2/./folder3/file.ext'" position="1"/>
+        </x:call>
+        <x:expect label="File name only" select="'file'"/>
+      </x:scenario>
+      <x:scenario label="$filePath = 'file' (file name that has no extension)">
+        <x:call>
+          <x:param name="filePath" select="'file'" position="1"/>
+        </x:call>
+        <x:expect label="File name only (missing ext)" select="'file'"/>
+      </x:scenario>
+      <x:scenario label="$filePath = 'folder1/folder2/folder3/file' (file name that has no extension)">
+        <x:call>
+          <x:param name="filePath" select="'folder1/folder2/folder3/file'" position="1"/>
+        </x:call>
+        <x:expect label="File name only (missing ext)" select="'file'"/>
+      </x:scenario>
+    </x:scenario>
+  </x:scenario>
+  
+  <x:scenario label="els:getFileName (1 parameter) file name + extension (default behaviour)">
+    <x:call function="els:getFileName"/>
+    <x:scenario label="$filePath = 'file.ext'">
+      <x:call>
+        <x:param name="filePath" select="'file.ext'"/>
+      </x:call>
+      <x:expect label="File name + ext" select="'file.ext'"/>
+    </x:scenario>
+    <x:scenario label="$filePath = 'folder1/folder2/folder3/file.ext'">
+      <x:call>
+        <x:param name="filePath" select="'folder1/folder2/folder3/file.ext'"/>
+      </x:call>
+      <x:expect label="File name + ext" select="'file.ext'"/>
+    </x:scenario>
+    <x:scenario label="$filePath = 'folder1/../folder2/./folder3/file.ext'">
+      <x:call>
+        <x:param name="filePath" select="'folder1/../folder2/./folder3/file.ext'"/>
+      </x:call>
+      <x:expect label="File name + ext" select="'file.ext'"/>
+    </x:scenario>
+    <x:scenario label="$filePath = 'file' (file name that has no extension)">
+      <x:call>
+        <x:param name="filePath" select="'file'"/>
+      </x:call>
+      <x:expect label="File name only (missing ext)" select="'file'"/>
+    </x:scenario>
+    <x:scenario label="$filePath = 'folder1/folder2/folder3/file' (file name that has no extension)">
+      <x:call>
+        <x:param name="filePath" select="'folder1/folder2/folder3/file'"/>
+      </x:call>
+      <x:expect label="File name only (missing ext)" select="'file'"/>
+    </x:scenario>
+  </x:scenario>
+  
+  <x:scenario label="els:getFileExt">
+    <x:call function="els:getFileExt"/>
+    <x:scenario label="$filePath = 'file.ext'">
+      <x:call>
+        <x:param name="filePath" select="'file.ext'"/>
+      </x:call>
+      <x:expect label="ext" select="'ext'"/>
+    </x:scenario>
+    <x:scenario label="$filePath = 'folder1/folder2/folder3/file' (file name that has no extension)">
+      <x:call>
+        <x:param name="filePath" select="'folder1/folder2/folder3/file'"/>
+      </x:call>
+      <!--THIS IS WRONG should be ''-->
+      <x:expect label="ext" select="'folder1/folder2/folder3/file'"/>
+    </x:scenario>
+  </x:scenario>
+  
+  <x:scenario label="els:getFolderPath">
+    <x:call function="els:getFolderPath"/>
+    <x:scenario label="getFolderPath($filePath)">
+      <x:call>
+        <x:param name="filePath" select="'file:/folder1/folder2/folder3/file.ext'"/>
+      </x:call>
+      <x:expect label="folderPath (level 1 = path complet)" select="'file:/folder1/folder2/folder3'"/>
+    </x:scenario>
+    <x:scenario label="getFolderPath($filePath, 2)">
+      <x:call>
+        <x:param name="filePath" select="'file:/folder1/folder2/folder3/file.ext'"/>
+        <x:param name="level" select="2"/>
+      </x:call>
+      <x:expect label="folderPath 2" select="'file:/folder1/folder2'"/>
+    </x:scenario>
+  </x:scenario>
+  
+  <x:scenario label="els:getFolderName">
+    <x:call function="els:getFolderName"/>
+    <x:scenario label="getFolderName($filePath)">
+      <x:call>
+        <x:param name="filePath" select="'file:/folder1/folder2/folder3/file.ext'"/>
+      </x:call>
+      <x:expect label="folderPath (level 1 = parent folder name)" select="'folder3'"/>
+    </x:scenario>
+    <x:scenario label="getFolderName($filePath, 2)">
+      <x:call>
+        <x:param name="filePath" select="'file:/folder1/folder2/folder3/file.ext'"/>
+        <x:param name="level" select="2"/>
+      </x:call>
+      <x:expect label="folderPath 2" select="'folder2'"/>
+    </x:scenario>
+  </x:scenario>
+  
+  <x:scenario label="els:getRelativePath">
+    <x:scenario label="getRelativePath($source, $target)">
+      <x:call function="els:getRelativePath">
+        <x:param name="source" select="'file:/folder1/folder2/folder3'"/>
+        <x:param name="target" select="'file:/folder1/folder2bis/folder3bis/file.ext'"/>
+      </x:call>
+      <x:expect label="getRelativePath($source, $target)" select="'../../folder2bis/folder3bis/file.ext'"/>
+    </x:scenario>
+  </x:scenario>
+  
+</x:description>

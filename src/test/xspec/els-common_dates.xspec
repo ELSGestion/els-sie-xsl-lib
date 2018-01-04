@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<x:description 
+  xmlns:x="http://www.jenitennison.com/xslt/xspec" 
+  xmlns:els="http://www.lefebvre-sarrut.eu/ns/els"
+  stylesheet="../../main/xsl/els-common_dates.xsl"
+  xslt-version="3.0">
+
+  <x:scenario label="els:getCurrentIsoDate">
+    <x:call function="els:getCurrentIsoDate"/>
+    <x:expect label="YYYY-MM-DD" test="matches($x:result, '^\d\d\d\d-\d\d-\d\d$')"/>
+  </x:scenario>
+  
+  <x:scenario label="els:getYearFromIsoDate">
+    <x:call function="els:getYearFromIsoDate">
+      <x:param name="isoDate" select="'2017-12-31'"/>
+    </x:call>
+    <x:expect label="Year" select="'2017'"/>
+  </x:scenario>
+  
+  <x:scenario label="els:getMonthFromIsoDate">
+    <x:call function="els:getMonthFromIsoDate">
+      <x:param name="isoDate" select="'2017-12-31'"/>
+    </x:call>
+    <x:expect label="Month" select="'12'"/>
+  </x:scenario>
+  
+  <x:scenario label="els:getDayFromIsoDate">
+    <x:call function="els:getDayFromIsoDate">
+      <x:param name="isoDate" select="'2017-12-31'"/>
+    </x:call>
+    <x:expect label="Day" select="'31'"/>
+  </x:scenario>
+  
+  <x:scenario label="els:isIsoDate">
+    <x:call function="els:isIsoDate"/>
+    <x:scenario label="true">
+      <x:call>
+        <x:param name="dateString" select="'2017-12-31'"/>
+      </x:call>
+      <x:expect label="true" select="true()"/>
+    </x:scenario>
+    <x:scenario label="false">
+      <x:call>
+        <x:param name="dateString" select="'2017/12/31'"/>
+      </x:call>
+      <x:expect label="false" select="false()"/>
+    </x:scenario>
+  </x:scenario>
+  
+  <x:scenario label="els:verbalizeMonthFromNum">
+    <x:call function="els:verbalizeMonthFromNum"/>
+    <x:scenario label="11">
+      <x:call>
+        <x:param name="monthNumString" select="'11'"/>
+      </x:call>
+      <x:expect label="Novembre" select="'novembre'"/>
+    </x:scenario>
+    <x:scenario label="13">
+      <x:call>
+        <x:param name="monthNumString" select="'13'"/>
+      </x:call>
+      <x:expect label="Error" select="'[ErreurMois]'"/>
+    </x:scenario>
+  </x:scenario>
+  
+  <x:scenario label="els:getMonthNumFromVerbalizeMonth">
+    <x:call function="els:getMonthNumFromVerbalizeMonth"/>
+    <x:scenario label="Novembre">
+      <x:call>
+        <x:param name="monthString" select="'novembre'"/>
+      </x:call>
+      <x:expect label="11" select="11"/>
+    </x:scenario>
+    <x:scenario label="foobar">
+      <x:call>
+        <x:param name="monthString" select="'foobar'"/>
+      </x:call>
+      <x:expect label="Error" select="0"/>
+    </x:scenario>
+  </x:scenario>
+  
+  <x:scenario label="els:makeIsoDate">
+    <x:call function="els:makeIsoDate">
+      <x:param name="s" select="'21-10-1972'"/>
+      <x:param name="sep" select="'-'"/>
+    </x:call>
+    <x:expect label="1972-10-21" select="'1972-10-21'"/>
+  </x:scenario>
+  
+  <x:scenario label="els:makeIsoDateFromYYYYMMDD">
+    <x:call function="els:makeIsoDateFromYYYYMMDD"/>
+    <x:scenario label="/ Parameter is castable as YYYYMMDD">
+      <x:call>
+        <x:param name="date" select="'19721021'"/>
+      </x:call>
+      <x:expect label="1972-10-21" select="'1972-10-21'"/>        
+    </x:scenario>     
+    <x:scenario label="/ Parameter is castable as YYYYMMDD">
+      <x:call>
+        <x:param name="date" select="'19721001'"/>
+      </x:call>
+      <x:expect label="1972-10-01" select="'1972-10-01'"/>        
+    </x:scenario>      
+    <x:scenario label="/ Parameter is not castable as YYYYMMDD">
+      <x:call>
+        <x:param name="date" select="'null'"/>
+      </x:call>
+      <x:expect label="Returns an empty sequence" select="()"/>
+    </x:scenario>
+  </x:scenario>
+  
+  <x:scenario label="els:getIsoDateFromString">
+    <x:call function="els:getIsoDateFromString"/>
+    <x:scenario label="/ Parameter is castable as xs:dateTime">
+      <x:call>
+        <x:param name="date" select="'2016-03-07T00:00:00.0Z'"/>
+      </x:call>
+      <x:expect label="Returns a normalized ISO date" select="'2016-03-07'"/>
+    </x:scenario>
+    <x:scenario label="/ Parameter is castable as xs:date">
+      <x:call>
+        <x:param name="date" select="'2016-03-07'"/>
+      </x:call>
+      <x:expect label="Returns a normalized ISO date" select="'2016-03-07'"/>
+    </x:scenario>
+    <x:scenario label="/ Parameter is not a valid xs:date/xs:dateTime">
+      <x:call>
+        <x:param name="date" select="'null'"/>
+      </x:call>
+      <x:expect label="Returns an empty sequence" select="()"/>
+    </x:scenario>
+  </x:scenario>
+  
+  <x:scenario label="els:date-number-slash">
+    <x:call function="els:date-number-slash">
+      <x:param name="param" select="'2016-03-07'"/>
+    </x:call>
+    <x:expect label="DD/MM/YYY" select="'07/03/2016'"/>
+  </x:scenario>
+  
+  <x:scenario label="els:date-number-dash">
+    <x:call function="els:date-number-dash">
+      <x:param name="param" select="'2016-03-07'"/>
+    </x:call>
+    <x:expect label="DD-MM-YYY" select="'07-03-2016'"/>
+  </x:scenario>
+  
+  <x:scenario label="els:date-string">
+    <x:call function="els:date-string">
+      <x:param name="param" select="'2016-03-07'"/>
+    </x:call>
+    <x:expect label="DD MM YYY" select="'7 mars 2016'"/>
+  </x:scenario>
+  
+  <x:scenario label="els:displayDate">
+    <x:call function="els:displayDate">
+      <x:param name="param" select="'19750910'"/>
+    </x:call>
+    <x:expect label="10 Septembre 1975" select="'10 septembre 1975'"/>
+  </x:scenario>
+  
+  <x:scenario label="els:date-string-to-number-slash">
+    <x:call function="els:date-string-to-number-slash">
+      <x:param name="dateVerbalized" select="'10 septembre 1975'"/>
+      <x:param name="shortMonth" select="true()"/>
+    </x:call>
+    <x:expect label="19750910" select="'10/09/1975'"/>
+  </x:scenario>
+  
+  <x:scenario label="els:date-string-to-number-slash">
+    <x:call function="els:date-string-to-number-slash">
+      <x:param name="dateVerbalized" select="'10 septembre 1975'"/>
+    </x:call>
+    <x:expect label="19750910" select="'10/09/1975'"/>
+  </x:scenario>
+  
+</x:description>

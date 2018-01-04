@@ -123,7 +123,7 @@
       <plugin>
         <groupId>top.marchand.xml</groupId>
         <artifactId>xslDoc-maven-plugin</artifactId>
-        <version>0.10</version>
+        <version>0.11</version>
         <configuration>
           <xslDirEntries>
             <xslDirEntry>
@@ -146,6 +146,12 @@
       <url>http://srvic/nexus/content/repositories/snapshots</url>
       <layout>default</layout>
     </snapshotRepository>
+    <site>
+      <id>xslLib</id>
+      <name>xslLib website</name>
+      <url>file:///var/www/html/Artefact/${project.groupId}/${project.artifactId}/${project.version}/</url>
+      <!--Site : http://srvicprd/Artefact/-->
+    </site>
   </distributionManagement>
 
   <pluginRepositories>
