@@ -67,7 +67,7 @@
   <!--==============================================================================================================================-->
   
   <xsl:template match="/" mode="xslLib:xhtml2cals">
-    <xsl:variable name="step1" as="document-node()">
+    <xsl:variable name="step" as="document-node()">
       <xsl:document>
         <xsl:apply-templates select="." mode="xhtml2cals:normalize-to-xhtml"/>
       </xsl:document>
@@ -76,66 +76,66 @@
       <xsl:variable name="log.uri" select="resolve-uri('xhtml2cals.step1.log.xml', $xslLib:html2cals.log.uri)" as="xs:anyURI"/>
       <xsl:message>[INFO] writing <xsl:value-of select="$log.uri"/></xsl:message>
       <xsl:result-document href="{$log.uri}">
-        <xsl:sequence select="$step1"/>
+        <xsl:sequence select="$step"/>
       </xsl:result-document>
     </xsl:if>
-    <xsl:variable name="step2" as="document-node()">
+    <xsl:variable name="step" as="document-node()">
       <xsl:document>
-        <xsl:apply-templates select="$step1" mode="xhtml2cals:expand-spans"/>
+        <xsl:apply-templates select="$step" mode="xhtml2cals:expand-spans"/>
       </xsl:document>
     </xsl:variable>
     <xsl:if test="$xslLib:html2cals.debug">
       <xsl:variable name="log.uri" select="resolve-uri('xhtml2cals.step2.log.xml', $xslLib:html2cals.log.uri)" as="xs:anyURI"/>
       <xsl:message>[INFO] writing <xsl:value-of select="$log.uri"/></xsl:message>
       <xsl:result-document href="{$log.uri}">
-        <xsl:sequence select="$step2"/>
+        <xsl:sequence select="$step"/>
       </xsl:result-document>
     </xsl:if>
-    <xsl:variable name="step3" as="document-node()">
+    <xsl:variable name="step" as="document-node()">
       <xsl:document>
-        <xsl:apply-templates select="$step2" mode="xslLib:html4table2html5table"/>
+        <xsl:apply-templates select="$step" mode="xslLib:html4table2html5table"/>
       </xsl:document>
     </xsl:variable>
     <xsl:if test="$xslLib:html2cals.debug">
       <xsl:variable name="log.uri" select="resolve-uri('xhtml2cals.step3.log.xml', $xslLib:html2cals.log.uri)" as="xs:anyURI"/>
       <xsl:message>[INFO] writing <xsl:value-of select="$log.uri"/></xsl:message>
       <xsl:result-document href="{$log.uri}">
-        <xsl:sequence select="$step3"/>
+        <xsl:sequence select="$step"/>
       </xsl:result-document>
     </xsl:if>
-    <xsl:variable name="step4" as="document-node()">
+    <xsl:variable name="step" as="document-node()">
       <xsl:document>
-        <xsl:apply-templates select="$step3" mode="xhtml2cals:convert-to-cals"/>
+        <xsl:apply-templates select="$step" mode="xhtml2cals:convert-to-cals"/>
       </xsl:document>
     </xsl:variable>
     <xsl:if test="$xslLib:html2cals.debug">
       <xsl:variable name="log.uri" select="resolve-uri('xhtml2cals.step4.log.xml', $xslLib:html2cals.log.uri)" as="xs:anyURI"/>
       <xsl:message>[INFO] writing <xsl:value-of select="$log.uri"/></xsl:message>
       <xsl:result-document href="{$log.uri}">
-        <xsl:sequence select="$step4"/>
+        <xsl:sequence select="$step"/>
       </xsl:result-document>
     </xsl:if>
-    <xsl:variable name="step5" as="document-node()">
+    <xsl:variable name="step" as="document-node()">
       <xsl:document>
-        <xsl:apply-templates select="$step4" mode="xhtml2cals:optimize-cals"/>
+        <xsl:apply-templates select="$step" mode="xhtml2cals:optimize-cals"/>
       </xsl:document>
     </xsl:variable>
     <xsl:if test="$xslLib:html2cals.debug">
       <xsl:variable name="log.uri" select="resolve-uri('xhtml2cals.step5.log.xml', $xslLib:html2cals.log.uri)" as="xs:anyURI"/>
       <xsl:message>[INFO] writing <xsl:value-of select="$log.uri"/></xsl:message>
       <xsl:result-document href="{$log.uri}">
-        <xsl:sequence select="$step5"/>
+        <xsl:sequence select="$step"/>
       </xsl:result-document>
     </xsl:if>
     <!--FINALY-->
     <xsl:choose>
       <!--Element has already been created in cals namespace (default xsl namespace) which is the intended one-->
       <xsl:when test="$xslLib:html2cals.cals.ns.uri = 'http://docs.oasis-open.org/ns/oasis-exchange/table'">
-        <xsl:sequence select="$step5"/>
+        <xsl:sequence select="$step"/>
       </xsl:when>
       <!--if not : convert cals element to the intended namespace--> 
       <xsl:otherwise>
-        <xsl:apply-templates select="$step5" mode="xhtml2cals:convert-cals-namespace"/>
+        <xsl:apply-templates select="$step" mode="xhtml2cals:convert-cals-namespace"/>
       </xsl:otherwise>
     </xsl:choose>
   </xsl:template>

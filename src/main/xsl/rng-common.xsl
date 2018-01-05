@@ -357,12 +357,12 @@
     
   <xsl:template match="grammar" mode="rng:mergeIdenticalDefine">
     <xsl:message>[INFO] rng:mergeIdenticalDefine on <xsl:value-of select="local-name()"/></xsl:message>
-    <xsl:variable name="rng:mergeIdenticalDefine.step1" as="document-node()">
+    <xsl:variable name="step" as="document-node()">
       <xsl:document>
         <xsl:apply-templates select="." mode="rng:mergeIdenticalDefine.step1"/>
       </xsl:document>
     </xsl:variable>
-    <xsl:apply-templates select="$rng:mergeIdenticalDefine.step1" mode="rng:mergeIdenticalDefine.step2"/>
+    <xsl:apply-templates select="$step" mode="rng:mergeIdenticalDefine.step2"/>
   </xsl:template>
   
   <!-- === STEP1 === -->
@@ -454,25 +454,25 @@
   <xsl:template match="/grammar" mode="rng:clean">
     <xsl:param name="rng:clean_mergeIdenticalDefines" select="false()" as="xs:boolean"/>
     <xsl:message>[INFO] rng:clean on <xsl:value-of select="local-name()"/></xsl:message>
-    <xsl:variable name="step1.deleteOrphansDefine" as="element(grammar)">
+    <xsl:variable name="step" as="element(grammar)">
       <xsl:call-template name="rng:deleteOrphansDefine">
         <xsl:with-param name="tree" select="."/>
       </xsl:call-template>
     </xsl:variable>
-    <xsl:variable name="step2.deleteEmptyStructuralInstructionInDataModel" as="element(grammar)">
+    <xsl:variable name="step" as="element(grammar)">
       <xsl:call-template name="rng:deleteEmptyStructuralInstructionInDataModel">
-        <xsl:with-param name="tree" select="$step1.deleteOrphansDefine"/>
+        <xsl:with-param name="tree" select="$step"/>
       </xsl:call-template>
     </xsl:variable>
-    <xsl:variable name="step3.clean" as="element(grammar)">
-      <xsl:apply-templates select="$step2.deleteEmptyStructuralInstructionInDataModel" mode="#current"/>
+    <xsl:variable name="step" as="element(grammar)">
+      <xsl:apply-templates select="$step" mode="#current"/>
     </xsl:variable>
     <xsl:choose>
       <xsl:when test="$rng:clean_mergeIdenticalDefines">
-        <xsl:apply-templates select="$step3.clean" mode="rng:mergeIdenticalDefine"/>
+        <xsl:apply-templates select="$step" mode="rng:mergeIdenticalDefine"/>
       </xsl:when>
       <xsl:otherwise>
-        <xsl:sequence select="$step3.clean"/>
+        <xsl:sequence select="$step"/>
       </xsl:otherwise>
     </xsl:choose>
   </xsl:template>
@@ -627,7 +627,7 @@
     <xsl:param name="rng:reorder_byAttributeName" as="xs:string?"/>
     <xsl:param name="rng:reorder_addGrammarNamespaces" as="node()*"/>
     <xsl:message>[INFO] rng:reorder sur <xsl:value-of select="local-name()"/></xsl:message>
-    <xsl:variable name="rng_reorder_step1" as="document-node()">
+    <xsl:variable name="step" as="document-node()">
       <xsl:document>
         <xsl:copy copy-namespaces="yes">
           <xsl:copy-of select="$rng:reorder_addGrammarNamespaces"/>
@@ -648,10 +648,10 @@
     </xsl:variable>
     <xsl:choose>
       <xsl:when test="$rng:reorder_renameDefineRef">
-        <xsl:apply-templates select="$rng_reorder_step1" mode="rng:renameDefineAndRefByElementNameAndOrder"/>
+        <xsl:apply-templates select="$step" mode="rng:renameDefineAndRefByElementNameAndOrder"/>
       </xsl:when>
       <xsl:otherwise>
-        <xsl:sequence select="$rng_reorder_step1"/>
+        <xsl:sequence select="$step"/>
       </xsl:otherwise>
     </xsl:choose>
   </xsl:template>

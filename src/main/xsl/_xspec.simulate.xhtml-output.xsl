@@ -19,13 +19,13 @@
   <xsl:param name="encoding" select="'UTF-8'" as="xs:string"/>
   
   <xsl:template match="/">
-    <xsl:variable name="step1" as="document-node()">
+    <xsl:variable name="step" as="document-node()">
       <xsl:document>
         <!--applying the xslt that import this one-->
         <xsl:apply-imports/>
       </xsl:document>
     </xsl:variable>
-    <xsl:apply-templates select="$step1" mode="els:xspec.adapt.xhtml-output"/>
+    <xsl:apply-templates select="$step" mode="els:xspec.adapt.xhtml-output"/>
   </xsl:template>
   
   <!--The default (x)html output add an encoding meta in the head element-->

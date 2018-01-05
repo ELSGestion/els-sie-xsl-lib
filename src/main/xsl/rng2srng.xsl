@@ -51,7 +51,7 @@ Je comptais simplifier l’étape de renommage des steps 7.19 et 7.20 qui est un
   <!-- =================================================================== -->
   
   <xsl:template match="/" mode="rng2srng:main">
-    <xsl:variable name="step7.2" as="document-node()">
+    <xsl:variable name="step" as="document-node()">
       <xsl:document>
         <xsl:apply-templates select="." mode="rng2srng:step7.2"/>
       </xsl:document>
@@ -60,239 +60,239 @@ Je comptais simplifier l’étape de renommage des steps 7.19 et 7.20 qui est un
       <xsl:variable name="step.log.uri" select="resolve-uri('rng2srng.step7.2..rng', $rng2srng:log.uri)" as="xs:anyURI"/>
       <xsl:message>[INFO] writing <xsl:value-of select="$step.log.uri"/></xsl:message>
       <xsl:result-document href="{$step.log.uri}">
-        <xsl:sequence select="$step7.2"/>
+        <xsl:sequence select="$step"/>
       </xsl:result-document>
     </xsl:if>
-    <xsl:variable name="step7.3" as="document-node()">
+    <xsl:variable name="step" as="document-node()">
       <xsl:document>
-        <xsl:apply-templates select="$step7.2" mode="rng2srng:step7.3"/>
+        <xsl:apply-templates select="$step" mode="rng2srng:step7.3"/>
       </xsl:document>
     </xsl:variable>
     <xsl:if test="$rng2srng:debug">
       <xsl:variable name="step.log.uri" select="resolve-uri('rng2srng.step7.3..rng', $rng2srng:log.uri)" as="xs:anyURI"/>
       <xsl:message>[INFO] writing <xsl:value-of select="$step.log.uri"/></xsl:message>
       <xsl:result-document href="{$step.log.uri}">
-        <xsl:sequence select="$step7.3"/>
+        <xsl:sequence select="$step"/>
       </xsl:result-document>
     </xsl:if>
-    <xsl:variable name="step7.4" as="document-node()">
+    <xsl:variable name="step" as="document-node()">
       <xsl:document>
-        <xsl:apply-templates select="$step7.3" mode="rng2srng:step7.4"/>
+        <xsl:apply-templates select="$step" mode="rng2srng:step7.4"/>
       </xsl:document>
     </xsl:variable>
     <xsl:if test="$rng2srng:debug">
       <xsl:variable name="step.log.uri" select="resolve-uri('rng2srng.step7.4..rng', $rng2srng:log.uri)" as="xs:anyURI"/>
       <xsl:message>[INFO] writing <xsl:value-of select="$step.log.uri"/></xsl:message>
       <xsl:result-document href="{$step.log.uri}">
-        <xsl:sequence select="$step7.4"/>
+        <xsl:sequence select="$step"/>
       </xsl:result-document>
     </xsl:if>
-    <xsl:variable name="step7.5" as="document-node()">
+    <xsl:variable name="step" as="document-node()">
       <xsl:document>
-        <xsl:apply-templates select="$step7.4" mode="rng2srng:step7.5"/>
+        <xsl:apply-templates select="$step" mode="rng2srng:step7.5"/>
       </xsl:document>
     </xsl:variable>
     <xsl:if test="$rng2srng:debug">
       <xsl:variable name="step.log.uri" select="resolve-uri('rng2srng.step7.5..rng', $rng2srng:log.uri)" as="xs:anyURI"/>
       <xsl:message>[INFO] writing <xsl:value-of select="$step.log.uri"/></xsl:message>
       <xsl:result-document href="{$step.log.uri}">
-        <xsl:sequence select="$step7.5"/>
+        <xsl:sequence select="$step"/>
       </xsl:result-document>
     </xsl:if>
-    <xsl:variable name="step7.6" as="document-node()">
+    <xsl:variable name="step" as="document-node()">
       <xsl:document>
-        <xsl:apply-templates select="$step7.5" mode="rng2srng:step7.6"/>
+        <xsl:apply-templates select="$step" mode="rng2srng:step7.6"/>
       </xsl:document>
     </xsl:variable>
     <xsl:if test="$rng2srng:debug">
       <xsl:variable name="step.log.uri" select="resolve-uri('rng2srng.step7.6..rng', $rng2srng:log.uri)" as="xs:anyURI"/>
       <xsl:message>[INFO] writing <xsl:value-of select="$step.log.uri"/></xsl:message>
       <xsl:result-document href="{$step.log.uri}">
-        <xsl:sequence select="$step7.6"/>
+        <xsl:sequence select="$step"/>
       </xsl:result-document>
     </xsl:if>
-    <xsl:variable name="step7.7" as="document-node()">
+    <xsl:variable name="step" as="document-node()">
       <xsl:document>
-        <xsl:apply-templates select="$step7.6" mode="rng2srng:step7.7"/>
+        <xsl:apply-templates select="$step" mode="rng2srng:step7.7"/>
       </xsl:document>
     </xsl:variable>
     <xsl:if test="$rng2srng:debug">
       <xsl:variable name="step.log.uri" select="resolve-uri('rng2srng.step7.7..rng', $rng2srng:log.uri)" as="xs:anyURI"/>
       <xsl:message>[INFO] writing <xsl:value-of select="$step.log.uri"/></xsl:message>
       <xsl:result-document href="{$step.log.uri}">
-        <xsl:sequence select="$step7.7"/>
+        <xsl:sequence select="$step"/>
       </xsl:result-document>
     </xsl:if>
-    <xsl:variable name="step7.8" as="document-node()">
+    <xsl:variable name="step" as="document-node()">
       <xsl:document>
-        <xsl:apply-templates select="$step7.7" mode="rng2srng:step7.8"/>
+        <xsl:apply-templates select="$step" mode="rng2srng:step7.8"/>
       </xsl:document>
     </xsl:variable>
     <xsl:if test="$rng2srng:debug">
       <xsl:variable name="step.log.uri" select="resolve-uri('rng2srng.step7.8..rng', $rng2srng:log.uri)" as="xs:anyURI"/>
       <xsl:message>[INFO] writing <xsl:value-of select="$step.log.uri"/></xsl:message>
       <xsl:result-document href="{$step.log.uri}">
-        <xsl:sequence select="$step7.8"/>
+        <xsl:sequence select="$step"/>
       </xsl:result-document>
     </xsl:if>
-    <xsl:variable name="step7.9" as="document-node()">
+    <xsl:variable name="step" as="document-node()">
       <xsl:document>
-        <xsl:apply-templates select="$step7.8" mode="rng2srng:step7.9"/>
+        <xsl:apply-templates select="$step" mode="rng2srng:step7.9"/>
       </xsl:document>
     </xsl:variable>
     <xsl:if test="$rng2srng:debug">
       <xsl:variable name="step.log.uri" select="resolve-uri('rng2srng.step7.9..rng', $rng2srng:log.uri)" as="xs:anyURI"/>
       <xsl:message>[INFO] writing <xsl:value-of select="$step.log.uri"/></xsl:message>
       <xsl:result-document href="{$step.log.uri}">
-        <xsl:sequence select="$step7.9"/>
+        <xsl:sequence select="$step"/>
       </xsl:result-document>
     </xsl:if>
-    <xsl:variable name="step7.10" as="document-node()">
+    <xsl:variable name="step" as="document-node()">
       <xsl:document>
-        <xsl:apply-templates select="$step7.9" mode="rng2srng:step7.10"/>
+        <xsl:apply-templates select="$step" mode="rng2srng:step7.10"/>
       </xsl:document>
     </xsl:variable>
     <xsl:if test="$rng2srng:debug">
       <xsl:variable name="step.log.uri" select="resolve-uri('rng2srng.step7.10..rng', $rng2srng:log.uri)" as="xs:anyURI"/>
       <xsl:message>[INFO] writing <xsl:value-of select="$step.log.uri"/></xsl:message>
       <xsl:result-document href="{$step.log.uri}">
-        <xsl:sequence select="$step7.10"/>
+        <xsl:sequence select="$step"/>
       </xsl:result-document>
     </xsl:if>
-    <xsl:variable name="step7.11" as="document-node()">
+    <xsl:variable name="step" as="document-node()">
       <xsl:document>
-        <xsl:apply-templates select="$step7.10" mode="rng2srng:step7.11"/>
+        <xsl:apply-templates select="$step" mode="rng2srng:step7.11"/>
       </xsl:document>
     </xsl:variable>
     <xsl:if test="$rng2srng:debug">
       <xsl:variable name="step.log.uri" select="resolve-uri('rng2srng.step7.11..rng', $rng2srng:log.uri)" as="xs:anyURI"/>
       <xsl:message>[INFO] writing <xsl:value-of select="$step.log.uri"/></xsl:message>
       <xsl:result-document href="{$step.log.uri}">
-        <xsl:sequence select="$step7.11"/>
+        <xsl:sequence select="$step"/>
       </xsl:result-document>
     </xsl:if>
-    <xsl:variable name="step7.12" as="document-node()">
+    <xsl:variable name="step" as="document-node()">
       <xsl:document>
-        <xsl:apply-templates select="$step7.11" mode="rng2srng:step7.12"/>
+        <xsl:apply-templates select="$step" mode="rng2srng:step7.12"/>
       </xsl:document>
     </xsl:variable>
     <xsl:if test="$rng2srng:debug">
       <xsl:variable name="step.log.uri" select="resolve-uri('rng2srng.step7.12..rng', $rng2srng:log.uri)" as="xs:anyURI"/>
       <xsl:message>[INFO] writing <xsl:value-of select="$step.log.uri"/></xsl:message>
       <xsl:result-document href="{$step.log.uri}">
-        <xsl:sequence select="$step7.12"/>
+        <xsl:sequence select="$step"/>
       </xsl:result-document>
     </xsl:if>
-    <xsl:variable name="step7.13" as="document-node()">
+    <xsl:variable name="step" as="document-node()">
       <xsl:document>
-        <xsl:apply-templates select="$step7.12" mode="rng2srng:step7.13"/>
+        <xsl:apply-templates select="$step" mode="rng2srng:step7.13"/>
       </xsl:document>
     </xsl:variable>
     <xsl:if test="$rng2srng:debug">
       <xsl:variable name="step.log.uri" select="resolve-uri('rng2srng.step7.13..rng', $rng2srng:log.uri)" as="xs:anyURI"/>
       <xsl:message>[INFO] writing <xsl:value-of select="$step.log.uri"/></xsl:message>
       <xsl:result-document href="{$step.log.uri}">
-        <xsl:sequence select="$step7.13"/>
+        <xsl:sequence select="$step"/>
       </xsl:result-document>
     </xsl:if>
-    <xsl:variable name="step7.14" as="document-node()">
+    <xsl:variable name="step" as="document-node()">
       <xsl:document>
-        <xsl:apply-templates select="$step7.13" mode="rng2srng:step7.14"/>
+        <xsl:apply-templates select="$step" mode="rng2srng:step7.14"/>
       </xsl:document>
     </xsl:variable>
     <xsl:if test="$rng2srng:debug">
       <xsl:variable name="step.log.uri" select="resolve-uri('rng2srng.step7.14..rng', $rng2srng:log.uri)" as="xs:anyURI"/>
       <xsl:message>[INFO] writing <xsl:value-of select="$step.log.uri"/></xsl:message>
       <xsl:result-document href="{$step.log.uri}">
-        <xsl:sequence select="$step7.14"/>
+        <xsl:sequence select="$step"/>
       </xsl:result-document>
     </xsl:if>
-    <xsl:variable name="step7.15" as="document-node()">
+    <xsl:variable name="step" as="document-node()">
       <xsl:document>
-        <xsl:apply-templates select="$step7.14" mode="rng2srng:step7.15"/>
+        <xsl:apply-templates select="$step" mode="rng2srng:step7.15"/>
       </xsl:document>
     </xsl:variable>
     <xsl:if test="$rng2srng:debug">
       <xsl:variable name="step.log.uri" select="resolve-uri('rng2srng.step7.15..rng', $rng2srng:log.uri)" as="xs:anyURI"/>
       <xsl:message>[INFO] writing <xsl:value-of select="$step.log.uri"/></xsl:message>
       <xsl:result-document href="{$step.log.uri}">
-        <xsl:sequence select="$step7.15"/>
+        <xsl:sequence select="$step"/>
       </xsl:result-document>
     </xsl:if>
-    <xsl:variable name="step7.16" as="document-node()">
+    <xsl:variable name="step" as="document-node()">
       <xsl:document>
-        <xsl:apply-templates select="$step7.15" mode="rng2srng:step7.16"/>
+        <xsl:apply-templates select="$step" mode="rng2srng:step7.16"/>
       </xsl:document>
     </xsl:variable>
     <xsl:if test="$rng2srng:debug">
       <xsl:variable name="step.log.uri" select="resolve-uri('rng2srng.step7.16..rng', $rng2srng:log.uri)" as="xs:anyURI"/>
       <xsl:message>[INFO] writing <xsl:value-of select="$step.log.uri"/></xsl:message>
       <xsl:result-document href="{$step.log.uri}">
-        <xsl:sequence select="$step7.16"/>
+        <xsl:sequence select="$step"/>
       </xsl:result-document>
     </xsl:if>
-    <xsl:variable name="step7.17" as="document-node()">
+    <xsl:variable name="step" as="document-node()">
       <xsl:document>
-        <xsl:apply-templates select="$step7.16" mode="rng2srng:step7.17"/>
+        <xsl:apply-templates select="$step" mode="rng2srng:step7.17"/>
       </xsl:document>
     </xsl:variable>
     <xsl:if test="$rng2srng:debug">
       <xsl:variable name="step.log.uri" select="resolve-uri('rng2srng.step7.17..rng', $rng2srng:log.uri)" as="xs:anyURI"/>
       <xsl:message>[INFO] writing <xsl:value-of select="$step.log.uri"/></xsl:message>
       <xsl:result-document href="{$step.log.uri}">
-        <xsl:sequence select="$step7.17"/>
+        <xsl:sequence select="$step"/>
       </xsl:result-document>
     </xsl:if>
-    <xsl:variable name="step7.18" as="document-node()">
+    <xsl:variable name="step" as="document-node()">
       <xsl:document>
-        <xsl:apply-templates select="$step7.17" mode="rng2srng:step7.18"/>
+        <xsl:apply-templates select="$step" mode="rng2srng:step7.18"/>
       </xsl:document>
     </xsl:variable>
     <xsl:if test="$rng2srng:debug">
       <xsl:variable name="step.log.uri" select="resolve-uri('rng2srng.step7.18..rng', $rng2srng:log.uri)" as="xs:anyURI"/>
       <xsl:message>[INFO] writing <xsl:value-of select="$step.log.uri"/></xsl:message>
       <xsl:result-document href="{$step.log.uri}">
-        <xsl:sequence select="$step7.18"/>
+        <xsl:sequence select="$step"/>
       </xsl:result-document>
     </xsl:if>
-    <xsl:variable name="step7.19" as="document-node()">
+    <xsl:variable name="step" as="document-node()">
       <xsl:document>
-        <xsl:apply-templates select="$step7.18" mode="rng2srng:step7.19"/>
+        <xsl:apply-templates select="$step" mode="rng2srng:step7.19"/>
       </xsl:document>
     </xsl:variable>
     <xsl:if test="$rng2srng:debug">
       <xsl:variable name="step.log.uri" select="resolve-uri('rng2srng.step7.19..rng', $rng2srng:log.uri)" as="xs:anyURI"/>
       <xsl:message>[INFO] writing <xsl:value-of select="$step.log.uri"/></xsl:message>
       <xsl:result-document href="{$step.log.uri}">
-        <xsl:sequence select="$step7.19"/>
+        <xsl:sequence select="$step"/>
       </xsl:result-document>
     </xsl:if>
-    <xsl:variable name="step7.20" as="document-node()">
+    <xsl:variable name="step" as="document-node()">
       <xsl:document>
-        <xsl:apply-templates select="$step7.19" mode="rng2srng:step7.20"/>
+        <xsl:apply-templates select="$step" mode="rng2srng:step7.20"/>
       </xsl:document>
     </xsl:variable>
     <xsl:if test="$rng2srng:debug">
       <xsl:variable name="step.log.uri" select="resolve-uri('rng2srng.step7.20..rng', $rng2srng:log.uri)" as="xs:anyURI"/>
       <xsl:message>[INFO] writing <xsl:value-of select="$step.log.uri"/></xsl:message>
       <xsl:result-document href="{$step.log.uri}">
-        <xsl:sequence select="$step7.20"/>
+        <xsl:sequence select="$step"/>
       </xsl:result-document>
     </xsl:if>
-    <xsl:variable name="step7.21" as="document-node()">
+    <xsl:variable name="step" as="document-node()">
       <xsl:document>
-        <xsl:apply-templates select="$step7.20" mode="rng2srng:step7.21"/>
+        <xsl:apply-templates select="$step" mode="rng2srng:step7.21"/>
       </xsl:document>
     </xsl:variable>
     <xsl:if test="$rng2srng:debug">
       <xsl:variable name="step.log.uri" select="resolve-uri('rng2srng.step7.21..rng', $rng2srng:log.uri)" as="xs:anyURI"/>
       <xsl:message>[INFO] writing <xsl:value-of select="$step.log.uri"/></xsl:message>
       <xsl:result-document href="{$step.log.uri}">
-        <xsl:sequence select="$step7.21"/>
+        <xsl:sequence select="$step"/>
       </xsl:result-document>
     </xsl:if>
     <!--FINALY-->
-    <xsl:apply-templates select="$step7.21" mode="rng2srng:step7.22"/>
+    <xsl:apply-templates select="$step" mode="rng2srng:step7.22"/>
   </xsl:template>
   
   <!-- =================================================================== -->
@@ -1210,8 +1210,7 @@ Je comptais simplifier l’étape de renommage des steps 7.19 et 7.20 qui est un
     </xsl:apply-templates>
   </xsl:template>
   
-  <xsl:template match="group[count(empty)=2] | interleave[count(empty)=2] | choice[count(empty)=2] | oneOrMore[empty]"
-    mode="rng2srng:step7.22">
+  <xsl:template match="group[count(empty)=2] | interleave[count(empty)=2] | choice[count(empty)=2] | oneOrMore[empty]" mode="rng2srng:step7.22">
     <empty updated="1"/>
   </xsl:template>
 

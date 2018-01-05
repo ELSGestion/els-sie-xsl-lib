@@ -37,19 +37,19 @@
   <!--=============================================================================================-->
 
   <xsl:template match="/" mode="fixMsvErrorWhenConvertingXSD2RNG:main">
-    <xsl:variable name="step1" as="document-node()">
+    <xsl:variable name="step" as="document-node()">
       <xsl:document>
         <xsl:apply-templates select="." mode="fixMsvErrorWhenConvertingXSD2RNG:step1"/>
       </xsl:document>
     </xsl:variable>
     <xsl:if test="$debug">
-      <xsl:variable name="step1.log.uri" select="resolve-uri(concat('fixMsvErrorWhenConvertingXSD2RNG.step1.', els:getFileName(base-uri(), false()),'.log.xml'), $log.uri)" as="xs:anyURI"/>
-      <xsl:message>[INFO] writing <xsl:value-of select="$step1.log.uri"/></xsl:message>
-      <xsl:result-document href="{$step1.log.uri}">
-        <xsl:sequence select="$step1"/>
+      <xsl:variable name="step.log.uri" select="resolve-uri(concat('fixMsvErrorWhenConvertingXSD2RNG.step1.', els:getFileName(base-uri(), false()),'.log.xml'), $log.uri)" as="xs:anyURI"/>
+      <xsl:message>[INFO] writing <xsl:value-of select="$step.log.uri"/></xsl:message>
+      <xsl:result-document href="{$step.log.uri}">
+        <xsl:sequence select="$step"/>
       </xsl:result-document>
     </xsl:if>
-    <xsl:apply-templates select="$step1" mode="fixMsvErrorWhenConvertingXSD2RNG:step2"/>
+    <xsl:apply-templates select="$step" mode="fixMsvErrorWhenConvertingXSD2RNG:step2"/>
   </xsl:template>
   
   <!--========================================================-->

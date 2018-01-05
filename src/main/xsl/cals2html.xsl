@@ -67,47 +67,47 @@
   
   <xsl:template match="/" mode="xslLib:cals2html">
     <!--STEP0 : set xml:base to init multi-step-->
-    <xsl:variable name="step0" as="document-node()">
+    <xsl:variable name="step" as="document-node()">
       <xsl:document>
         <xsl:apply-templates select="." mode="xslLib:setXmlBase"/>
       </xsl:document>
     </xsl:variable>
     <!--STEP1 : normalize cals table-->
-    <xsl:variable name="step1" as="document-node()">
+    <xsl:variable name="step" as="document-node()">
       <xsl:document>
-        <xsl:apply-templates select="$step0" mode="xslLib:normalizeCalsTable"/>
+        <xsl:apply-templates select="$step" mode="xslLib:normalizeCalsTable"/>
       </xsl:document>
     </xsl:variable>
     <xsl:if test="$xslLib:cals2html.debug">
       <xsl:variable name="step.log.uri" select="resolve-uri('cals2html.step1.xml', $xslLib:cals2html.log.uri)" as="xs:anyURI"/>
       <xsl:message>[INFO] writing <xsl:value-of select="$step.log.uri"/></xsl:message>
       <xsl:result-document href="{$step.log.uri}">
-        <xsl:sequence select="$step1"/>
+        <xsl:sequence select="$step"/>
       </xsl:result-document>
     </xsl:if>
     <!--STEP2 : cals2html.main-->
-    <xsl:variable name="step2" as="document-node()">
+    <xsl:variable name="step" as="document-node()">
       <xsl:document>
-        <xsl:apply-templates select="$step1" mode="xslLib:cals2html.main"/>
+        <xsl:apply-templates select="$step" mode="xslLib:cals2html.main"/>
       </xsl:document>
     </xsl:variable>
     <xsl:if test="$xslLib:cals2html.debug">
       <xsl:variable name="step.log.uri" select="resolve-uri('cals2html.step2.xml', $xslLib:cals2html.log.uri)" as="xs:anyURI"/>
       <xsl:message>[INFO] writing <xsl:value-of select="$step.log.uri"/></xsl:message>
       <xsl:result-document href="{$step.log.uri}">
-        <xsl:sequence select="$step2"/>
+        <xsl:sequence select="$step"/>
       </xsl:result-document>
     </xsl:if>
     <!--STEP3 : convert class2style-->
-    <xsl:variable name="step3" as="document-node()">
+    <xsl:variable name="step" as="document-node()">
       <xsl:choose>
         <xsl:when test="$xslLib:cals2html.use-style-insteadOf-class">
           <xsl:document>
-            <xsl:apply-templates select="$step2" mode="xslLib:cals2html.class2style"/>
+            <xsl:apply-templates select="$step" mode="xslLib:cals2html.class2style"/>
           </xsl:document>
         </xsl:when>
         <xsl:otherwise>
-          <xsl:sequence select="$step2"/>
+          <xsl:sequence select="$step"/>
         </xsl:otherwise>
       </xsl:choose>
     </xsl:variable>
@@ -115,11 +115,11 @@
       <xsl:variable name="step.log.uri" select="resolve-uri('cals2html.step3.xml', $xslLib:cals2html.log.uri)" as="xs:anyURI"/>
       <xsl:message>[INFO] writing <xsl:value-of select="$step.log.uri"/></xsl:message>
       <xsl:result-document href="{$step.log.uri}">
-        <xsl:sequence select="$step3"/>
+        <xsl:sequence select="$step"/>
       </xsl:result-document>
     </xsl:if>
-    <!--FINALY-->
-    <xsl:apply-templates select="$step3" mode="xslLib:removeXmlBase"/>
+    <!--FINALY-->    
+    <xsl:apply-templates select="$step" mode="xslLib:removeXmlBase"/>
   </xsl:template>
   
   <!--==============================================================================================================================-->
