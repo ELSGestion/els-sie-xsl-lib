@@ -406,7 +406,7 @@
   <xsl:template match="node() | @*" 
     mode="rng:mergeIdenticalDefine.step1 
           rng:mergeIdenticalDefine.step2">
-    <xsl:copy>
+    <xsl:copy copy-namespaces="no">
       <xsl:apply-templates select="node() | @*" mode="#current"/>
     </xsl:copy>
   </xsl:template>
