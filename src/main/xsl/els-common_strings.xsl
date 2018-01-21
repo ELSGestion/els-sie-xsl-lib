@@ -213,6 +213,18 @@
   
   <xd:doc>
     <xd:desc>
+      <!--FIXME : difference with els:normalize-no-diacritic ? this function has been copied from Flash SAS EFL-->
+      <xd:p>Normalize the string by removing accents</xd:p>
+    </xd:desc>
+    <xd:param name="string">The string to normalize</xd:param>
+  </xd:doc>
+  <xsl:function name="els:strip-accent" as="xs:string">
+    <xsl:param name="string" as="xs:string?"/>
+    <xsl:value-of select="normalize-unicode(replace(normalize-unicode($value, 'NFD'), '\p{Mn}', ''), 'NFC')"/>
+  </xsl:function>
+  
+  <xd:doc>
+    <xd:desc>
       <xd:p>"carriage return line feed" : generates N carriage return</xd:p>
     </xd:desc>
     <xd:param name="n">[Integer] number of carriage return to generate (should be positiv)</xd:param>
