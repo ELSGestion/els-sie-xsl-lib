@@ -43,6 +43,13 @@
     <x:expect label="abccdeeeeœ" select="'abccdeeeaœ'"/>
   </x:scenario>
   
+  <x:scenario label="els:strip-accent">
+    <x:call function="els:strip-accent">
+      <x:param name="string" select="'abcçdéêèàœ'"/>
+    </x:call>
+    <x:expect label="abccdeeeeœ" select="'abccdeeeaœ'"/>
+  </x:scenario>
+  
   <x:scenario label="els:crlf">
     <x:call function="els:crlf">
       <x:param name="n" select="3"/>

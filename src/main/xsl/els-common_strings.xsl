@@ -220,7 +220,7 @@
   </xd:doc>
   <xsl:function name="els:strip-accent" as="xs:string">
     <xsl:param name="string" as="xs:string?"/>
-    <xsl:value-of select="normalize-unicode(replace(normalize-unicode($value, 'NFD'), '\p{Mn}', ''), 'NFC')"/>
+    <xsl:value-of select="normalize-unicode(replace(normalize-unicode($string, 'NFD'), '\p{Mn}', ''), 'NFC')"/>
   </xsl:function>
   
   <xd:doc>
