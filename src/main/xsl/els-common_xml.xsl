@@ -284,6 +284,17 @@
       </xsl:otherwise>
     </xsl:choose>
   </xsl:function>
+  
+  <xd:doc>Mode to delete indentations</xd:doc>
+  <xsl:template match="text()[matches(.,'\n[ \t]*')]" mode="els:deleteIndentation">
+    <xsl:value-of select="replace(.,'\n[ \t]*', ' ')"/>
+  </xsl:template>
+  
+  <xsl:template match="node() | @*" mode="els:deleteIndentation">
+    <xsl:copy>
+      <xsl:apply-templates select="node() | @*" mode="#current"/>
+    </xsl:copy>
+  </xsl:template>
 
   <xd:desc>Copy an element and its attributes and "continue" the job in the current mode</xd:desc>
   <xsl:template name="els:copyAndContinue">
