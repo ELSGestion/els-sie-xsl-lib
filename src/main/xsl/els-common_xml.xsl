@@ -311,6 +311,25 @@
     </xsl:copy>
   </xsl:template>
   
+  <!--A template to deal with namespace declaration at root element-->
+  <!--param namespaces is a sequences of <els:namespace name="xxx" uri="yyy"/>-->
+  <xsl:template match="/*" mode="els:fixNamespaceDeclarations">
+    <xsl:param name="namespaces" as="element(els:namespace)*"/>
+    <xsl:copy copy-namespaces="no">
+      <xsl:for-each select="$namespaces">
+        <xsl:namespace name="{@name}" select="@uri"/>  
+      </xsl:for-each>
+      <xsl:apply-templates select="@* | node()" mode="#current"/>
+    </xsl:copy>
+  </xsl:template>
+  
+  <!--copy template-->
+  <xsl:template match="node() | @*" mode="els:fixNamespaceDeclarations" priority="-1">
+    <xsl:copy copy-namespaces="no">
+      <xsl:apply-templates select="node() | @*" mode="#current"/>
+    </xsl:copy>
+  </xsl:template>
+  
   <xd:doc>
     <xd:desc>
       <xd:p>Display any node (element, attribute, text, pi, etc.) as a readable string</xd:p>
