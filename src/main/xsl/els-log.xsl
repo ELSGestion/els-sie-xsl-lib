@@ -91,6 +91,7 @@
           <xsl:with-param name="xsltName" select="'els-log.xsl'"/>
           <xsl:with-param name="alert" select="true()"/>
           <xsl:with-param name="markup" select="false()"/>
+          <xsl:with-param name="xpathContext" select="$xpathContext"></xsl:with-param>
           <xsl:with-param name="description" xml:space="preserve">Appel du template log avec valeur du parametre level = "<xsl:value-of select="$level"/>" non autorisé</xsl:with-param>
         </xsl:call-template>
       </xsl:if>
