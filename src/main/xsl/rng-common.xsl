@@ -351,6 +351,12 @@
     <xsl:sequence select="rng:getRefByElementName($rngElement, $refName, ())"/>
   </xsl:function>
   
+  <xsl:function name="rng:getAttributeDataType" as="xs:string?">
+    <xsl:param name="rngElement" as="element(rng:element)"/>
+    <xsl:param name="attName" as="xs:string"/>
+    <xsl:sequence select="$rngElement//attribute[@name = $attName]/data/@type"/>
+  </xsl:function>
+  
   <!--===========================================================-->
   <!-- rng:mergeIdenticalDefine -->
   <!--===========================================================-->
