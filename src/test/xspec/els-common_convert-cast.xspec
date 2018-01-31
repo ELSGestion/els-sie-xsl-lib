@@ -175,7 +175,7 @@
     <x:expect label="1A" select="'1A'"/>
   </x:scenario>
 
-  <x:scenario label="els:convertToBoolean">
+  <x:scenario label="els:convertToBoolean [DEPRECATED]">
     <x:call function="els:convertToBoolean"/>
     <x:scenario label="true()">
       <x:call>
@@ -205,13 +205,301 @@
       <x:call>
         <x:param name="var" select="0" />
       </x:call>
-      <x:expect label="faux" select="false()"/>
+      <x:expect label="false" select="false()"/>
     </x:scenario>
     <x:scenario label="1">
       <x:call>
         <x:param name="var" select="1"/>
       </x:call>
       <x:expect label="true" select="true()"/>
+    </x:scenario>
+  </x:scenario>
+  
+  <x:scenario label="els:convertAtomicValueToCanonicalBooleanValue">
+    <x:call function="els:convertAtomicValueToCanonicalBooleanValue"/>
+    <x:scenario label="Default language ('fr')">
+      <x:scenario label="true()">
+        <x:call>
+          <x:param name="var" select="true()" position="1"/>
+        </x:call>
+        <x:expect label="true" select="true()"/>
+      </x:scenario>
+      <x:scenario label="'true'">
+        <x:call>
+          <x:param name="var" select="'true'" position="1"/>
+        </x:call>
+        <x:expect label="true" select="true()"/>
+      </x:scenario>
+      <x:scenario label="'OUI'">
+        <x:call>
+          <x:param name="var" select="'OUI'" position="1"/>
+        </x:call>
+        <x:expect label="true" select="true()"/>
+      </x:scenario>
+      <x:scenario label="'vrai'">
+        <x:call>
+          <x:param name="var" select="'vrai'" position="1"/>
+        </x:call>
+        <x:expect label="true" select="true()"/>
+      </x:scenario>
+      <x:scenario label="'non'">
+        <x:call>
+          <x:param name="var" select="'non'" position="1"/>
+        </x:call>
+        <x:expect label="false" select="false()"/>
+      </x:scenario>
+      <x:scenario label="0">
+        <x:call>
+          <x:param name="var" select="0" position="1"/>
+        </x:call>
+        <x:expect label="false" select="false()"/>
+      </x:scenario>
+      <x:scenario label="1">
+        <x:call>
+          <x:param name="var" select="1" position="1"/>
+        </x:call>
+        <x:expect label="true" select="true()"/>
+      </x:scenario>
+    </x:scenario>
+    <x:scenario label="$lang = 'fr'">
+      <x:call>
+        <x:param name="lang" select="'fr'" position="2"/>
+      </x:call>
+      <x:scenario label="true()">
+        <x:call>
+          <x:param name="var" select="true()" position="1"/>
+        </x:call>
+        <x:expect label="true" select="true()"/>
+      </x:scenario>
+      <x:scenario label="'true'">
+        <x:call>
+          <x:param name="var" select="'true'" position="1"/>
+        </x:call>
+        <x:expect label="true" select="true()"/>
+      </x:scenario>
+      <x:scenario label="'OUI'">
+        <x:call>
+          <x:param name="var" select="'OUI'" position="1"/>
+        </x:call>
+        <x:expect label="true" select="true()"/>
+      </x:scenario>
+      <x:scenario label="'vrai'">
+        <x:call>
+          <x:param name="var" select="'vrai'" position="1"/>
+        </x:call>
+        <x:expect label="true" select="true()"/>
+      </x:scenario>
+      <x:scenario label="'non'">
+        <x:call>
+          <x:param name="var" select="'non'" position="1"/>
+        </x:call>
+        <x:expect label="false" select="false()"/>
+      </x:scenario>
+      <x:scenario label="0">
+        <x:call>
+          <x:param name="var" select="0" position="1"/>
+        </x:call>
+        <x:expect label="false" select="false()"/>
+      </x:scenario>
+      <x:scenario label="1">
+        <x:call>
+          <x:param name="var" select="1" position="1"/>
+        </x:call>
+        <x:expect label="true" select="true()"/>
+      </x:scenario>
+    </x:scenario>
+    <x:scenario label="$lang = 'en'">
+      <x:call>
+        <x:param name="lang" select="'en'" position="2"/>
+      </x:call>
+      <x:scenario label="true()">
+        <x:call>
+          <x:param name="var" select="true()" position="1"/>
+        </x:call>
+        <x:expect label="true" select="true()"/>
+      </x:scenario>
+      <x:scenario label="'true'">
+        <x:call>
+          <x:param name="var" select="'true'" position="1"/>
+        </x:call>
+        <x:expect label="true" select="true()"/>
+      </x:scenario>
+      <x:scenario label="'YES'">
+        <x:call>
+          <x:param name="var" select="'YES'" position="1"/>
+        </x:call>
+        <x:expect label="true" select="true()"/>
+      </x:scenario>
+      <x:scenario label="'no'">
+        <x:call>
+          <x:param name="var" select="'no'" position="1"/>
+        </x:call>
+        <x:expect label="false" select="false()"/>
+      </x:scenario>
+      <x:scenario label="0">
+        <x:call>
+          <x:param name="var" select="0" position="1"/>
+        </x:call>
+        <x:expect label="false" select="false()"/>
+      </x:scenario>
+      <x:scenario label="1">
+        <x:call>
+          <x:param name="var" select="1" position="1"/>
+        </x:call>
+        <x:expect label="true" select="true()"/>
+      </x:scenario>
+    </x:scenario>
+  </x:scenario>
+  
+  <x:scenario label="els:convertAtomicValueToIntegerBooleanValue">
+    <x:call function="els:convertAtomicValueToIntegerBooleanValue"/>
+    <x:scenario label="Default language ('fr')">
+      <x:scenario label="true()">
+        <x:call>
+          <x:param name="var" select="true()" position="1"/>
+        </x:call>
+        <x:expect label="1" select="1"/>
+      </x:scenario>
+      <x:scenario label="'true'">
+        <x:call>
+          <x:param name="var" select="'true'" position="1"/>
+        </x:call>
+        <x:expect label="1" select="1"/>
+      </x:scenario>
+      <x:scenario label="'OUI'">
+        <x:call>
+          <x:param name="var" select="'OUI'" position="1"/>
+        </x:call>
+        <x:expect label="1" select="1"/>
+      </x:scenario>
+      <x:scenario label="'vrai'">
+        <x:call>
+          <x:param name="var" select="'vrai'" position="1"/>
+        </x:call>
+        <x:expect label="1" select="1"/>
+      </x:scenario>
+      <x:scenario label="'non'">
+        <x:call>
+          <x:param name="var" select="'non'" position="1"/>
+        </x:call>
+        <x:expect label="0" select="0"/>
+      </x:scenario>
+      <x:scenario label="0">
+        <x:call>
+          <x:param name="var" select="0" position="1"/>
+        </x:call>
+        <x:expect label="0" select="0"/>
+      </x:scenario>
+      <x:scenario label="1">
+        <x:call>
+          <x:param name="var" select="1" position="1"/>
+        </x:call>
+        <x:expect label="1" select="1"/>
+      </x:scenario>
+    </x:scenario>
+    <x:scenario label="$lang = 'fr'">
+      <x:call>
+        <x:param name="lang" select="'fr'" position="2"/>
+      </x:call>
+      <x:scenario label="true()">
+        <x:call>
+          <x:param name="var" select="true()" position="1"/>
+        </x:call>
+        <x:expect label="1" select="1"/>
+      </x:scenario>
+      <x:scenario label="'true'">
+        <x:call>
+          <x:param name="var" select="'true'" position="1"/>
+        </x:call>
+        <x:expect label="1" select="1"/>
+      </x:scenario>
+      <x:scenario label="'OUI'">
+        <x:call>
+          <x:param name="var" select="'OUI'" position="1"/>
+        </x:call>
+        <x:expect label="1" select="1"/>
+      </x:scenario>
+      <x:scenario label="'vrai'">
+        <x:call>
+          <x:param name="var" select="'vrai'" position="1"/>
+        </x:call>
+        <x:expect label="1" select="1"/>
+      </x:scenario>
+      <x:scenario label="'non'">
+        <x:call>
+          <x:param name="var" select="'non'" position="1"/>
+        </x:call>
+        <x:expect label="0" select="0"/>
+      </x:scenario>
+      <x:scenario label="0">
+        <x:call>
+          <x:param name="var" select="0" position="1"/>
+        </x:call>
+        <x:expect label="0" select="0"/>
+      </x:scenario>
+      <x:scenario label="1">
+        <x:call>
+          <x:param name="var" select="1" position="1"/>
+        </x:call>
+        <x:expect label="1" select="1"/>
+      </x:scenario>
+    </x:scenario>
+    <x:scenario label="$lang = 'en'">
+      <x:call>
+        <x:param name="lang" select="'en'" position="2"/>
+      </x:call>
+      <x:scenario label="true()">
+        <x:call>
+          <x:param name="var" select="true()" position="1"/>
+        </x:call>
+        <x:expect label="1" select="1"/>
+      </x:scenario>
+      <x:scenario label="'true'">
+        <x:call>
+          <x:param name="var" select="'true'" position="1"/>
+        </x:call>
+        <x:expect label="1" select="1"/>
+      </x:scenario>
+      <x:scenario label="'YES'">
+        <x:call>
+          <x:param name="var" select="'YES'" position="1"/>
+        </x:call>
+        <x:expect label="1" select="1"/>
+      </x:scenario>
+      <x:scenario label="'no'">
+        <x:call>
+          <x:param name="var" select="'no'" position="1"/>
+        </x:call>
+        <x:expect label="0" select="0"/>
+      </x:scenario>
+      <x:scenario label="0">
+        <x:call>
+          <x:param name="var" select="0" position="1"/>
+        </x:call>
+        <x:expect label="0" select="0"/>
+      </x:scenario>
+      <x:scenario label="1">
+        <x:call>
+          <x:param name="var" select="1" position="1"/>
+        </x:call>
+        <x:expect label="1" select="1"/>
+      </x:scenario>
+    </x:scenario>
+  </x:scenario>
+  
+  <x:scenario label="els:convertCanonicalBooleanValueToIntegerBooleanValue">
+    <x:call function="els:convertCanonicalBooleanValueToIntegerBooleanValue"/>
+    <x:scenario label="true()">
+      <x:call>
+        <x:param name="val" select="true()"/>
+      </x:call>
+      <x:expect label="1" select="1"/>
+    </x:scenario>
+    <x:scenario label="false()">
+      <x:call>
+        <x:param name="val" select="false()"/>
+      </x:call>
+      <x:expect label="0" select="0"/>
     </x:scenario>
   </x:scenario>
 

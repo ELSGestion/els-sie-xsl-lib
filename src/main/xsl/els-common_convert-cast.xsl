@@ -165,20 +165,113 @@
 
   <xd:doc>
     <xd:desc>
+      <xd:p>DEPRECATED FUNCTION : USE els:convertAtomicValueToCanonicalBooleanValue($var,'fr') INSTEAD.</xd:p>
       <xd:p>Convert an atomic value to a boolean</xd:p>
       <xd:p>If the value is equal to "TRUE", "OUI", "VRAI", it returns true()</xd:p>
     </xd:desc>
   </xd:doc>
-  <!--FIXME : use castable as xs:boolean and treat only specific values + language parameter = fr ?-->
   <xsl:function name="els:convertToBoolean" as="xs:boolean">
     <xsl:param name="var" as="item()?" />
-    <xsl:value-of 
-      select="if (not(exists($var))) then (false())
-              else (if ($var instance of xs:boolean) then ($var)
-                   else (if ($var instance of xs:integer) then (boolean($var))
-                     else (if ($var instance of xs:string) then (boolean(upper-case($var)='OUI' or upper-case($var)='TRUE' or upper-case($var)='VRAI'))
-                           else (false())
-              )))"/>
+    <xsl:message>[WARNING] Function els:convertToBoolean($var) is deprecated and may be removed from future releases. Use els:convertAtomicValueToCanonicalBooleanValue($var,'fr') instead.</xsl:message>
+    <xsl:sequence select="els:convertAtomicValueToCanonicalBooleanValue($var,'fr')"/>
+  </xsl:function>
+  
+  <xd:doc>
+    <xd:desc>
+      <xd:p>Converts an atomic value to a xs:boolean in its canonical form (true() / false()).</xd:p>
+      <xd:p>The <xd:ref name="lang" type="parameter">$lang</xd:ref> parameter allows the conversion of non-canonical string forms:</xd:p>
+      <xd:ul>
+        <xd:li>$lang = 'fr': 'OUI' / 'VRAI'.</xd:li>
+        <xd:li>$lang = 'en': 'YES'.</xd:li>
+      </xd:ul>
+    </xd:desc>
+    <xd:param name="var">[item()?] An atomic value.</xd:param>
+    <xd:param name="lang">[xs:string] A language code for non-canonical string forms.</xd:param>
+    <xd:return>[xs:boolean] The boolean converted atomic value in its canonical form.</xd:return>
+  </xd:doc>
+  <xsl:function name="els:convertAtomicValueToCanonicalBooleanValue" as="xs:boolean">
+    <xsl:param name="var" as="item()?"/>
+    <xsl:param name="lang" as="xs:string"/>
+    <xsl:value-of select="if (not(exists($var))) then (false())
+                          else (
+                            if ($var castable as xs:boolean) then ($var cast as xs:boolean)
+                            else (
+                              if ($var instance of xs:string and $lang = 'fr') then (boolean(upper-case($var) = 'OUI' or upper-case($var) = 'VRAI'))
+                              else (
+                                if ($var instance of xs:string and $lang = 'en') then (boolean(upper-case($var) = 'YES'))
+                                else (false())
+                              )
+                            )
+                          )"/>
+  </xsl:function>
+  
+  <xd:doc>
+    <xd:desc>
+      <xd:p>Converts an atomic value to a xs:boolean in its canonical form (true() / false()).</xd:p>
+      <xd:p>The <xd:ref name="lang" type="parameter">$lang</xd:ref> parameter allows the conversion of non-canonical string forms.</xd:p>
+      <xd:p>The <xd:ref name="lang" type="parameter">$lang</xd:ref> default value is "fr".</xd:p>
+    </xd:desc>
+    <xd:param name="var">[item()?] An atomic value.</xd:param>
+    <xd:return>[xs:boolean] The boolean converted atomic value in its canonical form.</xd:return>
+  </xd:doc>
+  <xsl:function name="els:convertAtomicValueToCanonicalBooleanValue" as="xs:boolean">
+    <xsl:param name="var" as="item()?"/>
+    <xsl:sequence select="els:convertAtomicValueToCanonicalBooleanValue($var,'fr')"/>
+  </xsl:function>
+  
+  <xd:doc>
+    <xd:desc>
+      <xd:p>Converts an atomic value to a xs:boolean in its integer form (1 / 0).</xd:p>
+      <xd:p>The <xd:ref name="lang" type="parameter">$lang</xd:ref> parameter allows the conversion of non-canonical string forms:</xd:p>
+      <xd:ul>
+        <xd:li>$lang = 'fr': 'OUI' / 'VRAI'.</xd:li>
+        <xd:li>$lang = 'en': 'YES'.</xd:li>
+      </xd:ul>
+    </xd:desc>
+    <xd:param name="var">[item()?] An atomic value.</xd:param>
+    <xd:param name="lang">[xs:string] A language code for non-canonical string forms.</xd:param>
+    <xd:return>[xs:integer] The boolean converted atomic value in its integer form.</xd:return>
+  </xd:doc>
+  <xsl:function name="els:convertAtomicValueToIntegerBooleanValue" as="xs:integer">
+    <xsl:param name="var" as="item()?"/>
+    <xsl:param name="lang" as="xs:string"/>
+    <xsl:value-of select="if (not(exists($var))) then (0)
+                          else (
+                            if ($var castable as xs:boolean) then (els:convertCanonicalBooleanValueToIntegerBooleanValue($var cast as xs:boolean))
+                            else (
+                              if ($var instance of xs:string and $lang = 'fr') then (els:convertCanonicalBooleanValueToIntegerBooleanValue(upper-case($var) = 'OUI' or upper-case($var) = 'VRAI'))
+                              else (
+                                if ($var instance of xs:string and $lang = 'en') then (els:convertCanonicalBooleanValueToIntegerBooleanValue(upper-case($var) = 'YES'))
+                                else (0)
+                              )
+                            )
+                          )"/>
+  </xsl:function>
+  
+  <xd:doc>
+    <xd:desc>
+      <xd:p>Converts an atomic value to a xs:boolean in its integer form (1 / 0).</xd:p>
+      <xd:p>The <xd:ref name="lang" type="parameter">$lang</xd:ref> parameter allows the conversion of non-canonical string forms.</xd:p>
+      <xd:p>The <xd:ref name="lang" type="parameter">$lang</xd:ref> default value is "fr".</xd:p>
+    </xd:desc>
+    <xd:param name="var">[item()?] An atomic value.</xd:param>
+    <xd:return>[xs:integer] The boolean converted atomic value in its integer form.</xd:return>
+  </xd:doc>
+  <xsl:function name="els:convertAtomicValueToIntegerBooleanValue" as="xs:integer">
+    <xsl:param name="var" as="item()?"/>
+    <xsl:sequence select="els:convertAtomicValueToIntegerBooleanValue($var,'fr')"/>
+  </xsl:function>
+  
+  <xd:doc>
+    <xd:desc>
+      <xd:p>Converts an xs:boolean in its canonical form (true() / false()) to its integer form (1 / 0).</xd:p>
+    </xd:desc>
+    <xd:param name="val">[xs:boolean] A boolean value.</xd:param>
+    <xd:return>[xs:integer] The boolean value in its integer form.</xd:return>
+  </xd:doc>
+  <xsl:function name="els:convertCanonicalBooleanValueToIntegerBooleanValue" as="xs:integer">
+    <xsl:param name="val" as="xs:boolean"/>
+    <xsl:value-of select="if ($val = true()) then (1) else (0)"/>
   </xsl:function>
   
 </xsl:stylesheet>
