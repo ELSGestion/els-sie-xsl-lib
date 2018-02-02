@@ -284,8 +284,8 @@
     <xd:return>Boolean : true() if $s is the empty string '' or if it only contains whitespaces, else false()</xd:return>
   </xd:doc>
   <xsl:function name="els:is-empty-or-whitespace" as="xs:boolean">
-    <xsl:param name="s" as="xs:string"/>
-    <xsl:sequence select="matches($s, concat('^', $els:regAnySpace, '$'))"/>
+    <xsl:param name="s" as="xs:string?"/>
+    <xsl:sequence select="matches($s, concat('^', $els:regAnySpace, '*$'))"/>
   </xsl:function>
   
   <xd:doc>
