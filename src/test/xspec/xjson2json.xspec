@@ -9,7 +9,7 @@
   <!--<x:param name="xslLib:xjson2json.options" select="map{'indent':true()}"/>-->
   
   <x:scenario label="sample.xvrl.xjson > sample.xvrl.xjson.json" xml:base="../samples/xml2json/">
-    <x:context href="sample.xvrl.xjson"/>
+    <x:context href="sample.xvrl.xjson" mode="xslLib:xjson2json"/>
     <x:expect label="sample.xvrl.xjson.json" select="unparsed-text($sample.xvrl.xjson.json.uri)"/>
   </x:scenario>
   
