@@ -38,17 +38,12 @@ Je comptais simplifier l’étape de renommage des steps 7.19 et 7.20 qui est un
   <xsl:param name="rng2srng:log.uri" select="resolve-uri('log/', base-uri(.))" as="xs:anyURI" />
   <xsl:param name="rng2srng:debug" select="true()" as="xs:boolean" />
   
-  <!-- =================================================================== -->
-  <!--                           INIT                                      -->
-  <!-- =================================================================== -->
-  
-  <xsl:template match="/">
-    <xsl:apply-templates select="." mode="rng2srng:main"/>
-  </xsl:template>
   
   <!-- =================================================================== -->
   <!--                           MAIN                                      -->
   <!-- =================================================================== -->
+  
+  <!--ELSSIEXDC-18 : don't use a default <xsl:template match="/"> for transformation libraries-->
   
   <xsl:template match="/" mode="rng2srng:main">
     <xsl:variable name="step" as="document-node()">

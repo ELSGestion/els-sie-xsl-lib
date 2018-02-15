@@ -23,16 +23,10 @@
   <xsl:import href="anyXML2json.xsl"/>
 
   <!--================================-->
-  <!--INIT-->
-  <!--================================-->
-  
-  <xsl:template match="/">
-    <xsl:apply-templates select="." mode="xslLib:xvrl2xjson"/>
-  </xsl:template>
-  
-  <!--================================-->
   <!--MAIN-->
   <!--================================-->
+
+  <!--ELSSIEXDC-18 : don't use a default <xsl:template match="/"> for transformation libraries-->
   
   <xsl:template match="/" mode="xslLib:xvrl2xjson">
     <xsl:apply-templates select="." mode="xslLib:anyXML2xjson"/>

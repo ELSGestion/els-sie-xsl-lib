@@ -14,18 +14,12 @@
         where the xml:base is usefull during processing but should be delete at the end so xspec does't complain.</xd:p>
     </xd:desc>
   </xd:doc>
-  
-  <!--==============================================================================================================================-->
-  <!-- INIT -->
-  <!--==============================================================================================================================-->
-  
-  <xsl:template match="/">
-    <xsl:apply-templates select="/" mode="xslLib:removeXmlBase"/>
-  </xsl:template>
-  
+
   <!--==============================================================================================================================-->
   <!-- MAIN -->
   <!--==============================================================================================================================-->
+
+  <!--ELSSIEXDC-18 : don't use a default <xsl:template match="/"> for transformation libraries-->
   
   <xsl:template match="/*" mode="xslLib:removeXmlBase">
     <xsl:copy>

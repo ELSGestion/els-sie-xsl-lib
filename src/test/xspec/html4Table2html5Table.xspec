@@ -2,11 +2,12 @@
 <x:description 
   xmlns:x="http://www.jenitennison.com/xslt/xspec" 
   stylesheet="../../main/xsl/html4Table2html5Table.xsl"
+  xmlns:xslLib="http://www.lefebvre-sarrut.eu/ns/els/xslLib"
   xslt-version="3.0">
   
   <x:scenario label="html4Table2html5Table" xml:base="../samples/tables/">
     <x:scenario label="table.html4.html > table.html4.html5.html">
-      <x:context href="table.html4.html"/>
+      <x:context href="table.html4.html" mode="xslLib:html4table2html5table"/>
       <x:expect label="OK" select="/*" test="/*" href="table.html4.html5.html"/>
     </x:scenario>
   </x:scenario>

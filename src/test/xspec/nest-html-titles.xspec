@@ -2,11 +2,11 @@
 <x:description 
   xmlns:x="http://www.jenitennison.com/xslt/xspec" 
   xmlns:xslLib="http://www.lefebvre-sarrut.eu/ns/els/xslLib"
-  stylesheet="_xspec.override-xslt/nest-html-titles.xsl"
+  stylesheet="../../main/xsl/nest-html-titles.xsl"
   xslt-version="3.0">
   
   <x:scenario label="Nest HTML Titles" xml:base="../samples/nest-titles/">
-    <x:context href="sample.html-headings.html"/>
+    <x:context href="sample.html-headings.html" mode="xslLib:nest-html-titles.main"/>
     <x:expect label="OK" select="/" test="/" href="sample.html-headings.nested.html"/>
   </x:scenario>
   

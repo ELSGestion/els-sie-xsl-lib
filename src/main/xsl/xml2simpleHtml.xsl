@@ -15,17 +15,11 @@
   </xd:doc>
   
   <!--==================================================-->
-  <!--INIT-->
-  <!--==================================================-->
-
-  <xsl:template match="/">
-    <xsl:apply-templates select="." mode="els:xml2simpleHtml"/>
-  </xsl:template>
-  
-  <!--==================================================-->
   <!--MAIN-->
   <!--==================================================-->
 
+  <!--ELSSIEXDC-18 : don't use a default <xsl:template match="/"> for transformation libraries-->
+  
   <xsl:template match="*" mode="els:xml2simpleHtml">
     <xsl:variable name="element.name" as="xs:string">
       <xsl:choose>

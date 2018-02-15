@@ -28,16 +28,10 @@
   <xsl:param name="xslLib:anyXML2json.options" select="map{'indent':false()}" as="map(*)"/>
   
   <!--==============================================-->
-  <!--INIT-->
-  <!--==============================================-->
-  
-  <xsl:template match="/">
-    <xsl:apply-templates select="." mode="xslLib:anyXML2json"/>
-  </xsl:template>
-  
-  <!--==============================================-->
   <!--MAIN-->
   <!--==============================================-->
+
+  <!--ELSSIEXDC-18 : don't use a default <xsl:template match="/"> for transformation libraries-->
   
   <xsl:template match="/" mode="xslLib:anyXML2json">
     <xsl:variable name="root" select="*[1]" as="element()"/>

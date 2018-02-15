@@ -7,37 +7,37 @@
   
   <x:scenario label="HTML2CALS any html" xml:base="../samples/tables/">
     <x:scenario label="table.html">
-      <x:context href="table.html"/>
+      <x:context href="table.html" mode="xslLib:xhtml2cals"/>
       <x:expect label="OK" select="/*" test="/*" href="table.cals.xml"/>
     </x:scenario>
   </x:scenario>
   
   <x:scenario label="HTML2CALS - with class" xml:base="../samples/tables/">
     <x:scenario label="Table jira CHAINE-1885">
-      <x:context href="Table_CHAINE-1885.htm"/>
+      <x:context href="Table_CHAINE-1885.htm" mode="xslLib:xhtml2cals"/>
       <x:expect label="OK" select="/*" test="/*" href="Table_CHAINE-1885.cals.xml"/>
     </x:scenario>
     <x:scenario label="frchs1603cx.tables">
-      <x:context href="frchs1603cx.tables.htm"/>
+      <x:context href="frchs1603cx.tables.htm" mode="xslLib:xhtml2cals"/>
       <x:expect label="OK" select="/*" test="/*" href="frchs1603cx.tables.cals.xml"/>
     </x:scenario>
     <x:scenario label="isosts_tables">
-      <x:context href="isosts_tables.cals.htm"/>
+      <x:context href="isosts_tables.cals.htm" mode="xslLib:xhtml2cals"/>
       <x:expect label="OK" select="/*" test="/*" href="isosts_tables.cals.cals.xml"/>
     </x:scenario>
   </x:scenario>
   
   <x:scenario label="HTML2CALS - with style" xml:base="../samples/tables/">
     <x:scenario label="Table jira CHAINE-1885">
-      <x:context href="Table_CHAINE-1885.style.htm"/>
+      <x:context href="Table_CHAINE-1885.style.htm" mode="xslLib:xhtml2cals"/>
       <x:expect label="OK" select="/*" test="/*" href="Table_CHAINE-1885.style.cals.xml"/>
     </x:scenario>
     <x:scenario label="frchs1603cx.tables">
-      <x:context href="frchs1603cx.tables.style.htm"/>
+      <x:context href="frchs1603cx.tables.style.htm" mode="xslLib:xhtml2cals"/>
       <x:expect label="OK" select="/*" test="/*" href="frchs1603cx.tables.style.cals.xml"/>
     </x:scenario>
     <x:scenario label="isosts_tables">
-      <x:context href="isosts_tables.cals.style.htm"/>
+      <x:context href="isosts_tables.cals.style.htm" mode="xslLib:xhtml2cals"/>
       <x:expect label="OK" select="/*" test="/*" href="isosts_tables.cals.style.cals.xml"/>
     </x:scenario>
   </x:scenario>

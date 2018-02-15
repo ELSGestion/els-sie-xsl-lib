@@ -18,18 +18,12 @@
   
   <xsl:import href="els-common.xsl"/>
   
-  <!--===================================================-->  
-  <!--INIT-->
-  <!--===================================================-->  
-  
-  <xsl:template match="/">
-    <xsl:apply-templates select="." mode="xslLib:nest-titles.main"/>
-  </xsl:template>
-  
   <!--===================================================-->
   <!--MAIN-->
   <!--===================================================-->
-  
+
+  <!--ELSSIEXDC-18 : don't use a default <xsl:template match="/"> for transformation libraries-->
+
   <xsl:template match="*[*[xslLib:nest-title.getDeepLevel(.) != 0]]" mode="xslLib:nest-titles.main">
     <xsl:copy>
       <xsl:apply-templates select="@*" mode="#current"/>
@@ -37,6 +31,7 @@
     </xsl:copy>
   </xsl:template>
   
+  <!--default copy--> 
   <xsl:template match="node() | @*" mode="xslLib:nest-titles.main">
     <xsl:copy>
       <xsl:apply-templates select="node() | @*" mode="#current"/>
@@ -89,7 +84,6 @@
     <xsl:param name="e" as="element()"/>
     <xsl:sequence select="xslLib:nest-title.getDeepLevel($e) ne -1"/>
   </xsl:function>
-  
   
   <!--===================================================-->
   <!--INTERFACES-->

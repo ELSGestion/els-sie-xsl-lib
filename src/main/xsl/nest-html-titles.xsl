@@ -18,17 +18,13 @@
 
   <xsl:import href="nest-titles.xsl"/>
 
-  <!--===================================================-->  
-  <!--INIT-->
-  <!--===================================================-->  
-  
-  <xsl:template match="/">
-    <xsl:apply-templates select="." mode="xslLib:nest-html-titles.main"/>
-  </xsl:template>
+  <xsl:output method="xml"/>
   
   <!--===================================================-->
   <!--MAIN-->
   <!--===================================================-->
+  
+  <!--ELSSIEXDC-18 : don't use a default <xsl:template match="/"> for transformation libraries-->
   
   <xsl:template match="/" mode="xslLib:nest-html-titles.main">
     <xsl:apply-templates select="." mode="xslLib:nest-titles.main"/>

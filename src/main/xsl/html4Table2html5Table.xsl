@@ -36,16 +36,10 @@
     as="xs:string*"/>
   
   <!--==========================================================-->
-  <!-- INIT -->
-  <!--==========================================================-->
-  
-  <xsl:template match="/">
-    <xsl:apply-templates select="." mode="xslLib:html4table2html5table"/>
-  </xsl:template>
-  
-  <!--==========================================================-->
   <!-- MAIN -->
   <!--==========================================================-->
+  
+  <!--ELSSIEXDC-18 : don't use a default <xsl:template match="/"> for transformation libraries-->
   
   <xsl:template 
     match="table | table/colgroup | table/colgroup/col | 

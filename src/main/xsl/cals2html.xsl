@@ -53,17 +53,12 @@
   <xsl:param name="xslLib:cals2html.default-td-valign" select="'middle'" as="xs:string"/><!--default browser value-->
   <xsl:param name="xslLib:cals2html.default-th-valign" select="'middle'" as="xs:string"/><!--default browser value-->
 
-  <!--==============================================================================================================================-->
-  <!-- INIT -->
-  <!--==============================================================================================================================-->
-  
-  <xsl:template match="/">
-    <xsl:apply-templates select="/" mode="xslLib:cals2html"/>
-  </xsl:template>
   
   <!--==============================================================================================================================-->
   <!-- DRIVER -->
   <!--==============================================================================================================================-->
+  
+  <!--ELSSIEXDC-18 : don't use a default <xsl:template match="/"> for transformation libraries-->
   
   <xsl:template match="/" mode="xslLib:cals2html">
     <!--STEP0 : set xml:base to init multi-step-->
