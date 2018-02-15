@@ -31,12 +31,10 @@
   <xsl:param name="xslLib:xjson2json.options" select="map{'indent':false()}" as="map(*)"/>
   
   <!--==============================================-->
-  <!--INIT-->
-  <!--==============================================-->
-  
-  <!--==============================================-->
   <!--MAIN-->
   <!--==============================================-->
+  
+  <!--ELSSIEXDC-18 : don't use a default <xsl:template match="/"> for transformation libraries-->
   
   <xsl:template match="/" mode="xslLib:xjson2json">
     <xsl:call-template name="xslLib:xjson2json.serialize-as-json">
