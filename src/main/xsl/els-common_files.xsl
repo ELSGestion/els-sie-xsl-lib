@@ -63,7 +63,7 @@
   <xsl:function name="els:getFileExt" as="xs:string?">
     <xsl:param name="filePath" as="xs:string?"/>
     <xsl:choose>
-      <xsl:when test="not(matches($filePath, '\.'))">
+      <xsl:when test="not(matches(functx:substring-after-last-match($filePath,'/'), '\.'))">
         <!-- To return an empty string (not an empty sequence) -->
         <xsl:text/>
       </xsl:when>

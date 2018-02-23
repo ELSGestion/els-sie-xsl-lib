@@ -127,11 +127,29 @@
       </x:call>
       <x:expect label="ext" select="'ext'"/>
     </x:scenario>
+    <x:scenario label="$filePath = 'folder1/folder2/folder3/file.ext'">
+      <x:call>
+        <x:param name="filePath" select="'folder1/folder2/folder3/file.ext'"/>
+      </x:call>
+      <x:expect label="ext" select="'ext'"/>
+    </x:scenario>
+    <x:scenario label="$filePath = 'folder1/../folder2/../folder3/../file.ext'">
+      <x:call>
+        <x:param name="filePath" select="'folder1/../folder2/../folder3/../file.ext'"/>
+      </x:call>
+      <x:expect label="ext" select="'ext'"/>
+    </x:scenario>
     <x:scenario label="$filePath = 'folder1/folder2/folder3/file' (file name that has no extension)">
       <x:call>
         <x:param name="filePath" select="'folder1/folder2/folder3/file'"/>
       </x:call>
-      <x:expect label="ext" select="''"/>
+      <x:expect label="no ext" select="''"/>
+    </x:scenario>
+    <x:scenario label="$filePath = 'folder1/../folder2/../folder3/../file' (file name that has no extension)">
+      <x:call>
+        <x:param name="filePath" select="'folder1/../folder2/../folder3/../file'"/>
+      </x:call>
+      <x:expect label="no ext" select="''"/>
     </x:scenario>
   </x:scenario>
   
