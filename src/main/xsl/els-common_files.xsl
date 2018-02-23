@@ -60,9 +60,17 @@
     <xd:param name="filePath">[String] path of the file (typically string(base-uri())</xd:param>
     <xd:return>The file extension if it has one</xd:return>
   </xd:doc>
-  <xsl:function name="els:getFileExt" as="xs:string">
+  <xsl:function name="els:getFileExt" as="xs:string?">
     <xsl:param name="filePath" as="xs:string?"/>
-    <xsl:sequence select="concat('',functx:substring-after-last-match($filePath,'\.'))"/>
+    <xsl:choose>
+      <xsl:when test="not(matches($filePath, '\.'))">
+        <!-- To return an empty string (not an empty sequence) -->
+        <xsl:text/>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:sequence select="concat('',functx:substring-after-last-match($filePath,'\.'))"/>
+      </xsl:otherwise>
+    </xsl:choose>
   </xsl:function>
 
   <xd:doc>

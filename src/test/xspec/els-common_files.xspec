@@ -131,8 +131,7 @@
       <x:call>
         <x:param name="filePath" select="'folder1/folder2/folder3/file'"/>
       </x:call>
-      <!--THIS IS WRONG should be ''-->
-      <x:expect label="ext" select="'folder1/folder2/folder3/file'"/>
+      <x:expect label="ext" select="''"/>
     </x:scenario>
   </x:scenario>
   
