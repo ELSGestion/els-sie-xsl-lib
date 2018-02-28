@@ -44,6 +44,14 @@
   <xd:p>(cf. http://www.regular-expressions.info/unicode.html)</xd:p>
   <xsl:variable name="els:regAnyPonctuation" select="'\p{P}'" as="xs:string"/>  
   
+  <xd:p>Variable "regAnyNumber : match any number</xd:p>
+  <xd:p>(cf. http://www.regular-expressions.info/unicode.html)</xd:p>
+  <xsl:variable name="els:regAnyNumber" select="'\p{N}'" as="xs:string"/>
+
+  <xd:p>Variable "regAnyLetter : match any letter</xd:p>
+  <xd:p>(cf. http://www.regular-expressions.info/unicode.html)</xd:p>
+  <xsl:variable name="els:regAnyLetter" select="'\p{L}'" as="xs:string"/>
+  
   <xd:p>Variable "end of word" (equivalent to "\b" in regex)</xd:p>
   <xsl:variable name="els:regWordBoundery" select="concat($els:regAnySpace, '|', $els:regAnyPonctuation)" as="xs:string"/>
   
