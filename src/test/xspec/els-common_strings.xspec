@@ -156,4 +156,49 @@
     </x:scenario>
   </x:scenario>
   
+  <x:scenario label="els:hasNoTextChildExceptWhiteSpace">
+    <x:call function="els:hasNoTextChildExceptWhiteSpace"/>
+    <x:scenario label="text exists (up)>">
+      <x:call>
+        <x:param name="e">
+          <p>text exists
+            <child-p>text of &lt;child-p&gt;</child-p>
+          </p>
+        </x:param>        
+      </x:call>
+      <x:expect label="false" select="false()"/>
+    </x:scenario>
+    <x:scenario label="text exists (down)">
+      <x:call>
+        <x:param name="e">
+          <p>
+            <child-p>text of &lt;child-p&gt;</child-p>
+            text exists
+          </p>
+        </x:param>        
+      </x:call>
+      <x:expect label="false" select="false()"/>
+    </x:scenario>    
+    <x:scenario label="only whitespaces (indent)">
+      <x:call>
+        <x:param name="e">
+          <p>
+            <child-p>text of &lt;child-p&gt;</child-p>
+          </p>
+        </x:param>        
+      </x:call>
+      <x:expect label="true" select="true()"/>
+    </x:scenario>
+    <x:scenario label="only whitespaces and no break whitespaces">
+      <x:call>
+        <x:param name="e">
+          <p>&#10;
+            <child-p>text of &lt;child-p&gt;</child-p>
+            &#10;
+          </p>
+        </x:param>        
+      </x:call>
+      <x:expect label="true" select="true()"/>
+    </x:scenario>
+  </x:scenario>
 </x:description>

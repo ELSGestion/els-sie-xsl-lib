@@ -309,6 +309,18 @@
     <xsl:sequence select="els:normalized-string($node, ' ')"/>
   </xsl:function>
   
+  <xd:doc>
+    <xd:desc>
+      <xd:p>Check the text existance of an element except his children</xd:p>
+    </xd:desc>
+    <xd:param name="e">element to check</xd:param>
+    <xd:return>true() if there is not texte, otherwise false()</xd:return>
+  </xd:doc>
+  <xsl:function name="els:hasNoTextChildExceptWhiteSpace" as="xs:boolean">
+    <xsl:param name="e" as="element()"/>
+    <xsl:sequence select="els:is-empty-or-whitespace(normalize-space(string-join($e/text(), '')))"/>      
+  </xsl:function>
+  
   <!--=====================-->
   <!-- MODE els:UPPERCASE -->
   <!--=====================-->
