@@ -20,6 +20,10 @@
       <x:context href="isosts_tables.cals.xml"/>
       <x:expect label="OK" select="/*" test="/*" href="isosts_tables.cals.style.htm"/>
     </x:scenario>
+    <x:scenario label="table_test-colwith">
+      <x:context href="table_test-colwith.xml"/>
+      <x:expect label="OK" select="/*" test="/*" href="table_test-colwith.style.htm"/>
+    </x:scenario>
   </x:scenario>
   
 </x:description>

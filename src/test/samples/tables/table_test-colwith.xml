@@ -1,0 +1,265 @@
+<?xml-model href="ext-models:/ext-models/oasis/cals/cals.nvdl" type="application/xml" schematypens="http://purl.oclc.org/dsdl/nvdl/ns/structure/1.0"?>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <style type="text/css">table{border-collapse: collapse;}</style>
+  </head>
+  <body>
+    <h2>Table colspec with "*"</h2>
+    <table xmlns="http://docs.oasis-open.org/ns/oasis-exchange/table" frame="all" colsep="1" rowsep="1">
+      <tgroup cols="4" tgroupstyle="type3" colsep="1" rowsep="1">
+        <colspec colnum="1" colname="1" colwidth="10*"/>
+        <colspec colnum="2" colname="2" colwidth="20*"/>
+        <colspec colnum="3" colname="3" colwidth="30*"/>
+        <colspec colnum="4" colname="4" colwidth="40*"/>
+        <thead>
+          <row rowsep="1">
+            <entry colname="1">h1</entry>
+            <entry colname="2">h2</entry>
+            <entry colname="3">h3</entry>
+            <entry colname="4">h4</entry>
+          </row>
+        </thead>
+        <tbody>
+          <row rowsep="1">
+            <entry colname="1">r1c1</entry>
+            <entry colname="2" morerows="2">r1c2</entry>
+            <entry colname="3">r1c3</entry>
+            <entry colname="4" morerows="2">r1c4</entry>
+          </row>
+          <row rowsep="1">
+            <entry colname="1" morerows="1">r2c1</entry>
+            <entry colname="3">r2c2</entry>
+          </row>
+          <row rowsep="0">
+            <entry colname="3">r3c1</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+    <h2>Table 100% colspec with "*"</h2>
+    <table xmlns="http://docs.oasis-open.org/ns/oasis-exchange/table" frame="all" colsep="1" rowsep="1" pgwide="1">
+      <tgroup cols="4" tgroupstyle="type3" colsep="1" rowsep="1">
+        <colspec colnum="1" colname="1" colwidth="10*"/>
+        <colspec colnum="2" colname="2" colwidth="20*"/>
+        <colspec colnum="3" colname="3" colwidth="30*"/>
+        <colspec colnum="4" colname="4" colwidth="40*"/>
+        <thead>
+          <row rowsep="1">
+            <entry colname="1">h1</entry>
+            <entry colname="2">h2</entry>
+            <entry colname="3">h3</entry>
+            <entry colname="4">h4</entry>
+          </row>
+        </thead>
+        <tbody>
+          <row rowsep="1">
+            <entry colname="1">r1c1</entry>
+            <entry colname="2" morerows="2">r1c2</entry>
+            <entry colname="3">r1c3</entry>
+            <entry colname="4" morerows="2">r1c4</entry>
+          </row>
+          <row rowsep="1">
+            <entry colname="1" morerows="1">r2c1</entry>
+            <entry colname="3">r2c2</entry>
+          </row>
+          <row rowsep="0">
+            <entry colname="3">r3c1</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+    <h2>Table colspec with "in"</h2>
+    <table xmlns="http://docs.oasis-open.org/ns/oasis-exchange/table" frame="all" colsep="1" rowsep="1">
+      <tgroup cols="4" tgroupstyle="type3" colsep="1" rowsep="1">
+        <colspec colnum="1" colname="1" colwidth="1in"/>
+        <colspec colnum="2" colname="2" colwidth="2in"/>
+        <colspec colnum="3" colname="3" colwidth="3in"/>
+        <colspec colnum="4" colname="4" colwidth="4in"/>
+        <thead>
+          <row rowsep="1">
+            <entry colname="1">h1</entry>
+            <entry colname="2">h2</entry>
+            <entry colname="3">h3</entry>
+            <entry colname="4">h4</entry>
+          </row>
+        </thead>
+        <tbody>
+          <row rowsep="1">
+            <entry colname="1">r1c1</entry>
+            <entry colname="2" morerows="2">r1c2</entry>
+            <entry colname="3">r1c3</entry>
+            <entry colname="4" morerows="2">r1c4</entry>
+          </row>
+          <row rowsep="1">
+            <entry colname="1" morerows="1">r2c1</entry>
+            <entry colname="3">r2c2</entry>
+          </row>
+          <row rowsep="0">
+            <entry colname="3">r3c1</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+    <h2>Table 100% colspec with "in"</h2>
+    <table xmlns="http://docs.oasis-open.org/ns/oasis-exchange/table" frame="all" colsep="1" rowsep="1" pgwide="1">
+      <tgroup cols="4" tgroupstyle="type3" colsep="1" rowsep="1">
+        <colspec colnum="1" colname="1" colwidth="1in"/>
+        <colspec colnum="2" colname="2" colwidth="2in"/>
+        <colspec colnum="3" colname="3" colwidth="3in"/>
+        <colspec colnum="4" colname="4" colwidth="4in"/>
+        <thead>
+          <row rowsep="1">
+            <entry colname="1">h1</entry>
+            <entry colname="2">h2</entry>
+            <entry colname="3">h3</entry>
+            <entry colname="4">h4</entry>
+          </row>
+        </thead>
+        <tbody>
+          <row rowsep="1">
+            <entry colname="1">r1c1</entry>
+            <entry colname="2" morerows="2">r1c2</entry>
+            <entry colname="3">r1c3</entry>
+            <entry colname="4" morerows="2">r1c4</entry>
+          </row>
+          <row rowsep="1">
+            <entry colname="1" morerows="1">r2c1</entry>
+            <entry colname="3">r2c2</entry>
+          </row>
+          <row rowsep="0">
+            <entry colname="3">r3c1</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+    <h2>Table colspec with "px"</h2>
+    <table xmlns="http://docs.oasis-open.org/ns/oasis-exchange/table" frame="all" colsep="1" rowsep="1">
+      <tgroup cols="4" tgroupstyle="type3" colsep="1" rowsep="1">
+        <colspec colnum="1" colname="1" colwidth="50px"/>
+        <colspec colnum="2" colname="2" colwidth="100px"/>
+        <colspec colnum="3" colname="3" colwidth="150px"/>
+        <colspec colnum="4" colname="4" colwidth="200px"/>
+        <thead>
+          <row rowsep="1">
+            <entry colname="1">h1</entry>
+            <entry colname="2">h2</entry>
+            <entry colname="3">h3</entry>
+            <entry colname="4">h4</entry>
+          </row>
+        </thead>
+        <tbody>
+          <row rowsep="1">
+            <entry colname="1">r1c1</entry>
+            <entry colname="2" morerows="2">r1c2</entry>
+            <entry colname="3">r1c3</entry>
+            <entry colname="4" morerows="2">r1c4</entry>
+          </row>
+          <row rowsep="1">
+            <entry colname="1" morerows="1">r2c1</entry>
+            <entry colname="3">r2c2</entry>
+          </row>
+          <row rowsep="0">
+            <entry colname="3">r3c1</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+    <h2>Table 100% colspec with "px"</h2>
+    <table xmlns="http://docs.oasis-open.org/ns/oasis-exchange/table" frame="all" colsep="1" rowsep="1" pgwide="1">
+      <tgroup cols="4" tgroupstyle="type3" colsep="1" rowsep="1">
+        <colspec colnum="1" colname="1" colwidth="50px"/>
+        <colspec colnum="2" colname="2" colwidth="100px"/>
+        <colspec colnum="3" colname="3" colwidth="150px"/>
+        <colspec colnum="4" colname="4" colwidth="200px"/>
+        <thead>
+          <row rowsep="1">
+            <entry colname="1">h1</entry>
+            <entry colname="2">h2</entry>
+            <entry colname="3">h3</entry>
+            <entry colname="4">h4</entry>
+          </row>
+        </thead>
+        <tbody>
+          <row rowsep="1">
+            <entry colname="1">r1c1</entry>
+            <entry colname="2" morerows="2">r1c2</entry>
+            <entry colname="3">r1c3</entry>
+            <entry colname="4" morerows="2">r1c4</entry>
+          </row>
+          <row rowsep="1">
+            <entry colname="1" morerows="1">r2c1</entry>
+            <entry colname="3">r2c2</entry>
+          </row>
+          <row rowsep="0">
+            <entry colname="3">r3c1</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+    <h2>Table colspec with mixed units ("px", "in", "*", none)</h2>
+    <table xmlns="http://docs.oasis-open.org/ns/oasis-exchange/table" frame="all" colsep="1" rowsep="1">
+      <tgroup cols="4" tgroupstyle="type3" colsep="1" rowsep="1">
+        <colspec colnum="1" colname="1" colwidth="50px"/>
+        <colspec colnum="2" colname="2" colwidth="2in"/>
+        <colspec colnum="3" colname="3" colwidth="30*"/>
+        <colspec colnum="4" colname="4" />
+        <thead>
+          <row rowsep="1">
+            <entry colname="1">h1</entry>
+            <entry colname="2">h2</entry>
+            <entry colname="3">h3</entry>
+            <entry colname="4">h4</entry>
+          </row>
+        </thead>
+        <tbody>
+          <row rowsep="1">
+            <entry colname="1">r1c1</entry>
+            <entry colname="2" morerows="2">r1c2</entry>
+            <entry colname="3">r1c3</entry>
+            <entry colname="4" morerows="2">r1c4</entry>
+          </row>
+          <row rowsep="1">
+            <entry colname="1" morerows="1">r2c1</entry>
+            <entry colname="3">r2c2</entry>
+          </row>
+          <row rowsep="0">
+            <entry colname="3">r3c1</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+    <h2>Table 100% colspec with mixed units ("px", "in", "*", none)</h2>
+    <table xmlns="http://docs.oasis-open.org/ns/oasis-exchange/table" frame="all" colsep="1" rowsep="1" pgwide="1">
+      <tgroup cols="4" tgroupstyle="type3" colsep="1" rowsep="1">
+        <colspec colnum="1" colname="1" colwidth="50px"/>
+        <colspec colnum="2" colname="2" colwidth="2in"/>
+        <colspec colnum="3" colname="3" colwidth="50*"/>
+        <colspec colnum="4" colname="4" />
+        <thead>
+          <row rowsep="1">
+            <entry colname="1">h1</entry>
+            <entry colname="2">h2</entry>
+            <entry colname="3">h3</entry>
+            <entry colname="4">h4</entry>
+          </row>
+        </thead>
+        <tbody>
+          <row rowsep="1">
+            <entry colname="1">r1c1</entry>
+            <entry colname="2" morerows="2">r1c2</entry>
+            <entry colname="3">r1c3</entry>
+            <entry colname="4" morerows="2">r1c4</entry>
+          </row>
+          <row rowsep="1">
+            <entry colname="1" morerows="1">r2c1</entry>
+            <entry colname="3">r2c2</entry>
+          </row>
+          <row rowsep="0">
+            <entry colname="3">r3c1</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+  </body>
+</html>

@@ -10,7 +10,38 @@
                         <scenarioAssociation-array>
                             <scenarioAssociation>
                                 <field name="url">
-                                    <String>src/test/xspec/data_xml2json/sample.xvrl.xjson</String>
+                                    <String>src/test/samples/tables/table_test-colwith.xml</String>
+                                </field>
+                                <field name="scenarioIds">
+                                    <list>
+                                        <String>cals2html.xsl - with @style</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioTypes">
+                                    <list>
+                                        <String>XSL</String>
+                                    </list>
+                                </field>
+                            </scenarioAssociation>
+                            <scenarioAssociation>
+                                <field name="url">
+                                    <String>src/test/samples/tables/table_with-abs-colwith.xml</String>
+                                </field>
+                                <field name="scenarioIds">
+                                    <list>
+                                        <String>cals2html.xsl - with @style</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioTypes">
+                                    <list>
+                                        <String>XSL</String>
+                                    </list>
+                                </field>
+                            </scenarioAssociation>
+                            
+                            <scenarioAssociation>
+                                <field name="url">
+                                    <String>src/test/samples/xml2json/sample.xvrl.xjson</String>
                                 </field>
                                 <field name="scenarioIds">
                                     <list>
@@ -25,7 +56,7 @@
                             </scenarioAssociation>
                             <scenarioAssociation>
                                 <field name="url">
-                                    <String>src/test/xspec/data-nest-titles/sample.html-headings.html</String>
+                                    <String>src/test/samples/nest-titles/sample.html-headings.html</String>
                                 </field>
                                 <field name="scenarioIds">
                                     <list>
@@ -40,7 +71,7 @@
                             </scenarioAssociation>
                             <scenarioAssociation>
                                 <field name="url">
-                                    <String>src/test/xspec/data-nest-titles/sample.html-headings.xml</String>
+                                    <String>src/test/samples/nest-titles/sample.html-headings.nested.html</String>
                                 </field>
                                 <field name="scenarioIds">
                                     <list>
@@ -55,7 +86,7 @@
                             </scenarioAssociation>
                             <scenarioAssociation>
                                 <field name="url">
-                                    <String>src/test/xspec/data_xml2json/anyXML.sample.xml</String>
+                                    <String>src/test/samples/xml2json/anyXML.sample.xml</String>
                                 </field>
                                 <field name="scenarioIds">
                                     <list>
@@ -70,22 +101,7 @@
                             </scenarioAssociation>
                             <scenarioAssociation>
                                 <field name="url">
-                                    <String>src/test/xspec/data/Z2002_table.xml</String>
-                                </field>
-                                <field name="scenarioIds">
-                                    <list>
-                                        <String>cals2html.xsl - with @style</String>
-                                    </list>
-                                </field>
-                                <field name="scenarioTypes">
-                                    <list>
-                                        <String>XSL</String>
-                                    </list>
-                                </field>
-                            </scenarioAssociation>
-                            <scenarioAssociation>
-                                <field name="url">
-                                    <String>src/test/xspec/data/table.html4.html</String>
+                                    <String>src/test/samples/tables/Table.html4.html</String>
                                 </field>
                                 <field name="scenarioIds">
                                     <list>
@@ -100,7 +116,7 @@
                             </scenarioAssociation>
                             <scenarioAssociation>
                                 <field name="url">
-                                    <String>src/test/xspec/data/frchs1603cx.tables.style.htm</String>
+                                    <String>src/test/samples/tables/frchs1603cx.tables.style.htm</String>
                                 </field>
                                 <field name="scenarioIds">
                                     <list>
@@ -115,7 +131,7 @@
                             </scenarioAssociation>
                             <scenarioAssociation>
                                 <field name="url">
-                                    <String>src/test/xspec/data/frchs1603cx.tables.htm</String>
+                                    <String>src/test/samples/tables/isosts_tables.cals.style.htm</String>
                                 </field>
                                 <field name="scenarioIds">
                                     <list>
@@ -130,7 +146,7 @@
                             </scenarioAssociation>
                             <scenarioAssociation>
                                 <field name="url">
-                                    <String>src/test/xspec/data/isosts_tables.cals.style.htm</String>
+                                    <String>src/test/samples/tables/isosts_tables.cals.htm</String>
                                 </field>
                                 <field name="scenarioIds">
                                     <list>
@@ -145,7 +161,7 @@
                             </scenarioAssociation>
                             <scenarioAssociation>
                                 <field name="url">
-                                    <String>src/test/xspec/data/isosts_tables.cals.htm</String>
+                                    <String>src/test/samples/tables/Table_CHAINE-1885.style.htm</String>
                                 </field>
                                 <field name="scenarioIds">
                                     <list>
@@ -160,7 +176,7 @@
                             </scenarioAssociation>
                             <scenarioAssociation>
                                 <field name="url">
-                                    <String>src/test/xspec/data/Table_CHAINE-1885.style.htm</String>
+                                    <String>src/test/samples/tables/Table_CHAINE-1885.htm</String>
                                 </field>
                                 <field name="scenarioIds">
                                     <list>
@@ -175,22 +191,7 @@
                             </scenarioAssociation>
                             <scenarioAssociation>
                                 <field name="url">
-                                    <String>src/test/xspec/data/Table_CHAINE-1885.htm</String>
-                                </field>
-                                <field name="scenarioIds">
-                                    <list>
-                                        <String>html2cals.xsl</String>
-                                    </list>
-                                </field>
-                                <field name="scenarioTypes">
-                                    <list>
-                                        <String>XSL</String>
-                                    </list>
-                                </field>
-                            </scenarioAssociation>
-                            <scenarioAssociation>
-                                <field name="url">
-                                    <String>src/test/xspec/data/frchs1603cx.tables.xml</String>
+                                    <String>src/test/samples/tables/frchs1603cx.tables.xml</String>
                                 </field>
                                 <field name="scenarioIds">
                                     <list>
@@ -207,7 +208,7 @@
                             </scenarioAssociation>
                             <scenarioAssociation>
                                 <field name="url">
-                                    <String>src/test/xspec/data/isosts_tables.cals.xml</String>
+                                    <String>src/test/samples/tables/isosts_tables.cals.xml</String>
                                 </field>
                                 <field name="scenarioIds">
                                     <list>
@@ -224,22 +225,7 @@
                             </scenarioAssociation>
                             <scenarioAssociation>
                                 <field name="url">
-                                    <String>src/test/xspec/data_cals2html/frchs1603cx.tables.style.htm</String>
-                                </field>
-                                <field name="scenarioIds">
-                                    <list>
-                                        <String>html2cals.xsl</String>
-                                    </list>
-                                </field>
-                                <field name="scenarioTypes">
-                                    <list>
-                                        <String>XSL</String>
-                                    </list>
-                                </field>
-                            </scenarioAssociation>
-                            <scenarioAssociation>
-                                <field name="url">
-                                    <String>src/test/xspec/data/Table_CHAINE-1885.xml</String>
+                                    <String>src/test/samples/tables/Table_CHAINE-1885.xml</String>
                                 </field>
                                 <field name="scenarioIds">
                                     <list>
@@ -250,143 +236,6 @@
                                 <field name="scenarioTypes">
                                     <list>
                                         <String>XSL</String>
-                                        <String>XSL</String>
-                                    </list>
-                                </field>
-                            </scenarioAssociation>
-                            <scenarioAssociation>
-                                <field name="url">
-                                    <String>src/test/xspec/data_cals2html/Table_CHAINE-1885.htm</String>
-                                </field>
-                                <field name="scenarioIds">
-                                    <list>
-                                        <String>html2cals.xsl</String>
-                                    </list>
-                                </field>
-                                <field name="scenarioTypes">
-                                    <list>
-                                        <String>XSL</String>
-                                    </list>
-                                </field>
-                            </scenarioAssociation>
-                            <scenarioAssociation>
-                                <field name="url">
-                                    <String>src/test/xspec/data_cals2html/Table_CHAINE-1885.style.htm</String>
-                                </field>
-                                <field name="scenarioIds">
-                                    <list>
-                                        <String>html2cals.xsl</String>
-                                    </list>
-                                </field>
-                                <field name="scenarioTypes">
-                                    <list>
-                                        <String>XSL</String>
-                                    </list>
-                                </field>
-                            </scenarioAssociation>
-                            <scenarioAssociation>
-                                <field name="url">
-                                    <String>src/test/xspec/data_cals2html/Table_CHAINE-1885.xml</String>
-                                </field>
-                                <field name="scenarioIds">
-                                    <list>
-                                        <String>cals2html.xsl - with @class</String>
-                                        <String>cals2html.xsl - with @style</String>
-                                    </list>
-                                </field>
-                                <field name="scenarioTypes">
-                                    <list>
-                                        <String>XSL</String>
-                                        <String>XSL</String>
-                                    </list>
-                                </field>
-                            </scenarioAssociation>
-                            <scenarioAssociation>
-                                <field name="url">
-                                    <String>src/test/xspec/data_cals2html/isosts_tables.cals.style.htm</String>
-                                </field>
-                                <field name="scenarioIds">
-                                    <list>
-                                        <String>html2cals.xsl</String>
-                                    </list>
-                                </field>
-                                <field name="scenarioTypes">
-                                    <list>
-                                        <String>XSL</String>
-                                    </list>
-                                </field>
-                            </scenarioAssociation>
-                            <scenarioAssociation>
-                                <field name="url">
-                                    <String>src/test/xspec/data_cals2html/isosts_tables.cals.htm</String>
-                                </field>
-                                <field name="scenarioIds">
-                                    <list>
-                                        <String>html2cals.xsl</String>
-                                    </list>
-                                </field>
-                                <field name="scenarioTypes">
-                                    <list>
-                                        <String>XSL</String>
-                                    </list>
-                                </field>
-                            </scenarioAssociation>
-                            <scenarioAssociation>
-                                <field name="url">
-                                    <String>src/test/xspec/data_cals2html/frchs1603cx.tables.htm</String>
-                                </field>
-                                <field name="scenarioIds">
-                                    <list>
-                                        <String>html2cals.xsl</String>
-                                    </list>
-                                </field>
-                                <field name="scenarioTypes">
-                                    <list>
-                                        <String>XSL</String>
-                                    </list>
-                                </field>
-                            </scenarioAssociation>
-                            <scenarioAssociation>
-                                <field name="url">
-                                    <String>src/test/xspec/data_cals2html/frchs1603cx.tables_error.style.htm</String>
-                                </field>
-                                <field name="scenarioIds">
-                                    <list>
-                                        <String>html2cals.xsl</String>
-                                    </list>
-                                </field>
-                                <field name="scenarioTypes">
-                                    <list>
-                                        <String>XSL</String>
-                                    </list>
-                                </field>
-                            </scenarioAssociation>
-                            <scenarioAssociation>
-                                <field name="url">
-                                    <String>../../SIE_XML-MODELS/SIE-ELS-MODELS/src/test/xvrl/sample-report.xvrl.xjson</String>
-                                </field>
-                                <field name="scenarioIds">
-                                    <list>
-                                        <String>xslLib:xjson2json.xsl</String>
-                                    </list>
-                                </field>
-                                <field name="scenarioTypes">
-                                    <list>
-                                        <String>XSL</String>
-                                    </list>
-                                </field>
-                            </scenarioAssociation>
-                            <scenarioAssociation>
-                                <field name="url">
-                                    <String>../../SIE_XML-MODELS/SIE-ELS-MODELS/src/test/xvrl/sample.xvrl.xjson</String>
-                                </field>
-                                <field name="scenarioIds">
-                                    <list>
-                                        <String>xslLib:xjson2json.xsl</String>
-                                    </list>
-                                </field>
-                                <field name="scenarioTypes">
-                                    <list>
                                         <String>XSL</String>
                                     </list>
                                 </field>
@@ -1585,13 +1434,7 @@
         </options>
     </meta>
     <projectTree name="xslLib.xpr">
-        <folder name="src/">
-            <folder path="src/main/xsl/"/>
-            <folder path="src/site/"/>
-        </folder>
-        <folder name="test/">
-            <folder path="src/test/xspec/"/>
-        </folder>
+        <folder path="src/"/>
         <file name="pom.xml"/>
     </projectTree>
 </project>
