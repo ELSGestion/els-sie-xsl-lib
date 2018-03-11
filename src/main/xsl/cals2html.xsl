@@ -8,11 +8,9 @@
   xmlns:cals2html="http://www.lefebvre-sarrut.eu/ns/els/xslLib/cals2html"
   xmlns:cals="http://docs.oasis-open.org/ns/oasis-exchange/table"
   xmlns:html="http://www.w3.org/1999/xhtml"
-  xmlns:saxon="http://saxon.sf.net/"
   xmlns="http://www.w3.org/1999/xhtml"
   xpath-default-namespace="http://docs.oasis-open.org/ns/oasis-exchange/table"
   exclude-result-prefixes="#all" 
-  extension-element-prefixes="xd"
   >
   
   <xsl:import href="els-common.xsl"/>
@@ -180,15 +178,13 @@
         - unit : * => make it %
         - unit px  => let it the same (or make it %) ?-->
         <colgroup>
-          <xsl:variable name="total-colwidth-sum" select="xslLib:cals2html.cals_sum-colwidths(colspec)" as="xs:double"/>
+          <xsl:variable name="colspec" select="colspec" as="element(colspec)*"/>
           <xsl:for-each select="colspec">
-            <xsl:variable name="current-colwidth" select="xslLib:cals2html.cals_sum-colwidths(.)" as="xs:double"/>
             <col>
-              <xsl:if test="$total-colwidth-sum != 0">
-                <xsl:call-template name="xslLib:cals2html.add-column-width">
-                  <xsl:with-param name="width" select="concat(round(($current-colwidth div $total-colwidth-sum) * 100), '%')" as="xs:string"/>
-                </xsl:call-template>
-              </xsl:if>
+              <xsl:call-template name="xslLib:cals2html.add-column-width">
+                <xsl:with-param name="colspec-list-for-total-width" select="$colspec" as="element(colspec)*"/>
+                <xsl:with-param name="colspec-list-for-current-width" select="." as="element(colspec)*"/>
+              </xsl:call-template>
             </col>
           </xsl:for-each>
         </colgroup>
@@ -448,7 +444,8 @@
       <xsl:variable name="current-colwidth" select="xslLib:cals2html.cals_sum-colwidths($current-colspec-list)" as="xs:double"/>
       <xsl:if test="not($xslLib:cals2html.compute-column-width-within-colgroup)">
         <xsl:call-template name="xslLib:cals2html.add-column-width">
-          <xsl:with-param name="width" select="concat(round(($current-colwidth div  $total-colwidth-sum) * 100), '%')" as="xs:string"/>
+          <xsl:with-param name="colspec-list-for-total-width" select="$current-tgroup/colspec" as="element(colspec)*"/>
+          <xsl:with-param name="colspec-list-for-current-width" select="$current-colspec-list" as="element(colspec)*"/>
         </xsl:call-template>
       </xsl:if>
       <xsl:if test="count($current-colspec-list) > 1">
@@ -548,7 +545,11 @@
   
   <!--Add @width or @style="width:..." on current element-->
   <xsl:template name="xslLib:cals2html.add-column-width">
-    <xsl:param name="width" required="yes" as="xs:string"/>
+    <xsl:param name="colspec-list-for-total-width" required="yes" as="element(colspec)*"/>
+    <xsl:param name="colspec-list-for-current-width" required="yes" as="element(colspec)*"/>
+    <xsl:variable name="total-colwidth-sum" select="xslLib:cals2html.cals_sum-colwidths($colspec-list-for-total-width)" as="xs:double"/>
+    <xsl:variable name="current-colwidth" select="xslLib:cals2html.cals_sum-colwidths($colspec-list-for-current-width)" as="xs:double"/>
+    <xsl:variable name="width" select="concat(round(($current-colwidth div $total-colwidth-sum) * 100), '%')" as="xs:string"/>
     <xsl:choose>
       <xsl:when test="$width = 'NaN%'">
         <xsl:message>[ERROR][cals2html.xsl] Unable to compute width (NaN%) at <xsl:value-of select="els:get-xpath(.)"/> : <xsl:value-of select="els:displayNode(.)"/></xsl:message>
