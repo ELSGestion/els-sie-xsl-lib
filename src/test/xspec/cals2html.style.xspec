@@ -2,6 +2,7 @@
 <x:description 
   xmlns:x="http://www.jenitennison.com/xslt/xspec" 
   xmlns:xslLib="http://www.lefebvre-sarrut.eu/ns/els/xslLib"
+  xmlns="http://www.w3.org/1999/xhtml"
   stylesheet="../../main/xsl/cals2html.xsl"
   xslt-version="3.0">
   
@@ -22,7 +23,7 @@
     </x:scenario>
     <x:scenario label="table_test-colwith">
       <x:context href="table_test-colwith.xml"/>
-      <x:expect label="OK" select="/*" test="/*" href="table_test-colwith.style.htm"/>
+      <x:expect label="OK" select="/*/body" test="/*/body" href="table_test-colwith.style.htm"/>
     </x:scenario>
   </x:scenario>
   
