@@ -53,6 +53,33 @@
     </xsl:choose>
   </xsl:template>
   
+  <!--add empty colwidth if none exist-->
+  <xsl:template match="colspec[not(@colwidth)]" mode="xslLib:normalizeCalsTable">
+    <xsl:copy copy-namespaces="no">
+      <xsl:apply-templates select="@*" mode="#current"/>
+      <xsl:attribute name="colwidth"/>
+      <xsl:apply-templates select="node()" mode="#current"/>
+    </xsl:copy>
+  </xsl:template>
+  
+  <!--Normalize @colwidth value-->
+  <xsl:template match="colspec/@colwidth" mode="xslLib:normalizeCalsTable">
+    <!--lowercase and no spaces-->
+    <xsl:variable name="value.normalized" select="replace(lower-case(.), '\s', '')" as="xs:string"/>
+    <!--adding unit "*" if none-->
+    <xsl:attribute name="colwidth">
+      <xsl:choose>
+        <!--no unit-->
+        <xsl:when test="replace(., '(\d|\.)', '') = ''">
+          <xsl:value-of select="concat($value.normalized, '*')"/>
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:value-of select="$value.normalized"/>
+        </xsl:otherwise>
+      </xsl:choose>
+    </xsl:attribute>
+  </xsl:template>
+  
   <!--copy template-->
   <xsl:template match="* | @* | node()" mode="xslLib:normalizeCalsTable">
     <xsl:copy>

@@ -172,11 +172,6 @@
         <xsl:attribute name="style" select="string-join($style.tmp, ' ')"/>
       </xsl:if>
       <xsl:if test="$xslLib:cals2html.compute-column-width-within-colgroup">
-        <!--FIXME : here we get the new colwidth as percent ("500*, 500*" would be converted as "50%, 50%")
-        But we should treat differently by unit :
-        - unit : % => let it the same
-        - unit : * => make it %
-        - unit px  => let it the same (or make it %) ?-->
         <colgroup>
           <xsl:variable name="colspec" select="colspec" as="element(colspec)*"/>
           <xsl:for-each select="colspec">
@@ -440,8 +435,6 @@
       <xsl:if test="not(empty($style.tmp))">
         <xsl:attribute name="style" select="string-join($style.tmp, ' ')"/>
       </xsl:if>
-      <xsl:variable name="total-colwidth-sum" select="xslLib:cals2html.cals_sum-colwidths($current-tgroup/colspec)" as="xs:double"/>
-      <xsl:variable name="current-colwidth" select="xslLib:cals2html.cals_sum-colwidths($current-colspec-list)" as="xs:double"/>
       <xsl:if test="not($xslLib:cals2html.compute-column-width-within-colgroup)">
         <xsl:call-template name="xslLib:cals2html.add-column-width">
           <xsl:with-param name="colspec-list-for-total-width" select="$current-tgroup/colspec" as="element(colspec)*"/>
@@ -517,20 +510,84 @@
       - fixed values like : “pt” (points), “cm” (centimeters), “mm” (millimeters), “pi” (picas), and “in” (inches)
     => FIXME mricaud : j'ai l'impression qu'ici on ne gère que les proportionnel, faut-il prévoir les fixes ?
   -->
+  <!--FIXME : here we get the new colwidth as percent ("500*, 500*" would be converted as "50%, 50%")
+        But we should treat differently by unit :
+        - unit : % => let it the same
+        - unit : * => make it %
+        - unit px  => let it the same (or make it %) ?-->
   
   <!--Add @width or @style="width:..." on current element-->
   <xsl:template name="xslLib:cals2html.add-column-width">
     <xsl:param name="colspec-list-for-total-width" required="yes" as="element(colspec)*"/>
     <xsl:param name="colspec-list-for-current-width" required="yes" as="element(colspec)*"/>
-    <xsl:variable name="total-colwidth-sum" select="xslLib:cals2html.cals_sum-colwidths($colspec-list-for-total-width)" as="xs:double"/>
-    <xsl:variable name="current-colwidth" select="xslLib:cals2html.cals_sum-colwidths($colspec-list-for-current-width)" as="xs:double"/>
-    <xsl:variable name="width" select="concat(round(($current-colwidth div $total-colwidth-sum) * 100), '%')" as="xs:string"/>
+    <xsl:variable name="width" as="xs:string">
+      <xsl:choose>
+        <xsl:when test="xslLib:cals2html.colspecWidthUnitAreTheSame($colspec-list-for-current-width)">
+          <xsl:variable name="colspec-list-for-current-width.unit" select="$colspec-list-for-current-width[1]/@colwidth/xslLib:cals2html.getWidthUnit(.)" as="xs:string"/>
+          <xsl:choose>
+            <!--current unit is fixed-->
+            <xsl:when test="xslLib:cals2html.unitIsFixed($colspec-list-for-current-width.unit)">
+              <xsl:value-of select="concat(
+                sum($colspec-list-for-current-width/@colwidth/xslLib:cals2html.getWidthValue(.)), 
+                $colspec-list-for-current-width.unit)"/>
+            </xsl:when>
+            <!--current unit is proportional-->
+            <xsl:otherwise>
+              <xsl:choose>
+                <!--unit is "%" : keep it the same (just round it)-->
+                <xsl:when test="$colspec-list-for-current-width.unit = '%'">
+                  <xsl:value-of select="concat(
+                    round(sum($colspec-list-for-current-width/@colwidth/xslLib:cals2html.getWidthValue(.))), 
+                    $colspec-list-for-current-width.unit)"/>
+                </xsl:when>
+                <!--unit is "*" : make it "%" (from the total width)-->
+                <xsl:otherwise>
+                  <xsl:choose>
+                    <!--total width units are consistent-->
+                    <xsl:when test="xslLib:cals2html.colspecWidthUnitAreTheSame($colspec-list-for-total-width)">
+                      <xsl:variable name="colspec-list-for-total-width.unit" select="$colspec-list-for-total-width[1]/@colwidth/xslLib:cals2html.getWidthUnit(.)" as="xs:string"/>
+                      <xsl:choose>
+                        <!--total width units are consistent with current cell units--> 
+                        <xsl:when test="$colspec-list-for-current-width.unit = $colspec-list-for-total-width.unit">
+                          <xsl:variable name="total-colwidth-sum" select="sum($colspec-list-for-total-width/@colwidth/xslLib:cals2html.getWidthValue(.))" as="xs:double"/>
+                          <xsl:variable name="current-colwidth-sum" select="sum($colspec-list-for-current-width/@colwidth/xslLib:cals2html.getWidthValue(.))" as="xs:double"/>
+                          <xsl:sequence select="concat(
+                            round($current-colwidth-sum div $total-colwidth-sum * 100),
+                            '%')"/>
+                        </xsl:when>
+                        <!--total width units are NOT consistent with current cell units-->
+                        <xsl:otherwise>
+                          <!--TODO ?-->
+                          <xsl:text/>
+                        </xsl:otherwise>
+                      </xsl:choose>
+                    </xsl:when>
+                    <!--total width units are not consistent-->
+                    <xsl:otherwise>
+                      <!--TODO ?-->
+                      <xsl:text/>
+                    </xsl:otherwise>
+                  </xsl:choose>
+                </xsl:otherwise>
+              </xsl:choose>
+            </xsl:otherwise>
+          </xsl:choose>
+        </xsl:when>
+        <!--unconsitence units for the current cells : no width-->
+        <xsl:otherwise>
+          <xsl:text/>
+        </xsl:otherwise>
+      </xsl:choose>
+    </xsl:variable>
     <xsl:choose>
-      <xsl:when test="$width = 'NaN%'">
-        <xsl:message>[ERROR][cals2html.xsl] Unable to compute width (NaN%) at <xsl:value-of select="els:get-xpath(.)"/> : <xsl:value-of select="els:displayNode(.)"/></xsl:message>
+      <xsl:when test="string(xslLib:cals2html.getWidthValue($width)) = ''">
+        <xsl:message>[ERROR][cals2html.xsl] Unable to compute width (empty) at <xsl:value-of select="els:get-xpath(.)"/> : <xsl:value-of select="els:displayNode(.)"/></xsl:message>
       </xsl:when>
-      <xsl:when test="$width = '0%'">
-        <xsl:message>[WARNING][cals2html.xsl] width=0 will not be computed</xsl:message>
+      <xsl:when test="string(xslLib:cals2html.getWidthValue($width)) = 'NaN'">
+        <xsl:message>[ERROR][cals2html.xsl] Unable to compute width (<xsl:value-of select="$width"/>) at <xsl:value-of select="els:get-xpath(.)"/> : <xsl:value-of select="els:displayNode(.)"/></xsl:message>
+      </xsl:when>
+      <xsl:when test="string(xslLib:cals2html.getWidthValue($width)) = '0'">
+        <xsl:message>[WARNING][cals2html.xsl] width=<xsl:value-of select="$width"/> will not be computed</xsl:message>
       </xsl:when>
       <xsl:when test="$xslLib:cals2html.compute-column-width-as-width-attribute">
         <xsl:attribute name="style" select="concat('width:', $width)"/>
@@ -541,29 +598,45 @@
     </xsl:choose>
   </xsl:template>
   
-  <!--1 argument signature to initiate reccursion from 0 by additionning colwidth-->
-  <xsl:function name="xslLib:cals2html.cals_sum-colwidths" as="xs:double">
-    <xsl:param name="colspec-list" as="element(colspec)*"/>
-    <xsl:sequence select="xslLib:cals2html.cals_sum-colwidths($colspec-list, 0)"/>
+  <!--From a width with its unit (like 10px), get the unit (px)-->
+  <xsl:function name="xslLib:cals2html.getWidthUnit" as="xs:string">
+    <xsl:param name="width" as="xs:string"/>
+    <xsl:sequence select="replace($width, '\d|\.', '')"/>
   </xsl:function>
   
-  <!--Given a list of colspec, this function make the sum of each colwidth-->
-  <xsl:function name="xslLib:cals2html.cals_sum-colwidths" as="xs:double">
-    <xsl:param name="colspec-list" as="element(colspec)*"/>
-    <xsl:param name="current-sum" as="xs:double"/>
+  <!--Check if a unit is a proportional one-->
+  <xsl:function name="xslLib:cals2html.unitIsProportional" as="xs:boolean">
+    <xsl:param name="unit" as="xs:string"/>
+    <xsl:sequence select="$unit = ('%', '*')"/>
+  </xsl:function>
+  
+  <!--check if a unit is fixed (not a proportional one)-->
+  <xsl:function name="xslLib:cals2html.unitIsFixed" as="xs:boolean">
+    <xsl:param name="unit" as="xs:string"/>
+    <xsl:sequence select="not(xslLib:cals2html.unitIsProportional($unit))"/>
+  </xsl:function>
+  
+  <!--From a width with its unit (like 10px), get the value (10)-->
+  <xsl:function name="xslLib:cals2html.getWidthValue" as="xs:double">
+    <xsl:param name="width" as="xs:string"/>
+    <xsl:variable name="value.string" select="substring-before($width, xslLib:cals2html.getWidthUnit($width))" as="xs:string"/>
     <xsl:choose>
-      <xsl:when test="count($colspec-list) != 0">
-        <xsl:variable name="colspec" select="$colspec-list[1]" as="element(colspec)"/>
-        <xsl:variable name="colwidth" select="$colspec/@colwidth" as="xs:string?"/>
-        <!--<xsl:message>colwidth= <xsl:value-of select="$colwidth"/></xsl:message>-->
-        <xsl:variable name="colwidth.normalized" select="replace($colwidth, '(\*|%)', '')" as="xs:string"/>
-        <xsl:variable name="colwidth.as-number" select="if($colwidth.normalized castable as xs:double) then(number($colwidth.normalized)) else(0)" as="xs:double"/>
-        <xsl:sequence select="xslLib:cals2html.cals_sum-colwidths($colspec-list[position() gt 1], $current-sum + $colwidth.as-number)"/>
+      <xsl:when test="$value.string castable as xs:double">
+        <xsl:sequence select="number($value.string)"/>
       </xsl:when>
       <xsl:otherwise>
-        <xsl:sequence select="$current-sum" />
+        <xsl:sequence select="xs:double('NaN')"/>
       </xsl:otherwise>
     </xsl:choose>
+  </xsl:function>
+  
+  <!--Check if every units of a colspec list are consistent (the same)-->
+  <xsl:function name="xslLib:cals2html.colspecWidthUnitAreTheSame" as="xs:boolean">
+    <xsl:param name="colspec-list" as="element(colspec)*"/>
+    <xsl:variable name="colspec-1.unit" select="$colspec-list[1]/@colwidth/xslLib:cals2html.getWidthUnit(.)" as="xs:string"/>
+    <xsl:sequence 
+      select="every $unit in $colspec-list/@colwidth/xslLib:cals2html.getWidthUnit(.) 
+      satisfies $unit = $colspec-1.unit"/>
   </xsl:function>
   
   <!--Get the @colnum of a colspec. If the attribute doesn't exist, the function will return the position of the colspec amongs the other colspec-->
