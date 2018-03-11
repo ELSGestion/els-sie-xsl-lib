@@ -518,6 +518,29 @@
     => FIXME mricaud : j'ai l'impression qu'ici on ne gère que les proportionnel, faut-il prévoir les fixes ?
   -->
   
+  <!--Add @width or @style="width:..." on current element-->
+  <xsl:template name="xslLib:cals2html.add-column-width">
+    <xsl:param name="colspec-list-for-total-width" required="yes" as="element(colspec)*"/>
+    <xsl:param name="colspec-list-for-current-width" required="yes" as="element(colspec)*"/>
+    <xsl:variable name="total-colwidth-sum" select="xslLib:cals2html.cals_sum-colwidths($colspec-list-for-total-width)" as="xs:double"/>
+    <xsl:variable name="current-colwidth" select="xslLib:cals2html.cals_sum-colwidths($colspec-list-for-current-width)" as="xs:double"/>
+    <xsl:variable name="width" select="concat(round(($current-colwidth div $total-colwidth-sum) * 100), '%')" as="xs:string"/>
+    <xsl:choose>
+      <xsl:when test="$width = 'NaN%'">
+        <xsl:message>[ERROR][cals2html.xsl] Unable to compute width (NaN%) at <xsl:value-of select="els:get-xpath(.)"/> : <xsl:value-of select="els:displayNode(.)"/></xsl:message>
+      </xsl:when>
+      <xsl:when test="$width = '0%'">
+        <xsl:message>[WARNING][cals2html.xsl] width=0 will not be computed</xsl:message>
+      </xsl:when>
+      <xsl:when test="$xslLib:cals2html.compute-column-width-as-width-attribute">
+        <xsl:attribute name="style" select="concat('width:', $width)"/>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:attribute name="width" select="$width"/>
+      </xsl:otherwise>
+    </xsl:choose>
+  </xsl:template>
+  
   <!--1 argument signature to initiate reccursion from 0 by additionning colwidth-->
   <xsl:function name="xslLib:cals2html.cals_sum-colwidths" as="xs:double">
     <xsl:param name="colspec-list" as="element(colspec)*"/>
@@ -542,29 +565,6 @@
       </xsl:otherwise>
     </xsl:choose>
   </xsl:function>
-  
-  <!--Add @width or @style="width:..." on current element-->
-  <xsl:template name="xslLib:cals2html.add-column-width">
-    <xsl:param name="colspec-list-for-total-width" required="yes" as="element(colspec)*"/>
-    <xsl:param name="colspec-list-for-current-width" required="yes" as="element(colspec)*"/>
-    <xsl:variable name="total-colwidth-sum" select="xslLib:cals2html.cals_sum-colwidths($colspec-list-for-total-width)" as="xs:double"/>
-    <xsl:variable name="current-colwidth" select="xslLib:cals2html.cals_sum-colwidths($colspec-list-for-current-width)" as="xs:double"/>
-    <xsl:variable name="width" select="concat(round(($current-colwidth div $total-colwidth-sum) * 100), '%')" as="xs:string"/>
-    <xsl:choose>
-      <xsl:when test="$width = 'NaN%'">
-        <xsl:message>[ERROR][cals2html.xsl] Unable to compute width (NaN%) at <xsl:value-of select="els:get-xpath(.)"/> : <xsl:value-of select="els:displayNode(.)"/></xsl:message>
-      </xsl:when>
-      <xsl:when test="$width = '0%'">
-        <xsl:message>[WARNING][cals2html.xsl] width=0 will not be computed</xsl:message>
-      </xsl:when>
-      <xsl:when test="$xslLib:cals2html.compute-column-width-as-width-attribute">
-        <xsl:attribute name="style" select="concat('width:', $width)"/>
-      </xsl:when>
-      <xsl:otherwise>
-        <xsl:attribute name="width" select="$width"/>
-      </xsl:otherwise>
-    </xsl:choose>
-  </xsl:template>
   
   <!--Get the @colnum of a colspec. If the attribute doesn't exist, the function will return the position of the colspec amongs the other colspec-->
   <xsl:function name="xslLib:cals2html.get-colnum" as="xs:integer">
