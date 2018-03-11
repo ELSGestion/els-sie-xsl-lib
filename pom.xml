@@ -67,7 +67,7 @@
       <plugin>
         <groupId>io.xspec.maven</groupId>
         <artifactId>xspec-maven-plugin</artifactId>
-        <version>1.5.1-RC6</version>
+        <version>1.5.1</version>
         <dependencies>
           <dependency>
             <groupId>extern.net.sf.saxon</groupId>
