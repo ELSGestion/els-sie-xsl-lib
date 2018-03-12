@@ -522,6 +522,9 @@
     <xsl:param name="colspec-list-for-current-width" required="yes" as="element(colspec)*"/>
     <xsl:variable name="width" as="xs:string">
       <xsl:choose>
+        <xsl:when test="count($colspec-list-for-current-width) = 0">
+          <xsl:text>ignore</xsl:text>
+        </xsl:when>
         <xsl:when test="xslLib:cals2html.colspecWidthUnitAreTheSame($colspec-list-for-current-width)">
           <xsl:variable name="colspec-list-for-current-width.unit" select="$colspec-list-for-current-width[1]/@colwidth/xslLib:cals2html.getWidthUnit(.)" as="xs:string"/>
           <xsl:choose>
@@ -555,17 +558,16 @@
                             round($current-colwidth-sum div $total-colwidth-sum * 100),
                             '%')"/>
                         </xsl:when>
-                        <!--total width units are NOT consistent with current cell units-->
                         <xsl:otherwise>
-                          <!--TODO ?-->
-                          <xsl:text/>
+                          <xsl:message terminate="no">[ERROR][cals2html.xsl] total width units are NOT consistent with current cell units at <xsl:sequence select="els:get-xpath($colspec-list-for-current-width[1])"/></xsl:message>
+                          <xsl:text>error</xsl:text>
                         </xsl:otherwise>
                       </xsl:choose>
                     </xsl:when>
                     <!--total width units are not consistent-->
                     <xsl:otherwise>
-                      <!--TODO ?-->
-                      <xsl:text/>
+                      <xsl:message terminate="no">[ERROR][cals2html.xsl] total width units are not consistent at <xsl:sequence select="els:get-xpath($colspec-list-for-current-width[1])"/></xsl:message>
+                      <xsl:text>error</xsl:text>
                     </xsl:otherwise>
                   </xsl:choose>
                 </xsl:otherwise>
@@ -573,13 +575,17 @@
             </xsl:otherwise>
           </xsl:choose>
         </xsl:when>
-        <!--unconsitence units for the current cells : no width-->
+        <!--unconsitent units for the current cells-->
         <xsl:otherwise>
-          <xsl:text/>
+          <xsl:message terminate="no">[ERROR][cals2html.xsl] unconsitent units for the current cells at <xsl:sequence select="els:get-xpath($colspec-list-for-current-width[1])"/></xsl:message>
+          <xsl:text>error</xsl:text>
         </xsl:otherwise>
       </xsl:choose>
     </xsl:variable>
     <xsl:choose>
+      <xsl:when test="$width = ('ignore', 'error')">
+        <!--no width-->
+      </xsl:when>
       <xsl:when test="string(xslLib:cals2html.getWidthValue($width)) = ''">
         <xsl:message>[ERROR][cals2html.xsl] Unable to compute width (empty) at <xsl:value-of select="els:get-xpath(.)"/> : <xsl:value-of select="els:displayNode(.)"/></xsl:message>
       </xsl:when>
@@ -633,10 +639,17 @@
   <!--Check if every units of a colspec list are consistent (the same)-->
   <xsl:function name="xslLib:cals2html.colspecWidthUnitAreTheSame" as="xs:boolean">
     <xsl:param name="colspec-list" as="element(colspec)*"/>
-    <xsl:variable name="colspec-1.unit" select="$colspec-list[1]/@colwidth/xslLib:cals2html.getWidthUnit(.)" as="xs:string"/>
-    <xsl:sequence 
-      select="every $unit in $colspec-list/@colwidth/xslLib:cals2html.getWidthUnit(.) 
-      satisfies $unit = $colspec-1.unit"/>
+    <xsl:variable name="colspec-1.unit" select="$colspec-list[@colwidth][1]/@colwidth/xslLib:cals2html.getWidthUnit(.)" as="xs:string?"/>
+    <xsl:choose>
+      <xsl:when test="count($colspec-list) = 0 or count($colspec-1.unit) = 0">
+        <xsl:sequence select="false()"/>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:sequence 
+          select="every $unit in $colspec-list/@colwidth/xslLib:cals2html.getWidthUnit(.) 
+          satisfies $unit = $colspec-1.unit"/>
+      </xsl:otherwise>
+    </xsl:choose>
   </xsl:function>
   
   <!--Get the @colnum of a colspec. If the attribute doesn't exist, the function will return the position of the colspec amongs the other colspec-->

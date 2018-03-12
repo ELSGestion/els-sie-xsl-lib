@@ -280,5 +280,40 @@
         </tbody>
       </table>
     </div>
+    <h2>Table 100% colspec with mixed units but some consistent for cospaned cells</h2>
+    <div class="cals_table">
+      <table data-cals-tgroupstyle="type3" class="cals_tgroup" style="width:100%; border:1px solid">
+        <colgroup>
+          <col />
+          <col style="width:2in" />
+          <col style="width:3in" />
+          <col />
+          <col />
+        </colgroup>
+        <thead>
+          <tr>
+            <th style="border-right:1px solid; border-bottom:1px solid; text-align:left">h1</th>
+            <th colspan="2" style="border-right:1px solid; border-bottom:1px solid; text-align:left">h2</th>
+            <th style="border-right:1px solid; border-bottom:1px solid; text-align:left">h4</th>
+            <th style="border-right:1px solid; border-bottom:1px solid; text-align:left">h5</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="border-right:1px solid; border-bottom:1px solid">r1c1</td>
+            <td rowspan="3" style="border-right:1px solid; border-bottom:1px solid">r1c2</td>
+            <td style="border-right:1px solid; border-bottom:1px solid">r1c3</td>
+            <td colspan="2" rowspan="3" style="border-right:1px solid; border-bottom:1px solid">r1c4</td>
+          </tr>
+          <tr>
+            <td rowspan="2" style="border-right:1px solid; border-bottom:1px solid">r2c1</td>
+            <td style="border-right:1px solid; border-bottom:1px solid">r2c2</td>
+          </tr>
+          <tr>
+            <td style="border-right:1px solid">r3c1</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </body>
 </html>

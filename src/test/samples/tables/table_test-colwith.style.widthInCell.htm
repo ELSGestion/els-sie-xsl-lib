@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-model href="ext-models:/ext-models/oasis/cals/cals.nvdl" type="application/xml" schematypens="http://purl.oclc.org/dsdl/nvdl/ns/structure/1.0"?>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <style type="text/css">
+      table{
+        border-collapse: collapse;
+      }</style>
+  </head>
+  <body>
+    <h2>Table colspec with "*"</h2>
+    <div class="cals_table">
+      <table data-cals-tgroupstyle="type3" class="cals_tgroup" style="border:1px solid">
+        <thead>
+          <tr>
+            <th style="width:10%; border-right:1px solid; border-bottom:1px solid; text-align:left">h1</th>
+            <th style="width:20%; border-right:1px solid; border-bottom:1px solid; text-align:left">h2</th>
+            <th style="width:30%; border-right:1px solid; border-bottom:1px solid; text-align:left">h3</th>
+            <th style="width:40%; border-right:1px solid; border-bottom:1px solid; text-align:left">h4</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="width:10%; border-right:1px solid; border-bottom:1px solid">r1c1</td>
+            <td rowspan="3" style="width:20%; border-right:1px solid; border-bottom:1px solid">r1c2</td>
+            <td style="width:30%; border-right:1px solid; border-bottom:1px solid">r1c3</td>
+            <td rowspan="3" style="width:40%; border-right:1px solid; border-bottom:1px solid">r1c4</td>
+          </tr>
+          <tr>
+            <td rowspan="2" style="width:10%; border-right:1px solid; border-bottom:1px solid">r2c1</td>
+            <td style="width:30%; border-right:1px solid; border-bottom:1px solid">r2c2</td>
+          </tr>
+          <tr>
+            <td style="width:30%; border-right:1px solid">r3c1</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Table 100% colspec with "*"</h2>
+    <div class="cals_table">
+      <table data-cals-tgroupstyle="type3" class="cals_tgroup" style="width:100%; border:1px solid">
+        <thead>
+          <tr>
+            <th style="width:10%; border-right:1px solid; border-bottom:1px solid; text-align:left">h1</th>
+            <th style="width:20%; border-right:1px solid; border-bottom:1px solid; text-align:left">h2</th>
+            <th style="width:30%; border-right:1px solid; border-bottom:1px solid; text-align:left">h3</th>
+            <th style="width:40%; border-right:1px solid; border-bottom:1px solid; text-align:left">h4</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="width:10%; border-right:1px solid; border-bottom:1px solid">r1c1</td>
+            <td rowspan="3" style="width:20%; border-right:1px solid; border-bottom:1px solid">r1c2</td>
+            <td style="width:30%; border-right:1px solid; border-bottom:1px solid">r1c3</td>
+            <td rowspan="3" style="width:40%; border-right:1px solid; border-bottom:1px solid">r1c4</td>
+          </tr>
+          <tr>
+            <td rowspan="2" style="width:10%; border-right:1px solid; border-bottom:1px solid">r2c1</td>
+            <td style="width:30%; border-right:1px solid; border-bottom:1px solid">r2c2</td>
+          </tr>
+          <tr>
+            <td style="width:30%; border-right:1px solid">r3c1</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Table colspec with "in"</h2>
+    <div class="cals_table">
+      <table data-cals-tgroupstyle="type3" class="cals_tgroup" style="border:1px solid">
+        <thead>
+          <tr>
+            <th style="width:1in; border-right:1px solid; border-bottom:1px solid; text-align:left">h1</th>
+            <th style="width:2in; border-right:1px solid; border-bottom:1px solid; text-align:left">h2</th>
+            <th style="width:3in; border-right:1px solid; border-bottom:1px solid; text-align:left">h3</th>
+            <th style="width:4in; border-right:1px solid; border-bottom:1px solid; text-align:left">h4</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="width:1in; border-right:1px solid; border-bottom:1px solid">r1c1</td>
+            <td rowspan="3" style="width:2in; border-right:1px solid; border-bottom:1px solid">r1c2</td>
+            <td style="width:3in; border-right:1px solid; border-bottom:1px solid">r1c3</td>
+            <td rowspan="3" style="width:4in; border-right:1px solid; border-bottom:1px solid">r1c4</td>
+          </tr>
+          <tr>
+            <td rowspan="2" style="width:1in; border-right:1px solid; border-bottom:1px solid">r2c1</td>
+            <td style="width:3in; border-right:1px solid; border-bottom:1px solid">r2c2</td>
+          </tr>
+          <tr>
+            <td style="width:3in; border-right:1px solid">r3c1</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Table 100% colspec with "in"</h2>
+    <div class="cals_table">
+      <table data-cals-tgroupstyle="type3" class="cals_tgroup" style="width:100%; border:1px solid">
+        <thead>
+          <tr>
+            <th style="width:1in; border-right:1px solid; border-bottom:1px solid; text-align:left">h1</th>
+            <th style="width:2in; border-right:1px solid; border-bottom:1px solid; text-align:left">h2</th>
+            <th style="width:3in; border-right:1px solid; border-bottom:1px solid; text-align:left">h3</th>
+            <th style="width:4in; border-right:1px solid; border-bottom:1px solid; text-align:left">h4</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="width:1in; border-right:1px solid; border-bottom:1px solid">r1c1</td>
+            <td rowspan="3" style="width:2in; border-right:1px solid; border-bottom:1px solid">r1c2</td>
+            <td style="width:3in; border-right:1px solid; border-bottom:1px solid">r1c3</td>
+            <td rowspan="3" style="width:4in; border-right:1px solid; border-bottom:1px solid">r1c4</td>
+          </tr>
+          <tr>
+            <td rowspan="2" style="width:1in; border-right:1px solid; border-bottom:1px solid">r2c1</td>
+            <td style="width:3in; border-right:1px solid; border-bottom:1px solid">r2c2</td>
+          </tr>
+          <tr>
+            <td style="width:3in; border-right:1px solid">r3c1</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Table colspec with "px"</h2>
+    <div class="cals_table">
+      <table data-cals-tgroupstyle="type3" class="cals_tgroup" style="border:1px solid">
+        <thead>
+          <tr>
+            <th style="width:50px; border-right:1px solid; border-bottom:1px solid; text-align:left">h1</th>
+            <th style="width:100px; border-right:1px solid; border-bottom:1px solid; text-align:left">h2</th>
+            <th style="width:150px; border-right:1px solid; border-bottom:1px solid; text-align:left">h3</th>
+            <th style="width:200px; border-right:1px solid; border-bottom:1px solid; text-align:left">h4</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="width:50px; border-right:1px solid; border-bottom:1px solid">r1c1</td>
+            <td rowspan="3" style="width:100px; border-right:1px solid; border-bottom:1px solid">r1c2</td>
+            <td style="width:150px; border-right:1px solid; border-bottom:1px solid">r1c3</td>
+            <td rowspan="3" style="width:200px; border-right:1px solid; border-bottom:1px solid">r1c4</td>
+          </tr>
+          <tr>
+            <td rowspan="2" style="width:50px; border-right:1px solid; border-bottom:1px solid">r2c1</td>
+            <td style="width:150px; border-right:1px solid; border-bottom:1px solid">r2c2</td>
+          </tr>
+          <tr>
+            <td style="width:150px; border-right:1px solid">r3c1</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Table 100% colspec with "px"</h2>
+    <div class="cals_table">
+      <table data-cals-tgroupstyle="type3" class="cals_tgroup" style="width:100%; border:1px solid">
+        <thead>
+          <tr>
+            <th style="width:50px; border-right:1px solid; border-bottom:1px solid; text-align:left">h1</th>
+            <th style="width:100px; border-right:1px solid; border-bottom:1px solid; text-align:left">h2</th>
+            <th style="width:150px; border-right:1px solid; border-bottom:1px solid; text-align:left">h3</th>
+            <th style="width:200px; border-right:1px solid; border-bottom:1px solid; text-align:left">h4</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="width:50px; border-right:1px solid; border-bottom:1px solid">r1c1</td>
+            <td rowspan="3" style="width:100px; border-right:1px solid; border-bottom:1px solid">r1c2</td>
+            <td style="width:150px; border-right:1px solid; border-bottom:1px solid">r1c3</td>
+            <td rowspan="3" style="width:200px; border-right:1px solid; border-bottom:1px solid">r1c4</td>
+          </tr>
+          <tr>
+            <td rowspan="2" style="width:50px; border-right:1px solid; border-bottom:1px solid">r2c1</td>
+            <td style="width:150px; border-right:1px solid; border-bottom:1px solid">r2c2</td>
+          </tr>
+          <tr>
+            <td style="width:150px; border-right:1px solid">r3c1</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Table colspec with mixed units ("px", "in", "*", none)</h2>
+    <div class="cals_table">
+      <table data-cals-tgroupstyle="type3" class="cals_tgroup" style="border:1px solid">
+        <thead>
+          <tr>
+            <th style="width:50px; border-right:1px solid; border-bottom:1px solid; text-align:left">h1</th>
+            <th style="width:2in; border-right:1px solid; border-bottom:1px solid; text-align:left">h2</th>
+            <th style="border-right:1px solid; border-bottom:1px solid; text-align:left">h3</th>
+            <th style="border-right:1px solid; border-bottom:1px solid; text-align:left">h4</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="width:50px; border-right:1px solid; border-bottom:1px solid">r1c1</td>
+            <td rowspan="3" style="width:2in; border-right:1px solid; border-bottom:1px solid">r1c2</td>
+            <td style="border-right:1px solid; border-bottom:1px solid">r1c3</td>
+            <td rowspan="3" style="border-right:1px solid; border-bottom:1px solid">r1c4</td>
+          </tr>
+          <tr>
+            <td rowspan="2" style="width:50px; border-right:1px solid; border-bottom:1px solid">r2c1</td>
+            <td style="border-right:1px solid; border-bottom:1px solid">r2c2</td>
+          </tr>
+          <tr>
+            <td style="border-right:1px solid">r3c1</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Table 100% colspec with mixed units ("px", "in", "*", none)</h2>
+    <div class="cals_table">
+      <table data-cals-tgroupstyle="type3" class="cals_tgroup" style="width:100%; border:1px solid">
+        <thead>
+          <tr>
+            <th style="width:50px; border-right:1px solid; border-bottom:1px solid; text-align:left">h1</th>
+            <th style="width:2in; border-right:1px solid; border-bottom:1px solid; text-align:left">h2</th>
+            <th style="border-right:1px solid; border-bottom:1px solid; text-align:left">h3</th>
+            <th style="border-right:1px solid; border-bottom:1px solid; text-align:left">h4</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="width:50px; border-right:1px solid; border-bottom:1px solid">r1c1</td>
+            <td rowspan="3" style="width:2in; border-right:1px solid; border-bottom:1px solid">r1c2</td>
+            <td style="border-right:1px solid; border-bottom:1px solid">r1c3</td>
+            <td rowspan="3" style="border-right:1px solid; border-bottom:1px solid">r1c4</td>
+          </tr>
+          <tr>
+            <td rowspan="2" style="width:50px; border-right:1px solid; border-bottom:1px solid">r2c1</td>
+            <td style="border-right:1px solid; border-bottom:1px solid">r2c2</td>
+          </tr>
+          <tr>
+            <td style="border-right:1px solid">r3c1</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Table 100% colspec with mixed units but some consistent for cospaned cells</h2>
+    <div class="cals_table">
+      <table data-cals-tgroupstyle="type3" class="cals_tgroup" style="width:100%; border:1px solid">
+        <thead>
+          <tr>
+            <th style="border-right:1px solid; border-bottom:1px solid; text-align:left">h1</th>
+            <th colspan="2" style="width:5in; border-right:1px solid; border-bottom:1px solid; text-align:left">h2</th>
+            <th style="border-right:1px solid; border-bottom:1px solid; text-align:left">h4</th>
+            <th style="border-right:1px solid; border-bottom:1px solid; text-align:left">h5</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="border-right:1px solid; border-bottom:1px solid">r1c1</td>
+            <td rowspan="3" style="width:2in; border-right:1px solid; border-bottom:1px solid">r1c2</td>
+            <td style="width:3in; border-right:1px solid; border-bottom:1px solid">r1c3</td>
+            <td colspan="2" rowspan="3" style="border-right:1px solid; border-bottom:1px solid">r1c4</td>
+          </tr>
+          <tr>
+            <td rowspan="2" style="border-right:1px solid; border-bottom:1px solid">r2c1</td>
+            <td style="width:3in; border-right:1px solid; border-bottom:1px solid">r2c2</td>
+          </tr>
+          <tr>
+            <td style="width:3in; border-right:1px solid">r3c1</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </body>
+</html>

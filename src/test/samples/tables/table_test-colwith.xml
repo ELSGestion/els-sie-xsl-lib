@@ -261,5 +261,38 @@
         </tbody>
       </tgroup>
     </table>
+    <h2>Table 100% colspec with mixed units but some consistent for cospaned cells</h2>
+    <table xmlns="http://docs.oasis-open.org/ns/oasis-exchange/table" frame="all" colsep="1" rowsep="1" pgwide="1">
+      <tgroup cols="5" tgroupstyle="type3" colsep="1" rowsep="1">
+        <colspec colname="1" />
+        <colspec colname="2" colwidth="2in"/>
+        <colspec colname="3" colwidth="3in"/>
+        <colspec colname="4" colwidth="50*"/>
+        <colspec colname="5" colwidth=""/>
+        <thead>
+          <row rowsep="1">
+            <entry colname="1">h1</entry>
+            <entry namest="2" nameend="3">h2</entry>
+            <entry colname="4">h4</entry>
+            <entry colname="5">h5</entry>
+          </row>
+        </thead>
+        <tbody>
+          <row rowsep="1">
+            <entry colname="1">r1c1</entry>
+            <entry colname="2" morerows="2">r1c2</entry>
+            <entry colname="3">r1c3</entry>
+            <entry namest="4" nameend="5" morerows="2">r1c4</entry>
+          </row>
+          <row rowsep="1">
+            <entry colname="1" morerows="1">r2c1</entry>
+            <entry colname="3">r2c2</entry>
+          </row>
+          <row rowsep="0">
+            <entry colname="3">r3c1</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
   </body>
 </html>
