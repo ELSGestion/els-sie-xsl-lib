@@ -35,7 +35,7 @@
       <xd:p>Si ce n'est pas le cas, ce sont les valeurs des paramêtres alert et markup dans la f° de log qui définissent seuls la génération des logs. </xd:p>
     </xd:desc>
   </xd:doc>
-  <xsl:param name="els:log.level.alert" as="xs:string?" required="no"/>
+  <xsl:param name="els:log.level.alert" as="xs:string?" required="no"/><!-- value : info, debug, error, warning, fatal -->
   <xsl:param name="els:log.level.markup" as="xs:string?" required="no"/>
   
   <xd:doc>
@@ -113,7 +113,7 @@
           <xsl:value-of select="$code"/>
           <xsl:text>] </xsl:text>
           <!--suppression des accents car mal géré au niveau des invites de commande-->
-          <xsl:sequence select="els:normalize-no-diacritic($description)"/>
+          <xsl:sequence select="els:normalize-no-diacritic(string-join($description))"/>
           <xsl:if test="$logXpath">
             <xsl:text>&#10; xpath=</xsl:text>
             <xsl:value-of select="$xpath"/>
