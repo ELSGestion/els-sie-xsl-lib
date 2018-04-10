@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<x:description 
+  xmlns:x="http://www.jenitennison.com/xslt/xspec"
+  xmlns:els="http://www.lefebvre-sarrut.eu/ns/els"
+  stylesheet="../../../main/xsl/els-log-extract.xsl"  
+  xslt-version="3.0"> 
+
+  <x:scenario label="Remove els:log" xml:base="../../samples/logs/">
+    <x:scenario label="sample.xml.with.els.log.xml">
+      <x:context href="sample.xml.with.els.log-remove-logs.xml" mode="els:removeLogs"/>
+      <x:expect label="OK" select="/*" test="/*" href="sample.xml.with.els.log-remove-logs.xml"/>
+    </x:scenario>
+  </x:scenario>
+
+</x:description>

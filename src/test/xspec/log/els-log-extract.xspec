@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<x:description xmlns:x="http://www.jenitennison.com/xslt/xspec"
+  stylesheet="../../../main/xsl/els-log-extract.xsl"
+  xslt-version="3.0"> 
+
+  <x:scenario label="Extract log (no params)" xml:base="../../samples/logs/">
+    <x:scenario label="sample.xml.with.els.log.xml">
+      <x:context href="sample.xml.with.els.log.xml"/>
+      <x:expect label="OK" select="/*" test="/*" href="sample.xml.with.els.log.html"/>
+    </x:scenario>
+  </x:scenario>
+
+</x:description>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+  <son>
+    <children>
+      <content>Alii nullo quaerente vultus severitate</content>
+      <els:log xmlns:els="http://www.lefebvre-sarrut.eu/ns/els"
+        level="error" code="JUST TO CHECK"
+        xsltName="els-log-extract.xsl"
+        >Basic Error message</els:log>
+      <bear>
+        <content>dsimulata patrimonia sua in inmensum extollunt,</content>
+        <els:log xmlns:els="http://www.lefebvre-sarrut.eu/ns/els"
+          level="info" code="JUST TO CHECK"
+          xsltName="els-log-extract.xsl"
+          >Information message</els:log>
+      </bear>
+    </children>
+    <els:log xmlns:els="http://www.lefebvre-sarrut.eu/ns/els"
+      level="fatal" code="JUST TO CHECK"
+      xsltName="els-log-extract.xsl"
+      >Fatal Error message</els:log>
+    <content>cultorum ut puta feracium multiplicantes annuos fructus</content>
+  </son>
+  <father>
+    <content>quae a primo ad ultimum solem se abunde iactitant possidere</content>
+    <els:log xmlns:els="http://www.lefebvre-sarrut.eu/ns/els"
+      level="warning" code="JUST TO CHECK"
+      xsltName="els-log-extract.xsl"
+      >Warning message</els:log>
+  </father>
+  <mother>
+    <content>gnorantes profecto maiores suos, per quos ita magnitudo</content>
+    <els:log xmlns:els="http://www.lefebvre-sarrut.eu/ns/els"
+      level="fixme" code="JUST TO CHECK"
+      xsltName="els-log-extract.xsl"
+      >Fixme message</els:log>
+  </mother>
+</root>

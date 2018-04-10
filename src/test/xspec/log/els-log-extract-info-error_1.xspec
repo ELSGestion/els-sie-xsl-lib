@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<x:description 
+  xmlns:x="http://www.jenitennison.com/xslt/xspec"
+  xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+  xmlns:els="http://www.lefebvre-sarrut.eu/ns/els"
+  stylesheet="../../../main/xsl/els-log-extract.xsl"
+  xslt-version="3.0">
+
+  <!-- Overload the main param called $els:logLevels -->
+  <x:param name="els:logLevels" select="('info', 'error')"/>
+
+  <x:scenario label="Extract log - overload the param els:logLevels" xml:base="../../samples/logs/">
+    <x:scenario label="sample.xml.with.els.log.xml">
+      <x:context href="sample.xml.with.els.log.xml"/>
+      <x:expect label="OK" select="/*" test="/*" href="sample.xml.with.els.log-info-error.html"/>
+    </x:scenario>
+  </x:scenario>
+
+</x:description>
