@@ -18,30 +18,7 @@
 
   <xd:doc>
     <xd:desc>
-      <xd:p>Function to parse RegEx and do string replacement</xd:p>
-      <xd:p>Note: DO NOT USE directly this function. Please use xfe:replace-multiple(string, &lt;replace-list&gt;)</xd:p>
-      <xd:p>Note : This function was inspired by functx:replace-multi($arg, $changeFrom, $changeTo) function (See: http://www.xqueryfunctions.com/xq/functx_replace-multi.html )</xd:p>
-      <xd:p>When this function is inserted into a xsl:package, it must have @visibility="private"</xd:p>
-    </xd:desc>
-    <xd:param name="string">string to parse</xd:param>
-    <xd:param name="changeFrom">sequence of regExs</xd:param>
-    <xd:param name="changeTo">sequence of replacement strings</xd:param>
-    <xd:param name="flags">sequence of flags</xd:param>
-  </xd:doc>
-  <xsl:function name="els:replace-multiple" as="xs:string?">
-    <xsl:param name="string" as="xs:string?"/>
-    <xsl:param name="changeFrom" as="xs:string*"/>
-    <xsl:param name="changeTo" as="xs:string*"/>
-    <xsl:param name="flags" as="xs:string*"/> 
-    <xsl:sequence select=" if (count($changeFrom) > 0) 
-      then els:replace-multiple( replace($string, $changeFrom[1], $changeTo[1], $flags[1]), $changeFrom[position() > 1], $changeTo[position() > 1], $flags[position() > 1]) 
-      else $string "/>
-  </xsl:function>
-  
-  <xd:doc>
-    <xd:desc>
-      <xd:p>Perform successiv regex replacements on a string</xd:p>
-      <xd:p>When this function is inserted into a &lt;²xsl:package&gt;, it must have @visibility="public"</xd:p>
+      <xd:p>Perform successiv regex replacements on a string with 2 parameters</xd:p>
     </xd:desc>
     <xd:param name="string">The string to work on</xd:param>
     <xd:param name="replace-list">An element els:replace-list with any els:replace as children. 
@@ -64,24 +41,56 @@
   <xsl:function name="els:replace-multiple" as="xs:string">
     <xsl:param name="string" as="xs:string"/>
     <xsl:param name="replace-list" as="element(els:replace-list)"/>
+    <xsl:sequence select="els:replace-multiple($string, $replace-list, 1)"></xsl:sequence>
+  </xsl:function>
+  
+  <xd:doc>
+    <xd:desc>
+      <xd:p>Perform successiv regex replacements on a string with 3 parameters</xd:p>
+    </xd:desc>
+    <xd:param name="string">The string to work on</xd:param>
+    <xd:param name="replace-list">An element els:replace-list with any els:replace as children. 
+      Example:
+      <xd:pre>
+      &lt;replace-list flags="[optionnal attribut for regex flags]" xmlns="http://www.lefebvre-sarrut.eu/ns/els">
+        &lt;replace flags="[optionnal attribut for regex flags]">
+          &lt;pattern>[any regex]&lt;/pattern>
+          &lt;replacement>[replacement using $1, $2, etc. as regex-group replacement, like replace() third arg]&lt;/replacement>
+        &lt;/replace>
+        &lt;replace flags="x">
+          &lt;pattern>(x) (x) (x)&lt;/pattern>
+          &lt;replacement>Y$2Y&lt;/replacement>
+        &lt;/replace>
+      &lt;/replace-list>
+      </xd:pre>
+    </xd:param>
+    <xd:param name="nextPos">Position of the first executed &lt;els:replace&gt;</xd:param>
+    <xd:return>The string after performing regex following $nextPos replacements succesively</xd:return>
+  </xd:doc>
+  <xsl:function name="els:replace-multiple" as="xs:string">
+    <xsl:param name="string" as="xs:string"/>
+    <xsl:param name="replace-list" as="element(els:replace-list)"/>
+    <xsl:param name="nextPos" as="xs:integer"/>
     <xsl:choose>
-      <xsl:when test="empty($replace-list/els:replace)">
+      <xsl:when test="empty($replace-list/els:replace[$nextPos])">
         <xsl:sequence select="$string"/>
       </xsl:when>
       <xsl:otherwise>
-        <xsl:variable name="changeFrom" select="$replace-list/els:replace/els:pattern" as="xs:string*"/>
-        <xsl:variable name="changeTo" select="$replace-list/els:replace/els:replacement" as="xs:string*"/>
-        <!-- Possible regex flags values: 
-        m: multiline mode
-        s : dot-all mode
-        i : case-insensitive
-        x : ignore whitespace within the regex -->
-        <xsl:variable name="flags" as="xs:string*">
-          <xsl:for-each select="$replace-list/els:replace">
-            <xsl:sequence select="if(@flags) then(@flags) else('')"/>
-          </xsl:for-each>
-        </xsl:variable>
-        <xsl:sequence select="els:replace-multiple($string, $changeFrom, $changeTo, $flags)"/>
+        <xsl:variable name="current-replace" select="$replace-list/els:replace[$nextPos]" as="element(els:replace)"/>
+        <!--Possible regex flags values: 
+              m: multiline mode
+              s : dot-all mode
+              i : case-insensitive
+              x : ignore whitespace within the regex
+              Note: add ";j" at the end of the @flags set the java regex process.
+            -->
+        <xsl:variable name="string.replaced" select="replace(
+          $string, 
+          string($current-replace/els:pattern), 
+          string($current-replace/els:replacement), 
+          string($current-replace/ancestor-or-self::*[@flags][1]/@flags)
+          )" as="xs:string"/>
+        <xsl:sequence select="els:replace-multiple($string.replaced, $replace-list, $nextPos + 1)"/>
       </xsl:otherwise>
     </xsl:choose>
   </xsl:function>
