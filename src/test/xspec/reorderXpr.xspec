@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<x:description 
+  xmlns:x="http://www.jenitennison.com/xslt/xspec" 
+  xmlns:xslLib="http://www.lefebvre-sarrut.eu/ns/els/xslLib"
+  stylesheet="../../main/xsl/reorderXpr.xsl"
+  xslt-version="3.0">
+
+  <x:param name="debug.reorder.xpr" select="false()"/>
+
+  <x:scenario label="Reorder XPR"  xml:base="../samples/xpr/">
+    <x:context href="sample.xpr"/>
+    <x:expect label="OK" select="/*" test="/*" href="sample.expected.xpr.xml"/>
+  </x:scenario>
+  
+</x:description>
