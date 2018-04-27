@@ -260,9 +260,22 @@
       </xsl:when>
       <xsl:when test="count($processed-row/node()) = 0">
         <!-- Pas de ligne encore expansée. On est donc à la première ligne du bloc et donc seuls les colspan sont à traiter. -->
-        <xsl:variable name="first-row" as="element()+">
+        <xsl:variable name="first-row-tmp" as="element()+">
+          <xsl:copy-of select="xhtml2cals:expand-colspans($source-block/tr[1])"/>
+        </xsl:variable>
+        <!-- ELSSIEXDC-23 / Les éventuels @rowspan de la 1ère ligne deviennent des @xhtml2cals:rowspan, nécessaires pour la suite de la transformation
+             FIXME: A factoriser -->
+        <xsl:variable name="first-row" as="element()">
           <tr xmlns="http://www.w3.org/1999/xhtml">
-            <xsl:copy-of select="xhtml2cals:expand-colspans($source-block/tr[1])"/>
+            <xsl:for-each select="$first-row-tmp">
+              <xsl:element name="{local-name()}" namespace="http://www.w3.org/1999/xhtml" inherit-namespaces="no">
+                <xsl:copy-of select="@*[not(name() = 'rowspan')]" copy-namespaces="no"/>
+                <xsl:if test="@rowspan">
+                  <xsl:attribute name="xhtml2cals:rowspan" select="@rowspan"/>
+                </xsl:if>
+                <xsl:copy-of select="node()" copy-namespaces="no"/>
+              </xsl:element>
+            </xsl:for-each>
           </tr>
         </xsl:variable>
         <!-- On retourne la première ligne expansée et on fait un appel récursif à la procédure pour traiter la ligne suivante. -->

@@ -43,14 +43,8 @@
   </x:scenario>
   
   <x:scenario label="HTML2CALS - ELSSIEXDC-23" xml:base="../samples/tables/">
-    <x:scenario label="Wrong CALS output">
-      <x:context href="table_ELSSIEXDC-23.editor.html"/>
-      <x:expect label="KO" select="/*" test="/*" href="table_ELSSIEXDC-23.cals.KO.xml"/>
-    </x:scenario>
-    <x:scenario label="Expected CALS output" pending="true">
-      <x:context href="table_ELSSIEXDC-23.editor.html"/>
-      <x:expect label="OK" select="/*" test="/*" href="table_ELSSIEXDC-23.cals.OK.xml"/>
-    </x:scenario>
+    <x:context href="table_ELSSIEXDC-23.editor.html"/>
+    <x:expect label="OK" select="/*" test="/*" href="table_ELSSIEXDC-23.cals.xml"/>
   </x:scenario>
   
 </x:description>

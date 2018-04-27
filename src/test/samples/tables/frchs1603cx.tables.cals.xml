@@ -65,7 +65,7 @@
       <colspec colname="c6" colwidth="12%"/>
       <thead>
         <row>
-          <entry namest="c1" nameend="c2">
+          <entry namest="c1" nameend="c2" morerows="1">
             <al xmlns="local">
               <motRep>ACTIF</motRep>
             </al>
@@ -5610,10 +5610,10 @@
       <colspec colname="c6" colwidth="15%"/>
       <tbody>
         <row>
-          <entry>
+          <entry morerows="1">
             <al xmlns="local">En milliers - Au 31-12-2015</al>
           </entry>
-          <entry>
+          <entry morerows="1">
             <al xmlns="local">
               <motRep>Valeur comptable (euros)</motRep>
             </al>
@@ -5623,12 +5623,12 @@
               <motRep>Valeur d’utilité</motRep>
             </al>
           </entry>
-          <entry>
+          <entry morerows="1">
             <al xmlns="local">
               <motRep>(ECA) / ECP sur emprunt</motRep>
             </al>
           </entry>
-          <entry>
+          <entry morerows="1">
             <al xmlns="local">
               <motRep>Résultat latent sur titres après prise en compte de la couverture</motRep>
               <rNote id="FRCHS_2016-03_UI-B59FF261-0E72-4AC1-9D6D-3478BFEE377F_UI-3FB76785-3FA8-48ED-86B2-731741C2BEA0rNote_3" num="2" ref="FRCHS_2016-03_UI-B59FF261-0E72-4AC1-9D6D-3478BFEE377F_UI-3FB76785-3FA8-48ED-86B2-731741C2BEA0"/>
@@ -5654,6 +5654,18 @@
           <entry>
             <al xmlns="local">4 656</al>
           </entry>
+          <entry>
+            <al xmlns="local">6 820</al>
+          </entry>
+          <entry>
+            <al xmlns="local">4 544</al>
+          </entry>
+          <entry>
+            <al xmlns="local"/>
+          </entry>
+          <entry>
+            <al xmlns="local">80</al>
+          </entry>
         </row>
         <row>
           <entry>
@@ -5661,6 +5673,18 @@
           </entry>
           <entry>
             <al xmlns="local">(4 464)</al>
+          </entry>
+          <entry>
+            <al xmlns="local">(6 700)</al>
+          </entry>
+          <entry>
+            <al xmlns="local">(4 464)</al>
+          </entry>
+          <entry>
+            <al xmlns="local">192</al>
+          </entry>
+          <entry>
+            <al xmlns="local"/>
           </entry>
         </row>
       </tbody>

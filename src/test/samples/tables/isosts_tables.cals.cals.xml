@@ -124,7 +124,7 @@
             <colspec colname="c4" colwidth="25%"/>
             <thead>
               <row>
-                <entry>header text</entry>
+                <entry morerows="1">header text</entry>
                 <entry namest="c2" nameend="c4">header text</entry>
               </row>
               <row>
@@ -213,44 +213,44 @@
             </thead>
             <tbody>
               <row>
-                <entry>table cell text</entry>
+                <entry morerows="9">table cell text</entry>
                 <entry namest="c2" nameend="c3">table cell text</entry>
                 <entry>table cell text</entry>
                 <entry>table cell text</entry>
                 <entry>table cell text</entry>
               </row>
               <row>
-                <entry namest="c1" nameend="c5">table cell text</entry>
+                <entry namest="c2" nameend="c6">table cell text</entry>
               </row>
               <row>
-                <entry namest="c1" nameend="c2">table cell text</entry>
-                <entry namest="c3" nameend="c5">table cell text</entry>
+                <entry namest="c2" nameend="c3">table cell text</entry>
+                <entry namest="c4" nameend="c6">table cell text</entry>
               </row>
               <row>
-                <entry namest="c1" nameend="c5">table cell text</entry>
+                <entry namest="c2" nameend="c6">table cell text</entry>
               </row>
               <row>
-                <entry namest="c1" nameend="c2">table cell text</entry>
-                <entry namest="c3" nameend="c5">table cell text</entry>
+                <entry namest="c2" nameend="c3">table cell text</entry>
+                <entry namest="c4" nameend="c6">table cell text</entry>
               </row>
               <row>
-                <entry namest="c1" nameend="c2">table cell text</entry>
-                <entry namest="c3" nameend="c5">table cell text</entry>
+                <entry namest="c2" nameend="c3">table cell text</entry>
+                <entry namest="c4" nameend="c6">table cell text</entry>
               </row>
               <row>
-                <entry namest="c1" nameend="c2">table cell text</entry>
-                <entry namest="c3" nameend="c5">table cell text</entry>
+                <entry namest="c2" nameend="c3">table cell text</entry>
+                <entry namest="c4" nameend="c6">table cell text</entry>
               </row>
               <row>
-                <entry namest="c1" nameend="c5">table cell text</entry>
-              </row>
-              <row>
-                <entry>table cell text</entry>
-                <entry namest="c2" nameend="c5">table cell text</entry>
+                <entry namest="c2" nameend="c6">table cell text</entry>
               </row>
               <row>
                 <entry>table cell text</entry>
-                <entry namest="c2" nameend="c5">table cell text</entry>
+                <entry namest="c3" nameend="c6">table cell text</entry>
+              </row>
+              <row>
+                <entry>table cell text</entry>
+                <entry namest="c3" nameend="c6">table cell text</entry>
               </row>
             </tbody>
           </tgroup>
@@ -269,7 +269,7 @@
             <colspec colname="c4" colwidth="25%"/>
             <thead>
               <row>
-                <entry>header text</entry>
+                <entry morerows="1">header text</entry>
                 <entry namest="c2" nameend="c4">header text</entry>
               </row>
               <row>
@@ -336,7 +336,7 @@
               <row>
                 <entry namest="c1" nameend="c2">rowsep=no</entry>
                 <entry>table default</entry>
-                <entry>rowsep=yes</entry>
+                <entry morerows="1">rowsep=yes</entry>
               </row>
               <row>
                 <entry namest="c1" nameend="c2">colsep=yes, rowsep=yes</entry>
@@ -345,6 +345,7 @@
               <row>
                 <entry>table default</entry>
                 <entry>colsep=yes</entry>
+                <entry>table default</entry>
                 <entry>table default</entry>
               </row>
             </tbody>

@@ -124,7 +124,7 @@
             <colspec colname="c4" colwidth="25%"/>
             <thead>
               <row>
-                <entry valign="top" colsep="1" rowsep="1">header text</entry>
+                <entry valign="top" colsep="1" rowsep="1" morerows="1">header text</entry>
                 <entry valign="top" namest="c2" nameend="c4" colsep="1" rowsep="1">header text</entry>
               </row>
               <row>
@@ -213,44 +213,44 @@
             </thead>
             <tbody>
               <row>
-                <entry align="center" valign="top" colsep="1" rowsep="1">table cell text</entry>
+                <entry align="center" valign="top" colsep="1" rowsep="1" morerows="9">table cell text</entry>
                 <entry valign="top" namest="c2" nameend="c3" colsep="1" rowsep="1">table cell text</entry>
                 <entry align="center" valign="top" colsep="1" rowsep="1">table cell text</entry>
                 <entry align="center" valign="top" colsep="1" rowsep="1">table cell text</entry>
                 <entry align="center" valign="top" colsep="1" rowsep="1">table cell text</entry>
               </row>
               <row>
-                <entry valign="top" namest="c1" nameend="c5" colsep="1" rowsep="1">table cell text</entry>
+                <entry valign="top" namest="c2" nameend="c6" colsep="1" rowsep="1">table cell text</entry>
               </row>
               <row>
-                <entry valign="top" namest="c1" nameend="c2" colsep="1" rowsep="1">table cell text</entry>
-                <entry align="center" valign="top" namest="c3" nameend="c5" colsep="1" rowsep="1">table cell text</entry>
+                <entry valign="top" namest="c2" nameend="c3" colsep="1" rowsep="1">table cell text</entry>
+                <entry align="center" valign="top" namest="c4" nameend="c6" colsep="1" rowsep="1">table cell text</entry>
               </row>
               <row>
-                <entry valign="top" namest="c1" nameend="c5" colsep="1" rowsep="1">table cell text</entry>
+                <entry valign="top" namest="c2" nameend="c6" colsep="1" rowsep="1">table cell text</entry>
               </row>
               <row>
-                <entry valign="top" namest="c1" nameend="c2" colsep="1" rowsep="1">table cell text</entry>
-                <entry align="center" valign="top" namest="c3" nameend="c5" colsep="1" rowsep="1">table cell text</entry>
+                <entry valign="top" namest="c2" nameend="c3" colsep="1" rowsep="1">table cell text</entry>
+                <entry align="center" valign="top" namest="c4" nameend="c6" colsep="1" rowsep="1">table cell text</entry>
               </row>
               <row>
-                <entry valign="top" namest="c1" nameend="c2" colsep="1" rowsep="1">table cell text</entry>
-                <entry valign="top" namest="c3" nameend="c5" colsep="1" rowsep="1">table cell text</entry>
+                <entry valign="top" namest="c2" nameend="c3" colsep="1" rowsep="1">table cell text</entry>
+                <entry valign="top" namest="c4" nameend="c6" colsep="1" rowsep="1">table cell text</entry>
               </row>
               <row>
-                <entry valign="top" namest="c1" nameend="c2" colsep="1" rowsep="1">table cell text</entry>
-                <entry valign="top" namest="c3" nameend="c5" colsep="1" rowsep="1">table cell text</entry>
+                <entry valign="top" namest="c2" nameend="c3" colsep="1" rowsep="1">table cell text</entry>
+                <entry valign="top" namest="c4" nameend="c6" colsep="1" rowsep="1">table cell text</entry>
               </row>
               <row>
-                <entry valign="top" namest="c1" nameend="c5" colsep="1" rowsep="1">table cell text</entry>
+                <entry valign="top" namest="c2" nameend="c6" colsep="1" rowsep="1">table cell text</entry>
               </row>
               <row>
                 <entry align="center" valign="top" colsep="1" rowsep="1">table cell text</entry>
-                <entry valign="top" namest="c2" nameend="c5" colsep="1" rowsep="1">table cell text</entry>
+                <entry valign="top" namest="c3" nameend="c6" colsep="1" rowsep="1">table cell text</entry>
               </row>
               <row>
                 <entry valign="top" colsep="1" rowsep="1">table cell text</entry>
-                <entry valign="top" namest="c2" nameend="c5" colsep="1" rowsep="1">table cell text</entry>
+                <entry valign="top" namest="c3" nameend="c6" colsep="1" rowsep="1">table cell text</entry>
               </row>
             </tbody>
           </tgroup>
@@ -269,7 +269,7 @@
             <colspec colname="c4" colwidth="25%"/>
             <thead>
               <row>
-                <entry valign="top" colsep="1" rowsep="1">header text</entry>
+                <entry valign="top" colsep="1" rowsep="1" morerows="1">header text</entry>
                 <entry valign="top" namest="c2" nameend="c4" colsep="1" rowsep="1">header text</entry>
               </row>
               <row>
@@ -336,7 +336,7 @@
               <row>
                 <entry namest="c1" nameend="c2">rowsep=no</entry>
                 <entry>table default</entry>
-                <entry rowsep="1">rowsep=yes</entry>
+                <entry morerows="1" rowsep="1">rowsep=yes</entry>
               </row>
               <row>
                 <entry namest="c1" nameend="c2" colsep="1" rowsep="1">colsep=yes, rowsep=yes</entry>
@@ -345,6 +345,7 @@
               <row>
                 <entry>table default</entry>
                 <entry colsep="1">colsep=yes</entry>
+                <entry>table default</entry>
                 <entry>table default</entry>
               </row>
             </tbody>
