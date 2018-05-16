@@ -408,4 +408,53 @@
     <x:call function="els:wrap-elements-starting-with"/>
   </x:scenario>
   
+  <x:scenario label="els:each-subsequence-item-included-into-sequence => true() - text() &amp; numbers">
+    <x:call function="els:each-subsequence-item-included-into-sequence">
+      <x:param name="subsequence" select="(2, 1, 'b', 'a')"/>
+      <x:param name="sequence" select="('a', 'b', 'c', 1, 2, 3, 4, 5, 6)"/>
+    </x:call>
+    <x:expect label="OK" select="true()"/>    
+  </x:scenario>
+  
+  <x:scenario label="els:each-subsequence-item-included-into-sequence => false() - text() &amp; numbers">
+    <x:call function="els:each-subsequence-item-included-into-sequence">
+      <x:param name="subsequence" select="(2, 1, 'b', 'a', 'z')"/>
+      <x:param name="sequence" select="('a', 'b', 'c', 1, 2, 3, 4, 5, 6)"/>
+    </x:call>
+    <x:expect label="OK" select="false()"/>    
+  </x:scenario>
+  
+  <x:scenario label="els:each-subsequence-item-included-into-sequence => true() - element() &amp; PI">
+    <x:call function="els:each-subsequence-item-included-into-sequence">
+      <x:param name="subsequence">
+        <e>e.test1</e>
+        <a>a.test2</a> 
+        <?PI?>
+      </x:param>
+      <x:param name="sequence">
+        <e>e.test1</e>
+        <e>e.test3</e> 
+        <?PI?>
+        <a>a.test2</a>       
+      </x:param>
+    </x:call>
+    <x:expect label="OK" select="true()"/>    
+  </x:scenario>
+  
+  <x:scenario label="els:each-subsequence-item-included-into-sequence => false() - element() &amp; PI">
+    <x:call function="els:each-subsequence-item-included-into-sequence">
+      <x:param name="subsequence">
+        <e>e.test1</e>
+        <?PI?>
+        <e>e.test3</e>
+        <a>a.test2</a>
+      </x:param>
+      <x:param name="sequence">
+        <e>e.test1</e>
+        <a>a.test2</a>
+        <?PI?>
+      </x:param>
+    </x:call>
+    <x:expect label="OK" select="false()"/>    
+  </x:scenario>
 </x:description>

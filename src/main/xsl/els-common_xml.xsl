@@ -662,4 +662,19 @@
     </xsl:choose>
   </xsl:function>
  
+  <xd:doc>
+    <xd:desc>
+      <xd:p>Check all unordered items of $subsequence is contained in $sequence</xd:p>      
+    </xd:desc>
+    <xd:param name="subsequence">sequence of items()* to be checked</xd:param>
+    <xd:param name="sequence">referential sequence of item()*</xd:param>
+    <xd:return>true() is all items are mapped</xd:return>
+  </xd:doc>
+  <xsl:function name="els:each-subsequence-item-included-into-sequence" as="xs:boolean">
+    <xsl:param name="subsequence" as="item()*"/>
+    <xsl:param name="sequence" as="item()*"/>
+    <xsl:sequence select="every $sub-item in $subsequence satisfies 
+      (some $item in $sequence satisfies deep-equal($sub-item, $item))"/>
+  </xsl:function>  
+ 
 </xsl:stylesheet>
