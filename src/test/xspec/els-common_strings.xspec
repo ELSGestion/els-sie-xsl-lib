@@ -28,14 +28,6 @@
     <x:expect label="String with replacements" select="'Text Test n°12 YxY text/A'"/>
   </x:scenario>
   
-  <x:scenario label="els:reccursivReplace" pending="DEPRECATED">
-    <x:call function="els:reccursivReplace">
-      <x:param name="Text" select="''"/>
-      <x:param name="SequenceDeTriplets" select="''"/>
-    </x:call>
-    <x:expect label="Not yet implemented" select="'Not yet implemented'"/>
-  </x:scenario>
-  
   <x:scenario label="els:normalize-no-diacritic">
     <x:call function="els:normalize-no-diacritic">
       <x:param name="string" select="'abcçdéêèàœ'"/>
