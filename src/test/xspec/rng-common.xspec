@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<x:description 
+  xmlns:x="http://www.jenitennison.com/xslt/xspec" 
+  xmlns:els="http://www.lefebvre-sarrut.eu/ns/els"
+  xmlns:rng="http://relaxng.org/ns/structure/1.0"
+  xmlns="http://relaxng.org/ns/structure/1.0"
+  stylesheet="../../main/xsl/rng-common.xsl"
+  xslt-version="3.0">
+
+  <x:scenario label="rng:getRefByElementName">
+    <x:call function="rng:getRefByElementName">
+      <x:param name="rngElement" select="//rng:element[@name = 'a']">
+        <grammar>
+          <define name="a">
+            <element name="a">
+              <ref name="b1"/>
+              <ref name="b2"/>
+              <ref name="b3"/>
+            </element>
+          </define>
+          <define name="b1">
+            <element name="b">
+              <attribute name="foo">
+                <value>bar</value>
+              </attribute>
+              <attribute name="bar">
+                <value>foo</value>
+              </attribute>
+            </element>
+          </define>
+          <define name="b2">
+            <element name="b">
+              <attribute name="foo">
+                <value>bar</value>
+              </attribute>
+            </element>
+          </define>
+          <define name="b3">
+            <element name="b">
+              <attribute name="bar">
+                <value>foo</value>
+              </attribute>
+            </element>
+          </define>
+        </grammar>
+      </x:param>
+      <x:param name="ref.elementName" select="'b'"/>
+      <x:param name="predicates" select="//text()">
+        <s>@foo = 'bar'</s>
+        <s>@bar='foo'</s>
+      </x:param>
+    </x:call>
+    <x:expect label="ref b1">
+      <ref name="b1"/>
+    </x:expect>
+  </x:scenario>
+  
+  <x:scenario label="rng:getRefByElementName">
+    <x:call function="rng:getRefByElementName">
+      <x:param name="rngElement" select="//rng:element[@name = 'a']">
+        <grammar>
+          <define name="a">
+            <element name="a">
+              <ref name="b1"/>
+              <ref name="b2"/>
+            </element>
+          </define>
+          <define name="b1">
+            <element name="b">
+              <attribute name="foo">
+                <value>bar</value>
+              </attribute>
+              <attribute name="bar">
+                <data type="string"/>
+              </attribute>
+              <optional>
+                <attribute name="foobar">
+                  <value>foobar</value>
+                </attribute>
+              </optional>
+            </element>
+          </define>
+          <define name="b2">
+            <element name="b">
+              <attribute name="foo">
+                <value>bar</value>
+              </attribute>
+            </element>
+          </define>
+        </grammar>
+      </x:param>
+      <x:param name="ref.elementName" select="'b'"/>
+      <x:param name="predicates" select="//text()">
+        <s>@foo = 'bar'</s>
+      </x:param>
+      <x:param name="excludeDefinesWithAttributeNotInPredicates" select="true()"/>
+    </x:call>
+    <x:expect label="b2 because b1 has a 'bar' mandatory attribute">
+      <ref name="b2"/>
+    </x:expect>
+  </x:scenario>
+ 
+</x:description>
