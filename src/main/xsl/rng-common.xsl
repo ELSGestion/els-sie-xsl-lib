@@ -332,7 +332,7 @@
               <xsl:variable name="att.value" select="@att.value" as="xs:string"/>
               <xsl:message use-when="false()">[DEBUG] MATCHES <xsl:value-of select="$predicate"/> [name=<xsl:value-of select="$att.name"/>][value=<xsl:value-of select="$att.value"/>]</xsl:message>
               <xsl:for-each select="$rngRef.tmp1/rng:getDefine(.)">
-                <define name="{@name}" predicate="{$predicate}">
+                <define name="{@name}" predicate="{$predicate}" test-attribute.name="{$att.name}" test-attribute.value="{$att.value}">
                   <xsl:attribute name="candidate">
                     <xsl:choose>
                       <!--The attribute is defined with the expected value : it's a possible candidate-->
@@ -363,7 +363,7 @@
                 <!--check if each mandatory attribute of the define is present in the predicates-->
                 <xsl:for-each select="rng:attribute[not(ancestor::rng:optional)]">
                   <xsl:if test="not(@name = $predicates-as-xml-map/@att.name)">
-                    <define name="{$define/@name}" candidate="false" test-attribute="{@name}"/>
+                    <define name="{$define/@name}" candidate="false" test-attribute="{@name}" excludeDefinesWithAttributeNotInPredicates="true"/>
                   </xsl:if>
                 </xsl:for-each>
               </xsl:for-each>
