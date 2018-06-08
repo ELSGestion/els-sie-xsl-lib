@@ -481,13 +481,14 @@
 
   <xsl:template match="table" mode="xhtml2cals:convert-to-cals">
     <table>
-      <xsl:apply-templates select="@*" mode="xhtml2cals:convert-attributes-to-cals"/>
+      <xsl:apply-templates select="@* except @data-cals-tgroupstyle" mode="xhtml2cals:convert-attributes-to-cals"/>
       <!--<xsl:copy-of select="@id | @class | @align | @width" copy-namespaces="no"/>-->
       <xsl:call-template name="xhtml2cals:compute-table-borders"/>
       <xsl:call-template name="xhtml2cals:compute-rowsep-colsep-defaults"/>
       <xsl:copy-of select="processing-instruction()|comment()"/>
       <xsl:apply-templates select="caption" mode="#current"/>
       <tgroup>
+        <xsl:apply-templates select="@data-cals-tgroupstyle" mode="xhtml2cals:convert-attributes-to-cals"/>
         <xsl:attribute name="cols" select="xhtml2cals:nb-cols(.)"/>
         <xsl:call-template name="xhtml2cals:make-colspec">
           <xsl:with-param name="context" select="colgroup | col"/>
@@ -926,7 +927,7 @@
     <xsl:apply-templates select="node()" mode="#current"/>
   </xsl:template>
   
-  <!--convert data-cals attributes to cals format when le html originaly comes from ths cals2html.xsl of the repo-->
+  <!--convert data-cals attributes to cals format when le html originaly comes from ths cals2html.xsl of this repo-->
   <xsl:template match="@*[starts-with(local-name(), 'data-cals-')]" mode="xhtml2cals:optimize-cals">
     <xsl:attribute name="{substring-after(local-name(), 'data-cals-')}" select="."/>
   </xsl:template>

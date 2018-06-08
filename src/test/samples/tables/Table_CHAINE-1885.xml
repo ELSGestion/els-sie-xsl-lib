@@ -10,7 +10,7 @@
   pgwide="1"
   >
   <titre>Tableau-liste des filiales et des participations</titre>
-  <cals:tgroup cols="9">
+  <cals:tgroup cols="9" tgroupstyle="tgroupstyle-1">
     <cals:colspec align="left" colname="column1" colnum="1" colsep="0" colwidth="200*"/>
     <cals:colspec align="right" colname="column2" colnum="2" colsep="0" colwidth="100*"/>
     <cals:colspec align="right" colname="column3" colnum="3" colsep="0" colwidth="100*"/>
