@@ -89,7 +89,7 @@
 
   <x:scenario label="els:isAnyUri">
     <x:call function="els:isAnyUri"/>
-    <x:scenario label="Value is not an URI">
+    <x:scenario label="Value is not an URI" pending="Not true anymore with XSD 1.1 cf. https://markmail.org/message/eo46wdle2kip5lp2">
       <x:call>
         <x:param name="item" select="'http://test.web.site.fr#toto#toto'"/>
       </x:call>
