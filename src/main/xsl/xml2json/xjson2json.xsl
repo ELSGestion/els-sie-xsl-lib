@@ -63,12 +63,12 @@
   
   <!--1 arg signature-->
   <xsl:function name="xslLib:xjson2json" as="xs:string">
-    <xsl:param name="xjson" as="element(fn:map)"/>
+    <xsl:param name="xjson" as="element()"/> <!--fn:map or fn:array-->
     <xsl:sequence select="xslLib:xjson2json($xjson, $xslLib:xjson2json.options)"/>
   </xsl:function>
   
   <xsl:function name="xslLib:xjson2json" as="xs:string">
-    <xsl:param name="xjson" as="element(fn:map)"/>
+    <xsl:param name="xjson" as="element()"/><!--fn:map or fn:array-->
     <xsl:param name="options" as="map(*)"/>
     <xsl:try select="xml-to-json($xjson, $options)">
       <xsl:catch>
