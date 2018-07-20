@@ -5,6 +5,33 @@
   stylesheet="../../main/xsl/els-common_strings.xsl"
   xslt-version="3.0">
   
+  <x:scenario label="els:string-join - normal use">
+    <x:call function="els:string-join">
+      <x:param name="seq" select="('text1', 'text2', 'text3', 'text4')"/>
+      <x:param name="sep" select="', '"/>
+      <x:param name="lastSep" select="' and '"/>
+    </x:call>
+    <x:expect label="els:string-join" select="'text1, text2, text3 and text4'"/>
+  </x:scenario>
+  
+  <x:scenario label="els:string-join - empty use">
+    <x:call function="els:string-join">
+      <x:param name="seq" select="''"/>
+      <x:param name="sep" select="', '"/>
+      <x:param name="lastSep" select="' and '"/>
+    </x:call>
+    <x:expect label="els:string-join" select="''"/>
+  </x:scenario>
+  
+  <x:scenario label="els:string-join - one item">
+    <x:call function="els:string-join">
+      <x:param name="seq" select="'text1'"/>
+      <x:param name="sep" select="', '"/>
+      <x:param name="lastSep" select="' and '"/>
+    </x:call>
+    <x:expect label="els:string-join" select="'text1'"/>
+  </x:scenario>
+  
   <x:scenario label="els:els:replace-multiple()">
     <x:call function="els:replace-multiple">
       <x:param name="string" select="'Text test_12 xxx text/ZZZ'"/>
@@ -27,7 +54,23 @@
     </x:call>
     <x:expect label="String with replacements" select="'Text Test n°12 YxY text/A'"/>
   </x:scenario>
+
+  <x:scenario label="els:els:replace-multiple() => 1">
+    <x:call function="els:replace-multiple">
+      <x:param name="string" select="'MAC 2018 et 2016 , 2015 + 2018'"/>
+      <x:param name="replace.list" as="element(els:replace-list)">
+        <replace-list xmlns="http://www.lefebvre-sarrut.eu/ns/els">
+          <replace>
+            <pattern>(\d+)(\s*et\s*|\s*,\s*|\s*\+\s*)</pattern>
+            <replacement>$1#SEP#</replacement>
+          </replace>
+        </replace-list>
+      </x:param>
+    </x:call>
+    <x:expect label="String with replacements" select="'MAC 2018#SEP#2016#SEP#2015#SEP#2018'"/>
+  </x:scenario>
   
+
   <x:scenario label="els:normalize-no-diacritic">
     <x:call function="els:normalize-no-diacritic">
       <x:param name="string" select="'abcçdéêèàœ'"/>

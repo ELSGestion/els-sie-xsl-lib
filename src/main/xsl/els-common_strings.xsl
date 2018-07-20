@@ -218,6 +218,30 @@
     <xsl:sequence select="els:is-empty-or-whitespace(normalize-space(string-join($e/text(), '')))"/>      
   </xsl:function>
   
+  <xd:doc>
+    <xd:desc>
+      <xd:p>Join items of strings sequence with separators and a specific last separator.</xd:p>
+      <xd:p>for sample : the result of ('text1', 'text2', 'text3') is "text1, text2 and text3" (with $sep="', '" and $lastSep="' and '")</xd:p>
+      <xd:p></xd:p>
+    </xd:desc>
+    <xd:param name="seq">string sequence</xd:param>
+    <xd:param name="sep">default separator</xd:param>
+    <xd:param name="lastSep">last separator</xd:param>
+  </xd:doc>
+  <xsl:function name="els:string-join" as="xs:string?">
+    <xsl:param name="seq" as="xs:string*"/>
+    <xsl:param name="sep" as="xs:string"/>
+    <xsl:param name="lastSep" as="xs:string"/>            
+    <xsl:choose>
+      <xsl:when test="count($seq) > 1">
+        <xsl:sequence select="concat(string-join($seq[position() != last()], $sep), $lastSep, $seq[last()])"/>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:value-of select="$seq"/>
+      </xsl:otherwise>
+    </xsl:choose>   
+  </xsl:function>
+  
   <!--=====================-->
   <!-- MODE els:UPPERCASE -->
   <!--=====================-->
