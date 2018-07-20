@@ -306,7 +306,7 @@
   
   <xd:doc>Generic copy template</xd:doc>
   <xsl:template match="node() | @*" mode="els:copy">
-    <xsl:copy>
+    <xsl:copy copy-namespaces="no">
       <xsl:apply-templates select="node() | @*" mode="#current"/>
     </xsl:copy>
   </xsl:template>
