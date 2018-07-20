@@ -5,7 +5,7 @@
 
   <groupId>eu.els.sie.lib.xsl.common</groupId>
   <artifactId>xslLib</artifactId>
-  <version>3.1.15-SNAPSHOT</version>
+  <version>3.1.15</version>
   <packaging>jar</packaging>
 
   <name>xslLib</name>
@@ -17,7 +17,7 @@
 
   <scm>
     <developerConnection>scm:git:git@bitbucket.org:elsgestion/sie-lib-xsl-common.git</developerConnection>
-    <tag>HEAD</tag>
+    <tag>RELEASE_3.1.15</tag>
   </scm>
 
   <dependencies>
