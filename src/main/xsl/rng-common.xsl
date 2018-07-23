@@ -24,7 +24,8 @@
   
   <xsl:key name="rng:getDefineByName" match="define" use="@name"/>
   <xsl:key name="rng:getRefByName" match="ref" use="@name"/>
-  
+  <!--This key is not used here but might be usefull-->
+  <xsl:key name="rng:getDefineByElementName" match="rng:define" use="rng:element/@name"/>
   <!--
     NEED context item here !
     <xsl:function name="rng:getDefineByName" as="element(define)*">
