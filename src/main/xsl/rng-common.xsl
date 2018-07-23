@@ -460,6 +460,14 @@
     <xsl:apply-templates select="$step" mode="rng:mergeIdenticalDefine.step2"/>
   </xsl:template>
   
+  <!--copy template (actually used for document-node children like pi, comment, etc.-->
+  <xsl:template match="node() | @*" mode="rng:mergeIdenticalDefine">
+    <xsl:copy>
+      <xsl:apply-templates select="node() | @*" mode="#current"/>
+    </xsl:copy>
+  </xsl:template>
+  
+  
   <!-- === STEP1 === -->
   
   <xsl:template match="define" mode="rng:mergeIdenticalDefine.step1">
