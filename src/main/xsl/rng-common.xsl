@@ -10,8 +10,6 @@
   exclude-result-prefixes="#all"
   version="3.0">
   
-  <xsl:import href="els-common.xsl"/>
-  
   <xd:doc scope="stylesheet">
     <xd:desc>
       <xd:p>XSLT functions/templates library to extract information or transform Relax NG schema</xd:p>
@@ -19,6 +17,8 @@
         there should be at least one element by define and one define by element.</xd:p>
     </xd:desc>
   </xd:doc>
+  
+  <xsl:import href="els-common.xsl"/>
   
   <!--FIXME : adding a check on (s)rng format before proceding each step/function ?-->
   
@@ -453,9 +453,10 @@
     
   <xsl:template match="grammar" mode="rng:mergeIdenticalDefine">
     <xsl:message>[INFO] rng:mergeIdenticalDefine on <xsl:value-of select="local-name()"/></xsl:message>
+    <xsl:variable name="step" select="." as="element(grammar)"/>
     <xsl:variable name="step" as="document-node()">
       <xsl:document>
-        <xsl:apply-templates select="." mode="rng:mergeIdenticalDefine.step1"/>
+        <xsl:apply-templates select="$step" mode="rng:mergeIdenticalDefine.step1"/>
       </xsl:document>
     </xsl:variable>
     <xsl:variable name="step" as="document-node()">
@@ -511,6 +512,13 @@
     </xsl:copy>
   </xsl:template>
   
+  <!--default copy-->
+  <xsl:template match="node() | @*" mode="rng:mergeIdenticalDefine.step1">
+    <xsl:copy copy-namespaces="no">
+      <xsl:apply-templates select="node() | @*" mode="#current"/>
+    </xsl:copy>
+  </xsl:template>
+  
   <!-- === STEP2 === -->
   
   <!--keep only the first define when they are multiple identical occurence of it-->
@@ -532,9 +540,7 @@
   <xsl:template match="@is-identical-with" mode="rng:mergeIdenticalDefine.step2"/>
   
   <!--default copy-->
-  <xsl:template match="node() | @*" 
-    mode="rng:mergeIdenticalDefine.step1 
-          rng:mergeIdenticalDefine.step2">
+  <xsl:template match="node() | @*" mode="rng:mergeIdenticalDefine.step2">
     <xsl:copy copy-namespaces="no">
       <xsl:apply-templates select="node() | @*" mode="#current"/>
     </xsl:copy>
@@ -542,11 +548,20 @@
   
   <xsl:function name="rng:normalizeDefine4Comparing" as="element(define)">
     <xsl:param name="define" as="element(define)"/>
+    <!--First delete indentation that might make differences using deep-equals()-->
+    <xsl:variable name="define" as="element(define)">
+      <xsl:apply-templates select="$define" mode="els:deleteIndentation"/>
+    </xsl:variable>
     <define>
       <!--@name must be deleted for comparaison-->
       <xsl:apply-templates select="$define/*" mode="rng:normalizeDefine4Comparing"/>
     </define>
   </xsl:function>
+  
+  <!--Don't change rng:value while deleting indentations-->
+  <xsl:template match="value" mode="els:deleteIndentation">
+    <xsl:copy-of select="."/>
+  </xsl:template>
   
   <!--deep-equals doesn't care about xml attributes order, but order of rng:attribute element might be sorted-->
   <xsl:template match="*[attribute or optional[attribute]]" mode="rng:normalizeDefine4Comparing">

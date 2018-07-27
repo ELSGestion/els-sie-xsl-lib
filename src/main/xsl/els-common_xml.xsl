@@ -286,8 +286,8 @@
   </xsl:function>
   
   <xd:doc>Mode to delete indentations</xd:doc>
-  <xsl:template match="text()[matches(.,'\n[ \t]*')]" mode="els:deleteIndentation">
-    <xsl:value-of select="replace(.,'\n[ \t]*', ' ')"/>
+  <xsl:template match="text()[matches(.,'(\s|\t)*\n(\s|\t)*')]" mode="els:deleteIndentation">
+    <xsl:value-of select="replace(.,'(\s|\t)*\n(\s|\t)*', ' ')"/>
   </xsl:template>
   
   <xsl:template match="node() | @*" mode="els:deleteIndentation">

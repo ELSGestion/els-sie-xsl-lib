@@ -105,9 +105,12 @@
       </attribute>
     </element>
   </define>
+  <!--Caution : div_8 has different indentation as div_7-->
   <define name="div_8">
     <element name="div">
+      
       <attribute name="class">
+        
         <choice>
           <value>class-2</value>
           <value>class-1</value>
