@@ -100,4 +100,11 @@
     </x:expect>
   </x:scenario>
  
+  <x:scenario label="rng:mergeIdenticalDefine">
+    <x:scenario label="mergeIdenticalDefine.sample.rng > mergeIdenticalDefine.sample.merged-defines.rng" xml:base="../samples/rng/">
+      <x:context mode="rng:mergeIdenticalDefine" href="mergeIdenticalDefine.sample.rng"/>
+      <x:expect label="OK" href="mergeIdenticalDefine.sample.merged-defines.rng" select="/*" test="/*"/>
+    </x:scenario>
+  </x:scenario>
+  
 </x:description>

@@ -502,7 +502,7 @@
       <xsl:attribute name="name" select="$identical.define[1]/@name"/>
     </xsl:copy>
   </xsl:template>
-
+  
   <!--delete tmp attribute-->
   <xsl:template match="@is-identical-with" mode="rng:mergeIdenticalDefine.step2"/>
   
@@ -522,29 +522,32 @@
       <xsl:apply-templates select="$define/*" mode="rng:normalizeDefine4Comparing"/>
     </define>
   </xsl:function>
-
-  <xsl:template match="*" mode="rng:normalizeDefine4Comparing">
+  
+  <!--deep-equals doesn't care about xml attributes order, but order of rng:attribute element might be sorted-->
+  <xsl:template match="*[attribute or optional[attribute]]" mode="rng:normalizeDefine4Comparing">
     <xsl:copy copy-namespaces="no">
-      <xsl:for-each select="@*">
-        <xsl:sort/>
-        <xsl:copy-of select="."/>
-      </xsl:for-each>
-      <xsl:apply-templates select="*" mode="#current">
-        <!--<xsl:sort/> NO, it would change the define-->
+      <xsl:apply-templates select="@*" mode="#current"/>
+      <xsl:variable name="attributes.pattern" select="attribute | optional[count(*) = 1][attribute]" as="element()*"/>
+      <xsl:apply-templates select="$attributes.pattern" mode="#current">
+        <xsl:sort select="descendant-or-self::attribute/@name"/>
       </xsl:apply-templates>
+      <xsl:apply-templates select="node() except $attributes.pattern" mode="#current"/>
     </xsl:copy>
   </xsl:template>
   
   <!--Sorting on "choice" is ok-->
   <xsl:template match="choice" mode="rng:normalizeDefine4Comparing">
     <xsl:copy copy-namespaces="no">
-      <xsl:for-each select="@*">
-        <xsl:sort/>
-        <xsl:copy-of select="."/>
-      </xsl:for-each>
-      <xsl:apply-templates select="*" mode="#current">
+      <xsl:apply-templates select="node() | *" mode="#current">
         <xsl:sort/>
       </xsl:apply-templates>
+    </xsl:copy>
+  </xsl:template>
+  
+  <!--default copy (especially text and attributes)-->
+  <xsl:template match="node() | @*" mode="rng:normalizeDefine4Comparing">
+    <xsl:copy>
+      <xsl:apply-templates select="node() | @*" mode="#current"/>
     </xsl:copy>
   </xsl:template>
   

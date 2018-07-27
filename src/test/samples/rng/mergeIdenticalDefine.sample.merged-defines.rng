@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<grammar xmlns="http://relaxng.org/ns/structure/1.0">
+  <start>
+    <choice>
+      <ref name="div_1"/>
+      <ref name="div_2"/>
+      <ref name="div_3"/>
+      <ref name="div_3"/>
+      <ref name="div_5"/>
+      <ref name="div_5"/>
+      <ref name="div_7"/>
+      <ref name="div_7"/>
+    </choice>
+  </start>
+  <define name="div_1">
+    <element name="div">
+      <attribute name="class">
+        <value>class-1</value>
+      </attribute>
+    </element>
+  </define>
+  <define name="div_2">
+    <element name="div">
+      <attribute name="class">
+        <value>class-2</value>
+      </attribute>
+    </element>
+  </define>
+  <define name="div_3">
+    <element name="div">
+      <attribute name="id"/>
+      <optional>
+        <attribute name="xml:lang"/>
+      </optional>
+      <attribute name="class">
+        <value>class</value>
+      </attribute>
+      <element name="test">
+        <empty/>
+      </element>
+      <ref name="div_1"/>
+    </element>
+  </define>
+  <define name="div_5">
+    <element name="div">
+      <attribute name="class">
+        <value>class</value>
+      </attribute>
+      <attribute name="id"/>
+      <optional>
+        <attribute name="xml:lang"/>
+      </optional>
+      <zeroOrMore>
+        <choice>
+          <element name="test">
+            <empty/>
+          </element>
+          <ref name="div_1"/>
+        </choice>
+      </zeroOrMore>
+    </element>
+  </define>
+  <define name="div_7">
+    <element name="div">
+      <attribute name="class">
+        <choice>
+          <value>class-1</value>
+          <value>class-2</value>
+        </choice>
+      </attribute>
+    </element>
+  </define>
+</grammar>
