@@ -475,9 +475,16 @@
     <xsl:variable name="current.define" select="." as="element(define)"/>
     <xsl:copy copy-namespaces="no">
       <xsl:apply-templates select="@*" mode="#current"/>
-      <xsl:variable name="is-identical-with" 
-        select="parent::grammar/define[deep-equal(rng:normalizeDefine4Comparing(.), rng:normalizeDefine4Comparing($current.define))]/@name" 
-        as="xs:string*"/>
+      <xsl:variable name="is-identical-with" as="xs:string*">
+        <xsl:choose>
+          <xsl:when test="$current.define[count(*) = 1]/element[@name]">
+            <xsl:sequence select="parent::grammar/define[element/@name = $current.define/element/@name][deep-equal(rng:normalizeDefine4Comparing(.), rng:normalizeDefine4Comparing($current.define))]/@name"/>
+          </xsl:when>
+          <xsl:otherwise>
+            <xsl:sequence select="parent::grammar/define[deep-equal(rng:normalizeDefine4Comparing(.), rng:normalizeDefine4Comparing($current.define))]/@name"/>
+          </xsl:otherwise>
+        </xsl:choose>
+      </xsl:variable>
         <!--[not(. is $current.define)]-->
       <xsl:if test="count($is-identical-with) gt 1">
         <xsl:attribute name="is-identical-with" select="$is-identical-with"/>
