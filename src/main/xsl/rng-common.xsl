@@ -458,7 +458,26 @@
         <xsl:apply-templates select="." mode="rng:mergeIdenticalDefine.step1"/>
       </xsl:document>
     </xsl:variable>
-    <xsl:apply-templates select="$step" mode="rng:mergeIdenticalDefine.step2"/>
+    <xsl:variable name="step" as="document-node()">
+      <xsl:document>
+        <xsl:apply-templates select="$step" mode="rng:mergeIdenticalDefine.step2"/>
+      </xsl:document>
+    </xsl:variable>
+    <!--Starting reccursion-->
+    <xsl:variable name="step" as="document-node()">
+      <xsl:document>
+        <xsl:apply-templates select="$step" mode="rng:mergeIdenticalDefine.step1"/>
+      </xsl:document>
+    </xsl:variable>
+    <!--After the first merging, some new defines might be identical, let's call step 1 again-->
+    <xsl:choose>
+      <xsl:when test="count($step/grammar/define[@is-identical-with]) != 0">
+        <xsl:apply-templates select="$step" mode="rng:mergeIdenticalDefine"/>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:sequence select="$step"/>
+      </xsl:otherwise>
+    </xsl:choose>
   </xsl:template>
   
   <!--copy template (actually used for document-node children like pi, comment, etc.-->
@@ -467,7 +486,6 @@
       <xsl:apply-templates select="node() | @*" mode="#current"/>
     </xsl:copy>
   </xsl:template>
-  
   
   <!-- === STEP1 === -->
   

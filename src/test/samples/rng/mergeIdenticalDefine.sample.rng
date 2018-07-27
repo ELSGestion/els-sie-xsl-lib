@@ -9,6 +9,8 @@
       <ref name="div_6"/>
       <ref name="div_7"/>
       <ref name="div_8"/>
+      <ref name="div_9"/>
+      <ref name="div_10"/>
     </choice>
   </start>
   <define name="div_1">
@@ -111,6 +113,20 @@
           <value>class-1</value>
         </choice>
       </attribute>
+    </element>
+  </define>
+  <define name="div_9">
+    <element name="div">
+      <attribute name="class"/>
+      <attribute name="id"/>
+      <ref name="div_7"/>
+    </element>
+  </define>
+  <define name="div_10">
+    <element name="div">
+      <attribute name="id"/>
+      <attribute name="class"/>
+      <ref name="div_8"/>
     </element>
   </define>
 </grammar>
