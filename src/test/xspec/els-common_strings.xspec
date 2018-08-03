@@ -153,41 +153,149 @@
   
   <x:scenario label="els:is-empty-or-whitespace">
     <x:call function="els:is-empty-or-whitespace"/>
-    <x:scenario label="Single whitespace">
-      <x:call>
-        <x:param name="s" select="' '"/>
-      </x:call>
-      <x:expect label="true" select="true()"/>
+    <x:scenario label="1 parameter / Default singleline match">
+      <x:scenario label="Single whitespace">
+        <x:call>
+          <x:param name="s" select="' '"/>
+        </x:call>
+        <x:expect label="true" select="true()"/>
+      </x:scenario>
+      <x:scenario label="Multiple whitespaces">
+        <x:call>
+          <x:param name="s" select="'   '"/>
+        </x:call>
+        <x:expect label="true" select="true()"/>
+      </x:scenario>
+      <x:scenario label="Multiline whitespaces">
+        <x:call>
+          <x:param xml:space="preserve" name="s">      
+          
+          </x:param>
+        </x:call>
+        <x:expect label="false" select="false()"/>
+      </x:scenario>
+      <x:scenario label="Special whitespaces">
+        <x:call>
+          <x:param name="s" select="'&#x00A0;&#x2002;&#x2003;'"/>
+        </x:call>
+        <x:expect label="true" select="true()"/>
+      </x:scenario>
+      <x:scenario label="Empty string">
+        <x:call>
+          <x:param name="s" select="''"/>
+        </x:call>
+        <x:expect label="true" select="true()"/>
+      </x:scenario>
+      <x:scenario label="Empty sequence">
+        <x:call>
+          <x:param name="s" select="()"/>
+        </x:call>
+        <x:expect label="true" select="true()"/>
+      </x:scenario>
+      <x:scenario label="Not an empty string">
+        <x:call>
+          <x:param name="s" select="'not empty'"/>
+        </x:call>
+        <x:expect label="false" select="false()"/>
+      </x:scenario>
     </x:scenario>
-    <x:scenario label="Multiple whitespaces">
+    <x:scenario label="2 parameters / Explicit singleline match">
       <x:call>
-        <x:param name="s" select="'   '"/>
+        <x:param name="m" position="2" select="false()"/>
       </x:call>
-      <x:expect label="true" select="true()"/>
+      <x:scenario label="Single whitespace">
+        <x:call>
+          <x:param name="s" select="' '"/>
+        </x:call>
+        <x:expect label="true" select="true()"/>
+      </x:scenario>
+      <x:scenario label="Multiple whitespaces">
+        <x:call>
+          <x:param name="s" select="'   '"/>
+        </x:call>
+        <x:expect label="true" select="true()"/>
+      </x:scenario>
+      <x:scenario label="Multiline whitespaces">
+        <x:call>
+          <x:param xml:space="preserve" name="s">      
+          
+          </x:param>
+        </x:call>
+        <x:expect label="false" select="false()"/>
+      </x:scenario>
+      <x:scenario label="Special whitespaces">
+        <x:call>
+          <x:param name="s" select="'&#x00A0;&#x2002;&#x2003;'"/>
+        </x:call>
+        <x:expect label="true" select="true()"/>
+      </x:scenario>
+      <x:scenario label="Empty string">
+        <x:call>
+          <x:param name="s" select="''"/>
+        </x:call>
+        <x:expect label="true" select="true()"/>
+      </x:scenario>
+      <x:scenario label="Empty sequence">
+        <x:call>
+          <x:param name="s" select="()"/>
+        </x:call>
+        <x:expect label="true" select="true()"/>
+      </x:scenario>
+      <x:scenario label="Not an empty string">
+        <x:call>
+          <x:param name="s" select="'not empty'"/>
+        </x:call>
+        <x:expect label="false" select="false()"/>
+      </x:scenario>
     </x:scenario>
-    <x:scenario label="Special whitespaces">
+    <x:scenario label="2 parameters / Explicit multiline match">
       <x:call>
-        <x:param name="s" select="'&#x00A0;&#x2002;&#x2003;'"/>
+        <x:param name="m" position="2" select="true()"/>
       </x:call>
-      <x:expect label="true" select="true()"/>
-    </x:scenario>
-    <x:scenario label="Empty string">
-      <x:call>
-        <x:param name="s" select="''"/>
-      </x:call>
-      <x:expect label="true" select="true()"/>
-    </x:scenario>
-    <x:scenario label="Empty sequence">
-      <x:call>
-        <x:param name="s" select="()"/>
-      </x:call>
-      <x:expect label="true" select="true()"/>
-    </x:scenario>
-    <x:scenario label="Not an empty string">
-      <x:call>
-        <x:param name="s" select="'not empty'"/>
-      </x:call>
-      <x:expect label="false" select="false()"/>
+      <x:scenario label="Single whitespace">
+        <x:call>
+          <x:param name="s" select="' '"/>
+        </x:call>
+        <x:expect label="true" select="true()"/>
+      </x:scenario>
+      <x:scenario label="Multiple whitespaces">
+        <x:call>
+          <x:param name="s" select="'   '"/>
+        </x:call>
+        <x:expect label="true" select="true()"/>
+      </x:scenario>
+      <x:scenario label="Multiline whitespaces">
+        <x:call>
+          <x:param xml:space="preserve" name="s">      
+          
+          </x:param>
+        </x:call>
+        <x:expect label="true" select="true()"/>
+      </x:scenario>
+      <x:scenario label="Special whitespaces">
+        <x:call>
+          <x:param name="s" select="'&#x00A0;&#x2002;&#x2003;'"/>
+        </x:call>
+        <x:expect label="true" select="true()"/>
+      </x:scenario>
+      <x:scenario label="Empty string">
+        <x:call>
+          <x:param name="s" select="''"/>
+        </x:call>
+        <x:expect label="true" select="true()"/>
+      </x:scenario>
+      <x:scenario label="Empty sequence">
+        <x:call>
+          <x:param name="s" select="()"/>
+        </x:call>
+        <x:expect label="true" select="true()"/>
+      </x:scenario>
+      <x:scenario label="Not an empty string">
+        <x:call>
+          <x:param name="s" select="'not empty'"/>
+        </x:call>
+        <x:expect label="false" select="false()"/>
+      </x:scenario>
     </x:scenario>
   </x:scenario>
   

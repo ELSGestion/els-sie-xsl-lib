@@ -176,13 +176,28 @@
   <xd:doc>
     <xd:desc>
       <xd:p>Determin if a string is kind of empty considering any whitespace as empty characters</xd:p>
+      <xd:p>The default is to NOT match in multiline mode: line break characters will not be considered as whitespaces</xd:p>
     </xd:desc>
     <xd:param name="s">Any string</xd:param>
     <xd:return>Boolean : true() if $s is the empty string '' or if it only contains whitespaces, else false()</xd:return>
   </xd:doc>
   <xsl:function name="els:is-empty-or-whitespace" as="xs:boolean">
     <xsl:param name="s" as="xs:string?"/>
-    <xsl:sequence select="matches($s, concat('^', $els:regAnySpace, '*$'))"/>
+    <xsl:sequence select="els:is-empty-or-whitespace($s, false())"/>
+  </xsl:function>
+  
+  <xd:doc>
+    <xd:desc>
+      <xd:p>Determin if a string is kind of empty considering any whitespace as empty characters</xd:p>
+    </xd:desc>
+    <xd:param name="s">Any string</xd:param>
+    <xd:param name="m">Matches in multiline mode (xs:boolean)</xd:param>
+    <xd:return>Boolean : true() if $s is the empty string '' or if it only contains whitespaces, else false()</xd:return>
+  </xd:doc>
+  <xsl:function name="els:is-empty-or-whitespace" as="xs:boolean">
+    <xsl:param name="s" as="xs:string?"/>
+    <xsl:param name="m" as="xs:boolean"/>
+    <xsl:sequence select="matches($s, concat('^', $els:regAnySpace, '*$'), if ($m) then ('m') else (''))"/>
   </xsl:function>
   
   <xd:doc>
