@@ -100,19 +100,19 @@
             </xsl:otherwise>
           </xsl:choose>
         </xsl:if>
-        <xsl:if test="local-name(.) = ('td', 'th') and $cellpadding != 0 and count(css:getPropertyValue($css, 'padding')) = 0">
+        <xsl:if test="local-name(.) = ('td', 'th') and $cellpadding != 0 and not(css:getProperty($css, 'padding'))">
           <xsl:variable name="paddings-to-set" as="xs:string*">
             <!--Here we have to set every unset padding-->
-            <xsl:if test="count(css:getPropertyValue($css, 'padding-top')) = 0">
+            <xsl:if test="not(css:getProperty($css, 'padding-top'))">
               <xsl:text>top</xsl:text>
             </xsl:if>
-            <xsl:if test="count(css:getPropertyValue($css, 'padding-right')) = 0">
+            <xsl:if test="not(css:getProperty($css, 'padding-right'))">
               <xsl:text>right</xsl:text>
             </xsl:if>
-            <xsl:if test="count(css:getPropertyValue($css, 'padding-bottom')) = 0">
+            <xsl:if test="not(css:getProperty($css, 'padding-bottom'))">
               <xsl:text>bottom</xsl:text>
             </xsl:if>
-            <xsl:if test="count(css:getPropertyValue($css, 'padding-left')) = 0">
+            <xsl:if test="not(css:getProperty($css, 'padding-left'))">
               <xsl:text>left</xsl:text>
             </xsl:if>
           </xsl:variable>
@@ -136,32 +136,32 @@
             </xsl:otherwise>
           </xsl:choose>
         </xsl:if>
-        <xsl:if test="@cellspacing and count(css:getPropertyValue($css, 'border-spacing')) = 0">
+        <xsl:if test="@cellspacing and not(css:getProperty($css, 'border-spacing'))">
           <xsl:value-of select="concat('border-spacing:', @cellspacing)"/>
         </xsl:if>
-        <xsl:if test="@width and count(css:getPropertyValue($css, 'width')) = 0">
+        <xsl:if test="@width and not(css:getProperty($css, 'width'))">
           <xsl:value-of select="concat('width:', if(@width castable as xs:double) then(concat(@width, 'px')) else(@width))"/>
         </xsl:if>
-        <xsl:if test="@height and not(css:getPropertyValue($css, 'height'))">
+        <xsl:if test="@height and not(css:getProperty($css, 'height'))">
           <xsl:value-of select="concat('height:', @height)"/>
         </xsl:if>
         <xsl:if test="self::table and @align='center' (: ('center', 'middle', 'absmiddle', 'abscenter') :) 
-          and not(css:getPropertyValue($css, 'margin-left')) and not(css:getPropertyValue($css, 'margin-right'))">
+          and not(css:getProperty($css, 'margin-left')) and not(css:getProperty($css, 'margin-right'))">
           <xsl:text>margin-left:auto</xsl:text>
           <xsl:text>margin-right:auto</xsl:text>
         </xsl:if>
         <xsl:if test="self::table and @align='right' 
-          and not(css:getPropertyValue($css, 'margin-left')) and not(css:getPropertyValue($css, 'margin-right'))">
+          and not(css:getProperty($css, 'margin-left')) and not(css:getProperty($css, 'margin-right'))">
           <xsl:text>margin-left:auto</xsl:text>
           <xsl:text>margin-right:0</xsl:text>
         </xsl:if>
-        <xsl:if test="not(self::table) and @align and count(css:getPropertyValue($css, 'text-align')) = 0">
+        <xsl:if test="not(self::table) and @align and not(css:getProperty($css, 'text-align'))">
           <xsl:value-of select="concat('text-align:', @align)"/>
         </xsl:if>
-        <xsl:if test="@valign and count(css:getPropertyValue($css, 'vertical-align')) = 0">
+        <xsl:if test="@valign and not(css:getProperty($css, 'vertical-align'))">
           <xsl:value-of select="concat('vertical-align:', @valign)"/>
         </xsl:if>
-        <xsl:if test="@bgcolor and count(css:getPropertyValue($css, 'background-color')) = 0">
+        <xsl:if test="@bgcolor and not(css:getProperty($css, 'background-color'))">
           <xsl:value-of select="concat('background-color:', @bgcolor)"/>
         </xsl:if>
         <xsl:if test="normalize-space(@style) != ''">

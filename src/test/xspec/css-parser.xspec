@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<x:description 
+  xmlns:x="http://www.jenitennison.com/xslt/xspec"
+  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+  xmlns:css="http://www.w3.org/1996/css"
+  stylesheet="../../main/xsl/css-parser.xsl"
+  xslt-version="3.0">
+  
+  <x:param name="css:inline.1">
+    text-align:center;
+    border: 1px solid black;
+    border-top:none;
+    border-left: 0 dashed;
+    margin-top: 1em;
+    margin-bottom:2em;
+    width: 12px;
+  </x:param>
+  
+  <x:param name="css.inline.2">
+    padding: 0 1em 0 2em;
+  </x:param>
+  
+  <x:param name="css:css-xml.1">
+    <css:css>
+      <css:text-align-ruleset>
+        <css:text-align>
+          <css:center />
+        </css:text-align>
+      </css:text-align-ruleset>
+      <css:border-ruleset>
+        <css:border-top-width>
+          <css:dimension unit="px">1</css:dimension>
+        </css:border-top-width>
+        <css:border-top-style>
+          <css:solid />
+        </css:border-top-style>
+        <css:border-top-color>
+          <css:black />
+        </css:border-top-color>
+        <css:border-right-width>
+          <css:dimension unit="px">1</css:dimension>
+        </css:border-right-width>
+        <css:border-right-style>
+          <css:solid />
+        </css:border-right-style>
+        <css:border-right-color>
+          <css:black />
+        </css:border-right-color>
+        <css:border-bottom-width>
+          <css:dimension unit="px">1</css:dimension>
+        </css:border-bottom-width>
+        <css:border-bottom-style>
+          <css:solid />
+        </css:border-bottom-style>
+        <css:border-bottom-color>
+          <css:black />
+        </css:border-bottom-color>
+        <css:border-left-width>
+          <css:dimension unit="px">1</css:dimension>
+        </css:border-left-width>
+        <css:border-left-style>
+          <css:solid />
+        </css:border-left-style>
+        <css:border-left-color>
+          <css:black />
+        </css:border-left-color>
+      </css:border-ruleset>
+      <css:border-top-ruleset>
+        <css:border-top-style>
+          <css:none />
+        </css:border-top-style>
+      </css:border-top-ruleset>
+      <css:border-left-ruleset>
+        <css:border-left-width>
+          <css:dimension unit="px">0</css:dimension>
+        </css:border-left-width>
+        <css:border-left-style>
+          <css:dashed />
+        </css:border-left-style>
+      </css:border-left-ruleset>
+      <css:margin-top-ruleset>
+        <css:margin-top>
+          <css:dimension unit="em">1</css:dimension>
+        </css:margin-top>
+      </css:margin-top-ruleset>
+      <css:margin-bottom-ruleset>
+        <css:margin-bottom>
+          <css:dimension unit="em">2</css:dimension>
+        </css:margin-bottom>
+      </css:margin-bottom-ruleset>
+      <css:width-ruleset>
+        <css:width>
+          <css:dimension unit="px">12</css:dimension>
+        </css:width>
+      </css:width-ruleset>
+    </css:css>
+  </x:param>
+  
+  <x:scenario label="css:parse-inline">
+    <x:call function="css:parse-inline">
+      <x:param name="css:inline" select="$css:inline.1" as="xs:string"/>
+    </x:call>
+    <x:expect label="css:css" select="$css:css-xml.1"/>
+  </x:scenario>
+  
+  <x:scenario label="css:parsed-to-string">
+    <x:call function="css:parsed-to-string">
+      <x:param name="css:css" select="$css:css-xml.1" as="element()"/>
+    </x:call>
+    <x:expect label="css inline" select="normalize-space(replace(., '&#10;', ' '))">
+      border:1px solid;
+      text-align:center;
+      margin-top:1em; 
+      margin-bottom:2em;
+      width:12px;
+    </x:expect>
+  </x:scenario>
+  
+  <x:scenario label="css:getPropertyValue">
+    <x:call function="css:getPropertyValue">
+      <x:param name="css:css" select="$css:css-xml.1" as="element()"/>
+    </x:call>
+    <x:scenario label="text-align">
+      <x:call>
+        <x:param name="name" select="'text-align'"/>
+      </x:call>
+      <x:expect label="css inline" select="'center'"/>
+    </x:scenario>
+    <x:scenario label="width">
+      <x:call>
+        <x:param name="name" select="'width'"/>
+      </x:call>
+      <x:expect label="css inline" select="'12px'"/>
+    </x:scenario>
+    <!--<x:scenario label="border">
+      <x:call>
+        <x:param name="name" select="'border'"/>
+      </x:call>
+      <x:expect label="css inline" select="'12px'"/>
+    </x:scenario>-->
+    <x:scenario label="border-top">
+      <x:call>
+        <x:param name="name" select="'border-top-style'"/>
+      </x:call>
+      <x:expect label="css inline" select="'none'"/>
+    </x:scenario>
+    <x:scenario label="border-right-style">
+      <x:call>
+        <x:param name="name" select="'border-right-style'"/>
+      </x:call>
+      <x:expect label="css inline" select="'solid'"/>
+    </x:scenario>
+  </x:scenario>
+
+</x:description>

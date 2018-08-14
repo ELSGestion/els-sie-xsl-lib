@@ -65,7 +65,7 @@
           <xsl:analyze-string select="$css:inline" regex="/\*.*?\*/">
             <xsl:matching-substring/>
             <xsl:non-matching-substring>
-              <xsl:copy-of select="."/>  
+              <xsl:value-of select="."/>  
             </xsl:non-matching-substring>
           </xsl:analyze-string>
         </xsl:variable>
@@ -283,7 +283,6 @@
     </xsl:for-each>
   </xsl:function>
   
-  
   <xsl:function name="css:definesBorderRight" as="xs:boolean">
     <xsl:param name="css" as="element(css:css)?"/>
     <xsl:choose>
@@ -450,20 +449,41 @@
   
   <!--=== CSS UTILITIES ===-->
   
- <xsl:function name="css:getPropertyValue" as="xs:string?">
-   <xsl:param name="css" as="element(css:css)?"/>
-   <xsl:param name="name" as="xs:string"/>
-   <xsl:variable name="property" select="css:getProperty($css, $name)" as="element()*"/>
-   <xsl:variable name="property.last.child" select="$property[last()]/*" as="element()?"/>
-   <xsl:choose>
-     <xsl:when test="$property.last.child/self::css:dimension">
-       <xsl:sequence select="concat($property.last.child, $property.last.child/@unit)"/>
-     </xsl:when>
-     <xsl:when test="count($property.last.child) != 0">
-       <xsl:sequence select="local-name($property.last.child)"/>
-     </xsl:when>
-   </xsl:choose>
- </xsl:function>
+  <!--
+    FIXME : this is completly wrong, but it works for the cases we have.
+    TODO : NEED GLOBAL REFACTORING ! actually the full XSL needs it :
+      - take into account every multivalued properties (padding, margin) not only borders
+      - parse the css to really get the good values when twice (last one has precedancy) -->
+  
+  <!--Get the value of a property-->
+  <!--If the property doesn't exist return the empty string-->
+  <xsl:function name="css:getPropertyValue" as="xs:string">
+    <xsl:param name="css" as="element(css:css)?"/>
+    <xsl:param name="name" as="xs:string"/>
+    <xsl:variable name="property" select="css:getProperty($css, $name)" as="element()*"/>
+    <xsl:choose>
+      <!--Single properties values (which may appear several times) or sub-properties (like border-top-style under border-ruleset)-->
+      <xsl:when test="count(distinct-values($property/local-name(.))) = 1">
+        <xsl:variable name="value" as="xs:string*">
+          <xsl:apply-templates select="$property[last()]/css:*" mode="css:parsed-to-string"/>
+        </xsl:variable>
+        <xsl:value-of select="normalize-space(string-join($value, ''))"/>
+      </xsl:when>
+      <!--Multivalued property value like padding, border-style -->
+      <xsl:otherwise>
+        <!--assume : properties are in the good css defined order : top, right, left, right-->
+        <xsl:variable name="values" as="xs:string*">
+          <xsl:for-each select="$property/*">
+            <xsl:variable name="value" as="xs:string?">
+              <xsl:apply-templates select="$property/css:*" mode="css:parsed-to-string"/>
+            </xsl:variable>
+            <xsl:value-of select="normalize-space($value)"/>
+          </xsl:for-each>
+        </xsl:variable>
+        <xsl:value-of select="string-join($values, ' ')"/>
+      </xsl:otherwise>
+    </xsl:choose>
+  </xsl:function>
   
   <xsl:function name="css:getPropertyName" as="xs:string">
     <xsl:param name="property" as="element(*)"/> <!--ex : <css:text-align-ruleset>-->
@@ -473,12 +493,92 @@
   <xsl:function name="css:getProperty" as="element()*">
     <xsl:param name="css" as="element(css:css)?"/>
     <xsl:param name="name" as="xs:string"/>
-    <xsl:sequence select="$css/css:*[css:getPropertyName(.) = $name]/*"/>
+    <!--<xsl:choose>
+      <!-\-Single properties (ruleset property)-\->
+      <xsl:when test="$css/css:*[local-name() = concat($name, '-ruleset')]">
+        <xsl:sequence select="$css/css:*[local-name() = concat($name, '-ruleset')]"/>
+      </xsl:when>
+      <!-\-Multivalued property : look sub-properties within ruleset (ex : border-style-ruleset has border-top-style child property)-\->
+      <xsl:otherwise>
+        <xsl:sequence select="$css/css:*/css:*[local-name() = $name]"/>
+      </xsl:otherwise>
+    </xsl:choose>-->
+    <xsl:sequence select="$css/css:*/css:*[local-name() = $name]"/>
   </xsl:function>
   
   <xsl:function name="css:getProperties" as="element()*">
     <xsl:param name="css" as="element(css:css)?"/>
     <xsl:sequence select="$css/*"/>
   </xsl:function>
+  
+  <!--==== css:parsed-to-string ====-->
+  
+  <xd:p>Convert back css:css element to css string</xd:p>
+  <xsl:function name="css:parsed-to-string" as="xs:string">
+    <xsl:param name="css" as="element(css:css)"/>
+    <xsl:variable name="css" as="xs:string*">
+      <xsl:apply-templates select="$css" mode="css:parsed-to-string"/>
+    </xsl:variable>
+    <xsl:value-of select="normalize-space(string-join($css, ''))"/>
+  </xsl:function>
+  
+  <!--FIXME : border color is lost here (and border-with / border-style are normalized to 1px solid)--> 
+  <xsl:template match="css:css" mode="css:parsed-to-string">
+    <xsl:choose>
+      <xsl:when test="css:showAllBorders(.)">
+        <xsl:text>border:1px solid; </xsl:text>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:if test="css:showBorderLeft(.)">
+          <xsl:text>border-left:1px solid; </xsl:text>
+        </xsl:if>
+        <xsl:if test="css:showBorderRight(.)">
+          <xsl:text>border-right:1px solid; </xsl:text>
+        </xsl:if>
+        <xsl:if test="css:showBorderTop(.)">
+          <xsl:text>border-top:1px solid; </xsl:text>
+        </xsl:if>
+        <xsl:if test="css:showBorderBottom(.)">
+          <xsl:text>border-bottom:1px solid; </xsl:text>
+        </xsl:if>
+      </xsl:otherwise>
+    </xsl:choose>
+    <xsl:apply-templates select="css:*" mode="#current"/>
+  </xsl:template>
+  
+  <!-- Example :
+  <css:text-align-ruleset>
+    <css:text-align>
+      <css:left/>
+    </css:text-align>
+  </css:text-align-ruleset>
+  <css:padding-ruleset>
+    <css:padding>
+      <css:dimension unit="px">0</css:dimension>
+    </css:padding>
+  </css:padding-ruleset>
+  -->
+  
+  <xsl:template match="css:*[starts-with(local-name(), 'border')]" mode="css:parsed-to-string" priority="2">
+    <!--rulset for border has already been processed in css:css match-->
+  </xsl:template>
+  
+  <xsl:template match="css:*[ends-with(local-name(), '-ruleset')]" mode="css:parsed-to-string" priority="1">
+    <xsl:apply-templates mode="#current"/>
+  </xsl:template>
+  
+  <xsl:template match="css:*[ends-with(local-name(), '-ruleset')]/css:*" mode="css:parsed-to-string">
+    <xsl:sequence select="concat(local-name(), ':')"/>
+    <xsl:apply-templates select="css:*" mode="#current"/>
+    <xsl:text>; </xsl:text>
+  </xsl:template>
+  
+  <xsl:template match="css:*[ends-with(local-name(), '-ruleset')]/css:*/css:*" mode="css:parsed-to-string">
+    <xsl:sequence select="local-name()"/>
+  </xsl:template>
+  
+  <xsl:template match="css:dimension" mode="css:parsed-to-string" priority="1">
+    <xsl:sequence select="concat(text(), @unit)"/>
+  </xsl:template>
   
 </xsl:stylesheet>
