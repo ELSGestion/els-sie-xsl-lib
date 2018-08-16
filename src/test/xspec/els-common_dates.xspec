@@ -64,18 +64,55 @@
   </x:scenario>
   
   <x:scenario label="els:getMonthNumFromVerbalizeMonth">
-    <x:call function="els:getMonthNumFromVerbalizeMonth"/>
-    <x:scenario label="Novembre">
-      <x:call>
-        <x:param name="monthString" select="'novembre'"/>
-      </x:call>
-      <x:expect label="11" select="11"/>
+    <x:scenario label="1 argument">
+      <x:call function="els:getMonthNumFromVerbalizeMonth"/>
+      <x:scenario label="novembre">
+        <x:call>
+          <x:param name="monthString" select="'novembre'"/>
+        </x:call>
+        <x:expect label="11" select="11"/>
+      </x:scenario>
+      <x:scenario label="NovemBre">
+        <x:call>
+          <x:param name="monthString" select="'NovemBre'"/>
+        </x:call>
+        <x:expect label="11" select="11"/>
+      </x:scenario>
+      <x:scenario label="foobar">
+        <x:call>
+          <x:param name="monthString" select="'foobar'"/>
+        </x:call>
+        <x:expect label="Error" select="0"/>
+      </x:scenario>
     </x:scenario>
-    <x:scenario label="foobar">
-      <x:call>
-        <x:param name="monthString" select="'foobar'"/>
+    <x:scenario label="2 arguments">
+      <x:call function="els:getMonthNumFromVerbalizeMonth">
+        <x:param name="months.verbalized" select="('janv(\.?|ier)','f[eé]vr(\.?|ier)')" position="2"/>
       </x:call>
-      <x:expect label="Error" select="0"/>
+      <x:scenario label="févr.">
+        <x:call>
+          <x:param name="monthString" select="'févr.'" position="1"/>
+        </x:call>
+        <x:expect label="2" select="2"/>
+      </x:scenario>
+      <x:scenario label="Février">
+        <x:call>
+          <x:param name="monthString" select="'Février'" position="1"/>
+        </x:call>
+        <x:expect label="2" select="2"/>
+      </x:scenario>
+      <x:scenario label="fevr">
+        <x:call>
+          <x:param name="monthString" select="'fevr'" position="1"/>
+        </x:call>
+        <x:expect label="2" select="2"/>
+      </x:scenario>
+      <x:scenario label="fevrier">
+        <x:call>
+          <x:param name="monthString" select="'fevrier'" position="1"/>
+        </x:call>
+        <x:expect label="2" select="2"/>
+      </x:scenario>
     </x:scenario>
   </x:scenario>
   
