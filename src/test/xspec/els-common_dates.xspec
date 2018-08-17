@@ -211,4 +211,38 @@
     <x:expect label="19750910" select="'10/09/1975'"/>
   </x:scenario>
   
+  <x:scenario label="els:getYearOn2Digits">
+    <x:call function="els:getYearOn2Digits"/>
+    <x:scenario label="/ 4 digit year to 2 digit year (1)">
+      <x:call>
+        <x:param name="annee" select="'2018'"/>
+      </x:call>
+      <x:expect label="18" select="'18'"/>
+    </x:scenario>
+    <x:scenario label="/ 4 digit year to 2 digit year (2)">
+      <x:call>
+        <x:param name="annee" select="'   2018  '"/>
+      </x:call>
+      <x:expect label="18" select="'18'"/>
+    </x:scenario>
+    <x:scenario label="/ not a 4 digits year">
+      <x:call>
+        <x:param name="annee" select="'2a18'"/>
+      </x:call>
+      <x:expect label="2a18" select="'2a18'"/>
+    </x:scenario>
+    <x:scenario label="/ more than 4 digits">
+      <x:call>
+        <x:param name="annee" select="'20180'"/>
+      </x:call>
+      <x:expect label="20180" select="'20180'"/>
+    </x:scenario>
+    <x:scenario label="/ less than 4 digits">
+      <x:call>
+        <x:param name="annee" select="'201'"/>
+      </x:call>
+      <x:expect label="201" select="'201'"/>
+    </x:scenario>
+  </x:scenario>
+  
 </x:description>

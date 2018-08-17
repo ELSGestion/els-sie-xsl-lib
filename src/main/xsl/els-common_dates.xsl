@@ -297,4 +297,19 @@
     <xsl:sequence select="els:date-string-to-number-slash($dateVerbalized, false())"/>
   </xsl:function>
   
+  <xd:doc>
+    <xd:desc>
+      <xd:p>Truncate a 4 digit year into a 2 digit year.</xd:p>
+    </xd:desc>
+    <xd:param name="year">[xs:string] The 4 digit year.</xd:param>
+    <xd:return>[xs:string] A 2 digit year (if the input year really was on 4 digits).</xd:return>
+  </xd:doc>
+  <xsl:function name="els:getYearOn2Digits" as="xs:string">
+    <xsl:param name="year" as="xs:string"/>
+    <xsl:variable name="year.norm" select="normalize-space($year)" as="xs:string"/>
+    <xsl:sequence select="if (string-length($year.norm) = 4 and $year.norm castable as xs:integer)
+                          then (substring($year.norm,3,2))
+                          else ($year)"/>
+  </xsl:function>
+  
 </xsl:stylesheet>
