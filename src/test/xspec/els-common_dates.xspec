@@ -225,7 +225,7 @@
       </x:call>
       <x:expect label="18" select="'18'"/>
     </x:scenario>
-    <x:scenario label="/ not a 4 digits year">
+    <x:scenario label="/ not a 4 digit year">
       <x:call>
         <x:param name="annee" select="'2a18'"/>
       </x:call>
@@ -242,6 +242,42 @@
         <x:param name="annee" select="'201'"/>
       </x:call>
       <x:expect label="201" select="'201'"/>
+    </x:scenario>
+  </x:scenario>
+  
+  <x:scenario label="els:getYearOn4Digits">
+    <x:call function="els:getYearOn4Digits">
+      <x:param name="currentCenturyLimit" select="70" position="2"/>
+    </x:call>
+    <x:scenario label="/ 2 digit year to 4 digit year / current century">
+      <x:call>
+        <x:param name="year" select="'18'" position="1"/>
+      </x:call>
+      <x:expect label="2018" select="'2018'"/>
+    </x:scenario>
+    <x:scenario label="/ 2 digit year to 4 digit year / preceding century">
+      <x:call>
+        <x:param name="year" select="'80'" position="1"/>
+      </x:call>
+      <x:expect label="1980" select="'1980'"/>
+    </x:scenario>
+    <x:scenario label="/ not a 2 digit year">
+      <x:call>
+        <x:param name="year" select="'2a'" position="1"/>
+      </x:call>
+      <x:expect label="2a" select="'2a'"/>
+    </x:scenario>
+    <x:scenario label="/ more than 2 digits">
+      <x:call>
+        <x:param name="year" select="'123'" position="1"/>
+      </x:call>
+      <x:expect label="123" select="'123'"/>
+    </x:scenario>
+    <x:scenario label="/ less than 2 digits">
+      <x:call>
+        <x:param name="year" select="'1'" position="1"/>
+      </x:call>
+      <x:expect label="2001" select="'2001'"/>
     </x:scenario>
   </x:scenario>
   

@@ -307,9 +307,40 @@
   <xsl:function name="els:getYearOn2Digits" as="xs:string">
     <xsl:param name="year" as="xs:string"/>
     <xsl:variable name="year.norm" select="normalize-space($year)" as="xs:string"/>
-    <xsl:sequence select="if (string-length($year.norm) = 4 and $year.norm castable as xs:integer)
-                          then (substring($year.norm,3,2))
-                          else ($year)"/>
+    <xsl:sequence select="if    (string-length($year.norm) = 4 and $year.norm castable as xs:integer)
+                          then  (substring($year.norm,3,2))
+                          else  ($year)"/>
+  </xsl:function>
+  
+  <xd:doc>
+    <xd:desc>
+      <xd:p>Transform a 2 digit year into a 4 digit year.</xd:p>
+      <xd:p>If the value of the supplied year is smaller than <xd:ref name="currentCenturyLimit" type="parameter">$currentCenturyLimit</xd:ref>, it is assumed that the year belongs to the current century.</xd:p>
+      <xd:p>If the value of the supplied year is bigger than <xd:ref name="currentCenturyLimit" type="parameter">$currentCenturyLimit</xd:ref>, it is assumed that the year belongs to the previous century.</xd:p>
+    </xd:desc>
+    <xd:param name="year">[xs:string] The 2 digit year.</xd:param>
+    <xd:param name="currentCenturyLimit">[xs:integer] The maximum value for a year to belong to the current century.</xd:param>
+    <xd:return>[xs:string] A 4 digit year, resolved according to <xd:ref name="currentCenturyLimit" type="parameter">$currentCenturyLimit</xd:ref>.</xd:return>
+  </xd:doc>
+  <xsl:function name="els:getYearOn4Digits" as="xs:string">
+    <xsl:param name="year" as="xs:string"/>
+    <xsl:param name="currentCenturyLimit" as="xs:integer"/>
+    <!-- Get the current century -->
+    <xsl:variable name="currentCentury" select="substring(string(year-from-date(current-date())),1,2)" as="xs:string"/>
+    <xsl:variable name="precedingCentury" select="string(($currentCentury cast as xs:integer) - 1)" as="xs:string"/>
+    <xsl:variable name="yearInt" select="if ($year castable as xs:positiveInteger) then ($year cast as xs:integer) else ()" as="xs:integer?"/>
+    <xsl:choose>
+      <xsl:when test="$yearInt &lt; 100">
+        <xsl:variable name="yearNorm" select="format-integer($yearInt,'##')" as="xs:string"/>
+        <xsl:sequence select="if    ($yearInt &lt; $currentCenturyLimit)
+                              then  (concat($currentCentury,$yearNorm))
+                              else  (concat($precedingCentury,$yearNorm))"/>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:message>[ERROR][els:getYearOn4Digits] The supplied year is not valid: <xsl:value-of select="$year"/>.</xsl:message>
+        <xsl:sequence select="$year"/>
+      </xsl:otherwise>
+    </xsl:choose>
   </xsl:function>
   
 </xsl:stylesheet>
