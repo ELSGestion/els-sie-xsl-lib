@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<x:description xmlns:x="http://www.jenitennison.com/xslt/xspec" 
+  xmlns:xslLib="http://www.lefebvre-sarrut.eu/ns/els/xslLib"
+  stylesheet="../../main/xsl/identity.xsl"
+  xslt-version="3.0">
+  
+  <x:scenario label="Identity Test">
+    <x:context mode="xslLib:identity">
+      <!--comment-->
+      <root a="foo" b="bar">
+        <element a="bar">
+          text <b>bold</b>
+        </element>
+        <?pi?>
+      </root>
+    </x:context>
+    <x:expect label="Same XML">
+      <!--comment-->
+      <root a="foo" b="bar">
+        <element a="bar">
+          text <b>bold</b>
+        </element>
+        <?pi?>
+      </root>
+    </x:expect>
+  </x:scenario>
+  
+</x:description>
