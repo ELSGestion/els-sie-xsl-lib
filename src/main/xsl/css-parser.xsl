@@ -98,6 +98,7 @@
     <xsl:for-each select="tokenize($raw-declarations, ';\s*')[matches(., '\S')]">
       <xsl:variable name="prop" select="substring-before(., ':')" />
       <xsl:variable name="val" select="replace(normalize-space(substring-after(., ':')), '\s?!important', '')" />
+      <!--FIXME : rgb(236, 239, 247) va géréner plusieurs val à cause des espaces...-->
       <xsl:variable name="val-seq" select="tokenize($val, ' ')" />
       <xsl:variable name="vals-count" select="count($val-seq)" />
       <xsl:choose>
@@ -457,6 +458,7 @@
   
   <!--Get the value of a property-->
   <!--If the property doesn't exist return the empty string-->
+  <!--FIXME : css:getPropertyValue($style.css, 'background-color') renvoi toujours "color"-->
   <xsl:function name="css:getPropertyValue" as="xs:string">
     <xsl:param name="css" as="element(css:css)?"/>
     <xsl:param name="name" as="xs:string"/>
