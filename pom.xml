@@ -23,7 +23,7 @@
   <dependencies>
     <!--Validation cals-->
     <dependency>
-      <scope>compile</scope> <!--(hack pour ne pas l'inclure dans le jar final)-->
+      <scope>provided</scope> <!--(hack pour ne pas l'inclure dans le jar final)-->
       <groupId>eu.els.sie.models</groupId>
       <artifactId>ext-models</artifactId>
       <version>1.0.3</version>
