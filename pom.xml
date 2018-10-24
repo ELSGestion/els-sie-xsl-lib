@@ -42,7 +42,7 @@
       <plugin>
         <groupId>top.marchand.xml.maven</groupId>
         <artifactId>catalogBuilder-maven-plugin</artifactId>
-        <version>2.0.0</version>
+        <version>3.0.0</version>
         <executions>
           <execution>
             <id>preparation</id>
