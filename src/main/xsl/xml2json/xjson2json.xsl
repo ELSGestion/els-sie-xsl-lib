@@ -15,7 +15,7 @@
     <xd:desc>
       <xd:p>This XSLT convert XJSON xml representation to text JSON</xd:p>
       <xd:p>It uses XSLT 3.0 xml-to-json($e) function, which need as $e a valid XJSON xml.</xd:p>
-      <xd:p>XJSON is the name we gave to the W3C xml JSON representation with schema : ext-models:/ext-models/w3c/xjson/schema-for-json.xsd</xd:p>
+      <xd:p>XJSON is the name we gave to the W3C xml JSON representation with schema : dependency:/eu.els.sie.models+ext-models/ext-models/w3c/xjson/schema-for-json.xsd</xd:p>
     </xd:desc>
   </xd:doc>
   

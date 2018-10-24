@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?><?xml-model href="ext-models:/ext-models/oasis/cals/cals.nvdl" type="application/xml" schematypens="http://purl.oclc.org/dsdl/nvdl/ns/structure/1.0"?>
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="idependency:/eu.els.sie.models+ext-models/ext-models/oasis/cals/cals.nvdl" type="application/xml" schematypens="http://purl.oclc.org/dsdl/nvdl/ns/structure/1.0"?>
 <table xmlns="http://docs.oasis-open.org/ns/oasis-exchange/table" id="FRCHS_2016-03_UI-FA0B2AD3C0D9F35BF8B349844A1E1A53_TABLE-2" tabstyle="FRCHS-style2" pgwide="1" frame="none" colsep="0" rowsep="0">
   <titre xmlns="local">Tableau-liste des filiales et des participations</titre>
   <tgroup tgroupstyle="tgroupstyle-1" cols="9">

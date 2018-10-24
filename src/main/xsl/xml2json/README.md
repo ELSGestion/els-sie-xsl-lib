@@ -4,7 +4,7 @@ The XSLT 3.0 specification add features to convert xml to json and json to xml.
 
 Thoses conversion use an intermediate XML format representating of a JSON file.
 
-XJSON is the name we gave to this format with schema : ext-models:/ext-models/w3c/xjson/schema-for-json.xsd
+XJSON is the name we gave to this format with schema : dependency:/eu.els.sie.models+ext-models/ext-models/w3c/xjson/schema-for-json.xsd
 
 
 ## XML to JSON

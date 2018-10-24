@@ -1,4 +1,4 @@
-<?xml-model href="ext-models:/ext-models/oasis/cals/cals.nvdl" type="application/xml" schematypens="http://purl.oclc.org/dsdl/nvdl/ns/structure/1.0"?>
+<?xml-model href="dependency:/eu.els.sie.models+ext-models/ext-models/oasis/cals/cals.nvdl" type="application/xml" schematypens="http://purl.oclc.org/dsdl/nvdl/ns/structure/1.0"?>
 <cals:table
   xmlns:cals="http://docs.oasis-open.org/ns/oasis-exchange/table"
   xmlns="local"

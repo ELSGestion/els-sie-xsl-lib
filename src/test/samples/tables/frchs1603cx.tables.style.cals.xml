@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?><?xml-model href="ext-models:/ext-models/oasis/cals/cals.nvdl" type="application/xml" schematypens="http://purl.oclc.org/dsdl/nvdl/ns/structure/1.0"?>
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="dependency:/eu.els.sie.models+ext-models/ext-models/oasis/cals/cals.nvdl" type="application/xml" schematypens="http://purl.oclc.org/dsdl/nvdl/ns/structure/1.0"?>
 <doc anneePublication="2016" classeDocument="frchs" createDt="2016-01-29T16:40:50.999+01:00" createUser="lcoudert" id="frchs_2016-03" lastUpdateDt="2016-03-30T20:54:50.999+02:00" lastUpdateUser="ext-lcoudert" numeroOrdre="03" status="BAP">
   <table xmlns="http://docs.oasis-open.org/ns/oasis-exchange/table" id="FRCHS_2016-03_UI-5C8BFDF2-8185-4D01-88B1-69BBC718AD65_TABLE_1" tabstyle="FRCHS-style1" frame="all" colsep="0" rowsep="0">
     <tgroup cols="2">

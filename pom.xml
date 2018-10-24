@@ -5,7 +5,7 @@
 
   <groupId>eu.els.sie.lib.xsl.common</groupId>
   <artifactId>xslLib</artifactId>
-  <version>3.2.4-SNAPSHOT</version>
+  <version>4.00.00-SNAPSHOT</version>
   <packaging>jar</packaging>
 
   <name>xslLib</name>
@@ -23,7 +23,7 @@
   <dependencies>
     <!--Validation cals-->
     <dependency>
-      <scope>provided</scope> <!--(hack pour ne pas l'inclure dans le jar final)-->
+      <scope>compile</scope> <!--(hack pour ne pas l'inclure dans le jar final)-->
       <groupId>eu.els.sie.models</groupId>
       <artifactId>ext-models</artifactId>
       <version>1.0.3</version>
@@ -42,7 +42,7 @@
       <plugin>
         <groupId>top.marchand.xml.maven</groupId>
         <artifactId>catalogBuilder-maven-plugin</artifactId>
-        <version>1.0.5</version>
+        <version>2.0.0</version>
         <executions>
           <execution>
             <id>preparation</id>

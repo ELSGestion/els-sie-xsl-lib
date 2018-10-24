@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<fn:map xmlns:fn="http://www.w3.org/2005/xpath-functions" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.w3.org/2005/xpath-functions ext-models:/ext-models/w3c/xjson/schema-for-json.xsd">
+<fn:map 
+  xmlns:fn="http://www.w3.org/2005/xpath-functions" 
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+  xsi:schemaLocation="http://www.w3.org/2005/xpath-functions dependency:/eu.els.sie.models+ext-models/ext-models/w3c/xjson/schema-for-json.xsd">
   <fn:map key="metadata">
     <fn:map key="system-id">
       <fn:string key="text">xxxx.xml</fn:string>

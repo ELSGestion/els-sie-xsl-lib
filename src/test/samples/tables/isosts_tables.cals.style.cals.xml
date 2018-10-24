@@ -2,7 +2,7 @@
   XML + CALS TABLES : http://www.iso.org/schema/isosts/cals/test/isosts_tables.cals.xml
   XML + HTML TABLES : http://www.iso.org/schema/isosts/cals/test/isosts_tables.xml
   HTML PREVIEW : http://www.iso.org/schema/isosts/cals/test/isosts_tables.html
---><?xml-model href="ext-models:/ext-models/oasis/cals/cals.nvdl" type="application/xml" schematypens="http://purl.oclc.org/dsdl/nvdl/ns/structure/1.0"?>
+--><?xml-model href="dependency:/eu.els.sie.models+ext-models/ext-models/oasis/cals/cals.nvdl" type="application/xml" schematypens="http://purl.oclc.org/dsdl/nvdl/ns/structure/1.0"?>
 <standard>
   <front>
     <iso-meta>

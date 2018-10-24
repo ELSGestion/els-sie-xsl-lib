@@ -67,7 +67,7 @@
   <xsl:template name="xslLib:add-schema-for-json.xsd.att">
     <xsl:attribute name="xsi:schemaLocation"
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      select="'http://www.w3.org/2005/xpath-functions ext-models:/ext-models/w3c/xjson/schema-for-json.xsd'"/>
+      select="'http://www.w3.org/2005/xpath-functions dependency:/eu.els.sie.models+ext-models/ext-models/w3c/xjson/schema-for-json.xsd'"/>
   </xsl:template>
   
   <xsl:template match="/*" mode="xslLib:anyXML2xjson">
