@@ -57,7 +57,7 @@
               <goal>catalog</goal>
             </goals>
             <configuration>
-              <rewriteToProtocol>cp</rewriteToProtocol>
+              <rewriteToProtocol>cp:/</rewriteToProtocol>
               <catalogFileName>target/generated-catalog/catalog.xml</catalogFileName>
             </configuration>
           </execution>
