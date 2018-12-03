@@ -750,10 +750,9 @@
       <xd:p>mode="rng:reorder"</xd:p>
       <xd:p>Réordonne les define d'un fichier RNG simplifié, en se basant sur le nom de l'élément</xd:p>
       <xd:p>Si 2 éléments ont le même nom, l'ordre pourra se faire sur la valeur d'un attribut, par défaut @class</xd:p>
+      <xd:p>Pour appeler ce mode directement en ligne de commande avec Saxon, utiliser -im:{http://relaxng.org/ns/structure/1.0}reorder</xd:p>
     </xd:desc>
   </xd:doc>
-  <!--FIXME : impossible d'appeler cette xsl avec initial mode = rng:reorder avec saxon
-  il semble que le nom du mode ne peut pas être préfixé-->
   
   <xsl:param name="rng:reorder_renameDefineRef" select="true()" as="xs:boolean"/>
   
