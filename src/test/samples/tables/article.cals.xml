@@ -1,0 +1,697 @@
+<RACINE>
+  <RACINEZOOM/>
+  <RACINEACTU/>
+  <RACINEACTUCC>
+    <ARTICLEACTUCC>
+      <THEME>
+        <CODE>15w713</CODE>
+        <LIBELLE>Alimentation : industries alimentaires diverses (5 branches)</LIBELLE>
+      </THEME>
+      <NUMEROSPARAGRAPHE>2050</NUMEROSPARAGRAPHE>
+      <TITRE>Salaires minima, primes et indemnités au 1er janvier 2018</TITRE>
+      <P CLASS="Txtrep3_dp15">Base de calcul des primes conventionnelles au 1<SUP>er</SUP> janvier 2018 (base 151,67 h/mois)</P>
+      <P>Ce barème, servant de base au calcul de certaines primes conventionnelles (primes de froid et de chaleur, prime d'ancienneté), est identique à celui fixé par l'avenant n° 8 du 2 mars 2017 étendu.</P>
+      <P>Pour plus de clarté, nous reprenons ci-après l'ensemble du barème applicable.</P>
+      <TBL>
+        <TABLE FRAME="ALL" COLSEP="0" ROWSEP="0">
+          <TGROUP COLS="4">
+            <COLSPEC COLNAME="C1"/>
+            <COLSPEC COLNAME="C2"/>
+            <COLSPEC COLNAME="C3"/>
+            <COLSPEC COLNAME="C4"/>
+            <THEAD>
+              <ROW>
+                <ENTRY BGCOLOR="#D8D8D8" ALIGN="CENTER" COLSEP="1">
+                  <P>Catégorie</P>
+                </ENTRY>
+                <ENTRY BGCOLOR="#D8D8D8" ALIGN="CENTER" COLSEP="1">
+                  <P>Niveau</P>
+                </ENTRY>
+                <ENTRY BGCOLOR="#D8D8D8" ALIGN="CENTER" COLSEP="1">
+                  <P>Échelon</P>
+                </ENTRY>
+                <ENTRY BGCOLOR="#D8D8D8" ALIGN="CENTER">
+                  <P>Montant</P>
+                </ENTRY>
+              </ROW>
+            </THEAD>
+            <TBODY>
+              <ROW>
+                <ENTRY ALIGN="CENTER" MOREROWS="8" COLSEP="1" ROWSEP="1">
+                  <P>Ouvriers/ Employés</P>
+                </ENTRY>
+                <ENTRY ALIGN="CENTER" MOREROWS="2" COLSEP="1" ROWSEP="1">
+                  <P>N 1</P>
+                </ENTRY>
+                <ENTRY ALIGN="CENTER" COLSEP="1" ROWSEP="1">
+                  <P>E 1</P>
+                </ENTRY>
+                <ENTRY ALIGN="CENTER" ROWSEP="1">
+                  <P>915  €</P>
+                </ENTRY>
+              </ROW>
+              <ROW>
+                <ENTRY ALIGN="CENTER" COLSEP="1" ROWSEP="1">
+                  <P>E 2</P>
+                </ENTRY>
+                <ENTRY ALIGN="CENTER" ROWSEP="1">
+                  <P>970  €</P>
+                </ENTRY>
+              </ROW>
+              <ROW>
+                <ENTRY ALIGN="CENTER" COLSEP="1" ROWSEP="1">
+                  <P>E 3</P>
+                </ENTRY>
+                <ENTRY ALIGN="CENTER" ROWSEP="1">
+                  <P>1 020  €</P>
+                </ENTRY>
+              </ROW>
+              <ROW>
+                <ENTRY ALIGN="CENTER" MOREROWS="2" COLSEP="1" ROWSEP="1">
+                  <P>N 2</P>
+                </ENTRY>
+                <ENTRY ALIGN="CENTER" COLSEP="1" ROWSEP="1">
+                  <P>E 1</P>
+                </ENTRY>
+                <ENTRY ALIGN="CENTER" ROWSEP="1">
+                  <P>1 075  €</P>
+                </ENTRY>
+              </ROW>
+              <ROW>
+                <ENTRY ALIGN="CENTER" COLSEP="1" ROWSEP="1">
+                  <P>E 2</P>
+                </ENTRY>
+                <ENTRY ALIGN="CENTER" ROWSEP="1">
+                  <P>1 085  €</P>
+                </ENTRY>
+              </ROW>
+              <ROW>
+                <ENTRY ALIGN="CENTER" COLSEP="1" ROWSEP="1">
+                  <P>E 3</P>
+                </ENTRY>
+                <ENTRY ALIGN="CENTER" ROWSEP="1">
+                  <P>1 090  €</P>
+                </ENTRY>
+              </ROW>
+              <ROW>
+                <ENTRY ALIGN="CENTER" MOREROWS="2" COLSEP="1" ROWSEP="1">
+                  <P>N 3</P>
+                </ENTRY>
+                <ENTRY ALIGN="CENTER" COLSEP="1" ROWSEP="1">
+                  <P>E 1</P>
+                </ENTRY>
+                <ENTRY ALIGN="CENTER" ROWSEP="1">
+                  <P>1 110  €</P>
+                </ENTRY>
+              </ROW>
+              <ROW>
+                <ENTRY ALIGN="CENTER" COLSEP="1" ROWSEP="1">
+                  <P>E 2</P>
+                </ENTRY>
+                <ENTRY ALIGN="CENTER" ROWSEP="1">
+                  <P>1 115  €</P>
+                </ENTRY>
+              </ROW>
+              <ROW>
+                <ENTRY ALIGN="CENTER" COLSEP="1" ROWSEP="1">
+                  <P>E 3</P>
+                </ENTRY>
+                <ENTRY ALIGN="CENTER" ROWSEP="1">
+                  <P>1 130  €</P>
+                </ENTRY>
+              </ROW>
+              <ROW>
+                <ENTRY ALIGN="CENTER" MOREROWS="5" COLSEP="1" ROWSEP="1">
+                  <P>TAM</P>
+                </ENTRY>
+                <ENTRY ALIGN="CENTER" MOREROWS="1" COLSEP="1" ROWSEP="1">
+                  <P>N 4</P>
+                </ENTRY>
+                <ENTRY ALIGN="CENTER" COLSEP="1" ROWSEP="1">
+                  <P>E 1</P>
+                </ENTRY>
+                <ENTRY ALIGN="CENTER" ROWSEP="1">
+                  <P>1 145  €</P>
+                </ENTRY>
+              </ROW>
+              <ROW>
+                <ENTRY ALIGN="CENTER" COLSEP="1" ROWSEP="1">
+                  <P>E 2</P>
+                </ENTRY>
+                <ENTRY ALIGN="CENTER" ROWSEP="1">
+                  <P>1 250  €</P>
+                </ENTRY>
+              </ROW>
+              <ROW>
+                <ENTRY ALIGN="CENTER" MOREROWS="1" COLSEP="1" ROWSEP="1">
+                  <P>N 5</P>
+                </ENTRY>
+                <ENTRY ALIGN="CENTER" COLSEP="1" ROWSEP="1">
+                  <P>E 1</P>
+                </ENTRY>
+                <ENTRY ALIGN="CENTER" ROWSEP="1">
+                  <P>1 350  €</P>
+                </ENTRY>
+              </ROW>
+              <ROW>
+                <ENTRY ALIGN="CENTER" COLSEP="1" ROWSEP="1">
+                  <P>E 2</P>
+                </ENTRY>
+                <ENTRY ALIGN="CENTER" ROWSEP="1">
+                  <P>1 455  €</P>
+                </ENTRY>
+              </ROW>
+              <ROW>
+                <ENTRY ALIGN="CENTER" MOREROWS="1" COLSEP="1" ROWSEP="1">
+                  <P>N 6</P>
+                </ENTRY>
+                <ENTRY ALIGN="CENTER" COLSEP="1" ROWSEP="1">
+                  <P>E 1</P>
+                </ENTRY>
+                <ENTRY ALIGN="CENTER" ROWSEP="1">
+                  <P>1 555  €</P>
+                </ENTRY>
+              </ROW>
+              <ROW>
+                <ENTRY ALIGN="CENTER" COLSEP="1">
+                  <P>E 2</P>
+                </ENTRY>
+                <ENTRY ALIGN="CENTER">
+                  <P>1 665  €</P>
+                </ENTRY>
+              </ROW>
+            </TBODY>
+          </TGROUP>
+        </TABLE>
+      </TBL>
+      <P CLASS="Txtrep3_dp15">Ressource brute mensuelle garantie hiérarchisée (RMGH) au 1<SUP>er</SUP> janvier 2018 (base 151,67 h/mois)</P>
+      <TBL>
+        <TABLE FRAME="ALL" COLSEP="0" ROWSEP="0">
+          <TGROUP COLS="4">
+            <COLSPEC COLNAME="C1"/>
+            <COLSPEC COLNAME="C2"/>
+            <COLSPEC COLNAME="C3"/>
+            <COLSPEC COLNAME="C4"/>
+            <THEAD>
+              <ROW>
+                <ENTRY BGCOLOR="#D8D8D8" ALIGN="CENTER" COLSEP="1">
+                  <P>Catégorie</P>
+                </ENTRY>
+                <ENTRY BGCOLOR="#D8D8D8" ALIGN="CENTER" COLSEP="1">
+                  <P>Niveau</P>
+                </ENTRY>
+                <ENTRY BGCOLOR="#D8D8D8" ALIGN="CENTER" COLSEP="1">
+                  <P>Échelon</P>
+                </ENTRY>
+                <ENTRY BGCOLOR="#D8D8D8" ALIGN="CENTER">
+                  <P>Montant</P>
+                </ENTRY>
+              </ROW>
+            </THEAD>
+            <TBODY>
+              <ROW>
+                <ENTRY ALIGN="CENTER" MOREROWS="8" COLSEP="1" ROWSEP="1">
+                  <P>Ouvriers/Employés</P>
+                </ENTRY>
+                <ENTRY ALIGN="CENTER" MOREROWS="2" COLSEP="1" ROWSEP="1">
+                  <P>N 1</P>
+                </ENTRY>
+                <ENTRY ALIGN="CENTER" COLSEP="1" ROWSEP="1">
+                  <P>E 1</P>
+                </ENTRY>
+                <ENTRY ALIGN="CENTER" ROWSEP="1">
+                  <P>1 501,47  €</P>
+                </ENTRY>
+              </ROW>
+              <ROW>
+                <ENTRY ALIGN="CENTER" COLSEP="1" ROWSEP="1">
+                  <P>E 2</P>
+                </ENTRY>
+                <ENTRY ALIGN="CENTER" ROWSEP="1">
+                  <P>1 510,57  €</P>
+                </ENTRY>
+              </ROW>
+              <ROW>
+                <ENTRY ALIGN="CENTER" COLSEP="1" ROWSEP="1">
+                  <P>E 3</P>
+                </ENTRY>
+                <ENTRY ALIGN="CENTER" ROWSEP="1">
+                  <P>1 523,59  €</P>
+                </ENTRY>
+              </ROW>
+              <ROW>
+                <ENTRY ALIGN="CENTER" MOREROWS="2" COLSEP="1" ROWSEP="1">
+                  <P>N 2</P>
+                </ENTRY>
+                <ENTRY ALIGN="CENTER" COLSEP="1" ROWSEP="1">
+                  <P>E 1</P>
+                </ENTRY>
+                <ENTRY ALIGN="CENTER" ROWSEP="1">
+                  <P>1 536,60  €</P>
+                </ENTRY>
+              </ROW>
+              <ROW>
+                <ENTRY ALIGN="CENTER" COLSEP="1" ROWSEP="1">
+                  <P>E 2</P>
+                </ENTRY>
+                <ENTRY ALIGN="CENTER" ROWSEP="1">
+                  <P>1 563,76  €</P>
+                </ENTRY>
+              </ROW>
+              <ROW>
+                <ENTRY ALIGN="CENTER" COLSEP="1" ROWSEP="1">
+                  <P>E 3</P>
+                </ENTRY>
+                <ENTRY ALIGN="CENTER" ROWSEP="1">
+                  <P>1 595,48  €</P>
+                </ENTRY>
+              </ROW>
+              <ROW>
+                <ENTRY ALIGN="CENTER" MOREROWS="2" COLSEP="1" ROWSEP="1">
+                  <P>N 3</P>
+                </ENTRY>
+                <ENTRY ALIGN="CENTER" COLSEP="1" ROWSEP="1">
+                  <P>E 1</P>
+                </ENTRY>
+                <ENTRY ALIGN="CENTER" ROWSEP="1">
+                  <P>1 627,20  €</P>
+                </ENTRY>
+              </ROW>
+              <ROW>
+                <ENTRY ALIGN="CENTER" COLSEP="1" ROWSEP="1">
+                  <P>E 2</P>
+                </ENTRY>
+                <ENTRY ALIGN="CENTER" ROWSEP="1">
+                  <P>1 663,15  €</P>
+                </ENTRY>
+              </ROW>
+              <ROW>
+                <ENTRY ALIGN="CENTER" COLSEP="1" ROWSEP="1">
+                  <P>E 3</P>
+                </ENTRY>
+                <ENTRY ALIGN="CENTER" ROWSEP="1">
+                  <P>1 699,09  €</P>
+                </ENTRY>
+              </ROW>
+              <ROW>
+                <ENTRY ALIGN="CENTER" MOREROWS="5" COLSEP="1" ROWSEP="1">
+                  <P>TAM</P>
+                </ENTRY>
+                <ENTRY ALIGN="CENTER" MOREROWS="1" COLSEP="1" ROWSEP="1">
+                  <P>N 4</P>
+                </ENTRY>
+                <ENTRY ALIGN="CENTER" COLSEP="1" ROWSEP="1">
+                  <P>E 1</P>
+                </ENTRY>
+                <ENTRY ALIGN="CENTER" ROWSEP="1">
+                  <P>1 733,32  €</P>
+                </ENTRY>
+              </ROW>
+              <ROW>
+                <ENTRY ALIGN="CENTER" COLSEP="1" ROWSEP="1">
+                  <P>E 2</P>
+                </ENTRY>
+                <ENTRY ALIGN="CENTER" ROWSEP="1">
+                  <P>1 819,94  €</P>
+                </ENTRY>
+              </ROW>
+              <ROW>
+                <ENTRY ALIGN="CENTER" MOREROWS="1" COLSEP="1" ROWSEP="1">
+                  <P>N 5</P>
+                </ENTRY>
+                <ENTRY ALIGN="CENTER" COLSEP="1" ROWSEP="1">
+                  <P>E 1</P>
+                </ENTRY>
+                <ENTRY ALIGN="CENTER" ROWSEP="1">
+                  <P>1 906,54  €</P>
+                </ENTRY>
+              </ROW>
+              <ROW>
+                <ENTRY ALIGN="CENTER" COLSEP="1" ROWSEP="1">
+                  <P>E 2</P>
+                </ENTRY>
+                <ENTRY ALIGN="CENTER" ROWSEP="1">
+                  <P>2 050,18  €</P>
+                </ENTRY>
+              </ROW>
+              <ROW>
+                <ENTRY ALIGN="CENTER" MOREROWS="1" COLSEP="1" ROWSEP="1">
+                  <P>N 6</P>
+                </ENTRY>
+                <ENTRY ALIGN="CENTER" COLSEP="1" ROWSEP="1">
+                  <P>E 1</P>
+                </ENTRY>
+                <ENTRY ALIGN="CENTER" ROWSEP="1">
+                  <P>2 193,83  €</P>
+                </ENTRY>
+              </ROW>
+              <ROW>
+                <ENTRY ALIGN="CENTER" COLSEP="1" ROWSEP="1">
+                  <P>E 2</P>
+                </ENTRY>
+                <ENTRY ALIGN="CENTER" ROWSEP="1">
+                  <P>2 442,04  €</P>
+                </ENTRY>
+              </ROW>
+              <ROW>
+                <ENTRY ALIGN="CENTER" MOREROWS="4" COLSEP="1" ROWSEP="1">
+                  <P>Cadres</P>
+                </ENTRY>
+                <ENTRY ALIGN="CENTER" MOREROWS="1" COLSEP="1" ROWSEP="1">
+                  <P>N 7</P>
+                </ENTRY>
+                <ENTRY ALIGN="CENTER" COLSEP="1" ROWSEP="1">
+                  <P>E 1</P>
+                </ENTRY>
+                <ENTRY ALIGN="CENTER" ROWSEP="1">
+                  <P>2 519,15  €</P>
+                </ENTRY>
+              </ROW>
+              <ROW>
+                <ENTRY ALIGN="CENTER" COLSEP="1" ROWSEP="1">
+                  <P>E 2</P>
+                </ENTRY>
+                <ENTRY ALIGN="CENTER" ROWSEP="1">
+                  <P>2 635,33  €</P>
+                </ENTRY>
+              </ROW>
+              <ROW>
+                <ENTRY ALIGN="CENTER" MOREROWS="1" COLSEP="1" ROWSEP="1">
+                  <P>N 8</P>
+                </ENTRY>
+                <ENTRY ALIGN="CENTER" COLSEP="1" ROWSEP="1">
+                  <P>E 1</P>
+                </ENTRY>
+                <ENTRY ALIGN="CENTER" ROWSEP="1">
+                  <P>2 751,48  €</P>
+                </ENTRY>
+              </ROW>
+              <ROW>
+                <ENTRY ALIGN="CENTER" COLSEP="1" ROWSEP="1">
+                  <P>E 2</P>
+                </ENTRY>
+                <ENTRY ALIGN="CENTER" ROWSEP="1">
+                  <P>3 735,89  €</P>
+                </ENTRY>
+              </ROW>
+              <ROW>
+                <ENTRY ALIGN="CENTER" COLSEP="1">
+                  <P>N 9</P>
+                </ENTRY>
+                <ENTRY ALIGN="CENTER" COLSEP="1">
+                  <P>E 1</P>
+                </ENTRY>
+                <ENTRY ALIGN="CENTER">
+                  <P>4 720,28  €</P>
+                </ENTRY>
+              </ROW>
+            </TBODY>
+          </TGROUP>
+        </TABLE>
+      </TBL>
+      <P CLASS="Txtrep3_dp15">Ressource brute conventionnelle annuelle (RCA) au 1<SUP>er</SUP> janvier 2018 (base 151,67 h/mois</P>
+      <TBL>
+        <TABLE FRAME="ALL" COLSEP="0" ROWSEP="0">
+          <TGROUP COLS="5">
+            <COLSPEC COLNAME="C1" COLWIDTH="28%"/>
+            <COLSPEC COLNAME="C2" COLWIDTH="39.0103%"/>
+            <COLSPEC COLNAME="C3" COLWIDTH="39.0103%"/>
+            <COLSPEC COLNAME="C4" COLWIDTH="39.0103%"/>
+            <COLSPEC COLNAME="C5" COLWIDTH="15.0103%"/>
+            <THEAD>
+              <ROW>
+                <ENTRY BGCOLOR="#D8D8D8" ALIGN="CENTER" MOREROWS="1" COLSEP="1" ROWSEP="1">
+                  <P>Catégorie</P>
+                </ENTRY>
+                <ENTRY BGCOLOR="#D8D8D8" ALIGN="CENTER" MOREROWS="1" COLSEP="1" ROWSEP="1">
+                  <P>Niveau</P>
+                </ENTRY>
+                <ENTRY BGCOLOR="#D8D8D8" ALIGN="CENTER" MOREROWS="1" COLSEP="1" ROWSEP="1">
+                  <P>Échelon</P>
+                </ENTRY>
+                <ENTRY BGCOLOR="#D8D8D8" ALIGN="CENTER" NAMEST="C4" NAMEEND="C5" COLSEP="1" ROWSEP="1">
+                  <P>Ancienneté</P>
+                </ENTRY>
+              </ROW>
+              <ROW>
+                <ENTRY BGCOLOR="#D8D8D8" ALIGN="CENTER" COLSEP="1">
+                  <P>≥ 1 an et &lt; 3 ans</P>
+                </ENTRY>
+                <ENTRY BGCOLOR="#D8D8D8" ALIGN="CENTER">
+                  <P>≥ 3 ans</P>
+                </ENTRY>
+              </ROW>
+            </THEAD>
+            <TBODY>
+              <ROW>
+                <ENTRY ALIGN="CENTER" MOREROWS="8" COLSEP="1" ROWSEP="1">
+                  <P>Ouvriers/Employés</P>
+                </ENTRY>
+                <ENTRY ALIGN="CENTER" MOREROWS="2" COLSEP="1" ROWSEP="1">
+                  <P>N 1</P>
+                </ENTRY>
+                <ENTRY ALIGN="CENTER" COLSEP="1" ROWSEP="1">
+                  <P>E 1</P>
+                </ENTRY>
+                <ENTRY ALIGN="CENTER" COLSEP="1" ROWSEP="1">
+                  <P>19 068,67 €</P>
+                </ENTRY>
+                <ENTRY ALIGN="CENTER" ROWSEP="1">
+                  <P>19 519,11 €</P>
+                </ENTRY>
+              </ROW>
+              <ROW>
+                <ENTRY ALIGN="CENTER" COLSEP="1" ROWSEP="1">
+                  <P>E 2</P>
+                </ENTRY>
+                <ENTRY ALIGN="CENTER" COLSEP="1" ROWSEP="1">
+                  <P>19 184,23 €</P>
+                </ENTRY>
+                <ENTRY ALIGN="CENTER" ROWSEP="1">
+                  <P>19 637,40 €</P>
+                </ENTRY>
+              </ROW>
+              <ROW>
+                <ENTRY ALIGN="CENTER" COLSEP="1" ROWSEP="1">
+                  <P>E 3</P>
+                </ENTRY>
+                <ENTRY ALIGN="CENTER" COLSEP="1" ROWSEP="1">
+                  <P>19 349,60 €</P>
+                </ENTRY>
+                <ENTRY ALIGN="CENTER" ROWSEP="1">
+                  <P>19 806,68 €</P>
+                </ENTRY>
+              </ROW>
+              <ROW>
+                <ENTRY ALIGN="CENTER" MOREROWS="2" COLSEP="1" ROWSEP="1">
+                  <P>N 2</P>
+                </ENTRY>
+                <ENTRY ALIGN="CENTER" COLSEP="1" ROWSEP="1">
+                  <P>E 1</P>
+                </ENTRY>
+                <ENTRY ALIGN="CENTER" COLSEP="1" ROWSEP="1">
+                  <P>19 514,85 €</P>
+                </ENTRY>
+                <ENTRY ALIGN="CENTER" ROWSEP="1">
+                  <P>19 975,83 €</P>
+                </ENTRY>
+              </ROW>
+              <ROW>
+                <ENTRY ALIGN="CENTER" COLSEP="1" ROWSEP="1">
+                  <P>E 2</P>
+                </ENTRY>
+                <ENTRY ALIGN="CENTER" COLSEP="1" ROWSEP="1">
+                  <P>19 859,75 €</P>
+                </ENTRY>
+                <ENTRY ALIGN="CENTER" ROWSEP="1">
+                  <P>20 328,88 €</P>
+                </ENTRY>
+              </ROW>
+              <ROW>
+                <ENTRY ALIGN="CENTER" COLSEP="1" ROWSEP="1">
+                  <P>E 3</P>
+                </ENTRY>
+                <ENTRY ALIGN="CENTER" COLSEP="1" ROWSEP="1">
+                  <P>20 262,65 €</P>
+                </ENTRY>
+                <ENTRY ALIGN="CENTER" ROWSEP="1">
+                  <P>20 741,29 €</P>
+                </ENTRY>
+              </ROW>
+              <ROW>
+                <ENTRY ALIGN="CENTER" MOREROWS="2" COLSEP="1" ROWSEP="1">
+                  <P>N 3</P>
+                </ENTRY>
+                <ENTRY ALIGN="CENTER" COLSEP="1" ROWSEP="1">
+                  <P>E 1</P>
+                </ENTRY>
+                <ENTRY ALIGN="CENTER" COLSEP="1" ROWSEP="1">
+                  <P>20 665,42 €</P>
+                </ENTRY>
+                <ENTRY ALIGN="CENTER" ROWSEP="1">
+                  <P>21 153,58 €</P>
+                </ENTRY>
+              </ROW>
+              <ROW>
+                <ENTRY ALIGN="CENTER" COLSEP="1" ROWSEP="1">
+                  <P>E 2</P>
+                </ENTRY>
+                <ENTRY ALIGN="CENTER" COLSEP="1" ROWSEP="1">
+                  <P>21 122,03 €</P>
+                </ENTRY>
+                <ENTRY ALIGN="CENTER" ROWSEP="1">
+                  <P>21 620,97 €</P>
+                </ENTRY>
+              </ROW>
+              <ROW>
+                <ENTRY ALIGN="CENTER" COLSEP="1" ROWSEP="1">
+                  <P>E 3</P>
+                </ENTRY>
+                <ENTRY ALIGN="CENTER" COLSEP="1" ROWSEP="1">
+                  <P>21 578,50 €</P>
+                </ENTRY>
+                <ENTRY ALIGN="CENTER" ROWSEP="1">
+                  <P>22 088,23 €</P>
+                </ENTRY>
+              </ROW>
+              <ROW>
+                <ENTRY ALIGN="CENTER" MOREROWS="5" COLSEP="1" ROWSEP="1">
+                  <P>TAM</P>
+                </ENTRY>
+                <ENTRY ALIGN="CENTER" MOREROWS="1" COLSEP="1" ROWSEP="1">
+                  <P>N 4</P>
+                </ENTRY>
+                <ENTRY ALIGN="CENTER" COLSEP="1" ROWSEP="1">
+                  <P>E 1</P>
+                </ENTRY>
+                <ENTRY ALIGN="CENTER" COLSEP="1" ROWSEP="1">
+                  <P>22 013,19 €</P>
+                </ENTRY>
+                <ENTRY ALIGN="CENTER" ROWSEP="1">
+                  <P>22 533,19 €</P>
+                </ENTRY>
+              </ROW>
+              <ROW>
+                <ENTRY ALIGN="CENTER" COLSEP="1" ROWSEP="1">
+                  <P>E 2</P>
+                </ENTRY>
+                <ENTRY ALIGN="CENTER" COLSEP="1" ROWSEP="1">
+                  <P>23 113,24 €</P>
+                </ENTRY>
+                <ENTRY ALIGN="CENTER" ROWSEP="1">
+                  <P>23 659,22 €</P>
+                </ENTRY>
+              </ROW>
+              <ROW>
+                <ENTRY ALIGN="CENTER" MOREROWS="1" COLSEP="1" ROWSEP="1">
+                  <P>N 5</P>
+                </ENTRY>
+                <ENTRY ALIGN="CENTER" COLSEP="1" ROWSEP="1">
+                  <P>E 1</P>
+                </ENTRY>
+                <ENTRY ALIGN="CENTER" COLSEP="1" ROWSEP="1">
+                  <P>24 213,03 €</P>
+                </ENTRY>
+                <ENTRY ALIGN="CENTER" ROWSEP="1">
+                  <P>24 784,99 €</P>
+                </ENTRY>
+              </ROW>
+              <ROW>
+                <ENTRY ALIGN="CENTER" COLSEP="1" ROWSEP="1">
+                  <P>E 2</P>
+                </ENTRY>
+                <ENTRY ALIGN="CENTER" COLSEP="1" ROWSEP="1">
+                  <P>26 037,27 €</P>
+                </ENTRY>
+                <ENTRY ALIGN="CENTER" ROWSEP="1">
+                  <P>26 652,33 €</P>
+                </ENTRY>
+              </ROW>
+              <ROW>
+                <ENTRY ALIGN="CENTER" MOREROWS="1" COLSEP="1" ROWSEP="1">
+                  <P>N 6</P>
+                </ENTRY>
+                <ENTRY ALIGN="CENTER" COLSEP="1" ROWSEP="1">
+                  <P>E 1</P>
+                </ENTRY>
+                <ENTRY ALIGN="CENTER" COLSEP="1" ROWSEP="1">
+                  <P>27 861,64 €</P>
+                </ENTRY>
+                <ENTRY ALIGN="CENTER" ROWSEP="1">
+                  <P>28 519,79 €</P>
+                </ENTRY>
+              </ROW>
+              <ROW>
+                <ENTRY ALIGN="CENTER" COLSEP="1" ROWSEP="1">
+                  <P>E 2</P>
+                </ENTRY>
+                <ENTRY ALIGN="CENTER" COLSEP="1" ROWSEP="1">
+                  <P>31 013,88 €</P>
+                </ENTRY>
+                <ENTRY ALIGN="CENTER" ROWSEP="1">
+                  <P>31 746,49 €</P>
+                </ENTRY>
+              </ROW>
+              <ROW>
+                <ENTRY ALIGN="CENTER" MOREROWS="4" COLSEP="1" ROWSEP="1">
+                  <P>Cadres</P>
+                </ENTRY>
+                <ENTRY ALIGN="CENTER" MOREROWS="1" COLSEP="1" ROWSEP="1">
+                  <P>N 7</P>
+                </ENTRY>
+                <ENTRY ALIGN="CENTER" COLSEP="1" ROWSEP="1">
+                  <P>E 1</P>
+                </ENTRY>
+                <ENTRY ALIGN="CENTER" NAMEST="C4" NAMEEND="C5" COLSEP="1" ROWSEP="1">
+                  <P>32 748,92 €</P>
+                </ENTRY>
+              </ROW>
+              <ROW>
+                <ENTRY ALIGN="CENTER" COLSEP="1" ROWSEP="1">
+                  <P>E 2</P>
+                </ENTRY>
+                <ENTRY ALIGN="CENTER" NAMEST="C4" NAMEEND="C5" COLSEP="1" ROWSEP="1">
+                  <P>34 259,30 €</P>
+                </ENTRY>
+              </ROW>
+              <ROW>
+                <ENTRY ALIGN="CENTER" MOREROWS="1" COLSEP="1" ROWSEP="1">
+                  <P>N 8</P>
+                </ENTRY>
+                <ENTRY ALIGN="CENTER" COLSEP="1" ROWSEP="1">
+                  <P>E 1</P>
+                </ENTRY>
+                <ENTRY ALIGN="CENTER" NAMEST="C4" NAMEEND="C5" COLSEP="1" ROWSEP="1">
+                  <P>35 769,28 €</P>
+                </ENTRY>
+              </ROW>
+              <ROW>
+                <ENTRY ALIGN="CENTER" COLSEP="1" ROWSEP="1">
+                  <P>E 2</P>
+                </ENTRY>
+                <ENTRY ALIGN="CENTER" NAMEST="C4" NAMEEND="C5" COLSEP="1" ROWSEP="1">
+                  <P>48 566,51 €</P>
+                </ENTRY>
+              </ROW>
+              <ROW>
+                <ENTRY ALIGN="CENTER" COLSEP="1">
+                  <P>N 9</P>
+                </ENTRY>
+                <ENTRY ALIGN="CENTER" COLSEP="1">
+                  <P>E 1</P>
+                </ENTRY>
+                <ENTRY ALIGN="CENTER" NAMEST="C4" NAMEEND="C5" COLSEP="1">
+                  <P>61 363,60 €</P>
+                </ENTRY>
+              </ROW>
+            </TBODY>
+          </TGROUP>
+        </TABLE>
+      </TBL>
+      <P CLASS="Txtrep3_dp15">Indemnité d'habillage et de déshabillage</P>
+      <P>Le montant de cette indemnité est fixé à 8 € au 1<SUP>er</SUP> janvier 2018.</P>
+      <SIGNATURE/>
+    </ARTICLEACTUCC>
+  </RACINEACTUCC>
+  <RACINEARRETCC/>
+</RACINE>
