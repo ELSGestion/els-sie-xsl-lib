@@ -168,6 +168,11 @@
       satisfies not(rng:isInline($rngElement, $rngParent))"/>
   </xsl:function>
   
+  <xsl:function name="rng:refIsCompulsary" as="xs:boolean">
+    <xsl:param name="ref" as="element(rng:ref)"/>
+    <xsl:sequence select="not($ref/ancestor::optional) and not($ref/ancestor::zeroOrMore) and not($ref/ancestor::choice)"/>
+  </xsl:function>
+    
   <xsl:function name="rng:defineHasCircularRef" as="xs:boolean">
     <xsl:param name="define" as="element(define)"/>
     <xsl:variable name="define.name" select="$define/@name" as="xs:string"/>
