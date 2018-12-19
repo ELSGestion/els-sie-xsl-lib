@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?xml-model href="dependency:/eu.els.sie.models+ext-models/ext-models/oasis/cals/cals.nvdl" type="application/xml" schematypens="http://purl.oclc.org/dsdl/nvdl/ns/structure/1.0"?>
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head></head>
   <body>
@@ -10,9 +9,9 @@
           <colspec colname="c2" colwidth="25%"/>
           <colspec colname="c3" colwidth="25%"/>
           <colspec colname="c4" colwidth="25%"/>
-          <thead>
+          <thead valign="middle">
             <row>
-              <entry align="left" colsep="1" rowsep="1">&#x00A0;</entry>
+              <entry align="left" colsep="1" rowsep="1"> </entry>
               <entry colsep="1" rowsep="1">
                 <p xmlns="http://www.w3.org/1999/xhtml">Avant</p>
                 <p xmlns="http://www.w3.org/1999/xhtml">le Règl. ANC 2015-05</p>
@@ -27,7 +26,7 @@
               </entry>
             </row>
           </thead>
-          <tbody>
+          <tbody valign="middle">
             <row>
               <entry colsep="1" rowsep="1">
                 <p xmlns="http://www.w3.org/1999/xhtml">Gains de change sur dettes et créances commerciales</p>

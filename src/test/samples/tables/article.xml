@@ -1,4 +1,3 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <RACINE>
   <RACINEZOOM/>
   <RACINEACTU/>
@@ -9,22 +8,22 @@
         <LIBELLE>Alimentation : industries alimentaires diverses (5 branches)</LIBELLE>
       </THEME>
       <NUMEROSPARAGRAPHE>2050</NUMEROSPARAGRAPHE>
-      <TITRE>Salaires minima, primes et indemnit&eacute;s au 1er janvier 2018</TITRE>
+      <TITRE>Salaires minima, primes et indemnités au 1er janvier 2018</TITRE>
       <P CLASS="Txtrep3_dp15">Base de calcul des primes conventionnelles au 1<SUP>er</SUP> janvier 2018 (base 151,67 h/mois)</P>
-      <P>Ce bar&egrave;me, servant de base au calcul de certaines primes conventionnelles (primes de froid et de chaleur, prime d'anciennet&eacute;), est identique &agrave; celui fix&eacute; par l'avenant n&deg;&nbsp;8 du 2 mars 2017 &eacute;tendu.</P>
-      <P>Pour plus de clart&eacute;, nous reprenons ci-apr&egrave;s l'ensemble du bar&egrave;me applicable.</P>
+      <P>Ce barême, servant de base au calcul de certaines primes conventionnelles (primes de froid et de chaleur, prime d'ancienneté), est identique à celui fixé par l'avenant n°&#160;8 du 2 mars 2017 étendu.</P>
+      <P>Pour plus de clarté, nous reprenons ci-aprês l'ensemble du barême applicable.</P>
       <TBL>
         <TABLE BORDER="1" CELLPADDING="1" CELLSPACING="1" STYLE="width: 450px;">
           <THEAD>
             <TR>
               <TH STYLE="background-color: #d8d8d8; text-align: center;">
-                <P>Cat&eacute;gorie</P>
+                <P>Catégorie</P>
               </TH>
               <TH STYLE="background-color: #d8d8d8; text-align: center;">
                 <P>Niveau</P>
               </TH>
               <TH STYLE="background-color: #d8d8d8; text-align: center;">
-                <P>&Eacute;chelon</P>
+                <P>échelon</P>
               </TH>
               <TH STYLE="background-color: #d8d8d8; text-align: center;">
                 <P>Montant</P>
@@ -33,7 +32,7 @@
           </THEAD>
           <TR>
             <TD STYLE="text-align:center;" ROWSPAN="9">
-              <P>Ouvriers/ Employ&eacute;s</P>
+              <P>Ouvriers/ Employés</P>
             </TD>
             <TD STYLE="text-align:center;" ROWSPAN="3">
               <P>N 1</P>
@@ -42,7 +41,7 @@
               <P>E 1</P>
             </TD>
             <TD STYLE="text-align:center;">
-              <P>915&nbsp;&nbsp;&euro;</P>
+              <P>915&#160;&#160;€</P>
             </TD>
           </TR>
           <TR>
@@ -50,7 +49,7 @@
               <P>E 2</P>
             </TD>
             <TD STYLE="text-align:center;">
-              <P>970&nbsp; &euro;</P>
+              <P>970&#160; €</P>
             </TD>
           </TR>
           <TR>
@@ -58,7 +57,7 @@
               <P>E 3</P>
             </TD>
             <TD STYLE="text-align:center;">
-              <P>1 020&nbsp; &euro;</P>
+              <P>1 020&#160; €</P>
             </TD>
           </TR>
           <TR>
@@ -69,7 +68,7 @@
               <P>E 1</P>
             </TD>
             <TD STYLE="text-align:center;">
-              <P>1 075&nbsp; &euro;</P>
+              <P>1 075&#160; €</P>
             </TD>
           </TR>
           <TR>
@@ -77,7 +76,7 @@
               <P>E 2</P>
             </TD>
             <TD STYLE="text-align:center;">
-              <P>1 085&nbsp; &euro;</P>
+              <P>1 085&#160; €</P>
             </TD>
           </TR>
           <TR>
@@ -85,7 +84,7 @@
               <P>E 3</P>
             </TD>
             <TD STYLE="text-align:center;">
-              <P>1 090&nbsp; &euro;</P>
+              <P>1 090&#160; €</P>
             </TD>
           </TR>
           <TR>
@@ -96,7 +95,7 @@
               <P>E 1</P>
             </TD>
             <TD STYLE="text-align:center;">
-              <P>1&nbsp;110&nbsp; &euro;</P>
+              <P>1&#160;110&#160; €</P>
             </TD>
           </TR>
           <TR>
@@ -104,7 +103,7 @@
               <P>E 2</P>
             </TD>
             <TD STYLE="text-align:center;">
-              <P>1&nbsp;115&nbsp; &euro;</P>
+              <P>1&#160;115&#160; €</P>
             </TD>
           </TR>
           <TR>
@@ -112,7 +111,7 @@
               <P>E 3</P>
             </TD>
             <TD STYLE="text-align:center;">
-              <P>1&nbsp;130&nbsp; &euro;</P>
+              <P>1&#160;130&#160; €</P>
             </TD>
           </TR>
           <TR>
@@ -126,7 +125,7 @@
               <P>E 1</P>
             </TD>
             <TD STYLE="text-align:center;">
-              <P>1&nbsp;145&nbsp; &euro;</P>
+              <P>1&#160;145&#160; €</P>
             </TD>
           </TR>
           <TR>
@@ -134,7 +133,7 @@
               <P>E 2</P>
             </TD>
             <TD STYLE="text-align:center;">
-              <P>1&nbsp;250&nbsp; &euro;</P>
+              <P>1&#160;250&#160; €</P>
             </TD>
           </TR>
           <TR>
@@ -145,7 +144,7 @@
               <P>E 1</P>
             </TD>
             <TD STYLE="text-align:center;">
-              <P>1&nbsp;350&nbsp; &euro;</P>
+              <P>1&#160;350&#160; €</P>
             </TD>
           </TR>
           <TR>
@@ -153,7 +152,7 @@
               <P>E 2</P>
             </TD>
             <TD STYLE="text-align:center;">
-              <P>1&nbsp;455&nbsp; &euro;</P>
+              <P>1&#160;455&#160; €</P>
             </TD>
           </TR>
           <TR>
@@ -164,7 +163,7 @@
               <P>E 1</P>
             </TD>
             <TD STYLE="text-align:center;">
-              <P>1&nbsp;555&nbsp; &euro;</P>
+              <P>1&#160;555&#160; €</P>
             </TD>
           </TR>
           <TR>
@@ -172,24 +171,24 @@
               <P>E 2</P>
             </TD>
             <TD STYLE="text-align:center;">
-              <P>1&nbsp;665&nbsp; &euro;</P>
+              <P>1&#160;665&#160; €</P>
             </TD>
           </TR>
         </TABLE>
       </TBL>
-      <P CLASS="Txtrep3_dp15">Ressource brute mensuelle garantie hi&eacute;rarchis&eacute;e&nbsp;(RMGH) au 1<SUP>er</SUP> janvier 2018 (base 151,67 h/mois)</P>
+      <P CLASS="Txtrep3_dp15">Ressource brute mensuelle garantie hiérarchisée&#160;(RMGH) au 1<SUP>er</SUP> janvier 2018 (base 151,67 h/mois)</P>
       <TBL>
         <TABLE BORDER="1" CELLPADDING="1" CELLSPACING="1" STYLE="width: 450px;">
           <THEAD>
             <TR>
               <TH STYLE="background-color: #d8d8d8; text-align: center;">
-                <P>Cat&eacute;gorie</P>
+                <P>Catégorie</P>
               </TH>
               <TH STYLE="background-color: #d8d8d8; text-align: center;">
                 <P>Niveau</P>
               </TH>
               <TH STYLE="background-color: #d8d8d8; text-align: center;">
-                <P>&Eacute;chelon</P>
+                <P>échelon</P>
               </TH>
               <TH STYLE="background-color: #d8d8d8; text-align: center;">
                 <P>Montant</P>
@@ -198,7 +197,7 @@
           </THEAD>
           <TR>
             <TD STYLE="text-align:center;" ROWSPAN="9">
-              <P>Ouvriers/Employ&eacute;s</P>
+              <P>Ouvriers/Employés</P>
             </TD>
             <TD STYLE="text-align:center;" ROWSPAN="3">
               <P>N 1</P>
@@ -207,7 +206,7 @@
               <P>E 1</P>
             </TD>
             <TD STYLE="text-align:center;">
-              <P>1 501,47&nbsp;&nbsp;&euro;</P>
+              <P>1 501,47&#160;&#160;€</P>
             </TD>
           </TR>
           <TR STYLE="text-align:center;">
@@ -215,7 +214,7 @@
               <P>E 2</P>
             </TD>
             <TD STYLE="text-align:center;">
-              <P>1 510,57&nbsp; &euro;</P>
+              <P>1 510,57&#160; €</P>
             </TD>
           </TR>
           <TR STYLE="text-align:center;">
@@ -223,7 +222,7 @@
               <P>E 3</P>
             </TD>
             <TD STYLE="text-align:center;">
-              <P>1 523,59&nbsp; &euro;</P>
+              <P>1 523,59&#160; €</P>
             </TD>
           </TR>
           <TR STYLE="text-align:center;">
@@ -234,7 +233,7 @@
               <P>E 1</P>
             </TD>
             <TD STYLE="text-align:center;">
-              <P>1 536,60&nbsp; &euro;</P>
+              <P>1 536,60&#160; €</P>
             </TD>
           </TR>
           <TR STYLE="text-align:center;">
@@ -242,7 +241,7 @@
               <P>E 2</P>
             </TD>
             <TD STYLE="text-align:center;">
-              <P>1 563,76&nbsp; &euro;</P>
+              <P>1 563,76&#160; €</P>
             </TD>
           </TR>
           <TR STYLE="text-align:center;">
@@ -250,7 +249,7 @@
               <P>E 3</P>
             </TD>
             <TD STYLE="text-align:center;">
-              <P>1 595,48&nbsp; &euro;</P>
+              <P>1 595,48&#160; €</P>
             </TD>
           </TR>
           <TR STYLE="text-align:center;">
@@ -261,7 +260,7 @@
               <P>E 1</P>
             </TD>
             <TD STYLE="text-align:center;">
-              <P>1 627,20&nbsp; &euro;</P>
+              <P>1 627,20&#160; €</P>
             </TD>
           </TR>
           <TR STYLE="text-align:center;">
@@ -269,7 +268,7 @@
               <P>E 2</P>
             </TD>
             <TD STYLE="text-align:center;">
-              <P>1 663,15&nbsp; &euro;</P>
+              <P>1 663,15&#160; €</P>
             </TD>
           </TR>
           <TR STYLE="text-align:center;">
@@ -277,7 +276,7 @@
               <P>E 3</P>
             </TD>
             <TD STYLE="text-align:center;">
-              <P>1 699,09&nbsp; &euro;</P>
+              <P>1 699,09&#160; €</P>
             </TD>
           </TR>
           <TR STYLE="text-align:center;">
@@ -291,7 +290,7 @@
               <P>E 1</P>
             </TD>
             <TD STYLE="text-align:center;">
-              <P>1 733,32&nbsp; &euro;</P>
+              <P>1 733,32&#160; €</P>
             </TD>
           </TR>
           <TR STYLE="text-align:center;">
@@ -299,7 +298,7 @@
               <P>E 2</P>
             </TD>
             <TD STYLE="text-align:center;">
-              <P>1 819,94&nbsp;&nbsp;&euro;</P>
+              <P>1 819,94&#160;&#160;€</P>
             </TD>
           </TR>
           <TR STYLE="text-align:center;">
@@ -310,7 +309,7 @@
               <P>E 1</P>
             </TD>
             <TD STYLE="text-align:center;">
-              <P>1 906,54&nbsp;&nbsp;&euro;</P>
+              <P>1 906,54&#160;&#160;€</P>
             </TD>
           </TR>
           <TR STYLE="text-align:center;">
@@ -318,7 +317,7 @@
               <P>E 2</P>
             </TD>
             <TD STYLE="text-align:center;">
-              <P>2 050,18&nbsp; &euro;</P>
+              <P>2 050,18&#160; €</P>
             </TD>
           </TR>
           <TR STYLE="text-align:center;">
@@ -329,7 +328,7 @@
               <P>E 1</P>
             </TD>
             <TD STYLE="text-align:center;">
-              <P>2 193,83&nbsp; &euro;</P>
+              <P>2 193,83&#160; €</P>
             </TD>
           </TR>
           <TR STYLE="text-align:center;">
@@ -337,7 +336,7 @@
               <P>E 2</P>
             </TD>
             <TD STYLE="text-align:center;">
-              <P>2 442,04&nbsp; &euro;</P>
+              <P>2 442,04&#160; €</P>
             </TD>
           </TR>
           <TR STYLE="text-align:center;">
@@ -351,7 +350,7 @@
               <P>E 1</P>
             </TD>
             <TD STYLE="text-align:center;">
-              <P>2 519,15&nbsp; &euro;</P>
+              <P>2 519,15&#160; €</P>
             </TD>
           </TR>
           <TR STYLE="text-align:center;">
@@ -359,7 +358,7 @@
               <P>E 2</P>
             </TD>
             <TD STYLE="text-align:center;">
-              <P>2 635,33&nbsp; &euro;</P>
+              <P>2 635,33&#160; €</P>
             </TD>
           </TR>
           <TR STYLE="text-align:center;">
@@ -370,7 +369,7 @@
               <P>E 1</P>
             </TD>
             <TD STYLE="text-align:center;">
-              <P>2 751,48&nbsp; &euro;</P>
+              <P>2 751,48&#160; €</P>
             </TD>
           </TR>
           <TR STYLE="text-align:center;">
@@ -378,7 +377,7 @@
               <P>E 2</P>
             </TD>
             <TD STYLE="text-align:center;">
-              <P>3 735,89&nbsp; &euro;</P>
+              <P>3 735,89&#160; €</P>
             </TD>
           </TR>
           <TR>
@@ -389,41 +388,41 @@
               <P>E 1</P>
             </TD>
             <TD STYLE="text-align:center;">
-              <P>4 720,28&nbsp; &euro;</P>
+              <P>4 720,28&#160; €</P>
             </TD>
           </TR>
         </TABLE>
       </TBL>
-      <P CLASS="Txtrep3_dp15">Ressource brute conventionnelle annuelle (RCA)&nbsp;au 1<SUP>er</SUP> janvier 2018 (base 151,67 h/mois</P>
+      <P CLASS="Txtrep3_dp15">Ressource brute conventionnelle annuelle (RCA)&#160;au 1<SUP>er</SUP> janvier 2018 (base 151,67 h/mois</P>
       <TBL>
         <TABLE BORDER="1" CELLPADDING="1" CELLSPACING="1" STYLE="width: 450px;">
           <THEAD>
             <TR>
               <TH ROWSPAN="2" STYLE="background-color: #d8d8d8; text-align: center;">
-                <P>Cat&eacute;gorie</P>
+                <P>Catégorie</P>
               </TH>
               <TH ROWSPAN="2" STYLE="background-color: #d8d8d8; text-align: center;">
                 <P>Niveau</P>
               </TH>
               <TH ROWSPAN="2" STYLE="background-color: #d8d8d8; text-align: center;">
-                <P>&Eacute;chelon</P>
+                <P>échelon</P>
               </TH>
               <TH COLSPAN="2" STYLE="background-color: #d8d8d8; text-align: center;">
-                <P>Anciennet&eacute;</P>
+                <P>Ancienneté</P>
               </TH>
             </TR>
             <TR>
               <TH STYLE="background-color: #d8d8d8; text-align: center;">
-                <P>&ge; 1 an et &lt; 3 ans</P>
+                <P>>= 1 an et &lt; 3 ans</P>
               </TH>
               <TH STYLE="background-color: #d8d8d8; text-align: center;">
-                <P>&ge; 3 ans</P>
+                <P>>= 3 ans</P>
               </TH>
             </TR>
           </THEAD>
           <TR>
             <TD STYLE="width:28%; text-align:center;" ROWSPAN="9">
-              <P>Ouvriers/Employ&eacute;s</P>
+              <P>Ouvriers/Employés</P>
             </TD>
             <TD STYLE="width:12%; text-align:center;" ROWSPAN="3">
               <P>N 1</P>
@@ -432,10 +431,10 @@
               <P>E 1</P>
             </TD>
             <TD STYLE="width:24%; text-align:center;">
-              <P>19 068,67 &euro;</P>
+              <P>19 068,67 €</P>
             </TD>
             <TD STYLE="width:15.0103%; text-align:center;">
-              <P>19&nbsp;519,11 &euro;</P>
+              <P>19&#160;519,11 €</P>
             </TD>
           </TR>
           <TR>
@@ -443,10 +442,10 @@
               <P>E 2</P>
             </TD>
             <TD STYLE="width:24%; text-align:center;">
-              <P>19&nbsp;184,23 &euro;</P>
+              <P>19&#160;184,23 €</P>
             </TD>
             <TD STYLE="width:15.0103%; text-align:center;">
-              <P>19&nbsp;637,40 &euro;</P>
+              <P>19&#160;637,40 €</P>
             </TD>
           </TR>
           <TR>
@@ -454,10 +453,10 @@
               <P>E 3</P>
             </TD>
             <TD STYLE="width:24%; text-align:center;">
-              <P>19&nbsp;349,60 &euro;</P>
+              <P>19&#160;349,60 €</P>
             </TD>
             <TD STYLE="width:15.0103%; text-align:center;">
-              <P>19&nbsp;806,68 &euro;</P>
+              <P>19&#160;806,68 €</P>
             </TD>
           </TR>
           <TR>
@@ -468,10 +467,10 @@
               <P>E 1</P>
             </TD>
             <TD STYLE="width:24%; text-align:center;">
-              <P>19&nbsp;514,85 &euro;</P>
+              <P>19&#160;514,85 €</P>
             </TD>
             <TD STYLE="width:15.0103%; text-align:center;">
-              <P>19&nbsp;975,83 &euro;</P>
+              <P>19&#160;975,83 €</P>
             </TD>
           </TR>
           <TR>
@@ -479,10 +478,10 @@
               <P>E 2</P>
             </TD>
             <TD STYLE="width:24%; text-align:center;">
-              <P>19&nbsp;859,75 &euro;</P>
+              <P>19&#160;859,75 €</P>
             </TD>
             <TD STYLE="width:15.0103%; text-align:center;">
-              <P>20 328,88 &euro;</P>
+              <P>20 328,88 €</P>
             </TD>
           </TR>
           <TR>
@@ -490,10 +489,10 @@
               <P>E 3</P>
             </TD>
             <TD STYLE="width:24%; text-align:center;">
-              <P>20 262,65 &euro;</P>
+              <P>20 262,65 €</P>
             </TD>
             <TD STYLE="width:15.0103%; text-align:center;">
-              <P>20 741,29 &euro;</P>
+              <P>20 741,29 €</P>
             </TD>
           </TR>
           <TR>
@@ -504,10 +503,10 @@
               <P>E 1</P>
             </TD>
             <TD STYLE="width:24%; text-align:center;">
-              <P>20 665,42 &euro;</P>
+              <P>20 665,42 €</P>
             </TD>
             <TD STYLE="width:15.0103%; text-align:center;">
-              <P>21 153,58 &euro;</P>
+              <P>21 153,58 €</P>
             </TD>
           </TR>
           <TR>
@@ -515,10 +514,10 @@
               <P>E 2</P>
             </TD>
             <TD STYLE="width:24%; text-align:center;">
-              <P>21 122,03 &euro;</P>
+              <P>21 122,03 €</P>
             </TD>
             <TD STYLE="width:15.0103%; text-align:center;">
-              <P>21 620,97 &euro;</P>
+              <P>21 620,97 €</P>
             </TD>
           </TR>
           <TR>
@@ -526,10 +525,10 @@
               <P>E 3</P>
             </TD>
             <TD STYLE="width:24%; text-align:center;">
-              <P>21 578,50 &euro;</P>
+              <P>21 578,50 €</P>
             </TD>
             <TD STYLE="width:15.0103%; text-align:center;">
-              <P>22 088,23 &euro;</P>
+              <P>22 088,23 €</P>
             </TD>
           </TR>
           <TR>
@@ -543,10 +542,10 @@
               <P>E 1</P>
             </TD>
             <TD STYLE="width:24%; text-align:center;">
-              <P>22 013,19 &euro;</P>
+              <P>22 013,19 €</P>
             </TD>
             <TD STYLE="width:15.0103%; text-align:center;">
-              <P>22 533,19 &euro;</P>
+              <P>22 533,19 €</P>
             </TD>
           </TR>
           <TR>
@@ -554,10 +553,10 @@
               <P>E 2</P>
             </TD>
             <TD STYLE="width:24%; text-align:center;">
-              <P>23 113,24 &euro;</P>
+              <P>23 113,24 €</P>
             </TD>
             <TD STYLE="width:15.0103%; text-align:center;">
-              <P>23 659,22 &euro;</P>
+              <P>23 659,22 €</P>
             </TD>
           </TR>
           <TR>
@@ -568,10 +567,10 @@
               <P>E 1</P>
             </TD>
             <TD STYLE="width:24%; text-align:center;">
-              <P>24 213,03 &euro;</P>
+              <P>24 213,03 €</P>
             </TD>
             <TD STYLE="width:15.0103%; text-align:center;">
-              <P>24 784,99 &euro;</P>
+              <P>24 784,99 €</P>
             </TD>
           </TR>
           <TR>
@@ -579,10 +578,10 @@
               <P>E 2</P>
             </TD>
             <TD STYLE="width:24%; text-align:center;">
-              <P>26 037,27 &euro;</P>
+              <P>26 037,27 €</P>
             </TD>
             <TD STYLE="width:15.0103%; text-align:center;">
-              <P>26 652,33 &euro;</P>
+              <P>26 652,33 €</P>
             </TD>
           </TR>
           <TR>
@@ -593,10 +592,10 @@
               <P>E 1</P>
             </TD>
             <TD STYLE="width:24%; text-align:center;">
-              <P>27 861,64 &euro;</P>
+              <P>27 861,64 €</P>
             </TD>
             <TD STYLE="width:15.0103%; text-align:center;">
-              <P>28 519,79 &euro;</P>
+              <P>28 519,79 €</P>
             </TD>
           </TR>
           <TR>
@@ -604,10 +603,10 @@
               <P>E 2</P>
             </TD>
             <TD STYLE="width:24%; text-align:center;">
-              <P>31 013,88 &euro;</P>
+              <P>31 013,88 €</P>
             </TD>
             <TD STYLE="width:15.0103%; text-align:center;">
-              <P>31 746,49 &euro;</P>
+              <P>31 746,49 €</P>
             </TD>
           </TR>
           <TR>
@@ -621,7 +620,7 @@
               <P>E 1</P>
             </TD>
             <TD STYLE="width:39.0103%; text-align:center;" COLSPAN="2">
-              <P>32 748,92 &euro;</P>
+              <P>32 748,92 €</P>
             </TD>
           </TR>
           <TR>
@@ -629,7 +628,7 @@
               <P>E 2</P>
             </TD>
             <TD STYLE="width:39.0103%; text-align:center;" COLSPAN="2">
-              <P>34 259,30&nbsp;&euro;</P>
+              <P>34 259,30&#160;€</P>
             </TD>
           </TR>
           <TR>
@@ -640,7 +639,7 @@
               <P>E 1</P>
             </TD>
             <TD STYLE="width:39.0103%; text-align:center;" COLSPAN="2">
-              <P>35 769,28 &euro;</P>
+              <P>35 769,28 €</P>
             </TD>
           </TR>
           <TR>
@@ -648,7 +647,7 @@
               <P>E 2</P>
             </TD>
             <TD STYLE="width:39.0103%; text-align:center;" COLSPAN="2">
-              <P>48 566,51 &euro;</P>
+              <P>48 566,51 €</P>
             </TD>
           </TR>
           <TR>
@@ -659,13 +658,13 @@
               <P>E 1</P>
             </TD>
             <TD STYLE="width:39.0103%; text-align:center;" COLSPAN="2">
-              <P>61 363,60 &euro;</P>
+              <P>61 363,60 €</P>
             </TD>
           </TR>
         </TABLE>
       </TBL>
-      <P CLASS="Txtrep3_dp15">Indemnit&eacute; d'habillage et de d&eacute;shabillage</P>
-      <P>Le montant de cette indemnit&eacute; est fix&eacute; &agrave; 8 &euro; au 1<SUP>er</SUP> janvier 2018.</P>
+      <P CLASS="Txtrep3_dp15">Indemnité d'habillage et de déshabillage</P>
+      <P>Le montant de cette indemnité est fixé à 8 € au 1<SUP>er</SUP> janvier 2018.</P>
       <SIGNATURE/>
     </ARTICLEACTUCC>
   </RACINEACTUCC>

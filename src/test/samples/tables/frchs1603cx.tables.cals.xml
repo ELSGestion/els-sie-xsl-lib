@@ -1,18 +1,17 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<?xml-model href="dependency:eu.els.sie.models+ext-models/ext-models/oasis/cals/cals.nvdl" type="application/xml" schematypens="http://purl.oclc.org/dsdl/nvdl/ns/structure/1.0"?>
+<?xml version="1.0" encoding="UTF-8"?><?xml-model href="dependency:/eu.els.sie.models+ext-models/ext-models/oasis/cals/cals.nvdl" type="application/xml" schematypens="http://purl.oclc.org/dsdl/nvdl/ns/structure/1.0"?>
 <doc anneePublication="2016" classeDocument="frchs" createDt="2016-01-29T16:40:50.999+01:00" createUser="lcoudert" id="frchs_2016-03" lastUpdateDt="2016-03-30T20:54:50.999+02:00" lastUpdateUser="ext-lcoudert" numeroOrdre="03" status="BAP">
   <table xmlns="http://docs.oasis-open.org/ns/oasis-exchange/table" id="FRCHS_2016-03_UI-5C8BFDF2-8185-4D01-88B1-69BBC718AD65_TABLE_1" tabstyle="FRCHS-style1" frame="none" colsep="0" rowsep="0">
     <tgroup cols="2">
       <colspec colname="c1" colwidth="50%"/>
       <colspec colname="c2" colwidth="50%"/>
-      <thead>
+      <thead valign="middle">
         <row>
           <entry namest="c1" nameend="c2">
             <al xmlns="local">Principales abréviations</al>
           </entry>
         </row>
       </thead>
-      <tbody>
+      <tbody valign="middle">
         <row>
           <entry>
             <al xmlns="local">MC</al>
@@ -64,9 +63,9 @@
       <colspec colname="c4" colwidth="14%"/>
       <colspec colname="c5" colwidth="12%"/>
       <colspec colname="c6" colwidth="12%"/>
-      <thead>
+      <thead valign="middle">
         <row>
-          <entry namest="c1" nameend="c2" morerows="1">
+          <entry morerows="1" namest="c1" nameend="c2">
             <al xmlns="local">
               <motRep>ACTIF</motRep>
             </al>
@@ -105,7 +104,7 @@
           </entry>
         </row>
       </thead>
-      <tbody>
+      <tbody valign="middle">
         <row>
           <entry namest="c1" nameend="c2">
             <al xmlns="local">
@@ -750,7 +749,7 @@
       <colspec colname="c1" colwidth="70%"/>
       <colspec colname="c2" colwidth="15%"/>
       <colspec colname="c3" colwidth="15%"/>
-      <thead>
+      <thead valign="middle">
         <row>
           <entry>
             <al xmlns="local">
@@ -769,7 +768,7 @@
           </entry>
         </row>
       </thead>
-      <tbody>
+      <tbody valign="middle">
         <row>
           <entry>
             <al xmlns="local">
@@ -1084,7 +1083,7 @@
       <colspec colname="c3" colwidth="60%"/>
       <colspec colname="c4" colwidth="15%"/>
       <colspec colname="c5" colwidth="15%"/>
-      <thead>
+      <thead valign="middle">
         <row>
           <entry namest="c1" nameend="c3">
             <al xmlns="local"/>
@@ -1101,7 +1100,7 @@
           </entry>
         </row>
       </thead>
-      <tbody>
+      <tbody valign="middle">
         <row>
           <entry>
             <al xmlns="local"/>
@@ -1836,7 +1835,7 @@
       <colspec colname="c4" colwidth="15%"/>
       <colspec colname="c5" colwidth="15%"/>
       <colspec colname="c6" colwidth="15%"/>
-      <tbody>
+      <tbody valign="middle">
         <row>
           <entry namest="c1" nameend="c6">
             <al xmlns="local"/>
@@ -2198,7 +2197,7 @@
       <colspec colname="c4" colwidth="15%"/>
       <colspec colname="c5" colwidth="15%"/>
       <colspec colname="c6" colwidth="15%"/>
-      <tbody>
+      <tbody valign="middle">
         <row>
           <entry namest="c1" nameend="c6">
             <al xmlns="local"/>
@@ -2690,7 +2689,7 @@
       <colspec colname="c3" colwidth="17%"/>
       <colspec colname="c4" colwidth="17%"/>
       <colspec colname="c5" colwidth="17%"/>
-      <tbody>
+      <tbody valign="middle">
         <row>
           <entry>
             <al xmlns="local"/>
@@ -2826,7 +2825,7 @@
       <colspec colname="c7" colwidth="10%"/>
       <colspec colname="c8" colwidth="10%"/>
       <colspec colname="c9" colwidth="10%"/>
-      <tbody>
+      <tbody valign="middle">
         <row>
           <entry>
             <al xmlns="local">
@@ -3189,7 +3188,7 @@
       <colspec colname="c1" colwidth="66%"/>
       <colspec colname="c2" colwidth="17%"/>
       <colspec colname="c3" colwidth="17%"/>
-      <tbody>
+      <tbody valign="middle">
         <row>
           <entry>
             <al xmlns="local">
@@ -3289,7 +3288,7 @@
       <colspec colname="c3" colwidth="17%"/>
       <colspec colname="c4" colwidth="17%"/>
       <colspec colname="c5" colwidth="17%"/>
-      <tbody>
+      <tbody valign="middle">
         <row>
           <entry namest="c1" nameend="c2">
             <al xmlns="local"/>
@@ -3531,7 +3530,7 @@
       <colspec colname="c1" colwidth="66%"/>
       <colspec colname="c2" colwidth="17%"/>
       <colspec colname="c3" colwidth="17%"/>
-      <tbody>
+      <tbody valign="middle">
         <row>
           <entry>
             <al xmlns="local"/>
@@ -3626,7 +3625,7 @@
       <colspec colname="c1" colwidth="66%"/>
       <colspec colname="c2" colwidth="17%"/>
       <colspec colname="c3" colwidth="17%"/>
-      <tbody>
+      <tbody valign="middle">
         <row>
           <entry>
             <al xmlns="local"/>
@@ -3721,7 +3720,7 @@
       <colspec colname="c1" colwidth="66%"/>
       <colspec colname="c2" colwidth="17%"/>
       <colspec colname="c3" colwidth="17%"/>
-      <tbody>
+      <tbody valign="middle">
         <row>
           <entry>
             <al xmlns="local"/>
@@ -3816,7 +3815,7 @@
       <colspec colname="c1" colwidth="66%"/>
       <colspec colname="c2" colwidth="17%"/>
       <colspec colname="c3" colwidth="17%"/>
-      <tbody>
+      <tbody valign="middle">
         <row>
           <entry>
             <al xmlns="local"/>
@@ -3911,7 +3910,7 @@
       <colspec colname="c1" colwidth="66%"/>
       <colspec colname="c2" colwidth="17%"/>
       <colspec colname="c3" colwidth="17%"/>
-      <tbody>
+      <tbody valign="middle">
         <row>
           <entry>
             <al xmlns="local"/>
@@ -4088,7 +4087,7 @@
       <colspec colname="c5" colwidth="14%"/>
       <colspec colname="c6" colwidth="14%"/>
       <colspec colname="c7" colwidth="14%"/>
-      <tbody>
+      <tbody valign="middle">
         <row>
           <entry>
             <al xmlns="local"/>
@@ -4340,7 +4339,7 @@
       <colspec colname="c3" colwidth="16%"/>
       <colspec colname="c4" colwidth="16%"/>
       <colspec colname="c5" colwidth="16%"/>
-      <tbody>
+      <tbody valign="middle">
         <row>
           <entry>
             <al xmlns="local"/>
@@ -4426,7 +4425,7 @@
       <colspec colname="c4" colwidth="16%"/>
       <colspec colname="c5" colwidth="16%"/>
       <colspec colname="c6" colwidth="16%"/>
-      <tbody>
+      <tbody valign="middle">
         <row>
           <entry>
             <al xmlns="local"/>
@@ -4624,7 +4623,7 @@
       <colspec colname="c1" colwidth="66%"/>
       <colspec colname="c2" colwidth="17%"/>
       <colspec colname="c3" colwidth="17%"/>
-      <tbody>
+      <tbody valign="middle">
         <row>
           <entry>
             <al xmlns="local"/>
@@ -4681,7 +4680,7 @@
       <colspec colname="c1" colwidth="66%"/>
       <colspec colname="c2" colwidth="17%"/>
       <colspec colname="c3" colwidth="17%"/>
-      <tbody>
+      <tbody valign="middle">
         <row>
           <entry>
             <al xmlns="local"/>
@@ -4782,7 +4781,7 @@
       <colspec colname="c1" colwidth="66%"/>
       <colspec colname="c2" colwidth="17%"/>
       <colspec colname="c3" colwidth="17%"/>
-      <tbody>
+      <tbody valign="middle">
         <row>
           <entry>
             <al xmlns="local"/>
@@ -4828,7 +4827,7 @@
       <colspec colname="c1" colwidth="66%"/>
       <colspec colname="c2" colwidth="17%"/>
       <colspec colname="c3" colwidth="17%"/>
-      <tbody>
+      <tbody valign="middle">
         <row>
           <entry>
             <al xmlns="local"/>
@@ -4902,7 +4901,7 @@
       <colspec colname="c1" colwidth="66%"/>
       <colspec colname="c2" colwidth="17%"/>
       <colspec colname="c3" colwidth="17%"/>
-      <tbody>
+      <tbody valign="middle">
         <row>
           <entry>
             <al xmlns="local"/>
@@ -5035,7 +5034,7 @@
       <colspec colname="c3" colwidth="16%"/>
       <colspec colname="c4" colwidth="16%"/>
       <colspec colname="c5" colwidth="16%"/>
-      <tbody>
+      <tbody valign="middle">
         <row>
           <entry namest="c1" nameend="c5"/>
         </row>
@@ -5220,7 +5219,7 @@
       <colspec colname="c1" colwidth="66%"/>
       <colspec colname="c2" colwidth="17%"/>
       <colspec colname="c3" colwidth="17%"/>
-      <tbody>
+      <tbody valign="middle">
         <row>
           <entry>
             <al xmlns="local">
@@ -5296,7 +5295,7 @@
       <colspec colname="c1" colwidth="66%"/>
       <colspec colname="c2" colwidth="17%"/>
       <colspec colname="c3" colwidth="17%"/>
-      <tbody>
+      <tbody valign="middle">
         <row>
           <entry>
             <al xmlns="local">
@@ -5376,7 +5375,7 @@
       <colspec colname="c5" colwidth="14%"/>
       <colspec colname="c6" colwidth="14%"/>
       <colspec colname="c7" colwidth="14%"/>
-      <tbody>
+      <tbody valign="middle">
         <row>
           <entry>
             <al xmlns="local">
@@ -5516,7 +5515,7 @@
       <colspec colname="c2" colwidth="17%"/>
       <colspec colname="c3" colwidth="17%"/>
       <colspec colname="c4" colwidth="17%"/>
-      <tbody>
+      <tbody valign="middle">
         <row>
           <entry>
             <al xmlns="local"/>
@@ -5609,7 +5608,7 @@
       <colspec colname="c4" colwidth="15%"/>
       <colspec colname="c5" colwidth="15%"/>
       <colspec colname="c6" colwidth="15%"/>
-      <tbody>
+      <tbody valign="middle">
         <row>
           <entry morerows="1">
             <al xmlns="local">En milliers - Au 31-12-2015</al>
@@ -5704,7 +5703,7 @@
       <colspec colname="c1" colwidth="66%"/>
       <colspec colname="c2" colwidth="17%"/>
       <colspec colname="c3" colwidth="17%"/>
-      <tbody>
+      <tbody valign="middle">
         <row>
           <entry>
             <al xmlns="local">
@@ -5802,7 +5801,7 @@
       <colspec colname="c1" colwidth="66%"/>
       <colspec colname="c2" colwidth="17%"/>
       <colspec colname="c3" colwidth="17%"/>
-      <tbody>
+      <tbody valign="middle">
         <row>
           <entry>
             <al xmlns="local">
@@ -5878,7 +5877,7 @@
       <colspec colname="c1" colwidth="66%"/>
       <colspec colname="c2" colwidth="17%"/>
       <colspec colname="c3" colwidth="17%"/>
-      <tbody>
+      <tbody valign="middle">
         <row>
           <entry>
             <al xmlns="local"/>
@@ -5976,7 +5975,7 @@
       <colspec colname="c3" colwidth="15%"/>
       <colspec colname="c4" colwidth="15%"/>
       <colspec colname="c5" colwidth="15%"/>
-      <tbody>
+      <tbody valign="middle">
         <row>
           <entry>
             <al xmlns="local">
@@ -6198,7 +6197,7 @@
       <colspec colname="c1" colwidth="66%"/>
       <colspec colname="c2" colwidth="17%"/>
       <colspec colname="c3" colwidth="17%"/>
-      <tbody>
+      <tbody valign="middle">
         <row>
           <entry>
             <al xmlns="local"/>
@@ -6354,7 +6353,7 @@
       <colspec colname="c1" colwidth="66%"/>
       <colspec colname="c2" colwidth="17%"/>
       <colspec colname="c3" colwidth="17%"/>
-      <tbody>
+      <tbody valign="middle">
         <row>
           <entry>
             <al xmlns="local">
@@ -6551,7 +6550,7 @@
       <colspec colname="c1" colwidth="66%"/>
       <colspec colname="c2" colwidth="17%"/>
       <colspec colname="c3" colwidth="17%"/>
-      <tbody>
+      <tbody valign="middle">
         <row>
           <entry>
             <al xmlns="local"/>
@@ -6629,7 +6628,7 @@
       <colspec colname="c1" colwidth="60%"/>
       <colspec colname="c2" colwidth="20%"/>
       <colspec colname="c3" colwidth="20%"/>
-      <tbody>
+      <tbody valign="middle">
         <row>
           <entry>
             <al xmlns="local">
@@ -6728,7 +6727,7 @@
       <colspec colname="c1" colwidth="66%"/>
       <colspec colname="c2" colwidth="17%"/>
       <colspec colname="c3" colwidth="17%"/>
-      <tbody>
+      <tbody valign="middle">
         <row>
           <entry>
             <al xmlns="local"/>
@@ -6833,7 +6832,7 @@
       <colspec colname="c1" colwidth="66%"/>
       <colspec colname="c2" colwidth="17%"/>
       <colspec colname="c3" colwidth="17%"/>
-      <tbody>
+      <tbody valign="middle">
         <row>
           <entry>
             <al xmlns="local"/>
@@ -6927,7 +6926,7 @@
     <tgroup cols="2">
       <colspec colname="c1" colwidth="80%"/>
       <colspec colname="c2" colwidth="20%"/>
-      <tbody>
+      <tbody valign="middle">
         <row>
           <entry/>
           <entry>
@@ -7000,7 +6999,7 @@
       <colspec colname="c3" colwidth="18%"/>
       <colspec colname="c4" colwidth="18%"/>
       <colspec colname="c5" colwidth="18%"/>
-      <tbody>
+      <tbody valign="middle">
         <row>
           <entry>
             <al xmlns="local">
@@ -7333,14 +7332,14 @@
     <tgroup cols="2">
       <colspec colname="c1" colwidth="50%"/>
       <colspec colname="c2" colwidth="50%"/>
-      <thead>
+      <thead valign="middle">
         <row>
           <entry namest="c1" nameend="c2">
             <al xmlns="local">Principales abréviations</al>
           </entry>
         </row>
       </thead>
-      <tbody>
+      <tbody valign="middle">
         <row>
           <entry>
             <al xmlns="local">MC</al>
@@ -7390,7 +7389,7 @@
       <colspec colname="c2" colwidth="43%"/>
       <colspec colname="c3" colwidth="30%"/>
       <colspec colname="c4" colwidth="20%"/>
-      <thead>
+      <thead valign="middle">
         <row>
           <entry>
             <al xmlns="local">1.</al>
@@ -7400,7 +7399,7 @@
           </entry>
         </row>
       </thead>
-      <tbody>
+      <tbody valign="middle">
         <row>
           <entry/>
           <entry>
@@ -7501,7 +7500,7 @@
       <colspec colname="c2" colwidth="43%"/>
       <colspec colname="c3" colwidth="30%"/>
       <colspec colname="c4" colwidth="20%"/>
-      <thead>
+      <thead valign="middle">
         <row>
           <entry>
             <al xmlns="local">2.</al>
@@ -7511,7 +7510,7 @@
           </entry>
         </row>
       </thead>
-      <tbody>
+      <tbody valign="middle">
         <row>
           <entry/>
           <entry>
@@ -7717,7 +7716,7 @@
       <colspec colname="c2" colwidth="43%"/>
       <colspec colname="c3" colwidth="30%"/>
       <colspec colname="c4" colwidth="20%"/>
-      <thead>
+      <thead valign="middle">
         <row>
           <entry>
             <al xmlns="local">3.</al>
@@ -7743,7 +7742,7 @@
           </entry>
         </row>
       </thead>
-      <tbody>
+      <tbody valign="middle">
         <row>
           <entry/>
           <entry>
@@ -8535,7 +8534,7 @@
       <colspec colname="c2" colwidth="43%"/>
       <colspec colname="c3" colwidth="30%"/>
       <colspec colname="c4" colwidth="20%"/>
-      <thead>
+      <thead valign="middle">
         <row>
           <entry>
             <al xmlns="local">3.</al>
@@ -8561,7 +8560,7 @@
           </entry>
         </row>
       </thead>
-      <tbody>
+      <tbody valign="middle">
         <row>
           <entry/>
           <entry>
@@ -8742,7 +8741,7 @@
       <colspec colname="c2" colwidth="43%"/>
       <colspec colname="c3" colwidth="30%"/>
       <colspec colname="c4" colwidth="20%"/>
-      <thead>
+      <thead valign="middle">
         <row>
           <entry>
             <al xmlns="local">3.</al>
@@ -8768,7 +8767,7 @@
           </entry>
         </row>
       </thead>
-      <tbody>
+      <tbody valign="middle">
         <row>
           <entry/>
           <entry>
@@ -8984,7 +8983,7 @@
       <colspec colname="c2" colwidth="43%"/>
       <colspec colname="c3" colwidth="30%"/>
       <colspec colname="c4" colwidth="20%"/>
-      <thead>
+      <thead valign="middle">
         <row>
           <entry>
             <al xmlns="local">3.</al>
@@ -9010,7 +9009,7 @@
           </entry>
         </row>
       </thead>
-      <tbody>
+      <tbody valign="middle">
         <row>
           <entry/>
           <entry>
@@ -9151,7 +9150,7 @@
       <colspec colname="c2" colwidth="43%"/>
       <colspec colname="c3" colwidth="30%"/>
       <colspec colname="c4" colwidth="20%"/>
-      <thead>
+      <thead valign="middle">
         <row>
           <entry>
             <al xmlns="local">3.</al>
@@ -9177,7 +9176,7 @@
           </entry>
         </row>
       </thead>
-      <tbody>
+      <tbody valign="middle">
         <row>
           <entry/>
           <entry>
@@ -9304,7 +9303,7 @@
       <colspec colname="c2" colwidth="43%"/>
       <colspec colname="c3" colwidth="30%"/>
       <colspec colname="c4" colwidth="20%"/>
-      <thead>
+      <thead valign="middle">
         <row>
           <entry>
             <al xmlns="local">3.</al>
@@ -9330,7 +9329,7 @@
           </entry>
         </row>
       </thead>
-      <tbody>
+      <tbody valign="middle">
         <row>
           <entry/>
           <entry>
@@ -9639,7 +9638,7 @@
       <colspec colname="c2" colwidth="43%"/>
       <colspec colname="c3" colwidth="30%"/>
       <colspec colname="c4" colwidth="20%"/>
-      <thead>
+      <thead valign="middle">
         <row>
           <entry>
             <al xmlns="local">3.</al>
@@ -9665,7 +9664,7 @@
           </entry>
         </row>
       </thead>
-      <tbody>
+      <tbody valign="middle">
         <row>
           <entry/>
           <entry>
@@ -9713,7 +9712,7 @@
       <colspec colname="c2" colwidth="43%"/>
       <colspec colname="c3" colwidth="30%"/>
       <colspec colname="c4" colwidth="20%"/>
-      <thead>
+      <thead valign="middle">
         <row>
           <entry>
             <al xmlns="local">3.</al>
@@ -9739,7 +9738,7 @@
           </entry>
         </row>
       </thead>
-      <tbody>
+      <tbody valign="middle">
         <row>
           <entry/>
           <entry>
@@ -9986,7 +9985,7 @@
       <colspec colname="c2" colwidth="43%"/>
       <colspec colname="c3" colwidth="30%"/>
       <colspec colname="c4" colwidth="20%"/>
-      <thead>
+      <thead valign="middle">
         <row>
           <entry>
             <al xmlns="local">3.</al>
@@ -10012,7 +10011,7 @@
           </entry>
         </row>
       </thead>
-      <tbody>
+      <tbody valign="middle">
         <row>
           <entry/>
           <entry>
@@ -10258,7 +10257,7 @@
       <colspec colname="c2" colwidth="43%"/>
       <colspec colname="c3" colwidth="30%"/>
       <colspec colname="c4" colwidth="20%"/>
-      <thead>
+      <thead valign="middle">
         <row>
           <entry>
             <al xmlns="local">4.</al>
@@ -10268,7 +10267,7 @@
           </entry>
         </row>
       </thead>
-      <tbody>
+      <tbody valign="middle">
         <row>
           <entry/>
           <entry>
@@ -10810,7 +10809,7 @@
       <colspec colname="c2" colwidth="43%"/>
       <colspec colname="c3" colwidth="30%"/>
       <colspec colname="c4" colwidth="20%"/>
-      <thead>
+      <thead valign="middle">
         <row>
           <entry>
             <al xmlns="local">5.</al>
@@ -10836,7 +10835,7 @@
           </entry>
         </row>
       </thead>
-      <tbody>
+      <tbody valign="middle">
         <row>
           <entry/>
           <entry>
@@ -10955,7 +10954,7 @@
       <colspec colname="c2" colwidth="43%"/>
       <colspec colname="c3" colwidth="30%"/>
       <colspec colname="c4" colwidth="20%"/>
-      <thead>
+      <thead valign="middle">
         <row>
           <entry>
             <al xmlns="local">5.</al>
@@ -10981,7 +10980,7 @@
           </entry>
         </row>
       </thead>
-      <tbody>
+      <tbody valign="middle">
         <row>
           <entry/>
           <entry>
@@ -11068,7 +11067,7 @@
       <colspec colname="c2" colwidth="43%"/>
       <colspec colname="c3" colwidth="30%"/>
       <colspec colname="c4" colwidth="20%"/>
-      <thead>
+      <thead valign="middle">
         <row>
           <entry>
             <al xmlns="local">5.</al>
@@ -11094,7 +11093,7 @@
           </entry>
         </row>
       </thead>
-      <tbody>
+      <tbody valign="middle">
         <row>
           <entry/>
           <entry>
@@ -11290,7 +11289,7 @@
       <colspec colname="c2" colwidth="43%"/>
       <colspec colname="c3" colwidth="30%"/>
       <colspec colname="c4" colwidth="20%"/>
-      <thead>
+      <thead valign="middle">
         <row>
           <entry>
             <al xmlns="local">5.</al>
@@ -11316,7 +11315,7 @@
           </entry>
         </row>
       </thead>
-      <tbody>
+      <tbody valign="middle">
         <row>
           <entry/>
           <entry>
@@ -11400,7 +11399,7 @@
       <colspec colname="c2" colwidth="43%"/>
       <colspec colname="c3" colwidth="30%"/>
       <colspec colname="c4" colwidth="20%"/>
-      <thead>
+      <thead valign="middle">
         <row>
           <entry>
             <al xmlns="local">5.</al>
@@ -11426,7 +11425,7 @@
           </entry>
         </row>
       </thead>
-      <tbody>
+      <tbody valign="middle">
         <row>
           <entry/>
           <entry>
@@ -11974,7 +11973,7 @@
       <colspec colname="c2" colwidth="43%"/>
       <colspec colname="c3" colwidth="30%"/>
       <colspec colname="c4" colwidth="20%"/>
-      <thead>
+      <thead valign="middle">
         <row>
           <entry>
             <al xmlns="local">5.</al>
@@ -12000,7 +11999,7 @@
           </entry>
         </row>
       </thead>
-      <tbody>
+      <tbody valign="middle">
         <row>
           <entry/>
           <entry>
@@ -12114,7 +12113,7 @@
       <colspec colname="c2" colwidth="43%"/>
       <colspec colname="c3" colwidth="30%"/>
       <colspec colname="c4" colwidth="20%"/>
-      <thead>
+      <thead valign="middle">
         <row>
           <entry>
             <al xmlns="local">5.</al>
@@ -12140,7 +12139,7 @@
           </entry>
         </row>
       </thead>
-      <tbody>
+      <tbody valign="middle">
         <row>
           <entry/>
           <entry>
@@ -12324,7 +12323,7 @@
       <colspec colname="c2" colwidth="43%"/>
       <colspec colname="c3" colwidth="30%"/>
       <colspec colname="c4" colwidth="20%"/>
-      <thead>
+      <thead valign="middle">
         <row>
           <entry>
             <al xmlns="local">5.</al>
@@ -12350,7 +12349,7 @@
           </entry>
         </row>
       </thead>
-      <tbody>
+      <tbody valign="middle">
         <row>
           <entry/>
           <entry>
@@ -12565,14 +12564,14 @@
     <tgroup cols="2">
       <colspec colname="c1" colwidth="50%"/>
       <colspec colname="c2" colwidth="50%"/>
-      <thead>
+      <thead valign="middle">
         <row>
           <entry namest="c1" nameend="c2">
             <al xmlns="local">Principales abréviations</al>
           </entry>
         </row>
       </thead>
-      <tbody>
+      <tbody valign="middle">
         <row>
           <entry>
             <al xmlns="local">MConso</al>
@@ -12606,7 +12605,7 @@
       <colspec colname="c2" colwidth="8%"/>
       <colspec colname="c3" colwidth="17%"/>
       <colspec colname="c4" colwidth="17%"/>
-      <tbody>
+      <tbody valign="middle">
         <row>
           <entry>
             <al xmlns="local">(en milliers d’euros sauf indication contraire)</al>
@@ -13219,7 +13218,7 @@
       <colspec colname="c2" colwidth="8%"/>
       <colspec colname="c3" colwidth="17%"/>
       <colspec colname="c4" colwidth="17%"/>
-      <tbody>
+      <tbody valign="middle">
         <row>
           <entry>
             <al xmlns="local">(en milliers d’euros sauf indication contraire)</al>
@@ -13783,7 +13782,7 @@
       <colspec colname="c7" colwidth="10%"/>
       <colspec colname="c8" colwidth="10%"/>
       <colspec colname="c9" colwidth="10%"/>
-      <tbody>
+      <tbody valign="middle">
         <row>
           <entry namest="c1" nameend="c9">
             <al xmlns="local">(en milliers d’euros sauf indication contraire)</al>
@@ -14432,7 +14431,7 @@
       <colspec colname="c2" colwidth="8%"/>
       <colspec colname="c3" colwidth="17%"/>
       <colspec colname="c4" colwidth="17%"/>
-      <tbody>
+      <tbody valign="middle">
         <row>
           <entry>
             <al xmlns="local">(en milliers d’euros sauf indication contraire)</al>
@@ -15062,7 +15061,7 @@
     <tgroup cols="2">
       <colspec colname="c1" colwidth="85%"/>
       <colspec colname="c2" colwidth="15%"/>
-      <tbody>
+      <tbody valign="middle">
         <row>
           <entry>
             <al xmlns="local">Prix d’acquisition :</al>
@@ -15125,7 +15124,7 @@
       <colspec colname="c5" colwidth="14%"/>
       <colspec colname="c6" colwidth="14%"/>
       <colspec colname="c7" colwidth="14%"/>
-      <tbody>
+      <tbody valign="middle">
         <row>
           <entry>
             <al xmlns="local"/>
@@ -15270,7 +15269,7 @@
       <colspec colname="c5" colwidth="14%"/>
       <colspec colname="c6" colwidth="14%"/>
       <colspec colname="c7" colwidth="14%"/>
-      <tbody>
+      <tbody valign="middle">
         <row>
           <entry>
             <al xmlns="local"/>
@@ -15487,7 +15486,7 @@
       <colspec colname="c7" colwidth="10%"/>
       <colspec colname="c8" colwidth="10%"/>
       <colspec colname="c9" colwidth="10%"/>
-      <tbody>
+      <tbody valign="middle">
         <row>
           <entry>
             <al xmlns="local"/>
@@ -15626,7 +15625,7 @@
       <colspec colname="c5" colwidth="13%"/>
       <colspec colname="c6" colwidth="13%"/>
       <colspec colname="c7" colwidth="13%"/>
-      <tbody>
+      <tbody valign="middle">
         <row>
           <entry>
             <al xmlns="local"/>
@@ -15990,7 +15989,7 @@
       <colspec colname="c5" colwidth="13%"/>
       <colspec colname="c6" colwidth="13%"/>
       <colspec colname="c7" colwidth="13%"/>
-      <tbody>
+      <tbody valign="middle">
         <row>
           <entry>
             <al xmlns="local"/>
@@ -16418,7 +16417,7 @@
       <colspec colname="c4" colwidth="14%"/>
       <colspec colname="c5" colwidth="14%"/>
       <colspec colname="c6" colwidth="14%"/>
-      <tbody>
+      <tbody valign="middle">
         <row>
           <entry>
             <al xmlns="local"/>
@@ -16566,7 +16565,7 @@
       <colspec colname="c4" colwidth="14%"/>
       <colspec colname="c5" colwidth="14%"/>
       <colspec colname="c6" colwidth="14%"/>
-      <tbody>
+      <tbody valign="middle">
         <row>
           <entry>
             <al xmlns="local"/>
@@ -16665,7 +16664,7 @@
       <colspec colname="c1" colwidth="70%"/>
       <colspec colname="c2" colwidth="15%"/>
       <colspec colname="c3" colwidth="15%"/>
-      <tbody>
+      <tbody valign="middle">
         <row>
           <entry>
             <al xmlns="local"/>
@@ -16761,7 +16760,7 @@
       <colspec colname="c1" colwidth="70%"/>
       <colspec colname="c2" colwidth="15%"/>
       <colspec colname="c3" colwidth="15%"/>
-      <tbody>
+      <tbody valign="middle">
         <row>
           <entry>
             <al xmlns="local"/>
@@ -16863,7 +16862,7 @@
       <colspec colname="c1" colwidth="70%"/>
       <colspec colname="c2" colwidth="15%"/>
       <colspec colname="c3" colwidth="15%"/>
-      <tbody>
+      <tbody valign="middle">
         <row>
           <entry>
             <al xmlns="local"/>
@@ -16948,7 +16947,7 @@
       <colspec colname="c1" colwidth="70%"/>
       <colspec colname="c2" colwidth="15%"/>
       <colspec colname="c3" colwidth="15%"/>
-      <tbody>
+      <tbody valign="middle">
         <row>
           <entry>
             <al xmlns="local"/>
@@ -17077,7 +17076,7 @@
       <colspec colname="c1" colwidth="70%"/>
       <colspec colname="c2" colwidth="15%"/>
       <colspec colname="c3" colwidth="15%"/>
-      <tbody>
+      <tbody valign="middle">
         <row>
           <entry>
             <al xmlns="local"/>
@@ -17162,7 +17161,7 @@
       <colspec colname="c1" colwidth="70%"/>
       <colspec colname="c2" colwidth="15%"/>
       <colspec colname="c3" colwidth="15%"/>
-      <tbody>
+      <tbody valign="middle">
         <row>
           <entry>
             <al xmlns="local"/>
@@ -17240,7 +17239,7 @@
       <colspec colname="c5" colwidth="13%"/>
       <colspec colname="c6" colwidth="13%"/>
       <colspec colname="c7" colwidth="13%"/>
-      <tbody>
+      <tbody valign="middle">
         <row>
           <entry>
             <al xmlns="local"/>
@@ -17482,7 +17481,7 @@
       <colspec colname="c1" colwidth="70%"/>
       <colspec colname="c2" colwidth="15%"/>
       <colspec colname="c3" colwidth="15%"/>
-      <tbody>
+      <tbody valign="middle">
         <row>
           <entry>
             <al xmlns="local"/>
@@ -17594,7 +17593,7 @@
       <colspec colname="c1" colwidth="70%"/>
       <colspec colname="c2" colwidth="15%"/>
       <colspec colname="c3" colwidth="15%"/>
-      <tbody>
+      <tbody valign="middle">
         <row>
           <entry>
             <al xmlns="local"/>
@@ -17651,7 +17650,7 @@
       <colspec colname="c1" colwidth="70%"/>
       <colspec colname="c2" colwidth="15%"/>
       <colspec colname="c3" colwidth="15%"/>
-      <tbody>
+      <tbody valign="middle">
         <row>
           <entry>
             <al xmlns="local"/>
@@ -17725,7 +17724,7 @@
       <colspec colname="c1" colwidth="70%"/>
       <colspec colname="c2" colwidth="15%"/>
       <colspec colname="c3" colwidth="15%"/>
-      <tbody>
+      <tbody valign="middle">
         <row>
           <entry>
             <al xmlns="local"/>
@@ -17861,7 +17860,7 @@
       <colspec colname="c6" colwidth="12%"/>
       <colspec colname="c7" colwidth="12%"/>
       <colspec colname="c8" colwidth="12%"/>
-      <tbody>
+      <tbody valign="middle">
         <row>
           <entry>
             <al xmlns="local"/>
@@ -18118,7 +18117,7 @@
       <colspec colname="c3" colwidth="15%"/>
       <colspec colname="c4" colwidth="15%"/>
       <colspec colname="c5" colwidth="15%"/>
-      <tbody>
+      <tbody valign="middle">
         <row>
           <entry>
             <al xmlns="local">
@@ -18257,7 +18256,7 @@
       <colspec colname="c3" colwidth="15%"/>
       <colspec colname="c4" colwidth="15%"/>
       <colspec colname="c5" colwidth="15%"/>
-      <tbody>
+      <tbody valign="middle">
         <row>
           <entry>
             <al xmlns="local">
@@ -18394,7 +18393,7 @@
       <colspec colname="c1" colwidth="70%"/>
       <colspec colname="c2" colwidth="15%"/>
       <colspec colname="c3" colwidth="15%"/>
-      <tbody>
+      <tbody valign="middle">
         <row>
           <entry>
             <al xmlns="local"/>
@@ -18490,7 +18489,7 @@
       <colspec colname="c1" colwidth="70%"/>
       <colspec colname="c2" colwidth="15%"/>
       <colspec colname="c3" colwidth="15%"/>
-      <tbody>
+      <tbody valign="middle">
         <row>
           <entry>
             <al xmlns="local"/>
@@ -18612,7 +18611,7 @@
       <colspec colname="c1" colwidth="70%"/>
       <colspec colname="c2" colwidth="15%"/>
       <colspec colname="c3" colwidth="15%"/>
-      <tbody>
+      <tbody valign="middle">
         <row>
           <entry>
             <al xmlns="local"/>
@@ -18686,7 +18685,7 @@
       <colspec colname="c1" colwidth="70%"/>
       <colspec colname="c2" colwidth="15%"/>
       <colspec colname="c3" colwidth="15%"/>
-      <tbody>
+      <tbody valign="middle">
         <row>
           <entry>
             <al xmlns="local"/>
@@ -18806,7 +18805,7 @@
       <colspec colname="c3" colwidth="15%"/>
       <colspec colname="c4" colwidth="15%"/>
       <colspec colname="c5" colwidth="15%"/>
-      <tbody>
+      <tbody valign="middle">
         <row>
           <entry>
             <al xmlns="local">
@@ -18991,7 +18990,7 @@
       <colspec colname="c1" colwidth="70%"/>
       <colspec colname="c2" colwidth="15%"/>
       <colspec colname="c3" colwidth="15%"/>
-      <tbody>
+      <tbody valign="middle">
         <row>
           <entry>
             <al xmlns="local"/>
@@ -19120,7 +19119,7 @@
       <colspec colname="c6" colwidth="13%"/>
       <colspec colname="c7" colwidth="13%"/>
       <colspec colname="c8" colwidth="13%"/>
-      <tbody>
+      <tbody valign="middle">
         <row>
           <entry>
             <al xmlns="local">
@@ -19311,7 +19310,7 @@
       <colspec colname="c3" colwidth="15%"/>
       <colspec colname="c4" colwidth="15%"/>
       <colspec colname="c5" colwidth="15%"/>
-      <tbody>
+      <tbody valign="middle">
         <row>
           <entry>
             <al xmlns="local">
@@ -19424,7 +19423,7 @@
       <colspec colname="c3" colwidth="13%"/>
       <colspec colname="c4" colwidth="13%"/>
       <colspec colname="c5" colwidth="13%"/>
-      <tbody>
+      <tbody valign="middle">
         <row>
           <entry>
             <al xmlns="local">
@@ -19536,7 +19535,7 @@
       <colspec colname="c3" colwidth="13%"/>
       <colspec colname="c4" colwidth="13%"/>
       <colspec colname="c5" colwidth="13%"/>
-      <tbody>
+      <tbody valign="middle">
         <row>
           <entry>
             <al xmlns="local">
@@ -19644,7 +19643,7 @@
       <colspec colname="c4" colwidth="13%"/>
       <colspec colname="c5" colwidth="13%"/>
       <colspec colname="c6" colwidth="13%"/>
-      <tbody>
+      <tbody valign="middle">
         <row>
           <entry>
             <al xmlns="local">
@@ -19772,7 +19771,7 @@
       <colspec colname="c4" colwidth="13%"/>
       <colspec colname="c5" colwidth="13%"/>
       <colspec colname="c6" colwidth="13%"/>
-      <tbody>
+      <tbody valign="middle">
         <row>
           <entry>
             <al xmlns="local">
@@ -19897,7 +19896,7 @@
       <colspec colname="c1" colwidth="70%"/>
       <colspec colname="c2" colwidth="15%"/>
       <colspec colname="c3" colwidth="15%"/>
-      <tbody>
+      <tbody valign="middle">
         <row>
           <entry>
             <al xmlns="local"/>
@@ -19993,7 +19992,7 @@
       <colspec colname="c1" colwidth="70%"/>
       <colspec colname="c2" colwidth="15%"/>
       <colspec colname="c3" colwidth="15%"/>
-      <tbody>
+      <tbody valign="middle">
         <row>
           <entry>
             <al xmlns="local"/>
@@ -20097,7 +20096,7 @@
       <colspec colname="c1" colwidth="70%"/>
       <colspec colname="c2" colwidth="15%"/>
       <colspec colname="c3" colwidth="15%"/>
-      <tbody>
+      <tbody valign="middle">
         <row>
           <entry>
             <al xmlns="local"/>
@@ -20238,7 +20237,7 @@
       <colspec colname="c1" colwidth="70%"/>
       <colspec colname="c2" colwidth="15%"/>
       <colspec colname="c3" colwidth="15%"/>
-      <tbody>
+      <tbody valign="middle">
         <row>
           <entry>
             <al xmlns="local"/>
@@ -20379,7 +20378,7 @@
       <colspec colname="c1" colwidth="70%"/>
       <colspec colname="c2" colwidth="15%"/>
       <colspec colname="c3" colwidth="15%"/>
-      <tbody>
+      <tbody valign="middle">
         <row>
           <entry>
             <al xmlns="local"/>
@@ -20529,7 +20528,7 @@
       <colspec colname="c1" colwidth="70%"/>
       <colspec colname="c2" colwidth="15%"/>
       <colspec colname="c3" colwidth="15%"/>
-      <tbody>
+      <tbody valign="middle">
         <row>
           <entry>
             <al xmlns="local"/>
@@ -20603,7 +20602,7 @@
       <colspec colname="c1" colwidth="70%"/>
       <colspec colname="c2" colwidth="15%"/>
       <colspec colname="c3" colwidth="15%"/>
-      <tbody>
+      <tbody valign="middle">
         <row>
           <entry>
             <al xmlns="local"/>
@@ -20748,7 +20747,7 @@
       <colspec colname="c1" colwidth="70%"/>
       <colspec colname="c2" colwidth="15%"/>
       <colspec colname="c3" colwidth="15%"/>
-      <tbody>
+      <tbody valign="middle">
         <row>
           <entry>
             <al xmlns="local"/>
@@ -20816,7 +20815,7 @@
       <colspec colname="c1" colwidth="70%"/>
       <colspec colname="c2" colwidth="15%"/>
       <colspec colname="c3" colwidth="15%"/>
-      <tbody>
+      <tbody valign="middle">
         <row>
           <entry>
             <al xmlns="local"/>
@@ -20924,7 +20923,7 @@
       <colspec colname="c1" colwidth="50%"/>
       <colspec colname="c2" colwidth="25%"/>
       <colspec colname="c3" colwidth="25%"/>
-      <tbody>
+      <tbody valign="middle">
         <row>
           <entry>
             <al xmlns="local"/>
@@ -21020,7 +21019,7 @@
       <colspec colname="c3" colwidth="20%"/>
       <colspec colname="c4" colwidth="20%"/>
       <colspec colname="c5" colwidth="20%"/>
-      <tbody>
+      <tbody valign="middle">
         <row>
           <entry>
             <al xmlns="local"/>
@@ -21115,7 +21114,7 @@
       <colspec colname="c1" colwidth="70%"/>
       <colspec colname="c2" colwidth="15%"/>
       <colspec colname="c3" colwidth="15%"/>
-      <tbody>
+      <tbody valign="middle">
         <row>
           <entry>
             <al xmlns="local"/>
@@ -21196,7 +21195,7 @@
       <colspec colname="c1" colwidth="70%"/>
       <colspec colname="c2" colwidth="15%"/>
       <colspec colname="c3" colwidth="15%"/>
-      <tbody>
+      <tbody valign="middle">
         <row>
           <entry>
             <al xmlns="local">Prix d’acquisition :</al>
@@ -21291,7 +21290,7 @@
       <colspec colname="c6" colwidth="11%"/>
       <colspec colname="c7" colwidth="11%"/>
       <colspec colname="c8" colwidth="11%"/>
-      <tbody>
+      <tbody valign="middle">
         <row>
           <entry>
             <al xmlns="local">
@@ -21792,7 +21791,7 @@
       <colspec colname="c2" colwidth="8%"/>
       <colspec colname="c3" colwidth="17%"/>
       <colspec colname="c4" colwidth="17%"/>
-      <tbody>
+      <tbody valign="middle">
         <row>
           <entry>
             <al xmlns="local">(en milliers d’euros sauf indication contraire)</al>
@@ -22315,14 +22314,14 @@
     <tgroup cols="2">
       <colspec colname="c1" colwidth="50%"/>
       <colspec colname="c2" colwidth="50%"/>
-      <thead>
+      <thead valign="middle">
         <row>
           <entry namest="c1" nameend="c2">
             <al xmlns="local">Principales abréviations utilisées</al>
           </entry>
         </row>
       </thead>
-      <tbody>
+      <tbody valign="middle">
         <row>
           <entry>
             <al xmlns="local">MConso</al>
@@ -22356,7 +22355,7 @@
       <colspec colname="c2" colwidth="43%"/>
       <colspec colname="c3" colwidth="30%"/>
       <colspec colname="c4" colwidth="20%"/>
-      <thead>
+      <thead valign="middle">
         <row>
           <entry>
             <al xmlns="local">1.</al>
@@ -22374,7 +22373,7 @@
           </entry>
         </row>
       </thead>
-      <tbody>
+      <tbody valign="middle">
         <row>
           <entry/>
           <entry>
@@ -22422,7 +22421,7 @@
       <colspec colname="c2" colwidth="43%"/>
       <colspec colname="c3" colwidth="30%"/>
       <colspec colname="c4" colwidth="20%"/>
-      <thead>
+      <thead valign="middle">
         <row>
           <entry>
             <al xmlns="local">1.</al>
@@ -22442,7 +22441,7 @@
           </entry>
         </row>
       </thead>
-      <tbody>
+      <tbody valign="middle">
         <row>
           <entry/>
           <entry>
@@ -22490,7 +22489,7 @@
       <colspec colname="c2" colwidth="43%"/>
       <colspec colname="c3" colwidth="30%"/>
       <colspec colname="c4" colwidth="20%"/>
-      <thead>
+      <thead valign="middle">
         <row>
           <entry>
             <al xmlns="local">1.</al>
@@ -22508,7 +22507,7 @@
           </entry>
         </row>
       </thead>
-      <tbody>
+      <tbody valign="middle">
         <row>
           <entry/>
           <entry>
@@ -22556,7 +22555,7 @@
       <colspec colname="c2" colwidth="43%"/>
       <colspec colname="c3" colwidth="30%"/>
       <colspec colname="c4" colwidth="20%"/>
-      <thead>
+      <thead valign="middle">
         <row>
           <entry>
             <al xmlns="local">1.</al>
@@ -22576,7 +22575,7 @@
           </entry>
         </row>
       </thead>
-      <tbody>
+      <tbody valign="middle">
         <row>
           <entry/>
           <entry>
@@ -22624,7 +22623,7 @@
       <colspec colname="c2" colwidth="43%"/>
       <colspec colname="c3" colwidth="30%"/>
       <colspec colname="c4" colwidth="20%"/>
-      <thead>
+      <thead valign="middle">
         <row>
           <entry>
             <al xmlns="local">1.</al>
@@ -22642,7 +22641,7 @@
           </entry>
         </row>
       </thead>
-      <tbody>
+      <tbody valign="middle">
         <row>
           <entry/>
           <entry>
@@ -22697,7 +22696,7 @@
       <colspec colname="c2" colwidth="43%"/>
       <colspec colname="c3" colwidth="30%"/>
       <colspec colname="c4" colwidth="20%"/>
-      <thead>
+      <thead valign="middle">
         <row>
           <entry>
             <al xmlns="local">2.</al>
@@ -22715,7 +22714,7 @@
           </entry>
         </row>
       </thead>
-      <tbody>
+      <tbody valign="middle">
         <row>
           <entry/>
           <entry>
@@ -22789,7 +22788,7 @@
       <colspec colname="c2" colwidth="43%"/>
       <colspec colname="c3" colwidth="30%"/>
       <colspec colname="c4" colwidth="20%"/>
-      <thead>
+      <thead valign="middle">
         <row>
           <entry>
             <al xmlns="local">2.</al>
@@ -22809,7 +22808,7 @@
           </entry>
         </row>
       </thead>
-      <tbody>
+      <tbody valign="middle">
         <row>
           <entry/>
           <entry>
@@ -23139,7 +23138,7 @@
       <colspec colname="c2" colwidth="43%"/>
       <colspec colname="c3" colwidth="30%"/>
       <colspec colname="c4" colwidth="20%"/>
-      <thead>
+      <thead valign="middle">
         <row>
           <entry>
             <al xmlns="local">2.</al>
@@ -23157,7 +23156,7 @@
           </entry>
         </row>
       </thead>
-      <tbody>
+      <tbody valign="middle">
         <row>
           <entry/>
           <entry>
@@ -23629,7 +23628,7 @@
       <colspec colname="c2" colwidth="43%"/>
       <colspec colname="c3" colwidth="30%"/>
       <colspec colname="c4" colwidth="20%"/>
-      <thead>
+      <thead valign="middle">
         <row>
           <entry>
             <al xmlns="local">3.</al>
@@ -23649,7 +23648,7 @@
           </entry>
         </row>
       </thead>
-      <tbody>
+      <tbody valign="middle">
         <row>
           <entry/>
           <entry>
@@ -23788,7 +23787,7 @@
       <colspec colname="c2" colwidth="43%"/>
       <colspec colname="c3" colwidth="30%"/>
       <colspec colname="c4" colwidth="20%"/>
-      <thead>
+      <thead valign="middle">
         <row>
           <entry>
             <al xmlns="local">4.</al>
@@ -23808,7 +23807,7 @@
           </entry>
         </row>
       </thead>
-      <tbody>
+      <tbody valign="middle">
         <row>
           <entry/>
           <entry>
@@ -24278,7 +24277,7 @@
       <colspec colname="c2" colwidth="43%"/>
       <colspec colname="c3" colwidth="30%"/>
       <colspec colname="c4" colwidth="20%"/>
-      <thead>
+      <thead valign="middle">
         <row>
           <entry>
             <al xmlns="local">4.</al>
@@ -24298,7 +24297,7 @@
           </entry>
         </row>
       </thead>
-      <tbody>
+      <tbody valign="middle">
         <row>
           <entry/>
           <entry>
@@ -24364,7 +24363,7 @@
       <colspec colname="c2" colwidth="43%"/>
       <colspec colname="c3" colwidth="30%"/>
       <colspec colname="c4" colwidth="20%"/>
-      <thead>
+      <thead valign="middle">
         <row>
           <entry>
             <al xmlns="local">5.</al>
@@ -24382,7 +24381,7 @@
           </entry>
         </row>
       </thead>
-      <tbody>
+      <tbody valign="middle">
         <row>
           <entry/>
           <entry>
@@ -25136,7 +25135,7 @@
       <colspec colname="c2" colwidth="43%"/>
       <colspec colname="c3" colwidth="30%"/>
       <colspec colname="c4" colwidth="20%"/>
-      <thead>
+      <thead valign="middle">
         <row>
           <entry>
             <al xmlns="local">5.</al>
@@ -25156,7 +25155,7 @@
           </entry>
         </row>
       </thead>
-      <tbody>
+      <tbody valign="middle">
         <row>
           <entry/>
           <entry>
@@ -25354,7 +25353,7 @@
       <colspec colname="c2" colwidth="43%"/>
       <colspec colname="c3" colwidth="30%"/>
       <colspec colname="c4" colwidth="20%"/>
-      <thead>
+      <thead valign="middle">
         <row>
           <entry>
             <al xmlns="local">6.</al>
@@ -25374,7 +25373,7 @@
           </entry>
         </row>
       </thead>
-      <tbody>
+      <tbody valign="middle">
         <row>
           <entry/>
           <entry>
@@ -25550,7 +25549,7 @@
       <colspec colname="c2" colwidth="43%"/>
       <colspec colname="c3" colwidth="30%"/>
       <colspec colname="c4" colwidth="20%"/>
-      <thead>
+      <thead valign="middle">
         <row>
           <entry>
             <al xmlns="local">6.</al>
@@ -25568,7 +25567,7 @@
           </entry>
         </row>
       </thead>
-      <tbody>
+      <tbody valign="middle">
         <row>
           <entry/>
           <entry>
@@ -25958,7 +25957,7 @@
       <colspec colname="c2" colwidth="43%"/>
       <colspec colname="c3" colwidth="30%"/>
       <colspec colname="c4" colwidth="20%"/>
-      <thead>
+      <thead valign="middle">
         <row>
           <entry>
             <al xmlns="local">6.</al>
@@ -25976,7 +25975,7 @@
           </entry>
         </row>
       </thead>
-      <tbody>
+      <tbody valign="middle">
         <row>
           <entry/>
           <entry>
@@ -26331,7 +26330,7 @@
       <colspec colname="c2" colwidth="43%"/>
       <colspec colname="c3" colwidth="30%"/>
       <colspec colname="c4" colwidth="20%"/>
-      <thead>
+      <thead valign="middle">
         <row>
           <entry>
             <al xmlns="local">7.</al>
@@ -26351,7 +26350,7 @@
           </entry>
         </row>
       </thead>
-      <tbody>
+      <tbody valign="middle">
         <row>
           <entry/>
           <entry>
@@ -26498,7 +26497,7 @@
       <colspec colname="c2" colwidth="43%"/>
       <colspec colname="c3" colwidth="30%"/>
       <colspec colname="c4" colwidth="20%"/>
-      <thead>
+      <thead valign="middle">
         <row>
           <entry>
             <al xmlns="local">8.</al>
@@ -26508,7 +26507,7 @@
           </entry>
         </row>
       </thead>
-      <tbody>
+      <tbody valign="middle">
         <row>
           <entry/>
           <entry>

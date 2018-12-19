@@ -48,7 +48,7 @@
         <table xmlns="http://docs.oasis-open.org/ns/oasis-exchange/table" frame="none" colsep="0" rowsep="0">
           <tgroup cols="2">
             <colspec colname="c1"/>
-            <tbody>
+            <tbody valign="middle">
               <row>
                 <entry>table cell text</entry>
                 <entry>table cell text</entry>
@@ -73,7 +73,7 @@
             <colspec colname="c3" colwidth="20%"/>
             <colspec colname="c4" colwidth="20%"/>
             <colspec colname="c5" colwidth="19%"/>
-            <thead>
+            <thead valign="middle">
               <row>
                 <entry valign="top" colsep="1" rowsep="1">
                   <bold xmlns="">header text</bold>
@@ -92,7 +92,7 @@
                 </entry>
               </row>
             </thead>
-            <tbody>
+            <tbody valign="middle">
               <row>
                 <entry align="center" valign="top" colsep="1" rowsep="1">table cell text</entry>
                 <entry align="center" valign="top" colsep="1" rowsep="1">table cell text</entry>
@@ -122,9 +122,9 @@
             <colspec colname="c2" colwidth="25%"/>
             <colspec colname="c3" colwidth="25%"/>
             <colspec colname="c4" colwidth="25%"/>
-            <thead>
+            <thead valign="middle">
               <row>
-                <entry valign="top" colsep="1" rowsep="1" morerows="1">header text</entry>
+                <entry valign="top" morerows="1" colsep="1" rowsep="1">header text</entry>
                 <entry valign="top" namest="c2" nameend="c4" colsep="1" rowsep="1">header text</entry>
               </row>
               <row>
@@ -133,7 +133,7 @@
                 <entry valign="top" colsep="1" rowsep="1">header text</entry>
               </row>
             </thead>
-            <tbody>
+            <tbody valign="middle">
               <row>
                 <entry align="center" valign="top" colsep="1" rowsep="1">table cell text</entry>
                 <entry align="center" valign="top" colsep="1" rowsep="1">table cell text</entry>
@@ -161,7 +161,7 @@
             <colspec colname="c2" colwidth="25%"/>
             <colspec colname="c3" colwidth="25%"/>
             <colspec colname="c4" colwidth="25%"/>
-            <thead>
+            <thead valign="middle">
               <row>
                 <entry valign="top" colsep="1" rowsep="1">header text</entry>
                 <entry valign="top" colsep="1" rowsep="1">header text</entry>
@@ -169,7 +169,7 @@
                 <entry valign="top" colsep="1" rowsep="1">header text</entry>
               </row>
             </thead>
-            <tbody>
+            <tbody valign="middle">
               <row>
                 <entry align="center" valign="top" colsep="1" rowsep="1">table cell text</entry>
                 <entry align="center" valign="top" colsep="1" rowsep="1">table cell text</entry>
@@ -202,7 +202,7 @@
             <colspec colname="c4" colwidth="10%"/>
             <colspec colname="c5" colwidth="10%"/>
             <colspec colname="c6" colwidth="11%"/>
-            <thead>
+            <thead valign="middle">
               <row>
                 <entry colsep="1" rowsep="1">header text</entry>
                 <entry namest="c2" nameend="c3" colsep="1" rowsep="1">header text</entry>
@@ -211,9 +211,9 @@
                 <entry colsep="1" rowsep="1">header text</entry>
               </row>
             </thead>
-            <tbody>
+            <tbody valign="middle">
               <row>
-                <entry align="center" valign="top" colsep="1" rowsep="1" morerows="9">table cell text</entry>
+                <entry align="center" valign="top" morerows="9" colsep="1" rowsep="1">table cell text</entry>
                 <entry valign="top" namest="c2" nameend="c3" colsep="1" rowsep="1">table cell text</entry>
                 <entry align="center" valign="top" colsep="1" rowsep="1">table cell text</entry>
                 <entry align="center" valign="top" colsep="1" rowsep="1">table cell text</entry>
@@ -267,9 +267,9 @@
             <colspec colname="c2" colwidth="25%"/>
             <colspec colname="c3" colwidth="25%"/>
             <colspec colname="c4" colwidth="25%"/>
-            <thead>
+            <thead valign="middle">
               <row>
-                <entry valign="top" colsep="1" rowsep="1" morerows="1">header text</entry>
+                <entry valign="top" morerows="1" colsep="1" rowsep="1">header text</entry>
                 <entry valign="top" namest="c2" nameend="c4" colsep="1" rowsep="1">header text</entry>
               </row>
               <row>
@@ -278,7 +278,7 @@
                 <entry valign="top" colsep="1" rowsep="1">header text</entry>
               </row>
             </thead>
-            <tbody>
+            <tbody valign="middle">
               <row>
                 <entry align="center" valign="top" colsep="1" rowsep="1">table cell text</entry>
                 <entry align="center" valign="top" colsep="1" rowsep="1">table cell text</entry>
@@ -324,7 +324,7 @@
             <colspec colname="c2" colwidth="25%"/>
             <colspec colname="c3" colwidth="25%"/>
             <colspec colname="c4" colwidth="25%"/>
-            <thead>
+            <thead valign="middle">
               <row>
                 <entry align="left">table default</entry>
                 <entry align="left">table default</entry>
@@ -332,7 +332,7 @@
                 <entry align="left">table default</entry>
               </row>
             </thead>
-            <tbody>
+            <tbody valign="middle">
               <row>
                 <entry namest="c1" nameend="c2">rowsep=no</entry>
                 <entry>table default</entry>
@@ -363,7 +363,7 @@
             <colspec colname="c2" colwidth="25%"/>
             <colspec colname="c3" colwidth="25%"/>
             <colspec colname="c4" colwidth="25%"/>
-            <thead>
+            <thead valign="middle">
               <row>
                 <entry align="left" rowsep="1">rowsep=yes</entry>
                 <entry align="left" rowsep="1">rowsep=yes</entry>
@@ -371,7 +371,7 @@
                 <entry align="left" rowsep="1">rowsep=yes</entry>
               </row>
             </thead>
-            <tbody>
+            <tbody valign="middle">
               <row>
                 <entry rowsep="1">rowsep=yes</entry>
                 <entry rowsep="1">rowsep=yes</entry>
@@ -405,7 +405,7 @@
             <colspec colname="c2" colwidth="25%"/>
             <colspec colname="c3" colwidth="25%"/>
             <colspec colname="c4" colwidth="25%"/>
-            <thead>
+            <thead valign="middle">
               <row>
                 <entry align="left" colsep="1">colsep=yes</entry>
                 <entry align="left" colsep="1">colsep=yes</entry>
@@ -413,7 +413,7 @@
                 <entry align="left" colsep="1">colsep=yes</entry>
               </row>
             </thead>
-            <tbody>
+            <tbody valign="middle">
               <row>
                 <entry colsep="1">colsep=yes</entry>
                 <entry colsep="1">colsep=yes</entry>
@@ -447,7 +447,7 @@
             <colspec colname="c2" colwidth="25%"/>
             <colspec colname="c3" colwidth="25%"/>
             <colspec colname="c4" colwidth="25%"/>
-            <thead>
+            <thead valign="middle">
               <row>
                 <entry align="left">table default</entry>
                 <entry align="left">table default</entry>
@@ -461,7 +461,7 @@
                 <entry align="left" rowsep="1">rowsep=yes</entry>
               </row>
             </thead>
-            <tbody>
+            <tbody valign="middle">
               <row>
                 <entry>table default</entry>
                 <entry>table default</entry>
@@ -495,7 +495,7 @@
             <colspec colname="c2" colwidth="25%"/>
             <colspec colname="c3" colwidth="25%"/>
             <colspec colname="c4" colwidth="25%"/>
-            <thead>
+            <thead valign="middle">
               <row>
                 <entry align="left" colsep="1" rowsep="1">colsep=yes, rowsep=yes</entry>
                 <entry align="left" colsep="1" rowsep="1">colsep=yes, rowsep=yes</entry>
@@ -509,7 +509,7 @@
                 <entry align="left" colsep="1" rowsep="1">colsep=yes, rowsep=yes</entry>
               </row>
             </thead>
-            <tbody>
+            <tbody valign="middle">
               <row>
                 <entry colsep="1" rowsep="1">colsep=yes, rowsep=yes</entry>
                 <entry colsep="1" rowsep="1">colsep=yes, rowsep=yes</entry>
@@ -545,7 +545,7 @@
             <colspec colname="c4"/>
             <colspec colname="c5"/>
             <colspec colname="c6"/>
-            <tbody>
+            <tbody valign="middle">
               <row>
                 <entry valign="top" colsep="1" rowsep="1">
                   just lots of text to see the vertical alignment, 

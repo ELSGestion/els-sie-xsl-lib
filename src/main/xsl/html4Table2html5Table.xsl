@@ -65,16 +65,16 @@
         <xsl:if test="local-name(.) = ('td', 'th') and $border and not(css:showAllBorders($css))">
           <xsl:variable name="borders-to-set" as="xs:string*">
             <!--Here we have to set every unset borders except those from the table itself-->
-            <xsl:if test="not(css:showBorderTop($css)) and parent::tr/preceding-sibling::tr">
+            <xsl:if test="not(css:showBorderTop($css))"> <!--and (parent::tr/preceding-sibling::tr or (ancestor::table/thead and ancestor::tbody))-->
                 <xsl:text>top</xsl:text>
             </xsl:if>
-            <xsl:if test="not(css:showBorderRight($css)) and following-sibling::*[local-name(.) = ('td', 'th')]">
+            <xsl:if test="not(css:showBorderRight($css))"> <!--and following-sibling::*[local-name(.) = ('td', 'th')]-->
               <xsl:text>right</xsl:text>
             </xsl:if>
-            <xsl:if test="not(css:showBorderBottom($css)) and parent::tr/following-sibling::tr">
+            <xsl:if test="not(css:showBorderBottom($css))"><!--and (parent::tr/following-sibling::tr or (ancestor::table/tbody and ancestor::thead))-->
               <xsl:text>bottom</xsl:text>
             </xsl:if>
-            <xsl:if test="not(css:showBorderLeft($css)) and preceding-sibling::*[local-name(.) = ('td', 'th')]">
+            <xsl:if test="not(css:showBorderLeft($css))">  <!--and preceding-sibling::*[local-name(.) = ('td', 'th')]-->
               <xsl:text>left</xsl:text>
             </xsl:if>
           </xsl:variable>

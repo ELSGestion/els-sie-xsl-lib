@@ -14,10 +14,6 @@
   exclude-result-prefixes="#all" 
   version="3.0">
   
-  <xsl:import href="els-common.xsl"/>
-  <xsl:import href="html4Table2html5Table.xsl"/>
-  <xsl:import href="css-parser.xsl"/>
-  
   <xd:doc scope="stylesheet">
     <xd:desc>
       <xd:p xml:lang="fr">Cette feuille de style va traiter la conversion de tables xhtml en tables CALS.</xd:p>
@@ -45,14 +41,21 @@
     </xd:desc>
   </xd:doc>
   
+  <xsl:import href="els-common.xsl"/>
+  <xsl:import href="html4Table2html5Table.xsl"/>
+  <xsl:import href="css-parser.xsl"/>
+  
   <xsl:param name="xslLib:html2cals.debug" select="false()" as="xs:boolean"/>
   <!--Par défaut les log sont écrits à côté du xml-->
   <xsl:param name="xslLib:html2cals.LOG.URI" select="resolve-uri('log', base-uri(.))" as="xs:string"/>
   <xsl:variable name="xslLib:html2cals.log.uri" select="if(ends-with($xslLib:html2cals.LOG.URI, '/')) then ($xslLib:html2cals.LOG.URI) else(concat($xslLib:html2cals.LOG.URI, '/'))" as="xs:string"/>
   
   <xsl:param name="xslLib:html2cals.cals.ns.uri" select="'http://docs.oasis-open.org/ns/oasis-exchange/table'" as="xs:string"/>
+  <!--set the pattern for the value of rowsep/colsep attributes : when false the default values are 0 or 1 as says the CALS spec-->
   <xsl:param name="xslLib:html2cals.use-yesorno-values-for-colsep-rowsep" select="false()" as="xs:boolean"/>
-  <!--when false the default values are 0 or 1 as says the CALS spec-->
+  <!--When table are not in html namespace one can force every tableaux to be converted to this namespace-->
+  <xsl:param name="xslLib:html2cals.force-html-table-conversion" select="false()" as="xs:boolean"/>
+  <xsl:param name="xslLib:html2cals.generate-upper-case-cals-elements" select="false()" as="xs:boolean"/>
   
   <!--==============================================================================================================================-->
   <!-- INIT -->
@@ -67,10 +70,18 @@
   <!--==============================================================================================================================-->
   
   <xsl:template match="/" mode="xslLib:xhtml2cals">
+    <xsl:variable name="step" select="." as="document-node()"/>
     <xsl:variable name="step" as="document-node()">
-      <xsl:document>
-        <xsl:apply-templates select="." mode="xhtml2cals:normalize-to-xhtml"/>
-      </xsl:document>
+      <xsl:choose>
+        <xsl:when test="$xslLib:html2cals.force-html-table-conversion">
+          <xsl:document>
+            <xsl:apply-templates select="." mode="xhtml2cals:force-html-table-conversion"/>
+          </xsl:document>
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:sequence select="$step"/>
+        </xsl:otherwise>
+      </xsl:choose>
     </xsl:variable>
     <xsl:if test="$xslLib:html2cals.debug">
       <xsl:variable name="log.uri" select="resolve-uri('xhtml2cals.step1.log.xml', $xslLib:html2cals.log.uri)" as="xs:anyURI"/>
@@ -81,7 +92,7 @@
     </xsl:if>
     <xsl:variable name="step" as="document-node()">
       <xsl:document>
-        <xsl:apply-templates select="$step" mode="xhtml2cals:expand-spans"/>
+        <xsl:apply-templates select="$step" mode="xhtml2cals:lowercase-html"/>
       </xsl:document>
     </xsl:variable>
     <xsl:if test="$xslLib:html2cals.debug">
@@ -93,7 +104,7 @@
     </xsl:if>
     <xsl:variable name="step" as="document-node()">
       <xsl:document>
-        <xsl:apply-templates select="$step" mode="xslLib:html4table2html5table"/>
+        <xsl:apply-templates select="$step" mode="xhtml2cals:normalize-to-xhtml"/>
       </xsl:document>
     </xsl:variable>
     <xsl:if test="$xslLib:html2cals.debug">
@@ -105,7 +116,7 @@
     </xsl:if>
     <xsl:variable name="step" as="document-node()">
       <xsl:document>
-        <xsl:apply-templates select="$step" mode="xhtml2cals:convert-to-cals"/>
+        <xsl:apply-templates select="$step" mode="xhtml2cals:expand-spans"/>
       </xsl:document>
     </xsl:variable>
     <xsl:if test="$xslLib:html2cals.debug">
@@ -117,11 +128,54 @@
     </xsl:if>
     <xsl:variable name="step" as="document-node()">
       <xsl:document>
-        <xsl:apply-templates select="$step" mode="xhtml2cals:optimize-cals"/>
+        <xsl:apply-templates select="$step" mode="xslLib:html4table2html5table"/>
       </xsl:document>
     </xsl:variable>
     <xsl:if test="$xslLib:html2cals.debug">
       <xsl:variable name="log.uri" select="resolve-uri('xhtml2cals.step5.log.xml', $xslLib:html2cals.log.uri)" as="xs:anyURI"/>
+      <xsl:message>[INFO] writing <xsl:value-of select="$log.uri"/></xsl:message>
+      <xsl:result-document href="{$log.uri}">
+        <xsl:sequence select="$step"/>
+      </xsl:result-document>
+    </xsl:if>
+    <xsl:variable name="step" as="document-node()">
+      <xsl:document>
+        <xsl:apply-templates select="$step" mode="xhtml2cals:convert-to-cals"/>
+      </xsl:document>
+    </xsl:variable>
+    <xsl:if test="$xslLib:html2cals.debug">
+      <xsl:variable name="log.uri" select="resolve-uri('xhtml2cals.step6.log.xml', $xslLib:html2cals.log.uri)" as="xs:anyURI"/>
+      <xsl:message>[INFO] writing <xsl:value-of select="$log.uri"/></xsl:message>
+      <xsl:result-document href="{$log.uri}">
+        <xsl:sequence select="$step"/>
+      </xsl:result-document>
+    </xsl:if>
+    <xsl:variable name="step" as="document-node()">
+      <xsl:document>
+        <xsl:apply-templates select="$step" mode="xhtml2cals:optimize-cals"/>
+      </xsl:document>
+    </xsl:variable>
+    <xsl:if test="$xslLib:html2cals.debug">
+      <xsl:variable name="log.uri" select="resolve-uri('xhtml2cals.step7.log.xml', $xslLib:html2cals.log.uri)" as="xs:anyURI"/>
+      <xsl:message>[INFO] writing <xsl:value-of select="$log.uri"/></xsl:message>
+      <xsl:result-document href="{$log.uri}">
+        <xsl:sequence select="$step"/>
+      </xsl:result-document>
+    </xsl:if>
+    <xsl:variable name="step" as="document-node()">
+      <xsl:choose>
+        <xsl:when test="$xslLib:html2cals.generate-upper-case-cals-elements">
+          <xsl:document>
+            <xsl:apply-templates select="$step" mode="xhtml2cals:convert-upper-case-cals"/>
+          </xsl:document>
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:sequence select="$step"/>
+        </xsl:otherwise>
+      </xsl:choose>
+    </xsl:variable>
+    <xsl:if test="$xslLib:html2cals.debug">
+      <xsl:variable name="log.uri" select="resolve-uri('xhtml2cals.step8.log.xml', $xslLib:html2cals.log.uri)" as="xs:anyURI"/>
       <xsl:message>[INFO] writing <xsl:value-of select="$log.uri"/></xsl:message>
       <xsl:result-document href="{$log.uri}">
         <xsl:sequence select="$step"/>
@@ -139,10 +193,50 @@
       </xsl:otherwise>
     </xsl:choose>
   </xsl:template>
+
+  <xd:doc>
+    <!-- ==============================================================================================-->
+    <!-- STEP 1 : Mode force-html-table-conversion: force every table to be converted to html namespace -->
+    <!-- ==============================================================================================-->
+  </xd:doc>
+  
+  <xsl:template match="*[lower-case(local-name(.)) = ('table', 'thead', 'tbody', 'tr', 'th', 'td')]" mode="xhtml2cals:force-html-table-conversion">
+    <xsl:element name="{local-name()}" namespace="http://www.w3.org/1999/xhtml">
+      <xsl:apply-templates select="@* | node()" mode="#current"/>
+    </xsl:element>
+  </xsl:template>
+  
+  <xsl:template match="node() | @*" mode="xhtml2cals:force-html-table-conversion">
+    <xsl:copy>
+      <xsl:apply-templates select="node() | @*" mode="#current"/>
+    </xsl:copy>
+  </xsl:template>
   
   <xd:doc>
     <!-- ==============================================================================================-->
-    <!-- STEP 1 : Mode normalize-to-xhtml: normalisation de la structure de table xhtml -->
+    <!-- STEP 2 : Mode lowercase-html: convert html table elements to lower-case -->
+    <!-- ==============================================================================================-->
+  </xd:doc>
+  
+  <xsl:template match="TABLE | THEAD | TBODY | TR | TH | TD" mode="xhtml2cals:lowercase-html">
+    <xsl:element name="{lower-case(name(.))}" namespace="http://www.w3.org/1999/xhtml">
+      <xsl:apply-templates select="@* | node()" mode="#current"/>
+    </xsl:element>
+  </xsl:template>
+  
+  <xsl:template match="(TABLE | THEAD | TBODY | TR | TH | TD)/@*" mode="xhtml2cals:lowercase-html">
+    <xsl:attribute name="{lower-case(name(.))}" select="."/>
+  </xsl:template>
+  
+  <xsl:template match="node() | @*" mode="xhtml2cals:lowercase-html">
+    <xsl:copy>
+      <xsl:apply-templates select="node() | @*" mode="#current"/>
+    </xsl:copy>
+  </xsl:template>
+  
+  <xd:doc>
+    <!-- ==============================================================================================-->
+    <!-- STEP 3 : Mode normalize-to-xhtml: normalisation de la structure de table xhtml -->
     <!-- ==============================================================================================-->
   </xd:doc>
 
@@ -221,9 +315,10 @@
   
   <xd:doc>
     <!-- ==============================================================================================-->
-    <!-- STEP 2 : Mode expand-spans: expansion des attributs colspan et rowspan -->
+    <!-- STEP 4 : Mode expand-spans: expansion des attributs colspan et rowspan -->
     <!-- ==============================================================================================-->
   </xd:doc>
+  
   <xd:doc scope="component" xml:lang="fr">
     <xd:desc>
       <xd:p>En mode <xd:i>expand-spans</xd:i> on va parcourir les lignes et expanser celles avec un attribut colspan ou rowspan.</xd:p>
@@ -467,7 +562,7 @@
   
   <xd:doc>
     <!-- ==============================================================================================-->
-    <!-- STEP 3 : Mode "xslLib:html4table2html5table" -->
+    <!-- STEP 5 : Mode "xslLib:html4table2html5table" -->
     <!-- ==============================================================================================-->
   </xd:doc>
   
@@ -475,7 +570,7 @@
   
   <xd:doc>
     <!-- ==============================================================================================-->
-    <!-- STEP 4 : Mode convert-to-cals  -->
+    <!-- STEP 6 : Mode convert-to-cals  -->
     <!-- ==============================================================================================-->
   </xd:doc>
 
@@ -497,7 +592,10 @@
         <!-- <xsl:call-template name="make-spanspec">
           <xsl:with-param name="context" select="colgroup | col"/>
         </xsl:call-template> -->
-        <xsl:apply-templates select="thead, tfoot, tbody" mode="#current"/>
+        <xsl:variable name="css" select="css:parse-inline(@style)" as="element(css:css)?"/>
+        <xsl:apply-templates select="thead, tfoot, tbody" mode="#current">
+          <xsl:with-param name="table.valign" select="css:getPropertyValue($css, 'vertical-align')" as="xs:string*"/>
+        </xsl:apply-templates>
       </tgroup>
     </table>
   </xsl:template>
@@ -700,24 +798,43 @@
   </xsl:template>
   
   <xsl:template match="thead" mode="xhtml2cals:convert-to-cals">
+    <xsl:param name="table.valign" as="xs:string*"/>
+    <xsl:variable name="css" select="css:parse-inline(@style)" as="element(css:css)?"/>
+    <!--FIXME : after html4Table2html5Table.xsl there is no more @valign attribute-->
     <thead>
       <xsl:apply-templates select="@*" mode="xhtml2cals:convert-attributes-to-cals"/>
+      <xsl:if test="$table.valign='' and css:getPropertyValue($css, 'vertical-align') = ''">
+        <!--Default HTML valign is middle, we have to say it explicitely in cals-->
+        <xsl:attribute name="valign" select="'middle'"/>
+      </xsl:if>
       <!--<xsl:copy-of select="@id | @class | @style | @align | @char | @charoff | @valign" copy-namespaces="no"/>-->
       <xsl:apply-templates select="node()" mode="#current"/>
     </thead>
   </xsl:template>
   
   <xsl:template match="tfoot" mode="xhtml2cals:convert-to-cals">
+    <xsl:param name="table.valign" as="xs:string*"/>
+    <xsl:variable name="css" select="css:parse-inline(@style)" as="element(css:css)?"/>
     <tfoot>
       <xsl:apply-templates select="@*" mode="xhtml2cals:convert-attributes-to-cals"/>
+      <xsl:if test="$table.valign='' and css:getPropertyValue($css, 'vertical-align') = ''">
+        <!--Default HTML valign is middle, we have to say it explicitely in cals-->
+        <xsl:attribute name="valign" select="'middle'"/>
+      </xsl:if>
       <!--<xsl:copy-of select="@id | @class | @style | @align | @char | @charoff | @valign" copy-namespaces="no"/>-->
       <xsl:apply-templates select="node()" mode="#current"/>
     </tfoot>
   </xsl:template>
   
   <xsl:template match="tbody" mode="xhtml2cals:convert-to-cals">
+    <xsl:param name="table.valign" as="xs:string*"/>
+    <xsl:variable name="css" select="css:parse-inline(@style)" as="element(css:css)?"/>
     <tbody>
       <xsl:apply-templates select="@*" mode="xhtml2cals:convert-attributes-to-cals"/>
+      <xsl:if test="$table.valign='' and css:getPropertyValue($css, 'vertical-align') = ''">
+        <!--Default HTML valign is middle, we have to say it explicitely in cals-->
+        <xsl:attribute name="valign" select="'middle'"/>
+      </xsl:if>
       <!--<xsl:copy-of select="@id | @class | @style | @align | @char | @charoff | @valign" copy-namespaces="no"/>-->
       <xsl:apply-templates select="node()" mode="#current"/>
     </tbody>
@@ -840,7 +957,7 @@
             </xsl:when>
             <xsl:when test="css:getPropertyValue($css, 'vertical-align') = 'baseline'">
               <!--"baseline" has no correspondence in CALS-->
-              <xsl:attribute name="valign" select="'left'"/>
+              <xsl:attribute name="valign" select="'bottom'"/>
             </xsl:when>
             <xsl:otherwise>
               <xsl:attribute name="valign" select="css:getPropertyValue($css, 'vertical-align')"/>
@@ -849,6 +966,11 @@
         </xsl:when>
         <xsl:when test="starts-with(css:getPropertyName(.), 'border')">
           <!--rowsep and colsep has already been processed-->
+        </xsl:when>
+        <xsl:when test="css:getPropertyName(.) = 'background-color'">
+          <xsl:message><xsl:copy-of select="$css"/></xsl:message>
+          <!--<css:background-color-ruleset><css:background-color><css:color>#d8d8d8</css:color></css:background-color></css:background-color-ruleset>-->
+          <xsl:attribute name="bgcolor" select="css:getProperty($css, 'background-color')//text()"/>
         </xsl:when>
         <xsl:otherwise>
           <xsl:message>[WARNING][html2cals.xsl] unmatched css property "<xsl:value-of select="css:getPropertyName(.)"/>"</xsl:message>
@@ -874,7 +996,7 @@
   
   <xd:doc>
     <!-- ==============================================================================================-->
-    <!-- STEP 5 : Mode xhtml2cals:optimize-cals-->
+    <!-- STEP 7 : Mode xhtml2cals:optimize-cals-->
     <!-- ==============================================================================================-->
   </xd:doc>
   
@@ -960,7 +1082,29 @@
   
   <xd:doc>
     <!-- ======================================================================-->
-    <!-- Mode xhtml2cals:convert-cals-namespace -->
+    <!-- STEP 8 : Mode xhtml2cals:convert-upper-case-cals -->
+    <!-- ======================================================================-->
+  </xd:doc>
+  
+  <xsl:template match="cals:tgroup | cals:table | cals:thead | cals:tbody | cals:row | cals:entry | cals:col | cals:colspec" mode="xhtml2cals:convert-upper-case-cals">
+    <xsl:element name="{upper-case(name(.))}">
+      <xsl:apply-templates select="@* | node()" mode="#current"/>
+    </xsl:element>
+  </xsl:template>
+  
+  <xsl:template match="(cals:tgroup | cals:table | cals:thead | cals:tbody | cals:row | cals:entry | cals:col | cals:colspec)/@*" mode="xhtml2cals:convert-upper-case-cals">
+    <xsl:attribute name="{upper-case(name(.))}" select="upper-case(.)"/>
+  </xsl:template>
+  
+  <xsl:template match="node() | @*" mode="xhtml2cals:convert-upper-case-cals">
+    <xsl:copy>
+      <xsl:apply-templates select="node() | @*" mode="#current"/>
+    </xsl:copy>
+  </xsl:template>
+  
+  <xd:doc>
+    <!-- ======================================================================-->
+    <!-- STEP 9 : Mode xhtml2cals:convert-cals-namespace -->
     <!-- ======================================================================-->
   </xd:doc>
   
@@ -976,6 +1120,5 @@
       <xsl:apply-templates select="@*|node()" mode="#current"/>
     </xsl:copy>
   </xsl:template>
-  
   
 </xsl:stylesheet>

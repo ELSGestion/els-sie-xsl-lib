@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<x:description 
+  xmlns:x="http://www.jenitennison.com/xslt/xspec" 
+  xmlns:xslLib="http://www.lefebvre-sarrut.eu/ns/els/xslLib"
+  stylesheet="../../main/xsl/html2cals.xsl"
+  xslt-version="3.0">
+  
+  <x:param name="xslLib:html2cals.force-html-table-conversion" select="true()"/>
+  <x:param name="xslLib:html2cals.generate-upper-case-cals-elements" select="true()"/>
+  <x:param name="xslLib:html2cals.cals.ns.uri" select="''"/>
+  
+  <x:scenario label="HTML2CALS - force-html-table-conversion + generate-upper-case-cals-elements + empty cals.ns.uri" xml:base="../samples/tables/">
+    
+    <x:scenario label="HTML2CALS any html">
+      <x:scenario label="article">
+        <x:context href="article.xml"/>
+        <x:expect label="OK" select="/*" test="/*" href="article.cals.xml"/>
+      </x:scenario>
+    </x:scenario>
+    
+  </x:scenario>
+  
+</x:description>
