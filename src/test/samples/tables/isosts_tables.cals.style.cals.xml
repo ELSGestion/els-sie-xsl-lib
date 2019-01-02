@@ -50,12 +50,12 @@
             <colspec colname="c1"/>
             <tbody valign="middle">
               <row>
-                <entry>table cell text</entry>
-                <entry>table cell text</entry>
+                <entry valign="top">table cell text</entry>
+                <entry valign="top">table cell text</entry>
               </row>
               <row>
-                <entry>table cell text</entry>
-                <entry>table cell text</entry>
+                <entry valign="top">table cell text</entry>
+                <entry valign="top">table cell text</entry>
               </row>
             </tbody>
           </tgroup>
@@ -326,27 +326,27 @@
             <colspec colname="c4" colwidth="25%"/>
             <thead valign="middle">
               <row>
-                <entry align="left">table default</entry>
-                <entry align="left">table default</entry>
-                <entry align="left">table default</entry>
-                <entry align="left">table default</entry>
+                <entry align="left" valign="top">table default</entry>
+                <entry align="left" valign="top">table default</entry>
+                <entry align="left" valign="top">table default</entry>
+                <entry align="left" valign="top">table default</entry>
               </row>
             </thead>
             <tbody valign="middle">
               <row>
-                <entry namest="c1" nameend="c2">rowsep=no</entry>
-                <entry>table default</entry>
-                <entry morerows="1" rowsep="1">rowsep=yes</entry>
+                <entry valign="top" namest="c1" nameend="c2">rowsep=no</entry>
+                <entry valign="top">table default</entry>
+                <entry valign="top" morerows="1" rowsep="1">rowsep=yes</entry>
               </row>
               <row>
-                <entry namest="c1" nameend="c2" colsep="1" rowsep="1">colsep=yes, rowsep=yes</entry>
-                <entry>table default</entry>
+                <entry valign="top" namest="c1" nameend="c2" colsep="1" rowsep="1">colsep=yes, rowsep=yes</entry>
+                <entry valign="top">table default</entry>
               </row>
               <row>
-                <entry>table default</entry>
-                <entry colsep="1">colsep=yes</entry>
-                <entry>table default</entry>
-                <entry>table default</entry>
+                <entry valign="top">table default</entry>
+                <entry valign="top" colsep="1">colsep=yes</entry>
+                <entry valign="top">table default</entry>
+                <entry valign="top">table default</entry>
               </row>
             </tbody>
           </tgroup>
@@ -365,30 +365,30 @@
             <colspec colname="c4" colwidth="25%"/>
             <thead valign="middle">
               <row>
-                <entry align="left" rowsep="1">rowsep=yes</entry>
-                <entry align="left" rowsep="1">rowsep=yes</entry>
-                <entry align="left" rowsep="1">rowsep=yes</entry>
-                <entry align="left" rowsep="1">rowsep=yes</entry>
+                <entry align="left" valign="top" rowsep="1">rowsep=yes</entry>
+                <entry align="left" valign="top" rowsep="1">rowsep=yes</entry>
+                <entry align="left" valign="top" rowsep="1">rowsep=yes</entry>
+                <entry align="left" valign="top" rowsep="1">rowsep=yes</entry>
               </row>
             </thead>
             <tbody valign="middle">
               <row>
-                <entry rowsep="1">rowsep=yes</entry>
-                <entry rowsep="1">rowsep=yes</entry>
-                <entry rowsep="1">rowsep=yes</entry>
-                <entry rowsep="1">rowsep=yes</entry>
+                <entry valign="top" rowsep="1">rowsep=yes</entry>
+                <entry valign="top" rowsep="1">rowsep=yes</entry>
+                <entry valign="top" rowsep="1">rowsep=yes</entry>
+                <entry valign="top" rowsep="1">rowsep=yes</entry>
               </row>
               <row>
-                <entry rowsep="1">rowsep=yes</entry>
-                <entry rowsep="1">rowsep=yes</entry>
-                <entry rowsep="1">rowsep=yes</entry>
-                <entry rowsep="1">rowsep=yes</entry>
+                <entry valign="top" rowsep="1">rowsep=yes</entry>
+                <entry valign="top" rowsep="1">rowsep=yes</entry>
+                <entry valign="top" rowsep="1">rowsep=yes</entry>
+                <entry valign="top" rowsep="1">rowsep=yes</entry>
               </row>
               <row>
-                <entry rowsep="1">rowsep=yes</entry>
-                <entry rowsep="1">rowsep=yes</entry>
-                <entry rowsep="1">rowsep=yes</entry>
-                <entry rowsep="1">rowsep=yes</entry>
+                <entry valign="top" rowsep="1">rowsep=yes</entry>
+                <entry valign="top" rowsep="1">rowsep=yes</entry>
+                <entry valign="top" rowsep="1">rowsep=yes</entry>
+                <entry valign="top" rowsep="1">rowsep=yes</entry>
               </row>
             </tbody>
           </tgroup>
@@ -407,30 +407,30 @@
             <colspec colname="c4" colwidth="25%"/>
             <thead valign="middle">
               <row>
-                <entry align="left" colsep="1">colsep=yes</entry>
-                <entry align="left" colsep="1">colsep=yes</entry>
-                <entry align="left" colsep="1">colsep=yes</entry>
-                <entry align="left" colsep="1">colsep=yes</entry>
+                <entry align="left" valign="top" colsep="1">colsep=yes</entry>
+                <entry align="left" valign="top" colsep="1">colsep=yes</entry>
+                <entry align="left" valign="top" colsep="1">colsep=yes</entry>
+                <entry align="left" valign="top" colsep="1">colsep=yes</entry>
               </row>
             </thead>
             <tbody valign="middle">
               <row>
-                <entry colsep="1">colsep=yes</entry>
-                <entry colsep="1">colsep=yes</entry>
-                <entry colsep="1">colsep=yes</entry>
-                <entry colsep="1">colsep=yes</entry>
+                <entry valign="top" colsep="1">colsep=yes</entry>
+                <entry valign="top" colsep="1">colsep=yes</entry>
+                <entry valign="top" colsep="1">colsep=yes</entry>
+                <entry valign="top" colsep="1">colsep=yes</entry>
               </row>
               <row>
-                <entry colsep="1">colsep=yes</entry>
-                <entry colsep="1">colsep=yes</entry>
-                <entry colsep="1">colsep=yes</entry>
-                <entry colsep="1">colsep=yes</entry>
+                <entry valign="top" colsep="1">colsep=yes</entry>
+                <entry valign="top" colsep="1">colsep=yes</entry>
+                <entry valign="top" colsep="1">colsep=yes</entry>
+                <entry valign="top" colsep="1">colsep=yes</entry>
               </row>
               <row>
-                <entry colsep="1">colsep=yes</entry>
-                <entry colsep="1">colsep=yes</entry>
-                <entry colsep="1">colsep=yes</entry>
-                <entry colsep="1">colsep=yes</entry>
+                <entry valign="top" colsep="1">colsep=yes</entry>
+                <entry valign="top" colsep="1">colsep=yes</entry>
+                <entry valign="top" colsep="1">colsep=yes</entry>
+                <entry valign="top" colsep="1">colsep=yes</entry>
               </row>
             </tbody>
           </tgroup>
@@ -449,36 +449,36 @@
             <colspec colname="c4" colwidth="25%"/>
             <thead valign="middle">
               <row>
-                <entry align="left">table default</entry>
-                <entry align="left">table default</entry>
-                <entry align="left">table default</entry>
-                <entry align="left">table default</entry>
+                <entry align="left" valign="top">table default</entry>
+                <entry align="left" valign="top">table default</entry>
+                <entry align="left" valign="top">table default</entry>
+                <entry align="left" valign="top">table default</entry>
               </row>
               <row>
-                <entry align="left" rowsep="1">rowsep=yes</entry>
-                <entry align="left" rowsep="1">rowsep=yes</entry>
-                <entry align="left" rowsep="1">rowsep=yes</entry>
-                <entry align="left" rowsep="1">rowsep=yes</entry>
+                <entry align="left" valign="top" rowsep="1">rowsep=yes</entry>
+                <entry align="left" valign="top" rowsep="1">rowsep=yes</entry>
+                <entry align="left" valign="top" rowsep="1">rowsep=yes</entry>
+                <entry align="left" valign="top" rowsep="1">rowsep=yes</entry>
               </row>
             </thead>
             <tbody valign="middle">
               <row>
-                <entry>table default</entry>
-                <entry>table default</entry>
-                <entry>table default</entry>
-                <entry>table default</entry>
+                <entry valign="top">table default</entry>
+                <entry valign="top">table default</entry>
+                <entry valign="top">table default</entry>
+                <entry valign="top">table default</entry>
               </row>
               <row>
-                <entry rowsep="1">rowsep=yes; because its the last tbody row before the tfoot</entry>
-                <entry rowsep="1">rowsep=yes</entry>
-                <entry rowsep="1">rowsep=yes</entry>
-                <entry rowsep="1">rowsep=yes</entry>
+                <entry valign="top" rowsep="1">rowsep=yes; because its the last tbody row before the tfoot</entry>
+                <entry valign="top" rowsep="1">rowsep=yes</entry>
+                <entry valign="top" rowsep="1">rowsep=yes</entry>
+                <entry valign="top" rowsep="1">rowsep=yes</entry>
               </row>
               <row>
-                <entry rowsep="1">table default</entry>
-                <entry rowsep="1">table default</entry>
-                <entry rowsep="1">table default</entry>
-                <entry rowsep="1">table default</entry>
+                <entry valign="top" rowsep="1">table default</entry>
+                <entry valign="top" rowsep="1">table default</entry>
+                <entry valign="top" rowsep="1">table default</entry>
+                <entry valign="top" rowsep="1">table default</entry>
               </row>
             </tbody>
           </tgroup>
@@ -497,36 +497,36 @@
             <colspec colname="c4" colwidth="25%"/>
             <thead valign="middle">
               <row>
-                <entry align="left" colsep="1" rowsep="1">colsep=yes, rowsep=yes</entry>
-                <entry align="left" colsep="1" rowsep="1">colsep=yes, rowsep=yes</entry>
-                <entry align="left" colsep="1" rowsep="1">colsep=yes, rowsep=yes</entry>
-                <entry align="left" colsep="1" rowsep="1">colsep=yes, rowsep=yes</entry>
+                <entry align="left" valign="top" colsep="1" rowsep="1">colsep=yes, rowsep=yes</entry>
+                <entry align="left" valign="top" colsep="1" rowsep="1">colsep=yes, rowsep=yes</entry>
+                <entry align="left" valign="top" colsep="1" rowsep="1">colsep=yes, rowsep=yes</entry>
+                <entry align="left" valign="top" colsep="1" rowsep="1">colsep=yes, rowsep=yes</entry>
               </row>
               <row>
-                <entry align="left" colsep="1" rowsep="1">colsep=yes, rowsep=yes</entry>
-                <entry align="left" colsep="1" rowsep="1">colsep=yes, rowsep=yes</entry>
-                <entry align="left" colsep="1" rowsep="1">colsep=yes, rowsep=yes</entry>
-                <entry align="left" colsep="1" rowsep="1">colsep=yes, rowsep=yes</entry>
+                <entry align="left" valign="top" colsep="1" rowsep="1">colsep=yes, rowsep=yes</entry>
+                <entry align="left" valign="top" colsep="1" rowsep="1">colsep=yes, rowsep=yes</entry>
+                <entry align="left" valign="top" colsep="1" rowsep="1">colsep=yes, rowsep=yes</entry>
+                <entry align="left" valign="top" colsep="1" rowsep="1">colsep=yes, rowsep=yes</entry>
               </row>
             </thead>
             <tbody valign="middle">
               <row>
-                <entry colsep="1" rowsep="1">colsep=yes, rowsep=yes</entry>
-                <entry colsep="1" rowsep="1">colsep=yes, rowsep=yes</entry>
-                <entry colsep="1" rowsep="1">colsep=yes, rowsep=yes</entry>
-                <entry colsep="1" rowsep="1">colsep=yes, rowsep=yes</entry>
+                <entry valign="top" colsep="1" rowsep="1">colsep=yes, rowsep=yes</entry>
+                <entry valign="top" colsep="1" rowsep="1">colsep=yes, rowsep=yes</entry>
+                <entry valign="top" colsep="1" rowsep="1">colsep=yes, rowsep=yes</entry>
+                <entry valign="top" colsep="1" rowsep="1">colsep=yes, rowsep=yes</entry>
               </row>
               <row>
-                <entry colsep="1" rowsep="1">colsep=yes, rowsep=yes</entry>
-                <entry colsep="1" rowsep="1">colsep=yes, rowsep=yes</entry>
-                <entry colsep="1" rowsep="1">colsep=yes, rowsep=yes</entry>
-                <entry colsep="1" rowsep="1">colsep=yes, rowsep=yes</entry>
+                <entry valign="top" colsep="1" rowsep="1">colsep=yes, rowsep=yes</entry>
+                <entry valign="top" colsep="1" rowsep="1">colsep=yes, rowsep=yes</entry>
+                <entry valign="top" colsep="1" rowsep="1">colsep=yes, rowsep=yes</entry>
+                <entry valign="top" colsep="1" rowsep="1">colsep=yes, rowsep=yes</entry>
               </row>
               <row>
-                <entry colsep="1" rowsep="1">colsep=yes, rowsep=yes</entry>
-                <entry colsep="1" rowsep="1">colsep=yes, rowsep=yes</entry>
-                <entry colsep="1" rowsep="1">colsep=yes, rowsep=yes</entry>
-                <entry colsep="1" rowsep="1">colsep=yes, rowsep=yes</entry>
+                <entry valign="top" colsep="1" rowsep="1">colsep=yes, rowsep=yes</entry>
+                <entry valign="top" colsep="1" rowsep="1">colsep=yes, rowsep=yes</entry>
+                <entry valign="top" colsep="1" rowsep="1">colsep=yes, rowsep=yes</entry>
+                <entry valign="top" colsep="1" rowsep="1">colsep=yes, rowsep=yes</entry>
               </row>
             </tbody>
           </tgroup>
@@ -556,7 +556,7 @@
                 <entry align="center" colsep="1" rowsep="1">align="center" valign="middle"</entry>
                 <entry valign="top" colsep="1" rowsep="1">align="left" valign="top"</entry>
                 <entry align="right" valign="bottom" colsep="1" rowsep="1">align="right" valign="bottom"</entry>
-                <entry colsep="1" rowsep="1">align="char"</entry>
+                <entry valign="top" colsep="1" rowsep="1">align="char"</entry>
                 <entry align="justify" valign="bottom" colsep="1" rowsep="1">align="justify" valign="bottom"</entry>
               </row>
             </tbody>

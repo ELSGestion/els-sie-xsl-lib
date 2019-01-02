@@ -1,22 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xsl:stylesheet version="3.0"
-  xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
   xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl" 
   xmlns:xs="http://www.w3.org/2001/XMLSchema"
   xmlns:els="http://www.lefebvre-sarrut.eu/ns/els"
   xmlns:xslLib="http://www.lefebvre-sarrut.eu/ns/els/xslLib"
-  xmlns:cals2html="http://www.lefebvre-sarrut.eu/ns/els/xslLib/cals2html"
   xmlns:cals="http://docs.oasis-open.org/ns/oasis-exchange/table"
   xmlns:html="http://www.w3.org/1999/xhtml"
   xmlns="http://www.w3.org/1999/xhtml"
   xpath-default-namespace="http://docs.oasis-open.org/ns/oasis-exchange/table"
-  exclude-result-prefixes="#all" 
+  exclude-result-prefixes="#all"
+  version="3.0"
   >
-  
-  <xsl:import href="els-common.xsl"/>
-  <xsl:import href="setXmlBase.xsl"/>
-  <xsl:import href="removeXmlBase.xsl"/>
-  <xsl:import href="normalizeCalsTable.xsl"/>
   
   <xd:doc scope="stylesheet">
     <xd:desc>
@@ -25,6 +19,11 @@
       <xd:p>/!\ Cals element must be in cals namespace before proceding, other elements will be copied as is.</xd:p>
     </xd:desc>
   </xd:doc>
+  
+  <xsl:import href="els-common.xsl"/>
+  <xsl:import href="setXmlBase.xsl"/>
+  <xsl:import href="removeXmlBase.xsl"/>
+  <xsl:import href="normalizeCalsTable.xsl"/>
   
   <!--PARAMETERS-->
   <!--common-->
@@ -47,7 +46,7 @@
   <xsl:param name="xslLib:cals2html.default-tgroup-align" select="'left'" as="xs:string"/>
   <xsl:param name="xslLib:cals2html.default-td-align" select="'left'" as="xs:string"/><!--default browser value-->
   <xsl:param name="xslLib:cals2html.default-th-align" select="'center'" as="xs:string"/><!--default browser value-->
-  <xsl:param name="xslLib:cals2html.default-tgroup-valign" select="'middle'" as="xs:string"/>
+  <xsl:param name="xslLib:cals2html.default-tgroup-valign" select="'top'" as="xs:string"/><!--default cals value-->
   <xsl:param name="xslLib:cals2html.default-td-valign" select="'middle'" as="xs:string"/><!--default browser value-->
   <xsl:param name="xslLib:cals2html.default-th-valign" select="'middle'" as="xs:string"/><!--default browser value-->
 

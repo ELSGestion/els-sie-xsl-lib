@@ -1026,6 +1026,7 @@
     </xsl:choose>
   </xsl:template>
   
+  <!--When the HTML come from xslLib:cals2html, one can convert the div class="cals_table" to an englobing cals table element, every html table inside has been converted to a cals tgroup-->
   <xsl:template match="div[els:hasClass(., 'cals_table')][cals:table]" mode="xhtml2cals:optimize-cals">
     <table>
       <xsl:apply-templates select="@*" mode="#current"/>
