@@ -9,14 +9,14 @@
   <packaging>jar</packaging>
 
   <name>xslLib</name>
-  <description>Une librairie regroupant les XSL couramment utilisées. functx.xsl (http://www.xsltfunctions.com). elsCommon.xsl avec plein de fonctions courantes.</description>
+  <description>A set of XSL librairies</description>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
 
   <scm>
-    <developerConnection>scm:git:git@bitbucket.org:elsgestion/sie-lib-xsl-common.git</developerConnection>
+    <developerConnection>scm:git:git@github.com:ELSGestion/els-sie-xsl-lib.git</developerConnection>
     <tag>HEAD</tag>
   </scm>
 
@@ -140,13 +140,11 @@
   <distributionManagement>
     <repository>
       <id>nexus-releases</id>
-      <!--<url>http://srvic/nexus/content/repositories/releases</url>-->
       <url>http://nexus.lefebvre-sarrut.eu/repository/releases</url>
       <layout>default</layout>
     </repository>
     <snapshotRepository>
       <id>nexus-snapshots</id>
-      <!--<url>http://srvic/nexus/content/repositories/snapshots</url>-->
       <url>http://nexus.lefebvre-sarrut.eu/repository/snapshots</url>
       <layout>default</layout>
     </snapshotRepository>
