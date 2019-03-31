@@ -316,6 +316,10 @@
         <xsl:when test="count($rngRef.tmp1) = 1 ">
           <xsl:sequence select="$rngRef.tmp1"/>
         </xsl:when>
+        <!--Every ref found points the same define-->
+        <xsl:when test="count(distinct-values($rngRef.tmp1/rng:getDefine(.)/@name)) = 1">
+          <xsl:sequence select="$rngRef.tmp1[1]"/>
+        </xsl:when>
         <xsl:when test="count($predicates[normalize-space(.)]) != 0">
           <!--If the predicates is of kind @foo = 'bar', maybe there is such a static define in the schema (<attribute name="foo"><value>bar</value></attribute>)
             (and no other same element's name with the same attribute's name which may have the same value)-->
