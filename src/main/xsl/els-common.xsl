@@ -19,5 +19,6 @@
   <xsl:import href="els-common_xml.xsl"/>
   <xsl:import href="els-common_files.xsl"/>
   <xsl:import href="els-common_convert-cast.xsl"/>
+  <xsl:import href="els-common_http.xsl"/>
 
 </xsl:stylesheet>

@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<x:description xmlns:x="http://www.jenitennison.com/xslt/xspec" xmlns:els="http://www.lefebvre-sarrut.eu/ns/els" stylesheet="../../main/xsl/els-common_http.xsl">
+
+  
+  <x:scenario label="URL Path (https)">
+    <x:call function="els:http-get-path">
+      <x:param name="url" select="'https://www.foo.bar:8282/baz/some/page.html?lang=FR&amp;layout=full&amp;turbo=true'" />
+    </x:call>
+    <x:expect label="URL Path (https)" select="'baz/some/page.html'" />
+  </x:scenario>
+  
+  <x:scenario label="URL Path (http)">
+    <x:call function="els:http-get-path">
+      <x:param name="url" select="'http://www.foo.bar:8282/baz/some/page.html?lang=FR&amp;layout=full&amp;turbo=true'" />
+    </x:call>
+    <x:expect label="URL Path (http)" select="'baz/some/page.html'" />
+  </x:scenario>
+  
+  <x:scenario label="URL Host">
+    <x:call function="els:http-get-host">
+      <x:param name="url" select="'https://www.foo.bar:8282/baz/some/page.html?lang=FR&amp;layout=full&amp;turbo=true'" />
+    </x:call>
+    <x:expect label="URL Host" select="'www.foo.bar'" />
+  </x:scenario>
+  
+  <x:scenario label="URL Host (no path)">
+    <x:call function="els:http-get-host">
+      <x:param name="url" select="'http://www.foo.bar/'" />
+    </x:call>
+    <x:expect label="URL Host (no path)" select="'www.foo.bar'" />
+  </x:scenario>
+  
+  <x:scenario label="URL Host (no trailing slash)">
+    <x:call function="els:http-get-host">
+      <x:param name="url" select="'https://www.foo.bar'" />
+    </x:call>
+    <x:expect label="URL Host (no trailing slash)" select="'www.foo.bar'" />
+  </x:scenario>
+  
+  <x:scenario label="URL port">
+    <x:call function="els:http-get-port">
+      <x:param name="url" select="'https://www.foo.bar:8282/baz/some/page.html?lang=FR&amp;layout=full&amp;turbo=true'" />
+    </x:call>
+    <x:expect label="URL port" select="'8282'" />
+  </x:scenario>
+  
+  <x:scenario label="URL port (no port)">
+    <x:call function="els:http-get-port">
+      <x:param name="url" select="'https://www.foo.bar/baz/some/page.html?lang=FR&amp;layout=full&amp;turbo=true'" />
+    </x:call>
+    <x:expect label="URL port (no port)" select="()" />
+  </x:scenario>
+  
+  <x:scenario label="URL query-string">
+    <x:call function="els:http-get-query-string">
+      <x:param name="url" select="'https://www.foo.bar:8282/baz/some/page.html?lang=FR&amp;layout=full&amp;turbo=true'" />
+    </x:call>
+    <x:expect label="URL query-string" select="'lang=FR&amp;layout=full&amp;turbo=true'" />
+  </x:scenario>
+  
+  <x:scenario label="URL query-string (no query string)">
+    <x:call function="els:http-get-query-string">
+      <x:param name="url" select="'https://www.foo.bar:8282/baz/some/page.html'" />
+    </x:call>
+    <x:expect label="URL query-string (no query string)" select="''" />
+  </x:scenario>
+  
+  <!--
+    HTTP Query Params
+    =================
+    
+    The form :
+    http(s)://foo.bar/baz?queryParam=value1&param2=value2&yet-another-param=yet-another-value
+    assuming '?','&' and '=' as delimiters, is a W3C recommendation
+    
+    Cf. https://www.w3.org/TR/REC-html40/interact/forms.html#form-content-type
+  -->
+  
+  <x:scenario label="Youtube - Id of a Video : simple case">
+    <x:call function="els:http-get-param">
+      <x:param name="url" select="'https://www.youtube.com/watch?v=Y2sRDh-ymBU'"/>
+      <x:param name="param" select="'v'"/>
+    </x:call>
+    <x:expect select="'Y2sRDh-ymBU'" label="Video ID"/>
+  </x:scenario>
+  
+  <x:scenario label="Youtube - Id of a Video in a playlist">
+    <x:call function="els:http-get-param">
+      <x:param name="url" select="'https://www.youtube.com/watch?v=Y2sRDh-ymBU&amp;list=PLQpqh98e9RgVcYmjmJ9OXrkHNDXuYB035'"/>
+      <x:param name="param" select="'v'"/>
+    </x:call>
+    <x:expect select="'Y2sRDh-ymBU'" label="Video ID"/>
+  </x:scenario>
+  
+  <x:scenario label="Youtube - Id of a Video from localized redirect">
+    <x:call function="els:http-get-param">
+      <x:param name="url" select="'https://www.youtube.com/watch?v=Y2sRDh-ymBU&amp;gl=FR&amp;hl=fr'"/>
+      <x:param name="param" select="'v'"/>
+    </x:call>
+    <x:expect select="'Y2sRDh-ymBU'" label="Video ID"/>
+  </x:scenario>
+  
+  <x:scenario label="Youtube - Language from localized redirect">
+    <x:call function="els:http-get-param">
+      <x:param name="url" select="'https://www.youtube.com/watch?v=Y2sRDh-ymBU&amp;gl=FR&amp;hl=fr'"/>
+      <x:param name="param" select="'hl'"/>
+    </x:call>
+    <x:expect select="'fr'" label="hl param"/>
+  </x:scenario>
+  
+  <x:scenario label="Bing - Search query from windows lock screen">
+    <x:call function="els:http-get-param">
+      <x:param name="url" select="'https://www.bing.com/search?q=Ligue+1&amp;setlang=fr-fr&amp;mkt=fr-fr&amp;FORM=M400PY&amp;OCID=M400PY&amp;wt.mc_id=M400PNY'"/>
+      <x:param name="param" select="'q'"/>
+    </x:call>
+    <x:expect select="'Ligue+1'" label="hl param"/>
+  </x:scenario>
+  
+  <!-- No params -->
+  
+  <x:scenario label="No params">
+    <x:call function="els:http-get-param">
+      <x:param name="url" select="'https://foo.bar/baz?'"/>
+      <x:param name="param" select="'leparam'"/>
+    </x:call>
+    <x:expect select="()" label="Empty sequence"/>
+  </x:scenario>
+  
+  <x:scenario label="No query string">
+    <x:call function="els:http-get-param">
+      <x:param name="url" select="'https://foo.bar/baz'"/>
+      <x:param name="param" select="'leparam'"/>
+    </x:call>
+    <x:expect select="()" label="Empty sequence"/>
+  </x:scenario>
+  
+  <x:scenario label="No param">
+    <x:call function="els:http-get-param">
+      <x:param name="url" select="'https://foo.bar/baz/'"/>
+      <x:param name="param" select="'leparam'"/>
+    </x:call>
+    <x:expect select="()" label="Empty sequence"/>
+  </x:scenario>
+  
+  <x:scenario label="Domain only - Trailing slash">
+    <x:call function="els:http-get-param">
+      <x:param name="url" select="'https://foo.bar/'"/>
+      <x:param name="param" select="'leparam'"/>
+    </x:call>
+    <x:expect select="()" label="Empty sequence"/>
+  </x:scenario>
+  
+  <x:scenario label="Domain only - No trailing slash">
+    <x:call function="els:http-get-param">
+      <x:param name="url" select="'https://foo.bar'"/>
+      <x:param name="param" select="'leparam'"/>
+    </x:call>
+    <x:expect select="()" label="Empty sequence"/>
+  </x:scenario>
+  
+  
+</x:description>
