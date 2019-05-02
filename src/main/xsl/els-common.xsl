@@ -20,5 +20,6 @@
   <xsl:import href="els-common_files.xsl"/>
   <xsl:import href="els-common_convert-cast.xsl"/>
   <xsl:import href="els-common_http.xsl"/>
+  <xsl:import href="els-common_videos.xsl"/>
 
 </xsl:stylesheet>
