@@ -74,7 +74,7 @@
   
   <x:scenario label="URL port (no port no protocol)">
     <x:call function="els:http-get-port">
-      <x:param name="url" select="'https://www.foo.bar/baz/some/page.html?lang=FR&amp;layout=full&amp;turbo=true'" />
+      <x:param name="url" select="'//www.foo.bar/baz/some/page.html?lang=FR&amp;layout=full&amp;turbo=true'" />
     </x:call>
     <x:expect label="URL port (no port no protocol)" select="()" />
   </x:scenario>
