@@ -16,6 +16,13 @@
     <x:expect label="URL Path (http)" select="'baz/some/page.html'" />
   </x:scenario>
   
+  <x:scenario label="URL Path (no protocol)">
+    <x:call function="els:http-get-path">
+      <x:param name="url" select="'//www.foo.bar:8282/baz/some/page.html?lang=FR&amp;layout=full&amp;turbo=true'" />
+    </x:call>
+    <x:expect label="URL Path (no protocol)" select="'baz/some/page.html'" />
+  </x:scenario>
+  
   <x:scenario label="URL Host">
     <x:call function="els:http-get-host">
       <x:param name="url" select="'https://www.foo.bar:8282/baz/some/page.html?lang=FR&amp;layout=full&amp;turbo=true'" />
@@ -37,6 +44,20 @@
     <x:expect label="URL Host (no trailing slash)" select="'www.foo.bar'" />
   </x:scenario>
   
+  <x:scenario label="URL Host (no protocol)">
+    <x:call function="els:http-get-host">
+      <x:param name="url" select="'//www.foo.bar/'" />
+    </x:call>
+    <x:expect label="URL Host (no protocol)" select="'www.foo.bar'" />
+  </x:scenario>
+  
+  <x:scenario label="URL Host (no protocol no trailing slash)">
+    <x:call function="els:http-get-host">
+      <x:param name="url" select="'//www.foo.bar'" />
+    </x:call>
+    <x:expect label="URL Host (no protocol no trailing slash)" select="'www.foo.bar'" />
+  </x:scenario>
+  
   <x:scenario label="URL port">
     <x:call function="els:http-get-port">
       <x:param name="url" select="'https://www.foo.bar:8282/baz/some/page.html?lang=FR&amp;layout=full&amp;turbo=true'" />
@@ -49,6 +70,13 @@
       <x:param name="url" select="'https://www.foo.bar/baz/some/page.html?lang=FR&amp;layout=full&amp;turbo=true'" />
     </x:call>
     <x:expect label="URL port (no port)" select="()" />
+  </x:scenario>
+  
+  <x:scenario label="URL port (no port no protocol)">
+    <x:call function="els:http-get-port">
+      <x:param name="url" select="'https://www.foo.bar/baz/some/page.html?lang=FR&amp;layout=full&amp;turbo=true'" />
+    </x:call>
+    <x:expect label="URL port (no port no protocol)" select="()" />
   </x:scenario>
   
   <x:scenario label="URL query-string">
@@ -153,6 +181,14 @@
   <x:scenario label="Domain only - No trailing slash">
     <x:call function="els:http-get-param">
       <x:param name="url" select="'https://foo.bar'"/>
+      <x:param name="param" select="'leparam'"/>
+    </x:call>
+    <x:expect select="()" label="Empty sequence"/>
+  </x:scenario>
+  
+  <x:scenario label="Domain only - No protocol No trailing slash">
+    <x:call function="els:http-get-param">
+      <x:param name="url" select="'//foo.bar'"/>
       <x:param name="param" select="'leparam'"/>
     </x:call>
     <x:expect select="()" label="Empty sequence"/>

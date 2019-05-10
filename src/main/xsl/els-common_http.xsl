@@ -50,7 +50,7 @@
   <xsl:function name="els:http-get-path" as="xs:string?">
     <xsl:param name="url" as="xs:string" />
     
-    <xsl:variable name="plain-url" select="tokenize($url,'https?://')[2]"/>
+    <xsl:variable name="plain-url" select="tokenize($url,'(https?:)?//')[2]"/>
     <xsl:variable name="path-and-query" select="substring-after($plain-url,'/')" />
     <xsl:sequence select="tokenize($path-and-query,'\?')[1]" />
   </xsl:function>
@@ -67,7 +67,7 @@
   <xsl:function name="els:http-get-host" as="xs:string?">
     <xsl:param name="url" as="xs:string" />
     
-    <xsl:variable name="plain-url" select="tokenize($url,'https?://')[2]"/>
+    <xsl:variable name="plain-url" select="tokenize($url,'(https?:)?//')[2]"/>
     <xsl:variable name="host-and-port" select="tokenize($plain-url,'/')[1]"/>   
     <xsl:sequence select="tokenize($host-and-port,':')[1]" />
   </xsl:function>
@@ -84,7 +84,7 @@
   <xsl:function name="els:http-get-port" as="xs:string?">
     <xsl:param name="url" as="xs:string" />
     
-    <xsl:variable name="plain-url" select="tokenize($url,'https?://')[2]"/>
+    <xsl:variable name="plain-url" select="tokenize($url,'(https?:)?//')[2]"/>
     <xsl:variable name="host-and-port" select="tokenize($plain-url,'/')[1]"/>
     <xsl:sequence select="tokenize($host-and-port,':')[2]" />
   </xsl:function>
