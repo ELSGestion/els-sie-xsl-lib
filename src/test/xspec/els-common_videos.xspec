@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<x:description xmlns:x="http://www.jenitennison.com/xslt/xspec"
+  xmlns:els="http://www.lefebvre-sarrut.eu/ns/els"
+  stylesheet="../../main/xsl/els-common_videos.xsl">
+  
+  <x:scenario label="isVideoUrl()">
+    
+    <x:scenario label="isVideoUrl : Youtube (Full domain)">
+      <x:call function="els:isVideoUrl">
+        <x:param name="url" select="'https://www.youtube.com/watch?v=qWFHsVQjJPA&amp;list=PLQpqh98e9RgVcYmjmJ9OXrkHNDXuYB035&amp;index=21'" />
+      </x:call>
+      <x:expect label="Youtube (Full domain) => true()" select="true()" />
+    </x:scenario>
+    
+    <x:scenario label="isVideoUrl : Youtube (Short domain, Share)">
+      <x:call function="els:isVideoUrl">
+        <x:param name="url" select="'https://youtu.be/qWFHsVQjJPA'" />
+      </x:call>
+      <x:expect label="Youtube (Share) => true()" select="true()" />
+    </x:scenario>
+    
+    <x:scenario label="isVideoUrl : Vimeo">
+      <x:call function="els:isVideoUrl">
+        <x:param name="url" select="'https://vimeo.com/259053952'" />
+      </x:call>
+      <x:expect label="Vimeo => true()" select="true()" />
+    </x:scenario>
+    
+    <x:scenario label="isVideoUrl : Random URL">
+      <x:call function="els:isVideoUrl">
+        <x:param name="url" select="'https://google.com/'" />
+      </x:call>
+      <x:expect label="Google.com => false()" select="false()" />
+    </x:scenario>
+    
+  </x:scenario>
+  
+  <x:scenario label="video-platformFromUrl()">
+    
+    <x:scenario label="video-platformFromUrl : Youtube (Full domain)">
+      <x:call function="els:video-platformFromUrl">
+        <x:param name="url" select="'https://www.youtube.com/watch?v=qWFHsVQjJPA&amp;list=PLQpqh98e9RgVcYmjmJ9OXrkHNDXuYB035&amp;index=21'" />
+      </x:call>
+      <x:expect label="Youtube (Full domain) => 'youtube'" select="'youtube'" />
+    </x:scenario>
+    
+    <x:scenario label="video-platformFromUrl : Youtube (Short domain, Share)">
+      <x:call function="els:video-platformFromUrl">
+        <x:param name="url" select="'https://youtu.be/qWFHsVQjJPA'" />
+      </x:call>
+      <x:expect label="Youtube (Short domain) => 'youtube'" select="'youtube'" />
+    </x:scenario>
+    
+    <x:scenario label="video-platformFromUrl : Vimeo">
+      <x:call function="els:video-platformFromUrl">
+        <x:param name="url" select="'https://vimeo.com/259053952'" />
+      </x:call>
+      <x:expect label="Vimeo  => 'vimeo'" select="'vimeo'" />
+    </x:scenario>
+    
+    <x:scenario label="video-platformFromUrl : Random URL">
+      <x:call function="els:video-platformFromUrl">
+        <x:param name="url" select="'https://google.com/'" />
+      </x:call>
+      <x:expect label="Google.com => ()" select="()" />
+    </x:scenario>
+    
+  </x:scenario>
+  
+  <x:scenario label="video-idFromUrl()">
+    
+    <x:scenario label="video-idFromUrl : Youtube (Full domain)">
+      <x:call function="els:video-idFromUrl">
+        <x:param name="url" select="'https://www.youtube.com/watch?v=qWFHsVQjJPA&amp;list=PLQpqh98e9RgVcYmjmJ9OXrkHNDXuYB035&amp;index=21'" />
+      </x:call>
+      <x:expect label="Youtube (Full domain) " select="'qWFHsVQjJPA'" />
+    </x:scenario>
+    
+    <x:scenario label="video-idFromUrl : Youtube (Short domain, Share)">
+      <x:call function="els:video-idFromUrl">
+        <x:param name="url" select="'https://youtu.be/qWFHsVQjJPA'" />
+      </x:call>
+      <x:expect label="Youtube (Short domain)" select="'qWFHsVQjJPA'" />
+    </x:scenario>
+    
+    <x:scenario label="video-idFromUrl : Youtube (Not a video)">
+      <x:call function="els:video-idFromUrl">
+        <x:param name="url" select="'https://www.youtube.com/playlist?list=PLQpqh98e9RgVcYmjmJ9OXrkHNDXuYB035'" />
+      </x:call>
+      <x:expect label="Youtube Playlist => ()" select="()" />
+    </x:scenario>
+    
+    
+    <x:scenario label="video-idFromUrl : Vimeo">
+      <x:call function="els:video-idFromUrl">
+        <x:param name="url" select="'https://vimeo.com/259053952'" />
+      </x:call>
+      <x:expect label="Vimeo" select="'259053952'" />
+    </x:scenario>
+    
+    <x:scenario label="video-idFromUrl : Vimeo (Not a video)">
+      <x:call function="els:video-idFromUrl">
+        <x:param name="url" select="'https://vimeo.com/fr/upgrade'" />
+      </x:call>
+      <x:expect label="Vimeo page => ()" select="()" />
+    </x:scenario>
+    
+    
+    <x:scenario label="video-idFromUrl : Random URL">
+      <x:call function="els:video-idFromUrl">
+        <x:param name="url" select="'https://google.com/'" />
+      </x:call>
+      <x:expect label="Google.com => ()" select="()" />
+    </x:scenario>
+    
+  </x:scenario>
+  
+  <x:scenario label="video-makeHtmlEmbed() - iframe generation">
+    
+    <x:scenario label="video-makeHtmlEmbed : Youtube">
+      <x:call function="els:video-makeHtmlEmbed">
+        <x:param name="url" select="'https://youtu.be/qWFHsVQjJPA'" />
+      </x:call>
+      <x:expect label="Youtube Video">
+        <html:iframe xmlns:html="http://www.w3.org/1999/xhtml"
+          xmlns:els="http://www.lefebvre-sarrut.eu/ns/els"
+          width="560"
+          height="315"
+          frameborder="0"
+          allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen="allowfullscreen"
+          src="https://www.youtube.com/embed/qWFHsVQjJPA" />
+      </x:expect>
+    </x:scenario>
+    
+    <x:scenario label="video-makeHtmlEmbed : Vimeo">
+      <x:call function="els:video-makeHtmlEmbed">
+        <x:param name="url" select="'https://vimeo.com/259053952'" />
+      </x:call>
+      <x:expect label="Vimeo Video">
+        <html:iframe xmlns:html="http://www.w3.org/1999/xhtml"
+          xmlns:els="http://www.lefebvre-sarrut.eu/ns/els"
+          width="640"
+          height="465"
+          frameborder="0"
+          allowfullscreen="allowfullscreen"
+          src="https://player.vimeo.com/video/259053952" />
+      </x:expect>
+    </x:scenario>
+
+    
+  </x:scenario>
+  
+</x:description>
+
+
