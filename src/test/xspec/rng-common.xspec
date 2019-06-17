@@ -100,6 +100,54 @@
     </x:expect>
   </x:scenario>
  
+  <x:scenario label="rng:getAttributeDataType">
+    <x:call function="rng:getAttributeDataType">
+      <x:param name="rngElement">
+        <element name="a">
+          <choice>
+            <attribute name="foo">
+              <data type="string"/>
+            </attribute>
+            <group>
+              <attribute name="foo">
+                <data type="string"/>
+              </attribute>
+              <attribute name="bar">
+                <data type="boolean"/>
+              </attribute>
+            </group>
+          </choice>
+        </element>
+      </x:param>
+      <x:param name="attName" select="'foo'"/>
+    </x:call>
+    <x:expect label="string" select="'string'"/>
+  </x:scenario>
+  
+  <x:scenario label="rng:getAttributeDataType">
+    <x:call function="rng:getAttributeDataType">
+      <x:param name="rngElement">
+        <element name="a">
+          <choice>
+            <attribute name="foo">
+              <data type="boolean"/>
+            </attribute>
+            <group>
+              <attribute name="foo">
+                <data type="string"/>
+              </attribute>
+              <attribute name="bar">
+                <data type="boolean"/>
+              </attribute>
+            </group>
+          </choice>
+        </element>
+      </x:param>
+      <x:param name="attName" select="'foo'"/>
+    </x:call>
+    <x:expect label="boolean because first occurence (but warning)" select="'boolean'"/>
+  </x:scenario>
+  
   <x:scenario label="rng:mergeIdenticalDefine">
     <x:scenario label="mergeIdenticalDefine.sample.rng > mergeIdenticalDefine.sample.merged-defines.rng" xml:base="../samples/rng/">
       <x:context mode="rng:mergeIdenticalDefine" href="mergeIdenticalDefine.sample.rng"/>

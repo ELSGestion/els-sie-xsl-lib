@@ -453,7 +453,14 @@
   <xsl:function name="rng:getAttributeDataType" as="xs:string?">
     <xsl:param name="rngElement" as="element(rng:element)"/>
     <xsl:param name="attName" as="xs:string"/>
-    <xsl:sequence select="$rngElement//attribute[@name = $attName]/data/@type"/>
+    <!--same attribute might appears several times in the elements definition (choice for example)-->
+    <xsl:variable name="attribute-with-name" select="$rngElement//attribute[@name = $attName]" as="element(attribute)*"/>
+    <xsl:if test="count($attribute-with-name) gt 1">
+      <xsl:if test="not(every $att in $attribute-with-name satisfies deep-equal($attribute-with-name[1], $att))">
+        <xsl:message>[WARNING][rng:getAttributeDataType] <xsl:value-of select="count($rngElement//attribute[@name = $attName])"/> rng:attribute found for <xsl:value-of select="$attName"/> on element <xsl:value-of select="$rngElement/@name"/></xsl:message>
+      </xsl:if>
+    </xsl:if>
+    <xsl:sequence select="$attribute-with-name[1]/data/@type"/>
   </xsl:function>
   
   <!--===========================================================-->
