@@ -168,6 +168,14 @@
       satisfies not(rng:isInline($rngElement, $rngParent))"/>
   </xsl:function>
   
+  <!-- Test if an attribute is optional
+       This only works with a flattened, simple RNG structure where there is no ref to follow -->
+  <xsl:function name="rng:isAttributeOptional" as="xs:boolean">
+    <xsl:param name="rngAtt" as="element(rng:attribute)"/>
+    <xsl:sequence select="$rngAtt/parent::optional or  (: optional/attribute :)
+                          $rngAtt/parent::*[self::choice or self::group]/parent::optional  (: optional/choice/attribute or optional/group/attribute :)"/>
+  </xsl:function>
+  
   <xsl:function name="rng:refIsCompulsary" as="xs:boolean">
     <xsl:param name="ref" as="element(rng:ref)"/>
     <xsl:sequence select="not($ref/ancestor::optional) and not($ref/ancestor::zeroOrMore) and not($ref/ancestor::choice)"/>

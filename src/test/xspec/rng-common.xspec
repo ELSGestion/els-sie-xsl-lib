@@ -155,4 +155,84 @@
     </x:scenario>
   </x:scenario>
   
+  <x:scenario label="rng:isAttributeOptional">
+    <x:call function="rng:isAttributeOptional"/>
+    <x:scenario label="optional/attribute">
+      <x:call>
+        <x:param name="rngAtt" select="//rng:attribute">
+          <rng:define>
+            <rng:optional>
+              <rng:attribute name="foo">
+                <rng:data type="boolean"/>
+              </rng:attribute>
+            </rng:optional>
+          </rng:define>
+        </x:param>
+      </x:call>
+      <x:expect label="true" select="true()"/>
+    </x:scenario>
+    <x:scenario label="optional/choice/attribute">
+      <x:call>
+        <x:param name="rngAtt" select="//rng:attribute">
+          <rng:define>
+            <rng:optional>
+              <rng:choice>
+                <rng:attribute name="foo">
+                  <rng:data type="boolean"/>
+                </rng:attribute>
+              </rng:choice>
+            </rng:optional>
+          </rng:define>
+        </x:param>
+      </x:call>
+      <x:expect label="true" select="true()"/>
+    </x:scenario>
+    <x:scenario label="optional/group/attribute">
+      <x:call>
+        <x:param name="rngAtt" select="//rng:attribute">
+          <rng:define>
+            <rng:optional>
+              <rng:group>
+                <rng:attribute name="foo">
+                  <rng:data type="boolean"/>
+                </rng:attribute>
+              </rng:group>
+            </rng:optional>
+          </rng:define>
+        </x:param>
+      </x:call>
+      <x:expect label="true" select="true()"/>
+    </x:scenario>
+    <x:scenario label="optional/optional/attribute">
+      <x:call>
+        <x:param name="rngAtt" select="//rng:attribute">
+          <rng:define>
+            <rng:optional>
+              <rng:optional>
+                <rng:attribute name="foo">
+                  <rng:data type="boolean"/>
+                </rng:attribute>
+              </rng:optional>
+            </rng:optional>
+          </rng:define>
+        </x:param>
+      </x:call>
+      <x:expect label="true" select="true()"/>
+    </x:scenario>
+    <x:scenario label="element/attribute">
+      <x:call>
+        <x:param name="rngAtt" select="//rng:attribute">
+          <rng:define>
+            <rng:element>
+              <rng:attribute name="foo">
+                <rng:data type="boolean"/>
+              </rng:attribute>
+            </rng:element>
+          </rng:define>
+        </x:param>
+      </x:call>
+      <x:expect label="false" select="false()"/>
+    </x:scenario>
+  </x:scenario>
+  
 </x:description>
