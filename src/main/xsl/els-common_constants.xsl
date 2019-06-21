@@ -40,6 +40,9 @@
   <xd:p>Variable "regAnySpace" : matches any spaces (non-break space, thin space, etc.)</xd:p>
   <xsl:variable name="els:regAnySpace" select="'\p{Z}'" as="xs:string"/>
   
+  <xd:p>Variable "regAnyDash" : matches any dash</xd:p>
+  <xsl:variable name="els:regAnyDash" select="(' \p{Pd} | &#x2D; | &#xAD; | &#x2043; | &#x2212; ')" as="xs:string"/>
+  
   <xd:p>Variable "regAnyPonctuation" : matches any ponctuation (point, coma, semicolon, etc.)</xd:p>
   <xd:p>(cf. http://www.regular-expressions.info/unicode.html)</xd:p>
   <xsl:variable name="els:regAnyPonctuation" select="'\p{P}'" as="xs:string"/>  
