@@ -5,6 +5,7 @@
   xmlns:xs="http://www.w3.org/2001/XMLSchema"
   xmlns:els="http://www.lefebvre-sarrut.eu/ns/els"
   xmlns:html="http://www.w3.org/1999/xhtml"
+  xmlns="http://www.w3.org/1999/xhtml"
   exclude-result-prefixes="#all"
   version="3.0"
   xml:lang="en">
@@ -172,7 +173,7 @@
     
 
     <xsl:sequence>
-      <html:iframe
+      <iframe
         width="{if ($width) then $width else $defaultWidth}"
         height="{if ($height) then $height else $defaultHeight}"
         frameborder="0"
@@ -200,7 +201,7 @@
     <xsl:variable name="defaultHeight" select="465" />
     
     <xsl:sequence>
-      <html:iframe
+      <iframe
         width="{if($width) then $width else $defaultWidth}"
         height="{if($height) then $height else $defaultHeight}"
         frameborder="0"
