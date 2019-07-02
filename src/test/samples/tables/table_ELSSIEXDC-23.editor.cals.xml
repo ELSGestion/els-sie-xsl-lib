@@ -2,6 +2,181 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head></head>
   <body>
+    <div class="blocTableau">
+      <h3>Test frame : all</h3>
+      <table xmlns="http://docs.oasis-open.org/ns/oasis-exchange/table" pgwide="1" frame="all" colsep="0" rowsep="0">
+        <tgroup cols="5">
+          <colspec colname="c1"/>
+          <colspec colname="c2"/>
+          <colspec colname="c3"/>
+          <colspec colname="c4"/>
+          <colspec colname="c5"/>
+          <tbody valign="middle">
+            <row>
+              <entry colsep="1" rowsep="1">a</entry>
+              <entry morerows="2" colsep="1" rowsep="1">b</entry>
+              <entry colsep="1" rowsep="1">c</entry>
+              <entry colsep="1" rowsep="1">d</entry>
+              <entry colsep="1" rowsep="1">e</entry>
+            </row>
+            <row>
+              <entry colsep="1" rowsep="1">f</entry>
+              <entry colsep="1" rowsep="1">g</entry>
+              <entry morerows="1" namest="c4" nameend="c5" colsep="1" rowsep="1">h</entry>
+            </row>
+            <row>
+              <entry morerows="1" colsep="1" rowsep="1">i</entry>
+              <entry morerows="1" colsep="1" rowsep="1">j</entry>
+            </row>
+            <row>
+              <entry colsep="1" rowsep="1">k</entry>
+              <entry namest="c4" nameend="c5" colsep="1" rowsep="1">l</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+    </div>
+    <p></p>
+    <div class="blocTableau">
+      <h3>Test frame : sides</h3>
+      <table xmlns="http://docs.oasis-open.org/ns/oasis-exchange/table" pgwide="1" frame="sides" colsep="0" rowsep="0">
+        <tgroup cols="5">
+          <colspec colname="c1"/>
+          <colspec colname="c2"/>
+          <colspec colname="c3"/>
+          <colspec colname="c4"/>
+          <colspec colname="c5"/>
+          <tbody valign="middle">
+            <row>
+              <entry colsep="1" rowsep="1">a</entry>
+              <entry morerows="2" colsep="1" rowsep="1">b</entry>
+              <entry colsep="1" rowsep="1">c</entry>
+              <entry colsep="1" rowsep="1">d</entry>
+              <entry colsep="1" rowsep="1">e</entry>
+            </row>
+            <row>
+              <entry colsep="1" rowsep="1">f</entry>
+              <entry colsep="1" rowsep="1">g</entry>
+              <entry morerows="1" namest="c4" nameend="c5" colsep="1" rowsep="1">h</entry>
+            </row>
+            <row>
+              <entry morerows="1" colsep="1">i</entry>
+              <entry morerows="1" colsep="1" rowsep="0">j</entry>
+            </row>
+            <row>
+              <entry colsep="1" rowsep="0">k</entry>
+              <entry namest="c4" nameend="c5" colsep="1" rowsep="0">l</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+    </div>
+    <p></p>
+    <div class="blocTableau">
+      <h3>Test frame : topbot</h3>
+      <table xmlns="http://docs.oasis-open.org/ns/oasis-exchange/table" pgwide="1" frame="topbot" colsep="0" rowsep="0">
+        <tgroup cols="5">
+          <colspec colname="c1"/>
+          <colspec colname="c2"/>
+          <colspec colname="c3"/>
+          <colspec colname="c4"/>
+          <colspec colname="c5"/>
+          <tbody valign="middle">
+            <row>
+              <entry colsep="1" rowsep="1">a</entry>
+              <entry morerows="2" colsep="1" rowsep="1">b</entry>
+              <entry colsep="1" rowsep="1">c</entry>
+              <entry colsep="1" rowsep="1">d</entry>
+              <entry colsep="0" rowsep="1">e</entry>
+            </row>
+            <row>
+              <entry colsep="1" rowsep="1">f</entry>
+              <entry colsep="1" rowsep="1">g</entry>
+              <entry morerows="1" namest="c4" nameend="c5" colsep="0" rowsep="1">h</entry>
+            </row>
+            <row>
+              <entry morerows="1" colsep="0" rowsep="1">i</entry>
+              <entry morerows="1" colsep="0" rowsep="1">j</entry>
+            </row>
+            <row>
+              <entry colsep="1" rowsep="1">k</entry>
+              <entry namest="c4" nameend="c5" colsep="1" rowsep="1">l</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+    </div>
+    <p></p>
+    <div class="blocTableau">
+      <h3>Test frame : bottom</h3>
+      <table xmlns="http://docs.oasis-open.org/ns/oasis-exchange/table" pgwide="1" frame="bottom" colsep="0" rowsep="0">
+        <tgroup cols="5">
+          <colspec colname="c1"/>
+          <colspec colname="c2"/>
+          <colspec colname="c3"/>
+          <colspec colname="c4"/>
+          <colspec colname="c5"/>
+          <tbody valign="middle">
+            <row>
+              <entry colsep="1" rowsep="1">a</entry>
+              <entry morerows="2" colsep="1" rowsep="1">b</entry>
+              <entry colsep="1" rowsep="1">c</entry>
+              <entry colsep="1" rowsep="1">d</entry>
+              <entry colsep="0" rowsep="1">e</entry>
+            </row>
+            <row>
+              <entry colsep="1" rowsep="1">f</entry>
+              <entry colsep="1" rowsep="1">g</entry>
+              <entry morerows="1" namest="c4" nameend="c5" colsep="0" rowsep="1">h</entry>
+            </row>
+            <row>
+              <entry morerows="1" colsep="0" rowsep="1">i</entry>
+              <entry morerows="1" colsep="0" rowsep="1">j</entry>
+            </row>
+            <row>
+              <entry colsep="1" rowsep="1">k</entry>
+              <entry namest="c4" nameend="c5" colsep="1" rowsep="1">l</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+    </div>
+    <p></p>
+    <div class="blocTableau">
+      <h3>Test frame : top</h3>
+      <table xmlns="http://docs.oasis-open.org/ns/oasis-exchange/table" pgwide="1" frame="top" colsep="0" rowsep="0">
+        <tgroup cols="5">
+          <colspec colname="c1"/>
+          <colspec colname="c2"/>
+          <colspec colname="c3"/>
+          <colspec colname="c4"/>
+          <colspec colname="c5"/>
+          <tbody valign="middle">
+            <row>
+              <entry colsep="1" rowsep="1">a</entry>
+              <entry morerows="2" colsep="1" rowsep="1">b</entry>
+              <entry colsep="1" rowsep="1">c</entry>
+              <entry colsep="1" rowsep="1">d</entry>
+              <entry colsep="0" rowsep="1">e</entry>
+            </row>
+            <row>
+              <entry colsep="1" rowsep="1">f</entry>
+              <entry colsep="1" rowsep="1">g</entry>
+              <entry morerows="1" namest="c4" nameend="c5" colsep="0" rowsep="1">h</entry>
+            </row>
+            <row>
+              <entry morerows="1" colsep="0" rowsep="0">i</entry>
+              <entry morerows="1" colsep="0" rowsep="0">j</entry>
+            </row>
+            <row>
+              <entry colsep="1" rowsep="0">k</entry>
+              <entry namest="c4" nameend="c5" colsep="1" rowsep="0">l</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+    </div>
+    <p></p>
     <div id="UI-7d176ac6-404f-4fdd-a1b9-866b01ff60de_table_1" class="blocTableau">
       <table xmlns="http://docs.oasis-open.org/ns/oasis-exchange/table" frame="all" colsep="0" rowsep="0">
         <tgroup cols="4">

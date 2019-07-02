@@ -338,7 +338,7 @@
     <xd:desc>
       <xd:p>On expanse les attributs colspan et rowspan d'un bloc de lignes.</xd:p>
       <xd:p>L'algorithme est le suivant: On parcourt ligne à ligne. Lorsqu'on se trouve sur une cellule, on vérifie s'il ne faut pas d'abord procéder 
-        à l'expansion verticale de la cellule située au dessus (et pour ce faire, on va avoir la ligne du dessus expansée en paramêtre à la procédure),
+        à l'expansion verticale de la cellule située au dessus (et pour ce faire, on va avoir la ligne du dessus expansée en paramètre à la procédure),
         sinon, on regarde s'il faut expanser la cellule horizontalement.</xd:p>
     </xd:desc>
   </xd:doc>
@@ -621,25 +621,43 @@
         <xsl:when test="@style">
           <xsl:variable name="style.parsed" select="css:parse-inline(@style)" as="element(css:css)"/>
           <!--cf. http://www.datypic.com/sc/cals/a-nons_frame.html-->
+          <!--NB : at step 4 every rowspan/colspan has been expanded to "dummyCell" : this is quite usefull here to guess the table border looking at every corner cells-->
+          <!--FIXME : assume border-collapse:collapse here : add a param ?-->
+          <xsl:variable name="border-top" select="css:showBorderTop($style.parsed) or (every $cell in (.//tr)[1]/(th|td) satisfies css:showBorderTop(css:parse-inline($cell/@style)))" as="xs:boolean"/>
+          <xsl:variable name="border-right" select="css:showBorderRight($style.parsed) or (every $cell in .//tr/(th|td)[last()] satisfies css:showBorderRight(css:parse-inline($cell/@style)))" as="xs:boolean"/>
+          <xsl:variable name="border-bottom" select="css:showBorderBottom($style.parsed) or (every $cell in (.//tr)[last()]/(th|td) satisfies css:showBorderBottom(css:parse-inline($cell/@style)))" as="xs:boolean"/>
+          <xsl:variable name="border-left" select="css:showBorderLeft($style.parsed) or (every $cell in .//(tr/(th|td))[1] satisfies css:showBorderLeft(css:parse-inline($cell/@style)))" as="xs:boolean"/>
+          <xsl:message use-when="false()">border-top : <xsl:value-of select="$border-top"/></xsl:message>
+          <xsl:message use-when="false()">border-right : <xsl:value-of select="$border-right"/></xsl:message>
+          <xsl:message use-when="false()">border-bottom : <xsl:value-of select="$border-bottom"/></xsl:message>
+          <xsl:message use-when="false()">border-left : <xsl:value-of select="$border-left"/></xsl:message>
           <xsl:choose>
-            <xsl:when test="css:showBorderTop($style.parsed) and css:showBorderRight($style.parsed) and css:showBorderBottom($style.parsed) and css:showBorderLeft($style.parsed)">
+            <xsl:when test="$border-top and $border-right and $border-bottom and $border-left">
               <xsl:text>all</xsl:text>
             </xsl:when>
-            <xsl:when test="css:showBorderTop($style.parsed) and not(css:showBorderRight($style.parsed)) and css:showBorderBottom($style.parsed) and not(css:showBorderLeft($style.parsed))">
+            <xsl:when test="$border-top and not($border-right) and $border-bottom and not($border-left)">
               <xsl:text>topbot</xsl:text>
             </xsl:when>
-            <xsl:when test="not(css:showBorderTop($style.parsed)) and css:showBorderRight($style.parsed) and not(css:showBorderBottom($style.parsed)) and css:showBorderLeft($style.parsed)">
+            <xsl:when test="not($border-top) and $border-right and not($border-bottom) and $border-left">
               <xsl:text>sides</xsl:text>
             </xsl:when>
-            <xsl:when test="css:showBorderTop($style.parsed) and not(css:showBorderRight($style.parsed)) and not(css:showBorderBottom($style.parsed)) and not(css:showBorderLeft($style.parsed))">
+            <xsl:when test="$border-top and not($border-right) and not($border-bottom) and not($border-left)">
               <xsl:text>top</xsl:text>
             </xsl:when>
-            <xsl:when test="not(css:showBorderTop($style.parsed)) and not(css:showBorderRight($style.parsed)) and css:showBorderBottom($style.parsed) and not(css:showBorderLeft($style.parsed))">
+            <xsl:when test="not($border-top) and not($border-right) and $border-bottom and not($border-left)">
               <xsl:text>bottom</xsl:text>
             </xsl:when>
-            <xsl:when test="not(css:showBorderTop($style.parsed)) and not(css:showBorderRight($style.parsed)) and not(css:showBorderBottom($style.parsed)) and not(css:showBorderLeft($style.parsed))">
+            <xsl:when test="not($border-top) and not($border-right) and not($border-bottom) and not($border-left)">
               <xsl:text>none</xsl:text>
             </xsl:when>
+            <xsl:otherwise>
+              <xsl:text>all</xsl:text>
+              <xsl:message>ERROR : unable to set cals:table @frame attribute properly, set to all by default.</xsl:message>
+              <xsl:message>border-top : <xsl:value-of select="$border-top"/></xsl:message>
+              <xsl:message>border-right : <xsl:value-of select="$border-right"/></xsl:message>
+              <xsl:message>border-bottom : <xsl:value-of select="$border-bottom"/></xsl:message>
+              <xsl:message>border-left : <xsl:value-of select="$border-left"/></xsl:message>
+            </xsl:otherwise>
           </xsl:choose>
         </xsl:when>
         <xsl:otherwise>

@@ -14,6 +14,7 @@
     margin-top: 1em;
     margin-bottom:2em;
     width: 12px;
+    color:rgb(236, 239, 247);
   </x:param>
   
   <x:param name="css.inline.2">
@@ -93,6 +94,11 @@
           <css:dimension unit="px">12</css:dimension>
         </css:width>
       </css:width-ruleset>
+      <css:color-ruleset>
+        <css:color>
+          <css:rgb red="236" green="239" blue="247"/>
+        </css:color>
+      </css:color-ruleset>
     </css:css>
   </x:param>
   
@@ -108,11 +114,13 @@
       <x:param name="css:css" select="$css:css-xml.1" as="element()"/>
     </x:call>
     <x:expect label="css inline" select="normalize-space(replace(., '&#10;', ' '))">
-      border:1px solid;
+      border-right:1px solid;
+      border-bottom:1px solid;
       text-align:center;
-      margin-top:1em; 
+      margin-top:1em;
       margin-bottom:2em;
       width:12px;
+      color:rbg(236,239,247);
     </x:expect>
   </x:scenario>
   

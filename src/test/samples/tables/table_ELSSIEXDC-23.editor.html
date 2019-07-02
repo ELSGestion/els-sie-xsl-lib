@@ -1,7 +1,147 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <html xmlns="http://www.w3.org/1999/xhtml">
-  <head/>
+  <head></head>
   <body>
+    <div class="blocTableau">
+      <h3>Test frame : all</h3>
+      <table style="width: 100%;">
+        <tbody>
+          <tr>
+            <td style="border-width: 1px; border-style: solid solid solid solid; border-color: rgb(0, 0, 0); ">a</td>
+            <td style="border-width: 1px; border-style: solid solid solid solid; border-color: black; " rowspan="3">b</td>
+            <td style="border-width: 1px; border-style: solid solid solid solid; border-color: black; ">c</td>
+            <td style="border-width: 1px; border-style: solid solid solid solid; border-color: black; ">d</td>
+            <td style="border-width: 1px; border-style: solid solid solid solid; border-color: black; ">e</td>
+          </tr>
+          <tr>
+            <td style="border: 1px solid rgb(0, 0, 0);">f</td>
+            <td style="border: 1px solid black;">g</td>
+            <td style="border-width: 1px; border-style: solid solid solid solid; border-color: black; " colspan="2" rowspan="2">h</td>
+          </tr>
+          <tr>
+            <td style="border-left-style: solid; border-bottom-style: solid ;border-left-width: 1px;" rowspan="2">i</td>
+            <td style="border-width: 1px; border-style: solid solid solid ; border-color: black;" rowspan="2">j</td>
+          </tr>
+          <tr>
+            <td style="border-width: 1px; border-style: solid solid solid; border-color: black; ">k</td>
+            <td style="border-width: 1px; border-style: solid solid solid solid; border-color: black; " colspan="2">l</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p/>
+    <div class="blocTableau">
+      <h3>Test frame : sides</h3>
+      <table style="width: 100%;">
+        <tbody>
+          <tr>
+            <td style="border-width: 1px; border-style: none solid solid solid; border-color: rgb(0, 0, 0); ">a</td>
+            <td style="border-width: 1px; border-style: none solid solid solid; border-color: black; " rowspan="3">b</td>
+            <td style="border-width: 1px; border-style: none solid solid solid; border-color: black; ">c</td>
+            <td style="border-width: 1px; border-style: none solid solid solid; border-color: black; ">d</td>
+            <td style="border-width: 1px; border-style: none solid solid solid; border-color: black; ">e</td>
+          </tr>
+          <tr>
+            <td style="border: 1px solid rgb(0, 0, 0);">f</td>
+            <td style="border: 1px solid black;">g</td>
+            <td style="border-width: 1px; border-style: solid solid solid solid; border-color: black; " colspan="2" rowspan="2">h</td>
+          </tr>
+          <tr>
+            <td style="border-left-style: solid; border-left-width: 1px;" rowspan="2">i</td>
+            <td style="border-width: 1px; border-style: solid solid none; border-color: black;" rowspan="2">j</td>
+          </tr>
+          <tr>
+            <td style="border-width: 1px; border-style: solid solid none; border-color: black; ">k</td>
+            <td style="border-width: 1px; border-style: solid solid none solid; border-color: black; " colspan="2">l</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p/>
+    <div class="blocTableau">
+      <h3>Test frame : topbot</h3>
+      <table style="width: 100%;">
+        <tbody>
+          <tr>
+            <td style="border-width: 1px; border-style: solid solid solid none; border-color: rgb(0, 0, 0); ">a</td>
+            <td style="border-width: 1px; border-style: solid solid solid solid; border-color: black; " rowspan="3">b</td>
+            <td style="border-width: 1px; border-style: solid solid solid solid; border-color: black; ">c</td>
+            <td style="border-width: 1px; border-style: solid solid solid solid; border-color: black; ">d</td>
+            <td style="border-width: 1px; border-style: solid none solid solid; border-color: black; ">e</td>
+          </tr>
+          <tr>
+            <td style="border: 1px solid rgb(0, 0, 0); border-left-style:none;">f</td>
+            <td style="border: 1px solid black;">g</td>
+            <td style="border-width: 1px; border-style: solid none solid solid; border-color: black;" colspan="2" rowspan="2">h</td>
+          </tr>
+          <tr>
+            <td style="border-left-style: none; border-left-width: 1px; border-bottom-style: solid" rowspan="2">i</td>
+            <td style="border-width: 1px; border-style: solid none solid; border-color: black;" rowspan="2">j</td>
+          </tr>
+          <tr>
+            <td style="border-width: 1px; border-style: solid solid solid; border-color: black; ">k</td>
+            <td style="border-width: 1px; border-style: solid solid solid none; border-color: black; " colspan="2">l</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p/>
+    <div class="blocTableau">
+      <h3>Test frame : bottom</h3>
+      <table style="width: 100%;">
+        <tbody>
+          <tr>
+            <td style="border-width: 1px; border-style: none solid solid none; border-color: rgb(0, 0, 0); ">a</td>
+            <td style="border-width: 1px; border-style: none solid solid solid; border-color: black; " rowspan="3">b</td>
+            <td style="border-width: 1px; border-style: none solid solid solid; border-color: black; ">c</td>
+            <td style="border-width: 1px; border-style: none solid solid solid; border-color: black; ">d</td>
+            <td style="border-width: 1px; border-style: none none solid solid; border-color: black; ">e</td>
+          </tr>
+          <tr>
+            <td style="border: 1px solid rgb(0, 0, 0); border-left-style:none;">f</td>
+            <td style="border: 1px solid black;">g</td>
+            <td style="border-width: 1px; border-style: solid none solid solid; border-color: black;" colspan="2" rowspan="2">h</td>
+          </tr>
+          <tr>
+            <td style="border-left-style: none; border-left-width: 1px; border-bottom-style: solid" rowspan="2">i</td>
+            <td style="border-width: 1px; border-style: solid none solid; border-color: black;" rowspan="2">j</td>
+          </tr>
+          <tr>
+            <td style="border-width: 1px; border-style: solid solid solid; border-color: black; ">k</td>
+            <td style="border-width: 1px; border-style: solid solid solid none; border-color: black; " colspan="2">l</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p/>
+    <div class="blocTableau">
+      <h3>Test frame : top</h3>
+      <table style="width: 100%;">
+        <tbody>
+          <tr>
+            <td style="border-width: 1px; border-style: solid solid solid none; border-color: rgb(0, 0, 0); ">a</td>
+            <td style="border-width: 1px; border-style: solid solid solid solid; border-color: black; " rowspan="3">b</td>
+            <td style="border-width: 1px; border-style: solid solid solid solid; border-color: black; ">c</td>
+            <td style="border-width: 1px; border-style: solid solid solid solid; border-color: black; ">d</td>
+            <td style="border-width: 1px; border-style: solid none solid solid; border-color: black; ">e</td>
+          </tr>
+          <tr>
+            <td style="border: 1px solid rgb(0, 0, 0); border-left-style:none;">f</td>
+            <td style="border: 1px solid black;">g</td>
+            <td style="border-width: 1px; border-style: solid none solid solid; border-color: black;" colspan="2" rowspan="2">h</td>
+          </tr>
+          <tr>
+            <td style="border-left-style: none; border-left-width: 1px; border-bottom-style: none" rowspan="2">i</td>
+            <td style="border-width: 1px; border-style: none; border-color: black;" rowspan="2">j</td>
+          </tr>
+          <tr>
+            <td style="border-width: 1px; border-style: solid solid none; border-color: black; ">k</td>
+            <td style="border-width: 1px; border-style: solid solid none none; border-color: black; " colspan="2">l</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p/>
     <div id="UI-7d176ac6-404f-4fdd-a1b9-866b01ff60de_table_1" class="blocTableau">
       <table class="cals_tgroup" style="border: 1px solid;" border="0">
         <thead>

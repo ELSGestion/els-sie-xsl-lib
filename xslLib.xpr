@@ -10,11 +10,41 @@
                         <scenarioAssociation-array>
                             <scenarioAssociation>
                                 <field name="url">
-                                    <String>src/test/samples/tables/article.xml</String>
+                                    <String>src/test/samples/tables/table_ELSSIEXDC-23.editor.cals.xml</String>
                                 </field>
                                 <field name="scenarioIds">
                                     <list>
-                                        <String>html2cals.xsl - force-html-table-conversion + generate-upper-case-cals-elements + casl.ns empty</String>
+                                        <String>cals2html.xsl - with @style</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioTypes">
+                                    <list>
+                                        <String>XSL</String>
+                                    </list>
+                                </field>
+                            </scenarioAssociation>
+                            <scenarioAssociation>
+                                <field name="url">
+                                    <String>src/test/samples/tables/table_ELSSIEXDC-23.editor.html</String>
+                                </field>
+                                <field name="scenarioIds">
+                                    <list>
+                                        <String>html2cals.xsl</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioTypes">
+                                    <list>
+                                        <String>XSL</String>
+                                    </list>
+                                </field>
+                            </scenarioAssociation>
+                            <scenarioAssociation>
+                                <field name="url">
+                                    <String>src/test/samples/tables/frchs1603cx.tables.htm</String>
+                                </field>
+                                <field name="scenarioIds">
+                                    <list>
+                                        <String>html2cals.xsl</String>
                                     </list>
                                 </field>
                                 <field name="scenarioTypes">
@@ -40,11 +70,11 @@
                             </scenarioAssociation>
                             <scenarioAssociation>
                                 <field name="url">
-                                    <String>src/test/samples/tables/table.html</String>
+                                    <String>src/test/samples/tables/article.xml</String>
                                 </field>
                                 <field name="scenarioIds">
                                     <list>
-                                        <String>html2cals.xsl</String>
+                                        <String>html2cals.xsl - force-html-table-conversion + generate-upper-case-cals-elements + casl.ns empty</String>
                                     </list>
                                 </field>
                                 <field name="scenarioTypes">
@@ -55,7 +85,7 @@
                             </scenarioAssociation>
                             <scenarioAssociation>
                                 <field name="url">
-                                    <String>src/test/samples/tables/table_ELSSIEXDC-23.editor.html</String>
+                                    <String>src/test/samples/tables/table.html</String>
                                 </field>
                                 <field name="scenarioIds">
                                     <list>
@@ -116,21 +146,6 @@
                             <scenarioAssociation>
                                 <field name="url">
                                     <String>src/test/samples/tables/isosts_tables.cals.htm</String>
-                                </field>
-                                <field name="scenarioIds">
-                                    <list>
-                                        <String>html2cals.xsl</String>
-                                    </list>
-                                </field>
-                                <field name="scenarioTypes">
-                                    <list>
-                                        <String>XSL</String>
-                                    </list>
-                                </field>
-                            </scenarioAssociation>
-                            <scenarioAssociation>
-                                <field name="url">
-                                    <String>src/test/samples/tables/frchs1603cx.tables.htm</String>
                                 </field>
                                 <field name="scenarioIds">
                                     <list>
@@ -845,7 +860,29 @@
                                     <Boolean>true</Boolean>
                                 </field>
                                 <field name="xsltParams">
-                                    <list/>
+                                    <list>
+                                        <transformationParameter>
+                                            <field name="paramDescription">
+                                                <paramDescriptor>
+                                                    <field name="localName">
+                                                        <String>html2cals.debug</String>
+                                                    </field>
+                                                    <field name="prefix">
+                                                        <null/>
+                                                    </field>
+                                                    <field name="namespace">
+                                                        <String>http://www.lefebvre-sarrut.eu/ns/els/xslLib</String>
+                                                    </field>
+                                                </paramDescriptor>
+                                            </field>
+                                            <field name="value">
+                                                <String>1</String>
+                                            </field>
+                                            <field name="hasXPathValue">
+                                                <Boolean>false</Boolean>
+                                            </field>
+                                        </transformationParameter>
+                                    </list>
                                 </field>
                                 <field name="cascadingStylesheets">
                                     <String-array/>

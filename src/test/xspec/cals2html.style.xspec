@@ -25,6 +25,10 @@
       <x:context href="table_test-colwith.xml"/>
       <x:expect label="OK" select="/*/body" test="/*/body" href="table_test-colwith.style.htm"/>
     </x:scenario>
+    <x:scenario label="table_ELSSIEXDC-23.editor">
+      <x:context href="table_ELSSIEXDC-23.editor.cals.xml"/>
+      <x:expect label="OK" select="/*/body" test="/*/body" href="table_ELSSIEXDC-23.editor.cals.style.htm"/>
+    </x:scenario>
   </x:scenario>
   
 </x:description>

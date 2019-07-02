@@ -96,17 +96,16 @@
   <xsl:template name="declarations">
     <xsl:param name="raw-declarations" />
     <xsl:for-each select="tokenize($raw-declarations, ';\s*')[matches(., '\S')]">
-      <xsl:variable name="prop" select="substring-before(., ':')" />
-      <xsl:variable name="val" select="replace(normalize-space(substring-after(., ':')), '\s?!important', '')" />
-      <!--FIXME : rgb(236, 239, 247) va géréner plusieurs val à cause des espaces...-->
-      <xsl:variable name="val-seq" select="tokenize($val, ' ')" />
-      <xsl:variable name="vals-count" select="count($val-seq)" />
+      <xsl:variable name="prop" select="substring-before(., ':')" as="xs:string"/>
+      <xsl:variable name="val" select="substring-after(., ':') => normalize-space() => replace('\s?!important', '') => replace('rgb\((\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*\)', 'rgb($1,$2,$3)')" as="xs:string"/>
+      <xsl:variable name="val-seq" select="tokenize($val, ' ')" as="xs:string*"/>
+      <xsl:variable name="vals-count" select="count($val-seq)" as="xs:integer"/>
       <xsl:choose>
         <xsl:when test="normalize-space($prop) = ''">
-          <xsl:element name="css:error">Erreur pas de propriété associée à la valeur: "<xsl:value-of select="$val" />"</xsl:element>
+          <css:error code="ERROR-1">Erreur pas de propriété associée à la valeur: "<xsl:value-of select="$val" />"</css:error>
         </xsl:when>
         <xsl:when test="$vals-count = 0">
-          <xsl:element name="css:error">Erreur pas de valeur associée à la propriété: "<xsl:value-of select="$prop" />"</xsl:element>
+          <css:error code="ERROR-2">Erreur pas de valeur associée à la propriété: "<xsl:value-of select="$prop" />"</css:error>
         </xsl:when>
         <xsl:when test="$prop='border'">
           <xsl:choose>
@@ -119,7 +118,7 @@
               </xsl:element>
             </xsl:when>
             <xsl:otherwise>
-              <xsl:element name="css:error">Erreur dans la propriété "<xsl:value-of select="$prop" />: <xsl:value-of select="$val" />"</xsl:element>
+              <css:error code="ERROR-3">Erreur dans la propriété "<xsl:value-of select="$prop" />: <xsl:value-of select="$val" />"</css:error>
             </xsl:otherwise>
           </xsl:choose>
         </xsl:when>
@@ -141,8 +140,7 @@
               </xsl:element>
             </xsl:when>
             <xsl:otherwise>
-              <xsl:element name="css:error">Erreur dans la propriété "<xsl:value-of select="$prop" />": <xsl:value-of select="$val" />
-              </xsl:element>
+              <css:error code="ERROR-4">Erreur dans la propriété "<xsl:value-of select="$prop" />": <xsl:value-of select="$val" /></css:error>
             </xsl:otherwise>
           </xsl:choose>
         </xsl:when>
@@ -156,7 +154,7 @@
                 </xsl:call-template>
               </xsl:when>
               <xsl:otherwise>
-                <xsl:element name="css:error">Erreur dans la propriété "<xsl:value-of select="$prop" />: <xsl:value-of select="$val" />"</xsl:element>
+                <css:error code="ERROR-5">Erreur dans la propriété "<xsl:value-of select="$prop" />: <xsl:value-of select="$val" />"</css:error>
               </xsl:otherwise>
             </xsl:choose>
           </xsl:element>
@@ -170,7 +168,7 @@
                 </xsl:element>
               </xsl:when>
               <xsl:otherwise>
-                <xsl:element name="css:error">Erreur dans la propriété "<xsl:value-of select="$prop" />: <xsl:value-of select="$val" />"</xsl:element>
+                <css:error code="ERROR-6">Erreur dans la propriété "<xsl:value-of select="$prop" />: <xsl:value-of select="$val" />"</css:error>
               </xsl:otherwise>
             </xsl:choose>
           </xsl:element>
@@ -184,7 +182,7 @@
                 </xsl:element>
               </xsl:when>
               <xsl:otherwise>
-                <xsl:element name="css:error">Erreur dans la propriété "<xsl:value-of select="$prop" />: <xsl:value-of select="$val" />"</xsl:element>
+                <css:error code="ERROR-7">Erreur dans la propriété "<xsl:value-of select="$prop" />: <xsl:value-of select="$val" />"</css:error>
               </xsl:otherwise>
             </xsl:choose>
           </xsl:element>
@@ -199,7 +197,7 @@
                 </xsl:element>
               </xsl:when>
               <xsl:otherwise>
-                <xsl:element name="css:error">Erreur dans la propriété "<xsl:value-of select="$prop" />: <xsl:value-of select="$val" />"</xsl:element>
+                <css:error code="ERROR-8">Erreur dans la propriété "<xsl:value-of select="$prop" />: <xsl:value-of select="$val" />"</css:error>
               </xsl:otherwise>
             </xsl:choose>
           </xsl:element>
@@ -259,6 +257,13 @@
             </xsl:matching-substring>
           </xsl:analyze-string>
         </xsl:when>
+        <xsl:when test="matches($css-prop-value, '^rgb\((\d+),(\d+),(\d+)\)$')">
+          <xsl:analyze-string select="$css-prop-value" regex="^rgb\((\d+),(\d+),(\d+)\)">
+            <xsl:matching-substring>
+              <css:rgb red="{regex-group(1)}" green="{regex-group(2)}" blue="{regex-group(3)}"/>
+            </xsl:matching-substring>
+          </xsl:analyze-string>
+        </xsl:when>
         <xsl:when test="matches($css-prop-value, '^([a-z]+)\((.*)\)$')">
           <xsl:analyze-string select="$css-prop-value" regex="^([a-z]+)\((.*)\)$">
             <xsl:matching-substring>
@@ -268,14 +273,14 @@
             </xsl:matching-substring>
           </xsl:analyze-string>
         </xsl:when>
-        <xsl:when test="starts-with($css-prop-value, '#')">
-          <xsl:element name="css:color"><xsl:value-of select="$css-prop-value"/></xsl:element>
+        <xsl:when test="starts-with($css-prop-value, '#') or matches($css-prop-value, 'rgb\((\d+),(\d+),(\d+)\)')">
+          <css:color><xsl:value-of select="$css-prop-value"/></css:color>
         </xsl:when>
         <xsl:when test="contains($css-prop-value,':')">
-          <xsl:element name="css:error">invalid style-value found: <xsl:value-of select="$css-prop-value"/></xsl:element>
+          <css:error>invalid style-value found: <xsl:value-of select="$css-prop-value"/></css:error>
         </xsl:when>
         <xsl:when test="not(matches($css-prop-value,$css-prop-name-pattern))">
-          <xsl:element name="css:error">invalid style-value found: <xsl:value-of select="$css-prop-value"/></xsl:element>
+          <css:error>invalid style-value found: <xsl:value-of select="$css-prop-value"/></css:error>
         </xsl:when>
         <xsl:otherwise>
           <xsl:element name="css:{$css-prop-value}"/>                                            
@@ -319,29 +324,25 @@
   <xsl:function name="css:showBorderTop" as="xs:boolean">
     <xsl:param name="css" as="element(css:css)?"/>
     <xsl:variable name="style" select="
-      $css/(css:border-top-style-ruleset, css:border-top-ruleset, css:border-style-ruleset, css:border-ruleset)/css:border-top-style"/>
+      ($css/(css:border-top-style-ruleset, css:border-top-ruleset, css:border-style-ruleset, css:border-ruleset)/css:border-top-style)[last()]" as="element()?"/>
     <xsl:variable name="width" select="
-      $css/(css:border-top-width-ruleset, css:border-top-ruleset, css:border-width-ruleset, css:border-ruleset)/css:border-top-width"/>
+      ($css/(css:border-top-width-ruleset, css:border-top-ruleset, css:border-width-ruleset, css:border-ruleset)/css:border-top-width)[last()]" as="element()?"/>
     <xsl:choose>
       <!-- specific settings for border-bottom overwrite general -->
-      <xsl:when test="$style[1]/(css:none, css:hidden)">
+      <xsl:when test="empty($style) or $style/(css:none, css:hidden)">
         <xsl:sequence select="false()"/>
       </xsl:when>
-      <xsl:when test="$width[1]/css:dimension">
+      <!--there is a border-->
+      <xsl:otherwise>
         <xsl:choose>
-          <xsl:when test="number($width[1]/css:dimension) &gt; 0">
-            <xsl:sequence select="true()"/>
+          <xsl:when test="$width/css:dimension = '0'">
+            <xsl:sequence select="false()"/>
           </xsl:when>
           <xsl:otherwise>
-            <xsl:sequence select="false()"/>
+            <!--there is no width (browsers show border by default in this case)-->
+            <xsl:sequence select="true()"/>
           </xsl:otherwise>
         </xsl:choose>
-      </xsl:when>
-      <xsl:when test="$width[1]">
-        <xsl:sequence select="true()"/>
-      </xsl:when>
-      <xsl:otherwise>
-        <xsl:sequence select="false()"/>
       </xsl:otherwise>
     </xsl:choose>
   </xsl:function>
@@ -349,29 +350,25 @@
   <xsl:function name="css:showBorderBottom" as="xs:boolean">
     <xsl:param name="css" as="element(css:css)?"/>
     <xsl:variable name="style" select="
-      $css/(css:border-bottom-style-ruleset, css:border-bottom-ruleset, css:border-style-ruleset, css:border-ruleset)/css:border-bottom-style"/>
+      ($css/(css:border-bottom-style-ruleset, css:border-bottom-ruleset, css:border-style-ruleset, css:border-ruleset)/css:border-bottom-style)[last()]" as="element()?"/>
     <xsl:variable name="width" select="
-      $css/(css:border-bottom-width-ruleset, css:border-bottom-ruleset, css:border-width-ruleset, css:border-ruleset)/css:border-bottom-width"/>
+      ($css/(css:border-bottom-width-ruleset, css:border-bottom-ruleset, css:border-width-ruleset, css:border-ruleset)/css:border-bottom-width)[last()]" as="element()?"/>
     <xsl:choose>
       <!-- specific settings for border-bottom overwrite general -->
-      <xsl:when test="$style[1]/(css:none, css:hidden)">
+      <xsl:when test="empty($style) or $style/(css:none, css:hidden)">
         <xsl:sequence select="false()"/>
       </xsl:when>
-      <xsl:when test="$width[1][self::css:dimension]">
+      <!--there is a border-->
+      <xsl:otherwise>
         <xsl:choose>
-          <xsl:when test="xs:integer($width[1]/node()) &gt; 0">
-            <xsl:sequence select="true()"/>
+          <xsl:when test="$width/css:dimension = '0'">
+            <xsl:sequence select="false()"/>
           </xsl:when>
           <xsl:otherwise>
-            <xsl:sequence select="false()"/>
+            <!--there is no width (browsers show border by default in this case)-->
+            <xsl:sequence select="true()"/>
           </xsl:otherwise>
         </xsl:choose>
-      </xsl:when>
-      <xsl:when test="$width[1]">
-        <xsl:sequence select="true()"/>
-      </xsl:when>
-      <xsl:otherwise>
-        <xsl:sequence select="false()"/>
       </xsl:otherwise>
     </xsl:choose>
   </xsl:function>
@@ -379,29 +376,25 @@
   <xsl:function name="css:showBorderRight" as="xs:boolean">
     <xsl:param name="css" as="element(css:css)?"/>
     <xsl:variable name="style" select="
-      $css/(css:border-right-style-ruleset, css:border-right-ruleset, css:border-style-ruleset, css:border-ruleset)/css:border-right-style"/>
+      ($css/(css:border-right-style-ruleset, css:border-right-ruleset, css:border-style-ruleset, css:border-ruleset)/css:border-right-style)[last()]" as="element()?" />
     <xsl:variable name="width" select="
-      $css/(css:border-right-width-ruleset, css:border-right-ruleset, css:border-width-ruleset, css:border-ruleset)/css:border-right-width"/>
+      ($css/(css:border-right-width-ruleset, css:border-right-ruleset, css:border-width-ruleset, css:border-ruleset)/css:border-right-width)[last()]" as="element()?"/>
     <xsl:choose>
       <!-- specific settings for border-bottom overwrite general -->
-      <xsl:when test="$style[1]/(css:none, css:hidden)">
+      <xsl:when test="empty($style) or $style/(css:none, css:hidden)">
         <xsl:sequence select="false()"/>
       </xsl:when>
-      <xsl:when test="$width[1][self::css:dimension]">
+      <!--there is a border-->
+      <xsl:otherwise>
         <xsl:choose>
-          <xsl:when test="xs:integer($width[1]/node()) &gt; 0">
-            <xsl:sequence select="true()"/>
+          <xsl:when test="$width/css:dimension = '0'">
+            <xsl:sequence select="false()"/>
           </xsl:when>
           <xsl:otherwise>
-            <xsl:sequence select="false()"/>
+            <!--there is no width (browsers show border by default in this case)-->
+            <xsl:sequence select="true()"/>
           </xsl:otherwise>
         </xsl:choose>
-      </xsl:when>
-      <xsl:when test="$width[1]">
-        <xsl:sequence select="true()"/>
-      </xsl:when>
-      <xsl:otherwise>
-        <xsl:sequence select="false()"/>
       </xsl:otherwise>
     </xsl:choose>
   </xsl:function>
@@ -409,29 +402,25 @@
   <xsl:function name="css:showBorderLeft" as="xs:boolean">
     <xsl:param name="css" as="element(css:css)?"/>
     <xsl:variable name="style" select="
-      $css/(css:border-left-style-ruleset, css:border-left-ruleset, css:border-style-ruleset, css:border-ruleset)/css:border-left-style"/>
+      ($css/(css:border-left-style-ruleset, css:border-left-ruleset, css:border-style-ruleset, css:border-ruleset)/css:border-left-style)[last()]" as="element()?"/>
     <xsl:variable name="width" select="
-      $css/(css:border-left-width-ruleset, css:border-left-ruleset, css:border-width-ruleset, css:border-ruleset)/css:border-left-width"/>
+      ($css/(css:border-left-width-ruleset, css:border-left-ruleset, css:border-width-ruleset, css:border-ruleset)/css:border-left-width)[last()]" as="element()?"/>
     <xsl:choose>
       <!-- specific settings for border-bottom overwrite general -->
-      <xsl:when test="$style[1]/(css:none, css:hidden)">
+      <xsl:when test="empty($style) or $style/(css:none, css:hidden)">
         <xsl:sequence select="false()"/>
       </xsl:when>
-      <xsl:when test="$width[1][self::css:dimension]">
+      <!--there is a border-->
+      <xsl:otherwise>
         <xsl:choose>
-          <xsl:when test="xs:integer($width[1]/node()) &gt; 0">
-            <xsl:sequence select="true()"/>
+          <xsl:when test="$width/css:dimension = '0'">
+            <xsl:sequence select="false()"/>
           </xsl:when>
           <xsl:otherwise>
-            <xsl:sequence select="false()"/>
+            <!--there is no width (browsers show border by default in this case)-->
+            <xsl:sequence select="true()"/>
           </xsl:otherwise>
         </xsl:choose>
-      </xsl:when>
-      <xsl:when test="$width[1]">
-        <xsl:sequence select="true()"/>
-      </xsl:when>
-      <xsl:otherwise>
-        <xsl:sequence select="false()"/>
       </xsl:otherwise>
     </xsl:choose>
   </xsl:function>
@@ -577,6 +566,16 @@
   
   <xsl:template match="css:*[ends-with(local-name(), '-ruleset')]/css:*/css:*" mode="css:parsed-to-string">
     <xsl:sequence select="local-name()"/>
+  </xsl:template>
+  
+  <xsl:template match="css:rgb" mode="css:parsed-to-string" priority="1">
+    <xsl:text>rbg(</xsl:text>
+    <xsl:value-of select="@red"/>
+    <xsl:text>,</xsl:text>
+    <xsl:value-of select="@green"/>
+    <xsl:text>,</xsl:text>
+    <xsl:value-of select="@blue"/>
+    <xsl:text>)</xsl:text>
   </xsl:template>
   
   <xsl:template match="css:dimension" mode="css:parsed-to-string" priority="1">
