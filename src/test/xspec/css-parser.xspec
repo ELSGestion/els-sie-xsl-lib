@@ -111,7 +111,7 @@
   
   <x:scenario label="css:parsed-to-string">
     <x:call function="css:parsed-to-string">
-      <x:param name="css:css" select="$css:css-xml.1" as="element()"/>
+      <x:param name="css" select="$css:css-xml.1" as="element()"/>
     </x:call>
     <x:expect label="css inline" select="normalize-space(replace(., '&#10;', ' '))">
       border-right:1px solid;
@@ -126,7 +126,7 @@
   
   <x:scenario label="css:getPropertyValue">
     <x:call function="css:getPropertyValue">
-      <x:param name="css:css" select="$css:css-xml.1" as="element()"/>
+      <x:param name="css" select="$css:css-xml.1" as="element()"/>
     </x:call>
     <x:scenario label="text-align">
       <x:call>
@@ -158,6 +158,32 @@
       </x:call>
       <x:expect label="css inline" select="'solid'"/>
     </x:scenario>
+  </x:scenario>
+  
+  <x:scenario label="css:removeProperties">
+    <x:call function="css:removeProperties">
+      <x:param name="css" select="$css:css-xml.1" as="element()"/>
+      <x:param name="properties.names" select="('text-align', 'border' , 'margin-bottom')" as="xs:string*"/>
+    </x:call>
+    <x:expect label="css inline">
+      <css:css>
+        <css:margin-top-ruleset>
+          <css:margin-top>
+            <css:dimension unit="em">1</css:dimension>
+          </css:margin-top>
+        </css:margin-top-ruleset>
+        <css:width-ruleset>
+          <css:width>
+            <css:dimension unit="px">12</css:dimension>
+          </css:width>
+        </css:width-ruleset>
+        <css:color-ruleset>
+          <css:color>
+            <css:rgb red="236" green="239" blue="247"/>
+          </css:color>
+        </css:color-ruleset>
+      </css:css>
+    </x:expect>
   </x:scenario>
 
 </x:description>

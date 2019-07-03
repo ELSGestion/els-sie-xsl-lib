@@ -502,6 +502,30 @@
     <xsl:sequence select="$css/*"/>
   </xsl:function>
   
+  <xsl:function name="css:removeProperties" as="element()*">
+    <xsl:param name="css" as="element(css:css)?"/>
+    <xsl:param name="properties.names" as="xs:string*"/>
+    <xsl:apply-templates select="$css" mode="css:removeProperties">
+      <xsl:with-param name="properties.names" select="$properties.names" as="xs:string*" tunnel="true"/>
+    </xsl:apply-templates>
+  </xsl:function>
+  
+  <xsl:mode name="css:removeProperties" on-no-match="shallow-copy"/>
+  
+  <xsl:template match="css:css/*" mode="css:removeProperties">
+    <xsl:param name="properties.names" as="xs:string*" tunnel="true"/>
+    <!--Assume : the more long is the css property name are the more precise it is : 
+    removing "border" will remove border-right, border-bottom, and any border-*-ruleset-->
+    <xsl:choose>
+      <xsl:when test="some $name in $properties.names satisfies starts-with(local-name(), $name)">
+        <!--delete the property-->
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:next-match/>
+      </xsl:otherwise>
+    </xsl:choose>
+  </xsl:template>
+  
   <!--==== css:parsed-to-string ====-->
   
   <xd:p>Convert back css:css element to css string</xd:p>
