@@ -75,19 +75,19 @@
             <colspec colname="c5" colwidth="19%"/>
             <thead valign="middle">
               <row>
-                <entry valign="top" colsep="1" rowsep="1">
+                <entry valign="top" align="center" colsep="1" rowsep="1">
                   <bold xmlns="">header text</bold>
                 </entry>
-                <entry valign="top" colsep="1" rowsep="1">
+                <entry valign="top" align="center" colsep="1" rowsep="1">
                   <bold xmlns="">header text</bold>
                 </entry>
-                <entry valign="top" colsep="1" rowsep="1">
+                <entry valign="top" align="center" colsep="1" rowsep="1">
                   <bold xmlns="">header text</bold>
                 </entry>
-                <entry valign="top" colsep="1" rowsep="1">
+                <entry valign="top" align="center" colsep="1" rowsep="1">
                   <bold xmlns="">header text</bold>
                 </entry>
-                <entry valign="top" colsep="1" rowsep="1">
+                <entry valign="top" align="center" colsep="1" rowsep="1">
                   <bold xmlns="">header text</bold>
                 </entry>
               </row>
@@ -124,13 +124,13 @@
             <colspec colname="c4" colwidth="25%"/>
             <thead valign="middle">
               <row>
-                <entry valign="top" morerows="1" colsep="1" rowsep="1">header text</entry>
-                <entry valign="top" namest="c2" nameend="c4" colsep="1" rowsep="1">header text</entry>
+                <entry valign="top" align="center" morerows="1" colsep="1" rowsep="1">header text</entry>
+                <entry valign="top" align="center" namest="c2" nameend="c4" colsep="1" rowsep="1">header text</entry>
               </row>
               <row>
-                <entry valign="top" colsep="1" rowsep="1">header text</entry>
-                <entry valign="top" colsep="1" rowsep="1">header text</entry>
-                <entry valign="top" colsep="1" rowsep="1">header text</entry>
+                <entry valign="top" align="center" colsep="1" rowsep="1">header text</entry>
+                <entry valign="top" align="center" colsep="1" rowsep="1">header text</entry>
+                <entry valign="top" align="center" colsep="1" rowsep="1">header text</entry>
               </row>
             </thead>
             <tbody valign="middle">
@@ -163,10 +163,10 @@
             <colspec colname="c4" colwidth="25%"/>
             <thead valign="middle">
               <row>
-                <entry valign="top" colsep="1" rowsep="1">header text</entry>
-                <entry valign="top" colsep="1" rowsep="1">header text</entry>
-                <entry valign="top" colsep="1" rowsep="1">header text</entry>
-                <entry valign="top" colsep="1" rowsep="1">header text</entry>
+                <entry valign="top" align="center" colsep="1" rowsep="1">header text</entry>
+                <entry valign="top" align="center" colsep="1" rowsep="1">header text</entry>
+                <entry valign="top" align="center" colsep="1" rowsep="1">header text</entry>
+                <entry valign="top" align="center" colsep="1" rowsep="1">header text</entry>
               </row>
             </thead>
             <tbody valign="middle">
@@ -204,11 +204,11 @@
             <colspec colname="c6" colwidth="11%"/>
             <thead valign="middle">
               <row>
-                <entry colsep="1" rowsep="1">header text</entry>
-                <entry namest="c2" nameend="c3" colsep="1" rowsep="1">header text</entry>
-                <entry colsep="1" rowsep="1">header text</entry>
-                <entry colsep="1" rowsep="1">header text</entry>
-                <entry colsep="1" rowsep="1">header text</entry>
+                <entry align="center" colsep="1" rowsep="1">header text</entry>
+                <entry align="center" namest="c2" nameend="c3" colsep="1" rowsep="1">header text</entry>
+                <entry align="center" colsep="1" rowsep="1">header text</entry>
+                <entry align="center" colsep="1" rowsep="1">header text</entry>
+                <entry align="center" colsep="1" rowsep="1">header text</entry>
               </row>
             </thead>
             <tbody valign="middle">
@@ -269,13 +269,13 @@
             <colspec colname="c4" colwidth="25%"/>
             <thead valign="middle">
               <row>
-                <entry valign="top" morerows="1" colsep="1" rowsep="1">header text</entry>
-                <entry valign="top" namest="c2" nameend="c4" colsep="1" rowsep="1">header text</entry>
+                <entry valign="top" align="center" morerows="1" colsep="1" rowsep="1">header text</entry>
+                <entry valign="top" align="center" namest="c2" nameend="c4" colsep="1" rowsep="1">header text</entry>
               </row>
               <row>
-                <entry valign="top" colsep="1" rowsep="1">header text</entry>
-                <entry valign="top" colsep="1" rowsep="1">header text</entry>
-                <entry valign="top" colsep="1" rowsep="1">header text</entry>
+                <entry valign="top" align="center" colsep="1" rowsep="1">header text</entry>
+                <entry valign="top" align="center" colsep="1" rowsep="1">header text</entry>
+                <entry valign="top" align="center" colsep="1" rowsep="1">header text</entry>
               </row>
             </thead>
             <tbody valign="middle">

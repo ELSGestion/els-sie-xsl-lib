@@ -306,6 +306,16 @@
     </xsl:choose>
   </xsl:function>
   
+  <!--CALS entry are left aligned by default, whereas html headers are centered by default, so we have to force this center alignement when th has no align-->
+  <!--no need to force any aligment with td because CALS and HTML use the same default value (left)-->
+  <xsl:template match="th[css:getPropertyValue(css:parse-inline(@style), 'text-align') = '']" mode="xhtml2cals:normalize-to-xhtml">
+    <xsl:copy copy-namespaces="false">
+      <xsl:apply-templates select="@*" mode="#current"/>
+      <xsl:attribute name="style" select="string-join((@style, 'text-align:center;'), '; ')"/>
+      <xsl:apply-templates select="node()" mode="#current"/>
+    </xsl:copy>
+  </xsl:template>
+  
   <!--Default copy-->
   <xsl:template match="node() | @*" mode="xhtml2cals:normalize-to-xhtml">
     <xsl:copy>

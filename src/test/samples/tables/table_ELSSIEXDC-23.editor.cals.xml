@@ -187,15 +187,15 @@
           <thead valign="middle">
             <row>
               <entry align="left" colsep="1" rowsep="1"> </entry>
-              <entry colsep="1" rowsep="1">
+              <entry align="center" colsep="1" rowsep="1">
                 <p xmlns="http://www.w3.org/1999/xhtml">Avant</p>
                 <p xmlns="http://www.w3.org/1999/xhtml">le Règl. ANC 2015-05</p>
               </entry>
-              <entry colsep="1" rowsep="1">
+              <entry align="center" colsep="1" rowsep="1">
                 <p xmlns="http://www.w3.org/1999/xhtml">Après</p>
                 <p xmlns="http://www.w3.org/1999/xhtml">le Règl. ANC 2015-05</p>
               </entry>
-              <entry colsep="1" rowsep="1">
+              <entry align="center" colsep="1" rowsep="1">
                 <p xmlns="http://www.w3.org/1999/xhtml">Effet</p>
                 <p xmlns="http://www.w3.org/1999/xhtml">des nouvelles règles</p>
               </entry>

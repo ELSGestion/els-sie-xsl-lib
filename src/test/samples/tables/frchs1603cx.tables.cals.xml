@@ -6,7 +6,7 @@
       <colspec colname="c2" colwidth="50%"/>
       <thead valign="middle">
         <row>
-          <entry namest="c1" nameend="c2">
+          <entry align="center" namest="c1" nameend="c2">
             <al xmlns="local">Principales abréviations</al>
           </entry>
         </row>
@@ -65,39 +65,39 @@
       <colspec colname="c6" colwidth="12%"/>
       <thead valign="middle">
         <row>
-          <entry morerows="1" namest="c1" nameend="c2">
+          <entry align="center" morerows="1" namest="c1" nameend="c2">
             <al xmlns="local">
               <motRep>ACTIF</motRep>
             </al>
           </entry>
-          <entry namest="c3" nameend="c5">
+          <entry align="center" namest="c3" nameend="c5">
             <al xmlns="local">
               <motRep>31-12-2015</motRep>
             </al>
           </entry>
-          <entry>
+          <entry align="center">
             <al xmlns="local">
               <motRep>31-12-2014</motRep>
             </al>
           </entry>
         </row>
         <row>
-          <entry>
+          <entry align="center">
             <al xmlns="local">
               <motRep>Brut</motRep>
             </al>
           </entry>
-          <entry>
+          <entry align="center">
             <al xmlns="local">
               <motRep>Amortissements et dépréciations</motRep>
             </al>
           </entry>
-          <entry>
+          <entry align="center">
             <al xmlns="local">
               <motRep>Net</motRep>
             </al>
           </entry>
-          <entry>
+          <entry align="center">
             <al xmlns="local">
               <motRep>Net</motRep>
             </al>
@@ -751,17 +751,17 @@
       <colspec colname="c3" colwidth="15%"/>
       <thead valign="middle">
         <row>
-          <entry>
+          <entry align="center">
             <al xmlns="local">
               <motRep>PASSIF</motRep>
             </al>
           </entry>
-          <entry>
+          <entry align="center">
             <al xmlns="local">
               <motRep>31-12-2015</motRep>
             </al>
           </entry>
-          <entry>
+          <entry align="center">
             <al xmlns="local">
               <motRep>31-12-2014</motRep>
             </al>
@@ -1085,15 +1085,15 @@
       <colspec colname="c5" colwidth="15%"/>
       <thead valign="middle">
         <row>
-          <entry namest="c1" nameend="c3">
+          <entry align="center" namest="c1" nameend="c3">
             <al xmlns="local"/>
           </entry>
-          <entry>
+          <entry align="center">
             <al xmlns="local">
               <motRep>31-12-2015</motRep>
             </al>
           </entry>
-          <entry>
+          <entry align="center">
             <al xmlns="local">
               <motRep>31-12-2014</motRep>
             </al>
@@ -7334,7 +7334,7 @@
       <colspec colname="c2" colwidth="50%"/>
       <thead valign="middle">
         <row>
-          <entry namest="c1" nameend="c2">
+          <entry align="center" namest="c1" nameend="c2">
             <al xmlns="local">Principales abréviations</al>
           </entry>
         </row>
@@ -7391,10 +7391,10 @@
       <colspec colname="c4" colwidth="20%"/>
       <thead valign="middle">
         <row>
-          <entry>
+          <entry align="center">
             <al xmlns="local">1.</al>
           </entry>
-          <entry namest="c2" nameend="c4">
+          <entry align="center" namest="c2" nameend="c4">
             <al xmlns="local">Faits caractéristiques</al>
           </entry>
         </row>
@@ -7502,10 +7502,10 @@
       <colspec colname="c4" colwidth="20%"/>
       <thead valign="middle">
         <row>
-          <entry>
+          <entry align="center">
             <al xmlns="local">2.</al>
           </entry>
-          <entry namest="c2" nameend="c4">
+          <entry align="center" namest="c2" nameend="c4">
             <al xmlns="local">Principes, règles et méthodes comptables</al>
           </entry>
         </row>
@@ -7718,26 +7718,26 @@
       <colspec colname="c4" colwidth="20%"/>
       <thead valign="middle">
         <row>
-          <entry>
+          <entry align="center">
             <al xmlns="local">3.</al>
           </entry>
-          <entry namest="c2" nameend="c4">
+          <entry align="center" namest="c2" nameend="c4">
             <al xmlns="local">Notes sur le bilan</al>
           </entry>
         </row>
         <row>
-          <entry>
+          <entry align="center">
             <al xmlns="local">
               <motRep>A.</motRep>
             </al>
           </entry>
-          <entry>
+          <entry align="center">
             <al xmlns="local">Immobilisations (corporelles, incorporelles et financières)</al>
           </entry>
-          <entry>
+          <entry align="center">
             <al xmlns="local"/>
           </entry>
-          <entry>
+          <entry align="center">
             <al xmlns="local"/>
           </entry>
         </row>
@@ -8536,26 +8536,26 @@
       <colspec colname="c4" colwidth="20%"/>
       <thead valign="middle">
         <row>
-          <entry>
+          <entry align="center">
             <al xmlns="local">3.</al>
           </entry>
-          <entry namest="c2" nameend="c4">
+          <entry align="center" namest="c2" nameend="c4">
             <al xmlns="local">Notes sur le bilan</al>
           </entry>
         </row>
         <row>
-          <entry>
+          <entry align="center">
             <al xmlns="local">
               <motRep>B.</motRep>
             </al>
           </entry>
-          <entry>
+          <entry align="center">
             <al xmlns="local">Stocks et en-cours</al>
           </entry>
-          <entry>
+          <entry align="center">
             <al xmlns="local"/>
           </entry>
-          <entry>
+          <entry align="center">
             <al xmlns="local"/>
           </entry>
         </row>
@@ -8743,26 +8743,26 @@
       <colspec colname="c4" colwidth="20%"/>
       <thead valign="middle">
         <row>
-          <entry>
+          <entry align="center">
             <al xmlns="local">3.</al>
           </entry>
-          <entry namest="c2" nameend="c4">
+          <entry align="center" namest="c2" nameend="c4">
             <al xmlns="local">Notes sur le bilan</al>
           </entry>
         </row>
         <row>
-          <entry>
+          <entry align="center">
             <al xmlns="local">
               <motRep>C. </motRep>
             </al>
           </entry>
-          <entry>
+          <entry align="center">
             <al xmlns="local">Créances et comptes rattachés</al>
           </entry>
-          <entry>
+          <entry align="center">
             <al xmlns="local"/>
           </entry>
-          <entry>
+          <entry align="center">
             <al xmlns="local"/>
           </entry>
         </row>
@@ -8985,26 +8985,26 @@
       <colspec colname="c4" colwidth="20%"/>
       <thead valign="middle">
         <row>
-          <entry>
+          <entry align="center">
             <al xmlns="local">3.</al>
           </entry>
-          <entry namest="c2" nameend="c4">
+          <entry align="center" namest="c2" nameend="c4">
             <al xmlns="local">Notes sur le bilan</al>
           </entry>
         </row>
         <row>
-          <entry>
+          <entry align="center">
             <al xmlns="local">
               <motRep>D.</motRep>
             </al>
           </entry>
-          <entry>
+          <entry align="center">
             <al xmlns="local">Disponibilités et concours bancaires courants</al>
           </entry>
-          <entry>
+          <entry align="center">
             <al xmlns="local"/>
           </entry>
-          <entry>
+          <entry align="center">
             <al xmlns="local"/>
           </entry>
         </row>
@@ -9152,26 +9152,26 @@
       <colspec colname="c4" colwidth="20%"/>
       <thead valign="middle">
         <row>
-          <entry>
+          <entry align="center">
             <al xmlns="local">3.</al>
           </entry>
-          <entry namest="c2" nameend="c4">
+          <entry align="center" namest="c2" nameend="c4">
             <al xmlns="local">Notes sur le bilan</al>
           </entry>
         </row>
         <row>
-          <entry>
+          <entry align="center">
             <al xmlns="local">
               <motRep>E.</motRep>
             </al>
           </entry>
-          <entry>
+          <entry align="center">
             <al xmlns="local">Comptes de régularisation et autres postes de l’actif</al>
           </entry>
-          <entry>
+          <entry align="center">
             <al xmlns="local"/>
           </entry>
-          <entry>
+          <entry align="center">
             <al xmlns="local"/>
           </entry>
         </row>
@@ -9305,26 +9305,26 @@
       <colspec colname="c4" colwidth="20%"/>
       <thead valign="middle">
         <row>
-          <entry>
+          <entry align="center">
             <al xmlns="local">3.</al>
           </entry>
-          <entry namest="c2" nameend="c4">
+          <entry align="center" namest="c2" nameend="c4">
             <al xmlns="local">Notes sur le bilan</al>
           </entry>
         </row>
         <row>
-          <entry>
+          <entry align="center">
             <al xmlns="local">
               <motRep>F.</motRep>
             </al>
           </entry>
-          <entry>
+          <entry align="center">
             <al xmlns="local">Capitaux propres</al>
           </entry>
-          <entry>
+          <entry align="center">
             <al xmlns="local"/>
           </entry>
-          <entry>
+          <entry align="center">
             <al xmlns="local"/>
           </entry>
         </row>
@@ -9640,26 +9640,26 @@
       <colspec colname="c4" colwidth="20%"/>
       <thead valign="middle">
         <row>
-          <entry>
+          <entry align="center">
             <al xmlns="local">3.</al>
           </entry>
-          <entry namest="c2" nameend="c4">
+          <entry align="center" namest="c2" nameend="c4">
             <al xmlns="local">Notes sur le bilan</al>
           </entry>
         </row>
         <row>
-          <entry>
+          <entry align="center">
             <al xmlns="local">
               <motRep>G.</motRep>
             </al>
           </entry>
-          <entry>
+          <entry align="center">
             <al xmlns="local">Provisions réglementées et subventions d’investissement</al>
           </entry>
-          <entry>
+          <entry align="center">
             <al xmlns="local"/>
           </entry>
-          <entry>
+          <entry align="center">
             <al xmlns="local"/>
           </entry>
         </row>
@@ -9714,26 +9714,26 @@
       <colspec colname="c4" colwidth="20%"/>
       <thead valign="middle">
         <row>
-          <entry>
+          <entry align="center">
             <al xmlns="local">3.</al>
           </entry>
-          <entry namest="c2" nameend="c4">
+          <entry align="center" namest="c2" nameend="c4">
             <al xmlns="local">Notes sur le bilan</al>
           </entry>
         </row>
         <row>
-          <entry>
+          <entry align="center">
             <al xmlns="local">
               <motRep>H.</motRep>
             </al>
           </entry>
-          <entry>
+          <entry align="center">
             <al xmlns="local">Provisions</al>
           </entry>
-          <entry>
+          <entry align="center">
             <al xmlns="local"/>
           </entry>
-          <entry>
+          <entry align="center">
             <al xmlns="local"/>
           </entry>
         </row>
@@ -9987,26 +9987,26 @@
       <colspec colname="c4" colwidth="20%"/>
       <thead valign="middle">
         <row>
-          <entry>
+          <entry align="center">
             <al xmlns="local">3.</al>
           </entry>
-          <entry namest="c2" nameend="c4">
+          <entry align="center" namest="c2" nameend="c4">
             <al xmlns="local">Notes sur le bilan</al>
           </entry>
         </row>
         <row>
-          <entry>
+          <entry align="center">
             <al xmlns="local">
               <motRep>I.</motRep>
             </al>
           </entry>
-          <entry>
+          <entry align="center">
             <al xmlns="local">Dettes</al>
           </entry>
-          <entry>
+          <entry align="center">
             <al xmlns="local"/>
           </entry>
-          <entry>
+          <entry align="center">
             <al xmlns="local"/>
           </entry>
         </row>
@@ -10259,10 +10259,10 @@
       <colspec colname="c4" colwidth="20%"/>
       <thead valign="middle">
         <row>
-          <entry>
+          <entry align="center">
             <al xmlns="local">4.</al>
           </entry>
-          <entry namest="c2" nameend="c4">
+          <entry align="center" namest="c2" nameend="c4">
             <al xmlns="local">Notes sur le compte de résultat</al>
           </entry>
         </row>
@@ -10811,26 +10811,26 @@
       <colspec colname="c4" colwidth="20%"/>
       <thead valign="middle">
         <row>
-          <entry>
+          <entry align="center">
             <al xmlns="local">5.</al>
           </entry>
-          <entry namest="c2" nameend="c4">
+          <entry align="center" namest="c2" nameend="c4">
             <al xmlns="local">Autres informations</al>
           </entry>
         </row>
         <row>
-          <entry>
+          <entry align="center">
             <al xmlns="local">
               <motRep>J.</motRep>
             </al>
           </entry>
-          <entry>
+          <entry align="center">
             <al xmlns="local">Informations relatives aux filiales, entreprises liées, participations</al>
           </entry>
-          <entry>
+          <entry align="center">
             <al xmlns="local"/>
           </entry>
-          <entry>
+          <entry align="center">
             <al xmlns="local"/>
           </entry>
         </row>
@@ -10956,26 +10956,26 @@
       <colspec colname="c4" colwidth="20%"/>
       <thead valign="middle">
         <row>
-          <entry>
+          <entry align="center">
             <al xmlns="local">5.</al>
           </entry>
-          <entry namest="c2" nameend="c4">
+          <entry align="center" namest="c2" nameend="c4">
             <al xmlns="local">Autres informations</al>
           </entry>
         </row>
         <row>
-          <entry>
+          <entry align="center">
             <al xmlns="local">
               <motRep>K.</motRep>
             </al>
           </entry>
-          <entry>
+          <entry align="center">
             <al xmlns="local">Informations sur les transactions entre parties liées</al>
           </entry>
-          <entry>
+          <entry align="center">
             <al xmlns="local"/>
           </entry>
-          <entry>
+          <entry align="center">
             <al xmlns="local"/>
           </entry>
         </row>
@@ -11069,26 +11069,26 @@
       <colspec colname="c4" colwidth="20%"/>
       <thead valign="middle">
         <row>
-          <entry>
+          <entry align="center">
             <al xmlns="local">5.</al>
           </entry>
-          <entry namest="c2" nameend="c4">
+          <entry align="center" namest="c2" nameend="c4">
             <al xmlns="local">Autres informations</al>
           </entry>
         </row>
         <row>
-          <entry>
+          <entry align="center">
             <al xmlns="local">
               <motRep>L.</motRep>
             </al>
           </entry>
-          <entry>
+          <entry align="center">
             <al xmlns="local">Informations relatives aux engagements de retraite et avantages similaires</al>
           </entry>
-          <entry>
+          <entry align="center">
             <al xmlns="local"/>
           </entry>
-          <entry>
+          <entry align="center">
             <al xmlns="local"/>
           </entry>
         </row>
@@ -11291,26 +11291,26 @@
       <colspec colname="c4" colwidth="20%"/>
       <thead valign="middle">
         <row>
-          <entry>
+          <entry align="center">
             <al xmlns="local">5.</al>
           </entry>
-          <entry namest="c2" nameend="c4">
+          <entry align="center" namest="c2" nameend="c4">
             <al xmlns="local">Autres informations</al>
           </entry>
         </row>
         <row>
-          <entry>
+          <entry align="center">
             <al xmlns="local">
               <motRep>M.</motRep>
             </al>
           </entry>
-          <entry>
+          <entry align="center">
             <al xmlns="local">Informations relatives aux organes d’administration et de direction et au personnel</al>
           </entry>
-          <entry>
+          <entry align="center">
             <al xmlns="local"/>
           </entry>
-          <entry>
+          <entry align="center">
             <al xmlns="local"/>
           </entry>
         </row>
@@ -11401,26 +11401,26 @@
       <colspec colname="c4" colwidth="20%"/>
       <thead valign="middle">
         <row>
-          <entry>
+          <entry align="center">
             <al xmlns="local">5.</al>
           </entry>
-          <entry namest="c2" nameend="c4">
+          <entry align="center" namest="c2" nameend="c4">
             <al xmlns="local">Autres informations</al>
           </entry>
         </row>
         <row>
-          <entry>
+          <entry align="center">
             <al xmlns="local">
               <motRep>N.</motRep>
             </al>
           </entry>
-          <entry>
+          <entry align="center">
             <al xmlns="local">Informations sur les opérations non inscrites au bilan</al>
           </entry>
-          <entry>
+          <entry align="center">
             <al xmlns="local"/>
           </entry>
-          <entry>
+          <entry align="center">
             <al xmlns="local"/>
           </entry>
         </row>
@@ -11975,26 +11975,26 @@
       <colspec colname="c4" colwidth="20%"/>
       <thead valign="middle">
         <row>
-          <entry>
+          <entry align="center">
             <al xmlns="local">5.</al>
           </entry>
-          <entry namest="c2" nameend="c4">
+          <entry align="center" namest="c2" nameend="c4">
             <al xmlns="local">Autres informations</al>
           </entry>
         </row>
         <row>
-          <entry>
+          <entry align="center">
             <al xmlns="local">
               <motRep>O.</motRep>
             </al>
           </entry>
-          <entry>
+          <entry align="center">
             <al xmlns="local">Informations relatives aux quotas de CO2 et certificats d’économies d’énergie</al>
           </entry>
-          <entry>
+          <entry align="center">
             <al xmlns="local"/>
           </entry>
-          <entry>
+          <entry align="center">
             <al xmlns="local"/>
           </entry>
         </row>
@@ -12115,26 +12115,26 @@
       <colspec colname="c4" colwidth="20%"/>
       <thead valign="middle">
         <row>
-          <entry>
+          <entry align="center">
             <al xmlns="local">5.</al>
           </entry>
-          <entry namest="c2" nameend="c4">
+          <entry align="center" namest="c2" nameend="c4">
             <al xmlns="local">Autres informations</al>
           </entry>
         </row>
         <row>
-          <entry>
+          <entry align="center">
             <al xmlns="local">
               <motRep>P.</motRep>
             </al>
           </entry>
-          <entry>
+          <entry align="center">
             <al xmlns="local">Instruments financiers dérivés, gestion des risques et opérations de couverture</al>
           </entry>
-          <entry>
+          <entry align="center">
             <al xmlns="local"/>
           </entry>
-          <entry>
+          <entry align="center">
             <al xmlns="local"/>
           </entry>
         </row>
@@ -12325,26 +12325,26 @@
       <colspec colname="c4" colwidth="20%"/>
       <thead valign="middle">
         <row>
-          <entry>
+          <entry align="center">
             <al xmlns="local">5.</al>
           </entry>
-          <entry namest="c2" nameend="c4">
+          <entry align="center" namest="c2" nameend="c4">
             <al xmlns="local">Autres informations</al>
           </entry>
         </row>
         <row>
-          <entry>
+          <entry align="center">
             <al xmlns="local">
               <motRep>Q.</motRep>
             </al>
           </entry>
-          <entry>
+          <entry align="center">
             <al xmlns="local">Autres informations</al>
           </entry>
-          <entry>
+          <entry align="center">
             <al xmlns="local"/>
           </entry>
-          <entry>
+          <entry align="center">
             <al xmlns="local"/>
           </entry>
         </row>
@@ -12566,7 +12566,7 @@
       <colspec colname="c2" colwidth="50%"/>
       <thead valign="middle">
         <row>
-          <entry namest="c1" nameend="c2">
+          <entry align="center" namest="c1" nameend="c2">
             <al xmlns="local">Principales abréviations</al>
           </entry>
         </row>
@@ -22316,7 +22316,7 @@
       <colspec colname="c2" colwidth="50%"/>
       <thead valign="middle">
         <row>
-          <entry namest="c1" nameend="c2">
+          <entry align="center" namest="c1" nameend="c2">
             <al xmlns="local">Principales abréviations utilisées</al>
           </entry>
         </row>
@@ -22357,18 +22357,18 @@
       <colspec colname="c4" colwidth="20%"/>
       <thead valign="middle">
         <row>
-          <entry>
+          <entry align="center">
             <al xmlns="local">1.</al>
           </entry>
-          <entry namest="c2" nameend="c4">
+          <entry align="center" namest="c2" nameend="c4">
             <al xmlns="local">Principes généraux</al>
           </entry>
         </row>
         <row>
-          <entry>
+          <entry align="center">
             <al xmlns="local"><motRep>A</motRep>.</al>
           </entry>
-          <entry namest="c2" nameend="c4">
+          <entry align="center" namest="c2" nameend="c4">
             <al xmlns="local">Conception de l’annexe</al>
           </entry>
         </row>
@@ -22423,18 +22423,18 @@
       <colspec colname="c4" colwidth="20%"/>
       <thead valign="middle">
         <row>
-          <entry>
+          <entry align="center">
             <al xmlns="local">1.</al>
           </entry>
-          <entry namest="c2" nameend="c4">
+          <entry align="center" namest="c2" nameend="c4">
             <al xmlns="local">Principes généraux</al>
           </entry>
         </row>
         <row>
-          <entry>
+          <entry align="center">
             <al xmlns="local"><motRep>B</motRep>.</al>
           </entry>
-          <entry namest="c2" nameend="c4">
+          <entry align="center" namest="c2" nameend="c4">
             <al xmlns="local">
               <motRep>Autonomie de l’annexe</motRep>
             </al>
@@ -22491,18 +22491,18 @@
       <colspec colname="c4" colwidth="20%"/>
       <thead valign="middle">
         <row>
-          <entry>
+          <entry align="center">
             <al xmlns="local">1.</al>
           </entry>
-          <entry namest="c2" nameend="c4">
+          <entry align="center" namest="c2" nameend="c4">
             <al xmlns="local">Principes généraux</al>
           </entry>
         </row>
         <row>
-          <entry>
+          <entry align="center">
             <al xmlns="local"><motRep>C</motRep>.</al>
           </entry>
-          <entry namest="c2" nameend="c4">
+          <entry align="center" namest="c2" nameend="c4">
             <al xmlns="local">Informations d’importance significative</al>
           </entry>
         </row>
@@ -22557,20 +22557,20 @@
       <colspec colname="c4" colwidth="20%"/>
       <thead valign="middle">
         <row>
-          <entry>
+          <entry align="center">
             <al xmlns="local">1.</al>
           </entry>
-          <entry namest="c2" nameend="c4">
+          <entry align="center" namest="c2" nameend="c4">
             <al xmlns="local">Principes généraux</al>
           </entry>
         </row>
         <row>
-          <entry>
+          <entry align="center">
             <al xmlns="local">
               <motRep>D.</motRep>
             </al>
           </entry>
-          <entry namest="c2" nameend="c4">
+          <entry align="center" namest="c2" nameend="c4">
             <al xmlns="local">Exercices sur lesquels porte l’information donnée en annexe</al>
           </entry>
         </row>
@@ -22625,18 +22625,18 @@
       <colspec colname="c4" colwidth="20%"/>
       <thead valign="middle">
         <row>
-          <entry>
+          <entry align="center">
             <al xmlns="local">1.</al>
           </entry>
-          <entry namest="c2" nameend="c4">
+          <entry align="center" namest="c2" nameend="c4">
             <al xmlns="local">Principes généraux</al>
           </entry>
         </row>
         <row>
-          <entry>
+          <entry align="center">
             <al xmlns="local"><motRep>E</motRep>.</al>
           </entry>
-          <entry namest="c2" nameend="c4">
+          <entry align="center" namest="c2" nameend="c4">
             <al xmlns="local">Indication du caractère incomplet des informations données</al>
           </entry>
         </row>
@@ -22698,18 +22698,18 @@
       <colspec colname="c4" colwidth="20%"/>
       <thead valign="middle">
         <row>
-          <entry>
+          <entry align="center">
             <al xmlns="local">2.</al>
           </entry>
-          <entry namest="c2" nameend="c4">
+          <entry align="center" namest="c2" nameend="c4">
             <al xmlns="local">Informations relatives au référentiel comptable, aux modalités de consolidation et aux méthodes et règles d’évaluation</al>
           </entry>
         </row>
         <row>
-          <entry>
+          <entry align="center">
             <al xmlns="local"><motRep>F</motRep>.</al>
           </entry>
-          <entry namest="c2" nameend="c4">
+          <entry align="center" namest="c2" nameend="c4">
             <al xmlns="local">Référentiel comptable</al>
           </entry>
         </row>
@@ -22790,20 +22790,20 @@
       <colspec colname="c4" colwidth="20%"/>
       <thead valign="middle">
         <row>
-          <entry>
+          <entry align="center">
             <al xmlns="local">2.</al>
           </entry>
-          <entry namest="c2" nameend="c4">
+          <entry align="center" namest="c2" nameend="c4">
             <al xmlns="local">Informations relatives au référentiel comptable, aux modalités de consolidation et aux méthodes et règles d’évaluation</al>
           </entry>
         </row>
         <row>
-          <entry>
+          <entry align="center">
             <al xmlns="local">
               <motRep>G.</motRep>
             </al>
           </entry>
-          <entry namest="c2" nameend="c4">
+          <entry align="center" namest="c2" nameend="c4">
             <al xmlns="local">Modalités de consolidation</al>
           </entry>
         </row>
@@ -23140,18 +23140,18 @@
       <colspec colname="c4" colwidth="20%"/>
       <thead valign="middle">
         <row>
-          <entry>
+          <entry align="center">
             <al xmlns="local">2.</al>
           </entry>
-          <entry namest="c2" nameend="c4">
+          <entry align="center" namest="c2" nameend="c4">
             <al xmlns="local">Informations relatives au référentiel comptable, aux modalités de consolidation et aux méthodes et règles d’évaluation</al>
           </entry>
         </row>
         <row>
-          <entry>
+          <entry align="center">
             <al xmlns="local"><motRep>H</motRep>.</al>
           </entry>
-          <entry namest="c2" nameend="c4">
+          <entry align="center" namest="c2" nameend="c4">
             <al xmlns="local">Règles et méthodes d’évaluation</al>
           </entry>
         </row>
@@ -23630,20 +23630,20 @@
       <colspec colname="c4" colwidth="20%"/>
       <thead valign="middle">
         <row>
-          <entry>
+          <entry align="center">
             <al xmlns="local">3.</al>
           </entry>
-          <entry namest="c2" nameend="c4">
+          <entry align="center" namest="c2" nameend="c4">
             <al xmlns="local">Informations relatives au périmètre de consolidation</al>
           </entry>
         </row>
         <row>
-          <entry>
+          <entry align="center">
             <al xmlns="local">
               <motRep>I.</motRep>
             </al>
           </entry>
-          <entry namest="c2" nameend="c4">
+          <entry align="center" namest="c2" nameend="c4">
             <al xmlns="local">Entreprises incluses/exclues du périmètre de consolidation</al>
           </entry>
         </row>
@@ -23789,20 +23789,20 @@
       <colspec colname="c4" colwidth="20%"/>
       <thead valign="middle">
         <row>
-          <entry>
+          <entry align="center">
             <al xmlns="local">4.</al>
           </entry>
-          <entry namest="c2" nameend="c4">
+          <entry align="center" namest="c2" nameend="c4">
             <al xmlns="local">Informations permettant la comparabilité des comptes</al>
           </entry>
         </row>
         <row>
-          <entry>
+          <entry align="center">
             <al xmlns="local">
               <motRep>J.</motRep>
             </al>
           </entry>
-          <entry namest="c2" nameend="c4">
+          <entry align="center" namest="c2" nameend="c4">
             <al xmlns="local">Informations relatives aux variations significatives du périmètre de consolidation et des pourcentages d’intérêts</al>
           </entry>
         </row>
@@ -24279,20 +24279,20 @@
       <colspec colname="c4" colwidth="20%"/>
       <thead valign="middle">
         <row>
-          <entry>
+          <entry align="center">
             <al xmlns="local">4.</al>
           </entry>
-          <entry namest="c2" nameend="c4">
+          <entry align="center" namest="c2" nameend="c4">
             <al xmlns="local">Informations permettant la comparabilité des comptes</al>
           </entry>
         </row>
         <row>
-          <entry>
+          <entry align="center">
             <al xmlns="local">
               <motRep>K.</motRep>
             </al>
           </entry>
-          <entry namest="c2" nameend="c4">
+          <entry align="center" namest="c2" nameend="c4">
             <al xmlns="local">Informations relatives aux changements comptables</al>
           </entry>
         </row>
@@ -24365,18 +24365,18 @@
       <colspec colname="c4" colwidth="20%"/>
       <thead valign="middle">
         <row>
-          <entry>
+          <entry align="center">
             <al xmlns="local">5.</al>
           </entry>
-          <entry namest="c2" nameend="c4">
+          <entry align="center" namest="c2" nameend="c4">
             <al xmlns="local">Explications des postes du bilan et du compte de résultat et de leurs variations</al>
           </entry>
         </row>
         <row>
-          <entry>
+          <entry align="center">
             <al xmlns="local"><motRep>L</motRep>.</al>
           </entry>
-          <entry namest="c2" nameend="c4">
+          <entry align="center" namest="c2" nameend="c4">
             <al xmlns="local">Postes du bilan consolidé</al>
           </entry>
         </row>
@@ -25137,20 +25137,20 @@
       <colspec colname="c4" colwidth="20%"/>
       <thead valign="middle">
         <row>
-          <entry>
+          <entry align="center">
             <al xmlns="local">5.</al>
           </entry>
-          <entry namest="c2" nameend="c4">
+          <entry align="center" namest="c2" nameend="c4">
             <al xmlns="local">Explications des postes du bilan et du compte de résultat et de leurs variations</al>
           </entry>
         </row>
         <row>
-          <entry>
+          <entry align="center">
             <al xmlns="local">
               <motRep>M.</motRep>
             </al>
           </entry>
-          <entry namest="c2" nameend="c4">
+          <entry align="center" namest="c2" nameend="c4">
             <al xmlns="local">Postes du compte de résultat consolidé</al>
           </entry>
         </row>
@@ -25355,20 +25355,20 @@
       <colspec colname="c4" colwidth="20%"/>
       <thead valign="middle">
         <row>
-          <entry>
+          <entry align="center">
             <al xmlns="local">6.</al>
           </entry>
-          <entry namest="c2" nameend="c4">
+          <entry align="center" namest="c2" nameend="c4">
             <al xmlns="local">Autres informations</al>
           </entry>
         </row>
         <row>
-          <entry>
+          <entry align="center">
             <al xmlns="local">
               <motRep>N.</motRep>
             </al>
           </entry>
-          <entry namest="c2" nameend="c4">
+          <entry align="center" namest="c2" nameend="c4">
             <al xmlns="local">Information sectorielle</al>
           </entry>
         </row>
@@ -25551,18 +25551,18 @@
       <colspec colname="c4" colwidth="20%"/>
       <thead valign="middle">
         <row>
-          <entry>
+          <entry align="center">
             <al xmlns="local">6.</al>
           </entry>
-          <entry namest="c2" nameend="c4">
+          <entry align="center" namest="c2" nameend="c4">
             <al xmlns="local">Autres informations</al>
           </entry>
         </row>
         <row>
-          <entry>
+          <entry align="center">
             <al xmlns="local"><motRep>O</motRep>.</al>
           </entry>
-          <entry namest="c2" nameend="c4">
+          <entry align="center" namest="c2" nameend="c4">
             <al xmlns="local">Engagements de retraite et engagements financiers hors bilan</al>
           </entry>
         </row>
@@ -25959,18 +25959,18 @@
       <colspec colname="c4" colwidth="20%"/>
       <thead valign="middle">
         <row>
-          <entry>
+          <entry align="center">
             <al xmlns="local">6.</al>
           </entry>
-          <entry namest="c2" nameend="c4">
+          <entry align="center" namest="c2" nameend="c4">
             <al xmlns="local">Autres informations</al>
           </entry>
         </row>
         <row>
-          <entry>
+          <entry align="center">
             <al xmlns="local"><motRep>P</motRep>.</al>
           </entry>
-          <entry namest="c2" nameend="c4">
+          <entry align="center" namest="c2" nameend="c4">
             <al xmlns="local">Autres informations diverses</al>
           </entry>
         </row>
@@ -26332,20 +26332,20 @@
       <colspec colname="c4" colwidth="20%"/>
       <thead valign="middle">
         <row>
-          <entry>
+          <entry align="center">
             <al xmlns="local">7.</al>
           </entry>
-          <entry namest="c2" nameend="c4">
+          <entry align="center" namest="c2" nameend="c4">
             <al xmlns="local">Tableau des flux de trésorerie</al>
           </entry>
         </row>
         <row>
-          <entry>
+          <entry align="center">
             <al xmlns="local">
               <motRep>Q.</motRep>
             </al>
           </entry>
-          <entry namest="c2" nameend="c4">
+          <entry align="center" namest="c2" nameend="c4">
             <al xmlns="local">S’assurer que le tableau des flux de trésorerie fait partie inté-grante de l’annexe.</al>
           </entry>
         </row>
@@ -26499,10 +26499,10 @@
       <colspec colname="c4" colwidth="20%"/>
       <thead valign="middle">
         <row>
-          <entry>
+          <entry align="center">
             <al xmlns="local">8.</al>
           </entry>
-          <entry namest="c2" nameend="c4">
+          <entry align="center" namest="c2" nameend="c4">
             <al xmlns="local">Première application du règlement CRC n<e>o</e> 99-02</al>
           </entry>
         </row>

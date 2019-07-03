@@ -1,13 +1,73 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project version="19.0">
+<project version="20.1">
     <meta>
         <filters directoryPatterns="" filePatterns="" positiveFilePatterns="" showHiddenFiles="false"/>
         <options>
-            <serialized version="19.0" xml:space="preserve">
+            <serialized version="20.1" xml:space="preserve">
                 <serializableOrderedMap>
                     <entry>
                         <String>scenario.associations</String>
                         <scenarioAssociation-array>
+                            <scenarioAssociation>
+                                <field name="url">
+                                    <String>src/test/samples/tables/isosts_tables.cals.style.htm</String>
+                                </field>
+                                <field name="scenarioIds">
+                                    <list>
+                                        <String>html2cals.xsl</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioTypes">
+                                    <list>
+                                        <String>XSL</String>
+                                    </list>
+                                </field>
+                            </scenarioAssociation>
+                            <scenarioAssociation>
+                                <field name="url">
+                                    <String>src/test/samples/tables/frchs1603cx.tables.style.htm</String>
+                                </field>
+                                <field name="scenarioIds">
+                                    <list>
+                                        <String>html2cals.xsl</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioTypes">
+                                    <list>
+                                        <String>XSL</String>
+                                    </list>
+                                </field>
+                            </scenarioAssociation>
+                            <scenarioAssociation>
+                                <field name="url">
+                                    <String>src/test/samples/tables/isosts_tables.cals.htm</String>
+                                </field>
+                                <field name="scenarioIds">
+                                    <list>
+                                        <String>html2cals.xsl</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioTypes">
+                                    <list>
+                                        <String>XSL</String>
+                                    </list>
+                                </field>
+                            </scenarioAssociation>
+                            <scenarioAssociation>
+                                <field name="url">
+                                    <String>src/test/samples/tables/frchs1603cx.tables.htm</String>
+                                </field>
+                                <field name="scenarioIds">
+                                    <list>
+                                        <String>html2cals.xsl</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioTypes">
+                                    <list>
+                                        <String>XSL</String>
+                                    </list>
+                                </field>
+                            </scenarioAssociation>
                             <scenarioAssociation>
                                 <field name="url">
                                     <String>src/test/samples/tables/table_ELSSIEXDC-23.editor.cals.xml</String>
@@ -26,21 +86,6 @@
                             <scenarioAssociation>
                                 <field name="url">
                                     <String>src/test/samples/tables/table_ELSSIEXDC-23.editor.html</String>
-                                </field>
-                                <field name="scenarioIds">
-                                    <list>
-                                        <String>html2cals.xsl</String>
-                                    </list>
-                                </field>
-                                <field name="scenarioTypes">
-                                    <list>
-                                        <String>XSL</String>
-                                    </list>
-                                </field>
-                            </scenarioAssociation>
-                            <scenarioAssociation>
-                                <field name="url">
-                                    <String>src/test/samples/tables/frchs1603cx.tables.htm</String>
                                 </field>
                                 <field name="scenarioIds">
                                     <list>
@@ -100,52 +145,7 @@
                             </scenarioAssociation>
                             <scenarioAssociation>
                                 <field name="url">
-                                    <String>src/test/samples/tables/isosts_tables.cals.style.htm</String>
-                                </field>
-                                <field name="scenarioIds">
-                                    <list>
-                                        <String>html2cals.xsl</String>
-                                    </list>
-                                </field>
-                                <field name="scenarioTypes">
-                                    <list>
-                                        <String>XSL</String>
-                                    </list>
-                                </field>
-                            </scenarioAssociation>
-                            <scenarioAssociation>
-                                <field name="url">
-                                    <String>src/test/samples/tables/frchs1603cx.tables.style.htm</String>
-                                </field>
-                                <field name="scenarioIds">
-                                    <list>
-                                        <String>html2cals.xsl</String>
-                                    </list>
-                                </field>
-                                <field name="scenarioTypes">
-                                    <list>
-                                        <String>XSL</String>
-                                    </list>
-                                </field>
-                            </scenarioAssociation>
-                            <scenarioAssociation>
-                                <field name="url">
                                     <String>src/test/samples/tables/Table_CHAINE-1885.style.htm</String>
-                                </field>
-                                <field name="scenarioIds">
-                                    <list>
-                                        <String>html2cals.xsl</String>
-                                    </list>
-                                </field>
-                                <field name="scenarioTypes">
-                                    <list>
-                                        <String>XSL</String>
-                                    </list>
-                                </field>
-                            </scenarioAssociation>
-                            <scenarioAssociation>
-                                <field name="url">
-                                    <String>src/test/samples/tables/isosts_tables.cals.htm</String>
                                 </field>
                                 <field name="scenarioIds">
                                     <list>
@@ -729,11 +729,11 @@
                                                 <field name="addCommentsForValidationErrors">
                                                     <Boolean>true</Boolean>
                                                 </field>
-                                                <field name="generateByteCode">
-                                                    <Boolean>false</Boolean>
-                                                </field>
                                                 <field name="streamingEnabled">
                                                     <Boolean>false</Boolean>
+                                                </field>
+                                                <field name="isJITEnabled">
+                                                    <Boolean>true</Boolean>
                                                 </field>
                                                 <field name="allowCallsOnExtensionFunctions">
                                                     <Boolean>true</Boolean>
@@ -774,8 +774,8 @@
                                                 <field name="stripWS">
                                                     <String>saxon.strip.ws.none</String>
                                                 </field>
-                                                <field name="optimizationLevel">
-                                                    <String>10</String>
+                                                <field name="optimizationEnabled">
+                                                    <Boolean>true</Boolean>
                                                 </field>
                                                 <field name="useConfigFile">
                                                     <Boolean>false</Boolean>
@@ -912,11 +912,11 @@
                                                 <field name="addCommentsForValidationErrors">
                                                     <Boolean>true</Boolean>
                                                 </field>
-                                                <field name="generateByteCode">
-                                                    <Boolean>false</Boolean>
-                                                </field>
                                                 <field name="streamingEnabled">
                                                     <Boolean>false</Boolean>
+                                                </field>
+                                                <field name="isJITEnabled">
+                                                    <Boolean>true</Boolean>
                                                 </field>
                                                 <field name="allowCallsOnExtensionFunctions">
                                                     <Boolean>true</Boolean>
@@ -957,8 +957,8 @@
                                                 <field name="stripWS">
                                                     <String>saxon.strip.ws.none</String>
                                                 </field>
-                                                <field name="optimizationLevel">
-                                                    <String>10</String>
+                                                <field name="optimizationEnabled">
+                                                    <Boolean>true</Boolean>
                                                 </field>
                                                 <field name="useConfigFile">
                                                     <Boolean>false</Boolean>
@@ -1158,11 +1158,11 @@
                                                 <field name="addCommentsForValidationErrors">
                                                     <Boolean>true</Boolean>
                                                 </field>
-                                                <field name="generateByteCode">
-                                                    <Boolean>false</Boolean>
-                                                </field>
                                                 <field name="streamingEnabled">
                                                     <Boolean>false</Boolean>
+                                                </field>
+                                                <field name="isJITEnabled">
+                                                    <Boolean>true</Boolean>
                                                 </field>
                                                 <field name="allowCallsOnExtensionFunctions">
                                                     <Boolean>true</Boolean>
@@ -1203,8 +1203,8 @@
                                                 <field name="stripWS">
                                                     <String>saxon.strip.ws.none</String>
                                                 </field>
-                                                <field name="optimizationLevel">
-                                                    <String>10</String>
+                                                <field name="optimizationEnabled">
+                                                    <Boolean>true</Boolean>
                                                 </field>
                                                 <field name="useConfigFile">
                                                     <Boolean>false</Boolean>
@@ -1319,11 +1319,11 @@
                                                 <field name="addCommentsForValidationErrors">
                                                     <Boolean>true</Boolean>
                                                 </field>
-                                                <field name="generateByteCode">
-                                                    <Boolean>false</Boolean>
-                                                </field>
                                                 <field name="streamingEnabled">
                                                     <Boolean>false</Boolean>
+                                                </field>
+                                                <field name="isJITEnabled">
+                                                    <Boolean>true</Boolean>
                                                 </field>
                                                 <field name="allowCallsOnExtensionFunctions">
                                                     <Boolean>true</Boolean>
@@ -1364,8 +1364,8 @@
                                                 <field name="stripWS">
                                                     <String>saxon.strip.ws.none</String>
                                                 </field>
-                                                <field name="optimizationLevel">
-                                                    <String>10</String>
+                                                <field name="optimizationEnabled">
+                                                    <Boolean>true</Boolean>
                                                 </field>
                                                 <field name="useConfigFile">
                                                     <Boolean>false</Boolean>
@@ -1480,11 +1480,11 @@
                                                 <field name="addCommentsForValidationErrors">
                                                     <Boolean>true</Boolean>
                                                 </field>
-                                                <field name="generateByteCode">
-                                                    <Boolean>false</Boolean>
-                                                </field>
                                                 <field name="streamingEnabled">
                                                     <Boolean>false</Boolean>
+                                                </field>
+                                                <field name="isJITEnabled">
+                                                    <Boolean>true</Boolean>
                                                 </field>
                                                 <field name="allowCallsOnExtensionFunctions">
                                                     <Boolean>true</Boolean>
@@ -1525,8 +1525,8 @@
                                                 <field name="stripWS">
                                                     <String>saxon.strip.ws.none</String>
                                                 </field>
-                                                <field name="optimizationLevel">
-                                                    <String>10</String>
+                                                <field name="optimizationEnabled">
+                                                    <Boolean>true</Boolean>
                                                 </field>
                                                 <field name="useConfigFile">
                                                     <Boolean>false</Boolean>
@@ -1727,11 +1727,11 @@
                                                 <field name="addCommentsForValidationErrors">
                                                     <Boolean>true</Boolean>
                                                 </field>
-                                                <field name="generateByteCode">
-                                                    <Boolean>false</Boolean>
-                                                </field>
                                                 <field name="streamingEnabled">
                                                     <Boolean>false</Boolean>
+                                                </field>
+                                                <field name="isJITEnabled">
+                                                    <Boolean>true</Boolean>
                                                 </field>
                                                 <field name="allowCallsOnExtensionFunctions">
                                                     <Boolean>true</Boolean>
@@ -1772,8 +1772,8 @@
                                                 <field name="stripWS">
                                                     <String>saxon.strip.ws.none</String>
                                                 </field>
-                                                <field name="optimizationLevel">
-                                                    <String>10</String>
+                                                <field name="optimizationEnabled">
+                                                    <Boolean>true</Boolean>
                                                 </field>
                                                 <field name="useConfigFile">
                                                     <Boolean>false</Boolean>
@@ -1888,11 +1888,11 @@
                                                 <field name="addCommentsForValidationErrors">
                                                     <Boolean>true</Boolean>
                                                 </field>
-                                                <field name="generateByteCode">
-                                                    <Boolean>false</Boolean>
-                                                </field>
                                                 <field name="streamingEnabled">
                                                     <Boolean>false</Boolean>
+                                                </field>
+                                                <field name="isJITEnabled">
+                                                    <Boolean>true</Boolean>
                                                 </field>
                                                 <field name="allowCallsOnExtensionFunctions">
                                                     <Boolean>true</Boolean>
@@ -1933,8 +1933,8 @@
                                                 <field name="stripWS">
                                                     <String>saxon.strip.ws.none</String>
                                                 </field>
-                                                <field name="optimizationLevel">
-                                                    <String>10</String>
+                                                <field name="optimizationEnabled">
+                                                    <Boolean>true</Boolean>
                                                 </field>
                                                 <field name="useConfigFile">
                                                     <Boolean>false</Boolean>
@@ -2049,11 +2049,11 @@
                                                 <field name="addCommentsForValidationErrors">
                                                     <Boolean>true</Boolean>
                                                 </field>
-                                                <field name="generateByteCode">
-                                                    <Boolean>false</Boolean>
-                                                </field>
                                                 <field name="streamingEnabled">
                                                     <Boolean>false</Boolean>
+                                                </field>
+                                                <field name="isJITEnabled">
+                                                    <Boolean>true</Boolean>
                                                 </field>
                                                 <field name="allowCallsOnExtensionFunctions">
                                                     <Boolean>true</Boolean>
@@ -2094,8 +2094,8 @@
                                                 <field name="stripWS">
                                                     <String>saxon.strip.ws.none</String>
                                                 </field>
-                                                <field name="optimizationLevel">
-                                                    <String>10</String>
+                                                <field name="optimizationEnabled">
+                                                    <Boolean>true</Boolean>
                                                 </field>
                                                 <field name="useConfigFile">
                                                     <Boolean>false</Boolean>

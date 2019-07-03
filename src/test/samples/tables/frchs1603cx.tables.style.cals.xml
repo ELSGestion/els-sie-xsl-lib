@@ -6,7 +6,7 @@
       <colspec colname="c2" colwidth="50%"/>
       <thead valign="middle">
         <row>
-          <entry valign="top" namest="c1" nameend="c2" colsep="1" rowsep="1">
+          <entry valign="top" align="center" namest="c1" nameend="c2" colsep="1" rowsep="1">
             <al xmlns="local">Principales abréviations</al>
           </entry>
         </row>
@@ -70,34 +70,34 @@
               <motRep>ACTIF</motRep>
             </al>
           </entry>
-          <entry namest="c3" nameend="c5" colsep="1" rowsep="1">
+          <entry align="center" namest="c3" nameend="c5" colsep="1" rowsep="1">
             <al xmlns="local">
               <motRep>31-12-2015</motRep>
             </al>
           </entry>
-          <entry colsep="1" rowsep="1">
+          <entry align="center" colsep="1" rowsep="1">
             <al xmlns="local">
               <motRep>31-12-2014</motRep>
             </al>
           </entry>
         </row>
         <row>
-          <entry colsep="1" rowsep="1">
+          <entry align="center" colsep="1" rowsep="1">
             <al xmlns="local">
               <motRep>Brut</motRep>
             </al>
           </entry>
-          <entry colsep="1" rowsep="1">
+          <entry align="center" colsep="1" rowsep="1">
             <al xmlns="local">
               <motRep>Amortissements et dépréciations</motRep>
             </al>
           </entry>
-          <entry colsep="1" rowsep="1">
+          <entry align="center" colsep="1" rowsep="1">
             <al xmlns="local">
               <motRep>Net</motRep>
             </al>
           </entry>
-          <entry colsep="1" rowsep="1">
+          <entry align="center" colsep="1" rowsep="1">
             <al xmlns="local">
               <motRep>Net</motRep>
             </al>
@@ -756,12 +756,12 @@
               <motRep>PASSIF</motRep>
             </al>
           </entry>
-          <entry colsep="1" rowsep="1">
+          <entry align="center" colsep="1" rowsep="1">
             <al xmlns="local">
               <motRep>31-12-2015</motRep>
             </al>
           </entry>
-          <entry colsep="1" rowsep="1">
+          <entry align="center" colsep="1" rowsep="1">
             <al xmlns="local">
               <motRep>31-12-2014</motRep>
             </al>
@@ -1088,12 +1088,12 @@
           <entry align="left" namest="c1" nameend="c3" colsep="1" rowsep="1">
             <al xmlns="local"/>
           </entry>
-          <entry colsep="1" rowsep="1">
+          <entry align="center" colsep="1" rowsep="1">
             <al xmlns="local">
               <motRep>31-12-2015</motRep>
             </al>
           </entry>
-          <entry colsep="1" rowsep="1">
+          <entry align="center" colsep="1" rowsep="1">
             <al xmlns="local">
               <motRep>31-12-2014</motRep>
             </al>
@@ -7334,7 +7334,7 @@
       <colspec colname="c2" colwidth="50%"/>
       <thead valign="middle">
         <row>
-          <entry valign="top" namest="c1" nameend="c2" colsep="1" rowsep="1">
+          <entry valign="top" align="center" namest="c1" nameend="c2" colsep="1" rowsep="1">
             <al xmlns="local">Principales abréviations</al>
           </entry>
         </row>
@@ -7391,7 +7391,7 @@
       <colspec colname="c4" colwidth="20%"/>
       <thead valign="middle">
         <row>
-          <entry valign="top" colsep="1" rowsep="1">
+          <entry valign="top" align="center" colsep="1" rowsep="1">
             <al xmlns="local">1.</al>
           </entry>
           <entry align="left" valign="top" namest="c2" nameend="c4" colsep="1" rowsep="1">
@@ -7502,7 +7502,7 @@
       <colspec colname="c4" colwidth="20%"/>
       <thead valign="middle">
         <row>
-          <entry valign="top" colsep="1" rowsep="1">
+          <entry valign="top" align="center" colsep="1" rowsep="1">
             <al xmlns="local">2.</al>
           </entry>
           <entry align="left" valign="top" namest="c2" nameend="c4" colsep="1" rowsep="1">
@@ -7718,7 +7718,7 @@
       <colspec colname="c4" colwidth="20%"/>
       <thead valign="middle">
         <row>
-          <entry valign="top" colsep="1" rowsep="1">
+          <entry valign="top" align="center" colsep="1" rowsep="1">
             <al xmlns="local">3.</al>
           </entry>
           <entry align="left" valign="top" namest="c2" nameend="c4" colsep="1" rowsep="1">
@@ -7726,7 +7726,7 @@
           </entry>
         </row>
         <row>
-          <entry valign="top" colsep="1" rowsep="1">
+          <entry valign="top" align="center" colsep="1" rowsep="1">
             <al xmlns="local">
               <motRep>A.</motRep>
             </al>
@@ -7734,10 +7734,10 @@
           <entry align="left" valign="top" colsep="1" rowsep="1">
             <al xmlns="local">Immobilisations (corporelles, incorporelles et financières)</al>
           </entry>
-          <entry valign="top" colsep="1" rowsep="1">
+          <entry valign="top" align="center" colsep="1" rowsep="1">
             <al xmlns="local"/>
           </entry>
-          <entry valign="top" colsep="1" rowsep="1">
+          <entry valign="top" align="center" colsep="1" rowsep="1">
             <al xmlns="local"/>
           </entry>
         </row>
@@ -8536,7 +8536,7 @@
       <colspec colname="c4" colwidth="20%"/>
       <thead valign="middle">
         <row>
-          <entry valign="top" colsep="1" rowsep="1">
+          <entry valign="top" align="center" colsep="1" rowsep="1">
             <al xmlns="local">3.</al>
           </entry>
           <entry align="left" valign="top" namest="c2" nameend="c4" colsep="1" rowsep="1">
@@ -8544,7 +8544,7 @@
           </entry>
         </row>
         <row>
-          <entry valign="top" colsep="1" rowsep="1">
+          <entry valign="top" align="center" colsep="1" rowsep="1">
             <al xmlns="local">
               <motRep>B.</motRep>
             </al>
@@ -8552,10 +8552,10 @@
           <entry align="left" valign="top" colsep="1" rowsep="1">
             <al xmlns="local">Stocks et en-cours</al>
           </entry>
-          <entry valign="top" colsep="1" rowsep="1">
+          <entry valign="top" align="center" colsep="1" rowsep="1">
             <al xmlns="local"/>
           </entry>
-          <entry valign="top" colsep="1" rowsep="1">
+          <entry valign="top" align="center" colsep="1" rowsep="1">
             <al xmlns="local"/>
           </entry>
         </row>
@@ -8743,7 +8743,7 @@
       <colspec colname="c4" colwidth="20%"/>
       <thead valign="middle">
         <row>
-          <entry valign="top" colsep="1" rowsep="1">
+          <entry valign="top" align="center" colsep="1" rowsep="1">
             <al xmlns="local">3.</al>
           </entry>
           <entry align="left" valign="top" namest="c2" nameend="c4" colsep="1" rowsep="1">
@@ -8751,7 +8751,7 @@
           </entry>
         </row>
         <row>
-          <entry valign="top" colsep="1" rowsep="1">
+          <entry valign="top" align="center" colsep="1" rowsep="1">
             <al xmlns="local">
               <motRep>C. </motRep>
             </al>
@@ -8759,10 +8759,10 @@
           <entry align="left" valign="top" colsep="1" rowsep="1">
             <al xmlns="local">Créances et comptes rattachés</al>
           </entry>
-          <entry valign="top" colsep="1" rowsep="1">
+          <entry valign="top" align="center" colsep="1" rowsep="1">
             <al xmlns="local"/>
           </entry>
-          <entry valign="top" colsep="1" rowsep="1">
+          <entry valign="top" align="center" colsep="1" rowsep="1">
             <al xmlns="local"/>
           </entry>
         </row>
@@ -8985,7 +8985,7 @@
       <colspec colname="c4" colwidth="20%"/>
       <thead valign="middle">
         <row>
-          <entry valign="top" colsep="1" rowsep="1">
+          <entry valign="top" align="center" colsep="1" rowsep="1">
             <al xmlns="local">3.</al>
           </entry>
           <entry align="left" valign="top" namest="c2" nameend="c4" colsep="1" rowsep="1">
@@ -8993,7 +8993,7 @@
           </entry>
         </row>
         <row>
-          <entry valign="top" colsep="1" rowsep="1">
+          <entry valign="top" align="center" colsep="1" rowsep="1">
             <al xmlns="local">
               <motRep>D.</motRep>
             </al>
@@ -9001,10 +9001,10 @@
           <entry align="left" valign="top" colsep="1" rowsep="1">
             <al xmlns="local">Disponibilités et concours bancaires courants</al>
           </entry>
-          <entry valign="top" colsep="1" rowsep="1">
+          <entry valign="top" align="center" colsep="1" rowsep="1">
             <al xmlns="local"/>
           </entry>
-          <entry valign="top" colsep="1" rowsep="1">
+          <entry valign="top" align="center" colsep="1" rowsep="1">
             <al xmlns="local"/>
           </entry>
         </row>
@@ -9152,7 +9152,7 @@
       <colspec colname="c4" colwidth="20%"/>
       <thead valign="middle">
         <row>
-          <entry valign="top" colsep="1" rowsep="1">
+          <entry valign="top" align="center" colsep="1" rowsep="1">
             <al xmlns="local">3.</al>
           </entry>
           <entry align="left" valign="top" namest="c2" nameend="c4" colsep="1" rowsep="1">
@@ -9160,7 +9160,7 @@
           </entry>
         </row>
         <row>
-          <entry valign="top" colsep="1" rowsep="1">
+          <entry valign="top" align="center" colsep="1" rowsep="1">
             <al xmlns="local">
               <motRep>E.</motRep>
             </al>
@@ -9168,10 +9168,10 @@
           <entry align="left" valign="top" colsep="1" rowsep="1">
             <al xmlns="local">Comptes de régularisation et autres postes de l’actif</al>
           </entry>
-          <entry valign="top" colsep="1" rowsep="1">
+          <entry valign="top" align="center" colsep="1" rowsep="1">
             <al xmlns="local"/>
           </entry>
-          <entry valign="top" colsep="1" rowsep="1">
+          <entry valign="top" align="center" colsep="1" rowsep="1">
             <al xmlns="local"/>
           </entry>
         </row>
@@ -9305,7 +9305,7 @@
       <colspec colname="c4" colwidth="20%"/>
       <thead valign="middle">
         <row>
-          <entry valign="top" colsep="1" rowsep="1">
+          <entry valign="top" align="center" colsep="1" rowsep="1">
             <al xmlns="local">3.</al>
           </entry>
           <entry align="left" valign="top" namest="c2" nameend="c4" colsep="1" rowsep="1">
@@ -9313,7 +9313,7 @@
           </entry>
         </row>
         <row>
-          <entry valign="top" colsep="1" rowsep="1">
+          <entry valign="top" align="center" colsep="1" rowsep="1">
             <al xmlns="local">
               <motRep>F.</motRep>
             </al>
@@ -9321,10 +9321,10 @@
           <entry align="left" valign="top" colsep="1" rowsep="1">
             <al xmlns="local">Capitaux propres</al>
           </entry>
-          <entry valign="top" colsep="1" rowsep="1">
+          <entry valign="top" align="center" colsep="1" rowsep="1">
             <al xmlns="local"/>
           </entry>
-          <entry valign="top" colsep="1" rowsep="1">
+          <entry valign="top" align="center" colsep="1" rowsep="1">
             <al xmlns="local"/>
           </entry>
         </row>
@@ -9640,7 +9640,7 @@
       <colspec colname="c4" colwidth="20%"/>
       <thead valign="middle">
         <row>
-          <entry valign="top" colsep="1" rowsep="1">
+          <entry valign="top" align="center" colsep="1" rowsep="1">
             <al xmlns="local">3.</al>
           </entry>
           <entry align="left" valign="top" namest="c2" nameend="c4" colsep="1" rowsep="1">
@@ -9648,7 +9648,7 @@
           </entry>
         </row>
         <row>
-          <entry valign="top" colsep="1" rowsep="1">
+          <entry valign="top" align="center" colsep="1" rowsep="1">
             <al xmlns="local">
               <motRep>G.</motRep>
             </al>
@@ -9656,10 +9656,10 @@
           <entry align="left" valign="top" colsep="1" rowsep="1">
             <al xmlns="local">Provisions réglementées et subventions d’investissement</al>
           </entry>
-          <entry valign="top" colsep="1" rowsep="1">
+          <entry valign="top" align="center" colsep="1" rowsep="1">
             <al xmlns="local"/>
           </entry>
-          <entry valign="top" colsep="1" rowsep="1">
+          <entry valign="top" align="center" colsep="1" rowsep="1">
             <al xmlns="local"/>
           </entry>
         </row>
@@ -9714,7 +9714,7 @@
       <colspec colname="c4" colwidth="20%"/>
       <thead valign="middle">
         <row>
-          <entry valign="top" colsep="1" rowsep="1">
+          <entry valign="top" align="center" colsep="1" rowsep="1">
             <al xmlns="local">3.</al>
           </entry>
           <entry align="left" valign="top" namest="c2" nameend="c4" colsep="1" rowsep="1">
@@ -9722,7 +9722,7 @@
           </entry>
         </row>
         <row>
-          <entry valign="top" colsep="1" rowsep="1">
+          <entry valign="top" align="center" colsep="1" rowsep="1">
             <al xmlns="local">
               <motRep>H.</motRep>
             </al>
@@ -9730,10 +9730,10 @@
           <entry align="left" valign="top" colsep="1" rowsep="1">
             <al xmlns="local">Provisions</al>
           </entry>
-          <entry valign="top" colsep="1" rowsep="1">
+          <entry valign="top" align="center" colsep="1" rowsep="1">
             <al xmlns="local"/>
           </entry>
-          <entry valign="top" colsep="1" rowsep="1">
+          <entry valign="top" align="center" colsep="1" rowsep="1">
             <al xmlns="local"/>
           </entry>
         </row>
@@ -9987,7 +9987,7 @@
       <colspec colname="c4" colwidth="20%"/>
       <thead valign="middle">
         <row>
-          <entry valign="top" colsep="1" rowsep="1">
+          <entry valign="top" align="center" colsep="1" rowsep="1">
             <al xmlns="local">3.</al>
           </entry>
           <entry align="left" valign="top" namest="c2" nameend="c4" colsep="1" rowsep="1">
@@ -9995,7 +9995,7 @@
           </entry>
         </row>
         <row>
-          <entry valign="top" colsep="1" rowsep="1">
+          <entry valign="top" align="center" colsep="1" rowsep="1">
             <al xmlns="local">
               <motRep>I.</motRep>
             </al>
@@ -10003,10 +10003,10 @@
           <entry align="left" valign="top" colsep="1" rowsep="1">
             <al xmlns="local">Dettes</al>
           </entry>
-          <entry valign="top" colsep="1" rowsep="1">
+          <entry valign="top" align="center" colsep="1" rowsep="1">
             <al xmlns="local"/>
           </entry>
-          <entry valign="top" colsep="1" rowsep="1">
+          <entry valign="top" align="center" colsep="1" rowsep="1">
             <al xmlns="local"/>
           </entry>
         </row>
@@ -10259,7 +10259,7 @@
       <colspec colname="c4" colwidth="20%"/>
       <thead valign="middle">
         <row>
-          <entry valign="top" colsep="1" rowsep="1">
+          <entry valign="top" align="center" colsep="1" rowsep="1">
             <al xmlns="local">4.</al>
           </entry>
           <entry align="left" valign="top" namest="c2" nameend="c4" colsep="1" rowsep="1">
@@ -10811,7 +10811,7 @@
       <colspec colname="c4" colwidth="20%"/>
       <thead valign="middle">
         <row>
-          <entry valign="top" colsep="1" rowsep="1">
+          <entry valign="top" align="center" colsep="1" rowsep="1">
             <al xmlns="local">5.</al>
           </entry>
           <entry align="left" valign="top" namest="c2" nameend="c4" colsep="1" rowsep="1">
@@ -10819,7 +10819,7 @@
           </entry>
         </row>
         <row>
-          <entry valign="top" colsep="1" rowsep="1">
+          <entry valign="top" align="center" colsep="1" rowsep="1">
             <al xmlns="local">
               <motRep>J.</motRep>
             </al>
@@ -10956,7 +10956,7 @@
       <colspec colname="c4" colwidth="20%"/>
       <thead valign="middle">
         <row>
-          <entry valign="top" colsep="1" rowsep="1">
+          <entry valign="top" align="center" colsep="1" rowsep="1">
             <al xmlns="local">5.</al>
           </entry>
           <entry align="left" valign="top" namest="c2" nameend="c4" colsep="1" rowsep="1">
@@ -10964,7 +10964,7 @@
           </entry>
         </row>
         <row>
-          <entry valign="top" colsep="1" rowsep="1">
+          <entry valign="top" align="center" colsep="1" rowsep="1">
             <al xmlns="local">
               <motRep>K.</motRep>
             </al>
@@ -11069,7 +11069,7 @@
       <colspec colname="c4" colwidth="20%"/>
       <thead valign="middle">
         <row>
-          <entry valign="top" colsep="1" rowsep="1">
+          <entry valign="top" align="center" colsep="1" rowsep="1">
             <al xmlns="local">5.</al>
           </entry>
           <entry align="left" valign="top" namest="c2" nameend="c4" colsep="1" rowsep="1">
@@ -11077,7 +11077,7 @@
           </entry>
         </row>
         <row>
-          <entry valign="top" colsep="1" rowsep="1">
+          <entry valign="top" align="center" colsep="1" rowsep="1">
             <al xmlns="local">
               <motRep>L.</motRep>
             </al>
@@ -11291,7 +11291,7 @@
       <colspec colname="c4" colwidth="20%"/>
       <thead valign="middle">
         <row>
-          <entry valign="top" colsep="1" rowsep="1">
+          <entry valign="top" align="center" colsep="1" rowsep="1">
             <al xmlns="local">5.</al>
           </entry>
           <entry align="left" valign="top" namest="c2" nameend="c4" colsep="1" rowsep="1">
@@ -11299,7 +11299,7 @@
           </entry>
         </row>
         <row>
-          <entry valign="top" colsep="1" rowsep="1">
+          <entry valign="top" align="center" colsep="1" rowsep="1">
             <al xmlns="local">
               <motRep>M.</motRep>
             </al>
@@ -11401,7 +11401,7 @@
       <colspec colname="c4" colwidth="20%"/>
       <thead valign="middle">
         <row>
-          <entry valign="top" colsep="1" rowsep="1">
+          <entry valign="top" align="center" colsep="1" rowsep="1">
             <al xmlns="local">5.</al>
           </entry>
           <entry align="left" valign="top" namest="c2" nameend="c4" colsep="1" rowsep="1">
@@ -11409,7 +11409,7 @@
           </entry>
         </row>
         <row>
-          <entry valign="top" colsep="1" rowsep="1">
+          <entry valign="top" align="center" colsep="1" rowsep="1">
             <al xmlns="local">
               <motRep>N.</motRep>
             </al>
@@ -11975,7 +11975,7 @@
       <colspec colname="c4" colwidth="20%"/>
       <thead valign="middle">
         <row>
-          <entry valign="top" colsep="1" rowsep="1">
+          <entry valign="top" align="center" colsep="1" rowsep="1">
             <al xmlns="local">5.</al>
           </entry>
           <entry align="left" valign="top" namest="c2" nameend="c4" colsep="1" rowsep="1">
@@ -11983,7 +11983,7 @@
           </entry>
         </row>
         <row>
-          <entry valign="top" colsep="1" rowsep="1">
+          <entry valign="top" align="center" colsep="1" rowsep="1">
             <al xmlns="local">
               <motRep>O.</motRep>
             </al>
@@ -12115,7 +12115,7 @@
       <colspec colname="c4" colwidth="20%"/>
       <thead valign="middle">
         <row>
-          <entry valign="top" colsep="1" rowsep="1">
+          <entry valign="top" align="center" colsep="1" rowsep="1">
             <al xmlns="local">5.</al>
           </entry>
           <entry align="left" valign="top" namest="c2" nameend="c4" colsep="1" rowsep="1">
@@ -12123,7 +12123,7 @@
           </entry>
         </row>
         <row>
-          <entry valign="top" colsep="1" rowsep="1">
+          <entry valign="top" align="center" colsep="1" rowsep="1">
             <al xmlns="local">
               <motRep>P.</motRep>
             </al>
@@ -12325,7 +12325,7 @@
       <colspec colname="c4" colwidth="20%"/>
       <thead valign="middle">
         <row>
-          <entry valign="top" colsep="1" rowsep="1">
+          <entry valign="top" align="center" colsep="1" rowsep="1">
             <al xmlns="local">5.</al>
           </entry>
           <entry align="left" valign="top" namest="c2" nameend="c4" colsep="1" rowsep="1">
@@ -12333,7 +12333,7 @@
           </entry>
         </row>
         <row>
-          <entry valign="top" colsep="1" rowsep="1">
+          <entry valign="top" align="center" colsep="1" rowsep="1">
             <al xmlns="local">
               <motRep>Q.</motRep>
             </al>
@@ -12566,7 +12566,7 @@
       <colspec colname="c2" colwidth="50%"/>
       <thead valign="middle">
         <row>
-          <entry valign="top" namest="c1" nameend="c2" colsep="1" rowsep="1">
+          <entry valign="top" align="center" namest="c1" nameend="c2" colsep="1" rowsep="1">
             <al xmlns="local">Principales abréviations</al>
           </entry>
         </row>
@@ -22316,7 +22316,7 @@
       <colspec colname="c2" colwidth="50%"/>
       <thead valign="middle">
         <row>
-          <entry valign="top" namest="c1" nameend="c2" colsep="1" rowsep="1">
+          <entry valign="top" align="center" namest="c1" nameend="c2" colsep="1" rowsep="1">
             <al xmlns="local">Principales abréviations utilisées</al>
           </entry>
         </row>
@@ -22357,7 +22357,7 @@
       <colspec colname="c4" colwidth="20%"/>
       <thead valign="middle">
         <row>
-          <entry valign="top" colsep="1" rowsep="1">
+          <entry valign="top" align="center" colsep="1" rowsep="1">
             <al xmlns="local">1.</al>
           </entry>
           <entry align="left" valign="top" namest="c2" nameend="c4" colsep="1" rowsep="1">
@@ -22365,7 +22365,7 @@
           </entry>
         </row>
         <row>
-          <entry valign="top" colsep="1" rowsep="1">
+          <entry valign="top" align="center" colsep="1" rowsep="1">
             <al xmlns="local"><motRep>A</motRep>.</al>
           </entry>
           <entry align="left" valign="top" namest="c2" nameend="c4" colsep="1" rowsep="1">
@@ -22423,7 +22423,7 @@
       <colspec colname="c4" colwidth="20%"/>
       <thead valign="middle">
         <row>
-          <entry valign="top" colsep="1" rowsep="1">
+          <entry valign="top" align="center" colsep="1" rowsep="1">
             <al xmlns="local">1.</al>
           </entry>
           <entry align="left" valign="top" namest="c2" nameend="c4" colsep="1" rowsep="1">
@@ -22431,7 +22431,7 @@
           </entry>
         </row>
         <row>
-          <entry valign="top" colsep="1" rowsep="1">
+          <entry valign="top" align="center" colsep="1" rowsep="1">
             <al xmlns="local"><motRep>B</motRep>.</al>
           </entry>
           <entry align="left" valign="top" namest="c2" nameend="c4" colsep="1" rowsep="1">
@@ -22491,7 +22491,7 @@
       <colspec colname="c4" colwidth="20%"/>
       <thead valign="middle">
         <row>
-          <entry valign="top" colsep="1" rowsep="1">
+          <entry valign="top" align="center" colsep="1" rowsep="1">
             <al xmlns="local">1.</al>
           </entry>
           <entry align="left" valign="top" namest="c2" nameend="c4" colsep="1" rowsep="1">
@@ -22499,7 +22499,7 @@
           </entry>
         </row>
         <row>
-          <entry valign="top" colsep="1" rowsep="1">
+          <entry valign="top" align="center" colsep="1" rowsep="1">
             <al xmlns="local"><motRep>C</motRep>.</al>
           </entry>
           <entry align="left" valign="top" namest="c2" nameend="c4" colsep="1" rowsep="1">
@@ -22557,7 +22557,7 @@
       <colspec colname="c4" colwidth="20%"/>
       <thead valign="middle">
         <row>
-          <entry valign="top" colsep="1" rowsep="1">
+          <entry valign="top" align="center" colsep="1" rowsep="1">
             <al xmlns="local">1.</al>
           </entry>
           <entry align="left" valign="top" namest="c2" nameend="c4" colsep="1" rowsep="1">
@@ -22565,7 +22565,7 @@
           </entry>
         </row>
         <row>
-          <entry valign="top" colsep="1" rowsep="1">
+          <entry valign="top" align="center" colsep="1" rowsep="1">
             <al xmlns="local">
               <motRep>D.</motRep>
             </al>
@@ -22625,7 +22625,7 @@
       <colspec colname="c4" colwidth="20%"/>
       <thead valign="middle">
         <row>
-          <entry valign="top" colsep="1" rowsep="1">
+          <entry valign="top" align="center" colsep="1" rowsep="1">
             <al xmlns="local">1.</al>
           </entry>
           <entry align="left" valign="top" namest="c2" nameend="c4" colsep="1" rowsep="1">
@@ -22633,7 +22633,7 @@
           </entry>
         </row>
         <row>
-          <entry valign="top" colsep="1" rowsep="1">
+          <entry valign="top" align="center" colsep="1" rowsep="1">
             <al xmlns="local"><motRep>E</motRep>.</al>
           </entry>
           <entry align="left" valign="top" namest="c2" nameend="c4" colsep="1" rowsep="1">
@@ -22698,7 +22698,7 @@
       <colspec colname="c4" colwidth="20%"/>
       <thead valign="middle">
         <row>
-          <entry valign="top" colsep="1" rowsep="1">
+          <entry valign="top" align="center" colsep="1" rowsep="1">
             <al xmlns="local">2.</al>
           </entry>
           <entry align="left" valign="top" namest="c2" nameend="c4" colsep="1" rowsep="1">
@@ -22706,7 +22706,7 @@
           </entry>
         </row>
         <row>
-          <entry valign="top" colsep="1" rowsep="1">
+          <entry valign="top" align="center" colsep="1" rowsep="1">
             <al xmlns="local"><motRep>F</motRep>.</al>
           </entry>
           <entry align="left" valign="top" namest="c2" nameend="c4" colsep="1" rowsep="1">
@@ -22790,7 +22790,7 @@
       <colspec colname="c4" colwidth="20%"/>
       <thead valign="middle">
         <row>
-          <entry valign="top" colsep="1" rowsep="1">
+          <entry valign="top" align="center" colsep="1" rowsep="1">
             <al xmlns="local">2.</al>
           </entry>
           <entry align="left" valign="top" namest="c2" nameend="c4" colsep="1" rowsep="1">
@@ -22798,7 +22798,7 @@
           </entry>
         </row>
         <row>
-          <entry valign="top" colsep="1" rowsep="1">
+          <entry valign="top" align="center" colsep="1" rowsep="1">
             <al xmlns="local">
               <motRep>G.</motRep>
             </al>
@@ -23140,7 +23140,7 @@
       <colspec colname="c4" colwidth="20%"/>
       <thead valign="middle">
         <row>
-          <entry valign="top" colsep="1" rowsep="1">
+          <entry valign="top" align="center" colsep="1" rowsep="1">
             <al xmlns="local">2.</al>
           </entry>
           <entry align="left" valign="top" namest="c2" nameend="c4" colsep="1" rowsep="1">
@@ -23148,7 +23148,7 @@
           </entry>
         </row>
         <row>
-          <entry valign="top" colsep="1" rowsep="1">
+          <entry valign="top" align="center" colsep="1" rowsep="1">
             <al xmlns="local"><motRep>H</motRep>.</al>
           </entry>
           <entry align="left" valign="top" namest="c2" nameend="c4" colsep="1" rowsep="1">
@@ -23630,7 +23630,7 @@
       <colspec colname="c4" colwidth="20%"/>
       <thead valign="middle">
         <row>
-          <entry valign="top" colsep="1" rowsep="1">
+          <entry valign="top" align="center" colsep="1" rowsep="1">
             <al xmlns="local">3.</al>
           </entry>
           <entry align="left" valign="top" namest="c2" nameend="c4" colsep="1" rowsep="1">
@@ -23638,7 +23638,7 @@
           </entry>
         </row>
         <row>
-          <entry valign="top" colsep="1" rowsep="1">
+          <entry valign="top" align="center" colsep="1" rowsep="1">
             <al xmlns="local">
               <motRep>I.</motRep>
             </al>
@@ -23789,7 +23789,7 @@
       <colspec colname="c4" colwidth="20%"/>
       <thead valign="middle">
         <row>
-          <entry valign="top" colsep="1" rowsep="1">
+          <entry valign="top" align="center" colsep="1" rowsep="1">
             <al xmlns="local">4.</al>
           </entry>
           <entry align="left" valign="top" namest="c2" nameend="c4" colsep="1" rowsep="1">
@@ -23797,7 +23797,7 @@
           </entry>
         </row>
         <row>
-          <entry valign="top" colsep="1" rowsep="1">
+          <entry valign="top" align="center" colsep="1" rowsep="1">
             <al xmlns="local">
               <motRep>J.</motRep>
             </al>
@@ -24279,7 +24279,7 @@
       <colspec colname="c4" colwidth="20%"/>
       <thead valign="middle">
         <row>
-          <entry valign="top" colsep="1" rowsep="1">
+          <entry valign="top" align="center" colsep="1" rowsep="1">
             <al xmlns="local">4.</al>
           </entry>
           <entry align="left" valign="top" namest="c2" nameend="c4" colsep="1" rowsep="1">
@@ -24287,7 +24287,7 @@
           </entry>
         </row>
         <row>
-          <entry valign="top" colsep="1" rowsep="1">
+          <entry valign="top" align="center" colsep="1" rowsep="1">
             <al xmlns="local">
               <motRep>K.</motRep>
             </al>
@@ -24365,7 +24365,7 @@
       <colspec colname="c4" colwidth="20%"/>
       <thead valign="middle">
         <row>
-          <entry valign="top" colsep="1" rowsep="1">
+          <entry valign="top" align="center" colsep="1" rowsep="1">
             <al xmlns="local">5.</al>
           </entry>
           <entry align="left" valign="top" namest="c2" nameend="c4" colsep="1" rowsep="1">
@@ -24373,7 +24373,7 @@
           </entry>
         </row>
         <row>
-          <entry valign="top" colsep="1" rowsep="1">
+          <entry valign="top" align="center" colsep="1" rowsep="1">
             <al xmlns="local"><motRep>L</motRep>.</al>
           </entry>
           <entry align="left" valign="top" namest="c2" nameend="c4" colsep="1" rowsep="1">
@@ -25137,7 +25137,7 @@
       <colspec colname="c4" colwidth="20%"/>
       <thead valign="middle">
         <row>
-          <entry valign="top" colsep="1" rowsep="1">
+          <entry valign="top" align="center" colsep="1" rowsep="1">
             <al xmlns="local">5.</al>
           </entry>
           <entry align="left" valign="top" namest="c2" nameend="c4" colsep="1" rowsep="1">
@@ -25145,7 +25145,7 @@
           </entry>
         </row>
         <row>
-          <entry valign="top" colsep="1" rowsep="1">
+          <entry valign="top" align="center" colsep="1" rowsep="1">
             <al xmlns="local">
               <motRep>M.</motRep>
             </al>
@@ -25355,7 +25355,7 @@
       <colspec colname="c4" colwidth="20%"/>
       <thead valign="middle">
         <row>
-          <entry valign="top" colsep="1" rowsep="1">
+          <entry valign="top" align="center" colsep="1" rowsep="1">
             <al xmlns="local">6.</al>
           </entry>
           <entry align="left" valign="top" namest="c2" nameend="c4" colsep="1" rowsep="1">
@@ -25363,7 +25363,7 @@
           </entry>
         </row>
         <row>
-          <entry valign="top" colsep="1" rowsep="1">
+          <entry valign="top" align="center" colsep="1" rowsep="1">
             <al xmlns="local">
               <motRep>N.</motRep>
             </al>
@@ -25551,7 +25551,7 @@
       <colspec colname="c4" colwidth="20%"/>
       <thead valign="middle">
         <row>
-          <entry valign="top" colsep="1" rowsep="1">
+          <entry valign="top" align="center" colsep="1" rowsep="1">
             <al xmlns="local">6.</al>
           </entry>
           <entry align="left" valign="top" namest="c2" nameend="c4" colsep="1" rowsep="1">
@@ -25559,7 +25559,7 @@
           </entry>
         </row>
         <row>
-          <entry valign="top" colsep="1" rowsep="1">
+          <entry valign="top" align="center" colsep="1" rowsep="1">
             <al xmlns="local"><motRep>O</motRep>.</al>
           </entry>
           <entry align="left" valign="top" namest="c2" nameend="c4" colsep="1" rowsep="1">
@@ -25959,7 +25959,7 @@
       <colspec colname="c4" colwidth="20%"/>
       <thead valign="middle">
         <row>
-          <entry valign="top" colsep="1" rowsep="1">
+          <entry valign="top" align="center" colsep="1" rowsep="1">
             <al xmlns="local">6.</al>
           </entry>
           <entry align="left" valign="top" namest="c2" nameend="c4" colsep="1" rowsep="1">
@@ -25967,7 +25967,7 @@
           </entry>
         </row>
         <row>
-          <entry valign="top" colsep="1" rowsep="1">
+          <entry valign="top" align="center" colsep="1" rowsep="1">
             <al xmlns="local"><motRep>P</motRep>.</al>
           </entry>
           <entry align="left" valign="top" namest="c2" nameend="c4" colsep="1" rowsep="1">
@@ -26332,7 +26332,7 @@
       <colspec colname="c4" colwidth="20%"/>
       <thead valign="middle">
         <row>
-          <entry valign="top" colsep="1" rowsep="1">
+          <entry valign="top" align="center" colsep="1" rowsep="1">
             <al xmlns="local">7.</al>
           </entry>
           <entry align="left" valign="top" namest="c2" nameend="c4" colsep="1" rowsep="1">
@@ -26340,7 +26340,7 @@
           </entry>
         </row>
         <row>
-          <entry valign="top" colsep="1" rowsep="1">
+          <entry valign="top" align="center" colsep="1" rowsep="1">
             <al xmlns="local">
               <motRep>Q.</motRep>
             </al>
@@ -26499,7 +26499,7 @@
       <colspec colname="c4" colwidth="20%"/>
       <thead valign="middle">
         <row>
-          <entry valign="top" colsep="1" rowsep="1">
+          <entry valign="top" align="center" colsep="1" rowsep="1">
             <al xmlns="local">8.</al>
           </entry>
           <entry align="left" valign="top" namest="c2" nameend="c4" colsep="1" rowsep="1">

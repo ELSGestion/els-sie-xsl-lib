@@ -75,19 +75,19 @@
             <colspec colname="c5" colwidth="19%"/>
             <thead valign="middle">
               <row>
-                <entry>
+                <entry align="center">
                   <bold xmlns="">header text</bold>
                 </entry>
-                <entry>
+                <entry align="center">
                   <bold xmlns="">header text</bold>
                 </entry>
-                <entry>
+                <entry align="center">
                   <bold xmlns="">header text</bold>
                 </entry>
-                <entry>
+                <entry align="center">
                   <bold xmlns="">header text</bold>
                 </entry>
-                <entry>
+                <entry align="center">
                   <bold xmlns="">header text</bold>
                 </entry>
               </row>
@@ -124,13 +124,13 @@
             <colspec colname="c4" colwidth="25%"/>
             <thead valign="middle">
               <row>
-                <entry morerows="1">header text</entry>
-                <entry namest="c2" nameend="c4">header text</entry>
+                <entry align="center" morerows="1">header text</entry>
+                <entry align="center" namest="c2" nameend="c4">header text</entry>
               </row>
               <row>
-                <entry>header text</entry>
-                <entry>header text</entry>
-                <entry>header text</entry>
+                <entry align="center">header text</entry>
+                <entry align="center">header text</entry>
+                <entry align="center">header text</entry>
               </row>
             </thead>
             <tbody valign="middle">
@@ -163,10 +163,10 @@
             <colspec colname="c4" colwidth="25%"/>
             <thead valign="middle">
               <row>
-                <entry>header text</entry>
-                <entry>header text</entry>
-                <entry>header text</entry>
-                <entry>header text</entry>
+                <entry align="center">header text</entry>
+                <entry align="center">header text</entry>
+                <entry align="center">header text</entry>
+                <entry align="center">header text</entry>
               </row>
             </thead>
             <tbody valign="middle">
@@ -204,11 +204,11 @@
             <colspec colname="c6" colwidth="11%"/>
             <thead valign="middle">
               <row>
-                <entry>header text</entry>
-                <entry namest="c2" nameend="c3">header text</entry>
-                <entry>header text</entry>
-                <entry>header text</entry>
-                <entry>header text</entry>
+                <entry align="center">header text</entry>
+                <entry align="center" namest="c2" nameend="c3">header text</entry>
+                <entry align="center">header text</entry>
+                <entry align="center">header text</entry>
+                <entry align="center">header text</entry>
               </row>
             </thead>
             <tbody valign="middle">
@@ -269,13 +269,13 @@
             <colspec colname="c4" colwidth="25%"/>
             <thead valign="middle">
               <row>
-                <entry morerows="1">header text</entry>
-                <entry namest="c2" nameend="c4">header text</entry>
+                <entry align="center" morerows="1">header text</entry>
+                <entry align="center" namest="c2" nameend="c4">header text</entry>
               </row>
               <row>
-                <entry>header text</entry>
-                <entry>header text</entry>
-                <entry>header text</entry>
+                <entry align="center">header text</entry>
+                <entry align="center">header text</entry>
+                <entry align="center">header text</entry>
               </row>
             </thead>
             <tbody valign="middle">
@@ -326,10 +326,10 @@
             <colspec colname="c4" colwidth="25%"/>
             <thead valign="middle">
               <row>
-                <entry>table default</entry>
-                <entry>table default</entry>
-                <entry>table default</entry>
-                <entry>table default</entry>
+                <entry align="center">table default</entry>
+                <entry align="center">table default</entry>
+                <entry align="center">table default</entry>
+                <entry align="center">table default</entry>
               </row>
             </thead>
             <tbody valign="middle">
@@ -365,10 +365,10 @@
             <colspec colname="c4" colwidth="25%"/>
             <thead valign="middle">
               <row>
-                <entry>rowsep=yes</entry>
-                <entry>rowsep=yes</entry>
-                <entry>rowsep=yes</entry>
-                <entry>rowsep=yes</entry>
+                <entry align="center">rowsep=yes</entry>
+                <entry align="center">rowsep=yes</entry>
+                <entry align="center">rowsep=yes</entry>
+                <entry align="center">rowsep=yes</entry>
               </row>
             </thead>
             <tbody valign="middle">
@@ -407,10 +407,10 @@
             <colspec colname="c4" colwidth="25%"/>
             <thead valign="middle">
               <row>
-                <entry>colsep=yes</entry>
-                <entry>colsep=yes</entry>
-                <entry>colsep=yes</entry>
-                <entry>colsep=yes</entry>
+                <entry align="center">colsep=yes</entry>
+                <entry align="center">colsep=yes</entry>
+                <entry align="center">colsep=yes</entry>
+                <entry align="center">colsep=yes</entry>
               </row>
             </thead>
             <tbody valign="middle">
@@ -449,16 +449,16 @@
             <colspec colname="c4" colwidth="25%"/>
             <thead valign="middle">
               <row>
-                <entry>table default</entry>
-                <entry>table default</entry>
-                <entry>table default</entry>
-                <entry>table default</entry>
+                <entry align="center">table default</entry>
+                <entry align="center">table default</entry>
+                <entry align="center">table default</entry>
+                <entry align="center">table default</entry>
               </row>
               <row>
-                <entry>rowsep=yes</entry>
-                <entry>rowsep=yes</entry>
-                <entry>rowsep=yes</entry>
-                <entry>rowsep=yes</entry>
+                <entry align="center">rowsep=yes</entry>
+                <entry align="center">rowsep=yes</entry>
+                <entry align="center">rowsep=yes</entry>
+                <entry align="center">rowsep=yes</entry>
               </row>
             </thead>
             <tbody valign="middle">
@@ -497,16 +497,16 @@
             <colspec colname="c4" colwidth="25%"/>
             <thead valign="middle">
               <row>
-                <entry>colsep=yes, rowsep=yes</entry>
-                <entry>colsep=yes, rowsep=yes</entry>
-                <entry>colsep=yes, rowsep=yes</entry>
-                <entry>colsep=yes, rowsep=yes</entry>
+                <entry align="center">colsep=yes, rowsep=yes</entry>
+                <entry align="center">colsep=yes, rowsep=yes</entry>
+                <entry align="center">colsep=yes, rowsep=yes</entry>
+                <entry align="center">colsep=yes, rowsep=yes</entry>
               </row>
               <row>
-                <entry>colsep=yes, rowsep=yes</entry>
-                <entry>colsep=yes, rowsep=yes</entry>
-                <entry>colsep=yes, rowsep=yes</entry>
-                <entry>colsep=yes, rowsep=yes</entry>
+                <entry align="center">colsep=yes, rowsep=yes</entry>
+                <entry align="center">colsep=yes, rowsep=yes</entry>
+                <entry align="center">colsep=yes, rowsep=yes</entry>
+                <entry align="center">colsep=yes, rowsep=yes</entry>
               </row>
             </thead>
             <tbody valign="middle">
