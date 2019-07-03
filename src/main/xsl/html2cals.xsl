@@ -305,7 +305,7 @@
       </xsl:otherwise>
     </xsl:choose>
   </xsl:function>
-
+  
   <!--Default copy-->
   <xsl:template match="node() | @*" mode="xhtml2cals:normalize-to-xhtml">
     <xsl:copy>
@@ -623,10 +623,22 @@
           <!--cf. http://www.datypic.com/sc/cals/a-nons_frame.html-->
           <!--NB : at step 4 every rowspan/colspan has been expanded to "dummyCell" : this is quite usefull here to guess the table border looking at every corner cells-->
           <!--FIXME : assume border-collapse:collapse here : add a param ?-->
-          <xsl:variable name="border-top" select="css:showBorderTop($style.parsed) or (every $cell in (.//tr)[1]/(th|td) satisfies css:showBorderTop(css:parse-inline($cell/@style)))" as="xs:boolean"/>
-          <xsl:variable name="border-right" select="css:showBorderRight($style.parsed) or (every $cell in .//tr/(th|td)[last()] satisfies css:showBorderRight(css:parse-inline($cell/@style)))" as="xs:boolean"/>
-          <xsl:variable name="border-bottom" select="css:showBorderBottom($style.parsed) or (every $cell in (.//tr)[last()]/(th|td) satisfies css:showBorderBottom(css:parse-inline($cell/@style)))" as="xs:boolean"/>
-          <xsl:variable name="border-left" select="css:showBorderLeft($style.parsed) or (every $cell in .//(tr/(th|td))[1] satisfies css:showBorderLeft(css:parse-inline($cell/@style)))" as="xs:boolean"/>
+          <!--border-top-->
+          <xsl:variable name="border-top.by-table" select="css:showBorderTop($style.parsed)" as="xs:boolean"/>
+          <xsl:variable name="border-top.by-cells" select="every $cell in (.//tr)[1]/(th|td) satisfies css:showBorderTop(css:parse-inline($cell/@style))" as="xs:boolean"/>
+          <xsl:variable name="border-top" select="$border-top.by-table or $border-top.by-cells" as="xs:boolean"/>
+          <!--border-right-->
+          <xsl:variable name="border-right.by-table" select="css:showBorderRight($style.parsed)" as="xs:boolean"/>
+          <xsl:variable name="border-right.by-cells" select="every $cell in .//tr/(th|td)[last()] satisfies css:showBorderRight(css:parse-inline($cell/@style))" as="xs:boolean"/>
+          <xsl:variable name="border-right" select="$border-right.by-table or $border-right.by-cells" as="xs:boolean"/>
+          <!--border-bottom-->
+          <xsl:variable name="border-bottom.by-table" select="css:showBorderBottom($style.parsed)" as="xs:boolean"/>
+          <xsl:variable name="border-bottom.by-cells" select="every $cell in (.//tr)[last()]/(th|td) satisfies css:showBorderBottom(css:parse-inline($cell/@style))" as="xs:boolean"/>
+          <xsl:variable name="border-bottom" select="$border-bottom.by-table or $border-bottom.by-cells" as="xs:boolean"/>
+          <!--border-left-->
+          <xsl:variable name="border-left.by-table" select="css:showBorderLeft($style.parsed)" as="xs:boolean"/>
+          <xsl:variable name="border-left.by-cells" select="every $cell in .//(tr/(th|td))[1] satisfies css:showBorderLeft(css:parse-inline($cell/@style))" as="xs:boolean"/>
+          <xsl:variable name="border-left" select="$border-left.by-table or $border-left.by-cells" as="xs:boolean"/>
           <xsl:message use-when="false()">border-top : <xsl:value-of select="$border-top"/></xsl:message>
           <xsl:message use-when="false()">border-right : <xsl:value-of select="$border-right"/></xsl:message>
           <xsl:message use-when="false()">border-bottom : <xsl:value-of select="$border-bottom"/></xsl:message>
@@ -650,9 +662,26 @@
             <xsl:when test="not($border-top) and not($border-right) and not($border-bottom) and not($border-left)">
               <xsl:text>none</xsl:text>
             </xsl:when>
+            <!--in CALS the table's border-right and border-bottom (ONLY) can also be setted by the cells instead of the table frame
+            Let's consider theses cases together with frame specific values-->
+            <xsl:when test="not($border-top) and $border-right and $border-bottom.by-cells and $border-left">
+              <xsl:text>sides</xsl:text>
+            </xsl:when>
+            <xsl:when test="$border-top and $border-right.by-cells and $border-bottom and not($border-left)">
+              <xsl:text>topbot</xsl:text>
+            </xsl:when>
+            <xsl:when test="$border-top and $border-right.by-cells and $border-bottom.by-cells and not($border-left)">
+              <xsl:text>top</xsl:text>
+            </xsl:when>
+            <xsl:when test="$border-top and $border-right.by-cells and not($border-bottom) and not($border-left)">
+              <xsl:text>top</xsl:text>
+            </xsl:when>
+            <xsl:when test="not($border-top) and $border-right.by-cells and $border-bottom and not($border-left)">
+              <xsl:text>bottom</xsl:text>
+            </xsl:when>
             <xsl:otherwise>
               <xsl:text>all</xsl:text>
-              <xsl:message>ERROR : unable to set cals:table @frame attribute properly, set to all by default.</xsl:message>
+              <xsl:message>ERROR : unable to set cals:table @frame attribute properly, set to "all" by default</xsl:message>
               <xsl:message>border-top : <xsl:value-of select="$border-top"/></xsl:message>
               <xsl:message>border-right : <xsl:value-of select="$border-right"/></xsl:message>
               <xsl:message>border-bottom : <xsl:value-of select="$border-bottom"/></xsl:message>
@@ -868,7 +897,7 @@
   
   <xsl:template match="td | th" mode="xhtml2cals:convert-to-cals">
     <entry>
-      <xsl:variable name="curr-col-num" as="xs:integer" select="count(preceding-sibling::*) + 1"/>            
+      <xsl:variable name="curr-col-num" as="xs:integer" select="count(preceding-sibling::*) + 1"/>
       <!-- copy attributes with same name -->            
       <!-- If no @valign use col/@valign, @valign="baseline" has no correspondence in CALS -->
       <!--<xsl:copy-of select="(@valign, (../../..//col)[$curr-col-num]/@valign)[1][not(. = 'baseline')]"/>
