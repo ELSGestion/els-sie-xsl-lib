@@ -2,6 +2,7 @@
   xmlns:xsl="http://www.w3.org/1999/XSL/Transform" 
   xmlns:xs="http://www.w3.org/2001/XMLSchema"
   xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl"
+  xmlns:functx="http://www.functx.com"
   xmlns:html="http://www.w3.org/1999/xhtml"
   xmlns:css="http://www.w3.org/1996/css"
   exclude-result-prefixes="xs">
@@ -55,10 +56,14 @@
     </xd:desc>
   </xd:doc>
   
-  <xsl:function name="css:parse-inline" as="element(*)*">
+  <xsl:import href="functx.xsl"/>
+  
+  <xsl:function name="css:parse-inline" as="element(css:css)">
     <xsl:param name="css:inline" as="xs:string*" />
     <xsl:choose>
-      <xsl:when test="empty($css:inline)"/>
+      <xsl:when test="empty($css:inline)">
+        <css:css/>
+      </xsl:when>
       <xsl:otherwise>
         <xsl:variable name="uncommented-css">
           <!-- On élimine les commentaires -->
@@ -70,7 +75,7 @@
           </xsl:analyze-string>
         </xsl:variable>
         <xsl:variable name="declaration-block" select="if (contains($uncommented-css, '{')) then $uncommented-css else concat('{', $uncommented-css, '}')"/>
-        <xsl:element name="css:css">
+        <css:css>
           <xsl:for-each select="tokenize(normalize-space($declaration-block), '\}')[matches(., '\S')]">
             <xsl:choose>
               <!-- On ne traite pas les déclarations at-rules : -->
@@ -86,7 +91,7 @@
               </xsl:otherwise>
             </xsl:choose>
           </xsl:for-each>
-        </xsl:element>
+        </css:css>
       </xsl:otherwise>
     </xsl:choose>
   </xsl:function>
@@ -96,16 +101,17 @@
   <xsl:template name="declarations">
     <xsl:param name="raw-declarations" />
     <xsl:for-each select="tokenize($raw-declarations, ';\s*')[matches(., '\S')]">
-      <xsl:variable name="prop" select="substring-before(., ':')" as="xs:string"/>
-      <xsl:variable name="val" select="substring-after(., ':') => normalize-space() => replace('\s?!important', '') => replace('rgb\((\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*\)', 'rgb($1,$2,$3)')" as="xs:string"/>
+      <xsl:variable name="declaration" select=". => replace('\s*:\s*', ':')"/>
+      <xsl:variable name="prop" select="substring-before($declaration, ':')" as="xs:string"/>
+      <xsl:variable name="val" select="substring-after($declaration, ':') => normalize-space() => replace('\s?!important', '') => replace('rgb\((\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*\)', 'rgb($1,$2,$3)')" as="xs:string"/>
       <xsl:variable name="val-seq" select="tokenize($val, ' ')" as="xs:string*"/>
       <xsl:variable name="vals-count" select="count($val-seq)" as="xs:integer"/>
       <xsl:choose>
         <xsl:when test="normalize-space($prop) = ''">
-          <css:error code="ERROR-1">Erreur pas de propriété associée à la valeur: "<xsl:value-of select="$val" />"</css:error>
+          <css:error code="ERROR-1">[css-parser]ERROR-1: no property associated to value: "<xsl:value-of select="$val"/>" (full string chunk: "<xsl:value-of select="." />")</css:error>
         </xsl:when>
         <xsl:when test="$vals-count = 0">
-          <css:error code="ERROR-2">Erreur pas de valeur associée à la propriété: "<xsl:value-of select="$prop" />"</css:error>
+          <css:error code="ERROR-2">[css-parser]ERROR-2: No value associated to property: "<xsl:value-of select="$prop" />" (full string chunk: "<xsl:value-of select="." />")</css:error>
         </xsl:when>
         <xsl:when test="$prop='border'">
           <xsl:choose>
@@ -118,7 +124,7 @@
               </xsl:element>
             </xsl:when>
             <xsl:otherwise>
-              <css:error code="ERROR-3">Erreur dans la propriété "<xsl:value-of select="$prop" />: <xsl:value-of select="$val" />"</css:error>
+              <css:error code="ERROR-3">[css-parser]ERROR-3: Error in property: "<xsl:value-of select="$prop" />: <xsl:value-of select="$val" />"</css:error>
             </xsl:otherwise>
           </xsl:choose>
         </xsl:when>
@@ -140,7 +146,7 @@
               </xsl:element>
             </xsl:when>
             <xsl:otherwise>
-              <css:error code="ERROR-4">Erreur dans la propriété "<xsl:value-of select="$prop" />": <xsl:value-of select="$val" /></css:error>
+              <css:error code="ERROR-4">[css-parser]ERROR-4: Error in property: "<xsl:value-of select="$prop" />": <xsl:value-of select="$val" /></css:error>
             </xsl:otherwise>
           </xsl:choose>
         </xsl:when>
@@ -154,7 +160,7 @@
                 </xsl:call-template>
               </xsl:when>
               <xsl:otherwise>
-                <css:error code="ERROR-5">Erreur dans la propriété "<xsl:value-of select="$prop" />: <xsl:value-of select="$val" />"</css:error>
+                <css:error code="ERROR-5">[css-parser]ERROR-5: Error in property: "<xsl:value-of select="$prop" />: <xsl:value-of select="$val" />"</css:error>
               </xsl:otherwise>
             </xsl:choose>
           </xsl:element>
@@ -168,7 +174,7 @@
                 </xsl:element>
               </xsl:when>
               <xsl:otherwise>
-                <css:error code="ERROR-6">Erreur dans la propriété "<xsl:value-of select="$prop" />: <xsl:value-of select="$val" />"</css:error>
+                <css:error code="ERROR-6">[css-parser]ERROR-6: Error in property: "<xsl:value-of select="$prop" />: <xsl:value-of select="$val" />"</css:error>
               </xsl:otherwise>
             </xsl:choose>
           </xsl:element>
@@ -182,7 +188,7 @@
                 </xsl:element>
               </xsl:when>
               <xsl:otherwise>
-                <css:error code="ERROR-7">Erreur dans la propriété "<xsl:value-of select="$prop" />: <xsl:value-of select="$val" />"</css:error>
+                <css:error code="ERROR-7">[css-parser]ERROR-7: Error in property: "<xsl:value-of select="$prop" />: <xsl:value-of select="$val" />"</css:error>
               </xsl:otherwise>
             </xsl:choose>
           </xsl:element>
@@ -197,7 +203,7 @@
                 </xsl:element>
               </xsl:when>
               <xsl:otherwise>
-                <css:error code="ERROR-8">Erreur dans la propriété "<xsl:value-of select="$prop" />: <xsl:value-of select="$val" />"</css:error>
+                <css:error code="ERROR-8">[css-parser]ERROR-8: Error in property: "<xsl:value-of select="$prop" />: <xsl:value-of select="$val" />"</css:error>
               </xsl:otherwise>
             </xsl:choose>
           </xsl:element>
@@ -224,12 +230,11 @@
             <xsl:when test="matches(., $new-vals//style/@pos-vals)">style</xsl:when>
             <xsl:when test="matches(., $new-vals//width/@pos-vals)">width</xsl:when>
             <xsl:when test="matches(., $new-vals//color/@pos-vals)">color</xsl:when>
-            <xsl:otherwise></xsl:otherwise>
           </xsl:choose>
         </xsl:variable>
-          <xsl:element name="css:{concat('border-', $current-pos, '-', $current-val)}">
-           <xsl:copy-of select="css:build-generic-values(.)" />
-            </xsl:element>
+        <xsl:element name="css:{concat('border-', $current-pos, '-', $current-val)}">
+          <xsl:copy-of select="css:build-generic-values(.)" />
+        </xsl:element>
       </xsl:for-each>
     </xsl:for-each>
   </xsl:template>
@@ -537,8 +542,21 @@
     <xsl:value-of select="normalize-space(string-join($css, ''))"/>
   </xsl:function>
   
+  <!-- Example :
+  <css:text-align-ruleset>
+    <css:text-align>
+      <css:left/>
+    </css:text-align>
+  </css:text-align-ruleset>
+  <css:padding-ruleset>
+    <css:padding>
+      <css:dimension unit="px">0</css:dimension>
+    </css:padding>
+  </css:padding-ruleset>
+  -->
+  
   <!--FIXME : border color is lost here (and border-with / border-style are normalized to 1px solid)--> 
-  <xsl:template match="css:css" mode="css:parsed-to-string">
+  <!--<xsl:template match="css:css" mode="css:parsed-to-string">
     <xsl:choose>
       <xsl:when test="css:showAllBorders(.)">
         <xsl:text>border:1px solid; </xsl:text>
@@ -559,23 +577,48 @@
       </xsl:otherwise>
     </xsl:choose>
     <xsl:apply-templates select="css:*" mode="#current"/>
+  </xsl:template>-->
+  
+  <!--<xsl:template match="css:*[starts-with(local-name(), 'border')]" mode="css:parsed-to-string" priority="2">
+    <!-\-rulset for border has already been processed in css:css match-\->
+  </xsl:template>-->
+  
+  <xsl:template match="css:*[css:*[matches(local-name(), 'border-(top|right|bottom|left)-(width|style|color)')]]" mode="css:parsed-to-string" priority="2">
+    <xsl:for-each-group select="*" group-adjacent="local-name() => functx:substring-before-last('-')">
+      <xsl:choose>
+        <!--We need at least width and style to write simplified property : border: $width $style [$color]-->
+        <xsl:when test="(count(current-group()) gt 1) and 
+          current-group()[self::css:*[matches(local-name(), 'border-(top|right|bottom|left)-width')]] and 
+          current-group()[self::css:*[matches(local-name(), 'border-(top|right|bottom|left)-style')]]
+          ">
+          <xsl:value-of select="'border-' || replace(current-group()[1] => local-name(), 'border-(top|right|bottom|left)-(width|style|color)', '$1') || ':'"/>
+          <xsl:apply-templates select="(
+            current-group()[self::css:*[matches(local-name(), 'border-(top|right|bottom|left)-width')]],
+            current-group()[self::css:*[matches(local-name(), 'border-(top|right|bottom|left)-style')]],
+            current-group()[self::css:*[matches(local-name(), 'border-(top|right|bottom|left)-color')]]
+            )" mode="#current">
+            <xsl:with-param name="single-border-declaration" select="true()" as="xs:boolean" tunnel="true"/>
+          </xsl:apply-templates>
+          <xsl:text>; </xsl:text>
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:apply-templates select="current-group()" mode="#current"/>
+        </xsl:otherwise>
+      </xsl:choose>
+    </xsl:for-each-group>
   </xsl:template>
   
-  <!-- Example :
-  <css:text-align-ruleset>
-    <css:text-align>
-      <css:left/>
-    </css:text-align>
-  </css:text-align-ruleset>
-  <css:padding-ruleset>
-    <css:padding>
-      <css:dimension unit="px">0</css:dimension>
-    </css:padding>
-  </css:padding-ruleset>
-  -->
-  
-  <xsl:template match="css:*[starts-with(local-name(), 'border')]" mode="css:parsed-to-string" priority="2">
-    <!--rulset for border has already been processed in css:css match-->
+  <xsl:template match="css:*[matches(local-name(), 'border-(top|right|bottom|left)-(width|style|color)')]" mode="css:parsed-to-string" priority="1">
+    <xsl:param name="single-border-declaration" select="false()" as="xs:boolean" tunnel="true"/>
+    <xsl:choose>
+      <xsl:when test="$single-border-declaration">
+        <xsl:apply-templates mode="#current"/>
+        <xsl:text> </xsl:text>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:next-match/>
+      </xsl:otherwise>
+    </xsl:choose>
   </xsl:template>
   
   <xsl:template match="css:*[ends-with(local-name(), '-ruleset')]" mode="css:parsed-to-string" priority="1">

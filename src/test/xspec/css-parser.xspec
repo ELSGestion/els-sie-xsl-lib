@@ -13,7 +13,7 @@
     border-left: 0 dashed;
     margin-top: 1em;
     margin-bottom:2em;
-    width: 12px;
+    width : 12px;
     color:rgb(236, 239, 247);
   </x:param>
   
@@ -114,9 +114,13 @@
       <x:param name="css" select="$css:css-xml.1" as="element()"/>
     </x:call>
     <x:expect label="css inline" select="normalize-space(replace(., '&#10;', ' '))">
-      border-right:1px solid;
-      border-bottom:1px solid;
       text-align:center;
+      border-top:1px solid black ;
+      border-right:1px solid black ;
+      border-bottom:1px solid black ;
+      border-left:1px solid black ;
+      border-top-style:none;
+      border-left:0px dashed ;
       margin-top:1em;
       margin-bottom:2em;
       width:12px;
@@ -163,7 +167,7 @@
   <x:scenario label="css:removeProperties">
     <x:call function="css:removeProperties">
       <x:param name="css" select="$css:css-xml.1" as="element()"/>
-      <x:param name="properties.names" select="('text-align', 'border' , 'margin-bottom')" as="xs:string*"/>
+      <x:param name="properties.names" select="('text-align', 'border', 'margin-bottom')" as="xs:string*"/>
     </x:call>
     <x:expect label="css inline">
       <css:css>
