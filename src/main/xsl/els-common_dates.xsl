@@ -177,6 +177,7 @@
     <xsl:variable name="sToken" select="tokenize($s, $sep)" as="xs:string*"/>
     <xsl:variable name="regJJMMAAAA" as="xs:string" select="concat('^\d\d', $sep, '\d\d', $sep, '\d\d\d\d$')"/>
     <xsl:variable name="regJJMMAA" as="xs:string" select="concat('^\d\d', $sep, '\d\d', $sep, '\d\d')"/>
+    <xsl:variable name="regJMAAAA" as="xs:string" select="concat('^\d?\d', $sep, '\d?\d', $sep, '\d\d\d\d$')"/>
     <xsl:choose>
       <!--If $s is empty, we can't do anything : return the empty string-->
       <xsl:when test="empty($s)">
@@ -199,6 +200,30 @@
         <xsl:variable name="AA" select="xs:integer($sToken[3])" as="xs:integer"/>
         <xsl:variable name="AAAA" select="if ($AA gt $current__AA) then (concat($currentAA__ -1, $AA))  else (concat($currentAA__, $AA))" as="xs:string"/>
         <xsl:value-of select="concat($AAAA, '-', $sToken[2], '-', $sToken[1])"/>
+      </xsl:when>
+      <!--the day or month is one digit-->
+      <xsl:when test="matches($s,$regJMAAAA)">
+        <xsl:variable name="month" as="xs:string">
+          <xsl:choose>
+            <xsl:when test="string-length($sToken[2]) = 1">
+              <xsl:value-of select="concat('0',$sToken[2])"/>
+            </xsl:when>
+            <xsl:otherwise>
+              <xsl:value-of select="$sToken[2]"/>
+            </xsl:otherwise>
+          </xsl:choose>
+        </xsl:variable>
+        <xsl:variable name="day" as="xs:string">
+          <xsl:choose>
+            <xsl:when test="string-length($sToken[1]) = 1">
+              <xsl:value-of select="concat('0',$sToken[1])"/>
+            </xsl:when>
+            <xsl:otherwise>
+              <xsl:value-of select="$sToken[1]"/>
+            </xsl:otherwise>
+          </xsl:choose>
+        </xsl:variable>
+        <xsl:value-of select="concat($sToken[3],'-',$month,'-',$day )"/>
       </xsl:when>
       <!--Unknown format : return the original string $s--> 
       <xsl:otherwise>

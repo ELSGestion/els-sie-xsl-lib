@@ -117,11 +117,28 @@
   </x:scenario>
   
   <x:scenario label="els:makeIsoDate">
-    <x:call function="els:makeIsoDate">
-      <x:param name="s" select="'21-10-1972'"/>
-      <x:param name="sep" select="'-'"/>
-    </x:call>
-    <x:expect label="1972-10-21" select="'1972-10-21'"/>
+    <x:call function="els:makeIsoDate"/>
+    <x:scenario label="21-10-1972">
+      <x:call>
+        <x:param name="s" select="'21-10-1972'"/>
+        <x:param name="sep" select="'-'"/>
+      </x:call>
+      <x:expect label="1972-10-21" select="'1972-10-21'"/>
+    </x:scenario>
+    <x:scenario label="1-10-1972">
+      <x:call>
+        <x:param name="s" select="'1-10-1972'"/>
+        <x:param name="sep" select="'-'"/>
+      </x:call>
+      <x:expect label="1972-10-01" select="'1972-10-01'"/>
+    </x:scenario>
+    <x:scenario label="1-1-1972">
+      <x:call>
+        <x:param name="s" select="'1-1-1972'"/>
+        <x:param name="sep" select="'-'"/>
+      </x:call>
+      <x:expect label="1972-01-01" select="'1972-01-01'"/>
+    </x:scenario>
   </x:scenario>
   
   <x:scenario label="els:makeIsoDateFromYYYYMMDD">
@@ -130,13 +147,13 @@
       <x:call>
         <x:param name="date" select="'19721021'"/>
       </x:call>
-      <x:expect label="1972-10-21" select="'1972-10-21'"/>        
+      <x:expect label="1972-10-21" select="'1972-10-21'"/>
     </x:scenario>     
     <x:scenario label="/ Parameter is castable as YYYYMMDD">
       <x:call>
         <x:param name="date" select="'19721001'"/>
       </x:call>
-      <x:expect label="1972-10-01" select="'1972-10-01'"/>        
+      <x:expect label="1972-10-01" select="'1972-10-01'"/>
     </x:scenario>      
     <x:scenario label="/ Parameter is not castable as YYYYMMDD">
       <x:call>
