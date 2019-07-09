@@ -73,7 +73,7 @@
       </css:border-top-ruleset>
       <css:border-left-ruleset>
         <css:border-left-width>
-          <css:dimension unit="px">0</css:dimension>
+          <css:dimension>0</css:dimension>
         </css:border-left-width>
         <css:border-left-style>
           <css:dashed />
@@ -117,7 +117,7 @@
       text-align:center;
       border:1px solid black;
       border-top-style:none;
-      border-left:0px dashed ;
+      border-left:0 dashed ;
       margin-top:1em;
       margin-bottom:2em;
       width:12px;

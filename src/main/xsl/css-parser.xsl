@@ -248,17 +248,21 @@
         <xsl:when test="matches($css-prop-value, '^(\d+\.?\d*)(cm|mm|in|px|pt|pc|em|ex|ch|rem|vh|vw|vmin|vmax|%)?$')">
           <xsl:analyze-string select="$css-prop-value" regex="^(\d+\.?\d*)(cm|mm|in|px|pt|pc|em|ex|ch|rem|vh|vw|vmin|vmax|%)?$">
             <xsl:matching-substring>
-              <xsl:element name="css:dimension">
+              <css:dimension>
                 <xsl:choose>
                   <xsl:when test="regex-group(2)">
                     <xsl:attribute name="unit" select="regex-group(2)"/>
+                  </xsl:when>
+                  <xsl:when test="regex-group(1) = '0' and regex-group(2) = ''">
+                    <!--keep 0 without unit-->
+                    <!--<xsl:attribute name="unit"/>-->
                   </xsl:when>
                   <xsl:otherwise>
                     <xsl:attribute name="unit">px</xsl:attribute>
                   </xsl:otherwise>
                 </xsl:choose>
                 <xsl:value-of select="regex-group(1)"/>
-              </xsl:element>
+              </css:dimension>
             </xsl:matching-substring>
           </xsl:analyze-string>
         </xsl:when>
