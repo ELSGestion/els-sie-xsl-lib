@@ -121,7 +121,7 @@
       margin-top:1em;
       margin-bottom:2em;
       width:12px;
-      color:rbg(236,239,247)
+      color:rbg(236,239,247);
     </x:expect>
   </x:scenario>
   
@@ -134,19 +134,19 @@
         </x:param>
       </x:call>
       <x:expect label="css" select="normalize-space(replace(., '&#10;\s*', ''))">
-        border:1px solid green
+        border:1px solid green;
       </x:expect>
     </x:scenario>
     <x:scenario label="test-2">
       <x:call>
         <x:param name="css">
           border:1px solid;
-          border-color:green
+          border-color:green;
         </x:param>
       </x:call>
       <x:expect label="css" select="normalize-space(replace(., '&#10;\s*', ''))">
         border:1px solid;
-        border-color:green
+        border-color:green;
       </x:expect>
     </x:scenario>
     <x:scenario label="test-3">
@@ -154,13 +154,13 @@
         <x:param name="css">
           border-width:1px;
           border-style:solid;
-          border-color:green
+          border-color:green;
         </x:param>
       </x:call>
       <x:expect label="css" select="normalize-space(replace(., '&#10;\s*', ''))">
         border-width:1px;
         border-style:solid;
-        border-color:green
+        border-color:green;
       </x:expect>
     </x:scenario>
   </x:scenario>

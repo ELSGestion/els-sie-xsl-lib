@@ -531,8 +531,7 @@
     <xsl:variable name="css" as="xs:string*">
       <xsl:apply-templates select="$css" mode="css:parsed-to-string"/>
     </xsl:variable>
-    <!--remove leading ";"-->
-    <xsl:value-of select="$css => string-join('') => replace('^(.*?)\s*;$', '$1') => normalize-space()"/>
+    <xsl:value-of select="$css => string-join('') => normalize-space()"/>
   </xsl:function>
   
   <!-- Example :
