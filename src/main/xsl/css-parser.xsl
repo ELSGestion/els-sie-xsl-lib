@@ -300,34 +300,22 @@
   
   <xsl:function name="css:definesBorderRight" as="xs:boolean">
     <xsl:param name="css" as="element(css:css)?"/>
-    <xsl:choose>
-      <xsl:when test="$css//css:border-right-style"><xsl:sequence select="true()"/></xsl:when>
-      <xsl:otherwise><xsl:sequence select="false()"/></xsl:otherwise>
-    </xsl:choose>
+    <xsl:sequence select="exists($css//css:border-right-style)"/>
   </xsl:function>
   
   <xsl:function name="css:definesBorderLeft" as="xs:boolean">
     <xsl:param name="css" as="element(css:css)?"/>
-    <xsl:choose>
-      <xsl:when test="$css//css:border-left-style"><xsl:sequence select="true()"/></xsl:when>
-      <xsl:otherwise><xsl:sequence select="false()"/></xsl:otherwise>
-    </xsl:choose>
+    <xsl:sequence select="exists($css//css:border-left-style)"/>
   </xsl:function>
   
   <xsl:function name="css:definesBorderBottom" as="xs:boolean">
     <xsl:param name="css" as="element(css:css)?"/>
-    <xsl:choose>
-      <xsl:when test="$css//css:border-bottom-style"><xsl:sequence select="true()"/></xsl:when>
-      <xsl:otherwise><xsl:sequence select="false()"/></xsl:otherwise>
-    </xsl:choose>
+    <xsl:sequence select="exists($css//css:border-bottom-style)"/>
   </xsl:function>
   
   <xsl:function name="css:definesBorderTop" as="xs:boolean">
     <xsl:param name="css" as="element(css:css)?"/>
-    <xsl:choose>
-      <xsl:when test="$css//css:border-top-style"><xsl:sequence select="true()"/></xsl:when>
-      <xsl:otherwise><xsl:sequence select="false()"/></xsl:otherwise>
-    </xsl:choose>
+    <xsl:sequence select="exists($css//css:border-top-style)"/>
   </xsl:function>
   
   <xsl:function name="css:showBorderTop" as="xs:boolean">
