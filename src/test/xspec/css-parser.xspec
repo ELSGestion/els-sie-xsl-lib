@@ -113,15 +113,15 @@
     <x:call function="css:parsed-to-string">
       <x:param name="css" select="$css:css-xml.1" as="element()"/>
     </x:call>
-    <x:expect label="css inline" select="normalize-space(replace(., '&#10;', ' '))">
+    <x:expect label="css inline" select="normalize-space(replace(., '&#10;\s*', ''))">
       text-align:center;
       border:1px solid black;
       border-top-style:none;
-      border-left:0 dashed ;
+      border-left:0 dashed;
       margin-top:1em;
       margin-bottom:2em;
       width:12px;
-      color:rbg(236,239,247);
+      color:rbg(236,239,247)
     </x:expect>
   </x:scenario>
   
@@ -133,20 +133,20 @@
           border:1px solid green;
         </x:param>
       </x:call>
-      <x:expect label="css" select="normalize-space(replace(., '&#10;', ' '))">
-        border:1px solid green;
+      <x:expect label="css" select="normalize-space(replace(., '&#10;\s*', ''))">
+        border:1px solid green
       </x:expect>
     </x:scenario>
     <x:scenario label="test-2">
       <x:call>
         <x:param name="css">
           border:1px solid;
-          border-color:green;
+          border-color:green
         </x:param>
       </x:call>
-      <x:expect label="css" select="normalize-space(replace(., '&#10;', ' '))">
+      <x:expect label="css" select="normalize-space(replace(., '&#10;\s*', ''))">
         border:1px solid;
-        border-color:green;
+        border-color:green
       </x:expect>
     </x:scenario>
     <x:scenario label="test-3">
@@ -154,13 +154,13 @@
         <x:param name="css">
           border-width:1px;
           border-style:solid;
-          border-color:green;
+          border-color:green
         </x:param>
       </x:call>
-      <x:expect label="css" select="normalize-space(replace(., '&#10;', ' '))">
+      <x:expect label="css" select="normalize-space(replace(., '&#10;\s*', ''))">
         border-width:1px;
         border-style:solid;
-        border-color:green;
+        border-color:green
       </x:expect>
     </x:scenario>
   </x:scenario>

@@ -531,7 +531,8 @@
     <xsl:variable name="css" as="xs:string*">
       <xsl:apply-templates select="$css" mode="css:parsed-to-string"/>
     </xsl:variable>
-    <xsl:value-of select="normalize-space(string-join($css, ''))"/>
+    <!--remove leading ";"-->
+    <xsl:value-of select="$css => string-join('') => replace('^(.*?)\s*;$', '$1') => normalize-space()"/>
   </xsl:function>
   
   <!-- Example :
@@ -586,14 +587,16 @@
             current-group()[self::css:*[matches(local-name(), 'border-(top|right|bottom|left)-style')]]
             ">
             <xsl:value-of select="'border-' || current-group()[1] => local-name() => replace('border-(top|right|bottom|left)-(width|style|color)', '$1') || ':'"/>
-            <xsl:apply-templates select="(
-              current-group()[self::css:*[matches(local-name(), 'border-(top|right|bottom|left)-width')]],
-              current-group()[self::css:*[matches(local-name(), 'border-(top|right|bottom|left)-style')]],
-              current-group()[self::css:*[matches(local-name(), 'border-(top|right|bottom|left)-color')]]
-              )" mode="#current">
-              <xsl:with-param name="single-border-declaration" select="true()" as="xs:boolean" tunnel="true"/>
-            </xsl:apply-templates>
-            <xsl:text>; </xsl:text>
+            <xsl:variable name="value" as="xs:string*">
+              <xsl:apply-templates select="(
+                current-group()[self::css:*[matches(local-name(), 'border-(top|right|bottom|left)-width')]],
+                current-group()[self::css:*[matches(local-name(), 'border-(top|right|bottom|left)-style')]],
+                current-group()[self::css:*[matches(local-name(), 'border-(top|right|bottom|left)-color')]]
+                )" mode="#current">
+                <xsl:with-param name="single-border-declaration" select="true()" as="xs:boolean" tunnel="true"/>
+              </xsl:apply-templates>
+            </xsl:variable>
+            <xsl:value-of select="($value => string-join('') => normalize-space() || ';')"/>
           </xsl:when>
           <xsl:otherwise>
             <xsl:apply-templates select="current-group()" mode="#current"/>
@@ -611,7 +614,7 @@
           substring-after($b, ':') = ($border.token[1] => substring-after(':'))
           and replace($b, '^border-(top|right|bottom|left)?-?(width|style|color|:).*', '$2') = $border1.prop
           ))">
-        <xsl:value-of select="'border' || (if($border1.prop != ':') then ('-' || $border1.prop) else ('')) || ':' || $border.token[1] => substring-after(':') || '; '"/>
+        <xsl:value-of select="'border' || (if($border1.prop != ':') then ('-' || $border1.prop) else ('')) || ':' || $border.token[1] => substring-after(':') || ';'"/>
       </xsl:when>
       <xsl:otherwise>
         <xsl:sequence select="$border"/>
@@ -639,7 +642,7 @@
   <xsl:template match="css:*[ends-with(local-name(), '-ruleset')]/css:*" mode="css:parsed-to-string">
     <xsl:sequence select="concat(local-name(), ':')"/>
     <xsl:apply-templates select="css:*" mode="#current"/>
-    <xsl:text>; </xsl:text>
+    <xsl:text>;</xsl:text>
   </xsl:template>
   
   <xsl:template match="css:*[ends-with(local-name(), '-ruleset')]/css:*/css:*" mode="css:parsed-to-string">
