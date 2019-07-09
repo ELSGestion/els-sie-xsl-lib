@@ -115,10 +115,7 @@
     </x:call>
     <x:expect label="css inline" select="normalize-space(replace(., '&#10;', ' '))">
       text-align:center;
-      border-top:1px solid black ;
-      border-right:1px solid black ;
-      border-bottom:1px solid black ;
-      border-left:1px solid black ;
+      border:1px solid black;
       border-top-style:none;
       border-left:0px dashed ;
       margin-top:1em;
@@ -126,6 +123,46 @@
       width:12px;
       color:rbg(236,239,247);
     </x:expect>
+  </x:scenario>
+  
+  <x:scenario label="css:parsed-inline => css:parsed-to-string">
+    <x:call function="css:parse-inline_parsed-to-string"/>
+    <x:scenario label="test-1">
+      <x:call>
+        <x:param name="css">
+          border:1px solid green;
+        </x:param>
+      </x:call>
+      <x:expect label="css" select="normalize-space(replace(., '&#10;', ' '))">
+        border:1px solid green;
+      </x:expect>
+    </x:scenario>
+    <x:scenario label="test-2">
+      <x:call>
+        <x:param name="css">
+          border:1px solid;
+          border-color:green;
+        </x:param>
+      </x:call>
+      <x:expect label="css" select="normalize-space(replace(., '&#10;', ' '))">
+        border:1px solid;
+        border-color:green;
+      </x:expect>
+    </x:scenario>
+    <x:scenario label="test-3">
+      <x:call>
+        <x:param name="css">
+          border-width:1px;
+          border-style:solid;
+          border-color:green;
+        </x:param>
+      </x:call>
+      <x:expect label="css" select="normalize-space(replace(., '&#10;', ' '))">
+        border-width:1px;
+        border-style:solid;
+        border-color:green;
+      </x:expect>
+    </x:scenario>
   </x:scenario>
   
   <x:scenario label="css:getPropertyValue">

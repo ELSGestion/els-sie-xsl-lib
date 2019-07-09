@@ -583,29 +583,48 @@
     <!-\-rulset for border has already been processed in css:css match-\->
   </xsl:template>-->
   
+  <!--Writing simplify property : border: $width $style [$color]-->
   <xsl:template match="css:*[css:*[matches(local-name(), 'border-(top|right|bottom|left)-(width|style|color)')]]" mode="css:parsed-to-string" priority="2">
-    <xsl:for-each-group select="*" group-adjacent="local-name() => functx:substring-before-last('-')">
-      <xsl:choose>
-        <!--We need at least width and style to write simplified property : border: $width $style [$color]-->
-        <xsl:when test="(count(current-group()) gt 1) and 
-          current-group()[self::css:*[matches(local-name(), 'border-(top|right|bottom|left)-width')]] and 
-          current-group()[self::css:*[matches(local-name(), 'border-(top|right|bottom|left)-style')]]
-          ">
-          <xsl:value-of select="'border-' || replace(current-group()[1] => local-name(), 'border-(top|right|bottom|left)-(width|style|color)', '$1') || ':'"/>
-          <xsl:apply-templates select="(
-            current-group()[self::css:*[matches(local-name(), 'border-(top|right|bottom|left)-width')]],
-            current-group()[self::css:*[matches(local-name(), 'border-(top|right|bottom|left)-style')]],
-            current-group()[self::css:*[matches(local-name(), 'border-(top|right|bottom|left)-color')]]
-            )" mode="#current">
-            <xsl:with-param name="single-border-declaration" select="true()" as="xs:boolean" tunnel="true"/>
-          </xsl:apply-templates>
-          <xsl:text>; </xsl:text>
-        </xsl:when>
-        <xsl:otherwise>
-          <xsl:apply-templates select="current-group()" mode="#current"/>
-        </xsl:otherwise>
-      </xsl:choose>
-    </xsl:for-each-group>
+    <xsl:variable name="border" as="xs:string*">
+      <xsl:for-each-group select="*" group-adjacent="local-name() => functx:substring-before-last('-')">
+        <xsl:choose>
+          <!--We need at least width and style to write simplified property : border: $width $style [$color]-->
+          <xsl:when test="(count(current-group()) gt 1) and 
+            current-group()[self::css:*[matches(local-name(), 'border-(top|right|bottom|left)-width')]] and 
+            current-group()[self::css:*[matches(local-name(), 'border-(top|right|bottom|left)-style')]]
+            ">
+            <xsl:value-of select="'border-' || current-group()[1] => local-name() => replace('border-(top|right|bottom|left)-(width|style|color)', '$1') || ':'"/>
+            <xsl:apply-templates select="(
+              current-group()[self::css:*[matches(local-name(), 'border-(top|right|bottom|left)-width')]],
+              current-group()[self::css:*[matches(local-name(), 'border-(top|right|bottom|left)-style')]],
+              current-group()[self::css:*[matches(local-name(), 'border-(top|right|bottom|left)-color')]]
+              )" mode="#current">
+              <xsl:with-param name="single-border-declaration" select="true()" as="xs:boolean" tunnel="true"/>
+            </xsl:apply-templates>
+            <xsl:text>; </xsl:text>
+          </xsl:when>
+          <xsl:otherwise>
+            <xsl:apply-templates select="current-group()" mode="#current"/>
+          </xsl:otherwise>
+        </xsl:choose>
+      </xsl:for-each-group>
+    </xsl:variable>
+    <!--FIXME : ugly code to make 2nd simplification-->
+    <xsl:variable name="border" select="$border => string-join('')" as="xs:string"/>
+    <xsl:variable name="border.token" select="($border => tokenize('\s*;\s*'))[normalize-space(.) != '']" as="xs:string*"/>
+    <xsl:variable name="border1.prop" select="replace($border.token[1], '^border-(top|right|bottom|left)?-?(width|style|color|:).*', '$2')"/>
+    <xsl:choose>
+      <xsl:when test="count($border.token) = 4 
+        and (every $b in $border.token satisfies (
+          substring-after($b, ':') = ($border.token[1] => substring-after(':'))
+          and replace($b, '^border-(top|right|bottom|left)?-?(width|style|color|:).*', '$2') = $border1.prop
+          ))">
+        <xsl:value-of select="'border' || (if($border1.prop != ':') then ('-' || $border1.prop) else ('')) || ':' || $border.token[1] => substring-after(':') || '; '"/>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:sequence select="$border"/>
+      </xsl:otherwise>
+    </xsl:choose>
   </xsl:template>
   
   <xsl:template match="css:*[matches(local-name(), 'border-(top|right|bottom|left)-(width|style|color)')]" mode="css:parsed-to-string" priority="1">
@@ -648,5 +667,12 @@
   <xsl:template match="css:dimension" mode="css:parsed-to-string" priority="1">
     <xsl:sequence select="concat(text(), @unit)"/>
   </xsl:template>
+  
+  <!--JUST FOR XSPEC-->
+  <xsl:function name="css:parse-inline_parsed-to-string" as="xs:string">
+    <xsl:param name="css" as="xs:string*"/>
+    <xsl:sequence select="css:parse-inline($css) => css:parsed-to-string()"/>
+  </xsl:function>
+  
   
 </xsl:stylesheet>
