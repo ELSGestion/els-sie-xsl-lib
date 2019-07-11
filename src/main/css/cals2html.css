@@ -1,0 +1,140 @@
+/*CSS to be applied to html table after cals conversion using class (instead of style)*/
+
+/*=====================================*/
+/*COMMON*/
+/*=====================================*/
+
+table.cals_tgroup{
+  border-collapse:collapse;
+  margin-top:1.25em;
+  -webkit-text-size-adjust: auto;
+}
+
+
+
+table.cals_tgroup tbody td{
+  padding:0.4em 0.44em;
+}
+
+table.cals_tgroup caption{
+  /* même chose que pour le titre des images */
+  padding:0.4em 0px;
+  /*font-size:0.8em;*/
+  font-weight:bold;
+}
+
+table.cals_tgroup thead{
+  background-color:#f5f5f5;
+}
+
+table.cals_tgroup thead td{
+  padding:0.44em 0.4em 0.44em 0.44em;
+}
+
+tfoot td{
+  /*background-color:#FCFFFE;*/
+  padding:0.44em 0.4em 0.44em 0.44em;
+}
+
+/*=====================================*/
+/*BORDER FRAMES*/
+/*=====================================*/
+
+table.cals_frame-none{
+  border:none;
+}
+
+table.cals_frame-top{
+  border-top:1px solid black;
+}
+
+table.cals_frame-bottom{
+  border-bottom:1px solid black;
+}
+
+table.cals_frame-topbot{
+  border-top:1px solid black;
+  border-bottom:1px solid black;
+}
+
+table.cals_frame-sides{
+  border-left:1px solid black;
+  border-right:1px solid black;
+}
+
+table.cals_frame-all{
+  border:1px solid black;
+}
+
+/*=====================================*/
+/*H-ALIGN*/
+/*=====================================*/
+
+.cals_align-right{
+  text-align:right
+}
+
+/*bug ceci ne marche pas sous ie*/
+.cals_align-center{
+  text-align:center; 
+}
+
+.cals_align-justify{
+  text-align:justify
+}
+
+.cals_align-char{
+  /*?*/
+}
+
+/*=====================================*/
+/*V-ALIGN*/
+/*=====================================*/
+
+.cals_valign-top{
+  vertical-align:top;
+}
+
+.cals_valign-middle{
+  vertical-align:middle;
+}
+
+.cals_valign-bottom{
+  vertical-align:bottom;
+}
+
+/*=====================================*/
+/*BORDERS*/
+/*=====================================*/
+
+/* filets */
+table.cals_tgroup td{
+  border-right:none;
+  border-bottom:none;
+}
+table.cals_tgroup thead td.cals_colsep{
+  border-right:1px solid black;
+}
+table.cals_tgroup td.cals_colsep{
+  border-right:1px solid black;
+}
+
+table.cals_tgroup thead td.cals_rowsep{
+  border-bottom:1px solid black;
+}
+table.cals_tgroup td.cals_rowsep{
+  border-bottom:1px solid black;
+}
+
+/*=====================================*/
+/*FONT-REDUCTION*/
+/*=====================================*/
+
+/* Font reduction for large table.cals_tgroups*/
+.table.cals_tgroup-contents-font-reduction{
+  font-size:0.7em;
+}
+
+.table.cals_tgroup-contents-max-font-reduction{
+  font-size:0.6em;
+}
