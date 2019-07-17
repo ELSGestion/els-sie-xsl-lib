@@ -49,6 +49,11 @@
       <x:expect label="OK" select="/*" test="/*" href="table_ELSSIEXDC-23.editor.cals.xml"/>
     </x:scenario>
     
+    <x:scenario label="SIETRAINPR-1066 - BORDERS - No @style attribut on table but @style on every cell">
+      <x:context href="table_SIETRAINPR-1066.editor.html"/>
+      <x:expect label="OK" select="/*" test="/*" href="table_SIETRAINPR-1066.editor.cals.xml"/>
+    </x:scenario>
+    
   </x:scenario>
   
 </x:description>

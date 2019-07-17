@@ -627,8 +627,10 @@
             <xsl:otherwise>all</xsl:otherwise>
           </xsl:choose>
         </xsl:when>
-        <xsl:when test="not(@frame) and @border != 0">all</xsl:when>
-        <xsl:when test="@style">
+        <xsl:when test="not(@frame) and @border != 0">
+          <xsl:text>all</xsl:text>
+        </xsl:when>
+        <xsl:otherwise>
           <xsl:variable name="style.parsed" select="css:parse-inline(@style)" as="element(css:css)"/>
           <!--cf. http://www.datypic.com/sc/cals/a-nons_frame.html-->
           <!--NB : at step 4 every rowspan/colspan has been expanded to "dummyCell" : this is quite usefull here to guess the table border looking at every corner cells-->
@@ -698,9 +700,6 @@
               <xsl:message>border-left : <xsl:value-of select="$border-left"/></xsl:message>
             </xsl:otherwise>
           </xsl:choose>
-        </xsl:when>
-        <xsl:otherwise>
-          <xsl:text>none</xsl:text>
         </xsl:otherwise>
       </xsl:choose>
     </xsl:attribute>
