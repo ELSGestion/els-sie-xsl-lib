@@ -104,6 +104,30 @@
   
   <x:scenario label="css:parse-inline">
     <x:call function="css:parse-inline">
+      <x:param name="css:inline" select="'border-style:solid none dashed'" as="xs:string"/>
+    </x:call>
+    <x:expect label="css:css">
+      <css:css xmlns:css="http://www.w3.org/1996/css">
+        <css:border-style-ruleset>
+          <css:border-top-style>
+            <css:solid />
+          </css:border-top-style>
+          <css:border-right-style>
+            <css:none />
+          </css:border-right-style>
+          <css:border-bottom-style>
+            <css:dashed />
+          </css:border-bottom-style>
+          <css:border-left-style>
+            <css:none />
+          </css:border-left-style>
+        </css:border-style-ruleset>
+      </css:css>
+    </x:expect>
+  </x:scenario>
+  
+  <x:scenario label="css:parse-inline">
+    <x:call function="css:parse-inline">
       <x:param name="css:inline" select="$css:inline.1" as="xs:string"/>
     </x:call>
     <x:expect label="css:css" select="$css:css-xml.1"/>
