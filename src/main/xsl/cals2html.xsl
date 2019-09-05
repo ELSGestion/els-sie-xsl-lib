@@ -49,6 +49,9 @@
   <xsl:param name="xslLib:cals2html.default-tgroup-valign" select="'top'" as="xs:string"/><!--default cals value-->
   <xsl:param name="xslLib:cals2html.default-td-valign" select="'middle'" as="xs:string"/><!--default browser value-->
   <xsl:param name="xslLib:cals2html.default-th-valign" select="'middle'" as="xs:string"/><!--default browser value-->
+  <!-- force @aling / @valign with default value to be converted to CSS if explicitely set at entry level -->
+  <xsl:param name="xslLib:cals2html.default-align-force-explicit" select="false()" as="xs:boolean"/>
+  <xsl:param name="xslLib:cals2html.default-valign-force-explicit" select="false()" as="xs:boolean"/>
 
   <!--==============================================================================================================================-->
   <!-- INIT -->
@@ -365,6 +368,7 @@
         </xsl:otherwise>
       </xsl:choose>
     </xsl:variable>
+    <xsl:variable name="align-explicit" select="exists(@align)" as="xs:boolean"/>
     <xsl:variable name="align-current" as="xs:string">
       <xsl:choose>
         <xsl:when test="@align">
@@ -382,6 +386,7 @@
         </xsl:otherwise>
       </xsl:choose>
     </xsl:variable>
+    <xsl:variable name="valign-explicit" select="exists(@valign)" as="xs:boolean"/>
     <xsl:variable name="valign-current" as="xs:string">
       <xsl:choose>
         <xsl:when test="@valign">
@@ -409,10 +414,12 @@
         <xsl:if test="$rowsep-current != '0'">
           <xsl:text>cals_rowsep</xsl:text>
         </xsl:if>
-        <xsl:if test="$align-current != (if($name = 'td') then($xslLib:cals2html.default-td-align) else($xslLib:cals2html.default-th-align))">
+        <xsl:variable name="align-default" select="if($name = 'td') then($xslLib:cals2html.default-td-align) else($xslLib:cals2html.default-th-align)"/>
+        <xsl:if test="($align-current != $align-default) or ($xslLib:cals2html.default-align-force-explicit and $align-explicit)">
           <xsl:value-of select="concat('cals_align-', lower-case($align-current))" />
         </xsl:if>
-        <xsl:if test="$valign-current != (if($name = 'td') then($xslLib:cals2html.default-td-valign) else($xslLib:cals2html.default-th-valign))">
+        <xsl:variable name="valign-default" select="if($name = 'td') then($xslLib:cals2html.default-td-valign) else($xslLib:cals2html.default-th-valign)"/>
+        <xsl:if test="($valign-current != $valign-default) or ($xslLib:cals2html.default-valign-force-explicit and $valign-explicit)">
           <xsl:value-of select="concat('cals_valign-', lower-case($valign-current))" />
         </xsl:if>
         <xsl:if test="not(empty($nb-cols))">
