@@ -414,11 +414,11 @@
         <xsl:if test="$rowsep-current != '0'">
           <xsl:text>cals_rowsep</xsl:text>
         </xsl:if>
-        <xsl:variable name="align-default" select="if($name = 'td') then($xslLib:cals2html.default-td-align) else($xslLib:cals2html.default-th-align)"/>
+        <xsl:variable name="align-default" as="xs:string" select="if($name = 'td') then($xslLib:cals2html.default-td-align) else($xslLib:cals2html.default-th-align)"/>
         <xsl:if test="($align-current != $align-default) or ($xslLib:cals2html.default-align-force-explicit and $align-explicit)">
           <xsl:value-of select="concat('cals_align-', lower-case($align-current))" />
         </xsl:if>
-        <xsl:variable name="valign-default" select="if($name = 'td') then($xslLib:cals2html.default-td-valign) else($xslLib:cals2html.default-th-valign)"/>
+        <xsl:variable name="valign-default" as="xs:string" select="if($name = 'td') then($xslLib:cals2html.default-td-valign) else($xslLib:cals2html.default-th-valign)"/>
         <xsl:if test="($valign-current != $valign-default) or ($xslLib:cals2html.default-valign-force-explicit and $valign-explicit)">
           <xsl:value-of select="concat('cals_valign-', lower-case($valign-current))" />
         </xsl:if>
