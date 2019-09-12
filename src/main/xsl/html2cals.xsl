@@ -532,11 +532,11 @@
       <xsl:when test="$src-column-no = $current-span-col-total + $current-span">
         <xsl:choose>
           <xsl:when test="$current-cell/@rowspan">
-            <td xmlns="http://www.w3.org/1999/xhtml">
+            <xsl:element name="{local-name($current-cell)}" namespace="http://www.w3.org/1999/xhtml">
               <xsl:attribute name="xhtml2cals:rowspan" select="$current-cell/@rowspan"/>
               <xsl:copy-of select="$current-cell/(@* except @rowspan)"/>
               <xsl:copy-of select="$current-cell/node()"/>
-            </td>
+            </xsl:element>
           </xsl:when>
           <xsl:otherwise>
             <xsl:copy-of select="$current-cell" copy-namespaces="no"/>
