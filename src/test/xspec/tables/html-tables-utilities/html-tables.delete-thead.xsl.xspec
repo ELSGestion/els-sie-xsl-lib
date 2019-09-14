@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<x:description 
+  xmlns:x="http://www.jenitennison.com/xslt/xspec"
+  xmlns:xfe="http://www.lefebvre-sarrut.eu/ns/xmlfirst/xmlEditor"
+  stylesheet="../../../../main/xsl/html-tables-utillities/html-tables.delete-thead.xsl"
+  xslt-version="3.0">
+
+  <x:scenario label="Delete thead on html tables" xml:base="../../../samples/tables/html-tables-utilities/html-tables.delete-thead/">
+    
+    <x:scenario label="Case 1 : classic table with thead (with th) and tbody">
+      <x:context href="case-1.html" />
+      <x:expect label="OK" select="//*:body" test="//*:body" href="case-1.delete-thead.html"/>
+    </x:scenario>
+    
+    <x:scenario label="Case 2 : table with thead (with some td) and tbody">
+      <x:context href="case-2.html" />
+      <x:expect label="OK" select="//*:body" test="//*:body" href="case-2.delete-thead.html" />
+    </x:scenario>
+    
+    <x:scenario label="Case 3 : table with thead (with some td) without tbody">
+      <x:context href="case-3.html" />
+      <x:expect label="OK" select="//*:body" test="//*:body" href="case-3.delete-thead.html" />
+    </x:scenario>
+    
+  </x:scenario>
+  
+</x:description>
