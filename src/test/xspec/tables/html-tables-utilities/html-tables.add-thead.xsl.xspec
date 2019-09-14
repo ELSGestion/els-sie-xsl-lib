@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<x:description 
+  xmlns:x="http://www.jenitennison.com/xslt/xspec"
+  xmlns:xfe="http://www.lefebvre-sarrut.eu/ns/xmlfirst/xmlEditor"
+  stylesheet="../../../../main/xsl/html-tables-utillities/html-tables.add-thead.xsl"
+  xslt-version="3.0">
+
+  <x:scenario label="Add thead to html tables" xml:base="../../../samples/tables/html-tables-utilities/html-tables.add-thead/">
+    
+    <x:scenario label="Case 1 : 1st row is a header row">
+      <x:context href="case-1.html" />
+      <x:expect label="OK" select="//*:body" test="//*:body" href="case-1.add-thead.html"/>
+    </x:scenario>
+    
+    <x:scenario label="Case 2: 2 first rows are header rows">
+      <x:context href="case-2.html" />
+      <x:expect label="OK" select="//*:body" test="//*:body" href="case-2.add-thead.html" />
+    </x:scenario>
+    
+    <x:scenario label="Case 3 : row without only th">
+      <x:context href="case-3.html" />
+      <x:expect label="OK" select="//*:body" test="//*:body" href="case-3.add-thead.html" />
+    </x:scenario>
+    
+    <x:scenario label="Cas 4 : raw with th but in the middle of the table">
+      <x:context href="case-4.html" />
+      <x:expect label="OK" select="//*:body" test="//*:body" href="case-4.add-thead.html" />
+    </x:scenario>
+    
+    <x:scenario label="Cas 5 : rowspan and colspan within header">
+      <x:context href="case-5.html" />
+      <x:expect label="OK" select="//*:body" test="//*:body" href="case-5.add-thead.html" />
+    </x:scenario>
+    
+    <x:scenario label="Cas 6 : rowspan between thead and tbody">
+      <x:context href="case-6.html" />
+      <x:expect label="OK" select="//*:body" test="//*:body" href="case-6.add-thead.html" />
+    </x:scenario>
+    
+    <x:scenario label="Cas 7 : case 5 + case 6">
+      <x:context href="case-7.html" />
+      <x:expect label="OK" select="//*:body" test="//*:body" href="case-7.add-thead.html" />
+    </x:scenario>
+    
+  </x:scenario>
+  
+</x:description>

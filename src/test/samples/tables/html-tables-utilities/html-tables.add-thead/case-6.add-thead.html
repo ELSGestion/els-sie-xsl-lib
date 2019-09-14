@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Case 6 : rowspan between thead and tbody -->
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <style>
+      table {
+        width: 60%;
+      }
+      thead th {
+        background-color: #bbb;
+      }
+      th {
+        background-color: #eee;
+      }</style>
+  </head>
+  <body>
+    <table border="1">
+      <thead>
+        <tr>
+          <th>
+            <p>H</p>
+          </th>
+          <th>
+            <p>EA</p>
+          </th>
+          <th>
+            <p>D</p>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th rowspan="2">
+            <p>h and c</p>
+          </th>
+          <th>
+            <p>ea</p>
+          </th>
+          <th>
+            <p>d</p>
+          </th>
+        </tr>
+        <tr>
+          <td>
+            <p>c</p>
+          </td>
+          <td>
+            <p>ell</p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p>C</p>
+          </td>
+          <td>
+            <p>E</p>
+          </td>
+          <td>
+            <p>LL</p>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </body>
+</html>

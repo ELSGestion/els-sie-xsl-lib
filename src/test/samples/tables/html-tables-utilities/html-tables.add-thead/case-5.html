@@ -1,0 +1,61 @@
+<!-- Case 5 : colspan and rowspan within header -->
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <style>table{width:60%;}thead th{background-color: #bbb;}th{background-color: #eee;}</style>
+  </head>
+  <body>
+    <table border="1">
+      <tbody>
+        <tr>
+          <th colspan="5">
+            <p>colspan &amp; rowspan within header</p>
+          </th>
+        </tr>
+        <tr>
+          <th>
+            <p>H</p>
+          </th>
+          <th>
+            <p>E</p>
+          </th>
+          <th rowspan="2">
+            <p>A</p>
+            <p>e</p>
+          </th>
+          <th>
+            <p>D</p>
+          </th>
+          <th rowspan="2">
+            <p>!</p>
+            <p>d</p>
+          </th>
+        </tr>
+        <tr>
+          <th colspan="2">
+            <p>h</p>
+          </th>
+          <th>
+            <p>a</p>
+          </th>
+        </tr>
+        <tr>
+          <td>
+            <p>c</p>
+          </td>
+          <td>
+            <p>e</p>
+          </td>
+          <td>
+            <p>l</p>
+          </td>
+          <td>
+            <p>l</p>
+          </td>
+          <td>
+            <p>s</p>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </body>
+</html>
