@@ -368,18 +368,4 @@
     </xsl:choose>
   </xsl:function>
   
-  <xd:doc>
-    <xd:desc>
-      <xd:p>Check if 2 dates are equal</xd:p>
-    </xd:desc>
-    <xd:param name="date1">[xs:dateTime] The 1st date</xd:param>
-    <xd:param name="date2">[xs:dateTime] The 2nd date</xd:param>
-    <xd:return>[xs:boolean] true or false according to the result of comparison of the two dates</xd:return>
-  </xd:doc>
-  <xsl:function name="els:dayEqualInDate" as="xs:boolean">
-    <xsl:param name="date1" as="xs:dateTime"/>
-    <xsl:param name="date2" as="xs:dateTime"/>
-    <xsl:value-of select="format-dateTime($date1, '[Y0001][M01][D01]') = format-dateTime($date2, '[Y0001][M01][D01]')" />
-  </xsl:function>
-  
 </xsl:stylesheet>

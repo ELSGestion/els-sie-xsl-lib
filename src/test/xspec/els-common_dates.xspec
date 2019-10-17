@@ -298,22 +298,4 @@
     </x:scenario>
   </x:scenario>
   
-  <x:scenario label="els:dayEqualInDate">
-    <x:call function="els:dayEqualInDate"/>
-    <x:scenario label="true">
-      <x:call>
-        <x:param name="date1" select="xs:dateTime('2019-10-17T00:00:00.0Z')"/>
-        <x:param name="date2" select="xs:dateTime('2019-10-17T00:00:00.0Z')"/>
-      </x:call>
-      <x:expect label="true" select="true()"/>
-    </x:scenario>
-    <x:scenario label="false">
-      <x:call>
-        <x:param name="date1" select="xs:dateTime('2019-10-17T00:00:00.0Z')"/>
-        <x:param name="date2" select="xs:dateTime('2019-10-16T00:00:00.0Z')"/>
-      </x:call>
-      <x:expect label="false" select="false()"/>
-    </x:scenario>
-  </x:scenario>
-  
 </x:description>
