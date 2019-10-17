@@ -97,6 +97,22 @@
 
   <xd:doc>
     <xd:desc>
+      <xd:p>Returns first distincts values from strings sequence by keeping order.</xd:p>
+    </xd:desc>
+    <xd:param name="strs">[xs:string*] ordered list of duplicated strings.</xd:param>
+    <xd:return>[xs:string*] ordered list of unique strings keeping order.</xd:return>
+  </xd:doc>
+  <xsl:function name="els:distinct-values" as="xs:string*">
+    <xsl:param name="strs" as="xs:string*"/>
+    <xsl:sequence select="fold-left(
+      $strs,
+      (),
+      function($a, $b) { if (not($a = $b)) then (($a,$b)) else ($a) }
+      )"/>
+  </xsl:function>
+
+  <xd:doc>
+    <xd:desc>
       <xd:p>Normalize the string: remove diacritic marks.</xd:p>
       <xd:p>Example: els:normalize-no-diacritic('éêèàœç')='eeeaœc'</xd:p>
     </xd:desc>

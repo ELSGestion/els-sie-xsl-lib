@@ -70,6 +70,12 @@
     <x:expect label="String with replacements" select="'MAC 2018#SEP#2016#SEP#2015#SEP#2018'"/>
   </x:scenario>
   
+  <x:scenario label="els:distinct-values">
+    <x:call function="els:distinct-values">
+      <x:param name="strs" select="('a', 'b', 'c', 'a', 'd', 'b')"/>
+    </x:call>
+    <x:expect label="('a', 'b', 'c', 'd')" select="('a', 'b', 'c', 'd')"/>
+  </x:scenario>
 
   <x:scenario label="els:normalize-no-diacritic">
     <x:call function="els:normalize-no-diacritic">
