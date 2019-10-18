@@ -370,7 +370,7 @@
   
   <xd:doc>
     <xd:desc>
-      <xd:p>Generic function to say if 2 xs:dateTime are equals</xd:p>
+      <xd:p>Generic function to say if 2 xs:dateTime are equals at specific precision</xd:p>
     </xd:desc>
     <xd:param name="date1">1st date to compare</xd:param>
     <xd:param name="date2">2nd date to compare</xd:param>
@@ -378,7 +378,7 @@
     <!--format-dateTime(xs:dateTime('2019-12-17T14:25:33.123'), '[Y0001]-[M01]-[D01] [H01]:[m01]:[s01]:[f001]') = 2019-12-17 14:25:33:123-->
     <xd:return>Boolean</xd:return>
   </xd:doc>
-  <xsl:function name="els:date-equal-by-picture" as="xs:boolean">
+  <xsl:function name="els:dateTime-equal-by-precision" as="xs:boolean">
     <xsl:param name="date1" as="xs:dateTime"/>
     <xsl:param name="date2" as="xs:dateTime"/>
     <xsl:param name="precision-picture" as="xs:string"/>
@@ -387,24 +387,68 @@
   
   <xd:doc>
     <xd:desc>
-      <xd:p>els:date-equal compare date only (without time)</xd:p>
+      <xd:p>compare dateTime at year precision</xd:p>
     </xd:desc>
   </xd:doc>
-  <xsl:function name="els:date-equal" as="xs:boolean">
+  <xsl:function name="els:dateTime-equal-by-years" as="xs:boolean">
     <xsl:param name="date1" as="xs:dateTime"/>
     <xsl:param name="date2" as="xs:dateTime"/>
-    <xsl:sequence select="els:date-equal-by-picture($date1, $date2, '[Y0001]-[M01]-[D01]')"/>
+    <xsl:sequence select="els:dateTime-equal-by-precision($date1, $date2, '[Y0001]')"/>
   </xsl:function>
   
   <xd:doc>
     <xd:desc>
-      <xd:p>els:dateTime-equal compare date and time at millisecond precision</xd:p>
+      <xd:p>compare dateTime at month precision</xd:p>
     </xd:desc>
   </xd:doc>
-  <xsl:function name="els:dateTime-equal" as="xs:boolean">
+  <xsl:function name="els:dateTime-equal-by-months" as="xs:boolean">
     <xsl:param name="date1" as="xs:dateTime"/>
     <xsl:param name="date2" as="xs:dateTime"/>
-    <xsl:sequence select="els:date-equal-by-picture($date1, $date2, '[Y0001]-[M01]-[D01] [H01]:[m01]:[s01]:[f001]')"/>
+    <xsl:sequence select="els:dateTime-equal-by-precision($date1, $date2, '[Y0001]-[M01]')"/>
+  </xsl:function>
+  
+  <xd:doc>
+    <xd:desc>
+      <xd:p>compare dateTime at day precision</xd:p>
+    </xd:desc>
+  </xd:doc>
+  <xsl:function name="els:dateTime-equal-by-days" as="xs:boolean">
+    <xsl:param name="date1" as="xs:dateTime"/>
+    <xsl:param name="date2" as="xs:dateTime"/>
+    <xsl:sequence select="els:dateTime-equal-by-precision($date1, $date2, '[Y0001]-[M01]-[D01]')"/>
+  </xsl:function>
+  
+  <xd:doc>
+    <xd:desc>
+      <xd:p>compare dateTime at minutes precision</xd:p>
+    </xd:desc>
+  </xd:doc>
+  <xsl:function name="els:dateTime-equal-by-minutes" as="xs:boolean">
+    <xsl:param name="date1" as="xs:dateTime"/>
+    <xsl:param name="date2" as="xs:dateTime"/>
+    <xsl:sequence select="els:dateTime-equal-by-precision($date1, $date2, '[Y0001]-[M01]-[D01] [H01]:[m01]')"/>
+  </xsl:function>
+  
+  <xd:doc>
+    <xd:desc>
+      <xd:p>compare dateTime at second precision</xd:p>
+    </xd:desc>
+  </xd:doc>
+  <xsl:function name="els:dateTime-equal-by-seconds" as="xs:boolean">
+    <xsl:param name="date1" as="xs:dateTime"/>
+    <xsl:param name="date2" as="xs:dateTime"/>
+    <xsl:sequence select="els:dateTime-equal-by-precision($date1, $date2, '[Y0001]-[M01]-[D01] [H01]:[m01]:[s01]')"/>
+  </xsl:function>
+  
+  <xd:doc>
+    <xd:desc>
+      <xd:p>compare dateTime at millisecond precision</xd:p>
+    </xd:desc>
+  </xd:doc>
+  <xsl:function name="els:dateTime-equal-by-milliseconds" as="xs:boolean">
+    <xsl:param name="date1" as="xs:dateTime"/>
+    <xsl:param name="date2" as="xs:dateTime"/>
+    <xsl:sequence select="els:dateTime-equal-by-precision($date1, $date2, '[Y0001]-[M01]-[D01] [H01]:[m01]:[s01]:[f001]')"/>
   </xsl:function>
   
 </xsl:stylesheet>
