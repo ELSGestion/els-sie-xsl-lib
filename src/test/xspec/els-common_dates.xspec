@@ -298,4 +298,75 @@
     </x:scenario>
   </x:scenario>
   
+  <x:scenario label="els:date-equal">
+    <x:call function="els:date-equal">
+      <x:param name="date1" select="xs:dateTime('2019-12-17T14:25:33.123')"/>
+    </x:call>
+    <x:scenario label="exactly the same dateTime">
+      <x:call>
+        <x:param name="year" select="xs:dateTime('2019-12-17T14:25:33.123')"/>
+      </x:call>
+      <x:expect label="true" select="true()"/>
+    </x:scenario>
+    <x:scenario label="same date but different hour">
+      <x:call>
+        <x:param name="year" select="xs:dateTime('2019-12-17T15:25:33.123')"/>
+      </x:call>
+      <x:expect label="true" select="true()"/>
+    </x:scenario>
+    <x:scenario label="same date but different minute">
+      <x:call>
+        <x:param name="year" select="xs:dateTime('2019-12-17T14:30:33.123')"/>
+      </x:call>
+      <x:expect label="true" select="true()"/>
+    </x:scenario>
+    <x:scenario label="same date but different second">
+      <x:call>
+        <x:param name="year" select="xs:dateTime('2019-12-17T14:25:35.123')"/>
+      </x:call>
+      <x:expect label="true" select="true()"/>
+    </x:scenario>
+    <x:scenario label="same date but different millisecond">
+      <x:call>
+        <x:param name="year" select="xs:dateTime('2019-12-17T14:25:33.124')"/>
+      </x:call>
+      <x:expect label="true" select="true()"/>
+    </x:scenario>
+  </x:scenario>
+  
+  <x:scenario label="els:dateTime-equal">
+    <x:call function="els:dateTime-equal">
+      <x:param name="date1" select="xs:dateTime('2019-12-17T14:25:33.123')"/>
+    </x:call>
+    <x:scenario label="exactly the same dateTime">
+      <x:call>
+        <x:param name="year" select="xs:dateTime('2019-12-17T14:25:33.123')"/>
+      </x:call>
+      <x:expect label="true" select="true()"/>
+    </x:scenario>
+    <x:scenario label="same date but different hour">
+      <x:call>
+        <x:param name="year" select="xs:dateTime('2019-12-17T15:25:33.123')"/>
+      </x:call>
+      <x:expect label="false" select="false()"/>
+    </x:scenario>
+    <x:scenario label="same date but different minute">
+      <x:call>
+        <x:param name="year" select="xs:dateTime('2019-12-17T14:30:33.123')"/>
+      </x:call>
+      <x:expect label="false" select="false()"/>
+    </x:scenario>
+    <x:scenario label="same date but different second">
+      <x:call>
+        <x:param name="year" select="xs:dateTime('2019-12-17T14:25:35.123')"/>
+      </x:call>
+      <x:expect label="false" select="false()"/>
+    </x:scenario>
+    <x:scenario label="same date but different millisecond">
+      <x:call>
+        <x:param name="year" select="xs:dateTime('2019-12-17T14:25:33.124')"/>
+      </x:call>
+      <x:expect label="false" select="false()"/>
+    </x:scenario>
+  </x:scenario>
 </x:description>
