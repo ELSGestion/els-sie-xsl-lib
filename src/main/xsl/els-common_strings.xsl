@@ -97,15 +97,18 @@
 
   <xd:doc>
     <xd:desc>
-      <xd:p>Normalize the string: remove diacritic marks.</xd:p>
-      <xd:p>Example: els:normalize-no-diacritic('éêèàœç')='eeeaœc'</xd:p>
+      <xd:p>Normalize and simplify the spaces in the input string:</xd:p>
+      <xd:ul>
+        <xd:li>all kind of consecutive spaces are simplified into one sigle simple space ;</xd:li>
+        <xd:li>function normalize-space() is then applied on the resulting string.</xd:li>
+      </xd:ul>
     </xd:desc>
-    <xd:param name="string"/>
-    <xd:return>the <xd:b>string</xd:b> normalized</xd:return>
+    <xd:param name="string">[xs:string] The string that needs to be normalized.</xd:param>
+    <xd:return>The normalized string.</xd:return>
   </xd:doc>
-  <xsl:function name="els:normalize-no-diacritic" as="xs:string">
-    <xsl:param name="string" as="xs:string"/>
-    <xsl:sequence select="replace(normalize-unicode($string, 'NFD'), '[\p{M}]', '')"/>
+  <xsl:function name="els:normalize-and-simplify-spaces" as="xs:string">
+    <xsl:param name="string" as="xs:string?"/>
+    <xsl:sequence select="normalize-space(replace($string,'[\s\p{Zs}]+',' '))"/>
   </xsl:function>
   
   <xd:doc>
@@ -120,6 +123,19 @@
     <xsl:value-of select="normalize-unicode(replace(normalize-unicode($string, 'NFD'), '\p{Mn}', ''), 'NFC')"/>
   </xsl:function>
   
+  <xd:doc>
+    <xd:desc>
+      <xd:p>Normalize the string: remove diacritic marks.</xd:p>
+      <xd:p>Example: els:normalize-no-diacritic('éêèàœç')='eeeaœc'</xd:p>
+    </xd:desc>
+    <xd:param name="string"/>
+    <xd:return>the <xd:b>string</xd:b> normalized</xd:return>
+  </xd:doc>
+  <xsl:function name="els:normalize-no-diacritic" as="xs:string">
+    <xsl:param name="string" as="xs:string"/>
+    <xsl:sequence select="replace(normalize-unicode($string, 'NFD'), '[\p{M}]', '')"/>
+  </xsl:function>
+
   <xd:doc>
     <xd:desc>
       <xd:p>"carriage return line feed" : generates N carriage return</xd:p>

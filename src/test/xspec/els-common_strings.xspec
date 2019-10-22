@@ -344,4 +344,31 @@
       <x:expect label="true" select="true()"/>
     </x:scenario>
   </x:scenario>
+  
+  <x:scenario label="els:normalize-and-simplify-spaces">
+    <x:call function="els:normalize-and-simplify-spaces"/>
+    <x:scenario label="String with various whitespaces to normalize">
+      <x:call>
+        <x:param name="string" xml:space="preserve">   &#x00A0;   my string
+        that     needs&#x00A0; &#x00A0; 
+        
+        whitespace
+   &#x2009;     normalization&#x2009;&#x2009;</x:param>
+      </x:call>
+      <x:expect label="Return the input string with spaces normalized and simplified" select="'my string that needs whitespace normalization'"/>
+    </x:scenario>
+    <x:scenario label="String with no whitespace to normalize">
+      <x:call>
+        <x:param name="string">no-space-to-see-here</x:param>        
+      </x:call>
+      <x:expect label="Return the input string" select="'no-space-to-see-here'"/>
+    </x:scenario>
+    <x:scenario label="Empty sequence">
+      <x:call>
+        <x:param name="string" select="()"/>
+      </x:call>
+      <x:expect label="Return an empty string" select="''"/>
+    </x:scenario>
+  </x:scenario>
+  
 </x:description>
