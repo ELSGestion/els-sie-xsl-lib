@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<x:description xmlns:x="http://www.jenitennison.com/xslt/xspec"
+  xmlns:html="http://www.w3.org/1999/xhtml"
+  xmlns:els="http://www.lefebvre-sarrut.eu/ns/els"
+  stylesheet="../../main/xsl/els-common_social-network.xsl">
+  
+  <x:scenario label="els:isSocialNetworkUrl">
+    
+    <x:scenario label="els:isSocialNetworkUrl : Twitter">
+      <x:call function="els:isSocialNetworkUrl">
+        <x:param name="url" select="'https://twitter.com/efl_quotidienne/status/1187305228699234306'" />
+      </x:call>
+      <x:expect label="Twitter => true()" select="true()" />
+    </x:scenario>
+    
+    <x:scenario label="els:isSocialNetworkUrl : Random URL">
+      <x:call function="els:isSocialNetworkUrl">
+        <x:param name="url" select="'https://google.com/'" />
+      </x:call>
+      <x:expect label="Google.com => false()" select="false()" />
+    </x:scenario>
+    
+  </x:scenario>
+  
+  <x:scenario label="els:social-network-platformFromUrl()">
+    
+    <x:scenario label="els:social-network-platformFromUrl : Twitter">
+      <x:call function="els:social-network-platformFromUrl">
+        <x:param name="url" select="'https://twitter.com/efl_quotidienne/status/1187305228699234306'" />
+      </x:call>
+      <x:expect label="Twitter => 'twitter'" select="'twitter'" />
+    </x:scenario>
+    
+    <x:scenario label="els:social-network-platformFromUrl : Random URL">
+      <x:call function="els:social-network-platformFromUrl">
+        <x:param name="url" select="'https://google.com/'" />
+      </x:call>
+      <x:expect label="Google.com => ()" select="()" />
+    </x:scenario>
+    
+  </x:scenario>
+  
+  <x:scenario label="els:social-network-idFromUrl()">
+    
+    <x:scenario label="els:social-network-idFromUrl : Twitter">
+      <x:call function="els:social-network-idFromUrl">
+        <x:param name="url" select="'https://twitter.com/efl_quotidienne/status/1187305228699234306'" />
+      </x:call>
+      <x:expect label="Twitter" select="'1187305228699234306'" />
+    </x:scenario>
+    
+    <x:scenario label="els:social-network-idFromUrl : Random URL">
+      <x:call function="els:social-network-idFromUrl">
+        <x:param name="url" select="'https://google.com/'" />
+      </x:call>
+      <x:expect label="Google.com => ()" select="()" />
+    </x:scenario>
+    
+  </x:scenario>
+  
+  <x:scenario label="els:social-network-makeHtmlEmbedFromUrl() - iframe generation">
+    
+    <x:scenario label="els:social-network-makeHtmlEmbedFromUrl : Twitter">
+      <x:call function="els:social-network-makeHtmlEmbedFromUrl">
+        <x:param name="url" select="'https://twitter.com/efl_quotidienne/status/1187305228699234306'"/>
+      </x:call>
+      <x:expect label="iframe">
+        <html:iframe 
+          title=""
+          aria-label=""
+          src="https://twitframe.com/show?url=https://twitter.com/efl_quotidienne/status/1187305228699234306"
+          scrolling="1"
+          frameborder="0"
+          width="450"
+          height="250"/>
+      </x:expect>
+    </x:scenario>
+    
+  </x:scenario>
+  
+</x:description>
+
+
