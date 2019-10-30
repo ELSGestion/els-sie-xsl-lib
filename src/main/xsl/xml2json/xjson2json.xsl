@@ -77,6 +77,7 @@
           <fn:map><fn:string key="error"><xsl:value-of select="$err:code || ' : ' || $err:description"/></fn:string></fn:map>
         </xsl:variable>
         <xsl:value-of select="xml-to-json($err, $options)"/>
+        <xsl:message>[ERROR][xslLib:xjson2json] <xsl:value-of select="$err"/></xsl:message>
       </xsl:catch>
     </xsl:try>
   </xsl:function>
