@@ -358,6 +358,9 @@
           <xsl:text>text() </xsl:text>
           <xsl:value-of select="substring($node,1,30)"/>
         </xsl:when>
+        <xsl:when test="$node/self::attribute()">
+          <xsl:value-of select="'attribute_@' || name($node) || '=' || $els:dquot || $node || $els:dquot"/>
+        </xsl:when>
         <xsl:when test="$node/self::comment()">
           <xsl:text>comment() </xsl:text>
           <xsl:value-of select="substring($node,1,30)"/>

@@ -226,6 +226,16 @@
         <string>element():test_@foo="bar"_@bar="foo"</string>
       </x:expect>
     </x:scenario>
+    <x:scenario label="attribute">
+      <x:call>
+        <x:param name="node" select="//@foo">
+          <test foo="bar"/>
+        </x:param>
+      </x:call>
+      <x:expect label="Test" select="string(*/text())">
+        <string>attribute_@foo="bar"</string>
+      </x:expect>
+    </x:scenario>
     <x:scenario label="text()">
       <x:call>
         <x:param name="node" select="/*/text()">
