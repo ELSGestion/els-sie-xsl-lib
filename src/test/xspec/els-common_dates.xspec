@@ -502,4 +502,112 @@
     </x:scenario>
   </x:scenario>
   
+  <x:scenario label="els:displayEvent">
+    <x:call function="els:displayEvent">
+      <x:param name="months.verbalized" select="('JANV.', 'FÉVR.', 'MARS', 'AVR.', 'MAI', 'JUIN', 'JUILL.', 'AOÛT', 'SEPT.', 'OCT.', 'NOV.', 'DÉC.')" position="3"/>
+    </x:call>
+    <x:scenario label="Multiple day event / full verbalization">
+      <x:call>
+        <x:param name="date.from" select="xs:dateTime('2019-10-15T02:00:00+02:00')" position="1"/>
+        <x:param name="date.to" select="xs:dateTime('2019-10-17T02:00:00+02:00')" position="2"/>
+        <x:param name="intro.from" select="'DU'" position="4"/>
+        <x:param name="intro.to" select="'AU'" position="5"/>
+        <x:param name="intro.singleDate" select="'LE'" position="6"/>
+      </x:call>
+      <x:expect label="DU 15 OCT. 2019 AU 17 OCT. 2019" select="'DU 15 OCT. 2019 AU 17 OCT. 2019'"/>
+    </x:scenario>
+    <x:scenario label="Single day event (1) / full verbalization">
+      <x:call>
+        <x:param name="date.from" select="xs:dateTime('2019-10-15T02:00:00+02:00')" position="1"/>
+        <x:param name="date.to" select="xs:dateTime('2019-10-15T02:00:00+02:00')" position="2"/>
+        <x:param name="intro.from" select="'DU'" position="4"/>
+        <x:param name="intro.to" select="'AU'" position="5"/>
+        <x:param name="intro.singleDate" select="'LE'" position="6"/>
+      </x:call>
+      <x:expect label="LE 15 OCT. 2019" select="'LE 15 OCT. 2019'"/>
+    </x:scenario>
+    <x:scenario label="Single day event (2) / full verbalization">
+      <x:call>
+        <x:param name="date.from" select="xs:dateTime('2019-10-15T02:00:00+02:00')" position="1"/>
+        <x:param name="date.to" select="()" position="2"/>
+        <x:param name="intro.from" select="'DU'" position="4"/>
+        <x:param name="intro.to" select="'AU'" position="5"/>
+        <x:param name="intro.singleDate" select="'LE'" position="6"/>
+      </x:call>
+      <x:expect label="LE 15 OCT. 2019" select="'LE 15 OCT. 2019'"/>
+    </x:scenario>
+    <x:scenario label="Multiple day event / minimal verbalization">
+      <x:call>
+        <x:param name="date.from" select="xs:dateTime('2019-10-15T02:00:00+02:00')" position="1"/>
+        <x:param name="date.to" select="xs:dateTime('2019-10-17T02:00:00+02:00')" position="2"/>
+        <x:param name="intro.from" select="()" position="4"/>
+        <x:param name="intro.to" select="()" position="5"/>
+        <x:param name="intro.singleDate" select="()" position="6"/>
+      </x:call>
+      <x:expect label="15 OCT. 2019 17 OCT. 2019" select="'15 OCT. 2019 17 OCT. 2019'"/>
+    </x:scenario>
+    <x:scenario label="Single day event (1) / minimal verbalization">
+      <x:call>
+        <x:param name="date.from" select="xs:dateTime('2019-10-15T02:00:00+02:00')" position="1"/>
+        <x:param name="date.to" select="xs:dateTime('2019-10-15T02:00:00+02:00')" position="2"/>
+        <x:param name="intro.from" select="()" position="4"/>
+        <x:param name="intro.to" select="()" position="5"/>
+        <x:param name="intro.singleDate" select="()" position="6"/>
+      </x:call>
+      <x:expect label="15 OCT. 2019" select="'15 OCT. 2019'"/>
+    </x:scenario>
+    <x:scenario label="Single day event (2) / minimal verbalization">
+      <x:call>
+        <x:param name="date.from" select="xs:dateTime('2019-10-15T02:00:00+02:00')" position="1"/>
+        <x:param name="date.to" select="()" position="2"/>
+        <x:param name="intro.from" select="()" position="4"/>
+        <x:param name="intro.to" select="()" position="5"/>
+        <x:param name="intro.singleDate" select="()" position="6"/>
+      </x:call>
+      <x:expect label="15 OCT. 2019" select="'15 OCT. 2019'"/>
+    </x:scenario>
+    <x:scenario label="Missing dates">
+      <x:call>
+        <x:param name="date.from" select="()" position="1"/>
+        <x:param name="date.to" select="()" position="2"/>
+        <x:param name="intro.from" select="'DU'" position="4"/>
+        <x:param name="intro.to" select="'AU'" position="5"/>
+        <x:param name="intro.singleDate" select="'LE'" position="6"/>
+      </x:call>
+      <x:expect label="Empty sequence" select="()"/>
+    </x:scenario>
+  </x:scenario>
+  
+  <x:scenario label="els:displayEvent.fr">
+    <x:call function="els:displayEvent.fr"/>
+    <x:scenario label="Multiple day event">
+      <x:call>
+        <x:param name="date.from" select="xs:dateTime('2019-10-15T02:00:00+02:00')"/>
+        <x:param name="date.to" select="xs:dateTime('2019-10-17T02:00:00+02:00')"/>
+      </x:call>
+      <x:expect label="du 15 octobre 2019 au 17 octobre 2019" select="'du 15 octobre 2019 au 17 octobre 2019'"/>
+    </x:scenario>
+    <x:scenario label="Single day event (1)">
+      <x:call>
+        <x:param name="date.from" select="xs:dateTime('2019-10-15T02:00:00+02:00')"/>
+        <x:param name="date.to" select="xs:dateTime('2019-10-15T02:00:00+02:00')"/>
+      </x:call>
+      <x:expect label="le 15 octobre 2019" select="'le 15 octobre 2019'"/>
+    </x:scenario>
+    <x:scenario label="Single day event (2)">
+      <x:call>
+        <x:param name="date.from" select="xs:dateTime('2019-10-15T02:00:00+02:00')"/>
+        <x:param name="date.to" select="()"/>
+      </x:call>
+      <x:expect label="le 15 octobre 2019" select="'le 15 octobre 2019'"/>
+    </x:scenario>
+    <x:scenario label="Missing dates">
+      <x:call>
+        <x:param name="date.from" select="()"/>
+        <x:param name="date.to" select="()"/>
+      </x:call>
+      <x:expect label="Empty sequence" select="()"/>
+    </x:scenario>
+  </x:scenario>
+  
 </x:description>

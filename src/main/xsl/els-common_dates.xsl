@@ -280,6 +280,82 @@
   
   <xd:doc>
     <xd:desc>
+      <xd:p>Display an event in time in French (overrides els:displayEvent() function).</xd:p>
+      <xd:p>Default months list is $els:months.fr.</xd:p>
+      <xd:p>Introducers are: "du ... au ..." and "le ...".</xd:p>
+    </xd:desc>
+    <xd:param name="date.from">[xs:dateTime?] The beginning of the event.</xd:param>
+    <xd:param name="date.to">[xs:dateTime?] The end of the event.</xd:param>
+    <xd:return>[xs:string?] The event French verbalization.</xd:return>
+  </xd:doc>
+  <xsl:function name="els:displayEvent.fr" as="xs:string?">
+    <xsl:param name="date.from" as="xs:dateTime?"/>
+    <xsl:param name="date.to" as="xs:dateTime?"/>
+    <xsl:sequence select="els:displayEvent($date.from, $date.to, $els:months.fr, 'du', 'au', 'le')"/>
+  </xsl:function>
+  
+  <xd:doc>
+    <xd:desc>
+      <xd:p>Display an event in time:</xd:p>
+      <xd:ul>
+        <xd:li>a multiple day event set between $date.from and $date.to,</xd:li>
+        <xd:li>or a single day event ($date.from only).</xd:li>
+      </xd:ul>
+      <xd:p>Months are fully verbalized according to $months.verbalized.</xd:p>
+      <xd:p>$intro.from and $intro.to are used to introduce $date.from and $date.to (ex.: "from xxx to yyy").</xd:p>
+      <xd:p>$intro.singleDate is an optional string used to introduce the a single day event (ex.: "le xxx").</xd:p>
+      <xd:p>These introducers are optional; if not specified, the dates are verbalized according to the els:displayDate() function, and separated with a space.</xd:p>
+    </xd:desc>
+    <xd:param name="date.from">[xs:dateTime?] The beginning of the event.</xd:param>
+    <xd:param name="date.to">[xs:dateTime?] The end of the event.</xd:param>
+    <xd:param name="months.verbalized">[xs:string+] A list of verbalized months.</xd:param>
+    <xd:param name="intro.from">[xs:string?] Word(s) introducing the beginning of the event.</xd:param>
+    <xd:param name="intro.to">[xs:string?] Word(s) introducing the end of the event.</xd:param>
+    <xd:param name="intro.singleDate">[xs:string?] Word(s) introducing a single day event.</xd:param>
+    <xd:return>[xs:string?] The verbalized event.</xd:return>
+  </xd:doc>
+  <xsl:function name="els:displayEvent" as="xs:string?">
+    <xsl:param name="date.from" as="xs:dateTime?"/>
+    <xsl:param name="date.to" as="xs:dateTime?"/>
+    <xsl:param name="months.verbalized" as="xs:string+"/>
+    <xsl:param name="intro.from" as="xs:string?"/>
+    <xsl:param name="intro.to" as="xs:string?"/>
+    <xsl:param name="intro.singleDate" as="xs:string?"/>
+    <xsl:choose>
+      <xsl:when test="exists($date.from) and exists($date.to) and not(els:dateTime-equal-by-days($date.from, $date.to))">
+        <xsl:value-of>
+          <xsl:if test="exists($intro.from)">
+            <xsl:value-of select="normalize-space($intro.from)"/>
+            <xsl:text> </xsl:text>
+          </xsl:if>
+          <xsl:value-of select="els:displayDate(replace(els:getIsoDateFromString(string($date.from)),'\D+',''), $months.verbalized)"/>
+          <!-- Separate the 2 dates with a space even if $intro.from and $intro.to are empty -->
+          <xsl:text> </xsl:text>
+          <xsl:if test="exists($intro.to)">
+            <xsl:value-of select="normalize-space($intro.to)"/>
+            <xsl:text> </xsl:text>
+          </xsl:if>
+          <xsl:value-of select="els:displayDate(replace(els:getIsoDateFromString(string($date.to)),'\D+',''), $months.verbalized)"/>
+        </xsl:value-of>
+      </xsl:when>
+      <xsl:when test="exists($date.from)">
+        <xsl:value-of>
+          <xsl:if test="exists($intro.singleDate)">
+            <xsl:value-of select="normalize-space($intro.singleDate)"/>
+            <xsl:text> </xsl:text>
+          </xsl:if>
+          <xsl:value-of select="els:displayDate(replace(els:getIsoDateFromString(string($date.from)),'\D+',''), $months.verbalized)"/>
+        </xsl:value-of>
+      </xsl:when>
+      <xsl:otherwise>
+        <!-- Empty sequence -->
+        <xsl:message>[ERROR][els:displayEvent] The supplied dates are not valid: "<xsl:value-of select="$date.from"/>" - "<xsl:value-of select="$date.to"/>".</xsl:message>
+      </xsl:otherwise>
+    </xsl:choose>
+  </xsl:function>
+  
+  <xd:doc>
+    <xd:desc>
       <xd:p>Convert a verbalized date with format "DD month YYYY" to the format "DD/MM/AAAA"</xd:p>
       <xd:param name="dateVerbalized">[String] verbalized date "DD Month YYYY"</xd:param>
       <xd:param name="shortMonth">[Boolean] determine if the "month" is in a short format or no (ex: janv. instead of janvier)</xd:param>
