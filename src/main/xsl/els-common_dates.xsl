@@ -429,7 +429,8 @@
     <!-- Get the current century -->
     <xsl:variable name="currentCentury" select="substring(string(year-from-date(current-date())),1,2)" as="xs:string"/>
     <xsl:variable name="precedingCentury" select="string(($currentCentury cast as xs:integer) - 1)" as="xs:string"/>
-    <xsl:variable name="yearInt" select="if ($year castable as xs:positiveInteger) then ($year cast as xs:integer) else ()" as="xs:integer?"/>
+    <!-- "00" is neither a positive nor a negative integer ! -->
+    <xsl:variable name="yearInt" select="if ($year castable as xs:integer and not($year castable as xs:negativeInteger)) then ($year cast as xs:integer) else ()" as="xs:integer?"/>
     <xsl:choose>
       <xsl:when test="$yearInt &lt; 100">
         <xsl:variable name="yearNorm" select="format-integer($yearInt,'##')" as="xs:string"/>

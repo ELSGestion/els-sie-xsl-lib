@@ -284,6 +284,18 @@
       </x:call>
       <x:expect label="2a" select="'2a'"/>
     </x:scenario>
+    <x:scenario label="/ negative integer">
+      <x:call>
+        <x:param name="year" select="'-01'" position="1"/>
+      </x:call>
+      <x:expect label="-01" select="'-01'"/>
+    </x:scenario>
+    <x:scenario label="/ 00">
+      <x:call>
+        <x:param name="year" select="'00'" position="1"/>
+      </x:call>
+      <x:expect label="2000" select="'2000'"/>
+    </x:scenario>
     <x:scenario label="/ more than 2 digits">
       <x:call>
         <x:param name="year" select="'123'" position="1"/>
