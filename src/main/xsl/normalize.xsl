@@ -89,7 +89,7 @@
         <xsl:choose>
           <xsl:when test="$tbody-or-tgroup/self::*:tgroup">
             <xsl:for-each select="$tgroup">
-              <xsl:copy>
+              <xsl:copy copy-namespaces="no">
                 <xsl:copy-of select="@*, node() except (*:colspec | *:spanspec | *[*:row])"/>
                 <xsl:apply-templates select="$colspecs/calstable:colspecs/*, *:spanspec" mode="calstable:initial" />
                 <xsl:apply-templates select="*[*:row]" mode="calstable:initial">
@@ -131,6 +131,7 @@
       <xsl:apply-templates select="$table_with_no_colspans" mode="calstable:rowspan"/>
     </xsl:variable>
     <xsl:copy copy-namespaces="no">
+      <xsl:copy-of select="@*"/>
       <xsl:apply-templates select="$table_with_no_rowspans" mode="calstable:final">
         <xsl:with-param name="colspec-doc" as="document-node(element(calstable:colspecs))" select="$colspecs" tunnel="yes"/>
       </xsl:apply-templates>
@@ -193,7 +194,7 @@
         </xsl:variable>
         <xsl:sequence select="$preceding-with-colnum"/>
         <xsl:sequence select="preceding-sibling::node()[. >> $preceding]"/><!-- retain text nodes, comments, PIs -->
-        <xsl:copy>
+        <xsl:copy copy-namespaces="no">
           <xsl:variable name="colnum" as="xs:integer"
             select="xs:integer($preceding-with-colnum[last()]/@colnum) + 1"/>
           <xsl:attribute name="colnum" select="$colnum"/>
@@ -246,7 +247,7 @@
     <xsl:choose>
       <xsl:when test="$namest and $nameend">
         <xsl:variable name="this" select="." as="element()*"/>
-        <xsl:copy>
+        <xsl:copy copy-namespaces="no">
           <xsl:attribute name="calstable:id" select="$id"/>
           <xsl:attribute name="calstable:colspan" select="$colspan"/>
           <xsl:apply-templates select="@*, node()" mode="#current"/>
@@ -254,7 +255,7 @@
         <xsl:for-each select="2 to $colspan">
           <xsl:for-each select="$this">
             <!-- in XSLT 3, we'd use xsl:copy/@select -->
-            <xsl:copy>
+            <xsl:copy copy-namespaces="no">
               <!-- need to xsl:copy the entry in order to stay namespace-agnostic -->
               <xsl:attribute name="calstable:rid" select="$id"/>
               <xsl:copy-of select="@morerows"/>
@@ -263,13 +264,13 @@
         </xsl:for-each>
       </xsl:when>
       <xsl:when test="@morerows">
-        <xsl:copy>
+        <xsl:copy copy-namespaces="no">
           <xsl:attribute name="calstable:id" select="$id"/>
           <xsl:copy-of select="@*, node()"/>
         </xsl:copy>
       </xsl:when>
       <xsl:otherwise>
-        <xsl:copy-of select="."/>
+        <xsl:copy-of select="." copy-namespaces="no"/>
       </xsl:otherwise>
     </xsl:choose>
   </xsl:template>
@@ -279,7 +280,7 @@
   </xsl:template>
 
   <xsl:template match="*:tbody | *:thead | *:tfoot" mode="calstable:rowspan">
-    <xsl:copy-of select="*:row[1]"/>
+    <xsl:copy-of select="*:row[1]" copy-namespaces="no"/>
     <xsl:apply-templates select="*:row[2]" mode="calstable:rowspan">
       <xsl:with-param name="previousRow" select="*:row[1]"/>
     </xsl:apply-templates>
@@ -298,7 +299,7 @@
       <xsl:for-each select="$previousRow/*">
         <xsl:choose>
           <xsl:when test="@morerows &gt; 0">
-            <xsl:copy>
+            <xsl:copy copy-namespaces="no">
               <xsl:attribute name="morerows">
                 <xsl:value-of select="@morerows - 1"/>
               </xsl:attribute>
@@ -309,26 +310,26 @@
             </xsl:copy>
           </xsl:when>
           <xsl:otherwise>
-            <xsl:copy-of
+            <xsl:copy-of copy-namespaces="no"
               select="$currentRow/*[1 + count(current()/preceding-sibling::*[not(@morerows) or (@morerows = 0)])]"
             />
           </xsl:otherwise>
         </xsl:choose>
       </xsl:for-each>
       <!-- Extra cells will be appended at the end. Otherwise, the irregular row length wouldn’t be reported. -->
-      <xsl:copy-of
+      <xsl:copy-of copy-namespaces="no"
         select="$currentRow/*[position() gt (count($previousRow/*) - count($previousRow/*/@morerows[. &gt; 0]))]"
       />
     </xsl:variable>
 
     <xsl:variable name="newRow" as="element()">
-      <xsl:copy>
-        <xsl:copy-of select="$currentRow/@*"/>
-        <xsl:copy-of select="$normalizedCells"/>
+      <xsl:copy copy-namespaces="no">
+        <xsl:copy-of select="$currentRow/@*" copy-namespaces="no"/>
+        <xsl:copy-of select="$normalizedCells" copy-namespaces="no"/>
       </xsl:copy>
     </xsl:variable>
 
-    <xsl:copy-of select="$newRow"/>
+    <xsl:copy-of select="$newRow" copy-namespaces="no"/>
 
     <xsl:apply-templates select="following-sibling::*:row[1]" mode="calstable:rowspan">
       <xsl:with-param name="previousRow" select="$newRow"/>

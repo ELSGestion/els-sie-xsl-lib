@@ -5,6 +5,7 @@
   xmlns:els="http://www.lefebvre-sarrut.eu/ns/els"
   xmlns:xslLib="http://www.lefebvre-sarrut.eu/ns/els/xslLib"
   xmlns:cals="http://docs.oasis-open.org/ns/oasis-exchange/table"
+  xmlns:calstable="http://docs.oasis-open.org/ns/oasis-exchange/table"
   xmlns:html="http://www.w3.org/1999/xhtml"
   xmlns="http://www.w3.org/1999/xhtml"
   xpath-default-namespace="http://docs.oasis-open.org/ns/oasis-exchange/table"
@@ -75,7 +76,7 @@
     <!--STEP1 : normalize cals table-->
     <xsl:variable name="step" as="document-node()">
       <xsl:document>
-        <xsl:apply-templates select="$step" mode="xslLib:normalizeCalsTable"/>
+        <xsl:apply-templates select="$step" mode="xslLib:normalizeCalsTable.main"/>
       </xsl:document>
     </xsl:variable>
     <xsl:if test="$xslLib:cals2html.debug">
@@ -118,7 +119,7 @@
         <xsl:sequence select="$step"/>
       </xsl:result-document>
     </xsl:if>
-    <!--FINALY-->    
+    <!--FINALY-->
     <xsl:apply-templates select="$step" mode="xslLib:removeXmlBase"/>
   </xsl:template>
   
@@ -131,6 +132,15 @@
   <!--==============================================================================================================================-->
   <!-- STEP 2 : cal2html.main -->
   <!--==============================================================================================================================-->
+  
+  <!--<xsl:mode name="xslLib:cals2html.main" on-no-match="shallow-copy" />-->
+  
+  <!--copy template-->
+  <xsl:template match="node() | @*" mode="xslLib:cals2html.main">
+    <xsl:copy copy-namespaces="no">
+      <xsl:apply-templates select="node() | @*" mode="#current"/>
+    </xsl:copy>
+  </xsl:template>
   
   <!-- TABLE -->
   <!-- CALS MODEL : table ::= title, tgroup+ -->
@@ -221,7 +231,7 @@
     <xsl:apply-templates select="*" mode="#current"/>
   </xsl:template>
   
-  <!-- Table bocy -->
+  <!-- Table body -->
   <!-- CALS MODEL : tbody ::= row+-->
   <xsl:template match="tbody" mode="xslLib:cals2html.main">
     <tbody>
@@ -254,13 +264,25 @@
 
   <!-- Table Cell -->
   <!-- CALS MODEL : entry ::=  "global model dependent"-->
-  <xsl:template match="entry" mode="xslLib:cals2html.main">
+  
+  <!--delete transpect ghost entries-->
+  <xsl:template match="entry[@calstable:rid]" mode="xslLib:cals2html.main"/>
+  
+  <xsl:template match="entry[not(@calstable:rid)]" mode="xslLib:cals2html.main">
     <xsl:variable name="nb-cols" select="ancestor::tgroup[1]/@cols[. castable as xs:integer]" as="xs:integer?"/>
     <xsl:variable name="entry" select="self::*" as="element(entry)"/>
     <xsl:variable name="current-tgroup" select="ancestor::tgroup[1]" as="element()"/>
     <xsl:variable name="current-colspec-list" as="element(colspec)*">
       <xsl:choose>
-        <!-- Firts consider @namestart/nameend -->
+        <!--First consider @colname-->
+        <xsl:when test="@colname">
+          <xsl:variable name="colname.colspec" select="$current-tgroup/colspec[@colname = current()/@colname]" as="element()*"/>
+          <xsl:if test="count($colname.colspec) != 1">
+            <xsl:message terminate="no">[ERROR][cals2html.xsl] No colspec exists in the current tgroup with @colname equals to current @colname="<xsl:value-of select="@colname"/>"</xsl:message>
+          </xsl:if>
+          <xsl:sequence select="$colname.colspec"/>
+        </xsl:when>
+        <!-- Then consider @namestart/nameend -->
         <xsl:when test="@namest and @nameend">
           <xsl:variable name="namest.colspec" select="$current-tgroup/colspec[@colname = current()/@namest]" as="element()*"/>
           <xsl:variable name="nameend.colspec" select="$current-tgroup/colspec[@colname = current()/@nameend]" as="element()*"/>
@@ -312,14 +334,6 @@
           <xsl:variable name="fsib1.entry-namest" select="following-sibling::entry[@namest][1]" as="element()"/>
           <xsl:variable name="distance" select="count(following-sibling::entry[. &lt;&lt; $fsib1.entry-namest]) + 1" as="xs:integer"/>
           <xsl:sequence select="$current-tgroup/colspec[@colname = $fsib1.entry-namest/@namest]/preceding-sibling::colspec[$distance]"/>
-        </xsl:when>
-        <!--There is no namest/nameend at all in the current row, let's consider @colname-->
-        <xsl:when test="@colname">
-          <xsl:variable name="colname.colspec" select="$current-tgroup/colspec[@colname = current()/@colname]" as="element()*"/>
-          <xsl:if test="count($colname.colspec) != 1">
-            <xsl:message terminate="no">[ERROR][cals2html.xsl] No colspec exists in the current tgroup with @colname equals to current @colname="<xsl:value-of select="@colname"/>"</xsl:message>
-          </xsl:if>
-          <xsl:sequence select="$colname.colspec"/>
         </xsl:when>
         <!--Finaly consider position-->
         <xsl:when test="position() > 1 and ../entry[@colname]">
@@ -483,6 +497,9 @@
     </xsl:if>
   </xsl:template>
   
+  <!--delete transpect ghost attributes-->
+  <xsl:template match="@calstable:*" mode="xslLib:cals2html.attributes"/>
+  
   <!--Attributes to keep as is-->
   <xsl:template match="@xml:* | @id" mode="xslLib:cals2html.attributes">
     <xsl:copy copy-namespaces="no"/>
@@ -497,13 +514,6 @@
         <xsl:message>[ERROR] <xsl:value-of select="name(parent::*)"/>/@<xsl:value-of select="name()"/> unmatched in mode "xslLib:cals2html.attributes"</xsl:message>
       </xsl:otherwise>
     </xsl:choose>
-  </xsl:template>
-  
-  <!--copy template-->
-  <xsl:template match="node() | @*" mode="xslLib:cals2html.main">
-    <xsl:copy copy-namespaces="no">
-      <xsl:apply-templates select="node() | @*" mode="#current"/>
-    </xsl:copy>
   </xsl:template>
   
   <!--==================================-->
@@ -677,6 +687,8 @@
   <!-- STEP 3 : class2style -->
   <!--==============================================================================================================================-->
   
+  <xsl:mode name="xslLib:cals2html.class2style" on-no-match="shallow-copy"/>
+  
   <xsl:variable name="xslLib:cals2html.class2style.mapping" as="element()">
     <!--Using cals namespace here so we can match elements with the xpath default namespace-->
     <mapping xmlns="http://docs.oasis-open.org/ns/oasis-exchange/table">
@@ -726,13 +738,6 @@
       </xsl:if>
       <xsl:copy-of select="@* except (@class | @style)"/>
       <xsl:apply-templates mode="#current"/>
-    </xsl:copy>
-  </xsl:template>
-  
-  <!--Default copy-->
-  <xsl:template match="* | @* | node()" mode="xslLib:cals2html.class2style">
-    <xsl:copy>
-      <xsl:apply-templates select="@* | node()" mode="#current"/>
     </xsl:copy>
   </xsl:template>
   

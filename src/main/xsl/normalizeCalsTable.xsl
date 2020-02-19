@@ -1,17 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xsl:stylesheet version="3.0"
-  xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
   xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl" 
   xmlns:xs="http://www.w3.org/2001/XMLSchema"
   xmlns:els="http://www.lefebvre-sarrut.eu/ns/els"
   xmlns:xslLib="http://www.lefebvre-sarrut.eu/ns/els/xslLib"
   xmlns:cals="http://docs.oasis-open.org/ns/oasis-exchange/table"
+  xmlns:calstable="http://docs.oasis-open.org/ns/oasis-exchange/table"
   xmlns="http://docs.oasis-open.org/ns/oasis-exchange/table"
   xpath-default-namespace="http://docs.oasis-open.org/ns/oasis-exchange/table"
-  exclude-result-prefixes="#all" 
-  >
-  
-  <!--<xsl:import href="els-common.xsl"/>-->
+  exclude-result-prefixes="#all"
+  version="3.0">
   
   <xd:doc scope="stylesheet">
     <xd:desc>
@@ -19,17 +17,46 @@
     </xd:desc>
   </xd:doc>
   
-  <!--==============================================================================================================================-->
+  
+  <xsl:import href="normalize.xsl"/>
+  
+  <!--==================================================================================-->
   <!-- INIT -->
-  <!--==============================================================================================================================-->
+  <!--==================================================================================-->
   
   <xsl:template match="/">
-    <xsl:apply-templates select="/" mode="xslLib:normalizeCalsTable"/>
+    <xsl:apply-templates select="/" mode="xslLib:normalizeCalsTable.main"/>
   </xsl:template>
   
-  <!--==============================================================================================================================-->
+  <!--==================================================================================-->
   <!-- MAIN -->
-  <!--==============================================================================================================================-->
+  <!--==================================================================================-->
+  
+  <xsl:template match="/" mode="xslLib:normalizeCalsTable.main">
+    <xsl:variable name="step" select="." as="document-node()"/>
+    <xsl:variable name="step" as="document-node()">
+      <xsl:document>
+        <xsl:apply-templates select="$step" mode="xslLib:normalizeCalsTable"/>
+      </xsl:document>
+    </xsl:variable>
+    <xsl:variable name="step" as="document-node()">
+      <xsl:document>
+        <xsl:apply-templates select="$step" mode="xslLib:normalizeCalsTable.transpec-normalization"/>
+      </xsl:document>
+    </xsl:variable>
+    <xsl:variable name="step" as="document-node()">
+      <xsl:document>
+        <xsl:apply-templates select="$step" mode="xslLib:normalizeCalsTable.finally"/>
+      </xsl:document>
+    </xsl:variable>
+    <xsl:sequence select="$step"/>
+  </xsl:template>
+  
+  <!--==================================================================================-->
+  <!-- xslLib:normalizeCalsTable -->
+  <!--==================================================================================-->
+  
+  <xsl:mode name="xslLib:normalizeCalsTable" on-no-match="shallow-copy"/>
   
   <!--Normalize yesorno values (0/false or 1/true becomes yes/no)-->
   <xsl:template match="
@@ -80,9 +107,37 @@
     </xsl:attribute>
   </xsl:template>
   
-  <!--copy template-->
-  <xsl:template match="* | @* | node()" mode="xslLib:normalizeCalsTable">
-    <xsl:copy>
+  <!--Delete colname when namest and nameend are setted (it does't make sens, right ? FIXME : might be usefull to choose aligment specified on colspec for example?)-->
+  <xsl:template match="entry[@namest and @nameend]/@colname" mode="xslLib:normalizeCalsTable"/>
+  
+  <!--==================================================================================-->
+  <!-- transpec-normalization -->
+  <!--==================================================================================-->
+  
+  <xsl:mode name="xslLib:normalizeCalsTable.transpec-normalization" on-no-match="shallow-copy"/>
+  
+  <xsl:template match="thead | tbody | tfoot" mode="xslLib:normalizeCalsTable.transpec-normalization" >
+    <xsl:sequence select="cals:normalize(.)"/>
+  </xsl:template>
+  
+  <!--==================================================================================-->
+  <!-- Finally -->
+  <!--==================================================================================-->
+  
+  <xsl:mode name="xslLib:normalizeCalsTable.finally" on-no-match="shallow-copy"/>
+  
+  <xsl:template match="@calstable:namest | @calstable:nameend | @calstable:spanname | @calstable:morerows"
+    mode="xslLib:normalizeCalsTable.finally">
+    <xsl:attribute name="{local-name()}" select="."/>
+  </xsl:template>
+  
+  <xsl:template match="(:@calstable:morerows[. = '0'] |:) @calstable:id"
+    mode="xslLib:normalizeCalsTable.finally"/>
+  
+  <!--pretty print : namespace at root element-->
+  <xsl:template match="/*" mode="xslLib:normalizeCalsTable.finally">
+    <xsl:copy copy-namespaces="yes">
+      <xsl:namespace name="calstable">http://docs.oasis-open.org/ns/oasis-exchange/table</xsl:namespace>
       <xsl:apply-templates select="@* | node()" mode="#current"/>
     </xsl:copy>
   </xsl:template>
