@@ -2,9 +2,65 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <style type="text/css">table{border-collapse: collapse;}</style>
+    <style type="text/css">
+      table {
+        border-collapse: collapse;
+      }</style>
   </head>
   <body>
+    <h2></h2>
+    <table xmlns="http://docs.oasis-open.org/ns/oasis-exchange/table" colsep="1" frame="all" rowsep="1">
+      <tgroup cols="5">
+        <colspec colname="c1" colwidth="15*"/>
+        <colspec colname="c2" colwidth="40*"/>
+        <colspec colname="c3" colwidth="12*"/>
+        <colspec colname="c4" colwidth="8*"/>
+        <colspec colname="c5" colwidth="25*"/>
+        <thead valign="middle">
+          <row>
+            <entry morerows="1">
+              <al>h1</al>
+            </entry>
+            <entry morerows="1">
+              <al>h2</al>
+            </entry>
+            <entry nameend="c4" namest="c3">
+              <al>h3</al>
+            </entry>
+            <entry morerows="1">
+              <al>h4</al>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <al>h5</al>
+            </entry>
+            <entry>
+              <al>h6</al>
+            </entry>
+          </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry>
+              <al>c1</al>
+            </entry>
+            <entry>
+              <al>c2</al>
+            </entry>
+            <entry>
+              <al>c3</al>
+            </entry>
+            <entry>
+              <al>c4</al>
+            </entry>
+            <entry>
+              <al>c5</al>
+            </entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
     <h2>Table colspec with "*"</h2>
     <table xmlns="http://docs.oasis-open.org/ns/oasis-exchange/table" frame="all" colsep="1" rowsep="1">
       <tgroup cols="4" tgroupstyle="type3" colsep="1" rowsep="1">
@@ -203,7 +259,7 @@
         <colspec colnum="1" colname="1" colwidth="50px"/>
         <colspec colnum="2" colname="2" colwidth="2in"/>
         <colspec colnum="3" colname="3" colwidth="30*"/>
-        <colspec colnum="4" colname="4" />
+        <colspec colnum="4" colname="4"/>
         <thead>
           <row rowsep="1">
             <entry colname="1">h1</entry>
@@ -235,7 +291,7 @@
         <colspec colnum="1" colname="1" colwidth="50px"/>
         <colspec colnum="2" colname="2" colwidth="2in"/>
         <colspec colnum="3" colname="3" colwidth="50*"/>
-        <colspec colnum="4" colname="4" />
+        <colspec colnum="4" colname="4"/>
         <thead>
           <row rowsep="1">
             <entry colname="1">h1</entry>
@@ -264,7 +320,7 @@
     <h2>Table 100% colspec with mixed units but some consistent for cospaned cells</h2>
     <table xmlns="http://docs.oasis-open.org/ns/oasis-exchange/table" frame="all" colsep="1" rowsep="1" pgwide="1">
       <tgroup cols="5" tgroupstyle="type3" colsep="1" rowsep="1">
-        <colspec colname="1" />
+        <colspec colname="1"/>
         <colspec colname="2" colwidth="2in"/>
         <colspec colname="3" colwidth="3in"/>
         <colspec colname="4" colwidth="50*"/>
