@@ -7,14 +7,14 @@
   
   <x:scenario label="HTML2CALS" xml:base="../samples/tables/">
     
-    <x:scenario label="HTML2CALS any html">
+    <x:scenario label="HTML2CALS any html :">
       <x:scenario label="table.html">
         <x:context href="table.html"/>
         <x:expect label="OK" select="/*" test="/*" href="table.cals.xml"/>
       </x:scenario>
     </x:scenario>
     
-    <x:scenario label="HTML2CALS - with class">
+    <x:scenario label="HTML2CALS - with class :">
       <x:scenario label="Table jira CHAINE-1885">
         <x:context href="Table_CHAINE-1885.htm"/>
         <x:expect label="OK" select="/*" test="/*" href="Table_CHAINE-1885.cals.xml"/>
@@ -29,7 +29,7 @@
       </x:scenario>
     </x:scenario>
     
-    <x:scenario label="HTML2CALS - with style">
+    <x:scenario label="HTML2CALS - with style :">
       <x:scenario label="Table jira CHAINE-1885">
         <x:context href="Table_CHAINE-1885.style.htm"/>
         <x:expect label="OK" select="/*" test="/*" href="Table_CHAINE-1885.style.cals.xml"/>
@@ -54,6 +54,16 @@
       <x:expect label="OK" select="/*" test="/*" href="table_SIETRAINPR-1066.editor.cals.xml"/>
     </x:scenario>
     
+    <x:scenario label="Issue #8: col width not correct when rowspan :">
+      <x:scenario label="table_test-colwith.style.htm">
+        <x:context href="table_test-colwith.style.htm"/>
+        <x:expect label="OK" select="/*" test="/*" href="table_test-colwith.style.cals.xml"/>
+      </x:scenario>
+      <x:scenario label="table_test-colwith.style.widthInCell.htm">
+        <x:context href="table_test-colwith.style.widthInCell.htm"/>
+        <x:expect label="OK" select="/*" test="/*" href="table_test-colwith.style.widthInCell.cals.xml"/>
+      </x:scenario>
+    </x:scenario>
   </x:scenario>
   
 </x:description>

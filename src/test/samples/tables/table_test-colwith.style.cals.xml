@@ -1,0 +1,354 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-model href="dependency:/eu.els.sie.models+ext-models/ext-models/oasis/cals/cals.nvdl" type="application/xml" schematypens="http://purl.oclc.org/dsdl/nvdl/ns/structure/1.0"?>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <style type="text/css">
+      table {
+        border-collapse: collapse;
+      }</style>
+  </head>
+  <body>
+    <h2></h2>
+    <table xmlns="http://docs.oasis-open.org/ns/oasis-exchange/table" frame="all" colsep="0" rowsep="0">
+      <tgroup cols="5">
+        <colspec colname="c1" colwidth="15%"/>
+        <colspec colname="c2" colwidth="40%"/>
+        <colspec colname="c3" colwidth="12%"/>
+        <colspec colname="c4" colwidth="8%"/>
+        <colspec colname="c5" colwidth="25%"/>
+        <thead valign="middle">
+          <row>
+            <entry align="left" morerows="1" colsep="1" rowsep="1">
+              <al>h1</al>
+            </entry>
+            <entry align="left" morerows="1" colsep="1" rowsep="1">
+              <al>h2</al>
+            </entry>
+            <entry align="left" namest="c3" nameend="c4" colsep="1" rowsep="1">
+              <al>h3</al>
+            </entry>
+            <entry align="left" morerows="1" colsep="1" rowsep="1">
+              <al>h4</al>
+            </entry>
+          </row>
+          <row>
+            <entry align="left" colsep="1" rowsep="1">
+              <al>h5</al>
+            </entry>
+            <entry align="left" colsep="1" rowsep="1">
+              <al>h6</al>
+            </entry>
+          </row>
+        </thead>
+        <tbody valign="middle">
+          <row>
+            <entry valign="top" colsep="1" rowsep="1">
+              <al>c1</al>
+            </entry>
+            <entry valign="top" colsep="1" rowsep="1">
+              <al>c2</al>
+            </entry>
+            <entry valign="top" colsep="1" rowsep="1">
+              <al>c3</al>
+            </entry>
+            <entry valign="top" colsep="1" rowsep="1">
+              <al>c4</al>
+            </entry>
+            <entry valign="top" colsep="1" rowsep="1">
+              <al>c5</al>
+            </entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+    <h2>Table colspec with "*"</h2>
+    <table xmlns="http://docs.oasis-open.org/ns/oasis-exchange/table" frame="all" colsep="0" rowsep="0">
+      <tgroup tgroupstyle="type3" cols="4">
+        <colspec colname="c1" colwidth="10%"/>
+        <colspec colname="c2" colwidth="20%"/>
+        <colspec colname="c3" colwidth="30%"/>
+        <colspec colname="c4" colwidth="40%"/>
+        <thead valign="middle">
+          <row>
+            <entry align="left" valign="top" colsep="1" rowsep="1">h1</entry>
+            <entry align="left" valign="top" colsep="1" rowsep="1">h2</entry>
+            <entry align="left" valign="top" colsep="1" rowsep="1">h3</entry>
+            <entry align="left" valign="top" colsep="1" rowsep="1">h4</entry>
+          </row>
+        </thead>
+        <tbody valign="middle">
+          <row>
+            <entry valign="top" colsep="1" rowsep="1">r1c1</entry>
+            <entry valign="top" morerows="2" colsep="1" rowsep="1">r1c2</entry>
+            <entry valign="top" colsep="1" rowsep="1">r1c3</entry>
+            <entry valign="top" morerows="2" colsep="1" rowsep="1">r1c4</entry>
+          </row>
+          <row>
+            <entry valign="top" morerows="1" colsep="1" rowsep="1">r2c1</entry>
+            <entry valign="top" colsep="1" rowsep="1">r2c2</entry>
+          </row>
+          <row>
+            <entry valign="top" colsep="1">r3c1</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+    <h2>Table 100% colspec with "*"</h2>
+    <table xmlns="http://docs.oasis-open.org/ns/oasis-exchange/table" pgwide="1" frame="all" colsep="0" rowsep="0">
+      <tgroup tgroupstyle="type3" cols="4">
+        <colspec colname="c1" colwidth="10%"/>
+        <colspec colname="c2" colwidth="20%"/>
+        <colspec colname="c3" colwidth="30%"/>
+        <colspec colname="c4" colwidth="40%"/>
+        <thead valign="middle">
+          <row>
+            <entry align="left" valign="top" colsep="1" rowsep="1">h1</entry>
+            <entry align="left" valign="top" colsep="1" rowsep="1">h2</entry>
+            <entry align="left" valign="top" colsep="1" rowsep="1">h3</entry>
+            <entry align="left" valign="top" colsep="1" rowsep="1">h4</entry>
+          </row>
+        </thead>
+        <tbody valign="middle">
+          <row>
+            <entry valign="top" colsep="1" rowsep="1">r1c1</entry>
+            <entry valign="top" morerows="2" colsep="1" rowsep="1">r1c2</entry>
+            <entry valign="top" colsep="1" rowsep="1">r1c3</entry>
+            <entry valign="top" morerows="2" colsep="1" rowsep="1">r1c4</entry>
+          </row>
+          <row>
+            <entry valign="top" morerows="1" colsep="1" rowsep="1">r2c1</entry>
+            <entry valign="top" colsep="1" rowsep="1">r2c2</entry>
+          </row>
+          <row>
+            <entry valign="top" colsep="1">r3c1</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+    <h2>Table colspec with "in"</h2>
+    <table xmlns="http://docs.oasis-open.org/ns/oasis-exchange/table" frame="all" colsep="0" rowsep="0">
+      <tgroup tgroupstyle="type3" cols="4">
+        <colspec colname="c1" colwidth="1in"/>
+        <colspec colname="c2" colwidth="2in"/>
+        <colspec colname="c3" colwidth="3in"/>
+        <colspec colname="c4" colwidth="4in"/>
+        <thead valign="middle">
+          <row>
+            <entry align="left" valign="top" colsep="1" rowsep="1">h1</entry>
+            <entry align="left" valign="top" colsep="1" rowsep="1">h2</entry>
+            <entry align="left" valign="top" colsep="1" rowsep="1">h3</entry>
+            <entry align="left" valign="top" colsep="1" rowsep="1">h4</entry>
+          </row>
+        </thead>
+        <tbody valign="middle">
+          <row>
+            <entry valign="top" colsep="1" rowsep="1">r1c1</entry>
+            <entry valign="top" morerows="2" colsep="1" rowsep="1">r1c2</entry>
+            <entry valign="top" colsep="1" rowsep="1">r1c3</entry>
+            <entry valign="top" morerows="2" colsep="1" rowsep="1">r1c4</entry>
+          </row>
+          <row>
+            <entry valign="top" morerows="1" colsep="1" rowsep="1">r2c1</entry>
+            <entry valign="top" colsep="1" rowsep="1">r2c2</entry>
+          </row>
+          <row>
+            <entry valign="top" colsep="1">r3c1</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+    <h2>Table 100% colspec with "in"</h2>
+    <table xmlns="http://docs.oasis-open.org/ns/oasis-exchange/table" pgwide="1" frame="all" colsep="0" rowsep="0">
+      <tgroup tgroupstyle="type3" cols="4">
+        <colspec colname="c1" colwidth="1in"/>
+        <colspec colname="c2" colwidth="2in"/>
+        <colspec colname="c3" colwidth="3in"/>
+        <colspec colname="c4" colwidth="4in"/>
+        <thead valign="middle">
+          <row>
+            <entry align="left" valign="top" colsep="1" rowsep="1">h1</entry>
+            <entry align="left" valign="top" colsep="1" rowsep="1">h2</entry>
+            <entry align="left" valign="top" colsep="1" rowsep="1">h3</entry>
+            <entry align="left" valign="top" colsep="1" rowsep="1">h4</entry>
+          </row>
+        </thead>
+        <tbody valign="middle">
+          <row>
+            <entry valign="top" colsep="1" rowsep="1">r1c1</entry>
+            <entry valign="top" morerows="2" colsep="1" rowsep="1">r1c2</entry>
+            <entry valign="top" colsep="1" rowsep="1">r1c3</entry>
+            <entry valign="top" morerows="2" colsep="1" rowsep="1">r1c4</entry>
+          </row>
+          <row>
+            <entry valign="top" morerows="1" colsep="1" rowsep="1">r2c1</entry>
+            <entry valign="top" colsep="1" rowsep="1">r2c2</entry>
+          </row>
+          <row>
+            <entry valign="top" colsep="1">r3c1</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+    <h2>Table colspec with "px"</h2>
+    <table xmlns="http://docs.oasis-open.org/ns/oasis-exchange/table" frame="all" colsep="0" rowsep="0">
+      <tgroup tgroupstyle="type3" cols="4">
+        <colspec colname="c1" colwidth="50px"/>
+        <colspec colname="c2" colwidth="100px"/>
+        <colspec colname="c3" colwidth="150px"/>
+        <colspec colname="c4" colwidth="200px"/>
+        <thead valign="middle">
+          <row>
+            <entry align="left" valign="top" colsep="1" rowsep="1">h1</entry>
+            <entry align="left" valign="top" colsep="1" rowsep="1">h2</entry>
+            <entry align="left" valign="top" colsep="1" rowsep="1">h3</entry>
+            <entry align="left" valign="top" colsep="1" rowsep="1">h4</entry>
+          </row>
+        </thead>
+        <tbody valign="middle">
+          <row>
+            <entry valign="top" colsep="1" rowsep="1">r1c1</entry>
+            <entry valign="top" morerows="2" colsep="1" rowsep="1">r1c2</entry>
+            <entry valign="top" colsep="1" rowsep="1">r1c3</entry>
+            <entry valign="top" morerows="2" colsep="1" rowsep="1">r1c4</entry>
+          </row>
+          <row>
+            <entry valign="top" morerows="1" colsep="1" rowsep="1">r2c1</entry>
+            <entry valign="top" colsep="1" rowsep="1">r2c2</entry>
+          </row>
+          <row>
+            <entry valign="top" colsep="1">r3c1</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+    <h2>Table 100% colspec with "px"</h2>
+    <table xmlns="http://docs.oasis-open.org/ns/oasis-exchange/table" pgwide="1" frame="all" colsep="0" rowsep="0">
+      <tgroup tgroupstyle="type3" cols="4">
+        <colspec colname="c1" colwidth="50px"/>
+        <colspec colname="c2" colwidth="100px"/>
+        <colspec colname="c3" colwidth="150px"/>
+        <colspec colname="c4" colwidth="200px"/>
+        <thead valign="middle">
+          <row>
+            <entry align="left" valign="top" colsep="1" rowsep="1">h1</entry>
+            <entry align="left" valign="top" colsep="1" rowsep="1">h2</entry>
+            <entry align="left" valign="top" colsep="1" rowsep="1">h3</entry>
+            <entry align="left" valign="top" colsep="1" rowsep="1">h4</entry>
+          </row>
+        </thead>
+        <tbody valign="middle">
+          <row>
+            <entry valign="top" colsep="1" rowsep="1">r1c1</entry>
+            <entry valign="top" morerows="2" colsep="1" rowsep="1">r1c2</entry>
+            <entry valign="top" colsep="1" rowsep="1">r1c3</entry>
+            <entry valign="top" morerows="2" colsep="1" rowsep="1">r1c4</entry>
+          </row>
+          <row>
+            <entry valign="top" morerows="1" colsep="1" rowsep="1">r2c1</entry>
+            <entry valign="top" colsep="1" rowsep="1">r2c2</entry>
+          </row>
+          <row>
+            <entry valign="top" colsep="1">r3c1</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+    <h2>Table colspec with mixed units ("px", "in", "*", none)</h2>
+    <table xmlns="http://docs.oasis-open.org/ns/oasis-exchange/table" frame="all" colsep="0" rowsep="0">
+      <tgroup tgroupstyle="type3" cols="4">
+        <colspec colname="c1" colwidth="50px"/>
+        <colspec colname="c2" colwidth="2in"/>
+        <colspec colname="c3"/>
+        <colspec colname="c4"/>
+        <thead valign="middle">
+          <row>
+            <entry align="left" valign="top" colsep="1" rowsep="1">h1</entry>
+            <entry align="left" valign="top" colsep="1" rowsep="1">h2</entry>
+            <entry align="left" valign="top" colsep="1" rowsep="1">h3</entry>
+            <entry align="left" valign="top" colsep="1" rowsep="1">h4</entry>
+          </row>
+        </thead>
+        <tbody valign="middle">
+          <row>
+            <entry valign="top" colsep="1" rowsep="1">r1c1</entry>
+            <entry valign="top" morerows="2" colsep="1" rowsep="1">r1c2</entry>
+            <entry valign="top" colsep="1" rowsep="1">r1c3</entry>
+            <entry valign="top" morerows="2" colsep="1" rowsep="1">r1c4</entry>
+          </row>
+          <row>
+            <entry valign="top" morerows="1" colsep="1" rowsep="1">r2c1</entry>
+            <entry valign="top" colsep="1" rowsep="1">r2c2</entry>
+          </row>
+          <row>
+            <entry valign="top" colsep="1">r3c1</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+    <h2>Table 100% colspec with mixed units ("px", "in", "*", none)</h2>
+    <table xmlns="http://docs.oasis-open.org/ns/oasis-exchange/table" pgwide="1" frame="all" colsep="0" rowsep="0">
+      <tgroup tgroupstyle="type3" cols="4">
+        <colspec colname="c1" colwidth="50px"/>
+        <colspec colname="c2" colwidth="2in"/>
+        <colspec colname="c3"/>
+        <colspec colname="c4"/>
+        <thead valign="middle">
+          <row>
+            <entry align="left" valign="top" colsep="1" rowsep="1">h1</entry>
+            <entry align="left" valign="top" colsep="1" rowsep="1">h2</entry>
+            <entry align="left" valign="top" colsep="1" rowsep="1">h3</entry>
+            <entry align="left" valign="top" colsep="1" rowsep="1">h4</entry>
+          </row>
+        </thead>
+        <tbody valign="middle">
+          <row>
+            <entry valign="top" colsep="1" rowsep="1">r1c1</entry>
+            <entry valign="top" morerows="2" colsep="1" rowsep="1">r1c2</entry>
+            <entry valign="top" colsep="1" rowsep="1">r1c3</entry>
+            <entry valign="top" morerows="2" colsep="1" rowsep="1">r1c4</entry>
+          </row>
+          <row>
+            <entry valign="top" morerows="1" colsep="1" rowsep="1">r2c1</entry>
+            <entry valign="top" colsep="1" rowsep="1">r2c2</entry>
+          </row>
+          <row>
+            <entry valign="top" colsep="1">r3c1</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+    <h2>Table 100% colspec with mixed units but some consistent for cospaned cells</h2>
+    <table xmlns="http://docs.oasis-open.org/ns/oasis-exchange/table" pgwide="1" frame="all" colsep="0" rowsep="0">
+      <tgroup tgroupstyle="type3" cols="5">
+        <colspec colname="c1"/>
+        <colspec colname="c2" colwidth="2in"/>
+        <colspec colname="c3" colwidth="3in"/>
+        <colspec colname="c4"/>
+        <colspec colname="c5"/>
+        <thead valign="middle">
+          <row>
+            <entry align="left" valign="top" colsep="1" rowsep="1">h1</entry>
+            <entry align="left" valign="top" namest="c2" nameend="c3" colsep="1" rowsep="1">h2</entry>
+            <entry align="left" valign="top" colsep="1" rowsep="1">h4</entry>
+            <entry align="left" valign="top" colsep="1" rowsep="1">h5</entry>
+          </row>
+        </thead>
+        <tbody valign="middle">
+          <row>
+            <entry valign="top" colsep="1" rowsep="1">r1c1</entry>
+            <entry valign="top" morerows="2" colsep="1" rowsep="1">r1c2</entry>
+            <entry valign="top" colsep="1" rowsep="1">r1c3</entry>
+            <entry valign="top" morerows="2" namest="c4" nameend="c5" colsep="1" rowsep="1">r1c4</entry>
+          </row>
+          <row>
+            <entry valign="top" morerows="1" colsep="1" rowsep="1">r2c1</entry>
+            <entry valign="top" colsep="1" rowsep="1">r2c2</entry>
+          </row>
+          <row>
+            <entry valign="top" colsep="1">r3c1</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+  </body>
+</html>
