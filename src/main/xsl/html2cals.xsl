@@ -957,7 +957,13 @@
     </entry>
   </xsl:template>
   
-  <xsl:template match="td[@xhtml2cals:DummyCell = 'yes'] | th[@xhtml2cals:DummyCell = 'yes']" mode="xhtml2cals:convert-to-cals" priority="1"/>
+  <!--FIXME : will be delete later on cals-optimize because we need these dummyCells to compute colwidth, convert it to cals for now
+    keeping its attributes--> 
+  <xsl:template match="td[@xhtml2cals:DummyCell = 'yes'] | th[@xhtml2cals:DummyCell = 'yes']" mode="xhtml2cals:convert-to-cals" priority="1">
+    <entry>
+      <xsl:copy-of select="@*"/>
+    </entry>
+  </xsl:template>
   
   <!-- === Converting attributes === -->
   
@@ -1055,6 +1061,8 @@
     <!-- STEP 7 : Mode xhtml2cals:optimize-cals-->
     <!-- ==============================================================================================-->
   </xd:doc>
+  
+  <xsl:template match="cals:entry[@xhtml2cals:DummyCell = 'yes']" mode="xhtml2cals:optimize-cals" priority="1"/>
   
   <!--delete @html-width on cals elements, they had been added to compute colwidth (see after)-->
   <xsl:template match="cals:*/@html-width" mode="xhtml2cals:optimize-cals"/>
