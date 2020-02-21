@@ -1030,9 +1030,11 @@
           <!--rowsep and colsep has already been processed-->
         </xsl:when>
         <xsl:when test="css:getPropertyName(.) = 'background-color'">
-          <xsl:message><xsl:copy-of select="$css"/></xsl:message>
           <!--<css:background-color-ruleset><css:background-color><css:color>#d8d8d8</css:color></css:background-color></css:background-color-ruleset>-->
           <xsl:attribute name="bgcolor" select="css:getProperty($css, 'background-color')//text()"/>
+        </xsl:when>
+        <xsl:when test="css:getPropertyName(.) => starts-with('padding')">
+          <!--Ignore - no equivalent in CALS-->
         </xsl:when>
         <xsl:otherwise>
           <xsl:message>[WARNING][html2cals.xsl] unmatched css property "<xsl:value-of select="css:getPropertyName(.)"/>"</xsl:message>
@@ -1069,11 +1071,13 @@
   
   <xsl:template match="cals:colspec[not(@width)][following-sibling::*/cals:row/cals:entry[@html-width]]" mode="xhtml2cals:optimize-cals">
     <xsl:variable name="position" select="count(preceding-sibling::cals:colspec) + 1" as="xs:integer"/>
-    <xsl:variable name="entries.width" select="following-sibling::*/cals:row/cals:entry[$position]/@html-width" as="xs:string*"/>
+    <xsl:variable name="col.unspanned-entries.width" select="following-sibling::*/cals:row/cals:entry[$position]
+      [(@namest, '')[1] = (@nameend, '')[1]] (:ignore spanned entry:)
+      /@html-width" as="xs:string*"/>
     <xsl:copy copy-namespaces="no">
       <xsl:apply-templates select="@*" mode="#current"/>
-      <xsl:if test="not(empty($entries.width))">
-        <xsl:attribute name="colwidth" select="max($entries.width)"/>
+      <xsl:if test="not(empty($col.unspanned-entries.width))">
+        <xsl:attribute name="colwidth" select="max($col.unspanned-entries.width)"/>
       </xsl:if>
     </xsl:copy>
   </xsl:template>
