@@ -10,7 +10,157 @@
                         <scenarioAssociation-array>
                             <scenarioAssociation>
                                 <field name="url">
-                                    <String>src/test/samples/tables/table_test-colwith.style.widthInCell.htm</String>
+                                    <String>src/test/samples/tables/table_SIETRAINPR-1066.editor.html</String>
+                                </field>
+                                <field name="scenarioIds">
+                                    <list>
+                                        <String>html2cals.xsl</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioTypes">
+                                    <list>
+                                        <String>XSL</String>
+                                    </list>
+                                </field>
+                            </scenarioAssociation>
+                            <scenarioAssociation>
+                                <field name="url">
+                                    <String>src/test/samples/tables/table_ELSSIEXDC-23.editor.cals.xml</String>
+                                </field>
+                                <field name="scenarioIds">
+                                    <list>
+                                        <String>cals2html.xsl - with @style</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioTypes">
+                                    <list>
+                                        <String>XSL</String>
+                                    </list>
+                                </field>
+                            </scenarioAssociation>
+                            <scenarioAssociation>
+                                <field name="url">
+                                    <String>src/test/samples/tables/table_ELSSIEXDC-23.editor.html</String>
+                                </field>
+                                <field name="scenarioIds">
+                                    <list>
+                                        <String>html2cals.xsl</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioTypes">
+                                    <list>
+                                        <String>XSL</String>
+                                    </list>
+                                </field>
+                            </scenarioAssociation>
+                            <scenarioAssociation>
+                                <field name="url">
+                                    <String>src/test/samples/tables/Table_CHAINE-1885.htm</String>
+                                </field>
+                                <field name="scenarioIds">
+                                    <list>
+                                        <String>html2cals.xsl</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioTypes">
+                                    <list>
+                                        <String>XSL</String>
+                                    </list>
+                                </field>
+                            </scenarioAssociation>
+                            <scenarioAssociation>
+                                <field name="url">
+                                    <String>src/test/samples/tables/Table_CHAINE-1885.style.htm</String>
+                                </field>
+                                <field name="scenarioIds">
+                                    <list>
+                                        <String>html2cals.xsl</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioTypes">
+                                    <list>
+                                        <String>XSL</String>
+                                    </list>
+                                </field>
+                            </scenarioAssociation>
+                            <scenarioAssociation>
+                                <field name="url">
+                                    <String>src/test/samples/tables/table.html</String>
+                                </field>
+                                <field name="scenarioIds">
+                                    <list>
+                                        <String>html2cals.xsl</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioTypes">
+                                    <list>
+                                        <String>XSL</String>
+                                    </list>
+                                </field>
+                            </scenarioAssociation>
+                            <scenarioAssociation>
+                                <field name="url">
+                                    <String>src/test/samples/tables/isosts_tables.cals.style.htm</String>
+                                </field>
+                                <field name="scenarioIds">
+                                    <list>
+                                        <String>html2cals.xsl</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioTypes">
+                                    <list>
+                                        <String>XSL</String>
+                                    </list>
+                                </field>
+                            </scenarioAssociation>
+                            <scenarioAssociation>
+                                <field name="url">
+                                    <String>src/test/samples/tables/isosts_tables.cals.htm</String>
+                                </field>
+                                <field name="scenarioIds">
+                                    <list>
+                                        <String>html2cals.xsl</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioTypes">
+                                    <list>
+                                        <String>XSL</String>
+                                    </list>
+                                </field>
+                            </scenarioAssociation>
+                            <scenarioAssociation>
+                                <field name="url">
+                                    <String>src/test/samples/tables/frchs1603cx.tables.style.htm</String>
+                                </field>
+                                <field name="scenarioIds">
+                                    <list>
+                                        <String>html2cals.xsl</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioTypes">
+                                    <list>
+                                        <String>XSL</String>
+                                    </list>
+                                </field>
+                            </scenarioAssociation>
+                            <scenarioAssociation>
+                                <field name="url">
+                                    <String>src/test/samples/tables/article.xml</String>
+                                </field>
+                                <field name="scenarioIds">
+                                    <list>
+                                        <String>html2cals.xsl - force-html-table-conversion + generate-upper-case-cals-elements + casl.ns empty</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioTypes">
+                                    <list>
+                                        <String>XSL</String>
+                                    </list>
+                                </field>
+                            </scenarioAssociation>
+                            <scenarioAssociation>
+                                <field name="url">
+                                    <String>src/test/samples/tables/frchs1603cx.tables.htm</String>
                                 </field>
                                 <field name="scenarioIds">
                                     <list>
@@ -40,6 +190,21 @@
                             </scenarioAssociation>
                             <scenarioAssociation>
                                 <field name="url">
+                                    <String>src/test/samples/tables/table_test-colwith.style.widthInCell.htm</String>
+                                </field>
+                                <field name="scenarioIds">
+                                    <list>
+                                        <String>html2cals.xsl</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioTypes">
+                                    <list>
+                                        <String>XSL</String>
+                                    </list>
+                                </field>
+                            </scenarioAssociation>
+                            <scenarioAssociation>
+                                <field name="url">
                                     <String>src/test/samples/tables/table_test-colwith.xml</String>
                                 </field>
                                 <field name="scenarioIds">
@@ -51,6 +216,21 @@
                                 <field name="scenarioTypes">
                                     <list>
                                         <String>XSL</String>
+                                        <String>XSL</String>
+                                    </list>
+                                </field>
+                            </scenarioAssociation>
+                            <scenarioAssociation>
+                                <field name="url">
+                                    <String>src/test/samples/tables/html-tables-utilities/html-tables.add-thead/case-1.html</String>
+                                </field>
+                                <field name="scenarioIds">
+                                    <list>
+                                        <String>html-tables.add-thead.xsl</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioTypes">
+                                    <list>
                                         <String>XSL</String>
                                     </list>
                                 </field>
@@ -194,191 +374,11 @@
                             </scenarioAssociation>
                             <scenarioAssociation>
                                 <field name="url">
-                                    <String>src/test/samples/tables/html-tables-utilities/html-tables.add-thead/case-1.html</String>
-                                </field>
-                                <field name="scenarioIds">
-                                    <list>
-                                        <String>html-tables.add-thead.xsl</String>
-                                    </list>
-                                </field>
-                                <field name="scenarioTypes">
-                                    <list>
-                                        <String>XSL</String>
-                                    </list>
-                                </field>
-                            </scenarioAssociation>
-                            <scenarioAssociation>
-                                <field name="url">
                                     <String>src/test/samples/tables/html-tables-utilities/html-tables.add-thead/case-2.html</String>
                                 </field>
                                 <field name="scenarioIds">
                                     <list>
                                         <String>html-tables.add-thead.xsl</String>
-                                    </list>
-                                </field>
-                                <field name="scenarioTypes">
-                                    <list>
-                                        <String>XSL</String>
-                                    </list>
-                                </field>
-                            </scenarioAssociation>
-                            <scenarioAssociation>
-                                <field name="url">
-                                    <String>src/test/samples/tables/isosts_tables.cals.style.htm</String>
-                                </field>
-                                <field name="scenarioIds">
-                                    <list>
-                                        <String>html2cals.xsl</String>
-                                    </list>
-                                </field>
-                                <field name="scenarioTypes">
-                                    <list>
-                                        <String>XSL</String>
-                                    </list>
-                                </field>
-                            </scenarioAssociation>
-                            <scenarioAssociation>
-                                <field name="url">
-                                    <String>src/test/samples/tables/frchs1603cx.tables.style.htm</String>
-                                </field>
-                                <field name="scenarioIds">
-                                    <list>
-                                        <String>html2cals.xsl</String>
-                                    </list>
-                                </field>
-                                <field name="scenarioTypes">
-                                    <list>
-                                        <String>XSL</String>
-                                    </list>
-                                </field>
-                            </scenarioAssociation>
-                            <scenarioAssociation>
-                                <field name="url">
-                                    <String>src/test/samples/tables/isosts_tables.cals.htm</String>
-                                </field>
-                                <field name="scenarioIds">
-                                    <list>
-                                        <String>html2cals.xsl</String>
-                                    </list>
-                                </field>
-                                <field name="scenarioTypes">
-                                    <list>
-                                        <String>XSL</String>
-                                    </list>
-                                </field>
-                            </scenarioAssociation>
-                            <scenarioAssociation>
-                                <field name="url">
-                                    <String>src/test/samples/tables/frchs1603cx.tables.htm</String>
-                                </field>
-                                <field name="scenarioIds">
-                                    <list>
-                                        <String>html2cals.xsl</String>
-                                    </list>
-                                </field>
-                                <field name="scenarioTypes">
-                                    <list>
-                                        <String>XSL</String>
-                                    </list>
-                                </field>
-                            </scenarioAssociation>
-                            <scenarioAssociation>
-                                <field name="url">
-                                    <String>src/test/samples/tables/table_ELSSIEXDC-23.editor.cals.xml</String>
-                                </field>
-                                <field name="scenarioIds">
-                                    <list>
-                                        <String>cals2html.xsl - with @style</String>
-                                    </list>
-                                </field>
-                                <field name="scenarioTypes">
-                                    <list>
-                                        <String>XSL</String>
-                                    </list>
-                                </field>
-                            </scenarioAssociation>
-                            <scenarioAssociation>
-                                <field name="url">
-                                    <String>src/test/samples/tables/table_ELSSIEXDC-23.editor.html</String>
-                                </field>
-                                <field name="scenarioIds">
-                                    <list>
-                                        <String>html2cals.xsl</String>
-                                    </list>
-                                </field>
-                                <field name="scenarioTypes">
-                                    <list>
-                                        <String>XSL</String>
-                                    </list>
-                                </field>
-                            </scenarioAssociation>
-                            <scenarioAssociation>
-                                <field name="url">
-                                    <String>src/test/samples/tables/table.html4.html</String>
-                                </field>
-                                <field name="scenarioIds">
-                                    <list>
-                                        <String>html4Table2html5Table.xsl</String>
-                                    </list>
-                                </field>
-                                <field name="scenarioTypes">
-                                    <list>
-                                        <String>XSL</String>
-                                    </list>
-                                </field>
-                            </scenarioAssociation>
-                            <scenarioAssociation>
-                                <field name="url">
-                                    <String>src/test/samples/tables/article.xml</String>
-                                </field>
-                                <field name="scenarioIds">
-                                    <list>
-                                        <String>html2cals.xsl - force-html-table-conversion + generate-upper-case-cals-elements + casl.ns empty</String>
-                                    </list>
-                                </field>
-                                <field name="scenarioTypes">
-                                    <list>
-                                        <String>XSL</String>
-                                    </list>
-                                </field>
-                            </scenarioAssociation>
-                            <scenarioAssociation>
-                                <field name="url">
-                                    <String>src/test/samples/tables/table.html</String>
-                                </field>
-                                <field name="scenarioIds">
-                                    <list>
-                                        <String>html2cals.xsl</String>
-                                    </list>
-                                </field>
-                                <field name="scenarioTypes">
-                                    <list>
-                                        <String>XSL</String>
-                                    </list>
-                                </field>
-                            </scenarioAssociation>
-                            <scenarioAssociation>
-                                <field name="url">
-                                    <String>src/test/samples/tables/Table_CHAINE-1885.style.htm</String>
-                                </field>
-                                <field name="scenarioIds">
-                                    <list>
-                                        <String>html2cals.xsl</String>
-                                    </list>
-                                </field>
-                                <field name="scenarioTypes">
-                                    <list>
-                                        <String>XSL</String>
-                                    </list>
-                                </field>
-                            </scenarioAssociation>
-                            <scenarioAssociation>
-                                <field name="url">
-                                    <String>src/test/samples/tables/Table_CHAINE-1885.htm</String>
-                                </field>
-                                <field name="scenarioIds">
-                                    <list>
-                                        <String>html2cals.xsl</String>
                                     </list>
                                 </field>
                                 <field name="scenarioTypes">

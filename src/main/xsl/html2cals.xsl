@@ -56,6 +56,8 @@
   <!--When table are not in html namespace one can force every tableaux to be converted to this namespace-->
   <xsl:param name="xslLib:html2cals.force-html-table-conversion" select="false()" as="xs:boolean"/>
   <xsl:param name="xslLib:html2cals.generate-upper-case-cals-elements" select="false()" as="xs:boolean"/>
+  <!--Cals spec uses * instead of %, this param allow this conversion--> 
+  <xsl:param name="xslLib:html2cals.convertWidthPercentsToStars" select="true()" as="xs:boolean"/>
   
   <!--==============================================================================================================================-->
   <!-- INIT -->
@@ -996,16 +998,29 @@
     <xsl:for-each select="css:getProperties($css)">
       <xsl:choose>
         <xsl:when test="css:getPropertyName(.) = 'width'">
+          <xsl:variable name="width" select="css:getPropertyValue($css, 'width')" as="xs:string"/>
+          <xsl:variable name="normalized-width" as="xs:string">
+            <xsl:choose>
+              <xsl:when test="$xslLib:html2cals.convertWidthPercentsToStars and ends-with($width, '%')">
+                <xsl:sequence select="replace($width, '%', '*')"/>
+              </xsl:when>
+              <xsl:otherwise>
+                <xsl:sequence select="$width"/>
+              </xsl:otherwise>
+            </xsl:choose>
+          </xsl:variable>
           <xsl:choose>
-            <xsl:when test="$e/self::table and css:getPropertyValue($css, 'width') = '100%'">
+            <xsl:when test="$e/self::table and $width = '100%'">
               <xsl:attribute name="pgwide" select="'1'"/>
             </xsl:when>
+            <!--When the width is set on html:col, keep it for cals colspec-->
             <xsl:when test="$e/self::col">
-              <xsl:attribute name="colwidth" select="css:getPropertyValue($css, 'width')"/>
+              <xsl:attribute name="colwidth" select="$normalized-width"/>
             </xsl:when>
+            <!--When the width is set on html cells, we will have to compute it on cals colspec later-->
             <xsl:otherwise>
               <!--keep the width so we can compute it later-->
-              <xsl:attribute name="html-width" select="css:getPropertyValue($css, 'width')"/>
+              <xsl:attribute name="html-width" select="$normalized-width"/>
             </xsl:otherwise>
           </xsl:choose>
         </xsl:when>
