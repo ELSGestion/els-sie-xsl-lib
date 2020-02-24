@@ -1095,18 +1095,52 @@
   <!--delete @html-width on cals elements, they had been added to compute colwidth (see after)-->
   <xsl:template match="cals:*/@html-width" mode="xhtml2cals:optimize-cals"/>
   
-  <xsl:template match="cals:colspec[not(@width)][following-sibling::*/cals:row/cals:entry[@html-width]]" mode="xhtml2cals:optimize-cals">
+  <!--When colspec has no colwidth (from html:col/@width) try to get it from the cell(s) is the col that has the max size (if size is consistent)-->
+  <!--At this point an html-width attribute has been added on each cells : this value has been normalized to x* if the size was %-->
+  <!--We have to check first the constitancy of width of the selected cells (we could not now if 2cm is larger than 1*)-->
+  <xsl:template match="cals:colspec[not(@colwidth)][following-sibling::*/cals:row/cals:entry[@html-width]]" mode="xhtml2cals:optimize-cals">
     <xsl:variable name="position" select="count(preceding-sibling::cals:colspec) + 1" as="xs:integer"/>
-    <xsl:variable name="col.unspanned-entries.width" select="following-sibling::*/cals:row/cals:entry[$position]
-      [(@namest, '')[1] = (@nameend, '')[1]] (:ignore spanned entry:)
-      /@html-width" as="xs:string*"/>
+    <xsl:variable name="col.unspanned-entries" as="element(cals:entry)*"
+      select="following-sibling::*/cals:row/cals:entry[$position]
+      [(@namest, '')[1] = (@nameend, '')[1]] (:ignore width of spanned cells:)" />
     <xsl:copy copy-namespaces="no">
       <xsl:apply-templates select="@*" mode="#current"/>
-      <xsl:if test="not(empty($col.unspanned-entries.width))">
-        <xsl:attribute name="colwidth" select="max($col.unspanned-entries.width)"/>
+      <xsl:if test="xslLib:html2cals.entriesWidthUnitAreTheSame($col.unspanned-entries)">
+        <xsl:variable name="col.unspanned-entries.width" as="xs:double*"
+          select="$col.unspanned-entries/@html-width ! xslLib:html2cals.getWidthAsNumber(.)" />
+        <xsl:attribute name="colwidth" select="max($col.unspanned-entries.width) || $col.unspanned-entries[@html-width][1]/@html-width/xslLib:html2cals.getWidthUnit(.)"/>
       </xsl:if>
     </xsl:copy>
   </xsl:template>
+  
+  <!--Check if every @html-width units of an entries list are consistent (the same)-->
+  <xsl:function name="xslLib:html2cals.entriesWidthUnitAreTheSame" as="xs:boolean" visibility="private">
+    <xsl:param name="entries" as="element(cals:entry)*"/>
+    <xsl:variable name="entry-1.unit" select="$entries[@html-width][1]/@html-width/xslLib:html2cals.getWidthUnit(.)" as="xs:string?"/>
+    <xsl:choose>
+      <xsl:when test="count($entries) = 0 or count($entry-1.unit) = 0">
+        <xsl:sequence select="false()"/>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:sequence select="every $unit in $entries/@html-width/xslLib:html2cals.getWidthUnit(.) 
+          satisfies $unit = $entry-1.unit"/>
+      </xsl:otherwise>
+    </xsl:choose>
+  </xsl:function>
+  
+  
+  <!--From a width with its unit (like 10px), get the unit (px)-->
+  <!--FIXME : this function has been duplicated from cals2html one-->
+  <xsl:function name="xslLib:html2cals.getWidthUnit" as="xs:string">
+    <xsl:param name="width" as="xs:string"/>
+    <xsl:sequence select="replace($width, '\d|\.', '')"/>
+  </xsl:function>
+  
+  <!--10px => 10-->
+  <xsl:function name="xslLib:html2cals.getWidthAsNumber" as="xs:double">
+    <xsl:param name="width" as="xs:string"/>
+    <xsl:sequence select="replace($width, '^((\d|\.)+).*', '$1') => xs:double()"/>
+  </xsl:function>
   
   <!--colsep/rowsep : use 'yes' or 'no' instead of '1' or '0'-->
   <xsl:template match="cals:*/@colsep | cals:*/@rowsep" mode="xhtml2cals:optimize-cals">
