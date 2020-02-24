@@ -992,35 +992,46 @@
     <xsl:attribute name="{substring-after(local-name(), 'data-cals-')}" select="."/>
   </xsl:template>
   
-  <xsl:template match="@style" mode="xhtml2cals:convert-attributes-to-cals">
+  <xsl:template match="*[not(self::css:*)]/@style" mode="xhtml2cals:convert-attributes-to-cals">
     <xsl:variable name="e" select="parent::*" as="element()"/>
     <xsl:variable name="css" select="css:parse-inline(.)" as="element(css:css)?"/>
     <xsl:for-each select="css:getProperties($css)">
       <xsl:choose>
         <xsl:when test="css:getPropertyName(.) = 'width'">
           <xsl:variable name="width" select="css:getPropertyValue($css, 'width')" as="xs:string"/>
-          <xsl:variable name="normalized-width" as="xs:string">
-            <xsl:choose>
-              <xsl:when test="$xslLib:html2cals.convertWidthPercentsToStars and ends-with($width, '%')">
-                <xsl:sequence select="replace($width, '%', '*')"/>
-              </xsl:when>
-              <xsl:otherwise>
-                <xsl:sequence select="$width"/>
-              </xsl:otherwise>
-            </xsl:choose>
-          </xsl:variable>
           <xsl:choose>
             <xsl:when test="$e/self::table and $width = '100%'">
               <xsl:attribute name="pgwide" select="'1'"/>
             </xsl:when>
-            <!--When the width is set on html:col, keep it for cals colspec-->
-            <xsl:when test="$e/self::col">
-              <xsl:attribute name="colwidth" select="$normalized-width"/>
-            </xsl:when>
-            <!--When the width is set on html cells, we will have to compute it on cals colspec later-->
             <xsl:otherwise>
-              <!--keep the width so we can compute it later-->
-              <xsl:attribute name="html-width" select="$normalized-width"/>
+              <xsl:variable name="normalized-width" as="xs:string">
+                <xsl:choose>
+                  <xsl:when test="$xslLib:html2cals.convertWidthPercentsToStars and ends-with($width, '%')">
+                    <xsl:variable name="nb-cols" select="xhtml2cals:nb-cols($e/ancestor::table[1])" as="xs:integer"/>
+                    <xsl:variable name="percent" select="substring-before($width, '%') cast as xs:double" as="xs:double"/>
+                    <!--table % is applied to the width of the html table
+                        if a table has 4 cols, the whole width is "4*" then 1* is equivalent 25%
+                            100% -> nb-cols *
+                            N%   -> (N x nb-cols / 100) *
+                        NB : we could actually just replace % by * when every width is specified, which could be false-->
+                    <xsl:sequence select="els:round($percent * $nb-cols div 100, 3) || '*'"/>
+                  </xsl:when>
+                  <xsl:otherwise>
+                    <xsl:sequence select="$width"/>
+                  </xsl:otherwise>
+                </xsl:choose>
+              </xsl:variable>
+              <xsl:choose>
+                <!--When the width is set on html:col, keep it for cals colspec-->
+                <xsl:when test="$e/self::col">
+                  <xsl:attribute name="colwidth" select="$normalized-width"/>
+                </xsl:when>
+                <!--When the width is set on html cells, we will have to compute it on cals colspec later-->
+                <xsl:otherwise>
+                  <!--keep the width so we can compute it later-->
+                  <xsl:attribute name="html-width" select="$normalized-width"/>
+                </xsl:otherwise>
+              </xsl:choose>
             </xsl:otherwise>
           </xsl:choose>
         </xsl:when>

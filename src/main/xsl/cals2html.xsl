@@ -570,9 +570,7 @@
                         <xsl:when test="$colspec-list-for-current-width.unit = $colspec-list-for-total-width.unit">
                           <xsl:variable name="total-colwidth-sum" select="sum($colspec-list-for-total-width/@colwidth/xslLib:cals2html.getWidthValue(.))" as="xs:double"/>
                           <xsl:variable name="current-colwidth-sum" select="sum($colspec-list-for-current-width/@colwidth/xslLib:cals2html.getWidthValue(.))" as="xs:double"/>
-                          <xsl:sequence select="concat(
-                            round($current-colwidth-sum div $total-colwidth-sum * 100),
-                            '%')"/>
+                          <xsl:sequence select="round($current-colwidth-sum div $total-colwidth-sum * 100) || '%'"/>
                         </xsl:when>
                         <xsl:otherwise>
                           <xsl:message terminate="no">[ERROR][cals2html.xsl] total width units are NOT consistent with current cell units at <xsl:sequence select="els:get-xpath($colspec-list-for-current-width[1])"/></xsl:message>

@@ -8,62 +8,63 @@
   <x:scenario label="HTML2CALS" xml:base="../samples/tables/">
     
     <x:scenario label="HTML2CALS any html :">
-      <x:scenario label="table.html">
+      <x:scenario label="table.html > table.cals.xml">
         <x:context href="table.html"/>
-        <x:expect label="OK" select="/*" test="/*" href="table.cals.xml"/>
+        <x:expect label="OK" select="/*/*:body" test="/*/*:body" href="table.cals.xml"/>
       </x:scenario>
     </x:scenario>
     
     <x:scenario label="HTML2CALS - with class :">
-      <x:scenario label="Table jira CHAINE-1885">
+      <x:scenario label="Table_CHAINE-1885.htm > Table_CHAINE-1885.cals.xml">
         <x:context href="Table_CHAINE-1885.htm"/>
         <x:expect label="OK" select="/*" test="/*" href="Table_CHAINE-1885.cals.xml"/>
       </x:scenario>
-      <x:scenario label="frchs1603cx.tables">
+      <x:scenario label="frchs1603cx.tables.htm > frchs1603cx.tables.cals.xml">
         <x:context href="frchs1603cx.tables.htm"/>
         <x:expect label="OK" select="/*" test="/*" href="frchs1603cx.tables.cals.xml"/>
       </x:scenario>
-      <x:scenario label="isosts_tables">
+      <x:scenario label="isosts_tables.cals.htm > isosts_tables.cals.cals.xml">
         <x:context href="isosts_tables.cals.htm"/>
         <x:expect label="OK" select="/*" test="/*" href="isosts_tables.cals.cals.xml"/>
       </x:scenario>
     </x:scenario>
     
     <x:scenario label="HTML2CALS - with style :">
-      <x:scenario label="Table jira CHAINE-1885">
+      <x:scenario label="Table_CHAINE-1885.style.htm > Table_CHAINE-1885.style.cals.xml">
         <x:context href="Table_CHAINE-1885.style.htm"/>
         <x:expect label="OK" select="/*" test="/*" href="Table_CHAINE-1885.style.cals.xml"/>
       </x:scenario>
-      <x:scenario label="frchs1603cx.tables">
+      <x:scenario label="frchs1603cx.tables.style.htm > frchs1603cx.tables.style.cals.xml">
         <x:context href="frchs1603cx.tables.style.htm"/>
         <x:expect label="OK" select="/*" test="/*" href="frchs1603cx.tables.style.cals.xml"/>
       </x:scenario>
-      <x:scenario label="isosts_tables">
+      <x:scenario label="isosts_tables.cals.style.htm > isosts_tables.cals.style.cals.xml">
         <x:context href="isosts_tables.cals.style.htm"/>
         <x:expect label="OK" select="/*" test="/*" href="isosts_tables.cals.style.cals.xml"/>
       </x:scenario>
     </x:scenario>
     
-    <x:scenario label="HTML2CALS - ELSSIEXDC-23">
+    <x:scenario label="table_ELSSIEXDC-23.editor.html > table_ELSSIEXDC-23.editor.cals.xml">
       <x:context href="table_ELSSIEXDC-23.editor.html"/>
       <x:expect label="OK" select="/*" test="/*" href="table_ELSSIEXDC-23.editor.cals.xml"/>
     </x:scenario>
     
-    <x:scenario label="SIETRAINPR-1066 - BORDERS - No @style attribut on table but @style on every cell">
+    <x:scenario label="table_SIETRAINPR-1066.editor.html > table_SIETRAINPR-1066.editor.cals.xml - BORDERS - No @style attribut on table but @style on every cell">
       <x:context href="table_SIETRAINPR-1066.editor.html"/>
       <x:expect label="OK" select="/*" test="/*" href="table_SIETRAINPR-1066.editor.cals.xml"/>
     </x:scenario>
     
     <x:scenario label="Issue #8: col width not correct when rowspan :">
-      <x:scenario label="table_test-colwith.style.htm">
+      <x:scenario label="table_test-colwith.style.htm > table_test-colwith.style.cals.xml">
         <x:context href="table_test-colwith.style.htm"/>
         <x:expect label="OK" select="/*" test="/*" href="table_test-colwith.style.cals.xml"/>
       </x:scenario>
-      <x:scenario label="table_test-colwith.style.widthInCell.htm">
+      <x:scenario label="table_test-colwith.style.widthInCell.htm > table_test-colwith.style.widthInCell.cals.xml">
         <x:context href="table_test-colwith.style.widthInCell.htm"/>
         <x:expect label="OK" select="/*" test="/*" href="table_test-colwith.style.widthInCell.cals.xml"/>
       </x:scenario>
     </x:scenario>
+    
   </x:scenario>
   
 </x:description>

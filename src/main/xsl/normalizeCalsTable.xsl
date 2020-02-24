@@ -80,23 +80,22 @@
     </xsl:choose>
   </xsl:template>
   
-  <!--add empty colwidth if none exist-->
+  <!--add colwidth="1*" if none exist (this is the official CALS default value)-->
   <xsl:template match="colspec[not(@colwidth)]" mode="xslLib:normalizeCalsTable">
     <xsl:copy copy-namespaces="no">
       <xsl:apply-templates select="@*" mode="#current"/>
-      <xsl:attribute name="colwidth"/>
+      <xsl:attribute name="colwidth" select="'1*'"/>
       <xsl:apply-templates select="node()" mode="#current"/>
     </xsl:copy>
   </xsl:template>
   
   <!--Normalize @colwidth value-->
   <xsl:template match="colspec/@colwidth" mode="xslLib:normalizeCalsTable">
-    <!--lowercase and no spaces-->
+    <!--value should be lowercase without spaces-->
     <xsl:variable name="value.normalized" select="replace(lower-case(.), '\s', '')" as="xs:string"/>
-    <!--adding unit "*" if none-->
     <xsl:attribute name="colwidth">
       <xsl:choose>
-        <!--no unit-->
+        <!--adding unit "*" no unit-->
         <xsl:when test="replace(., '(\d|\.)', '') = ''">
           <xsl:value-of select="concat($value.normalized, '*')"/>
         </xsl:when>
@@ -107,7 +106,7 @@
     </xsl:attribute>
   </xsl:template>
   
-  <!--Delete colname when namest and nameend are setted (it does't make sens, right ? FIXME : might be usefull to choose aligment specified on colspec for example?)-->
+  <!--Delete colname when namest and nameend are setted (it's an error to have both - cf. cals schematron-->
   <xsl:template match="entry[@namest and @nameend]/@colname" mode="xslLib:normalizeCalsTable"/>
   
   <!--==================================================================================-->
