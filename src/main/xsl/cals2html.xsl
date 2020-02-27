@@ -50,7 +50,7 @@
   <xsl:param name="xslLib:cals2html.default-tgroup-valign" select="'top'" as="xs:string"/><!--default cals value-->
   <xsl:param name="xslLib:cals2html.default-td-valign" select="'middle'" as="xs:string"/><!--default browser value-->
   <xsl:param name="xslLib:cals2html.default-th-valign" select="'middle'" as="xs:string"/><!--default browser value-->
-  <!-- force @aling / @valign with default value to be converted to CSS if explicitely set at entry level -->
+  <!-- force @aling / @valign with default value to be converted to CSS-->
   <xsl:param name="xslLib:cals2html.default-align-force-explicit" select="false()" as="xs:boolean"/>
   <xsl:param name="xslLib:cals2html.default-valign-force-explicit" select="false()" as="xs:boolean"/>
 
@@ -357,8 +357,8 @@
         <xsl:when test="$current-colspec-list[1]/@colsep">
           <xsl:value-of select="$current-colspec-list[1]/@colsep" />
         </xsl:when>
-        <xsl:when test="ancestor::*/@colsep">
-          <xsl:value-of select="ancestor::*[@colsep][1]/@colsep" />
+        <xsl:when test="ancestor::cals:*/@colsep">
+          <xsl:value-of select="ancestor::cals:*[@colsep][1]/@colsep" />
         </xsl:when>
         <xsl:otherwise>
           <xsl:value-of select="$xslLib:cals2html.default-colsep"/>
@@ -374,15 +374,15 @@
         <xsl:when test="$current-colspec-list[1]/@rowsep">
           <xsl:value-of select="$current-colspec-list[1]/@rowsep"/>
         </xsl:when>
-        <xsl:when test="ancestor::*/@rowsep">
-          <xsl:value-of select="ancestor::*[@rowsep][1]/@rowsep"/>
+        <!--@rowsep allowed on table|tgroup|row-->
+        <xsl:when test="ancestor::cals:*/@rowsep">
+          <xsl:value-of select="ancestor::cals:*[@rowsep][1]/@rowsep"/>
         </xsl:when>
         <xsl:otherwise>
           <xsl:value-of select="$xslLib:cals2html.default-rowsep"/>
         </xsl:otherwise>
       </xsl:choose>
     </xsl:variable>
-    <xsl:variable name="align-explicit" select="exists(@align)" as="xs:boolean"/>
     <xsl:variable name="align-current" as="xs:string">
       <xsl:choose>
         <xsl:when test="@align">
@@ -392,26 +392,27 @@
         <xsl:when test="$current-colspec-list[1]/@align">
           <xsl:value-of select="$current-colspec-list[1]/@align"/>
         </xsl:when>
-        <xsl:when test="ancestor::*/@align">
-          <xsl:value-of select="ancestor::*[@align][1]/@align"/>
+         <!--@align is allowed on tgroup only (not table, thead, tbody, tfoot,row)-->
+        <xsl:when test="ancestor::cals:*/@align">
+          <xsl:value-of select="ancestor::cals:*[@align][1]/@align"/>
         </xsl:when>
         <xsl:otherwise>
           <xsl:value-of select="$xslLib:cals2html.default-tgroup-align"/>
         </xsl:otherwise>
       </xsl:choose>
     </xsl:variable>
-    <xsl:variable name="valign-explicit" select="exists(@valign)" as="xs:boolean"/>
     <xsl:variable name="valign-current" as="xs:string">
       <xsl:choose>
         <xsl:when test="@valign">
           <xsl:value-of select="@valign"/>
         </xsl:when>
         <!-- FIXME : que se passe-t-il lors d'un colspan ? a priori c'est le namest qui gagne-->
+        <!--FIXME : @valign is actually not allowed on colspec--> 
         <xsl:when test="$current-colspec-list[1]/@valign">
           <xsl:value-of select="$current-colspec-list[1]/@valign" />
         </xsl:when>
-        <xsl:when test="ancestor::*/@valign">
-          <xsl:value-of select="ancestor::*[@valign][1]/@valign" />
+        <xsl:when test="ancestor::cals:*/@valign">
+          <xsl:value-of select="ancestor::cals:*[@valign][1]/@valign" />
         </xsl:when>
         <xsl:otherwise>
           <xsl:value-of select="$xslLib:cals2html.default-tgroup-valign"/>
@@ -429,11 +430,11 @@
           <xsl:text>cals_rowsep</xsl:text>
         </xsl:if>
         <xsl:variable name="align-default" as="xs:string" select="if($name = 'td') then($xslLib:cals2html.default-td-align) else($xslLib:cals2html.default-th-align)"/>
-        <xsl:if test="($align-current != $align-default) or ($xslLib:cals2html.default-align-force-explicit and $align-explicit)">
+        <xsl:if test="($align-current != $align-default) or ($xslLib:cals2html.default-align-force-explicit)">
           <xsl:value-of select="concat('cals_align-', lower-case($align-current))" />
         </xsl:if>
         <xsl:variable name="valign-default" as="xs:string" select="if($name = 'td') then($xslLib:cals2html.default-td-valign) else($xslLib:cals2html.default-th-valign)"/>
-        <xsl:if test="($valign-current != $valign-default) or ($xslLib:cals2html.default-valign-force-explicit and $valign-explicit)">
+        <xsl:if test="($valign-current != $valign-default) or ($xslLib:cals2html.default-valign-force-explicit)">
           <xsl:value-of select="concat('cals_valign-', lower-case($valign-current))" />
         </xsl:if>
         <xsl:if test="not(empty($nb-cols))">
