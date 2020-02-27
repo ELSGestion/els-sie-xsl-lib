@@ -50,7 +50,7 @@
   <xsl:param name="xslLib:cals2html.default-tgroup-valign" select="'top'" as="xs:string"/><!--default cals value-->
   <xsl:param name="xslLib:cals2html.default-td-valign" select="'middle'" as="xs:string"/><!--default browser value-->
   <xsl:param name="xslLib:cals2html.default-th-valign" select="'middle'" as="xs:string"/><!--default browser value-->
-  <!-- force @align / @valign with default value to be converted to CSS-->
+  <!-- force @align / @valign default values to be specified in HTML (as class or css)-->
   <xsl:param name="xslLib:cals2html.default-align-force-explicit" select="false()" as="xs:boolean"/>
   <xsl:param name="xslLib:cals2html.default-valign-force-explicit" select="false()" as="xs:boolean"/>
 
