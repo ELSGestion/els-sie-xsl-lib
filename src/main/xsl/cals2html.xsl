@@ -50,7 +50,7 @@
   <xsl:param name="xslLib:cals2html.default-tgroup-valign" select="'top'" as="xs:string"/><!--default cals value-->
   <xsl:param name="xslLib:cals2html.default-td-valign" select="'middle'" as="xs:string"/><!--default browser value-->
   <xsl:param name="xslLib:cals2html.default-th-valign" select="'middle'" as="xs:string"/><!--default browser value-->
-  <!-- force @aling / @valign with default value to be converted to CSS-->
+  <!-- force @align / @valign with default value to be converted to CSS-->
   <xsl:param name="xslLib:cals2html.default-align-force-explicit" select="false()" as="xs:boolean"/>
   <xsl:param name="xslLib:cals2html.default-valign-force-explicit" select="false()" as="xs:boolean"/>
 
@@ -406,11 +406,10 @@
         <xsl:when test="@valign">
           <xsl:value-of select="@valign"/>
         </xsl:when>
-        <!-- FIXME : que se passe-t-il lors d'un colspan ? a priori c'est le namest qui gagne-->
-        <!--FIXME : @valign is actually not allowed on colspec--> 
-        <xsl:when test="$current-colspec-list[1]/@valign">
+        <!--@valign is actually not allowed on colspec--> 
+        <!--<xsl:when test="$current-colspec-list[1]/@valign">
           <xsl:value-of select="$current-colspec-list[1]/@valign" />
-        </xsl:when>
+        </xsl:when>-->
         <xsl:when test="ancestor::cals:*/@valign">
           <xsl:value-of select="ancestor::cals:*[@valign][1]/@valign" />
         </xsl:when>
