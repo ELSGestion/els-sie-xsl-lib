@@ -33,7 +33,6 @@
   <!--==================================================================================-->
   
   <xsl:template match="/" mode="xslLib:normalizeCalsTable.main">
-    <xsl:message><xsl:value-of select="els:getFileName(static-base-uri())"/></xsl:message>
     <xsl:variable name="step" select="." as="document-node()"/>
     <xsl:variable name="step" as="document-node()">
       <xsl:document>
