@@ -86,7 +86,7 @@
       </xsl:choose>
     </xsl:variable>
     <xsl:if test="$xslLib:html2cals.debug">
-      <xsl:variable name="log.uri" select="resolve-uri('xhtml2cals.step1.log.xml', $xslLib:html2cals.log.uri)" as="xs:anyURI"/>
+      <xsl:variable name="log.uri" select="resolve-uri('html2cals.step1.log.xml', $xslLib:html2cals.log.uri)" as="xs:anyURI"/>
       <xsl:message>[INFO] writing <xsl:value-of select="$log.uri"/></xsl:message>
       <xsl:result-document href="{$log.uri}">
         <xsl:sequence select="$step"/>
@@ -98,7 +98,7 @@
       </xsl:document>
     </xsl:variable>
     <xsl:if test="$xslLib:html2cals.debug">
-      <xsl:variable name="log.uri" select="resolve-uri('xhtml2cals.step2.log.xml', $xslLib:html2cals.log.uri)" as="xs:anyURI"/>
+      <xsl:variable name="log.uri" select="resolve-uri('html2cals.step2.log.xml', $xslLib:html2cals.log.uri)" as="xs:anyURI"/>
       <xsl:message>[INFO] writing <xsl:value-of select="$log.uri"/></xsl:message>
       <xsl:result-document href="{$log.uri}">
         <xsl:sequence select="$step"/>
@@ -110,7 +110,7 @@
       </xsl:document>
     </xsl:variable>
     <xsl:if test="$xslLib:html2cals.debug">
-      <xsl:variable name="log.uri" select="resolve-uri('xhtml2cals.step3.log.xml', $xslLib:html2cals.log.uri)" as="xs:anyURI"/>
+      <xsl:variable name="log.uri" select="resolve-uri('html2cals.step3.log.xml', $xslLib:html2cals.log.uri)" as="xs:anyURI"/>
       <xsl:message>[INFO] writing <xsl:value-of select="$log.uri"/></xsl:message>
       <xsl:result-document href="{$log.uri}">
         <xsl:sequence select="$step"/>
@@ -122,7 +122,7 @@
       </xsl:document>
     </xsl:variable>
     <xsl:if test="$xslLib:html2cals.debug">
-      <xsl:variable name="log.uri" select="resolve-uri('xhtml2cals.step4.log.xml', $xslLib:html2cals.log.uri)" as="xs:anyURI"/>
+      <xsl:variable name="log.uri" select="resolve-uri('html2cals.step4.log.xml', $xslLib:html2cals.log.uri)" as="xs:anyURI"/>
       <xsl:message>[INFO] writing <xsl:value-of select="$log.uri"/></xsl:message>
       <xsl:result-document href="{$log.uri}">
         <xsl:sequence select="$step"/>
@@ -134,7 +134,7 @@
       </xsl:document>
     </xsl:variable>
     <xsl:if test="$xslLib:html2cals.debug">
-      <xsl:variable name="log.uri" select="resolve-uri('xhtml2cals.step5.log.xml', $xslLib:html2cals.log.uri)" as="xs:anyURI"/>
+      <xsl:variable name="log.uri" select="resolve-uri('html2cals.step5.log.xml', $xslLib:html2cals.log.uri)" as="xs:anyURI"/>
       <xsl:message>[INFO] writing <xsl:value-of select="$log.uri"/></xsl:message>
       <xsl:result-document href="{$log.uri}">
         <xsl:sequence select="$step"/>
@@ -146,7 +146,7 @@
       </xsl:document>
     </xsl:variable>
     <xsl:if test="$xslLib:html2cals.debug">
-      <xsl:variable name="log.uri" select="resolve-uri('xhtml2cals.step6.log.xml', $xslLib:html2cals.log.uri)" as="xs:anyURI"/>
+      <xsl:variable name="log.uri" select="resolve-uri('html2cals.step6.log.xml', $xslLib:html2cals.log.uri)" as="xs:anyURI"/>
       <xsl:message>[INFO] writing <xsl:value-of select="$log.uri"/></xsl:message>
       <xsl:result-document href="{$log.uri}">
         <xsl:sequence select="$step"/>
@@ -158,7 +158,7 @@
       </xsl:document>
     </xsl:variable>
     <xsl:if test="$xslLib:html2cals.debug">
-      <xsl:variable name="log.uri" select="resolve-uri('xhtml2cals.step7.log.xml', $xslLib:html2cals.log.uri)" as="xs:anyURI"/>
+      <xsl:variable name="log.uri" select="resolve-uri('html2cals.step7.log.xml', $xslLib:html2cals.log.uri)" as="xs:anyURI"/>
       <xsl:message>[INFO] writing <xsl:value-of select="$log.uri"/></xsl:message>
       <xsl:result-document href="{$log.uri}">
         <xsl:sequence select="$step"/>
@@ -177,7 +177,7 @@
       </xsl:choose>
     </xsl:variable>
     <xsl:if test="$xslLib:html2cals.debug">
-      <xsl:variable name="log.uri" select="resolve-uri('xhtml2cals.step8.log.xml', $xslLib:html2cals.log.uri)" as="xs:anyURI"/>
+      <xsl:variable name="log.uri" select="resolve-uri('html2cals.step8.log.xml', $xslLib:html2cals.log.uri)" as="xs:anyURI"/>
       <xsl:message>[INFO] writing <xsl:value-of select="$log.uri"/></xsl:message>
       <xsl:result-document href="{$log.uri}">
         <xsl:sequence select="$step"/>
@@ -308,7 +308,7 @@
     </xsl:choose>
   </xsl:function>
   
-  <!--CALS entry are left aligned by default, whereas html headers are centered by default, so we have to force this center alignement when th has no align-->
+  <!--CALS entry are left aligned by default, whereas html headers are centered by default, so we have to force this center alignment when th has no align-->
   <!--no need to force any aligment with td because CALS and HTML use the same default value (left)-->
   <xsl:template match="th[css:getPropertyValue(css:parse-inline(@style), 'text-align') = '']" mode="xhtml2cals:normalize-to-xhtml">
     <xsl:copy copy-namespaces="false">
@@ -1000,14 +1000,18 @@
         <xsl:when test="css:getPropertyName(.) = 'width'">
           <xsl:variable name="width" select="css:getPropertyValue($css, 'width')" as="xs:string"/>
           <xsl:choose>
-            <xsl:when test="$e/self::table and $width = '100%'">
-              <xsl:attribute name="pgwide" select="'1'"/>
+            <xsl:when test="$e/self::table">
+              <!--There's no tablewidth attribute in CALS, the only value that can use here is pgwide="1" when the table is fullwith-->
+              <xsl:if test="$width = '100%'">
+                <xsl:attribute name="pgwide" select="'1'"/>
+              </xsl:if>
             </xsl:when>
             <xsl:otherwise>
               <xsl:variable name="normalized-width" as="xs:string">
                 <xsl:choose>
                   <xsl:when test="$xslLib:html2cals.convertWidthPercentsToStars and ends-with($width, '%')">
-                    <xsl:variable name="nb-cols" select="xhtml2cals:nb-cols($e/ancestor::table[1])" as="xs:integer"/>
+                    <xsl:variable name="table" select="$e/ancestor::table[1]" as="element()"/>
+                    <xsl:variable name="nb-cols" select="xhtml2cals:nb-cols($table)" as="xs:integer"/>
                     <xsl:variable name="percent" select="substring-before($width, '%') cast as xs:double" as="xs:double"/>
                     <!--table % is applied to the width of the html table
                         if a table has 4 cols, the whole width is "4*" then 1* is equivalent 25%
