@@ -1,0 +1,404 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<x:description xmlns:x="http://www.jenitennison.com/xslt/xspec"
+  xmlns:html="http://www.w3.org/1999/xhtml"
+  xmlns:els="http://www.lefebvre-sarrut.eu/ns/els"
+  stylesheet="../../main/xsl/els-common_infographic.xsl">
+  
+  <x:scenario label="els:isInfographicUrl">
+    
+    <x:scenario label="els:isInfographicUrl : Infogram">
+      <x:call function="els:isInfographicUrl">
+        <x:param name="url" select="'https://e.infogram.com/1p62v377xlyr1qa57ggkn2p6ndu3yv061kg'" />
+      </x:call>
+      <x:expect label="Infogram => true()" select="true()" />
+    </x:scenario>
+    
+    <x:scenario label="els:isInfographicUrl : Datawrapper">
+      <x:call function="els:isInfographicUrl">
+        <x:param name="url" select="'https://www.datawrapper.de/_/sRbza/'" />
+      </x:call>
+      <x:expect label="Datawrapper => true()" select="true()" />
+    </x:scenario>
+    
+    <x:scenario label="els:isInfographicUrl : Piktochart">
+      <x:call function="els:isInfographicUrl">
+        <x:param name="url" select="'https://create.piktochart.com/output/11232290-preca'" />
+      </x:call>
+      <x:expect label="Piktochart => true()" select="true()" />
+    </x:scenario>
+    
+    <x:scenario label="els:isInfographicUrl : Knightlab (timeline)">
+      <x:call function="els:isInfographicUrl">
+        <x:param name="url" select="'https://cdn.knightlab.com/libs/timeline/latest/embed/?source=0AiWUhxLpQgUXdEwtOEZVZU1lcllGVHJRbjlsYTJ1VGc&amp;font=Bevan-PotanoSans'" />
+      </x:call>
+      <x:expect label="Knightlab (timeline) => true()" select="true()" />
+    </x:scenario>
+    
+    <x:scenario label="els:isInfographicUrl : Random URL">
+      <x:call function="els:isInfographicUrl">
+        <x:param name="url" select="'https://google.com/'" />
+      </x:call>
+      <x:expect label="Google.com => false()" select="false()" />
+    </x:scenario>
+    
+  </x:scenario>
+  
+  <x:scenario label="els:infographic-platformFromUrl()">
+    
+    <x:scenario label="els:infographic-platformFromUrl : Infogram">
+      <x:call function="els:infographic-platformFromUrl">
+        <x:param name="url" select="'https://e.infogram.com/1p62v377xlyr1qa57ggkn2p6ndu3yv061kg'" />
+      </x:call>
+      <x:expect label="Infogram => 'infogram'" select="'infogram'" />
+    </x:scenario>
+    
+    <x:scenario label="els:infographic-platformFromUrl : Datawrapper">
+      <x:call function="els:infographic-platformFromUrl">
+        <x:param name="url" select="'https://www.datawrapper.de/_/sRbza/'" />
+      </x:call>
+      <x:expect label="Datawrapper => 'datawrapper'" select="'datawrapper'" />
+    </x:scenario>
+    
+    <x:scenario label="els:infographic-platformFromUrl : Piktochart">
+      <x:call function="els:infographic-platformFromUrl">
+        <x:param name="url" select="'https://create.piktochart.com/output/11232290-preca'" />
+      </x:call>
+      <x:expect label="Piktochart => 'piktochart'" select="'piktochart'" />
+    </x:scenario>
+    
+    <x:scenario label="els:infographic-platformFromUrl : Knightlab (timeline)">
+      <x:call function="els:infographic-platformFromUrl">
+        <x:param name="url" select="'https://cdn.knightlab.com/libs/timeline/latest/embed/?source=0AiWUhxLpQgUXdEwtOEZVZU1lcllGVHJRbjlsYTJ1VGc&amp;font=Bevan-PotanoSans'" />
+      </x:call>
+      <x:expect label="Knightlab (timeline) => 'knightlab-timeline'" select="'knightlab-timeline'" />
+    </x:scenario>
+    
+    <x:scenario label="els:infographic-platformFromUrl : Random URL">
+      <x:call function="els:infographic-platformFromUrl">
+        <x:param name="url" select="'https://google.com/'" />
+      </x:call>
+      <x:expect label="Google.com => ()" select="()" />
+    </x:scenario>
+    
+  </x:scenario>
+  
+  <x:scenario label="els:infographic-idFromUrl()">
+    
+    <x:scenario label="els:infographic-idFromUrl : Infogram">
+      <x:call function="els:infographic-idFromUrl">
+        <x:param name="url" select="'https://e.infogram.com/1p62v377xlyr1qa57ggkn2p6ndu3yv061kg'" />
+      </x:call>
+      <x:expect label="Infogram" select="'1p62v377xlyr1qa57ggkn2p6ndu3yv061kg'" />
+    </x:scenario>
+    
+    <x:scenario label="els:infographic-idFromUrl : Datawrapper">
+      <x:call function="els:infographic-idFromUrl">
+        <x:param name="url" select="'https://www.datawrapper.de/_/sRbza/'" />
+      </x:call>
+      <x:expect label="Datawrapper" select="'sRbza'" />
+    </x:scenario>
+    
+    <x:scenario label="els:infographic-idFromUrl : Piktochart">
+      <x:call function="els:infographic-idFromUrl">
+        <x:param name="url" select="'https://create.piktochart.com/output/11232290-preca'" />
+      </x:call>
+      <x:expect label="Piktochart" select="'11232290-preca'" />
+    </x:scenario>
+    
+    <x:scenario label="els:infographic-idFromUrl : Knightlab (timeline)">
+      <x:call function="els:infographic-idFromUrl">
+        <x:param name="url" select="'https://cdn.knightlab.com/libs/timeline/latest/embed/?source=0AiWUhxLpQgUXdEwtOEZVZU1lcllGVHJRbjlsYTJ1VGc&amp;font=Bevan-PotanoSans'" />
+      </x:call>
+      <x:expect label="Knightlab (timeline)" select="'0AiWUhxLpQgUXdEwtOEZVZU1lcllGVHJRbjlsYTJ1VGc'" />
+    </x:scenario>
+    
+    <x:scenario label="els:infographic-idFromUrl : Random URL">
+      <x:call function="els:infographic-idFromUrl">
+        <x:param name="url" select="'https://google.com/'" />
+      </x:call>
+      <x:expect label="Google.com => ()" select="()" />
+    </x:scenario>
+    
+  </x:scenario>
+  
+  <x:scenario label="els:infographic-makeHtmlEmbed() - iframe generation">
+    
+    <x:scenario label="els:infographic-makeHtmlEmbed : Infogram (full infographic URL + height/width)">
+      <x:call function="els:infographic-makeHtmlEmbed">
+        <x:param name="url" select="'https://e.infogram.com/1p62v377xlyr1qa57ggkn2p6ndu3yv061kg'"/>
+        <x:param name="width" select="'xxx'"/>
+        <x:param name="height" select="'yyy'"/>
+      </x:call>
+      <x:expect label="iframe">
+        <html:iframe 
+          src="https://e.infogram.com/1p62v377xlyr1qa57ggkn2p6ndu3yv061kg?src=embed"
+          title=""
+          width="xxx"
+          height="yyy"
+          scrolling="no"
+          frameborder="0"
+          style="border:none;"
+          allowfullscreen="allowfullscreen"/>
+      </x:expect>
+    </x:scenario>
+    
+    <x:scenario label="els:infographic-makeHtmlEmbed : Infogram (full infographic URL)">
+      <x:call function="els:infographic-makeHtmlEmbed">
+        <x:param name="url" select="'https://e.infogram.com/1p62v377xlyr1qa57ggkn2p6ndu3yv061kg?src=embed'"/>
+      </x:call>
+      <x:expect label="iframe">
+        <html:iframe 
+          src="https://e.infogram.com/1p62v377xlyr1qa57ggkn2p6ndu3yv061kg?src=embed"
+          title=""
+          width="640"
+          height="465"
+          scrolling="no"
+          frameborder="0"
+          style="border:none;"
+          allowfullscreen="allowfullscreen"/>
+      </x:expect>
+    </x:scenario>
+    
+    <x:scenario label="els:infographic-makeHtmlEmbed : Infogram (only infographic ID + width/height)">
+      <x:call function="els:infographic-makeHtmlEmbed">
+        <x:param name="platform" select="'infogram'"/>
+        <x:param name="infographicId" select="'1p62v377xlyr1qa57ggkn2p6ndu3yv061kg'"/>
+        <x:param name="width" select="'xxx'"/>
+        <x:param name="height" select="'yyy'"/>
+      </x:call>
+      <x:expect label="iframe">
+        <html:iframe 
+          src="https://e.infogram.com/1p62v377xlyr1qa57ggkn2p6ndu3yv061kg?src=embed"
+          title=""
+          width="xxx"
+          height="yyy"
+          scrolling="no"
+          frameborder="0"
+          style="border:none;"
+          allowfullscreen="allowfullscreen"/>
+      </x:expect>
+    </x:scenario>
+    
+    <x:scenario label="els:infographic-makeHtmlEmbed : Infogram (only infographic ID)">
+      <x:call function="els:infographic-makeHtmlEmbed">
+        <x:param name="platform" select="'infogram'"/>
+        <x:param name="infographicId" select="'1p62v377xlyr1qa57ggkn2p6ndu3yv061kg'"/>
+      </x:call>
+      <x:expect label="iframe">
+        <html:iframe 
+          src="https://e.infogram.com/1p62v377xlyr1qa57ggkn2p6ndu3yv061kg?src=embed"
+          title=""
+          width="640"
+          height="465"
+          scrolling="no"
+          frameborder="0"
+          style="border:none;"
+          allowfullscreen="allowfullscreen"/>
+      </x:expect>
+    </x:scenario>
+    
+    <x:scenario label="els:infographic-makeHtmlEmbed : Datawrapper (full infographic URL + height/width)">
+      <x:call function="els:infographic-makeHtmlEmbed">
+        <x:param name="url" select="'https://www.datawrapper.de/_/sRbza/'"/>
+        <x:param name="width" select="'xxx'"/>
+        <x:param name="height" select="'yyy'"/>
+      </x:call>
+      <x:expect label="iframe">
+        <html:iframe 
+          title=""
+          aria-label=""
+          src="//datawrapper.dwcdn.net/sRbza/1/"
+          scrolling="no"
+          frameborder="0"
+          style="border: none;"
+          width="xxx" 
+          height="yyy"/>
+      </x:expect>
+    </x:scenario>
+    
+    <x:scenario label="els:infographic-makeHtmlEmbed : Datawrapper (full infographic URL)">
+      <x:call function="els:infographic-makeHtmlEmbed">
+        <x:param name="url" select="'https://www.datawrapper.de/_/sRbza/'"/>
+      </x:call>
+      <x:expect label="iframe">
+        <html:iframe 
+          title=""
+          aria-label=""
+          src="//datawrapper.dwcdn.net/sRbza/1/"
+          scrolling="no"
+          frameborder="0"
+          style="border: none;"
+          width="640" 
+          height="465"/>
+      </x:expect>
+    </x:scenario>
+    
+    <x:scenario label="els:infographic-makeHtmlEmbed : Datawrapper (only infographic ID + width/height)">
+      <x:call function="els:infographic-makeHtmlEmbed">
+        <x:param name="platform" select="'datawrapper'"/>
+        <x:param name="infographicId" select="'sRbza'"/>
+        <x:param name="width" select="'xxx'"/>
+        <x:param name="height" select="'yyy'"/>
+      </x:call>
+      <x:expect label="iframe">
+        <html:iframe 
+          title=""
+          aria-label=""
+          src="//datawrapper.dwcdn.net/sRbza/1/"
+          scrolling="no"
+          frameborder="0"
+          style="border: none;"
+          width="xxx" 
+          height="yyy"/>
+      </x:expect>
+    </x:scenario>
+    
+    <x:scenario label="els:infographic-makeHtmlEmbed : Datawrapper (only infographic ID)">
+      <x:call function="els:infographic-makeHtmlEmbed">
+        <x:param name="platform" select="'datawrapper'"/>
+        <x:param name="infographicId" select="'sRbza'"/>
+      </x:call>
+      <x:expect label="iframe">
+        <html:iframe 
+          title=""
+          aria-label=""
+          src="//datawrapper.dwcdn.net/sRbza/1/"
+          scrolling="no"
+          frameborder="0"
+          style="border: none;"
+          width="640" 
+          height="465"/>
+      </x:expect>
+    </x:scenario>
+    
+    <x:scenario label="els:infographic-makeHtmlEmbed : Piktochart (full infographic URL + height/width)">
+      <x:call function="els:infographic-makeHtmlEmbed">
+        <x:param name="url" select="'https://create.piktochart.com/output/11232290-preca'"/>
+        <x:param name="width" select="'xxx'"/>
+        <x:param name="height" select="'yyy'"/>
+      </x:call>
+      <x:expect label="iframe">
+        <html:iframe 
+          width="xxx"
+          height="yyy"
+          frameborder="0"
+          scrolling="no"
+          style="overflow-y:hidden;"
+          src="https://create.piktochart.com/embed/11232290-preca"/>
+      </x:expect>
+    </x:scenario>
+    
+    <x:scenario label="els:infographic-makeHtmlEmbed : Piktochart (full infographic URL)">
+      <x:call function="els:infographic-makeHtmlEmbed">
+        <x:param name="url" select="'https://create.piktochart.com/output/11232290-preca'"/>
+      </x:call>
+      <x:expect label="iframe">
+        <html:iframe 
+          width="640"
+          height="465"
+          frameborder="0"
+          scrolling="no"
+          style="overflow-y:hidden;"
+          src="https://create.piktochart.com/embed/11232290-preca"/>
+      </x:expect>
+    </x:scenario>
+    
+    <x:scenario label="els:infographic-makeHtmlEmbed : Piktochart (only infographic ID + width/height)">
+      <x:call function="els:infographic-makeHtmlEmbed">
+        <x:param name="platform" select="'piktochart'"/>
+        <x:param name="infographicId" select="'11232290-preca'"/>
+        <x:param name="width" select="'xxx'"/>
+        <x:param name="height" select="'yyy'"/>
+      </x:call>
+      <x:expect label="iframe">
+        <html:iframe 
+          width="xxx"
+          height="yyy"
+          frameborder="0"
+          scrolling="no"
+          style="overflow-y:hidden;"
+          src="https://create.piktochart.com/embed/11232290-preca"/>
+      </x:expect>
+    </x:scenario>
+    
+    <x:scenario label="els:infographic-makeHtmlEmbed : Piktochart (only infographic ID)">
+      <x:call function="els:infographic-makeHtmlEmbed">
+        <x:param name="platform" select="'piktochart'"/>
+        <x:param name="infographicId" select="'11232290-preca'"/>
+      </x:call>
+      <x:expect label="iframe">
+        <html:iframe 
+          width="640"
+          height="465"
+          frameborder="0"
+          scrolling="no"
+          style="overflow-y:hidden;"
+          src="https://create.piktochart.com/embed/11232290-preca"/>
+      </x:expect>
+    </x:scenario>
+    
+    <x:scenario label="els:infographic-makeHtmlEmbed : Knightlab (timeline) (full infographic URL + height/width)">
+      <x:call function="els:infographic-makeHtmlEmbed">
+        <x:param name="url" select="'https://cdn.knightlab.com/libs/timeline/latest/embed/?source=0AiWUhxLpQgUXdEwtOEZVZU1lcllGVHJRbjlsYTJ1VGc&amp;font=Bevan-PotanoSans'"/>
+        <x:param name="width" select="'xxx'"/>
+        <x:param name="height" select="'yyy'"/>
+      </x:call>
+      <x:expect label="iframe">
+        <html:iframe 
+          width="xxx"
+          height="yyy"
+          frameborder="0"
+          scrolling="no"
+          src="https://cdn.knightlab.com/libs/timeline/latest/embed/?source=0AiWUhxLpQgUXdEwtOEZVZU1lcllGVHJRbjlsYTJ1VGc"/>
+      </x:expect>
+    </x:scenario>
+    
+    <x:scenario label="els:infographic-makeHtmlEmbed : Knightlab (timeline) (full infographic URL)">
+      <x:call function="els:infographic-makeHtmlEmbed">
+        <x:param name="url" select="'https://cdn.knightlab.com/libs/timeline/latest/embed/?source=0AiWUhxLpQgUXdEwtOEZVZU1lcllGVHJRbjlsYTJ1VGc&amp;font=Bevan-PotanoSans'"/>
+      </x:call>
+      <x:expect label="iframe">
+        <html:iframe 
+          width="640"
+          height="600"
+          frameborder="0"
+          scrolling="no"
+          src="https://cdn.knightlab.com/libs/timeline/latest/embed/?source=0AiWUhxLpQgUXdEwtOEZVZU1lcllGVHJRbjlsYTJ1VGc"/>
+      </x:expect>
+    </x:scenario>
+    
+    <x:scenario label="els:infographic-makeHtmlEmbed : Knightlab (timeline) (only infographic ID + width/height)">
+      <x:call function="els:infographic-makeHtmlEmbed">
+        <x:param name="platform" select="'knightlab-timeline'"/>
+        <x:param name="infographicId" select="'0AiWUhxLpQgUXdEwtOEZVZU1lcllGVHJRbjlsYTJ1VGc'"/>
+        <x:param name="width" select="'xxx'"/>
+        <x:param name="height" select="'yyy'"/>
+      </x:call>
+      <x:expect label="iframe">
+        <html:iframe 
+          width="xxx"
+          height="yyy"
+          frameborder="0"
+          scrolling="no"
+          src="https://cdn.knightlab.com/libs/timeline/latest/embed/?source=0AiWUhxLpQgUXdEwtOEZVZU1lcllGVHJRbjlsYTJ1VGc"/>
+      </x:expect>
+    </x:scenario>
+    
+    <x:scenario label="els:infographic-makeHtmlEmbed : Knightlab (timeline) (only infographic ID)">
+      <x:call function="els:infographic-makeHtmlEmbed">
+        <x:param name="platform" select="'knightlab-timeline'"/>
+        <x:param name="infographicId" select="'0AiWUhxLpQgUXdEwtOEZVZU1lcllGVHJRbjlsYTJ1VGc'"/>
+      </x:call>
+      <x:expect label="iframe">
+        <html:iframe 
+          width="640"
+          height="600"
+          frameborder="0"
+          scrolling="no"
+          src="https://cdn.knightlab.com/libs/timeline/latest/embed/?source=0AiWUhxLpQgUXdEwtOEZVZU1lcllGVHJRbjlsYTJ1VGc"/>
+      </x:expect>
+    </x:scenario>
+    
+  </x:scenario>
+  
+</x:description>
