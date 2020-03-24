@@ -49,6 +49,13 @@
       <x:expect label="Twitter" select="'1187305228699234306'" />
     </x:scenario>
     
+    <x:scenario label="els:social-network-idFromUrl : Twitter (with query)">
+      <x:call function="els:social-network-idFromUrl">
+        <x:param name="url" select="'https://twitter.com/efl_quotidienne/status/1187305228699234306?s=20'" />
+      </x:call>
+      <x:expect label="Twitter" select="'1187305228699234306'" />
+    </x:scenario>
+    
     <x:scenario label="els:social-network-idFromUrl : Random URL">
       <x:call function="els:social-network-idFromUrl">
         <x:param name="url" select="'https://google.com/'" />
@@ -58,10 +65,28 @@
     
   </x:scenario>
   
-  <x:scenario label="els:social-network-makeHtmlEmbedFromUrl() - iframe generation">
+  <x:scenario label="els:social-network-makeHtmlEmbed() - iframe generation">
     
-    <x:scenario label="els:social-network-makeHtmlEmbedFromUrl : Twitter">
-      <x:call function="els:social-network-makeHtmlEmbedFromUrl">
+    <x:scenario label="els:social-network-makeHtmlEmbed : Twitter (full tweet URL + height/width)">
+      <x:call function="els:social-network-makeHtmlEmbed">
+        <x:param name="url" select="'https://twitter.com/efl_quotidienne/status/1187305228699234306'"/>
+        <x:param name="width" select="'xxx'"/>
+        <x:param name="height" select="'yyy'"/>
+      </x:call>
+      <x:expect label="iframe">
+        <html:iframe 
+          title=""
+          aria-label=""
+          src="https://twitframe.com/show?url=https://twitter.com/efl_quotidienne/status/1187305228699234306"
+          scrolling="1"
+          frameborder="0"
+          width="xxx"
+          height="yyy"/>
+      </x:expect>
+    </x:scenario>
+    
+    <x:scenario label="els:social-network-makeHtmlEmbed : Twitter (full tweet URL)">
+      <x:call function="els:social-network-makeHtmlEmbed">
         <x:param name="url" select="'https://twitter.com/efl_quotidienne/status/1187305228699234306'"/>
       </x:call>
       <x:expect label="iframe">
@@ -69,6 +94,42 @@
           title=""
           aria-label=""
           src="https://twitframe.com/show?url=https://twitter.com/efl_quotidienne/status/1187305228699234306"
+          scrolling="1"
+          frameborder="0"
+          width="450"
+          height="250"/>
+      </x:expect>
+    </x:scenario>
+    
+    <x:scenario label="els:social-network-makeHtmlEmbed : Twitter (only tweet ID + width/height)">
+      <x:call function="els:social-network-makeHtmlEmbed">
+        <x:param name="platform" select="'twitter'"/>
+        <x:param name="postId" select="'1187305228699234306'"/>
+        <x:param name="width" select="'xxx'"/>
+        <x:param name="height" select="'yyy'"/>
+      </x:call>
+      <x:expect label="iframe">
+        <html:iframe 
+          title=""
+          aria-label=""
+          src="https://twitframe.com/show?url=https://twitter.com/default_user/status/1187305228699234306"
+          scrolling="1"
+          frameborder="0"
+          width="xxx"
+          height="yyy"/>
+      </x:expect>
+    </x:scenario>
+    
+    <x:scenario label="els:social-network-makeHtmlEmbed : Twitter (only tweet ID)">
+      <x:call function="els:social-network-makeHtmlEmbed">
+        <x:param name="platform" select="'twitter'"/>
+        <x:param name="postId" select="'1187305228699234306'"/>
+      </x:call>
+      <x:expect label="iframe">
+        <html:iframe 
+          title=""
+          aria-label=""
+          src="https://twitframe.com/show?url=https://twitter.com/default_user/status/1187305228699234306"
           scrolling="1"
           frameborder="0"
           width="450"
