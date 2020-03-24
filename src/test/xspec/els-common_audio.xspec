@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<x:description xmlns:x="http://www.jenitennison.com/xslt/xspec"
+  xmlns:html="http://www.w3.org/1999/xhtml"
+  xmlns:els="http://www.lefebvre-sarrut.eu/ns/els"
+  stylesheet="../../main/xsl/els-common_audio.xsl">
+  
+  <x:scenario label="els:isAudioUrl">
+    
+    <x:scenario label="els:isAudioUrl : Soundcloud (1)">
+      <x:call function="els:isAudioUrl">
+        <x:param name="url" select="'https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/34019569&amp;color=0066cc'" />
+      </x:call>
+      <x:expect label="Soundcloud => true()" select="true()" />
+    </x:scenario>
+    
+    <x:scenario label="els:isAudioUrl : Soundcloud (2)">
+      <x:call function="els:isAudioUrl">
+        <x:param name="url" select="'https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/34019569?src=embed'" />
+      </x:call>
+      <x:expect label="Soundcloud => true()" select="true()" />
+    </x:scenario>
+    
+    <x:scenario label="els:isAudioUrl : Random URL">
+      <x:call function="els:isAudioUrl">
+        <x:param name="url" select="'https://google.com/'" />
+      </x:call>
+      <x:expect label="Google.com => false()" select="false()" />
+    </x:scenario>
+    
+  </x:scenario>
+  
+  <x:scenario label="els:audio-platformFromUrl()">
+    
+    <x:scenario label="els:audio-platformFromUrl : Soundcloud">
+      <x:call function="els:audio-platformFromUrl">
+        <x:param name="url" select="'https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/34019569'" />
+      </x:call>
+      <x:expect label="Soundcloud => 'soundcloud'" select="'soundcloud'" />
+    </x:scenario>
+    
+    <x:scenario label="els:audio-platformFromUrl : Random URL">
+      <x:call function="els:audio-platformFromUrl">
+        <x:param name="url" select="'https://google.com/'" />
+      </x:call>
+      <x:expect label="Google.com => ()" select="()" />
+    </x:scenario>
+    
+  </x:scenario>
+  
+  <x:scenario label="els:audio-idFromUrl()">
+    
+    <x:scenario label="els:audio-idFromUrl : Soundcloud (1)">
+      <x:call function="els:audio-idFromUrl">
+        <x:param name="url" select="'https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/34019569'" />
+      </x:call>
+      <x:expect label="Soundcloud" select="'34019569'" />
+    </x:scenario>
+    
+    <x:scenario label="els:audio-idFromUrl : Soundcloud (2)">
+      <x:call function="els:audio-idFromUrl">
+        <x:param name="url" select="'https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/34019569&amp;color=0066cc'" />
+      </x:call>
+      <x:expect label="Soundcloud" select="'34019569'" />
+    </x:scenario>
+    
+    <x:scenario label="els:audio-idFromUrl : Soundcloud (3)">
+      <x:call function="els:audio-idFromUrl">
+        <x:param name="url" select="'https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/34019569?src=embed'" />
+      </x:call>
+      <x:expect label="Soundcloud" select="'34019569'" />
+    </x:scenario>
+    
+    <x:scenario label="els:audio-idFromUrl : Random URL">
+      <x:call function="els:audio-idFromUrl">
+        <x:param name="url" select="'https://google.com/'" />
+      </x:call>
+      <x:expect label="Google.com => ()" select="()" />
+    </x:scenario>
+    
+  </x:scenario>
+  
+  <x:scenario label="els:audio-makeHtmlEmbed() - iframe generation">
+    
+    <x:scenario label="els:audio-makeHtmlEmbed : Soundcloud (full audio clip URL + height/width)">
+      <x:call function="els:audio-makeHtmlEmbed">
+        <x:param name="url" select="'https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/34019569?src=embed'"/>
+        <x:param name="width" select="'xxx'"/>
+        <x:param name="height" select="'yyy'"/>
+      </x:call>
+      <x:expect label="iframe">
+        <html:iframe
+          width="xxx"
+          height="yyy"
+          scrolling="no"
+          frameborder="no"
+          src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/34019569"/>
+      </x:expect>
+    </x:scenario>
+    
+    <x:scenario label="els:audio-makeHtmlEmbed : Soundcloud (full audio clip URL)">
+      <x:call function="els:audio-makeHtmlEmbed">
+        <x:param name="url" select="'https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/34019569?src=embed'"/>
+      </x:call>
+      <x:expect label="iframe">
+        <html:iframe
+          width="100%"
+          height="166"
+          scrolling="no"
+          frameborder="no"
+          src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/34019569"/>
+      </x:expect>
+    </x:scenario>
+    
+    <x:scenario label="els:audio-makeHtmlEmbed : Soundcloud (only audio clip ID + width/height)">
+      <x:call function="els:audio-makeHtmlEmbed">
+        <x:param name="platform" select="'soundcloud'"/>
+        <x:param name="audioId" select="'34019569'"/>
+        <x:param name="width" select="'xxx'"/>
+        <x:param name="height" select="'yyy'"/>
+      </x:call>
+      <x:expect label="iframe">
+        <html:iframe
+          width="xxx"
+          height="yyy"
+          scrolling="no"
+          frameborder="no"
+          src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/34019569"/>
+      </x:expect>
+    </x:scenario>
+    
+    <x:scenario label="els:audio-makeHtmlEmbed : Soundcloud (only audio clip ID)">
+      <x:call function="els:audio-makeHtmlEmbed">
+        <x:param name="platform" select="'soundcloud'"/>
+        <x:param name="audioId" select="'34019569'"/>
+      </x:call>
+      <x:expect label="iframe">
+        <html:iframe
+          width="100%"
+          height="166"
+          scrolling="no"
+          frameborder="no"
+          src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/34019569"/>
+      </x:expect>
+    </x:scenario>
+    
+  </x:scenario>
+  
+</x:description>
+
+
