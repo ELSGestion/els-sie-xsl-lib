@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <x:description xmlns:x="http://www.jenitennison.com/xslt/xspec"
   xmlns:els="http://www.lefebvre-sarrut.eu/ns/els"
+  xmlns:html="http://www.w3.org/1999/xhtml"
   stylesheet="../../main/xsl/els-common_videos.xsl">
   
   <x:scenario label="isVideoUrl()">
@@ -117,13 +118,29 @@
   
   <x:scenario label="video-makeHtmlEmbed() - iframe generation">
     
-    <x:scenario label="video-makeHtmlEmbed : Youtube">
+    <x:scenario label="video-makeHtmlEmbed : Youtube (with URL + width/height)">
+      <x:call function="els:video-makeHtmlEmbed">
+        <x:param name="url" select="'https://youtu.be/qWFHsVQjJPA'" />
+        <x:param name="width" select="'xxx'" />
+        <x:param name="height" select="'yyy'" />
+      </x:call>
+      <x:expect label="Youtube Video">
+        <html:iframe 
+          width="xxx"
+          height="yyy"
+          frameborder="0"
+          allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen="allowfullscreen"
+          src="https://www.youtube.com/embed/qWFHsVQjJPA" />
+      </x:expect>
+    </x:scenario>
+    
+    <x:scenario label="video-makeHtmlEmbed : Youtube (with URL)">
       <x:call function="els:video-makeHtmlEmbed">
         <x:param name="url" select="'https://youtu.be/qWFHsVQjJPA'" />
       </x:call>
       <x:expect label="Youtube Video">
-        <html:iframe xmlns:html="http://www.w3.org/1999/xhtml"
-          xmlns:els="http://www.lefebvre-sarrut.eu/ns/els"
+        <html:iframe 
           width="560"
           height="315"
           frameborder="0"
@@ -133,13 +150,62 @@
       </x:expect>
     </x:scenario>
     
-    <x:scenario label="video-makeHtmlEmbed : Vimeo">
+    <x:scenario label="video-makeHtmlEmbed : Youtube (with video ID + width/height)">
+      <x:call function="els:video-makeHtmlEmbed">
+        <x:param name="platform" select="'youtube'" />
+        <x:param name="videoId" select="'qWFHsVQjJPA'" />
+        <x:param name="width" select="'xxx'" />
+        <x:param name="height" select="'yyy'" />
+      </x:call>
+      <x:expect label="Youtube Video">
+        <html:iframe 
+          width="xxx"
+          height="yyy"
+          frameborder="0"
+          allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen="allowfullscreen"
+          src="https://www.youtube.com/embed/qWFHsVQjJPA" />
+      </x:expect>
+    </x:scenario>
+    
+    <x:scenario label="video-makeHtmlEmbed : Youtube (with video ID)">
+      <x:call function="els:video-makeHtmlEmbed">
+        <x:param name="platform" select="'youtube'" />
+        <x:param name="videoId" select="'qWFHsVQjJPA'" />
+      </x:call>
+      <x:expect label="Youtube Video">
+        <html:iframe 
+          width="560"
+          height="315"
+          frameborder="0"
+          allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen="allowfullscreen"
+          src="https://www.youtube.com/embed/qWFHsVQjJPA" />
+      </x:expect>
+    </x:scenario>
+    
+    <x:scenario label="video-makeHtmlEmbed : Vimeo (with URL + width/height)">
+      <x:call function="els:video-makeHtmlEmbed">
+        <x:param name="url" select="'https://vimeo.com/259053952'" />
+        <x:param name="width" select="'xxx'" />
+        <x:param name="height" select="'yyy'" />
+      </x:call>
+      <x:expect label="Vimeo Video">
+        <html:iframe
+          width="xxx"
+          height="yyy"
+          frameborder="0"
+          allowfullscreen="allowfullscreen"
+          src="https://player.vimeo.com/video/259053952" />
+      </x:expect>
+    </x:scenario>
+
+    <x:scenario label="video-makeHtmlEmbed : Vimeo (with URL)">
       <x:call function="els:video-makeHtmlEmbed">
         <x:param name="url" select="'https://vimeo.com/259053952'" />
       </x:call>
       <x:expect label="Vimeo Video">
-        <html:iframe xmlns:html="http://www.w3.org/1999/xhtml"
-          xmlns:els="http://www.lefebvre-sarrut.eu/ns/els"
+        <html:iframe
           width="640"
           height="465"
           frameborder="0"
@@ -147,7 +213,38 @@
           src="https://player.vimeo.com/video/259053952" />
       </x:expect>
     </x:scenario>
-
+    
+    <x:scenario label="video-makeHtmlEmbed : Vimeo (with video ID + width/height)">
+      <x:call function="els:video-makeHtmlEmbed">
+        <x:param name="platform" select="'vimeo'" />
+        <x:param name="videoId" select="'259053952'" />
+        <x:param name="width" select="'xxx'" />
+        <x:param name="height" select="'yyy'" />
+      </x:call>
+      <x:expect label="Vimeo Video">
+        <html:iframe
+          width="xxx"
+          height="yyy"
+          frameborder="0"
+          allowfullscreen="allowfullscreen"
+          src="https://player.vimeo.com/video/259053952" />
+      </x:expect>
+    </x:scenario>
+    
+    <x:scenario label="video-makeHtmlEmbed : Vimeo (with video ID)">
+      <x:call function="els:video-makeHtmlEmbed">
+        <x:param name="platform" select="'vimeo'" />
+        <x:param name="videoId" select="'259053952'" />
+      </x:call>
+      <x:expect label="Vimeo Video">
+        <html:iframe
+          width="640"
+          height="465"
+          frameborder="0"
+          allowfullscreen="allowfullscreen"
+          src="https://player.vimeo.com/video/259053952" />
+      </x:expect>
+    </x:scenario>
     
   </x:scenario>
   
