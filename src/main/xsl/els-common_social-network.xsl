@@ -90,8 +90,8 @@
     </xd:desc>
     <xd:param name="platform">[xs:string] The platform identifier (cf. constants here in els-common_social-network.xsl).</xd:param>
     <xd:param name="postId">[xs:string] The ID of the post.</xd:param>
-    <xd:param name="width">A fixed width.</xd:param>
-    <xd:param name="height">A fixed height.</xd:param>
+    <xd:param name="width">[xs:string?] A fixed width.</xd:param>
+    <xd:param name="height">[xs:string?] A fixed height.</xd:param>
     <xd:return>[element(html:iframe)?] The web-integration-ready html tag of the post.</xd:return>
   </xd:doc>
   <xsl:function name="els:social-network-makeHtmlEmbed" as="element(html:iframe)?">
@@ -128,9 +128,9 @@
     <xd:desc>
       <xd:p>Function that a returns a generated web-integration-ready html tag embedding the social network post.</xd:p>
     </xd:desc>
-    <xd:param name="url">The social network URL of the post.</xd:param>
-    <xd:param name="width">A fixed width.</xd:param>
-    <xd:param name="height">A fixed height.</xd:param>
+    <xd:param name="url">[xs:string] The social network URL of the post.</xd:param>
+    <xd:param name="width">[xs:string?] A fixed width.</xd:param>
+    <xd:param name="height">[xs:string?] A fixed height.</xd:param>
     <xd:return>[element(html:iframe)?] The web-integration-ready html tag of the post.</xd:return>
   </xd:doc>
   <xsl:function name="els:social-network-makeHtmlEmbed" as="element(html:iframe)?">
@@ -153,7 +153,7 @@
       <xd:p>Function that a returns a generated web-integration-ready html tag embedding the social network post.</xd:p>
       <xd:p>1-arg signature without width/height arguments, which will be set to the platform default.</xd:p>
     </xd:desc>
-    <xd:param name="url">The social network URL of the post.</xd:param>
+    <xd:param name="url">[xs:string] The social network URL of the post.</xd:param>
     <xd:return>[element(html:iframe)?] The web-integration-ready html tag of the post.</xd:return>
   </xd:doc>
   <xsl:function name="els:social-network-makeHtmlEmbed" as="element(html:iframe)?">
@@ -166,9 +166,9 @@
       <xd:p>Twitter-specific function to generate an iframe embeding the tweet from its tweet ID.</xd:p>
       <xd:p>If width/height params are set to an empty sequence, the platform default values will be used.</xd:p>
     </xd:desc>
-    <xd:param name="tweetId">The ID of the tweet.</xd:param>
-    <xd:param name="width">A fixed width.</xd:param>
-    <xd:param name="height">A fixed height.</xd:param>
+    <xd:param name="tweetId">[xs:string] The ID of the tweet.</xd:param>
+    <xd:param name="width">[xs:string?] A fixed width.</xd:param>
+    <xd:param name="height">[xs:string?] A fixed height.</xd:param>
     <xd:return>[element(html:iframe)?] The web-integration-ready html tag of the tweet.</xd:return>
   </xd:doc>
   <xsl:function name="els:social-network-makeTwitterHtmlEmbed" as="element(html:iframe)?">
@@ -188,9 +188,9 @@
       <xd:p>A tweet URL contains the user and tweet IDs: https://twitter.com/ + user + /status/ + tweet ID.</xd:p>
       <xd:p>If width/height params are set to an empty sequence, the platform default values will be used.</xd:p>
     </xd:desc>
-    <xd:param name="url">The URL of the tweet.</xd:param>
-    <xd:param name="width">A fixed width.</xd:param>
-    <xd:param name="height">A fixed height.</xd:param>
+    <xd:param name="url">[xs:string] The URL of the tweet.</xd:param>
+    <xd:param name="width">[xs:string?] A fixed width.</xd:param>
+    <xd:param name="height">[xs:string?] A fixed height.</xd:param>
     <xd:return>[element(html:iframe)?] The web-integration-ready html tag of the tweet.</xd:return>
   </xd:doc>
   <xsl:function name="els:social-network-makeTwitterHtmlEmbedFromUrl" as="element(html:iframe)?">
