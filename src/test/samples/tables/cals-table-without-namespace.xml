@@ -1,0 +1,559 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<table colsep="0" frame="all" id="FRC_2020-01_UI-3DF13C5B-AB2D-4CE8-850F-C86704BE64AF_IDM1304137632" rowsep="0" tabstyle="FRC-TableauSimple">
+  <titre>Échéanciers comptables et financiers 2020 - Petites SARL, SNC</titre>
+  <tgroup cols="5">
+    <colspec colname="c1" colwidth="0.05*"/>
+    <colspec colname="c2" colwidth="2.3*"/>
+    <colspec colname="c3" colwidth="0.25*"/>
+    <colspec colname="c4" colwidth="2.3*"/>
+    <colspec colname="c5" colwidth="0.1*"/>
+    <thead valign="middle">
+      <row>
+        <entry align="center" colsep="1" morerows="1" rowsep="1" valign="top" colname="c1">
+          <al>Date limite</al>
+        </entry>
+        <entry align="center" colsep="1" morerows="1" rowsep="1" valign="top" colname="c2">
+          <al>Obligations</al>
+        </entry>
+        <entry align="center" colsep="1" nameend="c4" namest="c3" rowsep="1" valign="top" id="test">
+          <al>SARL, SNC (petites)</al>
+        </entry>
+        <entry align="center" colsep="1" morerows="1" rowsep="1" valign="top" colname="c5">
+          <al>MC</al>
+        </entry>
+      </row>
+      <row>
+        <entry align="center" colsep="1" rowsep="1" valign="top">
+          <al>avec CAC</al>
+        </entry>
+        <entry align="center" colsep="1" rowsep="1" valign="top">
+          <al>sans CAC</al>
+        </entry>
+      </row>
+    </thead>
+    <tbody valign="middle">
+      <row>
+        <entry align="center" colsep="1" rowsep="1" valign="middle">
+          <al>
+            <motRep>Clôture</motRep>
+          </al>
+          <al>
+            <motRep> + 1 mois</motRep>
+          </al>
+          <al>
+            <motRep>31-1</motRep>
+          </al>
+        </entry>
+        <entry align="left" colsep="1" rowsep="1" valign="top">
+          <al>Informer les CAC (par le gérant) de la poursuite au cours de l’exercice clos des conventions conclues et autorisées au cours d’exercices antérieurs (SARL uniquement ; dans les SNC, le CAC n’a pas à établir de rapport spécial, voir <renvoiAutruiTransition annee="2019" numeroDocument="12/19" numeroInfo="114" produitCx="FRCHS">FRC Hors-Série 12/19 n<e>o</e> 114</renvoiAutruiTransition>).</al>
+          <al>Pour les conventions conclues au cours de l’exercice, les CAC sont informés dans le mois de leur conclusion.</al>
+        </entry>
+        <entry align="center" colsep="1" rowsep="1" valign="middle">
+          <al>x</al>
+        </entry>
+        <entry align="center" colsep="1" rowsep="1" valign="top">
+          <al/>
+        </entry>
+        <entry align="left" colsep="1" rowsep="1" valign="top">
+          <al/>
+          <al>
+            <renvoisMemento nom="MC" mille="2020">
+              <rMemN aPublier="true" mille="2020" miseAJour="true" nom="MC" nouv="false" num="80440">80440</rMemN>
+            </renvoisMemento>
+          </al>
+          <al/>
+        </entry>
+      </row>
+      <row>
+        <entry align="center" colsep="1" rowsep="1" valign="middle">
+          <al>
+            <motRep>Clôture</motRep>
+          </al>
+          <al>
+            <motRep> + 3 mois</motRep>
+          </al>
+        </entry>
+        <entry align="left" colsep="1" rowsep="1" valign="top">
+          <al>Sociétés soumises à l’IS ou sociétés soumises au régime fiscal des sociétés de personnes : déposer la déclaration fiscale des résultats, voir note (1) p. 67.</al>
+        </entry>
+        <entry align="center" colsep="1" rowsep="1" valign="middle">
+          <al>x</al>
+        </entry>
+        <entry align="center" colsep="1" rowsep="1" valign="middle">
+          <al>x</al>
+        </entry>
+        <entry align="left" colsep="1" rowsep="1" valign="top">
+          <al/>
+        </entry>
+      </row>
+      <row>
+        <entry align="center" colsep="1" valign="middle">
+          <al><motRep>Conv</motRep>.</al>
+          <al>
+            <motRep>- 1 mois</motRep>
+            <rNote ref="FRC_2020-01_F365D5E9D-1CC6-4A65-A7C1-DED09711DDF8_NOTE61" id="FRC_2020-01_F365D5E9D-1CC6-4A65-A7C1-DED09711DDF8_NOTE61rNote_131" num="1"/>
+          </al>
+          <al>
+            <motRep>15-5</motRep>
+          </al>
+        </entry>
+        <entry align="left" colsep="1" valign="top">
+          <al>Établir (par le gérant) :</al>
+        </entry>
+        <entry align="left" colsep="1" valign="top">
+          <al/>
+        </entry>
+        <entry align="center" colsep="1" valign="top">
+          <al/>
+        </entry>
+        <entry align="left" colsep="1" valign="top">
+          <al/>
+        </entry>
+      </row>
+      <row>
+        <entry align="left" colsep="1" valign="top">
+          <al/>
+        </entry>
+        <entry align="left" colsep="1" valign="top">
+          <lst format="tiret">
+            <item>
+              <al>comptes annuels de l’exercice clos,</al>
+            </item>
+          </lst>
+        </entry>
+        <entry align="center" colsep="1" valign="middle">
+          <al>x</al>
+        </entry>
+        <entry align="center" colsep="1" valign="top">
+          <al/>
+        </entry>
+        <entry align="left" colsep="1" valign="top">
+          <al/>
+          <al><renvoisMemento nom="MC" mille="2020"><rMemN aPublier="true" mille="2020" miseAJour="true" nom="MC" nouv="false" num="64105">64105</rMemN></renvoisMemento> s.</al>
+          <al/>
+          <al/>
+        </entry>
+      </row>
+      <row>
+        <entry align="left" colsep="1" valign="top">
+          <al/>
+        </entry>
+        <entry align="left" colsep="1" valign="top">
+          <lst format="tiret">
+            <item>
+              <al>rapport de gestion, le cas échéant<rNote ref="FRC_2020-01_F365D5E9D-1CC6-4A65-A7C1-DED09711DDF8_NOTE62" id="FRC_2020-01_F365D5E9D-1CC6-4A65-A7C1-DED09711DDF8_NOTE62rNote_132" num="2"/>,</al>
+            </item>
+          </lst>
+        </entry>
+        <entry align="center" colsep="1" valign="middle">
+          <al>x</al>
+        </entry>
+        <entry align="center" colsep="1" valign="top">
+          <al/>
+        </entry>
+        <entry align="left" colsep="1" valign="top">
+          <al/>
+          <al>
+            <renvoisMemento nom="MC" mille="2020">
+              <rMemN aPublier="true" mille="2020" miseAJour="true" nom="MC" nouv="false" num="64980">64980 s.</rMemN>
+            </renvoisMemento>
+          </al>
+          <al/>
+          <al/>
+        </entry>
+      </row>
+      <row>
+        <entry align="left" colsep="1" valign="top">
+          <al/>
+        </entry>
+        <entry align="left" colsep="1" valign="top">
+          <lst format="tiret">
+            <item>
+              <al>comptes consolidés de l’exercice clos, le cas échéant,</al>
+            </item>
+          </lst>
+        </entry>
+        <entry align="center" colsep="1" valign="middle">
+          <al>x</al>
+        </entry>
+        <entry align="center" colsep="1" valign="top">
+          <al/>
+        </entry>
+        <entry align="left" colsep="1" valign="top">
+          <al/>
+          <al>
+            <renvoisMemento nom="MC" mille="2020">
+              <rMemN aPublier="true" mille="2020" miseAJour="true" nom="MC" nouv="false" num="64985">64985</rMemN>
+            </renvoisMemento>
+          </al>
+          <al/>
+        </entry>
+      </row>
+      <row>
+        <entry align="left" colsep="1" valign="top">
+          <al/>
+        </entry>
+        <entry align="left" colsep="1" rowsep="1" valign="top">
+          <lst format="tiret">
+            <item>
+              <al>rapport sur la gestion du groupe, le cas échéant.</al>
+            </item>
+          </lst>
+        </entry>
+        <entry align="center" colsep="1" rowsep="1" valign="middle">
+          <al>x</al>
+        </entry>
+        <entry align="center" colsep="1" rowsep="1" valign="top">
+          <al/>
+        </entry>
+        <entry align="left" colsep="1" rowsep="1" valign="top">
+          <al>MConso 9216-2</al>
+        </entry>
+      </row>
+      <row>
+        <entry align="left" colsep="1" valign="top">
+          <al/>
+        </entry>
+        <entry align="left" colsep="1" valign="top">
+          <al>Mettre à disposition des CAC au siège social :</al>
+        </entry>
+        <entry align="left" colsep="1" valign="top">
+          <al/>
+        </entry>
+        <entry align="center" colsep="1" valign="top">
+          <al/>
+        </entry>
+        <entry align="left" colsep="1" valign="top">
+          <al>80445</al>
+        </entry>
+      </row>
+      <row>
+        <entry align="left" colsep="1" valign="top">
+          <al/>
+        </entry>
+        <entry align="left" colsep="1" valign="top">
+          <lst format="tiret">
+            <item>
+              <al>comptes annuels,</al>
+            </item>
+          </lst>
+        </entry>
+        <entry align="center" colsep="1" valign="middle">
+          <al>x</al>
+        </entry>
+        <entry align="center" colsep="1" valign="top">
+          <al/>
+        </entry>
+        <entry align="left" colsep="1" valign="top">
+          <al/>
+        </entry>
+      </row>
+      <row>
+        <entry align="left" colsep="1" valign="top">
+          <al/>
+        </entry>
+        <entry align="left" colsep="1" valign="top">
+          <lst format="tiret">
+            <item>
+              <al>rapport de gestion, le cas échéant <rNote ref="FRC_2020-01_F365D5E9D-1CC6-4A65-A7C1-DED09711DDF8_NOTE62" id="FRC_2020-01_F365D5E9D-1CC6-4A65-A7C1-DED09711DDF8_NOTE62rNote_133" num="2"/>,</al>
+            </item>
+          </lst>
+        </entry>
+        <entry align="center" colsep="1" valign="middle">
+          <al>x</al>
+        </entry>
+        <entry align="center" colsep="1" valign="top">
+          <al/>
+        </entry>
+        <entry align="left" colsep="1" valign="top">
+          <al/>
+        </entry>
+      </row>
+      <row>
+        <entry align="left" colsep="1" valign="top">
+          <al/>
+        </entry>
+        <entry align="left" colsep="1" valign="top">
+          <lst format="tiret">
+            <item>
+              <al>comptes consolidés, le cas échéant,</al>
+            </item>
+          </lst>
+        </entry>
+        <entry align="center" colsep="1" valign="middle">
+          <al>x</al>
+        </entry>
+        <entry align="center" colsep="1" valign="top">
+          <al/>
+        </entry>
+        <entry align="left" colsep="1" valign="top">
+          <al/>
+        </entry>
+      </row>
+      <row>
+        <entry align="left" colsep="1" rowsep="1" valign="top">
+          <al/>
+        </entry>
+        <entry align="left" colsep="1" rowsep="1" valign="top">
+          <lst format="tiret">
+            <item>
+              <al>rapport sur la gestion du groupe, le cas échéant.</al>
+            </item>
+          </lst>
+        </entry>
+        <entry align="center" colsep="1" rowsep="1" valign="middle">
+          <al>x</al>
+        </entry>
+        <entry align="center" colsep="1" rowsep="1" valign="top">
+          <al/>
+        </entry>
+        <entry align="left" colsep="1" rowsep="1" valign="top">
+          <al/>
+        </entry>
+      </row>
+      <row>
+        <entry align="center" colsep="1" valign="middle">
+          <al>
+            <motRep>Assemblée annuelle</motRep>
+          </al>
+          <al>
+            <motRep>- 15 jours</motRep>
+          </al>
+          <al>
+            <motRep>15-6</motRep>
+          </al>
+        </entry>
+        <entry align="left" colsep="1" valign="top">
+          <al>Établir (par le gérant) :</al>
+        </entry>
+        <entry align="center" colsep="1" valign="top">
+          <al/>
+          <al/>
+          <al/>
+        </entry>
+        <entry align="left" colsep="1" valign="top">
+          <al/>
+        </entry>
+        <entry align="left" colsep="1" valign="top">
+          <al/>
+        </entry>
+      </row>
+      <row>
+        <entry align="left" colsep="1" valign="top">
+          <al/>
+        </entry>
+        <entry align="left" colsep="1" valign="top">
+          <lst format="tiret">
+            <item>
+              <al>comptes annuels de l’exercice clos,</al>
+            </item>
+          </lst>
+        </entry>
+        <entry align="center" colsep="1" valign="top">
+          <al/>
+        </entry>
+        <entry align="center" colsep="1" valign="middle">
+          <al>x</al>
+        </entry>
+        <entry align="left" colsep="1" valign="top">
+          <al/>
+          <al>
+            <renvoisMemento nom="MC" mille="2020">
+              <rMemN aPublier="true" mille="2020" miseAJour="true" nom="MC" nouv="false" num="64105">64105 s.</rMemN>
+            </renvoisMemento>
+          </al>
+          <al/>
+          <al/>
+        </entry>
+      </row>
+      <row>
+        <entry align="left" colsep="1" valign="top">
+          <al/>
+        </entry>
+        <entry align="left" colsep="1" rowsep="1" valign="top">
+          <lst format="tiret">
+            <item>
+              <al>rapport de gestion, le cas échéant <rNote ref="FRC_2020-01_F365D5E9D-1CC6-4A65-A7C1-DED09711DDF8_NOTE62" id="FRC_2020-01_F365D5E9D-1CC6-4A65-A7C1-DED09711DDF8_NOTE62rNote_134" num="2"/>.</al>
+            </item>
+          </lst>
+        </entry>
+        <entry align="center" colsep="1" rowsep="1" valign="top">
+          <al/>
+        </entry>
+        <entry align="center" colsep="1" rowsep="1" valign="middle">
+          <al>x</al>
+        </entry>
+        <entry align="left" colsep="1" rowsep="1" valign="top">
+          <al/>
+          <al>
+            <renvoisMemento nom="MC" mille="2020">
+              <rMemN aPublier="true" mille="2020" miseAJour="true" nom="MC" nouv="false" num="64980">64980 s.</rMemN>
+            </renvoisMemento>
+          </al>
+          <al/>
+          <al/>
+        </entry>
+      </row>
+      <row>
+        <entry align="left" colsep="1" valign="top">
+          <al/>
+        </entry>
+        <entry align="left" colsep="1" valign="top">
+          <al>Remise par les CAC :</al>
+        </entry>
+        <entry align="left" colsep="1" valign="top">
+          <al/>
+        </entry>
+        <entry align="center" colsep="1" valign="top">
+          <al/>
+        </entry>
+        <entry align="left" colsep="1" valign="top">
+          <al/>
+        </entry>
+      </row>
+      <row>
+        <entry align="left" colsep="1" valign="top">
+          <al/>
+        </entry>
+        <entry align="left" colsep="1" valign="top">
+          <lst format="tiret">
+            <item>
+              <al>du rapport sur les comptes annuels et du rapport sur les comptes consolidés, le cas échéant,</al>
+            </item>
+          </lst>
+        </entry>
+        <entry align="center" colsep="1" valign="middle">
+          <al>x</al>
+        </entry>
+        <entry align="center" colsep="1" valign="top">
+          <al/>
+        </entry>
+        <entry align="left" colsep="1" valign="top">
+          <al/>
+          <al>
+            <renvoisMemento nom="CCONSO" mille="2018">
+              <rMemN aPublier="true" mille="2018" miseAJour="true" nom="CCONSO" nouv="false" num="9246">MConso 9246</rMemN>
+            </renvoisMemento>
+          </al>
+          <al/>
+          <al><renvoiAutruiTransition annee="2019" numeroDocument="12/19" numeroInfo="112" produitCx="FRCHS">FRC Hors-Série 12/19 n<e>os</e> 112</renvoiAutruiTransition>, <renvoiAutruiTransition annee="2019" numeroDocument="12/19" numeroInfo="114" produitCx="FRCHS">114</renvoiAutruiTransition></al>
+          <al/>
+        </entry>
+      </row>
+      <row>
+        <entry align="left" colsep="1" valign="top">
+          <al/>
+        </entry>
+        <entry align="left" colsep="1" rowsep="1" valign="top">
+          <lst format="tiret">
+            <item>
+              <al>du rapport spécial (SARL uniquement, dans les SNC, le CAC n’a pas à établir de rapport spécial), voir note (1) p. 69.</al>
+            </item>
+          </lst>
+        </entry>
+        <entry align="center" colsep="1" rowsep="1" valign="middle">
+          <al>x</al>
+        </entry>
+        <entry align="center" colsep="1" rowsep="1" valign="top">
+          <al/>
+        </entry>
+        <entry align="left" colsep="1" rowsep="1" valign="top">
+          <al/>
+        </entry>
+      </row>
+      <row>
+        <entry align="left" colsep="1" valign="top">
+          <al/>
+        </entry>
+        <entry align="left" colsep="1" rowsep="1" valign="top">
+          <al>Fournir le montant des honoraires versés à chacun des CAC et les informations sur le réseau auquel ils appartiennent, voir note (2) p. 69.</al>
+        </entry>
+        <entry align="center" colsep="1" rowsep="1" valign="middle">
+          <al>x</al>
+        </entry>
+        <entry align="left" colsep="1" rowsep="1" valign="top">
+          <al/>
+        </entry>
+        <entry align="left" colsep="1" rowsep="1" valign="top">
+          <al>
+            <renvoisMemento nom="MC" mille="2020">
+              <rMemN aPublier="true" mille="2020" miseAJour="true" nom="MC" nouv="false" num="80155">80155</rMemN>
+            </renvoisMemento>
+          </al>
+          <al/>
+        </entry>
+      </row>
+      <row>
+        <entry align="left" colsep="1" valign="top">
+          <al/>
+        </entry>
+        <entry align="left" colsep="1" rowsep="1" valign="top">
+          <al>Convoquer l’assemblée annuelle des associés.</al>
+        </entry>
+        <entry align="center" colsep="1" rowsep="1" valign="middle">
+          <al>x</al>
+        </entry>
+        <entry align="center" colsep="1" rowsep="1" valign="middle">
+          <al>x</al>
+        </entry>
+        <entry align="center" colsep="1" rowsep="1" valign="top">
+          <al/>
+        </entry>
+      </row>
+      <row>
+        <entry align="left" colsep="1" valign="top">
+          <al/>
+        </entry>
+        <entry align="left" colsep="1" rowsep="1" valign="top">
+          <al>Convoquer le CAC à l’assemblée annuelle.</al>
+        </entry>
+        <entry align="center" colsep="1" rowsep="1" valign="middle">
+          <al>x</al>
+        </entry>
+        <entry align="center" colsep="1" rowsep="1" valign="top">
+          <al/>
+        </entry>
+        <entry align="center" colsep="1" rowsep="1" valign="top">
+          <al/>
+          <al>
+            <renvoisMemento nom="MC" mille="2020">
+              <rMemN aPublier="true" mille="2020" miseAJour="true" nom="MC" nouv="false" num="80450">80450</rMemN>
+            </renvoisMemento>
+          </al>
+          <al/>
+        </entry>
+      </row>
+      <row>
+        <entry align="left" colsep="1" rowsep="1" valign="top">
+          <al/>
+        </entry>
+        <entry align="left" colsep="1" rowsep="1" valign="top">
+          <al>Convoquer le CSE (ex-CE) à l’assemblée annuelle, voir note (3) p. 69.</al>
+        </entry>
+        <entry align="center" colsep="1" rowsep="1" valign="middle">
+          <al>x</al>
+        </entry>
+        <entry align="center" colsep="1" rowsep="1" valign="middle">
+          <al>x</al>
+        </entry>
+        <entry align="center" colsep="1" rowsep="1" valign="top">
+          <al/>
+          <al>
+            <renvoisMemento nom="MC" mille="2020">
+              <rMemN aPublier="true" mille="2020" miseAJour="true" nom="MC" nouv="false" num="80280">80280</rMemN>
+            </renvoisMemento>
+          </al>
+          <al/>
+        </entry>
+      </row>
+    </tbody>
+  </tgroup>
+  <tblNote>
+    <note id="FRC_2020-01_F365D5E9D-1CC6-4A65-A7C1-DED09711DDF8_NOTE61" num="1">
+      <al>C’est-à-dire à la date limite de mise à disposition des CAC des comptes et du rapport de gestion, soit au plus tard le 15 mai si l’assemblée annuelle se tient le 30 juin (les associés étant convoqués au plus tard le 15 juin).</al>
+    </note>
+    <note id="FRC_2020-01_F365D5E9D-1CC6-4A65-A7C1-DED09711DDF8_NOTE62" num="2">
+      <al>Sur la dispense pour certaines SARL et SNC ne dépassant pas à la clôture certains seuils d’établir un rapport de gestion, voir note (4) p. xx.</al>
+    </note>
+  </tblNote>
+</table>

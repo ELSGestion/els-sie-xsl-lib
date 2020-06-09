@@ -24,12 +24,14 @@
   <xsl:import href="els-common.xsl"/>
   <xsl:import href="setXmlBase.xsl"/>
   <xsl:import href="removeXmlBase.xsl"/>
+  <xsl:import href="setCalsTableNS.xsl"/>
   <xsl:import href="normalizeCalsTable.xsl"/>
   
   <!--PARAMETERS-->
   <!--common-->
   <xsl:param name="xslLib:cals2html.log.uri" select="resolve-uri('log/', base-uri())" as="xs:string"/>
   <xsl:param name="xslLib:cals2html.debug" select="false()" as="xs:boolean"/>
+  <xsl:param name="xslLib:cals2html.set-cals-ns" select="false()" as="xs:boolean"/>
   <!--structure-->
   <xsl:param name="xslLib:cals2html.html-version" select="5" as="xs:double"/> <!--4 or 5 for example-->
   <xsl:param name="xslLib:cals2html.use-style-insteadOf-class" select="true()" as="xs:boolean"/>
@@ -73,6 +75,26 @@
         <xsl:apply-templates select="." mode="xslLib:setXmlBase"/>
       </xsl:document>
     </xsl:variable>
+    <!--STEP0 : add cals namespace on table elements if asked for-->
+    <xsl:variable name="step" as="document-node()">
+      <xsl:choose>
+        <xsl:when test="$xslLib:cals2html.set-cals-ns">
+          <xsl:document>
+            <xsl:apply-templates select="." mode="xslLib:setCalsTableNS.main"/>
+          </xsl:document>
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:sequence select="$step"/>
+        </xsl:otherwise>
+      </xsl:choose>
+    </xsl:variable>
+    <xsl:if test="$xslLib:cals2html.debug">
+      <xsl:variable name="step.log.uri" select="resolve-uri('cals2html.step0.xml', $xslLib:cals2html.log.uri)" as="xs:anyURI"/>
+      <xsl:message>[INFO] writing <xsl:value-of select="$step.log.uri"/></xsl:message>
+      <xsl:result-document href="{$step.log.uri}">
+        <xsl:sequence select="$step"/>
+      </xsl:result-document>
+    </xsl:if>
     <!--STEP1 : normalize cals table-->
     <xsl:variable name="step" as="document-node()">
       <xsl:document>
@@ -336,6 +358,7 @@
           <xsl:sequence select="$current-tgroup/colspec[@colname = $fsib1.entry-namest/@namest]/preceding-sibling::colspec[$distance]"/>
         </xsl:when>
         <!--Finaly consider position-->
+        <!--FIXME : check those old messages => does it still make sens ? may it happens after cals normalisation-->
         <xsl:when test="position() > 1 and ../entry[@colname]">
           <xsl:message>[ERROR][cals2html.xsl] Unable to get colspec for this entry. @colname might be missing ? (<xsl:value-of select="els:getFileName(string(base-uri()))"/> : <xsl:sequence select="els:get-xpath(.)" />)</xsl:message>
         </xsl:when>
