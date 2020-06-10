@@ -259,7 +259,7 @@
       <xsl:apply-templates select="@* | processing-instruction() | comment()" mode="#current"/>
       <xsl:apply-templates select="caption" mode="#current"/>
       <xsl:choose>
-        <xsl:when test="colgroup | col">
+        <xsl:when test="colgroup[col] | col">
           <xsl:apply-templates select="colgroup | col" mode="#current"/>
         </xsl:when>
         <xsl:otherwise>
