@@ -15,108 +15,108 @@
           <colspec colname="c4"/>
           <tbody valign="middle">
             <row>
-              <entry colsep="1" rowsep="1">
+              <entry colname="c1" colsep="1" rowsep="1">
                 <p xmlns="http://www.w3.org/1999/xhtml">
                   <strong>Nature des prêts</strong>
                 </p>
               </entry>
-              <entry colsep="1" rowsep="1">
+              <entry colname="c2" colsep="1" rowsep="1">
                 <p xmlns="http://www.w3.org/1999/xhtml">
                   <strong>PC ordinaires (métropole)</strong>
                 </p>
               </entry>
-              <entry colsep="1" rowsep="1">
+              <entry colname="c3" colsep="1" rowsep="1">
                 <p xmlns="http://www.w3.org/1999/xhtml">
                   <strong>PAS Métropole</strong>
                 </p>
               </entry>
-              <entry colsep="1" rowsep="1">
+              <entry colname="c4" colsep="1" rowsep="1">
                 <p xmlns="http://www.w3.org/1999/xhtml">
                   <strong>PAS DOM</strong>
                 </p>
               </entry>
             </row>
             <row>
-              <entry colsep="1" rowsep="0">
+              <entry colname="c1" colsep="1" rowsep="0">
                 <p xmlns="http://www.w3.org/1999/xhtml"><strong>Prêts à taux fixes</strong> dont la durée est :</p>
               </entry>
-              <entry colsep="1" rowsep="0">
+              <entry colname="c2" colsep="1" rowsep="0">
                 <p xmlns="http://www.w3.org/1999/xhtml"></p>
               </entry>
-              <entry colsep="1" rowsep="0">
+              <entry colname="c3" colsep="1" rowsep="0">
                 <p xmlns="http://www.w3.org/1999/xhtml"></p>
               </entry>
-              <entry colsep="1" rowsep="0">
+              <entry colname="c4" colsep="1" rowsep="0">
                 <p xmlns="http://www.w3.org/1999/xhtml"></p>
               </entry>
             </row>
             <row>
-              <entry colsep="1" rowsep="0">
+              <entry colname="c1" colsep="1" rowsep="0">
                 <p xmlns="http://www.w3.org/1999/xhtml">≤ 12 ans</p>
               </entry>
-              <entry colsep="1" rowsep="0">
+              <entry colname="c2" colsep="1" rowsep="0">
                 <p xmlns="http://www.w3.org/1999/xhtml">4,55 %</p>
               </entry>
-              <entry colsep="1" rowsep="0">
+              <entry colname="c3" colsep="1" rowsep="0">
                 <p xmlns="http://www.w3.org/1999/xhtml">3,95 %</p>
               </entry>
-              <entry colsep="1" rowsep="0">
+              <entry colname="c4" colsep="1" rowsep="0">
                 <p xmlns="http://www.w3.org/1999/xhtml">4,55 %</p>
               </entry>
             </row>
             <row>
-              <entry colsep="1" rowsep="0">
+              <entry colname="c1" colsep="1" rowsep="0">
                 <p xmlns="http://www.w3.org/1999/xhtml">&gt; 12 ans et ≤ 15 ans</p>
               </entry>
-              <entry colsep="1" rowsep="0">
+              <entry colname="c2" colsep="1" rowsep="0">
                 <p xmlns="http://www.w3.org/1999/xhtml">4,75 %</p>
               </entry>
-              <entry colsep="1" rowsep="0">
+              <entry colname="c3" colsep="1" rowsep="0">
                 <p xmlns="http://www.w3.org/1999/xhtml">4,15 %</p>
               </entry>
-              <entry colsep="1" rowsep="0">
+              <entry colname="c4" colsep="1" rowsep="0">
                 <p xmlns="http://www.w3.org/1999/xhtml">4,75 %</p>
               </entry>
             </row>
             <row>
-              <entry colsep="1" rowsep="0">
+              <entry colname="c1" colsep="1" rowsep="0">
                 <p xmlns="http://www.w3.org/1999/xhtml">&gt; 15 ans et ≤ 20 ans</p>
               </entry>
-              <entry colsep="1" rowsep="0">
+              <entry colname="c2" colsep="1" rowsep="0">
                 <p xmlns="http://www.w3.org/1999/xhtml">4,90 %</p>
               </entry>
-              <entry colsep="1" rowsep="0">
+              <entry colname="c3" colsep="1" rowsep="0">
                 <p xmlns="http://www.w3.org/1999/xhtml">4,30 %</p>
               </entry>
-              <entry colsep="1" rowsep="0">
+              <entry colname="c4" colsep="1" rowsep="0">
                 <p xmlns="http://www.w3.org/1999/xhtml">4,90 %</p>
               </entry>
             </row>
             <row>
-              <entry colsep="1" rowsep="1">
+              <entry colname="c1" colsep="1" rowsep="1">
                 <p xmlns="http://www.w3.org/1999/xhtml">&gt; 20 ans</p>
               </entry>
-              <entry colsep="1" rowsep="1">
+              <entry colname="c2" colsep="1" rowsep="1">
                 <p xmlns="http://www.w3.org/1999/xhtml">5,00 %</p>
               </entry>
-              <entry colsep="1" rowsep="1">
+              <entry colname="c3" colsep="1" rowsep="1">
                 <p xmlns="http://www.w3.org/1999/xhtml">4,40 %</p>
               </entry>
-              <entry colsep="1" rowsep="1">
+              <entry colname="c4" colsep="1" rowsep="1">
                 <p xmlns="http://www.w3.org/1999/xhtml">5,00 %</p>
               </entry>
             </row>
             <row>
-              <entry colsep="1" rowsep="1">
+              <entry colname="c1" colsep="1" rowsep="1">
                 <p xmlns="http://www.w3.org/1999/xhtml"><strong>Prêts à taux variables ou révisables</strong> quelle que soit la durée du prêt</p>
               </entry>
-              <entry colsep="1" rowsep="1">
+              <entry colname="c2" colsep="1" rowsep="1">
                 <p xmlns="http://www.w3.org/1999/xhtml">4,55 %</p>
               </entry>
-              <entry colsep="1" rowsep="1">
+              <entry colname="c3" colsep="1" rowsep="1">
                 <p xmlns="http://www.w3.org/1999/xhtml">3,95 %</p>
               </entry>
-              <entry colsep="1" rowsep="1">
+              <entry colname="c4" colsep="1" rowsep="1">
                 <p xmlns="http://www.w3.org/1999/xhtml">4,55 %</p>
               </entry>
             </row>

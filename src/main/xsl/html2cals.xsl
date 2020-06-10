@@ -918,10 +918,15 @@
         <xsl:if test="@xhtml2cals:rowspan > 1">
           <xsl:attribute name="morerows" select="number(@xhtml2cals:rowspan)-1"/>
         </xsl:if>
-        <xsl:if test="@xhtml2cals:colspan > 1">
-          <xsl:attribute name="namest" select="concat('c', count(preceding-sibling::*) + 1)"/>
-          <xsl:attribute name="nameend" select="concat('c', count(preceding-sibling::*) + @xhtml2cals:colspan)"/>
-        </xsl:if>
+        <xsl:choose>
+          <xsl:when test="@xhtml2cals:colspan > 1">
+            <xsl:attribute name="namest" select="concat('c', count(preceding-sibling::*) + 1)"/>
+            <xsl:attribute name="nameend" select="concat('c', count(preceding-sibling::*) + @xhtml2cals:colspan)"/>            
+          </xsl:when>
+          <xsl:otherwise>
+            <xsl:attribute name="colname" select="concat('c', count(preceding-sibling::*) + 1)"/>
+          </xsl:otherwise>
+        </xsl:choose>
       </xsl:if>
       <!-- check CSS for definition of col or row separator -->
       <xsl:variable name="rowspan" select="(@xhtml2cals:rowspan, 1)[1]" as="xs:integer"/>
