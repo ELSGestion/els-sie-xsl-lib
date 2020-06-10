@@ -205,7 +205,7 @@
       <xsl:if test="not(empty($style.tmp))">
         <xsl:attribute name="style" select="string-join($style.tmp, ' ')"/>
       </xsl:if>
-      <xsl:if test="$xslLib:cals2html.compute-column-width-within-colgroup">
+      <xsl:if test="$xslLib:cals2html.compute-column-width-within-colgroup and exists(colspec)">
         <colgroup>
           <xsl:variable name="colspec" select="colspec" as="element(colspec)*"/>
           <xsl:for-each select="colspec">

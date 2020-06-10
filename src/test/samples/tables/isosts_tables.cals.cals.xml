@@ -48,6 +48,7 @@
         <table xmlns="http://docs.oasis-open.org/ns/oasis-exchange/table" frame="none" colsep="0" rowsep="0">
           <tgroup cols="2">
             <colspec colname="c1"/>
+            <colspec colname="c2"/>
             <tbody valign="middle">
               <row>
                 <entry>table cell text</entry>
