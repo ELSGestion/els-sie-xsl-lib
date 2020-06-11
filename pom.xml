@@ -16,7 +16,8 @@
   </properties>
 
   <scm>
-    <developerConnection>scm:git:git@github.com:ELSGestion/els-sie-xsl-lib.git</developerConnection>
+    <!--<developerConnection>scm:git:git@github.com:ELSGestion/els-sie-xsl-lib.git</developerConnection> SSH mode doesn't work with new Jenkins slave-->
+    <developerConnection>scm:git:https://github.com/ELSGestion/els-sie-xsl-lib.git</developerConnection>
     <tag>HEAD</tag>
   </scm>
 
