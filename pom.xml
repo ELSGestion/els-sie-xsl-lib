@@ -139,34 +139,15 @@
   </reporting>
 
   <distributionManagement>
-    <repository>
-      <id>nexus-releases</id>
-      <url>http://nexus.lefebvre-sarrut.eu/repository/releases</url>
-      <layout>default</layout>
-    </repository>
     <snapshotRepository>
-      <id>nexus-snapshots</id>
-      <url>http://nexus.lefebvre-sarrut.eu/repository/snapshots</url>
-      <layout>default</layout>
+      <id>${snapshotRepositoryId}</id>
+      <url>${snapshotRepositoryUrl}</url>
     </snapshotRepository>
-    <site>
-      <id>xslLib</id>
-      <name>xslLib website</name>
-      <url>file:///var/www/html/Artefact/${project.groupId}/${project.artifactId}/${project.version}/</url>
-      <!--Site : http://srvicprd/Artefact/-->
-    </site>
+    <repository>
+      <id>${releaseRepositoryId}</id>
+      <url>${releaseRepositoryUrl}</url>
+    </repository>
   </distributionManagement>
-
-  <pluginRepositories>
-    <pluginRepository>
-      <id>nexus-public</id>
-      <url>http://srvic/nexus/content/groups/public</url>
-      <layout>default</layout>
-      <snapshots>
-        <enabled>true</enabled>
-      </snapshots>
-    </pluginRepository>
-  </pluginRepositories>
 
   <profiles>
     <profile>
