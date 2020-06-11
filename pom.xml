@@ -161,6 +161,7 @@
 			<configuration>
 				<username>${scmUsername}</username>
 				<password>${scmPassword}</password>
+			<configuration>
             <dependencies>
               <dependency>
                 <groupId>org.apache.maven.scm</groupId>

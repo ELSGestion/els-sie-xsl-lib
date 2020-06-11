@@ -25,22 +25,6 @@ pipeline {
     }
 
     stages {
-        stage('Clean') {
-            steps {
-                deleteDir()
-            }
-        }
-
-        stage('Clone') {
-            steps {
-                 git(
-                     url: "https://github.com/ELSGestion/els-sie-xsl-lib.git",
-                     credentialsId: 'GitHub_IC_LSS',
-                     branch: env.BRANCH_NAME
-                )
-            }
-        }
-
         stage('Release') {
             steps {
                 mvnRelease(tagVersion: TAG_VERSION, devVersion: DEV_VERSION,credentialsId: 'GitHub_IC_LSS')
