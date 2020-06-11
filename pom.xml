@@ -5,7 +5,7 @@
 
   <groupId>eu.els.sie.lib.xsl.common</groupId>
   <artifactId>xslLib</artifactId>
-  <version>1.00.01-CTIX-SNAPSHOT</version>
+  <version>4.03.00</version>
   <packaging>jar</packaging>
 
   <name>xslLib</name>
@@ -18,7 +18,7 @@
   <scm>
     <!--<developerConnection>scm:git:git@github.com:ELSGestion/els-sie-xsl-lib.git</developerConnection> SSH mode doesn't work with new Jenkins slave-->
     <developerConnection>scm:git:https://github.com/ELSGestion/els-sie-xsl-lib.git</developerConnection>
-    <tag>HEAD</tag>
+    <tag>xslLib-4.03.00</tag>
   </scm>
 
   <dependencies>
