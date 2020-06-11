@@ -43,7 +43,7 @@ pipeline {
 
         stage('Release') {
             steps {
-                mvnRelease(tagVersion: TAG_VERSION, devVersion: DEV_VERSION)
+                mvnRelease(tagVersion: TAG_VERSION, devVersion: DEV_VERSION,credentialsId: 'GitHub_IC_LSS')
             }
         }
     }
