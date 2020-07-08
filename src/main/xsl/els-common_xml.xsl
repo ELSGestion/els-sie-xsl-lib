@@ -527,11 +527,11 @@
       <xd:p>Wrap "adjacent by name" elements into a new element "wrapper".</xd:p>
       <xd:p>CAUTION : any text, pi, comment within context will be loose !</xd:p>
     </xd:desc>
-    <xd:param name="context">Parent of the adjacents elements to wrap</xd:param>
+    <xd:param name="context">Parent of the adjacent elements to wrap</xd:param>
     <xd:param name="adjacent.names">sequence of qualified names to set adjacent elements</xd:param>
     <xd:param name="wrapper">element wrapper</xd:param>
-    <xd:param name="keep-context">Say if the context shoulb be kept or not in the result</xd:param>
-    <xd:return>context (or its content) with wrapped adjacents element</xd:return>
+    <xd:param name="keep-context">Say if the context should be kept or not in the result</xd:param>
+    <xd:return>context (or its content) with wrapped adjacent element</xd:return>
   </xd:doc>
   <xsl:function name="els:wrap-elements-adjacent-by-names" as="node()*">
     <xsl:param name="context" as="element()"/>
@@ -548,13 +548,13 @@
   <xd:doc>
     <xd:desc>
       <xd:p>Wrap adjacent elements into a new element "wrapper".</xd:p>
-      <xd:p>CAUTION : any text, pi, comment within context will be loose !</xd:p>
+      <xd:p>CAUTION : any text, pi, comments within context will be loose !</xd:p>
     </xd:desc>
-    <xd:param name="context">Parent of the adjacents elements to wrap</xd:param>
-    <xd:param name="adjacent.function">An Xpath function to set the adjacence condition</xd:param>
-    <xd:param name="wrapper">element wrapper</xd:param>
-    <xd:param name="keep-context">Say if the context shoulb be kept or not in the result</xd:param>
-    <xd:return>context (or its content) with wrapped adjacents element</xd:return>
+    <xd:param name="context">Parent of the adjacent elements to wrap</xd:param>
+    <xd:param name="adjacent.function">Xpath function to set the adjacency condition</xd:param>
+    <xd:param name="wrapper">Element wrapper</xd:param>
+    <xd:param name="keep-context">Say if the context should be kept or not in the result</xd:param>
+    <xd:return>context (or its content) with wrapped adjacent element</xd:return>
   </xd:doc>
   <xsl:function name="els:wrap-elements-adjacent" as="node()*">
     <xsl:param name="context" as="element()"/>
@@ -606,11 +606,11 @@
     <xd:desc>
       <xd:p>Wrap elements starting with specific names into a new element "wrapper" </xd:p>
     </xd:desc>
-    <xd:param name="context">Parent of the adjacents elements to wrap</xd:param>
+    <xd:param name="context">Parent of the elements to wrap</xd:param>
     <xd:param name="starts.names">sequence of names to set starting elements</xd:param>
     <xd:param name="wrapper">element wrapper</xd:param>
-    <xd:param name="keep-context">Say if the context shoulb be kept or not in the result</xd:param>
-    <xd:return>context (or its content) with wrapped adjacents element</xd:return>
+    <xd:param name="keep-context">Say if the context should be kept or not in the result</xd:param>
+    <xd:return>context (or its content) with wrapped element</xd:return>
   </xd:doc>
   <xsl:function name="els:wrap-elements-starting-with-names" as="node()*">
     <xsl:param name="context" as="element()"/>
@@ -628,11 +628,11 @@
     <xd:desc>
       <xd:p>Wrap elements starting with specific names into a new element "wrapper" </xd:p>
     </xd:desc>
-    <xd:param name="context">Parent of the adjacents elements to wrap</xd:param>
+    <xd:param name="context">Parent of the elements to wrap</xd:param>
     <xd:param name="starts.function">An Xpath function to set the starting group condition</xd:param>
     <xd:param name="wrapper">element wrapper</xd:param>
-    <xd:param name="keep-context">Say if the context shoulb be kept or not in the result</xd:param>
-    <xd:return>context (or its content) with wrapped adjacents element</xd:return>
+    <xd:param name="keep-context">Say if the context should be kept or not in the result</xd:param>
+    <xd:return>context (or its content) with wrapped element</xd:return>
   </xd:doc>
   <xsl:function name="els:wrap-elements-starting-with" as="element()*">
     <xsl:param name="context" as="element()"/>
