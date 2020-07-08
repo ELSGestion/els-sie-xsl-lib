@@ -524,8 +524,8 @@
   
   <xd:doc>
     <xd:desc>
-      <xd:p>Wrap "adjacent by name" elements into a new element "wrapper".</xd:p>
-      <xd:p>CAUTION : any text, pi, comment within context will be loose !</xd:p>
+      <xd:p>Wrap "adjacent by name" elements into a new  "wrapper" element</xd:p>
+      <xd:p>CAUTION : any text, pi, comment within context will be loose</xd:p>
     </xd:desc>
     <xd:param name="context">Parent of the adjacent elements to wrap</xd:param>
     <xd:param name="adjacent.names">sequence of qualified names to set adjacent elements</xd:param>
@@ -547,8 +547,8 @@
   
   <xd:doc>
     <xd:desc>
-      <xd:p>Wrap adjacent elements into a new element "wrapper".</xd:p>
-      <xd:p>CAUTION : any text, pi, comments within context will be loose !</xd:p>
+      <xd:p>Wrap adjacent elements into a new "wrapper" element</xd:p>
+      <xd:p>CAUTION : any text, pi, comments within context will be loose</xd:p>
     </xd:desc>
     <xd:param name="context">Parent of the adjacent elements to wrap</xd:param>
     <xd:param name="adjacent.function">Xpath function to set the adjacency condition</xd:param>
@@ -563,13 +563,12 @@
     <xsl:param name="keep-context" as="xs:boolean"/>
     <xsl:variable name="content" as="item()*">
       <xsl:for-each-group select="$context/*" group-adjacent="$adjacent.function(.)">
-        <xsl:variable name="cg" select="current-group()" as="element()*"/>
         <xsl:choose>
           <xsl:when test="current-grouping-key()">
             <xsl:for-each select="$wrapper">
               <xsl:copy>
                 <xsl:copy-of select="@*"/>
-                <xsl:copy-of select="$cg"/>
+                <xsl:sequence select="current-group()"/>
               </xsl:copy>
             </xsl:for-each>
           </xsl:when>
@@ -594,7 +593,7 @@
     </xsl:choose>
   </xsl:function>
   
-  <xd:doc>3 args signature of els:wrap-elements-adjacent-by-names()</xd:doc>
+  <xd:doc>3 args signature of els:wrap-elements-starting-with-names()</xd:doc>
   <xsl:function name="els:wrap-elements-starting-with-names" as="node()*">
     <xsl:param name="context" as="element()"/>
     <xsl:param name="starts.names" as="xs:string+"/>
@@ -604,7 +603,7 @@
   
   <xd:doc>
     <xd:desc>
-      <xd:p>Wrap elements starting with specific names into a new element "wrapper" </xd:p>
+      <xd:p>Wrap elements starting with specific names into a new "wrapper" element</xd:p>
     </xd:desc>
     <xd:param name="context">Parent of the elements to wrap</xd:param>
     <xd:param name="starts.names">sequence of names to set starting elements</xd:param>
@@ -626,7 +625,7 @@
   
   <xd:doc>
     <xd:desc>
-      <xd:p>Wrap elements starting with specific names into a new element "wrapper" </xd:p>
+      <xd:p>Wrap elements starting with specific names into a new "wrapper" element</xd:p>
     </xd:desc>
     <xd:param name="context">Parent of the elements to wrap</xd:param>
     <xd:param name="starts.function">An Xpath function to set the starting group condition</xd:param>
@@ -641,11 +640,10 @@
     <xsl:param name="keep-context" as="xs:boolean"/>
     <xsl:variable name="content" as="item()*">
       <xsl:for-each-group select="$context/node()" group-starting-with="*[$starts.function(.)]">
-        <xsl:variable name="cg" select="current-group()" as="node()*"/>
         <xsl:for-each select="$wrapper">
           <xsl:copy>
             <xsl:copy-of select="@*"/>
-            <xsl:copy-of select="$cg"/>
+            <xsl:sequence select="current-group()"/>
           </xsl:copy>
         </xsl:for-each>
       </xsl:for-each-group>
