@@ -558,7 +558,7 @@
   </xd:doc>
   <xsl:function name="els:wrap-elements-adjacent" as="node()*">
     <xsl:param name="context" as="element()"/>
-    <xsl:param name="adjacent.function"/> <!--as="xs:string"-->
+    <xsl:param name="adjacent.function" as="function(element()) as xs:boolean"/>
     <xsl:param name="wrapper" as="element()"/>
     <xsl:param name="keep-context" as="xs:boolean"/>
     <xsl:variable name="content" as="item()*">
@@ -635,11 +635,12 @@
   </xd:doc>
   <xsl:function name="els:wrap-elements-starting-with" as="element()*">
     <xsl:param name="context" as="element()"/>
-    <xsl:param name="starts.function"/> <!--as="xs:string"-->
+    <xsl:param name="starts.function" as="function(element()) as xs:boolean"/>
     <xsl:param name="wrapper" as="element()"/>
     <xsl:param name="keep-context" as="xs:boolean"/>
     <xsl:variable name="content" as="item()*">
-      <xsl:for-each-group select="$context/node()" group-starting-with="*[$starts.function(.)]">
+      <!--@group-starting-with needs to be converted to boolean as workaround of https://saxonica.plan.io/issues/4636-->
+      <xsl:for-each-group select="$context/node()" group-starting-with="*[boolean($starts.function(.))]">
         <xsl:for-each select="$wrapper">
           <xsl:copy>
             <xsl:copy-of select="@*"/>
