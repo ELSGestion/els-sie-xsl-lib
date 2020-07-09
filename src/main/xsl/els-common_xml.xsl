@@ -565,12 +565,10 @@
       <xsl:for-each-group select="$context/*" group-adjacent="$adjacent.function(.)">
         <xsl:choose>
           <xsl:when test="current-grouping-key()">
-            <xsl:for-each select="$wrapper">
-              <xsl:copy>
-                <xsl:copy-of select="@*"/>
-                <xsl:sequence select="current-group()"/>
-              </xsl:copy>
-            </xsl:for-each>
+            <xsl:copy select="$wrapper">
+              <xsl:copy-of select="@*"/>
+              <xsl:sequence select="current-group()"/>
+            </xsl:copy>
           </xsl:when>
           <xsl:otherwise>
             <xsl:copy-of select="current-group()"/>
@@ -580,12 +578,10 @@
     </xsl:variable>
     <xsl:choose>
       <xsl:when test="$keep-context">
-        <xsl:for-each select="$context">
-          <xsl:copy>
-            <xsl:copy-of select="@*"/>
-            <xsl:sequence select="$content"/>
-          </xsl:copy>
-        </xsl:for-each>
+        <xsl:copy select="$context">
+          <xsl:copy-of select="@*"/>
+          <xsl:sequence select="$content"/>
+        </xsl:copy>
       </xsl:when>
       <xsl:otherwise>
         <xsl:sequence select="$content"/>
@@ -641,22 +637,18 @@
     <xsl:variable name="content" as="item()*">
       <!--@group-starting-with needs to be converted to boolean as workaround of https://saxonica.plan.io/issues/4636-->
       <xsl:for-each-group select="$context/node()" group-starting-with="*[boolean($starts.function(.))]">
-        <xsl:for-each select="$wrapper">
-          <xsl:copy>
-            <xsl:copy-of select="@*"/>
-            <xsl:sequence select="current-group()"/>
-          </xsl:copy>
-        </xsl:for-each>
+        <xsl:copy select="$wrapper">
+          <xsl:copy-of select="@*"/>
+          <xsl:sequence select="current-group()"/>
+        </xsl:copy>
       </xsl:for-each-group>
     </xsl:variable>
     <xsl:choose>
       <xsl:when test="$keep-context">
-        <xsl:for-each select="$context">
-          <xsl:copy>
-            <xsl:copy-of select="@*"/>
-            <xsl:sequence select="$content"/>
-          </xsl:copy>
-        </xsl:for-each>
+        <xsl:copy select="$context">
+          <xsl:copy-of select="@*"/>
+          <xsl:sequence select="$content"/>
+        </xsl:copy>
       </xsl:when>
       <xsl:otherwise>
         <xsl:sequence select="$content"/>

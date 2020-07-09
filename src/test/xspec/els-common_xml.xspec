@@ -359,7 +359,7 @@
   <x:scenario label="els:wrap-elements-starting-with-names">
     <x:call function="els:wrap-elements-starting-with-names">
       <x:param name="context">
-        <context xmlns:p="prefix">
+        <context xmlns:p="prefix" foo="bar">
           <a foo="bar">lorem ipsum</a>
           <a>lorem ipsum</a>
           <b foo="bar">lorem ipsum</b>
@@ -382,7 +382,7 @@
       <x:param name="keep-context" select="true()"/>
     </x:call>
     <x:expect label="result">
-      <context xmlns:p="prefix">
+      <context xmlns:p="prefix" foo="bar">
         <WRAPPER starts="a or c">
           <a foo="bar">lorem ipsum</a>
         </WRAPPER>
