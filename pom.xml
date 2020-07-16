@@ -13,6 +13,8 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <saxon.version>9.8.0.12</saxon.version>
+    <saxon.licence.version>9.8.2018</saxon.licence.version>
   </properties>
 
   <scm>
@@ -68,24 +70,7 @@
       <plugin>
         <groupId>io.xspec.maven</groupId>
         <artifactId>xspec-maven-plugin</artifactId>
-        <version>1.5.1</version>
-        <dependencies>
-          <dependency>
-            <groupId>extern.net.sf.saxon</groupId>
-            <artifactId>saxonee-license</artifactId>
-            <version>9.8.2018</version>
-          </dependency>
-          <dependency>
-            <groupId>extern.net.sf.saxon</groupId>
-            <artifactId>saxonee</artifactId>
-            <type>jar</type>
-            <version>9.8.0.12</version>
-          </dependency>
-        </dependencies>
-        <configuration>
-          <catalogFile>catalog.xml</catalogFile>
-          <generateSurefireReport>true</generateSurefireReport>
-        </configuration>
+        <version>2.0.0</version>
         <executions>
           <execution>
             <phase>test</phase>
@@ -94,8 +79,30 @@
             </goals>
           </execution>
         </executions>
+        <configuration>
+          <catalogFile>${project.basedir}/catalog.xml</catalogFile>
+          <generateSurefireReport>true</generateSurefireReport>
+        </configuration>
+        <dependencies>
+          <dependency>
+            <groupId>io.xspec</groupId>
+            <artifactId>xspec</artifactId>
+            <version>1.0.9</version>
+          </dependency>
+          <dependency>
+            <groupId>extern.net.sf.saxon</groupId>
+            <artifactId>saxonee-license</artifactId>
+            <version>${saxon.licence.version}</version>
+          </dependency>
+          <dependency>
+            <groupId>extern.net.sf.saxon</groupId>
+            <artifactId>saxonee</artifactId>
+            <type>jar</type>
+            <version>${saxon.version}</version>
+          </dependency>
+        </dependencies>
       </plugin>
-
+      
       <plugin>
         <artifactId>maven-assembly-plugin</artifactId>
         <version>2.6</version>
