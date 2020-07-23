@@ -20,6 +20,20 @@
       <x:expect label="Soundcloud => true()" select="true()" />
     </x:scenario>
     
+    <x:scenario label="els:isAudioUrl : Ausha (1)">
+      <x:call function="els:isAudioUrl">
+        <x:param name="url" select="'https://widget.ausha.co/index.html?showId=b7zAOcvwJGP1&amp;color=%23ffcd1b&amp;v=2&amp;display=horizontal&amp;podcastId=yJderFGXmEdY'" />
+      </x:call>
+      <x:expect label="Ausha => true()" select="true()" />
+    </x:scenario>
+    
+    <x:scenario label="els:isAudioUrl : Ausha (2)">
+      <x:call function="els:isAudioUrl">
+        <x:param name="url" select="'https://widget.ausha.co/index.html?podcastId=yJderFGXmEdY&amp;color=%23ffcd1b&amp;v=2&amp;display=horizontal'" />
+      </x:call>
+      <x:expect label="Ausha => true()" select="true()" />
+    </x:scenario>
+    
     <x:scenario label="els:isAudioUrl : Random URL">
       <x:call function="els:isAudioUrl">
         <x:param name="url" select="'https://google.com/'" />
@@ -36,6 +50,13 @@
         <x:param name="url" select="'https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/34019569'" />
       </x:call>
       <x:expect label="Soundcloud => 'soundcloud'" select="'soundcloud'" />
+    </x:scenario>
+    
+    <x:scenario label="els:audio-platformFromUrl : Ausha">
+      <x:call function="els:audio-platformFromUrl">
+        <x:param name="url" select="'https://widget.ausha.co/index.html?showId=b7zAOcvwJGP1&amp;color=%23ffcd1b&amp;v=2&amp;display=horizontal&amp;podcastId=yJderFGXmEdY'" />
+      </x:call>
+      <x:expect label="Ausha => 'ausha'" select="'ausha'" />
     </x:scenario>
     
     <x:scenario label="els:audio-platformFromUrl : Random URL">
@@ -68,6 +89,27 @@
         <x:param name="url" select="'https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/34019569?src=embed'" />
       </x:call>
       <x:expect label="Soundcloud" select="'34019569'" />
+    </x:scenario>
+    
+    <x:scenario label="els:audio-idFromUrl : Ausha (1)">
+      <x:call function="els:audio-idFromUrl">
+        <x:param name="url" select="'https://widget.ausha.co/index.html?podcastId=yJderFGXmEdY'" />
+      </x:call>
+      <x:expect label="Ausha" select="'yJderFGXmEdY'" />
+    </x:scenario>
+    
+    <x:scenario label="els:audio-idFromUrl : Ausha (2)">
+      <x:call function="els:audio-idFromUrl">
+        <x:param name="url" select="'https://widget.ausha.co/index.html?showId=b7zAOcvwJGP1&amp;podcastId=yJderFGXmEdY'" />
+      </x:call>
+      <x:expect label="Ausha" select="'yJderFGXmEdY'" />
+    </x:scenario>
+    
+    <x:scenario label="els:audio-idFromUrl : Ausha (3)">
+      <x:call function="els:audio-idFromUrl">
+        <x:param name="url" select="'https://widget.ausha.co/index.html?podcastId=yJderFGXmEdY&amp;color=%23ffcd1b&amp;v=2&amp;display=horizontal'" />
+      </x:call>
+      <x:expect label="Ausha" select="'yJderFGXmEdY'" />
     </x:scenario>
     
     <x:scenario label="els:audio-idFromUrl : Random URL">
@@ -140,6 +182,68 @@
           scrolling="no"
           frameborder="no"
           src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/34019569"/>
+      </x:expect>
+    </x:scenario>
+    
+    <x:scenario label="els:audio-makeHtmlEmbed : Ausha (full audio clip URL + height/width)">
+      <x:call function="els:audio-makeHtmlEmbed">
+        <x:param name="url" select="'https://widget.ausha.co/index.html?showId=b7zAOcvwJGP1&amp;color=%23ffcd1b&amp;v=2&amp;display=horizontal&amp;podcastId=yJderFGXmEdY'"/>
+        <x:param name="width" select="'xxx'"/>
+        <x:param name="height" select="'yyy'"/>
+      </x:call>
+      <x:expect label="iframe">
+        <html:iframe
+          width="xxx"
+          height="yyy"
+          scrolling="no"
+          frameborder="no"
+          src="https://widget.ausha.co/index.html?podcastId=yJderFGXmEdY&amp;color=%23ffcd1b&amp;v=2&amp;display=horizontal"/>
+      </x:expect>
+    </x:scenario>
+    
+    <x:scenario label="els:audio-makeHtmlEmbed : Ausha (full audio clip URL)">
+      <x:call function="els:audio-makeHtmlEmbed">
+        <x:param name="url" select="'https://widget.ausha.co/index.html?showId=b7zAOcvwJGP1&amp;color=%23ffcd1b&amp;v=2&amp;display=horizontal&amp;podcastId=yJderFGXmEdY'"/>
+      </x:call>
+      <x:expect label="iframe">
+        <html:iframe
+          width="100%"
+          height="200"
+          scrolling="no"
+          frameborder="no"
+          src="https://widget.ausha.co/index.html?podcastId=yJderFGXmEdY&amp;color=%23ffcd1b&amp;v=2&amp;display=horizontal"/>
+      </x:expect>
+    </x:scenario>
+    
+    <x:scenario label="els:audio-makeHtmlEmbed : Ausha (only audio clip ID + width/height)">
+      <x:call function="els:audio-makeHtmlEmbed">
+        <x:param name="platform" select="'ausha'"/>
+        <x:param name="audioId" select="'yJderFGXmEdY'"/>
+        <x:param name="width" select="'xxx'"/>
+        <x:param name="height" select="'yyy'"/>
+      </x:call>
+      <x:expect label="iframe">
+        <html:iframe
+          width="xxx"
+          height="yyy"
+          scrolling="no"
+          frameborder="no"
+          src="https://widget.ausha.co/index.html?podcastId=yJderFGXmEdY&amp;color=%23ffcd1b&amp;v=2&amp;display=horizontal"/>
+      </x:expect>
+    </x:scenario>
+    
+    <x:scenario label="els:audio-makeHtmlEmbed : Ausha (only audio clip ID)">
+      <x:call function="els:audio-makeHtmlEmbed">
+        <x:param name="platform" select="'ausha'"/>
+        <x:param name="audioId" select="'yJderFGXmEdY'"/>
+      </x:call>
+      <x:expect label="iframe">
+        <html:iframe
+          width="100%"
+          height="200"
+          scrolling="no"
+          frameborder="no"
+          src="https://widget.ausha.co/index.html?podcastId=yJderFGXmEdY&amp;color=%23ffcd1b&amp;v=2&amp;display=horizontal"/>
       </x:expect>
     </x:scenario>
     
