@@ -15,7 +15,7 @@
     </xd:desc>
   </xd:doc>
   
-  <xsl:param name="xslLib:baseUri" select="base-uri()" as="xs:anyURI"/>
+  <xsl:param name="xslLib:baseUri" select="base-uri(/)" as="xs:anyURI"/>
   
   <!--==============================================================================================================================-->
   <!-- INIT -->
