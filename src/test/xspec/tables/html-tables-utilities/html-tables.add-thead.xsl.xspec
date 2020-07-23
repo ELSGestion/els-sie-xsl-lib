@@ -1,45 +1,91 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <x:description 
   xmlns:x="http://www.jenitennison.com/xslt/xspec"
-  xmlns:xfe="http://www.lefebvre-sarrut.eu/ns/xmlfirst/xmlEditor"
+  xmlns:xi="http://www.w3.org/2001/XInclude"
+  xmlns:html="http://www.w3.org/1999/xhtml"
   stylesheet="../../../../main/xsl/html-tables-utillities/html-tables.add-thead.xsl"
   xslt-version="3.0">
 
+  <!--NOTE : this XSpec uses xi:include instead of href to avoid indentation differences. 
+             See https://github.com/xspec/xspec/issues/1090-->
+  
   <x:scenario label="Add thead to html tables" xml:base="../../../samples/tables/html-tables-utilities/html-tables.add-thead/">
     
     <x:scenario label="Case 1 : 1st row is a header row">
-      <x:context href="case-1.html" />
-      <x:expect label="OK" select="//*:body" test="//*:body" href="case-1.add-thead.html"/>
+      <x:context select="/">
+        <xi:include href="case-1.html"/>
+      </x:context>
+      <x:expect label="OK"
+        select="serialize(/*) ! replace(., '(xml:base=&quot;.*?&quot;)', '') ! parse-xml(.)//html:body"
+        test="serialize(/*) ! replace(., '(xml:base=&quot;.*?&quot;)', '') ! parse-xml(.)//html:body">
+        <xi:include href="case-1.add-thead.html"/>
+      </x:expect>
     </x:scenario>
     
     <x:scenario label="Case 2: 2 first rows are header rows">
-      <x:context href="case-2.html" />
-      <x:expect label="OK" select="//*:body" test="//*:body" href="case-2.add-thead.html" />
+      <x:context select="/">
+        <xi:include href="case-2.html"/>
+      </x:context>
+      <x:expect label="OK"
+        select="serialize(/*) ! replace(., '(xml:base=&quot;.*?&quot;)', '') ! parse-xml(.)//html:body"
+        test="serialize(/*) ! replace(., '(xml:base=&quot;.*?&quot;)', '') ! parse-xml(.)//html:body">
+        <xi:include href="case-2.add-thead.html"/>
+      </x:expect>
     </x:scenario>
     
     <x:scenario label="Case 3 : row without only th">
-      <x:context href="case-3.html" />
-      <x:expect label="OK" select="//*:body" test="//*:body" href="case-3.add-thead.html" />
+      <x:context select="/">
+        <xi:include href="case-3.html"/>
+      </x:context>
+      <x:expect label="OK"
+        select="serialize(/*) ! replace(., '(xml:base=&quot;.*?&quot;)', '') ! parse-xml(.)//html:body"
+        test="serialize(/*) ! replace(., '(xml:base=&quot;.*?&quot;)', '') ! parse-xml(.)//html:body">
+        <xi:include href="case-3.add-thead.html"/>
+      </x:expect>
     </x:scenario>
     
     <x:scenario label="Cas 4 : raw with th but in the middle of the table">
-      <x:context href="case-4.html" />
-      <x:expect label="OK" select="//*:body" test="//*:body" href="case-4.add-thead.html" />
+      <x:context select="/">
+        <xi:include href="case-4.html"/>
+      </x:context>
+      <x:expect label="OK"
+        select="serialize(/*) ! replace(., '(xml:base=&quot;.*?&quot;)', '') ! parse-xml(.)//html:body"
+        test="serialize(/*) ! replace(., '(xml:base=&quot;.*?&quot;)', '') ! parse-xml(.)//html:body">
+        <xi:include href="case-4.add-thead.html"/>
+      </x:expect>
     </x:scenario>
     
     <x:scenario label="Cas 5 : rowspan and colspan within header">
-      <x:context href="case-5.html" />
-      <x:expect label="OK" select="//*:body" test="//*:body" href="case-5.add-thead.html" />
+      <x:context select="/">
+        <xi:include href="case-5.html"/>
+      </x:context>
+      <x:expect label="OK"
+        select="serialize(/*) ! replace(., '(xml:base=&quot;.*?&quot;)', '') ! parse-xml(.)//html:body"
+        test="serialize(/*) ! replace(., '(xml:base=&quot;.*?&quot;)', '') ! parse-xml(.)//html:body">
+        <xi:include href="case-5.add-thead.html"/>
+      </x:expect>
     </x:scenario>
     
     <x:scenario label="Cas 6 : rowspan between thead and tbody">
-      <x:context href="case-6.html" />
-      <x:expect label="OK" select="//*:body" test="//*:body" href="case-6.add-thead.html" />
+      <x:context select="/">
+        <xi:include href="case-6.html"/>
+      </x:context>
+      <x:expect label="OK"
+        select="serialize(/*) ! replace(., '(xml:base=&quot;.*?&quot;)', '') ! parse-xml(.)//html:body"
+        test="serialize(/*) ! replace(., '(xml:base=&quot;.*?&quot;)', '') ! parse-xml(.)//html:body">
+        <xi:include href="case-6.add-thead.html"/>
+      </x:expect>
     </x:scenario>
     
     <x:scenario label="Cas 7 : case 5 + case 6">
-      <x:context href="case-7.html" />
-      <x:expect label="OK" select="//*:body" test="//*:body" href="case-7.add-thead.html" />
+      <x:context select="/">
+        <xi:include href="case-7.html"/>
+      </x:context>
+      <x:expect label="OK"
+        select="serialize(/*) ! replace(., '(xml:base=&quot;.*?&quot;)', '') ! parse-xml(.)//html:body"
+        test="serialize(/*) ! replace(., '(xml:base=&quot;.*?&quot;)', '') ! parse-xml(.)//html:body">
+        <xi:include href="case-7.add-thead.html"/>
+      </x:expect>
     </x:scenario>
     
   </x:scenario>

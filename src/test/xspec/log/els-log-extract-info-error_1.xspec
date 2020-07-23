@@ -2,17 +2,27 @@
 <x:description 
   xmlns:x="http://www.jenitennison.com/xslt/xspec"
   xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+  xmlns:xi="http://www.w3.org/2001/XInclude"
   xmlns:els="http://www.lefebvre-sarrut.eu/ns/els"
   stylesheet="../../../main/xsl/els-log-extract.xsl"
   xslt-version="3.0">
 
+  <!--NOTE : this XSpec uses xi:include instead of href to avoid indentation differences. 
+             See https://github.com/xspec/xspec/issues/1090-->
+  
   <!-- Overload the main param called $els:logLevels -->
-  <x:param name="els:logLevels" select="('info', 'error')"/>
+  <x:param name="els:logLevels" select="('info', 'error')" as="xs:string*"/>
 
   <x:scenario label="Extract log - overload the param els:logLevels" xml:base="../../samples/logs/">
     <x:scenario label="sample.xml.with.els.log.xml">
-      <x:context href="sample.xml.with.els.log.xml"/>
-      <x:expect label="OK" select="/*" test="/*" href="sample.xml.with.els.log-info-error.html"/>
+      <x:context select="/">
+        <xi:include href="sample.xml.with.els.log.xml"/>
+      </x:context>
+      <x:expect label="OK"
+        select="serialize(/*) ! replace(., '(xml:base=&quot;.*?&quot;)', '') ! parse-xml(.)"
+        test="serialize(/*) ! replace(., '(xml:base=&quot;.*?&quot;)', '') ! parse-xml(.)">
+        <xi:include href="sample.xml.with.els.log-info-error.html"/>
+      </x:expect>
     </x:scenario>
   </x:scenario>
 

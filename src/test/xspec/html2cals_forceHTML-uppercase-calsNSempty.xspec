@@ -2,8 +2,12 @@
 <x:description 
   xmlns:x="http://www.jenitennison.com/xslt/xspec" 
   xmlns:xslLib="http://www.lefebvre-sarrut.eu/ns/els/xslLib"
+  xmlns:xi="http://www.w3.org/2001/XInclude"
   stylesheet="../../main/xsl/html2cals.xsl"
   xslt-version="3.0">
+  
+  <!--NOTE : this XSpec uses xi:include instead of href to avoid indentation differences. 
+             See https://github.com/xspec/xspec/issues/1090-->
   
   <x:param name="xslLib:html2cals.force-html-table-conversion" select="true()"/>
   <x:param name="xslLib:html2cals.generate-upper-case-cals-elements" select="true()"/>
@@ -13,8 +17,14 @@
     
     <x:scenario label="HTML2CALS any html">
       <x:scenario label="article">
-        <x:context href="article.xml"/>
-        <x:expect label="OK" select="/*" test="/*" href="article.cals.xml"/>
+        <x:context select="/">
+          <xi:include href="article.xml"/>
+        </x:context>
+        <x:expect label="OK"
+          select="serialize(/*) ! replace(., '(xml:base=&quot;.*?&quot;)', '') ! parse-xml(.)"
+          test="serialize(/*) ! replace(., '(xml:base=&quot;.*?&quot;)', '') ! parse-xml(.)">
+          <xi:include href="article.cals.xml"/>
+        </x:expect>
       </x:scenario>
     </x:scenario>
     

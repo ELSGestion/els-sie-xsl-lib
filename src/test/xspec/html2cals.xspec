@@ -1,67 +1,137 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <x:description 
   xmlns:x="http://www.jenitennison.com/xslt/xspec" 
-  xmlns:xslLib="http://www.lefebvre-sarrut.eu/ns/els/xslLib"
+  xmlns:xi="http://www.w3.org/2001/XInclude"
+  xmlns:html="http://www.w3.org/1999/xhtml"
   stylesheet="../../main/xsl/html2cals.xsl"
   xslt-version="3.0">
+  
+  <!--NOTE : this XSpec uses xi:include instead of href to avoid indentation differences. 
+             See https://github.com/xspec/xspec/issues/1090-->
   
   <x:scenario label="HTML2CALS" xml:base="../samples/tables/">
     
     <x:scenario label="HTML2CALS any html :">
       <x:scenario label="table.html > table.cals.xml">
-        <x:context href="table.html"/>
-        <x:expect label="OK" select="/*/*:body" test="/*/*:body" href="table.cals.xml"/>
+        <x:context select="/">
+          <xi:include href="table.html"/>
+        </x:context>
+        <x:expect label="OK"
+          select="serialize(/*) ! replace(., '(xml:base=&quot;.*?&quot;)', '') ! parse-xml(.)/html:html/html:body"
+          test="serialize(/*) ! replace(., '(xml:base=&quot;.*?&quot;)', '') ! parse-xml(.)/html:html/html:body">
+          <xi:include href="table.cals.xml"/>
+        </x:expect>
       </x:scenario>
     </x:scenario>
     
     <x:scenario label="HTML2CALS - with class :">
       <x:scenario label="Table_CHAINE-1885.htm > Table_CHAINE-1885.cals.xml">
-        <x:context href="Table_CHAINE-1885.htm"/>
-        <x:expect label="OK" select="/*" test="/*" href="Table_CHAINE-1885.cals.xml"/>
+        <x:context select="/">
+          <xi:include href="Table_CHAINE-1885.htm"/>
+        </x:context>
+        <x:expect label="OK"
+          select="serialize(/*) ! replace(., '(xml:base=&quot;.*?&quot;)', '') ! parse-xml(.)"
+          test="serialize(/*) ! replace(., '(xml:base=&quot;.*?&quot;)', '') ! parse-xml(.)">
+          <xi:include href="Table_CHAINE-1885.cals.xml"/>
+        </x:expect>
       </x:scenario>
       <x:scenario label="frchs1603cx.tables.htm > frchs1603cx.tables.cals.xml">
-        <x:context href="frchs1603cx.tables.htm"/>
-        <x:expect label="OK" select="/*" test="/*" href="frchs1603cx.tables.cals.xml"/>
+        <x:context select="/">
+          <xi:include href="frchs1603cx.tables.htm"/>
+        </x:context>
+        <x:expect label="OK"
+          select="serialize(/*) ! replace(., '(xml:base=&quot;.*?&quot;)', '') ! parse-xml(.)"
+          test="serialize(/*) ! replace(., '(xml:base=&quot;.*?&quot;)', '') ! parse-xml(.)">
+          <xi:include href="frchs1603cx.tables.cals.xml"/>
+        </x:expect>
       </x:scenario>
       <x:scenario label="isosts_tables.cals.htm > isosts_tables.cals.cals.xml">
-        <x:context href="isosts_tables.cals.htm"/>
-        <x:expect label="OK" select="/*" test="/*" href="isosts_tables.cals.cals.xml"/>
+        <x:context select="/">
+          <xi:include href="isosts_tables.cals.htm"/>
+        </x:context>
+        <x:expect label="OK"
+          select="serialize(/*) ! replace(., '(xml:base=&quot;.*?&quot;)', '') ! parse-xml(.)"
+          test="serialize(/*) ! replace(., '(xml:base=&quot;.*?&quot;)', '') ! parse-xml(.)">
+          <xi:include href="isosts_tables.cals.cals.xml"/>
+        </x:expect>
       </x:scenario>
     </x:scenario>
     
     <x:scenario label="HTML2CALS - with style :">
       <x:scenario label="Table_CHAINE-1885.style.htm > Table_CHAINE-1885.style.cals.xml">
-        <x:context href="Table_CHAINE-1885.style.htm"/>
-        <x:expect label="OK" select="/*" test="/*" href="Table_CHAINE-1885.style.cals.xml"/>
+        <x:context select="/">
+          <xi:include href="Table_CHAINE-1885.style.htm"/>
+        </x:context>
+        <x:expect label="OK"
+          select="serialize(/*) ! replace(., '(xml:base=&quot;.*?&quot;)', '') ! parse-xml(.)"
+          test="serialize(/*) ! replace(., '(xml:base=&quot;.*?&quot;)', '') ! parse-xml(.)">
+          <xi:include href="Table_CHAINE-1885.style.cals.xml"/>
+        </x:expect>
       </x:scenario>
       <x:scenario label="frchs1603cx.tables.style.htm > frchs1603cx.tables.style.cals.xml">
-        <x:context href="frchs1603cx.tables.style.htm"/>
-        <x:expect label="OK" select="/*" test="/*" href="frchs1603cx.tables.style.cals.xml"/>
+        <x:context select="/">
+          <xi:include href="frchs1603cx.tables.style.htm"/>
+        </x:context>
+        <x:expect label="OK"
+          select="serialize(/*) ! replace(., '(xml:base=&quot;.*?&quot;)', '') ! parse-xml(.)"
+          test="serialize(/*) ! replace(., '(xml:base=&quot;.*?&quot;)', '') ! parse-xml(.)">
+          <xi:include href="frchs1603cx.tables.style.cals.xml"/>
+        </x:expect>
       </x:scenario>
       <x:scenario label="isosts_tables.cals.style.htm > isosts_tables.cals.style.cals.xml">
-        <x:context href="isosts_tables.cals.style.htm"/>
-        <x:expect label="OK" select="/*" test="/*" href="isosts_tables.cals.style.cals.xml"/>
+        <x:context select="/">
+          <xi:include href="isosts_tables.cals.style.htm"/>
+        </x:context>
+        <x:expect label="OK"
+          select="serialize(/*) ! replace(., '(xml:base=&quot;.*?&quot;)', '') ! parse-xml(.)"
+          test="serialize(/*) ! replace(., '(xml:base=&quot;.*?&quot;)', '') ! parse-xml(.)">
+          <xi:include href="isosts_tables.cals.style.cals.xml"/>
+        </x:expect>
       </x:scenario>
     </x:scenario>
     
     <x:scenario label="table_ELSSIEXDC-23.editor.html > table_ELSSIEXDC-23.editor.cals.xml">
-      <x:context href="table_ELSSIEXDC-23.editor.html"/>
-      <x:expect label="OK" select="/*" test="/*" href="table_ELSSIEXDC-23.editor.cals.xml"/>
+      <x:context select="/">
+        <xi:include href="table_ELSSIEXDC-23.editor.html"/>
+      </x:context>
+      <x:expect label="OK"
+        select="serialize(/*) ! replace(., '(xml:base=&quot;.*?&quot;)', '') ! parse-xml(.)"
+        test="serialize(/*) ! replace(., '(xml:base=&quot;.*?&quot;)', '') ! parse-xml(.)">
+        <xi:include href="table_ELSSIEXDC-23.editor.cals.xml"/>
+      </x:expect>
     </x:scenario>
     
     <x:scenario label="table_SIETRAINPR-1066.editor.html > table_SIETRAINPR-1066.editor.cals.xml - BORDERS - No @style attribut on table but @style on every cell">
-      <x:context href="table_SIETRAINPR-1066.editor.html"/>
-      <x:expect label="OK" select="/*" test="/*" href="table_SIETRAINPR-1066.editor.cals.xml"/>
+      <x:context select="/">
+        <xi:include href="table_SIETRAINPR-1066.editor.html"/>
+      </x:context>
+      <x:expect label="OK"
+        select="serialize(/*) ! replace(., '(xml:base=&quot;.*?&quot;)', '') ! parse-xml(.)"
+        test="serialize(/*) ! replace(., '(xml:base=&quot;.*?&quot;)', '') ! parse-xml(.)">
+        <xi:include href="table_SIETRAINPR-1066.editor.cals.xml"/>
+      </x:expect>
     </x:scenario>
     
     <x:scenario label="Issue #8: col width not correct when rowspan :">
       <x:scenario label="table_test-colwith.style.htm > table_test-colwith.style.cals.xml">
-        <x:context href="table_test-colwith.style.htm"/>
-        <x:expect label="OK" select="/*" test="/*" href="table_test-colwith.style.cals.xml"/>
+        <x:context select="/">
+          <xi:include href="table_test-colwith.style.htm"/>
+        </x:context>
+        <x:expect label="OK"
+          select="serialize(/*) ! replace(., '(xml:base=&quot;.*?&quot;)', '') ! parse-xml(.)"
+          test="serialize(/*) ! replace(., '(xml:base=&quot;.*?&quot;)', '') ! parse-xml(.)">
+          <xi:include href="table_test-colwith.style.cals.xml"/>
+        </x:expect>
       </x:scenario>
       <x:scenario label="table_test-colwith.style.widthInCell.htm > table_test-colwith.style.widthInCell.cals.xml">
-        <x:context href="table_test-colwith.style.widthInCell.htm"/>
-        <x:expect label="OK" select="/*" test="/*" href="table_test-colwith.style.widthInCell.cals.xml"/>
+        <x:context select="/">
+          <xi:include href="table_test-colwith.style.widthInCell.htm"/>
+        </x:context>
+        <x:expect label="OK"
+          select="serialize(/*) ! replace(., '(xml:base=&quot;.*?&quot;)', '') ! parse-xml(.)"
+          test="serialize(/*) ! replace(., '(xml:base=&quot;.*?&quot;)', '') ! parse-xml(.)">
+          <xi:include href="table_test-colwith.style.widthInCell.cals.xml"/>
+        </x:expect>
       </x:scenario>
     </x:scenario>
     

@@ -1,17 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <x:description 
   xmlns:x="http://www.jenitennison.com/xslt/xspec" 
+  xmlns:xi="http://www.w3.org/2001/XInclude"
   xmlns:xslLib="http://www.lefebvre-sarrut.eu/ns/els/xslLib"
+  xmlns:html="http://www.w3.org/1999/xhtml"
   stylesheet="../../main/xsl/cals2html.xsl"
   xslt-version="3.0">
+  
+  <!--NOTE : this XSpec uses xi:include instead of href to avoid indentation differences. 
+             See https://github.com/xspec/xspec/issues/1090-->
+  
+  <!--xslLib:baseUri has a default xpath value : it has to be overrided in XSpec--> 
+  <x:param name="xslLib:baseUri" select="xs:anyURI('https://xspec.io/')" as="xs:anyURI"/>
   
   <x:param name="xslLib:cals2html.use-style-insteadOf-class" select="true()"/>
   <x:param name="xslLib:cals2html.compute-column-width-within-colgroup" select="false()"/>
   
   <x:scenario label="CALS2HTML -width -widthInCell" xml:base="../samples/tables/">
     <x:scenario label="table_test-colwith">
-      <x:context href="table_test-colwith.xml"/>
-      <x:expect label="OK" select="/*/*:body" test="/*/*:body" href="table_test-colwith.style.widthInCell.htm"/>
+      <x:context select="/">
+        <xi:include href="table_test-colwith.xml"/>
+      </x:context>
+      <x:expect label="OK"
+        select="serialize(/*) ! replace(., '(xml:base=&quot;.*?&quot;)', '') ! parse-xml(.)/html:html/html:body"
+        test="serialize(/*) ! replace(., '(xml:base=&quot;.*?&quot;)', '') ! parse-xml(.)/html:html/html:body">
+        <xi:include href="table_test-colwith.style.widthInCell.htm"/>
+      </x:expect>
     </x:scenario>
   </x:scenario>
   

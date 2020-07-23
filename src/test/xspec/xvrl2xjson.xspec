@@ -1,13 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <x:description 
   xmlns:x="http://www.jenitennison.com/xslt/xspec" 
-  xmlns:xslLib="http://www.lefebvre-sarrut.eu/ns/els/xslLib"
+  xmlns:xi="http://www.w3.org/2001/XInclude"
   stylesheet="../../main/xsl/xml2json/xvrl2xjson.xsl"
   xslt-version="3.0">
   
   <x:scenario label="sample.xvrl > sample.xvrl.xjson" xml:base="../samples/xml2json/">
-    <x:context href="sample.xvrl"/>
-    <x:expect label="sample.xvrl.xjson" href="sample.xvrl.xjson" select="/" test="/"/>
+    <x:context select="/">
+      <xi:include href="sample.xvrl"/>
+    </x:context>
+    <x:expect label="OK"
+      select="serialize(/*) ! replace(., '(xml:base=&quot;.*?&quot;)', '') ! parse-xml(.)"
+      test="serialize(/*) ! replace(., '(xml:base=&quot;.*?&quot;)', '') ! parse-xml(.)">
+      <xi:include href="sample.xvrl.xjson"/>
+    </x:expect>
   </x:scenario>
   
 </x:description>

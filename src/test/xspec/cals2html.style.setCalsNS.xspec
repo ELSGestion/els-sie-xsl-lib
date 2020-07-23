@@ -2,16 +2,29 @@
 <x:description 
   xmlns:x="http://www.jenitennison.com/xslt/xspec" 
   xmlns:xslLib="http://www.lefebvre-sarrut.eu/ns/els/xslLib"
+  xmlns:xi="http://www.w3.org/2001/XInclude"
   stylesheet="../../main/xsl/cals2html.xsl"
   xslt-version="3.0">
+  
+  <!--NOTE : this XSpec uses xi:include instead of href to avoid indentation differences. 
+             See https://github.com/xspec/xspec/issues/1090-->
+  
+  <!--xslLib:baseUri has a default xpath value : it has to be overrided in XSpec--> 
+  <x:param name="xslLib:baseUri" select="xs:anyURI('https://xspec.io/')" as="xs:anyURI"/>
   
   <x:param name="xslLib:cals2html.set-cals-ns" select="true()"/>
   <x:param name="xslLib:cals2html.use-style-insteadOf-class" select="true()"/>
   
   <x:scenario label="CALS2HTML with style and set cals NS" xml:base="../samples/tables/">
     <x:scenario label="cals-table-without-namespace">
-      <x:context href="cals-table-without-namespace.xml"/>
-      <x:expect label="OK" select="/*" test="/*" href="cals-table-without-namespace.style.htm"/>
+      <x:context select="/">
+        <xi:include href="cals-table-without-namespace.xml"/>
+      </x:context>
+      <x:expect label="OK"
+        select="serialize(/*) ! replace(., '(xml:base=&quot;.*?&quot;)', '') ! parse-xml(.)"
+        test="serialize(/*) ! replace(., '(xml:base=&quot;.*?&quot;)', '') ! parse-xml(.)">
+        <xi:include href="cals-table-without-namespace.style.htm"/>
+      </x:expect>
     </x:scenario>
   </x:scenario>
   

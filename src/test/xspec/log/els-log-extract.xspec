@@ -1,12 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <x:description xmlns:x="http://www.jenitennison.com/xslt/xspec"
+  xmlns:xi="http://www.w3.org/2001/XInclude"
   stylesheet="../../../main/xsl/els-log-extract.xsl"
   xslt-version="3.0"> 
 
+  <!--NOTE : this XSpec uses xi:include instead of href to avoid indentation differences. 
+             See https://github.com/xspec/xspec/issues/1090-->
+  
   <x:scenario label="Extract log (no params)" xml:base="../../samples/logs/">
     <x:scenario label="sample.xml.with.els.log.xml">
-      <x:context href="sample.xml.with.els.log.xml"/>
-      <x:expect label="OK" select="/*" test="/*" href="sample.xml.with.els.log.html"/>
+      <x:context select="/">
+        <xi:include href="sample.xml.with.els.log.xml"/>
+      </x:context>
+      <x:expect label="OK"
+        select="serialize(/*) ! replace(., '(xml:base=&quot;.*?&quot;)', '') ! parse-xml(.)"
+        test="serialize(/*) ! replace(., '(xml:base=&quot;.*?&quot;)', '') ! parse-xml(.)">
+        <xi:include href="sample.xml.with.els.log.html"/>
+      </x:expect>
     </x:scenario>
   </x:scenario>
 

@@ -13,8 +13,8 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <saxon.version>9.8.0.12</saxon.version>
-    <saxon.licence.version>9.8.2018</saxon.licence.version>
+    <saxon.version>9.9.1.7</saxon.version>
+    <saxon.licence.version>9.9.2020</saxon.licence.version>
   </properties>
 
   <scm>
@@ -82,12 +82,21 @@
         <configuration>
           <catalogFile>${project.basedir}/catalog.xml</catalogFile>
           <generateSurefireReport>true</generateSurefireReport>
+          <saxonOptions>
+            <xi>on</xi>
+          </saxonOptions>
         </configuration>
         <dependencies>
           <dependency>
             <groupId>io.xspec</groupId>
             <artifactId>xspec</artifactId>
-            <version>1.0.9</version>
+            <version>1.6.0</version>
+            <exclusions>
+              <exclusion>
+                <groupId>net.sf.saxon</groupId>
+                <artifactId>Saxon-HE</artifactId>
+              </exclusion>
+            </exclusions>
           </dependency>
           <dependency>
             <groupId>extern.net.sf.saxon</groupId>
