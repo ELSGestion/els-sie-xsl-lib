@@ -82,7 +82,7 @@
   <xd:doc>Convert a one character string to an numeric (representing the position in the alphabet)</xd:doc>
   <xsl:function name="els:litteral2numeric" as="xs:integer">
     <xsl:param name="lit" as="xs:string"/>
-    <xsl:value-of select="index-of(('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'), upper-case($lit))"/>
+    <xsl:sequence select="index-of(('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'), upper-case($lit))"/>
   </xsl:function>
   
   <xd:doc>Check if atomic value is an "number"</xd:doc>
@@ -128,7 +128,7 @@
   <xd:doc>1 arg signature of els:round. Default $precision = 0 (that's why it returns an integer)</xd:doc>
   <xsl:function name="els:round" as="xs:integer">
     <xsl:param name="number" as="xs:double"/>
-    <xsl:value-of select="els:round($number,0) cast as xs:integer"/>
+    <xsl:sequence select="els:round($number,0) cast as xs:integer"/>
   </xsl:function>
   
   <xd:doc>Get the round number of any $number with the specified $precision</xd:doc>
@@ -192,7 +192,7 @@
   <xsl:function name="els:convertAtomicValueToCanonicalBooleanValue" as="xs:boolean">
     <xsl:param name="var" as="item()?"/>
     <xsl:param name="lang" as="xs:string"/>
-    <xsl:value-of select="if (not(exists($var))) then (false())
+    <xsl:sequence select="if (not(exists($var))) then (false())
                           else (
                             if ($var castable as xs:boolean) then ($var cast as xs:boolean)
                             else (
@@ -235,7 +235,7 @@
   <xsl:function name="els:convertAtomicValueToIntegerBooleanValue" as="xs:integer">
     <xsl:param name="var" as="item()?"/>
     <xsl:param name="lang" as="xs:string"/>
-    <xsl:value-of select="if (not(exists($var))) then (0)
+    <xsl:sequence select="if (not(exists($var))) then (0)
                           else (
                             if ($var castable as xs:boolean) then (els:convertCanonicalBooleanValueToIntegerBooleanValue($var cast as xs:boolean))
                             else (
@@ -271,7 +271,7 @@
   </xd:doc>
   <xsl:function name="els:convertCanonicalBooleanValueToIntegerBooleanValue" as="xs:integer">
     <xsl:param name="val" as="xs:boolean"/>
-    <xsl:value-of select="if ($val = true()) then (1) else (0)"/>
+    <xsl:sequence select="if ($val = true()) then (1) else (0)"/>
   </xsl:function>
   
 </xsl:stylesheet>

@@ -459,7 +459,7 @@
     <xsl:param name="date1" as="xs:dateTime"/>
     <xsl:param name="date2" as="xs:dateTime"/>
     <xsl:param name="precision-picture" as="xs:string"/>
-    <xsl:value-of select="format-dateTime($date1, $precision-picture) = format-dateTime($date2, $precision-picture)" />
+    <xsl:sequence select="format-dateTime($date1, $precision-picture) = format-dateTime($date2, $precision-picture)" />
   </xsl:function>
   
   <xd:doc>
