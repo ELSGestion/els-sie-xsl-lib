@@ -43,9 +43,18 @@
   <!--==============================================-->
   
   <xsl:template match="/" mode="xslLib:xjson2json">
-    <xsl:call-template name="xslLib:xjson2json.serialize-as-json">
-      <xsl:with-param name="json" select="xslLib:xjson2json(fn:*)" as="xs:string"/>
-    </xsl:call-template>
+    <xsl:choose>
+      <xsl:when test="fn:*">
+        <xsl:call-template name="xslLib:xjson2json.serialize-as-json">
+          <xsl:with-param name="json" select="xslLib:xjson2json(fn:*)" as="xs:string"/>
+        </xsl:call-template>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:message>[ERROR] calling / mode "xslLib:xjson2json" with /* not fn:*</xsl:message>
+        <xsl:message terminate="yes"><xsl:copy-of select="*"/></xsl:message>
+      </xsl:otherwise>
+    </xsl:choose>
+    
   </xsl:template>
 
   <!--Specific template to serialize to JSON with
