@@ -31,6 +31,16 @@
   <xsl:variable name="els:audio.soundcloud.embed.URL.suffix" select="''" as="xs:string"/>
   
   <xd:doc>
+    <xd:desc>Constants for "Ausha" platform</xd:desc>
+  </xd:doc>
+  <xsl:variable name="els:audio.ausha" select="'ausha'" as="xs:string"/>
+  <xsl:variable name="els:audio.ausha.domain" select="'widget.ausha.co'" as="xs:string"/>
+  <xsl:variable name="els:audio.ausha.embed.defaultWidth" select="'100%'" as="xs:string"/>
+  <xsl:variable name="els:audio.ausha.embed.defaultHeight" select="'200'" as="xs:string"/>
+  <xsl:variable name="els:audio.ausha.embed.URL.prefix" select="'https://widget.ausha.co/index.html?podcastId='" as="xs:string"/>
+  <xsl:variable name="els:audio.ausha.embed.URL.suffix" select="'&amp;color=%23ffcd1b&amp;v=2&amp;display=horizontal'" as="xs:string"/>
+  
+  <xd:doc>
     <xd:desc>Returns true if the given URL is a link to a cloud-hosted audio clip.</xd:desc>
     <xd:param name="url">[xs:string] The URL to check.</xd:param>
     <xd:return>[xs:boolean] The result of the URL checking.</xd:return>
@@ -38,7 +48,7 @@
   <xsl:function name="els:isAudioUrl" as="xs:boolean">
     <xsl:param name="url" as="xs:string"/>
     <xsl:variable name="hostname" select="els:http-get-host($url)" as="xs:string?"/>
-    <xsl:sequence select="$hostname = ($els:audio.soundcloud.domain)"/>
+    <xsl:sequence select="$hostname = ($els:audio.soundcloud.domain, $els:audio.ausha.domain)"/>
   </xsl:function>
   
   <xd:doc>
@@ -55,6 +65,9 @@
     <xsl:choose>
       <xsl:when test="$hostname = $els:audio.soundcloud.domain">
         <xsl:sequence select="$els:audio.soundcloud"/>
+      </xsl:when>
+      <xsl:when test="$hostname = $els:audio.ausha.domain">
+        <xsl:sequence select="$els:audio.ausha"/>
       </xsl:when>
       <xsl:otherwise>
         <xsl:sequence select="()"/>
@@ -78,6 +91,11 @@
       <xsl:when test="$hostname = $els:audio.soundcloud.domain">
         <!-- FIXME : make it better! --> 
         <xsl:sequence select="tokenize(substring-after($url, 'tracks/'), '(\?|&amp;)')[1]"/>
+      </xsl:when>
+      <!-- AUSHA : https://widget.ausha.co/index.html?showId=...&color=...&v=2&display=horizontal&podcastId=yJderFGXmEdY -->
+      <xsl:when test="$hostname = $els:audio.ausha.domain">
+        <!-- FIXME : make it better! --> 
+        <xsl:sequence select="tokenize(substring-after($url, 'podcastId='), '(&amp;)')[1]"/>
       </xsl:when>
       <xsl:otherwise>
         <xsl:sequence select="()"/>
@@ -103,6 +121,9 @@
     <xsl:choose>
       <xsl:when test="$platform = $els:audio.soundcloud">
         <xsl:sequence select="els:audio-makeSoundcloudHtmlEmbed($audioId,$width,$height)"/>
+      </xsl:when>
+      <xsl:when test="$platform = $els:audio.ausha">
+        <xsl:sequence select="els:audio-makeAushaHtmlEmbed($audioId,$width,$height)"/>
       </xsl:when>
       <xsl:otherwise>
         <xsl:sequence select="()"/>
@@ -174,6 +195,28 @@
       scrolling="no"
       frameborder="no"
       src="{$els:audio.soundcloud.embed.URL.prefix || $audioId || $els:audio.soundcloud.embed.URL.suffix}"/>   
+  </xsl:function>
+  
+  <xd:doc>
+    <xd:desc>
+      <xd:p>Ausha-specific function to generate an iframe embedding the audio clip from the given audio clip ID.</xd:p>
+      <xd:p>If width/height params are set to an empty sequence, the platform default values will be used.</xd:p>
+    </xd:desc>
+    <xd:param name="audioId">[xs:string] The ID of the Ausha audio clip.</xd:param>
+    <xd:param name="width">[xs:string?] A fixed width.</xd:param>
+    <xd:param name="height">[xs:string?] A fixed height.</xd:param>
+    <xd:return>[element(html:iframe)?] The web-integration-ready html tag of the Ausha audio-clip.</xd:return>
+  </xd:doc>
+  <xsl:function name="els:audio-makeAushaHtmlEmbed" as="element(html:iframe)?">
+    <xsl:param name="audioId" as="xs:string?"/>
+    <xsl:param name="width" as="xs:string?"/>
+    <xsl:param name="height" as="xs:string?"/>
+    <iframe
+      width="{if ($width) then $width else $els:audio.ausha.embed.defaultWidth}"
+      height="{if ($height) then $height else $els:audio.ausha.embed.defaultHeight}"
+      scrolling="no"
+      frameborder="no"
+      src="{$els:audio.ausha.embed.URL.prefix || $audioId || $els:audio.ausha.embed.URL.suffix}"/>   
   </xsl:function>
  
 </xsl:stylesheet>
