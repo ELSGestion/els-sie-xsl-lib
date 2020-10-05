@@ -61,6 +61,13 @@
   <xd:p>Variable "regMailAddress" : matches mail address string</xd:p>
   <xsl:variable name="els:regMailAddress" select="'^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z-]+$'" as="xs:string"/>
   
+  <xd:p>Variable "regAbsUri" : matches absolute uri</xd:p>
+  <xsl:variable name="els:regAbsUri" as="xs:string">
+    <!--<xsl:text>/^([a-z0-9+.-]+):(?://(?:((?:[a-z0-9-._~!$&amp;'()*+,;=:]|%[0-9A-F]{2})*)@)?((?:[a-z0-9-._~!$&amp;'()*+,;=]|%[0-9A-F]{2})*)(?::(\d*))?(/(?:[a-z0-9-._~!$&amp;'()*+,;=:@/]|%[0-9A-F]{2})*)?|(/?(?:[a-z0-9-._~!$&amp;'()*+,;=:@]|%[0-9A-F]{2})+(?:[a-z0-9-._~!$&amp;'()*+,;=:@/]|%[0-9A-F]{2})*)?)(?:\?((?:[a-z0-9-._~!$&amp;'()*+,;=:/?@]|%[0-9A-F]{2})*))?(?:#((?:[a-z0-9-._~!$&amp;'()*+,;=:/?@]|%[0-9A-F]{2})*))?$</xsl:text>-->
+    <!--<xsl:text>^([a-z0-9+.-]+)://?/?.*$</xsl:text>-->
+    <xsl:text>^([a-zA-Z0-9+.-]+):/.*$</xsl:text>
+  </xsl:variable>
+  
   <xd:doc>
     <xd:desc>TYPOGRAPHIC SPACES</xd:desc>
     <xd:p>Every spaces from the largest to the thinest : &amp;#x2000; (same width as letter "M") => &amp;#x200b; (zero width space - breakable)</xd:p>
