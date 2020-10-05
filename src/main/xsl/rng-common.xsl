@@ -8,7 +8,8 @@
   xmlns="http://relaxng.org/ns/structure/1.0"
   xpath-default-namespace="http://relaxng.org/ns/structure/1.0"
   exclude-result-prefixes="#all"
-  version="3.0">
+  version="3.0"
+  xml:lang="en">
   
   <xd:doc scope="stylesheet">
     <xd:desc>
@@ -50,7 +51,7 @@
     </xsl:choose>
   </xsl:function>
   
-  <xd:doc xml:lang="en">
+  <xd:doc>
     <xd:desc>
       <xd:p>Indicates if there is only one possible root element for a given grammar</xd:p>
     </xd:desc>

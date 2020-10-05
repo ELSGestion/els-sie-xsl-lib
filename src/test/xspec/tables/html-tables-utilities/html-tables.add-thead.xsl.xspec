@@ -6,8 +6,9 @@
   stylesheet="../../../../main/xsl/html-tables-utillities/html-tables.add-thead.xsl"
   xslt-version="3.0">
 
-  <!--NOTE : this XSpec uses xi:include instead of href to avoid indentation differences. 
-             See https://github.com/xspec/xspec/issues/1090-->
+  <!--NOTE : this XSpec uses select="doc(...)" instead of href to avoid indentation differences.
+      CTRL + Click on @label will still open the selected file in Oxygen (thanks to @xml:base)
+      See https://github.com/xspec/xspec/issues/1090-->
   
   <x:scenario label="Add thead to html tables" xml:base="../../../samples/tables/html-tables-utilities/html-tables.add-thead/">
     

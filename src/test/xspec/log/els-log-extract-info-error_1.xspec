@@ -7,22 +7,21 @@
   stylesheet="../../../main/xsl/els-log-extract.xsl"
   xslt-version="3.0">
 
-  <!--NOTE : this XSpec uses xi:include instead of href to avoid indentation differences. 
-             See https://github.com/xspec/xspec/issues/1090-->
+  <!--NOTE : this XSpec uses select="doc(...)" instead of href to avoid indentation differences.
+      CTRL + Click on @label will still open the selected file in Oxygen (thanks to @xml:base)
+      See https://github.com/xspec/xspec/issues/1090-->
   
   <!-- Overload the main param called $els:logLevels -->
   <x:param name="els:logLevels" select="('info', 'error')" as="xs:string*"/>
-
+  
+  <x:param name="sampleBaseUri" select="resolve-uri('../../samples/logs/', $x:xspec-uri)" as="xs:anyURI"/>
+  
   <x:scenario label="Extract log - overload the param els:logLevels" xml:base="../../samples/logs/">
     <x:scenario label="sample.xml.with.els.log.xml">
-      <x:context select="/">
-        <xi:include href="sample.xml.with.els.log.xml"/>
-      </x:context>
-      <x:expect label="OK"
-        select="serialize(/*) ! replace(., '(xml:base=&quot;.*?&quot;)', '') ! parse-xml(.)"
-        test="serialize(/*) ! replace(., '(xml:base=&quot;.*?&quot;)', '') ! parse-xml(.)">
-        <xi:include href="sample.xml.with.els.log-info-error.html"/>
-      </x:expect>
+      <x:context select="doc(resolve-uri('sample.xml.with.els.log.xml', $sampleBaseUri))"/>
+      <x:expect label="sample.xml.with.els.log-info-error.html" 
+        select="doc(resolve-uri('sample.xml.with.els.log-info-error.html', $sampleBaseUri))/*"
+        test="doc(resolve-uri('sample.xml.with.els.log-info-error.html', $sampleBaseUri))/*"/>
     </x:scenario>
   </x:scenario>
 

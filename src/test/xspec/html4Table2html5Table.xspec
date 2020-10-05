@@ -5,8 +5,9 @@
   stylesheet="../../main/xsl/html4Table2html5Table.xsl"
   xslt-version="3.0">
   
-  <!--NOTE : this XSpec uses xi:include instead of href to avoid indentation differences. 
-             See https://github.com/xspec/xspec/issues/1090-->
+  <!--NOTE : this XSpec uses select="doc(...)" instead of href to avoid indentation differences.
+      CTRL + Click on @label will still open the selected file in Oxygen (thanks to @xml:base)
+      See https://github.com/xspec/xspec/issues/1090-->
   
   <x:scenario label="html4Table2html5Table" xml:base="../samples/tables/">
     <x:scenario label="table.html4.html > table.html4.html5.html">

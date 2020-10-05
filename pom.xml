@@ -82,9 +82,7 @@
         <configuration>
           <catalogFile>${project.basedir}/catalog.xml</catalogFile>
           <generateSurefireReport>true</generateSurefireReport>
-          <saxonOptions>
-            <xi>on</xi>
-          </saxonOptions>
+          <testDir>src/test/xspec/log</testDir>
         </configuration>
         <dependencies>
           <dependency>
