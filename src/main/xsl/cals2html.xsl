@@ -56,8 +56,9 @@
   <!-- force @align / @valign default values to be specified in HTML (as class or css)-->
   <xsl:param name="xslLib:cals2html.default-align-force-explicit" select="false()" as="xs:boolean"/>
   <xsl:param name="xslLib:cals2html.default-valign-force-explicit" select="false()" as="xs:boolean"/>
-  <!--Try to merge multiple tgroup table into a single html table when possible thead entries will-->
-  <xsl:param name="xslLib:cals2html.tryToMergeMultipleTgroupToSingleHTMLTable" select="false()" as="xs:boolean"/>
+  <!--Try to merge multiple tgroup table into a single html table: be carefull this might have side effect 
+    (loose tgroupstyle or adding colspan that will make the table look a bit different)-->
+  <xsl:param name="xslLib:cals2html.forceMergingMultipleTgroup" select="false()" as="xs:boolean"/>
   
   <!--==============================================================================================================================-->
   <!-- INIT -->
@@ -127,7 +128,7 @@
     <!--STEP3 : merge tgroup if asked-->
     <xsl:variable name="step" as="document-node()">
       <xsl:choose>
-        <xsl:when test="$xslLib:cals2html.tryToMergeMultipleTgroupToSingleHTMLTable">
+        <xsl:when test="$xslLib:cals2html.forceMergingMultipleTgroup">
           <xsl:document>
             <xsl:apply-templates select="$step" mode="xslLib:cals2html.mergeTgroups"/>
           </xsl:document>
@@ -199,7 +200,7 @@
   </xsl:template>
   
   <!--Add explicit cals attributes value on entry by resolving cals attributs inheritance for 
-  'colsep', 'rowsep', 'align', 'valign' except FIXME : 'char', 'charoff'--> 
+  'colsep', 'rowsep', 'align', 'valign' except (FIXME) : 'char', 'charoff'--> 
   <xsl:template match="entry[not(@calstable:rid)]" mode="xslLib:cals2html.moveAttributesDownEntries">
     <xsl:variable name="current-colspec-list" select="xslLib:cals2html.get-colspecs(.)" as="element(colspec)*"/>
     <xsl:variable name="colsep-current" as="xs:string">
@@ -294,21 +295,25 @@
   
   <xsl:mode name="xslLib:cals2html.mergeTgroups" on-no-match="shallow-copy"/>
   
-  <xsl:template match="table[not(tgroup/tfoot) (:tfoot is difficult to merge:)]"
+  <!--Merge tgroups except when there are tfoot (which is difficult to merge here, FIXME later ?)-->
+  <xsl:template match="table[count(tgroup) gt 1][not(tgroup/tfoot)]"
     mode="xslLib:cals2html.mergeTgroups">
+    <xsl:variable name="max.cols" select="xs:integer(max(tgroup/@cols))" as="xs:integer"/>
     <xsl:copy copy-namespaces="false">
       <xsl:apply-templates select="@*" mode="#current"/>
-      <!--adjacency condition : name is tgroup and cols have the same value 
-        (other attributes have been previously moved to entries--> 
-      <xsl:for-each-group select="*" group-adjacent="local-name(.) || '_$_' || @cols">
+      <!--adjacency condition : name is tgroup, keep other foreign markup if any --> 
+      <xsl:for-each-group select="*" group-adjacent="local-name(.)">
         <xsl:choose>
           <xsl:when test="current-group()[1]/local-name(.) = 'tgroup' and count(current-group()) gt 1">
             <cals:tgroup>
               <xsl:sequence select="current-group()[1]/@*"/>
               <!--1st colspec/colwith will be use (only for colwidth actually)--> 
               <xsl:sequence select="current-group()[1]/colspec"/>
+              <!--No more thead here, an annotation will be added to keep thead cells information, and later convert them to html:th-->
               <cals:tbody>
-                <xsl:apply-templates select="current-group()/*[not(self::colspec)]/*" mode="#current"/>
+                <xsl:apply-templates select="current-group()/*[self::thead or self::tbody]/row" mode="#current">
+                  <xsl:with-param name="max.cols" select="$max.cols" as="xs:integer" tunnel="true"/>
+                </xsl:apply-templates>
               </cals:tbody>
             </cals:tgroup>
           </xsl:when>
@@ -320,10 +325,22 @@
     </xsl:copy>
   </xsl:template>
   
-  <!--Add an annotation to keep the information that this cell was a thead entry-->
-  <xsl:template match="thead/row/entry" mode="xslLib:cals2html.mergeTgroups">
+  <!--Add html annotations to be used later in the conversion to HTML-->
+  <!--FIXME : entrytbl is not implement here-->
+  <xsl:template match="table[count(tgroup) gt 1][not(tgroup/tfoot)]/tgroup/*[self::thead or self::tbody]/row/entry"
+    mode="xslLib:cals2html.mergeTgroups">
+    <xsl:param name="max.cols" as="xs:integer" tunnel="true"/>
+    <xsl:variable name="cols" select="xs:integer(ancestor::tgroup[1]/@cols)" as="xs:integer"/>
+    <xsl:variable name="nbColsToAdd" select="$max.cols - $cols" as="xs:integer"/>
     <xsl:copy copy-namespaces="false">
-      <xsl:attribute name="html:name" select="'th'"/>
+      <!--add an annotation to expand tgroups with less cols than the other in the same cals table-->
+      <xsl:if test="$nbColsToAdd != 0">
+        <xsl:attribute name="html:colspanToAdd" select="$nbColsToAdd"/>
+      </xsl:if>
+      <!--Add an annotation to keep the information that this cell was a thead entry-->
+      <xsl:if test="parent::row/parent::thead">
+        <xsl:attribute name="html:name" select="'th'"/>
+      </xsl:if>
       <xsl:apply-templates select="@* | node()" mode="#current"/>
     </xsl:copy>
   </xsl:template>
@@ -513,8 +530,9 @@
           <xsl:with-param name="colspec-list-for-current-width" select="$current-colspec-list" as="element(colspec)*"/>
         </xsl:call-template>
       </xsl:if>
-      <xsl:if test="count($current-colspec-list) > 1">
-        <xsl:attribute name="colspan" select="count($current-colspec-list)"/>
+      <xsl:variable name="colspan" select="count($current-colspec-list) + xs:integer((@html:colspanToAdd, 0)[1])" as="xs:integer"/>
+      <xsl:if test="$colspan > 1">
+        <xsl:attribute name="colspan" select="$colspan"/>
       </xsl:if>
       <xsl:if test="normalize-space(@morerows) != '' and normalize-space(@morerows) castable as xs:integer">
         <xsl:attribute name="rowspan" select="xs:integer(@morerows) + 1"/>
@@ -554,6 +572,9 @@
   
   <!--delete html:name : temporary attribute (used for keeping thead entries information while merging tgroups)-->
   <xsl:template match="@html:name" mode="xslLib:cals2html.attributes"/>
+  
+  <!--delete html:name : temporary attribute (used for keeping thead entries information while merging tgroups)-->
+  <xsl:template match="@html:colspanToAdd" mode="xslLib:cals2html.attributes"/>
   
   <!--Attributes to keep as is-->
   <xsl:template match="@xml:* | @id" mode="xslLib:cals2html.attributes">

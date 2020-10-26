@@ -5,100 +5,114 @@
     <style type="text/css">
       table {
         border-collapse: collapse;
-        margin-top: 2em;
+        margin-top: 0;
+      }
+      
+      *[data-cals-tgroupstyle="tgroupstyle-1"]{
+        background-color: skyblue;
+      }
+      *[data-cals-tgroupstyle="tgroupstyle-2"]{
+        background-color: #eba487;
       }
       th {
         background-color: #ccc;
-      }</style>
+      }
+    </style>
   </head>
   <body>
-    <table xmlns="http://docs.oasis-open.org/ns/oasis-exchange/table" tabstyle="style-table-1" pgwide="1" frame="all" colsep="0" rowsep="0">
+    <table xmlns="http://docs.oasis-open.org/ns/oasis-exchange/table" tabstyle="tabstyle-1" pgwide="1"
+      frame="all" colsep="1"  rowsep="0">
       <h1 xmlns="http://www.w3.org/1999/xhtml" style="text-align:center;">Table with multiple tgroup</h1>
-      <tgroup cols="2">
-        <colspec colname="c1" colwidth="1*" align="center"/>
+      <tgroup cols="3" tgroupstyle="tgroupstyle-1" align="center">
+        <colspec colname="c1" colwidth="1*" align="left"/>
         <colspec colname="c2" colwidth="3*"/>
+        <colspec colname="c3" colwidth="2*" align="right"/>
         <thead>
           <row>
-            <entry colname="c1" colsep="1" rowsep="1">tgroup1:thead1</entry>
-            <entry colname="c2" colsep="1" rowsep="1">tgroup1:thead2</entry>
+            <entry colname="c1" rowsep="1">tgroup1:thead1</entry>
+            <entry colname="c2" rowsep="1">tgroup1:thead2</entry>
+            <entry colname="c3" rowsep="1">tgroup1:thead3</entry>
           </row>
         </thead>
-        <!--<tfoot>
+        <tbody valign="top">
           <row>
-            <entry colname="c1" colsep="1" rowsep="1">tgroup1:tfoot1</entry>
-            <entry colname="c2" colsep="1" rowsep="1">tgroup1:tfoot2</entry>
-          </row>
-        </tfoot>-->
-        <tbody valign="middle">
-          <row>
-            <entry colname="c1" colsep="1" rowsep="1">tgroup1:td1</entry>
-            <entry colname="c2" colsep="1" rowsep="1">tgroup1:td2</entry>
+            <entry colname="c1" rowsep="0">tgroup1:td1</entry>
+            <entry colname="c2" align="right">tgroup1:td2</entry>
+            <entry colname="c3" rowsep="1">tgroup1:td3</entry>
           </row>
           <row>
-            <entry colname="c1" colsep="1" rowsep="1">tgroup1:td3</entry>
-            <entry colname="c2" colsep="1" rowsep="1">tgroup1:td4</entry>
+            <entry colname="c1" rowsep="1">tgroup1:td4</entry>
+            <entry colname="c2" rowsep="1" morerows="1">tgroup1:td5</entry>
+            <entry colname="c3" rowsep="1">tgroup1:td6</entry>
+          </row>
+          <row>
+            <entry colname="c1" rowsep="1">tgroup1:td7</entry>
+            <entry colname="c3" rowsep="1">tgroup1:td8</entry>
+          </row>
+          <row>
+            <entry rowsep="1" namest="c1" nameend="c2">tgroup1:td9</entry>
+            <entry colname="c3" rowsep="1">tgroup1:td10</entry>
           </row>
         </tbody>
       </tgroup>
-      <tgroup cols="2" align="center">
-        <colspec colname="c1" colwidth="0.6*"/>
-        <colspec colname="c2" colwidth="1.4*"/>
+      <tgroup cols="2" align="right" tgroupstyle="tgroupstyle-2">
+        <colspec colname="c1" align="center"/>
+        <colspec colname="c2" colwidth="0.6*"/>
         <thead>
           <row>
-            <entry colname="c1" colsep="1" rowsep="1">tgroup2:thead1</entry>
-            <entry colname="c2" colsep="1" rowsep="1">tgroup2:thead2</entry>
+            <entry colname="c1" colsep="0" rowsep="1" align="left">tgroup2:thead1</entry>
+            <entry colname="c2" rowsep="1">tgroup2:thead2</entry>
           </row>
         </thead>
-        <!--<tfoot>
-          <row>
-            <entry colname="c1" colsep="1" rowsep="1">tgroup2:tfoot1</entry>
-            <entry colname="c2" colsep="1" rowsep="1">tgroup2:tfoot2</entry>
-          </row>
-        </tfoot>-->
         <tbody valign="middle">
           <row>
-            <entry colname="c1" colsep="1" rowsep="1">tgroup2:td1</entry>
-            <entry colname="c2" colsep="1" rowsep="1">tgroup2:td2</entry>
+            <entry colname="c1" rowsep="1" morerows="2">tgroup2:td1</entry>
+            <entry colname="c2" rowsep="1" align="center">tgroup2:td2</entry>
           </row>
           <row>
-            <entry colname="c1" colsep="1" rowsep="0">tgroup2:td3</entry>
-            <entry colname="c2" colsep="1" rowsep="1">tgroup2:td4</entry>
+            <entry colname="c2" rowsep="1">tgroup2:td3</entry>
           </row>
           <row>
-            <entry colname="c1" colsep="1" rowsep="1">tgroup2:td5</entry>
-            <entry colname="c2" colsep="1" rowsep="1">tgroup2:td6</entry>
+            <entry colname="c2" rowsep="1" align="center">tgroup2:td4</entry>
+          </row>
+          <row>
+            <entry rowsep="1" namest="c1" nameend="c2">tgroup2:td5</entry>
           </row>
         </tbody>
       </tgroup>
-      <tgroup cols="2">
-        <colspec colname="c1" colwidth="30px"/>
+      <tgroup cols="2" tgroupstyle="tgroupstyle-1">
+        <colspec colname="c1" colwidth="30px" align="right"/>
         <colspec colname="c2" colwidth="70px"/>
         <tbody valign="middle">
           <row>
-            <entry colname="c1" colsep="1" rowsep="1">tgroup3:td1</entry>
-            <entry colname="c2" colsep="1" rowsep="1">tgroup3:td2</entry>
+            <entry colname="c1" rowsep="1">tgroup3:td1</entry>
+            <entry colname="c2" rowsep="1">tgroup3:td2</entry>
           </row>
           <row>
-            <entry colname="c1" colsep="1" rowsep="1">tgroup3:td3</entry>
-            <entry colname="c2" colsep="1" rowsep="1">tgroup3:td4</entry>
+            <entry rowsep="1" namest="c1" nameend="c2" align="center">tgroup3:td3</entry>
           </row>
           <row>
-            <entry colname="c1" colsep="1" rowsep="1">tgroup3:td5</entry>
-            <entry colname="c2" colsep="1" rowsep="1">tgroup3:td6</entry>
+            <entry colname="c1" rowsep="1" align="left">tgroup3:td4</entry>
+            <entry colname="c2" rowsep="1" align="right">tgroup3:td5</entry>
           </row>
         </tbody>
       </tgroup>
-      <tgroup cols="1">
-        <colspec colname="c1" colwidth="0.5*"/>
+      <tgroup cols="1" tgroupstyle="tgroupstyle-2" align="center">
+        <colspec colname="c1" colwidth="0.5*" align="right" rowsep="0"/>
+        <thead>
+          <row>
+            <entry colname="c1" rowsep="1" align="center">tgroup4:th1</entry>
+          </row>
+        </thead>
         <tbody valign="middle">
           <row>
-            <entry colname="c1" colsep="1" rowsep="1">tgroup4:td1</entry>
+            <entry colname="c1" align="left">tgroup4:td1</entry>
           </row>
           <row>
-            <entry colname="c1" colsep="1" rowsep="1">tgroup4:td2</entry>
+            <entry colname="c1" align="center">tgroup4:td2</entry>
           </row>
           <row>
-            <entry colname="c1" colsep="1" rowsep="1">tgroup4:td3</entry>
+            <entry colname="c1">tgroup4:td3</entry>
           </row>
         </tbody>
       </tgroup>

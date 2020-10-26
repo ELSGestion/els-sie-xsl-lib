@@ -5,108 +5,120 @@
     <style type="text/css">
       table {
         border-collapse: collapse;
-        margin-top: 2em;
+        margin-top: 0;
+      }
+      
+      *[data-cals-tgroupstyle = "tgroupstyle-1"] {
+        background-color: skyblue;
+      }
+      *[data-cals-tgroupstyle = "tgroupstyle-2"] {
+        background-color: #eba487;
       }
       th {
         background-color: #ccc;
       }</style>
   </head>
   <body>
-    <div class="cals_table" data-cals-tabstyle="style-table-1">
+    <div class="cals_table" data-cals-tabstyle="tabstyle-1">
       <h1 style="text-align:center;">Table with multiple tgroup</h1>
-      <table class="cals_tgroup" style="width:100%; border:1px solid">
+      <table data-cals-tgroupstyle="tgroupstyle-1" class="cals_tgroup" style="width:100%; border:1px solid">
         <colgroup>
-          <col style="width:25%" />
-          <col style="width:75%" />
+          <col style="width:17%" />
+          <col style="width:50%" />
+          <col style="width:33%" />
         </colgroup>
         <thead>
           <tr>
-            <th style="border-right:1px solid; border-bottom:1px solid; vertical-align:top">tgroup1:thead1</th>
-            <th style="border-right:1px solid; border-bottom:1px solid; text-align:left; vertical-align:top">tgroup1:thead2</th>
+            <th style="border-right:1px solid; border-bottom:1px solid; text-align:left; vertical-align:top">tgroup1:thead1</th>
+            <th style="border-right:1px solid; border-bottom:1px solid; vertical-align:top">tgroup1:thead2</th>
+            <th style="border-right:1px solid; border-bottom:1px solid; text-align:right; vertical-align:top">tgroup1:thead3</th>
           </tr>
         </thead>
-        <!--<tfoot>
-          <row>
-            <entry colname="c1" colsep="1" rowsep="1">tgroup1:tfoot1</entry>
-            <entry colname="c2" colsep="1" rowsep="1">tgroup1:tfoot2</entry>
-          </row>
-        </tfoot>-->
         <tbody>
           <tr>
-            <td style="border-right:1px solid; border-bottom:1px solid; text-align:center">tgroup1:td1</td>
-            <td style="border-right:1px solid; border-bottom:1px solid">tgroup1:td2</td>
+            <td style="border-right:1px solid; vertical-align:top">tgroup1:td1</td>
+            <td style="border-right:1px solid; text-align:right; vertical-align:top">tgroup1:td2</td>
+            <td style="border-right:1px solid; border-bottom:1px solid; text-align:right; vertical-align:top">tgroup1:td3</td>
           </tr>
           <tr>
-            <td style="border-right:1px solid; border-bottom:1px solid; text-align:center">tgroup1:td3</td>
-            <td style="border-right:1px solid; border-bottom:1px solid">tgroup1:td4</td>
+            <td style="border-right:1px solid; border-bottom:1px solid; vertical-align:top">tgroup1:td4</td>
+            <td rowspan="2" style="border-right:1px solid; border-bottom:1px solid; text-align:center; vertical-align:top">tgroup1:td5</td>
+            <td style="border-right:1px solid; border-bottom:1px solid; text-align:right; vertical-align:top">tgroup1:td6</td>
+          </tr>
+          <tr>
+            <td style="border-right:1px solid; border-bottom:1px solid; vertical-align:top">tgroup1:td7</td>
+            <td style="border-right:1px solid; border-bottom:1px solid; text-align:right; vertical-align:top">tgroup1:td8</td>
+          </tr>
+          <tr>
+            <td colspan="2" style="border-right:1px solid; border-bottom:1px solid; vertical-align:top">tgroup1:td9</td>
+            <td style="border-right:1px solid; border-bottom:1px solid; text-align:right; vertical-align:top">tgroup1:td10</td>
           </tr>
         </tbody>
       </table>
-      <table class="cals_tgroup" style="width:100%; border:1px solid">
+      <table data-cals-tgroupstyle="tgroupstyle-2" class="cals_tgroup" style="width:100%; border:1px solid">
         <colgroup>
-          <col style="width:30%" />
-          <col style="width:70%" />
+          <col style="width:63%" />
+          <col style="width:37%" />
         </colgroup>
         <thead>
           <tr>
-            <th style="border-right:1px solid; border-bottom:1px solid; vertical-align:top">tgroup2:thead1</th>
-            <th style="border-right:1px solid; border-bottom:1px solid; vertical-align:top">tgroup2:thead2</th>
+            <th style="border-bottom:1px solid; text-align:left; vertical-align:top">tgroup2:thead1</th>
+            <th style="border-right:1px solid; border-bottom:1px solid; text-align:right; vertical-align:top">tgroup2:thead2</th>
           </tr>
         </thead>
-        <!--<tfoot>
-          <row>
-            <entry colname="c1" colsep="1" rowsep="1">tgroup2:tfoot1</entry>
-            <entry colname="c2" colsep="1" rowsep="1">tgroup2:tfoot2</entry>
-          </row>
-        </tfoot>-->
         <tbody>
           <tr>
-            <td style="border-right:1px solid; border-bottom:1px solid; text-align:center">tgroup2:td1</td>
+            <td rowspan="3" style="border-right:1px solid; border-bottom:1px solid; text-align:center">tgroup2:td1</td>
             <td style="border-right:1px solid; border-bottom:1px solid; text-align:center">tgroup2:td2</td>
           </tr>
           <tr>
-            <td style="border-right:1px solid; text-align:center">tgroup2:td3</td>
+            <td style="border-right:1px solid; border-bottom:1px solid; text-align:right">tgroup2:td3</td>
+          </tr>
+          <tr>
             <td style="border-right:1px solid; border-bottom:1px solid; text-align:center">tgroup2:td4</td>
           </tr>
           <tr>
-            <td style="border-right:1px solid; border-bottom:1px solid; text-align:center">tgroup2:td5</td>
-            <td style="border-right:1px solid; border-bottom:1px solid; text-align:center">tgroup2:td6</td>
+            <td colspan="2" style="border-right:1px solid; border-bottom:1px solid; text-align:center">tgroup2:td5</td>
           </tr>
         </tbody>
       </table>
-      <table class="cals_tgroup" style="width:100%; border:1px solid">
+      <table data-cals-tgroupstyle="tgroupstyle-1" class="cals_tgroup" style="width:100%; border:1px solid">
         <colgroup>
           <col style="width:30px" />
           <col style="width:70px" />
         </colgroup>
         <tbody>
           <tr>
-            <td style="border-right:1px solid; border-bottom:1px solid">tgroup3:td1</td>
+            <td style="border-right:1px solid; border-bottom:1px solid; text-align:right">tgroup3:td1</td>
             <td style="border-right:1px solid; border-bottom:1px solid">tgroup3:td2</td>
           </tr>
           <tr>
-            <td style="border-right:1px solid; border-bottom:1px solid">tgroup3:td3</td>
-            <td style="border-right:1px solid; border-bottom:1px solid">tgroup3:td4</td>
+            <td colspan="2" style="border-right:1px solid; border-bottom:1px solid; text-align:center">tgroup3:td3</td>
           </tr>
           <tr>
-            <td style="border-right:1px solid; border-bottom:1px solid">tgroup3:td5</td>
-            <td style="border-right:1px solid; border-bottom:1px solid">tgroup3:td6</td>
+            <td style="border-right:1px solid; border-bottom:1px solid">tgroup3:td4</td>
+            <td style="border-right:1px solid; border-bottom:1px solid; text-align:right">tgroup3:td5</td>
           </tr>
         </tbody>
       </table>
-      <table class="cals_tgroup" style="width:100%; border:1px solid">
+      <table data-cals-tgroupstyle="tgroupstyle-2" class="cals_tgroup" style="width:100%; border:1px solid">
         <colgroup>
           <col style="width:100%" />
         </colgroup>
+        <thead>
+          <tr>
+            <th style="border-right:1px solid; border-bottom:1px solid; vertical-align:top">tgroup4:th1</th>
+          </tr>
+        </thead>
         <tbody>
           <tr>
-            <td style="border-right:1px solid; border-bottom:1px solid">tgroup4:td1</td>
+            <td style="border-right:1px solid">tgroup4:td1</td>
           </tr>
           <tr>
-            <td style="border-right:1px solid; border-bottom:1px solid">tgroup4:td2</td>
+            <td style="border-right:1px solid; text-align:center">tgroup4:td2</td>
           </tr>
           <tr>
-            <td style="border-right:1px solid; border-bottom:1px solid">tgroup4:td3</td>
+            <td style="border-right:1px solid; text-align:right">tgroup4:td3</td>
           </tr>
         </tbody>
       </table>
