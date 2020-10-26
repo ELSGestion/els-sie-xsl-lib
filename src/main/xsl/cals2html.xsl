@@ -17,7 +17,8 @@
     <xd:desc>
       <xd:p>Convert CALS Table to HTML table</xd:p>
       <xd:p>Each cals:table will be converted to an html:div, then each cals:tgroup will be converted to an html:table</xd:p>
-      <xd:p>/!\ Cals element must be in cals namespace before proceding, other elements will be copied as is.</xd:p>
+      <xd:p>/!\ Cals elements must be in cals namespace before proceding, other elements will be copied as is, 
+        set param $xslLib:cals2html.set-cals-ns to true if you want to let this XSLT preform this namespace operation</xd:p>
     </xd:desc>
   </xd:doc>
   
@@ -57,8 +58,6 @@
   <xsl:param name="xslLib:cals2html.default-valign-force-explicit" select="false()" as="xs:boolean"/>
   <!--Try to merge multiple tgroup table into a single html table when possible thead entries will-->
   <xsl:param name="xslLib:cals2html.tryToMergeMultipleTgroupToSingleHTMLTable" select="false()" as="xs:boolean"/>
-  <!--move table/tgroup/colspec/row attributes down to entries, this is necessary if tryToMergeMultipleTgroupToSingleHTMLTable is activated--> 
-  <xsl:param name="xslLib:cals2html.moveAttributesDownToEntries" select="false()" as="xs:boolean"/>
   
   <!--==============================================================================================================================-->
   <!-- INIT -->
@@ -114,16 +113,9 @@
     </xsl:if>
     <!--STEP2 : move attributes down to entries-->
     <xsl:variable name="step" as="document-node()">
-      <xsl:choose>
-        <xsl:when test="$xslLib:cals2html.moveAttributesDownToEntries or $xslLib:cals2html.tryToMergeMultipleTgroupToSingleHTMLTable">
-          <xsl:document>
-            <xsl:apply-templates select="$step" mode="xslLib:cals2html.moveAttributesDownEntries"/>
-          </xsl:document>
-        </xsl:when>
-        <xsl:otherwise>
-          <xsl:sequence select="$step"/>
-        </xsl:otherwise>
-      </xsl:choose>
+      <xsl:document>
+        <xsl:apply-templates select="$step" mode="xslLib:cals2html.moveAttributesDownEntries"/>
+      </xsl:document>
     </xsl:variable>
     <xsl:if test="$xslLib:cals2html.debug">
       <xsl:variable name="step.log.uri" select="resolve-uri('cals2html.step2.xml', $xslLib:cals2html.log.uri)" as="xs:anyURI"/>
@@ -300,12 +292,7 @@
   <!-- STEP 3 : merge tgroups-->
   <!--==============================================================================================================================-->
   
-  <!--copy template-->
-  <xsl:template match="node() | @*" mode="xslLib:cals2html.mergeTgroups">
-    <xsl:copy copy-namespaces="no">
-      <xsl:apply-templates select="node() | @*" mode="#current"/>
-    </xsl:copy>
-  </xsl:template>
+  <xsl:mode name="xslLib:cals2html.mergeTgroups" on-no-match="shallow-copy"/>
   
   <xsl:template match="table[not(tgroup/tfoot) (:tfoot is difficult to merge:)]"
     mode="xslLib:cals2html.mergeTgroups">
@@ -333,6 +320,7 @@
     </xsl:copy>
   </xsl:template>
   
+  <!--Add an annotation to keep the information that this cell was a thead entry-->
   <xsl:template match="thead/row/entry" mode="xslLib:cals2html.mergeTgroups">
     <xsl:copy copy-namespaces="false">
       <xsl:attribute name="html:name" select="'th'"/>
@@ -480,93 +468,25 @@
     <xsl:variable name="nb-cols" select="ancestor::tgroup[1]/@cols[. castable as xs:integer]" as="xs:integer?"/>
     <xsl:variable name="current-tgroup" select="ancestor::tgroup[1]" as="element()"/>
     <xsl:variable name="current-colspec-list" select="xslLib:cals2html.get-colspecs(.)" as="element(colspec)*"/>
-    <xsl:variable name="colsep-current" as="xs:string">
-      <xsl:choose>
-        <xsl:when test="@colsep">
-          <xsl:value-of select="@colsep"/>
-        </xsl:when>
-        <!-- FIXME : que se passe-t-il lors d'un colspan ? a priori c'est le namest qui gagne-->
-        <xsl:when test="$current-colspec-list[1]/@colsep">
-          <xsl:value-of select="$current-colspec-list[1]/@colsep" />
-        </xsl:when>
-        <xsl:when test="ancestor::cals:*/@colsep">
-          <xsl:value-of select="ancestor::cals:*[@colsep][1]/@colsep" />
-        </xsl:when>
-        <xsl:otherwise>
-          <xsl:value-of select="$xslLib:cals2html.default-colsep"/>
-        </xsl:otherwise>
-      </xsl:choose>
-    </xsl:variable>
-    <xsl:variable name="rowsep-current" as="xs:string">
-      <xsl:choose>
-        <xsl:when test="@rowsep">
-          <xsl:value-of select="@rowsep"/>
-        </xsl:when>
-        <!-- FIXME : que se passe-t-il lors d'un colspan ? a priori c'est le namest qui gagne-->
-        <xsl:when test="$current-colspec-list[1]/@rowsep">
-          <xsl:value-of select="$current-colspec-list[1]/@rowsep"/>
-        </xsl:when>
-        <!--@rowsep allowed on table|tgroup|row-->
-        <xsl:when test="ancestor::cals:*/@rowsep">
-          <xsl:value-of select="ancestor::cals:*[@rowsep][1]/@rowsep"/>
-        </xsl:when>
-        <xsl:otherwise>
-          <xsl:value-of select="$xslLib:cals2html.default-rowsep"/>
-        </xsl:otherwise>
-      </xsl:choose>
-    </xsl:variable>
-    <xsl:variable name="align-current" as="xs:string">
-      <xsl:choose>
-        <xsl:when test="@align">
-          <xsl:value-of select="@align"/>
-        </xsl:when>
-        <!-- FIXME : que se passe-t-il lors d'un colspan ? a priori c'est le namest qui gagne-->
-        <xsl:when test="$current-colspec-list[1]/@align">
-          <xsl:value-of select="$current-colspec-list[1]/@align"/>
-        </xsl:when>
-         <!--@align is allowed on tgroup only (not table, thead, tbody, tfoot,row)-->
-        <xsl:when test="ancestor::cals:*/@align">
-          <xsl:value-of select="ancestor::cals:*[@align][1]/@align"/>
-        </xsl:when>
-        <xsl:otherwise>
-          <xsl:value-of select="$xslLib:cals2html.default-tgroup-align"/>
-        </xsl:otherwise>
-      </xsl:choose>
-    </xsl:variable>
-    <xsl:variable name="valign-current" as="xs:string">
-      <xsl:choose>
-        <xsl:when test="@valign">
-          <xsl:value-of select="@valign"/>
-        </xsl:when>
-        <!--@valign is actually not allowed on colspec--> 
-        <!--<xsl:when test="$current-colspec-list[1]/@valign">
-          <xsl:value-of select="$current-colspec-list[1]/@valign" />
-        </xsl:when>-->
-        <xsl:when test="ancestor::cals:*/@valign">
-          <xsl:value-of select="ancestor::cals:*[@valign][1]/@valign" />
-        </xsl:when>
-        <xsl:otherwise>
-          <xsl:value-of select="$xslLib:cals2html.default-tgroup-valign"/>
-        </xsl:otherwise>
-      </xsl:choose>
-    </xsl:variable>
     <xsl:variable name="name" select="if(ancestor::thead or @html:name = 'th') then ('th') else('td')" as="xs:string"/>
     <xsl:element name="{$name}">
-      <xsl:apply-templates select="@*" mode="xslLib:cals2html.attributes"/> 
+      <xsl:apply-templates select="@*" mode="xslLib:cals2html.attributes"/>
+      <!--At this point 'colsep', 'rowsep', 'align' and 'valign' have been moved to entries 
+        cf. step "xslLib:cals2html.moveAttributesDownEntries"-->
       <xsl:variable name="class.tmp" as="xs:string*">
-        <xsl:if test="$colsep-current != '0'">
+        <xsl:if test="@colsep != '0'">
           <xsl:text>cals_colsep</xsl:text>
         </xsl:if>
-        <xsl:if test="$rowsep-current != '0'">
+        <xsl:if test="@rowsep != '0'">
           <xsl:text>cals_rowsep</xsl:text>
         </xsl:if>
         <xsl:variable name="align-default" as="xs:string" select="if($name = 'td') then($xslLib:cals2html.default-td-align) else($xslLib:cals2html.default-th-align)"/>
-        <xsl:if test="($align-current != $align-default) or $xslLib:cals2html.default-align-force-explicit">
-          <xsl:value-of select="concat('cals_align-', lower-case($align-current))" />
+        <xsl:if test="(@align != $align-default) or $xslLib:cals2html.default-align-force-explicit">
+          <xsl:value-of select="concat('cals_align-', lower-case(@align))" />
         </xsl:if>
         <xsl:variable name="valign-default" as="xs:string" select="if($name = 'td') then($xslLib:cals2html.default-td-valign) else($xslLib:cals2html.default-th-valign)"/>
-        <xsl:if test="($valign-current != $valign-default) or $xslLib:cals2html.default-valign-force-explicit">
-          <xsl:value-of select="concat('cals_valign-', lower-case($valign-current))" />
+        <xsl:if test="(@valign != $valign-default) or $xslLib:cals2html.default-valign-force-explicit">
+          <xsl:value-of select="concat('cals_valign-', lower-case(@valign))" />
         </xsl:if>
         <xsl:if test="not(empty($nb-cols))">
           <xsl:if test="$nb-cols > $xslLib:cals2html.nb-cols-max-before-font-reduction
