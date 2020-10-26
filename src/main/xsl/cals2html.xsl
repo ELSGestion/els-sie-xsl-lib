@@ -55,7 +55,11 @@
   <!-- force @align / @valign default values to be specified in HTML (as class or css)-->
   <xsl:param name="xslLib:cals2html.default-align-force-explicit" select="false()" as="xs:boolean"/>
   <xsl:param name="xslLib:cals2html.default-valign-force-explicit" select="false()" as="xs:boolean"/>
-
+  <!--Try to merge multiple tgroup table into a single html table when possible thead entries will-->
+  <xsl:param name="xslLib:cals2html.tryToMergeMultipleTgroupToSingleHTMLTable" select="false()" as="xs:boolean"/>
+  <!--move table/tgroup/colspec/row attributes down to entries, this is necessary if tryToMergeMultipleTgroupToSingleHTMLTable is activated--> 
+  <xsl:param name="xslLib:cals2html.moveAttributesDownEntries" select="false()" as="xs:boolean"/>
+  
   <!--==============================================================================================================================-->
   <!-- INIT -->
   <!--==============================================================================================================================-->
@@ -108,6 +112,46 @@
         <xsl:sequence select="$step"/>
       </xsl:result-document>
     </xsl:if>
+    <!--STEP1bis : move attributes down to row/entries-->
+    <xsl:variable name="step" as="document-node()">
+      <xsl:choose>
+        <xsl:when test="$xslLib:cals2html.moveAttributesDownEntries or $xslLib:cals2html.tryToMergeMultipleTgroupToSingleHTMLTable">
+          <xsl:document>
+            <xsl:apply-templates select="$step" mode="xslLib:cals2html.moveAttributesDownEntries"/>
+          </xsl:document>
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:sequence select="$step"/>
+        </xsl:otherwise>
+      </xsl:choose>
+    </xsl:variable>
+    <xsl:if test="$xslLib:cals2html.debug">
+      <xsl:variable name="step.log.uri" select="resolve-uri('cals2html.step1bis.xml', $xslLib:cals2html.log.uri)" as="xs:anyURI"/>
+      <xsl:message>[INFO] writing <xsl:value-of select="$step.log.uri"/></xsl:message>
+      <xsl:result-document href="{$step.log.uri}">
+        <xsl:sequence select="$step"/>
+      </xsl:result-document>
+    </xsl:if>    
+    <!--STEP1bis : merge tgroup if asked-->
+    <xsl:variable name="step" as="document-node()">
+      <xsl:choose>
+        <xsl:when test="$xslLib:cals2html.tryToMergeMultipleTgroupToSingleHTMLTable">
+          <xsl:document>
+            <xsl:apply-templates select="$step" mode="xslLib:cals2html.mergeTgroups"/>
+          </xsl:document>
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:sequence select="$step"/>
+        </xsl:otherwise>
+      </xsl:choose>
+    </xsl:variable>
+    <xsl:if test="$xslLib:cals2html.debug">
+      <xsl:variable name="step.log.uri" select="resolve-uri('cals2html.step1ter.xml', $xslLib:cals2html.log.uri)" as="xs:anyURI"/>
+      <xsl:message>[INFO] writing <xsl:value-of select="$step.log.uri"/></xsl:message>
+      <xsl:result-document href="{$step.log.uri}">
+        <xsl:sequence select="$step"/>
+      </xsl:result-document>
+    </xsl:if>
     <!--STEP2 : cals2html.main-->
     <xsl:variable name="step" as="document-node()">
       <xsl:document>
@@ -150,6 +194,72 @@
   <!--==============================================================================================================================-->
   
   <!--see normalizeCalsTable.xsl-->
+  
+  <!--==============================================================================================================================-->
+  <!-- STEP 1bis : move attributes down to the entries-->
+  <!--==============================================================================================================================-->
+  
+  <!--copy template-->
+  <xsl:template match="node() | @*" mode="xslLib:cals2html.moveAttributesDownEntries">
+    <xsl:copy copy-namespaces="no">
+      <xsl:apply-templates select="node() | @*" mode="#current"/>
+    </xsl:copy>
+  </xsl:template>
+  
+  <!--from entry attribute, get 1st ancestor with the same attribute (resolving inheritance in CALS)--> 
+  <xsl:template match="entry[not(@calstable:rid)]/@*[name() = ('colsep', 'rowsep', 'align', 'valign', 'char', 'charoff')]" 
+    mode="xslLib:cals2html.moveAttributesDownEntries">
+    <xsl:variable name="name" select="name()" as="xs:string"/>
+    <xsl:attribute name="{$name}" select="(ancestor-or-self::cals:*/@*[name() = $name])[last()]"/>
+  </xsl:template>
+  
+  <!--Delete attributes that have been moved to cells-->
+  <xsl:template match="cals:*[not(self::entry)]/@*[name() = ('colsep', 'rowsep', 'align', 'valign', 'char', 'charoff')]"
+    mode="xslLib:cals2html.moveAttributesDownEntries"/>
+  
+  <!--==============================================================================================================================-->
+  <!-- STEP 1ter : merge tgroups-->
+  <!--==============================================================================================================================-->
+  
+  <!--copy template-->
+  <xsl:template match="node() | @*" mode="xslLib:cals2html.mergeTgroups">
+    <xsl:copy copy-namespaces="no">
+      <xsl:apply-templates select="node() | @*" mode="#current"/>
+    </xsl:copy>
+  </xsl:template>
+  
+  <xsl:template match="table[not(tgroup/tfoot) (:tfoot is difficult to merge:)]"
+    mode="xslLib:cals2html.mergeTgroups">
+    <xsl:copy copy-namespaces="false">
+      <xsl:apply-templates select="@*" mode="#current"/>
+      <!--adjacency condition : name is tgroup and cols have the same value 
+        (other attributes have been previously moved to entries--> 
+      <xsl:for-each-group select="*" group-adjacent="local-name(.) || '_$_' || @cols">
+        <xsl:choose>
+          <xsl:when test="current-group()[1]/local-name(.) = 'tgroup' and count(current-group()) gt 1">
+            <cals:tgroup>
+              <xsl:sequence select="current-group()[1]/@*"/>
+              <!--1st colspec/colwith will be use (only for colwidth actually)--> 
+              <xsl:sequence select="current-group()[1]/colspec"/>
+              <cals:tbody>
+                <xsl:apply-templates select="current-group()/*[not(self::colspec)]/*" mode="#current"/>
+              </cals:tbody>
+            </cals:tgroup>
+          </xsl:when>
+          <xsl:otherwise>
+            <xsl:apply-templates select="current-group()" mode="#current"/>
+          </xsl:otherwise>
+        </xsl:choose>
+      </xsl:for-each-group> 
+    </xsl:copy>
+  </xsl:template>
+  
+  <xsl:template match="thead/row/entry" mode="xslLib:cals2html.mergeTgroups">
+    <xsl:copy copy-namespaces="false">
+      <xsl:attribute name="html:name" select="'th'"/>
+      <xsl:apply-templates select="@* | node()" mode="#current"/>
+    </xsl:copy>
+  </xsl:template>
   
   <!--==============================================================================================================================-->
   <!-- STEP 2 : cal2html.main -->
@@ -221,13 +331,7 @@
       <xsl:if test="normalize-space(@cols) != '' and not(normalize-space(@cols) castable as xs:integer)">
         <xsl:message terminate="no">[ERROR][xslLib:cals2html] @cols="<xsl:value-of select="@cols"/>" is not an integer</xsl:message>
       </xsl:if>
-      <xsl:apply-templates mode="xslLib:cals2html.main" select="thead"/>
-      <xsl:if test="tfoot">
-        <tfoot>
-          <xsl:apply-templates select="tfoot" mode="#current"/>
-        </tfoot>
-      </xsl:if>
-      <xsl:apply-templates select="* except (thead, tfoot) (:head and foot has already been processed :)" mode="#current"/>
+      <xsl:apply-templates mode="#current"/>
     </table>
   </xsl:template>
   
@@ -250,7 +354,10 @@
   <!-- Table Foot -->
   <!-- CALS MODEL : tfoot ::= colspec*,row+ -->
   <xsl:template match="tfoot" mode="xslLib:cals2html.main">
-    <xsl:apply-templates select="*" mode="#current"/>
+    <tfoot>
+      <xsl:apply-templates select="@*" mode="xslLib:cals2html.attributes"/>
+      <xsl:apply-templates mode="#current"/>
+    </tfoot>
   </xsl:template>
   
   <!-- Table body -->
@@ -441,7 +548,7 @@
         </xsl:otherwise>
       </xsl:choose>
     </xsl:variable>
-    <xsl:variable name="name" select="if(ancestor::thead) then ('th') else('td')" as="xs:string"/>
+    <xsl:variable name="name" select="if(ancestor::thead or @html:name = 'th') then ('th') else('td')" as="xs:string"/>
     <xsl:element name="{$name}">
       <xsl:apply-templates select="@*" mode="xslLib:cals2html.attributes"/> 
       <xsl:variable name="class.tmp" as="xs:string*">
@@ -522,6 +629,9 @@
   
   <!--delete transpect ghost attributes-->
   <xsl:template match="@calstable:*" mode="xslLib:cals2html.attributes"/>
+  
+  <!--delete html:name : temporary attribute (used for keeping thead entries information while merging tgroups)-->
+  <xsl:template match="@html:name" mode="xslLib:cals2html.attributes"/>
   
   <!--Attributes to keep as is-->
   <xsl:template match="@xml:* | @id" mode="xslLib:cals2html.attributes">
