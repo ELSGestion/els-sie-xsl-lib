@@ -206,11 +206,90 @@
     </xsl:copy>
   </xsl:template>
   
-  <!--from entry attribute, get 1st ancestor with the same attribute (resolving inheritance in CALS)--> 
-  <xsl:template match="entry[not(@calstable:rid)]/@*[name() = ('colsep', 'rowsep', 'align', 'valign', 'char', 'charoff')]" 
-    mode="xslLib:cals2html.moveAttributesDownEntries">
-    <xsl:variable name="name" select="name()" as="xs:string"/>
-    <xsl:attribute name="{$name}" select="(ancestor-or-self::cals:*/@*[name() = $name])[last()]"/>
+  <!--Add explicit cals attributes value on entry by resolving cals attributs inheritance for 
+  'colsep', 'rowsep', 'align', 'valign' except FIXME : 'char', 'charoff'--> 
+  <xsl:template match="entry[not(@calstable:rid)]" mode="xslLib:cals2html.moveAttributesDownEntries">
+    <xsl:variable name="current-colspec-list" select="xslLib:cals2html.get-colspecs(.)" as="element(colspec)*"/>
+    <xsl:variable name="colsep-current" as="xs:string">
+      <xsl:choose>
+        <xsl:when test="@colsep">
+          <xsl:value-of select="@colsep"/>
+        </xsl:when>
+        <!-- FIXME : que se passe-t-il lors d'un colspan ? a priori c'est le namest qui gagne-->
+        <xsl:when test="$current-colspec-list[1]/@colsep">
+          <xsl:value-of select="$current-colspec-list[1]/@colsep" />
+        </xsl:when>
+        <xsl:when test="ancestor::cals:*/@colsep">
+          <xsl:value-of select="ancestor::cals:*[@colsep][1]/@colsep" />
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:value-of select="$xslLib:cals2html.default-colsep"/>
+        </xsl:otherwise>
+      </xsl:choose>
+    </xsl:variable>
+    <xsl:variable name="rowsep-current" as="xs:string">
+      <xsl:choose>
+        <xsl:when test="@rowsep">
+          <xsl:value-of select="@rowsep"/>
+        </xsl:when>
+        <!-- FIXME : que se passe-t-il lors d'un colspan ? a priori c'est le namest qui gagne-->
+        <xsl:when test="$current-colspec-list[1]/@rowsep">
+          <xsl:value-of select="$current-colspec-list[1]/@rowsep"/>
+        </xsl:when>
+        <!--@rowsep allowed on table|tgroup|row-->
+        <xsl:when test="ancestor::cals:*/@rowsep">
+          <xsl:value-of select="ancestor::cals:*[@rowsep][1]/@rowsep"/>
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:value-of select="$xslLib:cals2html.default-rowsep"/>
+        </xsl:otherwise>
+      </xsl:choose>
+    </xsl:variable>
+    <xsl:variable name="align-current" as="xs:string">
+      <xsl:choose>
+        <xsl:when test="@align">
+          <xsl:value-of select="@align"/>
+        </xsl:when>
+        <!-- FIXME : que se passe-t-il lors d'un colspan ? a priori c'est le namest qui gagne-->
+        <xsl:when test="$current-colspec-list[1]/@align">
+          <xsl:value-of select="$current-colspec-list[1]/@align"/>
+        </xsl:when>
+        <!--@align is allowed on tgroup only (not table, thead, tbody, tfoot,row)-->
+        <xsl:when test="ancestor::cals:*/@align">
+          <xsl:value-of select="ancestor::cals:*[@align][1]/@align"/>
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:value-of select="$xslLib:cals2html.default-tgroup-align"/>
+        </xsl:otherwise>
+      </xsl:choose>
+    </xsl:variable>
+    <xsl:variable name="valign-current" as="xs:string">
+      <xsl:choose>
+        <xsl:when test="@valign">
+          <xsl:value-of select="@valign"/>
+        </xsl:when>
+        <!--@valign is actually not allowed on colspec--> 
+        <!--<xsl:when test="$current-colspec-list[1]/@valign">
+          <xsl:value-of select="$current-colspec-list[1]/@valign" />
+        </xsl:when>-->
+        <xsl:when test="ancestor::cals:*/@valign">
+          <xsl:value-of select="ancestor::cals:*[@valign][1]/@valign" />
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:value-of select="$xslLib:cals2html.default-tgroup-valign"/>
+        </xsl:otherwise>
+      </xsl:choose>
+    </xsl:variable>
+    <xsl:copy copy-namespaces="false">
+      <!--copy current attributes (cals attribute will be overwritten afterwards in this template)-->
+      <xsl:apply-templates select="@*" mode="#current"/>
+      <!--Set cals attributes values-->
+      <xsl:attribute name="colsep" select="$colsep-current"/>
+      <xsl:attribute name="rowsep" select="$rowsep-current"/>
+      <xsl:attribute name="align" select="$align-current"/>
+      <xsl:attribute name="valign" select="$valign-current"/>
+      <xsl:apply-templates select="node()" mode="#current"/>
+    </xsl:copy>
   </xsl:template>
   
   <!--Delete attributes that have been moved to cells-->
@@ -399,85 +478,8 @@
   
   <xsl:template match="entry[not(@calstable:rid)]" mode="xslLib:cals2html.main">
     <xsl:variable name="nb-cols" select="ancestor::tgroup[1]/@cols[. castable as xs:integer]" as="xs:integer?"/>
-    <xsl:variable name="entry" select="self::*" as="element(entry)"/>
     <xsl:variable name="current-tgroup" select="ancestor::tgroup[1]" as="element()"/>
-    <xsl:variable name="current-colspec-list" as="element(colspec)*">
-      <xsl:choose>
-        <!--First consider @colname-->
-        <xsl:when test="@colname">
-          <xsl:variable name="colname.colspec" select="$current-tgroup/colspec[@colname = current()/@colname]" as="element()*"/>
-          <xsl:if test="count($colname.colspec) != 1">
-            <xsl:message terminate="no">[ERROR][cals2html.xsl] No colspec exists in the current tgroup with @colname equals to current @colname="<xsl:value-of select="@colname"/>"</xsl:message>
-          </xsl:if>
-          <xsl:sequence select="$colname.colspec"/>
-        </xsl:when>
-        <!-- Then consider @namestart/nameend -->
-        <xsl:when test="@namest and @nameend">
-          <xsl:variable name="namest.colspec" select="$current-tgroup/colspec[@colname = current()/@namest]" as="element()*"/>
-          <xsl:variable name="nameend.colspec" select="$current-tgroup/colspec[@colname = current()/@nameend]" as="element()*"/>
-          <xsl:choose>
-            <xsl:when test="count($namest.colspec) != 1">
-              <xsl:message terminate="no">[ERROR][cals2html.xsl] No colspec exists in the current tgroup with @colname equals to current @namest="<xsl:value-of select="@namest"/>"</xsl:message>
-            </xsl:when>
-            <xsl:when test="count($nameend.colspec) != 1">
-              <xsl:message terminate="no">[ERROR][cals2html.xsl] No colspec exists in the current tgroup with @colname equals to current @nameend="<xsl:value-of select="@nameend"/>"</xsl:message>
-            </xsl:when>
-            <xsl:otherwise>
-              <!--FIXME : a-t-on vraiment besoin de passer par colnum, ne pourrait-on pas prendre les colspec situés entre namest.colspec et nameend.colspec dans le xml ?--> 
-              <xsl:variable name="colnumst" select="xslLib:cals2html.get-colnum($entry, $namest.colspec)" as="xs:integer"/>
-              <xsl:variable name="colnumend" select="xslLib:cals2html.get-colnum($entry, $nameend.colspec)" as="xs:integer"/>
-              <xsl:sequence 
-                select="$current-tgroup/colspec
-                [xslLib:cals2html.get-colnum($entry, .) ge $colnumst]
-                [xslLib:cals2html.get-colnum($entry, .) le $colnumend]"/>
-            </xsl:otherwise>
-          </xsl:choose>
-        </xsl:when>
-        <!--If one of the following/preceding entry has a namest/nameend colum, then consider the current colspec *from* this point, example : 
-            <tgroup>
-              <colspec ... colname="c1"/>
-              <colspec ... colname="c2"/>
-              <colspec ... colname="c3"/>
-              <colspec ... colname="c4"/>
-              <colspec ... colname="c5"/>
-              <colspec ... colname="c6"/>
-              <tbody>
-                <row>
-                  <entry ... /> => c1
-                  <entry ... /> => c2
-                  <entry ... namest="c3" nameend="c4"/> => c3/c4
-                  <entry ... /> => c5 
-                  <entry ... /> => c6
-                </row>
-              </tbody>
-            </tgroup>
-        -->
-        <!--There is no current namest/nameend, look if there is a preceding entry with a "nameend" column, if so then use the next colspec by position-->
-        <xsl:when test="preceding-sibling::entry[@nameend]">
-          <xsl:variable name="psib1.entry-nameend" select="preceding-sibling::entry[@nameend][1]" as="element()"/>
-          <xsl:variable name="distance" select="count(preceding-sibling::entry[. >> $psib1.entry-nameend]) + 1" as="xs:integer"/>
-          <xsl:sequence select="$current-tgroup/colspec[@colname = $psib1.entry-nameend/@nameend]/following-sibling::colspec[$distance]"/>
-        </xsl:when>
-        <!--There is no namest/nameend, look if there is a following entry with a "namest" column, if so then use the preceding colspec by position-->
-        <xsl:when test="following-sibling::entry[@namest]">
-          <xsl:variable name="fsib1.entry-namest" select="following-sibling::entry[@namest][1]" as="element()"/>
-          <xsl:variable name="distance" select="count(following-sibling::entry[. &lt;&lt; $fsib1.entry-namest]) + 1" as="xs:integer"/>
-          <xsl:sequence select="$current-tgroup/colspec[@colname = $fsib1.entry-namest/@namest]/preceding-sibling::colspec[$distance]"/>
-        </xsl:when>
-        <!--Finaly consider position-->
-        <!--FIXME : check those old messages => does it still make sens ? may it happens after cals normalisation-->
-        <xsl:when test="position() > 1 and ../entry[@colname]">
-          <xsl:message>[ERROR][cals2html.xsl] Unable to get colspec for this entry. @colname might be missing ? (<xsl:value-of select="els:getFileName(string(base-uri()))"/> : <xsl:sequence select="els:get-xpath(.)" />)</xsl:message>
-        </xsl:when>
-        <xsl:when test="position() > 1 and ../entry[(position() lt last() and (@namest and @nameend))]">
-          <xsl:message>[ERROR][cals2html.xsl] Unable to get colspec for this entry. Too much columns (<xsl:value-of select="els:getFileName(string(base-uri()))"/> : <xsl:sequence select="els:get-xpath(.)" />)</xsl:message>
-        </xsl:when>
-        <xsl:otherwise>
-          <xsl:variable name="pos" select="count(preceding-sibling::entry) + 1" as="xs:integer"/>
-          <xsl:sequence select="$current-tgroup/colspec[$pos]"/>
-        </xsl:otherwise>
-      </xsl:choose>
-    </xsl:variable>
+    <xsl:variable name="current-colspec-list" select="xslLib:cals2html.get-colspecs(.)" as="element(colspec)*"/>
     <xsl:variable name="colsep-current" as="xs:string">
       <xsl:choose>
         <xsl:when test="@colsep">
@@ -601,6 +603,86 @@
     </xsl:element>
   </xsl:template>
 
+  <xsl:function name="xslLib:cals2html.get-colspecs" as="element(colspec)*">
+    <xsl:param name="entry" as="element(entry)"/>
+    <xsl:variable name="current-tgroup" select="$entry/ancestor::tgroup[1]" as="element()"/>
+    <xsl:choose>
+      <!--First consider @colname-->
+      <xsl:when test="$entry/@colname">
+        <xsl:variable name="colname.colspec" select="$current-tgroup/colspec[@colname = $entry/@colname]" as="element()*"/>
+        <xsl:if test="count($colname.colspec) != 1">
+          <xsl:message terminate="no">[ERROR][cals2html.xsl] No colspec exists in the current tgroup with @colname equals to current @colname="<xsl:value-of select="$entry/@colname"/>"</xsl:message>
+        </xsl:if>
+        <xsl:sequence select="$colname.colspec"/>
+      </xsl:when>
+      <!-- Then consider @namestart/nameend -->
+      <xsl:when test="$entry/@namest and $entry/@nameend">
+        <xsl:variable name="namest.colspec" select="$current-tgroup/colspec[@colname = $entry/@namest]" as="element()*"/>
+        <xsl:variable name="nameend.colspec" select="$current-tgroup/colspec[@colname = $entry/@nameend]" as="element()*"/>
+        <xsl:choose>
+          <xsl:when test="count($namest.colspec) != 1">
+            <xsl:message terminate="no">[ERROR][cals2html.xsl] No colspec exists in the current tgroup with @colname equals to current @namest="<xsl:value-of select="$entry/@namest"/>"</xsl:message>
+          </xsl:when>
+          <xsl:when test="count($nameend.colspec) != 1">
+            <xsl:message terminate="no">[ERROR][cals2html.xsl] No colspec exists in the current tgroup with @colname equals to current @nameend="<xsl:value-of select="$entry/@nameend"/>"</xsl:message>
+          </xsl:when>
+          <xsl:otherwise>
+            <!--FIXME : a-t-on vraiment besoin de passer par colnum, ne pourrait-on pas prendre les colspec situés entre namest.colspec et nameend.colspec dans le xml ?--> 
+            <xsl:variable name="colnumst" select="xslLib:cals2html.get-colnum($entry, $namest.colspec)" as="xs:integer"/>
+            <xsl:variable name="colnumend" select="xslLib:cals2html.get-colnum($entry, $nameend.colspec)" as="xs:integer"/>
+            <xsl:sequence 
+              select="$current-tgroup/colspec
+              [xslLib:cals2html.get-colnum($entry, .) ge $colnumst]
+              [xslLib:cals2html.get-colnum($entry, .) le $colnumend]"/>
+          </xsl:otherwise>
+        </xsl:choose>
+      </xsl:when>
+      <!--If one of the following/preceding entry has a namest/nameend colum, then consider the current colspec *from* this point, example : 
+            <tgroup>
+              <colspec ... colname="c1"/>
+              <colspec ... colname="c2"/>
+              <colspec ... colname="c3"/>
+              <colspec ... colname="c4"/>
+              <colspec ... colname="c5"/>
+              <colspec ... colname="c6"/>
+              <tbody>
+                <row>
+                  <entry ... /> => c1
+                  <entry ... /> => c2
+                  <entry ... namest="c3" nameend="c4"/> => c3/c4
+                  <entry ... /> => c5 
+                  <entry ... /> => c6
+                </row>
+              </tbody>
+            </tgroup>
+        -->
+      <!--There is no current namest/nameend, look if there is a preceding entry with a "nameend" column, if so then use the next colspec by position-->
+      <xsl:when test="$entry/preceding-sibling::entry[@nameend]">
+        <xsl:variable name="psib1.entry-nameend" select="$entry/preceding-sibling::entry[@nameend][1]" as="element()"/>
+        <xsl:variable name="distance" select="count($entry/preceding-sibling::entry[. >> $psib1.entry-nameend]) + 1" as="xs:integer"/>
+        <xsl:sequence select="$current-tgroup/colspec[@colname = $psib1.entry-nameend/@nameend]/following-sibling::colspec[$distance]"/>
+      </xsl:when>
+      <!--There is no namest/nameend, look if there is a following entry with a "namest" column, if so then use the preceding colspec by position-->
+      <xsl:when test="$entry/following-sibling::entry[@namest]">
+        <xsl:variable name="fsib1.entry-namest" select="$entry/following-sibling::entry[@namest][1]" as="element()"/>
+        <xsl:variable name="distance" select="count($entry/following-sibling::entry[. &lt;&lt; $fsib1.entry-namest]) + 1" as="xs:integer"/>
+        <xsl:sequence select="$current-tgroup/colspec[@colname = $fsib1.entry-namest/@namest]/preceding-sibling::colspec[$distance]"/>
+      </xsl:when>
+      <!--Finaly consider position-->
+      <!--FIXME : check those old messages => does it still make sens ? may it happens after cals normalisation-->
+      <xsl:when test="$entry/position() > 1 and $entry/parent::*/entry[@colname]">
+        <xsl:message>[ERROR][cals2html.xsl] Unable to get colspec for this entry. @colname might be missing ? (<xsl:value-of select="els:getFileName(string(base-uri($entry)))"/> : <xsl:sequence select="els:get-xpath($entry)" />)</xsl:message>
+      </xsl:when>
+      <xsl:when test="$entry/position() > 1 and $entry/parent::*/entry[(position() lt last() and (@namest and @nameend))]">
+        <xsl:message>[ERROR][cals2html.xsl] Unable to get colspec for this entry. Too much columns (<xsl:value-of select="els:getFileName(string(base-uri($entry)))"/> : <xsl:sequence select="els:get-xpath($entry)" />)</xsl:message>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:variable name="pos" select="count($entry/preceding-sibling::entry) + 1" as="xs:integer"/>
+        <xsl:sequence select="$current-tgroup/colspec[$pos]"/>
+      </xsl:otherwise>
+    </xsl:choose>
+  </xsl:function>
+  
   <!-- === COMMON : STEP 2 === -->
   
   <!--Attributes to ignore here because they have already been processed before-->
