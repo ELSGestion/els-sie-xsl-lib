@@ -335,8 +335,9 @@
     <xsl:variable name="cols" select="xs:integer(ancestor::tgroup[1]/@cols)" as="xs:integer"/>
     <xsl:variable name="nbColsToAdd" select="$max.cols - $cols" as="xs:integer"/>
     <xsl:copy copy-namespaces="false">
-      <!--add an annotation to expand tgroups with less cols than the other in the same cals table-->
-      <xsl:if test="$nbColsToAdd != 0">
+      <!--add an annotation to add fictiv cols in the merged cals table-->
+      <!--expand 1st entry that have less cols than the merge table--> 
+      <xsl:if test="not(preceding-sibling::entry) and $nbColsToAdd != 0">
         <xsl:attribute name="html:colspanToAdd" select="$nbColsToAdd"/>
       </xsl:if>
       <!--Add an annotation to keep the information that this cell was a thead entry-->

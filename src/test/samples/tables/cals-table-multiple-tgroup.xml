@@ -123,17 +123,12 @@
         <colspec align="left" colname="c1" colsep="1" colwidth="100*" rowsep="1"/>
         <thead valign="middle">
           <row>
-            <entry align="center">
-              <al>Retraitements sur l’imprimé n° 2058-A</al>
-            </entry>
+            <entry align="center">Retraitements sur l’imprimé n° 2058-A</entry>
           </row>
         </thead>
         <tbody valign="top">
           <row>
-            <entry colname="c1">
-              <al> <motRep>a.</motRep> 
-                En cas de dépréciation calculée par référence à la seule valeur d'usage, à défautde valeur vénale déterminable, si l'entreprise souhaite éviter tout risque de redressement:</al>
-            </entry>
+            <entry colname="c1">En cas de dépréciation calculée par référence à la seule valeur d'usage</entry>
           </row>
         </tbody>
       </tgroup>
@@ -142,35 +137,22 @@
         <colspec align="left" colname="c2" colsep="1" colwidth="50*" rowsep="1"/>
         <thead valign="middle">
           <row>
-            <entry align="center" colname="c1">
-              <al>Comptabilité</al>
-            </entry>
-            <entry align="center" colname="c2">
-              <al>Fiscalité</al>
-            </entry>
+            <entry align="center" colname="c1">Comptabilité</entry>
+            <entry align="center" colname="c2">Fiscalité</entry>
           </row>
         </thead>
         <tbody valign="top">
           <row rowsep="0">
-            <entry colname="c1">Lorsque, à la clôture d'un exercice, une immobilisation (corporelle ou incorporelle)présente un indice de perte de valeur, un test de dépréciation doit être effectué,ce test consistant en une comparaison entre la valeur nette comptable de l'immobilisationet sa valeur actuelle</entry>
+            <entry colname="c1">Lorsque, à la clôture d'un exercice, une immobilisation (corporelle ou incorporelle) présente un indice de perte de valeur, un test de dépréciation doit être effectué,ce test consistant en une comparaison entre la valeur nette comptable de l'immobilisationet sa valeur actuelle</entry>
             <entry colname="c2">Selon l'administration la dépréciation fondée sur la seule diminution des flux futurs</entry>
           </row>
           <row rowsep="0">
-            <entry colname="c1">
-              <al>La valeur vénale s'entend nette des coûts de sortie</al>
-            </entry>
-            <entry colname="c2">
-              <al>Selon l'administration, la valeur vénale ne doit pas tenir compte des coûts de sortie.En conséquence, lorsque la dépréciation est calculée par référence à la valeur vénale,la fraction de cette dépréciation correspondant aux coûts de sortie n'est pas déductible</al>
-            </entry>
+            <entry colname="c1">La valeur vénale s'entend nette des coûts de sortie</entry>
+            <entry colname="c2">Selon l'administration, la valeur vénale ne doit pas tenir compte des coûts de sortie...</entry>
           </row>
           <row rowsep="1">
-            <entry colname="c1">
-              <al>Compte tenu des divergences existant entre les règles comptables et fiscales afférentesà la base et à la durée d'amortissement des immobilisations</al>
-            </entry>
-            <entry colname="c2">
-              <al> 
-                Quelle que soit la valeur actuelle retenue pour le calcul de la dépréciation, lorsquela valeur nette comptable de l'immobilisation à déprécier (servant de base au calculde la dépréciation) est supérieure à sa valeur nette fiscale (correspondant à la différenceentre le coût de revient du bien et les amortissements fiscalement déduits, amortissementsdérogatoires compris), la dépréciation comptabilisée n'est pas admise en déductionà hauteur de cette différence</al>
-            </entry>
+            <entry colname="c1">Compte tenu des divergences existant entre les règles comptables ...</entry>
+            <entry colname="c2">Quelle que soit la valeur actuelle retenue pour le calcul de la dépréciation ...</entry>
           </row>
         </tbody>
       </tgroup>
@@ -178,17 +160,12 @@
         <colspec align="left" colname="c1" colsep="1" colwidth="100*" rowsep="1"/>
         <thead valign="middle">
           <row>
-            <entry align="center">
-              <al>Retraitements sur l’imprimé n° 2058-A</al>
-            </entry>
+            <entry align="center">Retraitements sur l’imprimé n° 2058-A </entry>
           </row>
         </thead>
         <tbody valign="top">
           <row>
-            <entry colname="c1">
-              <al> <motRep>a.</motRep> 
-                En cas de dépréciation calculée par référence à la seule valeur d'usage, à défautde valeur vénale déterminable, si l'entreprise souhaite éviter tout risque de redressement:</al>
-            </entry>
+            <entry colname="c1">En cas de dépréciation calculée par référence à la seule valeur d'usage, à défaut de valeur vénale...</entry>
           </row>
         </tbody>
       </tgroup>
