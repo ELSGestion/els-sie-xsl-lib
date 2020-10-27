@@ -305,11 +305,13 @@
       <xsl:for-each-group select="*" group-adjacent="local-name(.)">
         <xsl:choose>
           <xsl:when test="current-group()[1]/local-name(.) = 'tgroup' and count(current-group()) gt 1">
+            <!--At this point align/valign/colsep/rowsep have been moved to entries-->
             <cals:tgroup>
+              <!--different @tgroupstyle values might be loosed at this point-->
               <xsl:sequence select="current-group()[1]/@*"/>
-              <!--1st colspec/colwith will be use (only for colwidth actually)--> 
-              <xsl:sequence select="current-group()[1]/colspec"/>
-              <!--No more thead here, an annotation will be added to keep thead cells information, and later convert them to html:th-->
+              <!--colspec is necessary for colwidth and cells spanning (entry/@namest and entry/@nameend--> 
+              <xsl:apply-templates select="(current-group()[xs:integer(@cols) = $max.cols])[1]/colspec" mode="#current"/>
+              <!--No more <thead> here, an annotation will be add to keep thead cells information, and later convert them to html:th-->
               <cals:tbody>
                 <xsl:apply-templates select="current-group()/*[self::thead or self::tbody]/row" mode="#current">
                   <xsl:with-param name="max.cols" select="$max.cols" as="xs:integer" tunnel="true"/>
@@ -343,6 +345,28 @@
       </xsl:if>
       <xsl:apply-templates select="@* | node()" mode="#current"/>
     </xsl:copy>
+  </xsl:template>
+  
+  <xsl:template match="table[count(tgroup) gt 1][not(tgroup/tfoot)]/tgroup/*[self::thead or self::tbody]/row/entry
+    /@*[local-name() = ('colname', 'namest', 'nameend')]"
+    mode="xslLib:cals2html.mergeTgroups">
+    <xsl:variable name="value" select="." as="xs:string"/>
+    <xsl:variable name="colspec" select="ancestor::tgroup[1]/colspec[@colname = $value]" as="element(colspec)*"/>
+    <xsl:choose>
+      <xsl:when test="count($colspec) != 1">
+        <xsl:message expand-text="true">[ERROR][cals2html.xsl] no colspec found for {name()}="{.}"</xsl:message>
+        <xsl:message terminate="true"><xsl:copy-of select="ancestor::tgroup[1]/colspec"/></xsl:message>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:variable name="colspec.position" select="count($colspec/preceding-sibling::colspec) + 1" as="xs:integer"/>
+        <xsl:attribute name="{name()}" select="'c' || $colspec.position"/>
+      </xsl:otherwise>
+    </xsl:choose>
+  </xsl:template>
+  
+  <xsl:template match="table[count(tgroup) gt 1][not(tgroup/tfoot)]/tgroup/colspec/@colname"
+    mode="xslLib:cals2html.mergeTgroups">
+    <xsl:attribute name="colname" select="'c' || count(../preceding-sibling::colspec) + 1"/>
   </xsl:template>
   
   <!--==============================================================================================================================-->
