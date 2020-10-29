@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-model href="dependency:/eu.els.sie.models+ext-models/ext-models/oasis/cals/cals.nvdl" type="application/xml" schematypens="http://purl.oclc.org/dsdl/nvdl/ns/structure/1.0"?>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <style type="text/css">
+      table {
+        border-collapse: collapse;
+        margin-top: 0;
+      }
+      
+      *[data-cals-tgroupstyle = "tgroupstyle-1"] {
+        background-color: skyblue;
+      }
+      *[data-cals-tgroupstyle = "tgroupstyle-2"] {
+        background-color: #eba487;
+      }
+      th {
+        background-color: #ccc;
+      }</style>
+  </head>
+  <body>
+    <table xmlns="http://docs.oasis-open.org/ns/oasis-exchange/table" tabstyle="tabstyle-1" pgwide="1" frame="all" colsep="0" rowsep="0">
+      <h1 xmlns="http://www.w3.org/1999/xhtml" style="text-align:center;">Table with multiple tgroup</h1>
+      <tgroup tgroupstyle="tgroupstyle-1" cols="3">
+        <colspec colname="c1" colwidth="3*"/>
+        <colspec colname="c2" colwidth="2.49*"/>
+        <colspec colname="c3" colwidth="0.99*"/>
+        <thead valign="middle">
+          <row>
+            <entry align="left" valign="top" colname="c1" colsep="1" rowsep="1">tgroup1:thead1</entry>
+            <entry valign="top" align="center" colname="c2" colsep="1" rowsep="1">tgroup1:thead2</entry>
+            <entry align="right" valign="top" colname="c3" colsep="1" rowsep="1">tgroup1:thead3</entry>
+          </row>
+        </thead>
+        <tbody valign="middle">
+          <row>
+            <entry valign="top" colname="c1" colsep="1">tgroup1:td1</entry>
+            <entry align="right" valign="top" colname="c2" colsep="1">tgroup1:td2</entry>
+            <entry align="right" valign="top" colname="c3" colsep="1" rowsep="1">tgroup1:td3</entry>
+          </row>
+          <row>
+            <entry valign="top" colname="c1" colsep="1" rowsep="1">tgroup1:td4</entry>
+            <entry align="center" valign="top" morerows="1" colname="c2" colsep="1" rowsep="1">tgroup1:td5</entry>
+            <entry align="right" valign="top" colname="c3" colsep="1" rowsep="1">tgroup1:td6</entry>
+          </row>
+          <row>
+            <entry valign="top" colname="c1" colsep="1" rowsep="1">tgroup1:td7</entry>
+            <entry align="right" valign="top" colname="c3" colsep="1" rowsep="1">tgroup1:td8</entry>
+          </row>
+          <row>
+            <entry valign="top" namest="c1" nameend="c2" colsep="1" rowsep="1">tgroup1:td9</entry>
+            <entry align="right" valign="top" colname="c3" colsep="1" rowsep="1">tgroup1:td10</entry>
+          </row>
+        </tbody>
+      </tgroup>
+      <tgroup tgroupstyle="tgroupstyle-1" cols="2">
+        <colspec colname="c1" colwidth="3*"/>
+        <colspec colname="c3" colwidth="0.99*"/>
+        <thead valign="middle">
+          <row>
+            <entry colname="c1" align="left" valign="top" rowsep="1">tgroup2:thead1</entry>
+            <entry align="right" valign="top" colname="c3" colsep="1" rowsep="1">tgroup2:thead2</entry>
+          </row>
+        </thead>
+        <tbody valign="middle">
+          <row>
+            <entry colname="c1" align="center" morerows="2" colsep="1" rowsep="1">tgroup2:td1</entry>
+            <entry align="center" colname="c3" colsep="1" rowsep="1">tgroup2:td2</entry>
+          </row>
+          <row>
+            <entry align="right" colname="c3" colsep="1" rowsep="1">tgroup2:td3</entry>
+          </row>
+          <row>
+            <entry align="center" colname="c3" colsep="1" rowsep="1">tgroup2:td4</entry>
+          </row>
+          <row>
+            <entry namest="c1" nameend="c2" align="center" colsep="1" rowsep="1">tgroup2:td5</entry>
+          </row>
+        </tbody>
+      </tgroup>
+      <tgroup tgroupstyle="tgroupstyle-1" cols="2">
+        <colspec colname="c1" colwidth="3*"/>
+        <colspec colname="c3" colwidth="0.99*"/>
+        <thead valign="middle">
+          <row>
+            <entry colname="c1" align="right" valign="top" colsep="1">tgroup3:thead1</entry>
+            <entry align="left" valign="top" colname="c3" colsep="1">tgroup3:thead2</entry>
+          </row>
+        </thead>
+        <tbody valign="middle">
+          <row>
+            <entry colname="c1" align="right" colsep="1" rowsep="1">tgroup3:td1</entry>
+            <entry colname="c3" colsep="1" rowsep="1">tgroup3:td2</entry>
+          </row>
+          <row>
+            <entry namest="c1" nameend="c2" align="center" colsep="1" rowsep="1">tgroup3:td3</entry>
+          </row>
+          <row>
+            <entry colname="c1" colsep="1" rowsep="1">tgroup3:td4</entry>
+            <entry align="right" colname="c3" colsep="1" rowsep="1">tgroup3:td5</entry>
+          </row>
+          <row>
+            <entry colname="c1" align="right" colsep="1" rowsep="1">tgroup4:td1</entry>
+            <entry colname="c3" colsep="1" rowsep="1">tgroup4:td2</entry>
+          </row>
+          <row>
+            <entry namest="c1" nameend="c2" align="center" colsep="1" rowsep="1">tgroup4:td3</entry>
+          </row>
+          <row>
+            <entry colname="c1" colsep="1" rowsep="1">tgroup4:td4</entry>
+            <entry align="right" colname="c3" colsep="1" rowsep="1">tgroup4:td5</entry>
+          </row>
+        </tbody>
+      </tgroup>
+      <tgroup tgroupstyle="tgroupstyle-1" cols="1">
+        <colspec colname="c1" colwidth="3*"/>
+        <thead valign="middle">
+          <row>
+            <entry colname="c1" valign="top" align="center" colsep="1" rowsep="1">tgroup5:th1</entry>
+          </row>
+        </thead>
+        <tbody valign="middle">
+          <row>
+            <entry colname="c1" colsep="1">tgroup5:td1</entry>
+          </row>
+          <row>
+            <entry colname="c1" align="center" colsep="1">tgroup5:td2</entry>
+          </row>
+          <row>
+            <entry colname="c1" align="right" colsep="1">tgroup5:td3</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+    <h2>SIETRAINMQ-312 : test #1</h2>
+    <table xmlns="http://docs.oasis-open.org/ns/oasis-exchange/table" id="UI-cb155593-ed6b-4896-b126-ffb43f8c5a4f" tabstyle="FRCHS-style1" frame="all" colsep="0" rowsep="0">
+      <tgroup cols="1">
+        <colspec colname="c1" colwidth="2*"/>
+        <thead valign="middle">
+          <row>
+            <entry colname="c1" align="center" colsep="1" rowsep="1">Retraitements sur l’imprimé n° 2058-A</entry>
+          </row>
+        </thead>
+        <tbody valign="middle">
+          <row>
+            <entry colname="c1" valign="top" colsep="1" rowsep="1">En cas de dépréciation calculée par référence à la seule valeur d'usage</entry>
+          </row>
+        </tbody>
+      </tgroup>
+      <tgroup cols="2">
+        <colspec colname="c1" colwidth="2*"/>
+        <colspec colname="c2" colwidth="1*"/>
+        <thead valign="middle">
+          <row>
+            <entry align="center" colname="c1" colsep="1" rowsep="1">Comptabilité</entry>
+            <entry align="center" colname="c2" colsep="1" rowsep="1">Fiscalité</entry>
+          </row>
+        </thead>
+        <tbody valign="middle">
+          <row>
+            <entry valign="top" colname="c1" colsep="1" rowsep="1">Lorsque, à la clôture d'un exercice, une immobilisation (corporelle ou incorporelle)
+                     présente un indice de perte de valeur, un test de dépréciation doit être effectué,ce
+                     test consistant en une comparaison entre la valeur nette comptable de l'immobilisationet
+                     sa valeur actuelle
+                  </entry>
+            <entry valign="top" colname="c2" colsep="1" rowsep="1">Selon l'administration la dépréciation fondée sur la seule diminution des flux futurs</entry>
+          </row>
+          <row>
+            <entry valign="top" colname="c1" colsep="1" rowsep="1">La valeur vénale s'entend nette des coûts de sortie</entry>
+            <entry valign="top" colname="c2" colsep="1" rowsep="1">Selon l'administration, la valeur vénale ne doit pas tenir compte des coûts de sortie...</entry>
+          </row>
+          <row>
+            <entry valign="top" colname="c1" colsep="1" rowsep="1">Compte tenu des divergences existant entre les règles comptables ...</entry>
+            <entry valign="top" colname="c2" colsep="1" rowsep="1">Quelle que soit la valeur actuelle retenue pour le calcul de la dépréciation ...</entry>
+          </row>
+        </tbody>
+      </tgroup>
+      <tgroup cols="1">
+        <colspec colname="c1" colwidth="2*"/>
+        <thead valign="middle">
+          <row>
+            <entry colname="c1" align="center" colsep="1" rowsep="1">Retraitements sur l’imprimé n° 2058-A </entry>
+          </row>
+        </thead>
+        <tbody valign="middle">
+          <row>
+            <entry colname="c1" valign="top" colsep="1" rowsep="1">En cas de dépréciation calculée par référence à la seule valeur d'usage, à défaut
+                     de valeur vénale...
+                  </entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+  </body>
+</html>
