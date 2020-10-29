@@ -88,7 +88,7 @@
       </xsl:choose>
     </xsl:variable>
     <xsl:if test="$xslLib:html2cals.debug">
-      <xsl:variable name="log.uri" select="resolve-uri('html2cals.step1.log.xml', $xslLib:html2cals.log.uri)" as="xs:anyURI"/>
+      <xsl:variable name="log.uri" select="resolve-uri('html2cals.step1.force-html-table-conversion.log.xml', $xslLib:html2cals.log.uri)" as="xs:anyURI"/>
       <xsl:message>[INFO] writing <xsl:value-of select="$log.uri"/></xsl:message>
       <xsl:result-document href="{$log.uri}">
         <xsl:sequence select="$step"/>
@@ -100,7 +100,7 @@
       </xsl:document>
     </xsl:variable>
     <xsl:if test="$xslLib:html2cals.debug">
-      <xsl:variable name="log.uri" select="resolve-uri('html2cals.step2.log.xml', $xslLib:html2cals.log.uri)" as="xs:anyURI"/>
+      <xsl:variable name="log.uri" select="resolve-uri('html2cals.step2.lowercase-html.log.xml', $xslLib:html2cals.log.uri)" as="xs:anyURI"/>
       <xsl:message>[INFO] writing <xsl:value-of select="$log.uri"/></xsl:message>
       <xsl:result-document href="{$log.uri}">
         <xsl:sequence select="$step"/>
@@ -112,7 +112,7 @@
       </xsl:document>
     </xsl:variable>
     <xsl:if test="$xslLib:html2cals.debug">
-      <xsl:variable name="log.uri" select="resolve-uri('html2cals.step3.log.xml', $xslLib:html2cals.log.uri)" as="xs:anyURI"/>
+      <xsl:variable name="log.uri" select="resolve-uri('html2cals.step3.normalize-to-xhtml.log.xml', $xslLib:html2cals.log.uri)" as="xs:anyURI"/>
       <xsl:message>[INFO] writing <xsl:value-of select="$log.uri"/></xsl:message>
       <xsl:result-document href="{$log.uri}">
         <xsl:sequence select="$step"/>
@@ -124,7 +124,7 @@
       </xsl:document>
     </xsl:variable>
     <xsl:if test="$xslLib:html2cals.debug">
-      <xsl:variable name="log.uri" select="resolve-uri('html2cals.step4.log.xml', $xslLib:html2cals.log.uri)" as="xs:anyURI"/>
+      <xsl:variable name="log.uri" select="resolve-uri('html2cals.step4.expand-spans.log.xml', $xslLib:html2cals.log.uri)" as="xs:anyURI"/>
       <xsl:message>[INFO] writing <xsl:value-of select="$log.uri"/></xsl:message>
       <xsl:result-document href="{$log.uri}">
         <xsl:sequence select="$step"/>
@@ -136,7 +136,7 @@
       </xsl:document>
     </xsl:variable>
     <xsl:if test="$xslLib:html2cals.debug">
-      <xsl:variable name="log.uri" select="resolve-uri('html2cals.step5.log.xml', $xslLib:html2cals.log.uri)" as="xs:anyURI"/>
+      <xsl:variable name="log.uri" select="resolve-uri('html2cals.step5.html4table2html5table.log.xml', $xslLib:html2cals.log.uri)" as="xs:anyURI"/>
       <xsl:message>[INFO] writing <xsl:value-of select="$log.uri"/></xsl:message>
       <xsl:result-document href="{$log.uri}">
         <xsl:sequence select="$step"/>
@@ -148,7 +148,7 @@
       </xsl:document>
     </xsl:variable>
     <xsl:if test="$xslLib:html2cals.debug">
-      <xsl:variable name="log.uri" select="resolve-uri('html2cals.step6.log.xml', $xslLib:html2cals.log.uri)" as="xs:anyURI"/>
+      <xsl:variable name="log.uri" select="resolve-uri('html2cals.step6.convert-to-cals.log.xml', $xslLib:html2cals.log.uri)" as="xs:anyURI"/>
       <xsl:message>[INFO] writing <xsl:value-of select="$log.uri"/></xsl:message>
       <xsl:result-document href="{$log.uri}">
         <xsl:sequence select="$step"/>
@@ -167,7 +167,7 @@
       </xsl:choose>
     </xsl:variable>
     <xsl:if test="$xslLib:html2cals.debug">
-      <xsl:variable name="log.uri" select="resolve-uri('html2cals.step7.log.xml', $xslLib:html2cals.log.uri)" as="xs:anyURI"/>
+      <xsl:variable name="log.uri" select="resolve-uri('html2cals.step7.splitTgroupsByHeaders.log.xml', $xslLib:html2cals.log.uri)" as="xs:anyURI"/>
       <xsl:message>[INFO] writing <xsl:value-of select="$log.uri"/></xsl:message>
       <xsl:result-document href="{$log.uri}">
         <xsl:sequence select="$step"/>
@@ -187,7 +187,7 @@
       </xsl:choose>
     </xsl:variable>
     <xsl:if test="$xslLib:html2cals.debug">
-      <xsl:variable name="log.uri" select="resolve-uri('html2cals.step8.log.xml', $xslLib:html2cals.log.uri)" as="xs:anyURI"/>
+      <xsl:variable name="log.uri" select="resolve-uri('html2cals.step8.reduceNumberOfCols.log.xml', $xslLib:html2cals.log.uri)" as="xs:anyURI"/>
       <xsl:message>[INFO] writing <xsl:value-of select="$log.uri"/></xsl:message>
       <xsl:result-document href="{$log.uri}">
         <xsl:sequence select="$step"/>
@@ -199,7 +199,7 @@
       </xsl:document>
     </xsl:variable>
     <xsl:if test="$xslLib:html2cals.debug">
-      <xsl:variable name="log.uri" select="resolve-uri('html2cals.step9.log.xml', $xslLib:html2cals.log.uri)" as="xs:anyURI"/>
+      <xsl:variable name="log.uri" select="resolve-uri('html2cals.step9.optimize-cals.log.xml', $xslLib:html2cals.log.uri)" as="xs:anyURI"/>
       <xsl:message>[INFO] writing <xsl:value-of select="$log.uri"/></xsl:message>
       <xsl:result-document href="{$log.uri}">
         <xsl:sequence select="$step"/>
@@ -218,7 +218,7 @@
       </xsl:choose>
     </xsl:variable>
     <xsl:if test="$xslLib:html2cals.debug">
-      <xsl:variable name="log.uri" select="resolve-uri('html2cals.step10.log.xml', $xslLib:html2cals.log.uri)" as="xs:anyURI"/>
+      <xsl:variable name="log.uri" select="resolve-uri('html2cals.step10.convert-upper-case-cals.log.xml', $xslLib:html2cals.log.uri)" as="xs:anyURI"/>
       <xsl:message>[INFO] writing <xsl:value-of select="$log.uri"/></xsl:message>
       <xsl:result-document href="{$log.uri}">
         <xsl:sequence select="$step"/>
@@ -1143,7 +1143,8 @@
   </xd:doc>
   
   <xsl:template match="cals:tgroup[*/cals:row[xslLib:html2cals.rowIsHeader(.)]]" mode="xhtml2cals:splitTgroupsByHeaders">
-    <xsl:for-each-group select="descendant::cals:row" group-starting-with="cals:row[xslLib:html2cals.rowIsHeader(.)]">
+    <xsl:for-each-group select="descendant::cals:row" 
+      group-starting-with="cals:row[xslLib:html2cals.rowIsHeader(.)][not(preceding-sibling::cals:row[1]/xslLib:html2cals.rowIsHeader(.))]">
       <xsl:variable name="cg1" select="current-group()[1]" as="element(cals:row)"/>
       <xsl:variable name="theadOrTboby" select="($cg1/ancestor::cals:thead[1], $cg1/ancestor::cals:tbody[1])[1]" as="element()"/>
       <xsl:variable name="tgroup" select="$cg1/ancestor::cals:tgroup[1]" as="element(cals:tgroup)"/>
@@ -1202,14 +1203,15 @@
     <xsl:variable name="cols2delete" as="xs:integer*">
       <xsl:for-each select="$minGhostCells.position">
         <xsl:variable name="pos" select="." as="xs:integer"/>
-        <xsl:if test="every $entry in $rows/entry[position() = $pos] satisfies $entry/@xhtml2cals:DummyCell">
+        <xsl:if test="every $entry in $rows/cals:entry[position() = $pos] satisfies $entry/@xhtml2cals:DummyCell">
           <xsl:sequence select="$pos"/>
         </xsl:if>
       </xsl:for-each>
     </xsl:variable>
     <xsl:copy>
-      <!--<xsl:attribute name="minGhostCells.position" select="$minGhostCells.position"/>-->
       <!--<xsl:attribute name="minGhostCells" select="$minGhostCells"/>-->
+      <!--<xsl:attribute name="minGhostCells.position" select="$minGhostCells.position"/>-->
+      <!--<xsl:attribute name="cols2delete" select="$cols2delete"/>-->
       <xsl:apply-templates select="@* | node()" mode="#current">
         <xsl:with-param name="cols2delete" as="xs:integer*" select="$cols2delete" tunnel="true"/>
       </xsl:apply-templates>
@@ -1225,28 +1227,35 @@
   <!--Delete colspec that have been reduced-->
   <xsl:template match="cals:colspec" mode="xhtml2cals:reduceNumberOfCols">
     <xsl:param name="cols2delete" as="xs:integer*" tunnel="true"/>
-    <xsl:variable name="position" as="xs:integer" select="count(preceding-sibling::cals:colspec) + 1"/>
-    <xsl:if test="not($position = $cols2delete)">
-      <xsl:variable name="followingColspecToDelete" as="element()*" 
-        select="following-sibling::cals:colspec[not($position = $cols2delete)]"/>
-      <xsl:copy copy-namespaces="false">
-        <xsl:apply-templates select="@*" mode="#current"/>
-        <xsl:variable name="colwidths" select="(@colwidth, $followingColspecToDelete/@colwidth)" as="xs:string*"/>
-        <xsl:variable name="colwidths.units" select="$colwidths ! xslLib:html2cals.getWidthUnit(.)" as="xs:string*"/>
-        <xsl:variable name="colwidths.values" select="$colwidths ! xslLib:html2cals.getWidthAsNumber(.)" as="xs:double*"/>
-        <xsl:if test="count($colwidths) != 0 and count(distinct-values($colwidths.units)) = 1">
-          <xsl:attribute name="colwidth" select="sum($colwidths.values) || $colwidths.units[1]"/>
+    <xsl:choose>
+      <xsl:when test="empty($cols2delete)">
+        <xsl:next-match/>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:variable name="position" as="xs:integer" select="count(preceding-sibling::cals:colspec) + 1"/>
+        <xsl:if test="not($position = $cols2delete)">
+          <xsl:variable name="followingColspecToDelete" as="element()*" 
+            select="following-sibling::cals:colspec[not($position = $cols2delete)]"/>
+          <xsl:copy copy-namespaces="false">
+            <xsl:apply-templates select="@*" mode="#current"/>
+            <xsl:variable name="colwidths" select="(@colwidth, $followingColspecToDelete/@colwidth)" as="xs:string*"/>
+            <xsl:variable name="colwidths.units" select="$colwidths ! xslLib:html2cals.getWidthUnit(.)" as="xs:string*"/>
+            <xsl:variable name="colwidths.values" select="$colwidths ! xslLib:html2cals.getWidthAsNumber(.)" as="xs:double*"/>
+            <xsl:if test="count($colwidths) != 0 and count(distinct-values($colwidths.units)) = 1">
+              <xsl:attribute name="colwidth" select="sum($colwidths.values) || $colwidths.units[1]"/>
+            </xsl:if>
+            <xsl:apply-templates select="node()" mode="#current"/>
+          </xsl:copy>
         </xsl:if>
-        <xsl:apply-templates select="node()" mode="#current"/>
-      </xsl:copy>
-    </xsl:if>
-    <!--if not, delete it-->
-    <!--<xsl:if test="$position = $cols2delete">
-      <xsl:copy copy-namespaces="false">
-        <xsl:attribute name="delete" select="'true'"/>
-        <xsl:copy-of select="@*"/>
-      </xsl:copy>
-    </xsl:if>-->
+        <!--if not, delete it-->
+        <!--<xsl:if test="$position = $cols2delete">
+          <xsl:copy copy-namespaces="false">
+            <xsl:attribute name="delete" select="'true'"/>
+            <xsl:copy-of select="@*"/>
+          </xsl:copy>
+        </xsl:if>-->
+      </xsl:otherwise>
+    </xsl:choose>
   </xsl:template>
   
   <!--Rework entry @namest/@nameend 
