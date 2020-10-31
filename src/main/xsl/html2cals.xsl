@@ -1269,11 +1269,21 @@
       <xsl:when test="position() = $entry.position">
         <xsl:copy copy-namespaces="false">
           <xsl:variable name="nameend" select="@nameend" as="xs:string?"/>
-          <xsl:variable name="nameend.new" as="xs:string?"
-            select="ancestor::cals:tgroup/cals:colspec[@colname = $nameend]
-            /preceding-sibling::cals:colspec[count($cols2delete)]/@colname"/>
+          <xsl:variable name="nameend.new" as="xs:string?">
+            <xsl:choose>
+              <xsl:when test="$nameend = ancestor::cals:tgroup[1]/cals:colspec[position() = $cols2delete]/@colname">
+                <xsl:value-of select="ancestor::cals:tgroup[1]/cals:colspec[@colname = $nameend]
+                  /preceding-sibling::cals:colspec[count($cols2delete)]/@colname"/>
+              </xsl:when>
+              <xsl:otherwise>
+                <!--if cols2delete = (2, 3) and this entry start from 1 to 4, don't change the 4-->
+                <xsl:value-of select="$nameend"/>
+              </xsl:otherwise>
+            </xsl:choose>
+          </xsl:variable>
           <!--<xsl:copy-of select="@*"/>-->
           <!--<xsl:attribute name="nameend.new" select="$nameend.new"/>-->
+          <!--<xsl:apply-templates select="node()" mode="#current"/>-->
           <xsl:choose>
             <xsl:when test="empty($nameend.new)">
               <xsl:attribute name="error" select="'unable to get new nameend'"/>
