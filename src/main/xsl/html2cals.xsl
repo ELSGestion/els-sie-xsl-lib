@@ -1198,8 +1198,7 @@
     <!--Get the positions of those ghost cells : they indicate expanded cols and rows-->
     <xsl:variable name="minGhostCells.position" as="xs:integer*" select="
       for $ghostEntry in ($rows[count(cals:entry[@xhtml2cals:DummyCell]) = $minGhostCells][1]/cals:entry[@xhtml2cals:DummyCell]) 
-      return count($ghostEntry/preceding-sibling::cals:entry) + 1
-      "/>
+      return count($ghostEntry/preceding-sibling::cals:entry) + 1"/>
     <xsl:variable name="cols2delete" as="xs:integer*">
       <xsl:for-each select="$minGhostCells.position">
         <xsl:variable name="pos" select="." as="xs:integer"/>
@@ -1209,9 +1208,9 @@
       </xsl:for-each>
     </xsl:variable>
     <xsl:copy>
-      <!--<xsl:attribute name="minGhostCells" select="$minGhostCells"/>-->
-      <!--<xsl:attribute name="minGhostCells.position" select="$minGhostCells.position"/>-->
-      <!--<xsl:attribute name="cols2delete" select="$cols2delete"/>-->
+      <!--<xsl:attribute name="minGhostCells" select="$minGhostCells"/>
+      <xsl:attribute name="minGhostCells.position" select="$minGhostCells.position"/>
+      <xsl:attribute name="cols2delete" select="$cols2delete"/>-->
       <xsl:apply-templates select="@* | node()" mode="#current">
         <xsl:with-param name="cols2delete" as="xs:integer*" select="$cols2delete" tunnel="true"/>
       </xsl:apply-templates>
@@ -1258,32 +1257,54 @@
     </xsl:choose>
   </xsl:template>
   
-  <!--Rework entry @namest/@nameend 
-  Note : matching @nameend directly would be easier but it would then have been
-  difficult to convert same @namest/@nameend to colname when equals-->
-  <xsl:template match="cals:entry[not(@xhtml2cals:DummyCell)]" mode="xhtml2cals:reduceNumberOfCols">
+  <!--calculate new values for entry @nameend after cols reduction--> 
+  <xsl:template match="cals:entry[not(@xhtml2cals:DummyCell)][@nameend]" mode="xhtml2cals:reduceNumberOfCols">
     <xsl:param name="cols2delete" as="xs:integer*" tunnel="true"/>
-    <!--position of the entries to rework is just before the ghostcells marked to delete (fixme : better explanation needed)-->
-    <xsl:variable name="entry.position" select="$cols2delete[1] - 1" as="xs:integer?"/>
+    <xsl:variable name="nameend" as="xs:string" select="@nameend"/>
+    <xsl:variable name="colspec-list" as="element(cals:colspec)*" select="ancestor::cals:tgroup[1]/cals:colspec"/>
+    <xsl:variable name="colspec" as="element(cals:colspec)" select="$colspec-list[@colname = $nameend]"/>
+    <xsl:variable name="colspec.position" as="xs:integer" select="count($colspec/preceding-sibling::cals:colspec) + 1"/>
     <xsl:choose>
-      <xsl:when test="position() = $entry.position">
-        <xsl:copy copy-namespaces="false">
-          <xsl:variable name="nameend" select="@nameend" as="xs:string?"/>
-          <xsl:variable name="nameend.new" as="xs:string?">
-            <xsl:choose>
-              <xsl:when test="$nameend = ancestor::cals:tgroup[1]/cals:colspec[position() = $cols2delete]/@colname">
-                <xsl:value-of select="ancestor::cals:tgroup[1]/cals:colspec[@colname = $nameend]
-                  /preceding-sibling::cals:colspec[count($cols2delete)]/@colname"/>
-              </xsl:when>
-              <xsl:otherwise>
-                <!--if cols2delete = (2, 3) and this entry start from 1 to 4, don't change the 4-->
-                <xsl:value-of select="$nameend"/>
-              </xsl:otherwise>
-            </xsl:choose>
-          </xsl:variable>
-          <!--<xsl:copy-of select="@*"/>-->
-          <!--<xsl:attribute name="nameend.new" select="$nameend.new"/>-->
-          <!--<xsl:apply-templates select="node()" mode="#current"/>-->
+      <!--When the @nameend arrive on a deleted col-->
+      <xsl:when test="$colspec.position = $cols2delete">
+        <!--e.g: cols2delete = (2, 3, 4, 8, 9, 11)
+        there are actually 3 adjacent groups of col to delete here : (2, 3, 4) (8, 9) and (11)
+        This cols are to be deleted because every rows has entries that spanned at minimun over it
+        For this reason, none of the @nameend can be 2, 3 or 8. @nameend can only be 4 or 9 or 11.
+        These @nameend has to be changed to the first col available (not deleted) on the left 
+        (it can't be on the right because that would merge entries that are not spanned to the left)
+        That means here: 
+        - nameend="c4" will be changed to "c1"
+        - nameend="c9" will be changed to "c7"
+        - nameend="c11" will be changed to "c10"
+        The first entry (c1) will never had to be deleted, in the way the algorithm is written, if c1, c2  rows are always spanned, 
+        then c2 will be deleted. Actually @nameend can never be equals to c1 in CALS. 
+        -->
+        <xsl:variable name="cols2delete.index" as="xs:integer*" select="index-of($cols2delete, $colspec.position)"/>
+        <xsl:variable name="cols2delete.group" as="xs:integer*" select="subsequence($cols2delete, 1, $cols2delete.index)"/>
+        <xsl:variable name="last-available-colspec" as="element(cals:colspec)?" 
+          select="$colspec-list[xslLib:html2cals.getLastAvailableColPosition($cols2delete.group)]"/>
+        <xsl:variable name="nameend.new" as="xs:string">
+          <xsl:choose>
+            <xsl:when test="exists($last-available-colspec)">
+              <xsl:value-of select="$last-available-colspec/@colname"/>
+            </xsl:when>
+            <xsl:otherwise>
+              <xsl:text>error : unable to get last available colspec</xsl:text>
+              <xsl:message>[ERROR][html2cals.xsl][xhtml2cals:reduceNumberOfCols] unable to get new nameend</xsl:message>
+            </xsl:otherwise>
+          </xsl:choose>
+        </xsl:variable>
+        <!--Inverse use-when true/false to debug-->
+        <xsl:copy copy-namespaces="false" use-when="false()">
+          <xsl:copy-of select="@*"/>
+          <xsl:attribute name="colspec.position" select="$colspec.position"/>
+          <xsl:attribute name="cols2delete.index" select="$cols2delete.index"/>
+          <xsl:attribute name="cols2delete.group" select="$cols2delete.group"/>
+          <xsl:attribute name="nameend.new" select="$nameend.new"/>
+          <xsl:apply-templates select="node()" mode="#current"/>
+        </xsl:copy>
+        <xsl:copy copy-namespaces="false" use-when="true()">
           <xsl:choose>
             <xsl:when test="empty($nameend.new)">
               <xsl:attribute name="error" select="'unable to get new nameend'"/>
@@ -1297,7 +1318,8 @@
               <xsl:attribute name="nameend" select="$nameend.new"/>
             </xsl:otherwise>
           </xsl:choose>
-          <xsl:apply-templates select="@* except (@namest | @nameend) | node()" mode="#current"/>
+          <xsl:apply-templates select="@* except (@namest | @nameend)" mode="#current"/>
+          <xsl:apply-templates select="node()" mode="#current"/>
         </xsl:copy>
       </xsl:when>
       <xsl:otherwise>
@@ -1305,7 +1327,24 @@
       </xsl:otherwise>
     </xsl:choose>
   </xsl:template>
-
+  
+  <!--Get the last col available (not to delete)
+    It actually get the 1st integer (in reverse order) that is not in the sequence, going back from 1 to 1 step
+  (3, 6, 8, 9) => 7
+  (3, 5, 6) => 4
+  (1, 2, 3, 10) => 9-->
+  <xsl:function name="xslLib:html2cals.getLastAvailableColPosition" as="xs:integer">
+    <xsl:param name="cols2delete" as="xs:integer*"/>
+    <xsl:choose>
+      <xsl:when test="$cols2delete[last() - 1] = $cols2delete[last()] - 1">
+        <xsl:sequence select="xslLib:html2cals.getLastAvailableColPosition($cols2delete[not(position() = last())])"/>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:sequence select="$cols2delete[last()] - 1"/>
+      </xsl:otherwise>
+    </xsl:choose>
+  </xsl:function>
+  
   <xsl:template match="node() | @*" mode="xhtml2cals:reduceNumberOfCols">
     <xsl:copy copy-namespaces="false">
       <xsl:apply-templates select="node() | @*" mode="#current"/>

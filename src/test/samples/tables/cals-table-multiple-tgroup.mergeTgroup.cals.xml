@@ -74,7 +74,7 @@
             <entry align="center" colname="c3" colsep="1" rowsep="1">tgroup2:td4</entry>
           </row>
           <row>
-            <entry namest="c1" nameend="c3" align="center" colsep="1" rowsep="1">tgroup2:td5</entry>
+            <entry align="center" namest="c1" nameend="c3" colsep="1" rowsep="1">tgroup2:td5</entry>
           </row>
         </tbody>
       </tgroup>
@@ -93,7 +93,7 @@
             <entry colname="c3" colsep="1" rowsep="1">tgroup3:td2</entry>
           </row>
           <row>
-            <entry namest="c1" nameend="c3" align="center" colsep="1" rowsep="1">tgroup3:td3</entry>
+            <entry align="center" namest="c1" nameend="c3" colsep="1" rowsep="1">tgroup3:td3</entry>
           </row>
           <row>
             <entry colname="c1" colsep="1" rowsep="1">tgroup3:td4</entry>
@@ -104,7 +104,7 @@
             <entry colname="c3" colsep="1" rowsep="1">tgroup4:td2</entry>
           </row>
           <row>
-            <entry namest="c1" nameend="c3" align="center" colsep="1" rowsep="1">tgroup4:td3</entry>
+            <entry align="center" namest="c1" nameend="c3" colsep="1" rowsep="1">tgroup4:td3</entry>
           </row>
           <row>
             <entry colname="c1" colsep="1" rowsep="1">tgroup4:td4</entry>
