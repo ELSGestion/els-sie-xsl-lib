@@ -1359,6 +1359,29 @@
   
   <xsl:template match="cals:entry[@xhtml2cals:DummyCell]" mode="xhtml2cals:optimize-cals" priority="1"/>
   
+  <!--Rename colname to c1, c2, c3 ... sequentially  because step reduceNumberOfCols may have created gaps
+  This is purely "esthetic" to finished step reduceNumberOfCols in a clean manner-->
+  <xsl:template match="cals:colspec/@colname" mode="xhtml2cals:optimize-cals">
+    <xsl:variable name="colspec" select="parent::cals:colspec" as="element(cals:colspec)"/>
+    <xsl:attribute name="colname" select="'c' || count($colspec/preceding-sibling::cals:colspec) + 1"/>
+  </xsl:template>
+  
+  <xsl:template match="cals:entry/@*[local-name(.) = ('colname', 'namest', 'nameend')]" mode="xhtml2cals:optimize-cals">
+    <xsl:variable name="value" select="." as="xs:string"/>
+    <xsl:variable name="colspec" select="ancestor::cals:tgroup/cals:colspec[@colname = $value]" as="element(cals:colspec)*"/>
+    <xsl:attribute name="{local-name(.)}">
+      <xsl:choose>
+        <xsl:when test="count($colspec) = 1">
+          <xsl:value-of select="'c' || count($colspec/preceding-sibling::cals:colspec) + 1"/>
+        </xsl:when>
+        <xsl:otherwise>
+          <!--In case the colspec is not found, don't change anything-->
+          <xsl:value-of select="."/>
+        </xsl:otherwise>
+      </xsl:choose>
+    </xsl:attribute>
+  </xsl:template>
+  
   <!--delete @html-width on cals elements, they had been added to compute colwidth (see after)-->
   <xsl:template match="cals:*/@html-width" mode="xhtml2cals:optimize-cals"/>
   

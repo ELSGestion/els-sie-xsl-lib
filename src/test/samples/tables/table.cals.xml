@@ -380,56 +380,56 @@
       <tgroup cols="9">
         <colspec colname="c1"/>
         <colspec colname="c2"/>
+        <colspec colname="c3"/>
         <colspec colname="c4"/>
         <colspec colname="c5"/>
         <colspec colname="c6"/>
+        <colspec colname="c7"/>
         <colspec colname="c8"/>
         <colspec colname="c9"/>
-        <colspec colname="c10"/>
-        <colspec colname="c11"/>
         <tbody valign="middle">
           <row>
             <entry align="center" colname="c1" colsep="1" rowsep="1">1</entry>
             <entry colname="c2" align="center" colsep="1" rowsep="1">1:2-3</entry>
-            <entry align="center" colname="c4" colsep="1" rowsep="1">1:4</entry>
-            <entry align="center" colname="c5" colsep="1" rowsep="1">1:5</entry>
-            <entry align="center" namest="c6" nameend="c8" colsep="1" rowsep="1">1:6-8</entry>
-            <entry align="center" colname="c9" colsep="1" rowsep="1">1:9</entry>
-            <entry align="center" colname="c10" colsep="1" rowsep="1">1:10</entry>
-            <entry colname="c11" align="center" colsep="1" rowsep="1">1:11-13</entry>
+            <entry align="center" colname="c3" colsep="1" rowsep="1">1:4</entry>
+            <entry align="center" colname="c4" colsep="1" rowsep="1">1:5</entry>
+            <entry align="center" namest="c5" nameend="c6" colsep="1" rowsep="1">1:6-8</entry>
+            <entry align="center" colname="c7" colsep="1" rowsep="1">1:9</entry>
+            <entry align="center" colname="c8" colsep="1" rowsep="1">1:10</entry>
+            <entry colname="c9" align="center" colsep="1" rowsep="1">1:11-13</entry>
           </row>
           <row>
             <entry align="center" colname="c1" colsep="1" rowsep="1">2</entry>
-            <entry align="center" namest="c2" nameend="c4" colsep="1" rowsep="1">2:2-4</entry>
-            <entry align="center" colname="c5" colsep="1" rowsep="1">2:5</entry>
-            <entry colname="c6" align="center" colsep="1" rowsep="1">2:6-7</entry>
-            <entry align="center" colname="c8" colsep="1" rowsep="1">2:8</entry>
-            <entry align="center" colname="c9" colsep="1" rowsep="1">2:9</entry>
-            <entry namest="c10" nameend="c11" align="center" colsep="1" rowsep="1">2:10-13</entry>
+            <entry align="center" namest="c2" nameend="c3" colsep="1" rowsep="1">2:2-4</entry>
+            <entry align="center" colname="c4" colsep="1" rowsep="1">2:5</entry>
+            <entry colname="c5" align="center" colsep="1" rowsep="1">2:6-7</entry>
+            <entry align="center" colname="c6" colsep="1" rowsep="1">2:8</entry>
+            <entry align="center" colname="c7" colsep="1" rowsep="1">2:9</entry>
+            <entry namest="c8" nameend="c9" align="center" colsep="1" rowsep="1">2:10-13</entry>
           </row>
           <row>
             <entry align="center" colname="c1" colsep="1" rowsep="1">3</entry>
             <entry colname="c2" align="center" colsep="1" rowsep="1">3:2-3</entry>
-            <entry align="center" colname="c4" colsep="1" rowsep="1">3:4</entry>
-            <entry align="center" colname="c5" colsep="1" rowsep="1">3:5</entry>
-            <entry align="center" namest="c6" nameend="c10" colsep="1" rowsep="1">3:6-10</entry>
-            <entry colname="c11" align="center" colsep="1" rowsep="1">3:11-13</entry>
+            <entry align="center" colname="c3" colsep="1" rowsep="1">3:4</entry>
+            <entry align="center" colname="c4" colsep="1" rowsep="1">3:5</entry>
+            <entry align="center" namest="c5" nameend="c8" colsep="1" rowsep="1">3:6-10</entry>
+            <entry colname="c9" align="center" colsep="1" rowsep="1">3:11-13</entry>
           </row>
           <row>
             <entry align="center" colname="c1" colsep="1" rowsep="1">4</entry>
-            <entry align="center" namest="c2" nameend="c5" colsep="1" rowsep="1">4:2-5</entry>
-            <entry colname="c6" align="center" colsep="1" rowsep="1">4:6-7</entry>
-            <entry align="center" colname="c8" colsep="1" rowsep="1">4:8</entry>
-            <entry align="center" namest="c9" nameend="c10" colsep="1" rowsep="1">4:9-10</entry>
-            <entry colname="c11" align="center" colsep="1" rowsep="1">4:11-13</entry>
+            <entry align="center" namest="c2" nameend="c4" colsep="1" rowsep="1">4:2-5</entry>
+            <entry colname="c5" align="center" colsep="1" rowsep="1">4:6-7</entry>
+            <entry align="center" colname="c6" colsep="1" rowsep="1">4:8</entry>
+            <entry align="center" namest="c7" nameend="c8" colsep="1" rowsep="1">4:9-10</entry>
+            <entry colname="c9" align="center" colsep="1" rowsep="1">4:11-13</entry>
           </row>
           <row>
             <entry align="center" colname="c1" colsep="1" rowsep="1">5</entry>
             <entry colname="c2" align="center" colsep="1" rowsep="1">5:2-3</entry>
-            <entry align="center" colname="c4" colsep="1" rowsep="1">5:4</entry>
-            <entry align="center" colname="c5" colsep="1" rowsep="1">5:5</entry>
-            <entry align="center" namest="c6" nameend="c8" colsep="1" rowsep="1">5:6-8</entry>
-            <entry namest="c9" nameend="c11" align="center" colsep="1" rowsep="1">5:9-13</entry>
+            <entry align="center" colname="c3" colsep="1" rowsep="1">5:4</entry>
+            <entry align="center" colname="c4" colsep="1" rowsep="1">5:5</entry>
+            <entry align="center" namest="c5" nameend="c6" colsep="1" rowsep="1">5:6-8</entry>
+            <entry namest="c7" nameend="c9" align="center" colsep="1" rowsep="1">5:9-13</entry>
           </row>
         </tbody>
       </tgroup>
