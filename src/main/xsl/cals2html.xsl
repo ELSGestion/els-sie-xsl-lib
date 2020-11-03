@@ -73,13 +73,20 @@
   <!--==============================================================================================================================-->
   
   <xsl:template match="/" mode="xslLib:cals2html">
-    <!--STEP0 : set xml:base to init multi-step-->
+    <!--STEP1 : set xml:base to init multi-step-->
     <xsl:variable name="step" as="document-node()">
       <xsl:document>
         <xsl:apply-templates select="." mode="xslLib:setXmlBase"/>
       </xsl:document>
     </xsl:variable>
-    <!--STEP0 : add cals namespace on table elements if asked for-->
+    <xsl:if test="$xslLib:cals2html.debug">
+      <xsl:variable name="step.log.uri" select="resolve-uri('cals2html.step1.setXmlBase.xml', $xslLib:cals2html.log.uri)" as="xs:anyURI"/>
+      <xsl:message>[INFO] writing <xsl:value-of select="$step.log.uri"/></xsl:message>
+      <xsl:result-document href="{$step.log.uri}">
+        <xsl:sequence select="$step"/>
+      </xsl:result-document>
+    </xsl:if>
+    <!--STEP2 : add cals namespace on table elements if asked for-->
     <xsl:variable name="step" as="document-node()">
       <xsl:choose>
         <xsl:when test="$xslLib:cals2html.set-cals-ns">
@@ -93,39 +100,39 @@
       </xsl:choose>
     </xsl:variable>
     <xsl:if test="$xslLib:cals2html.debug">
-      <xsl:variable name="step.log.uri" select="resolve-uri('cals2html.step0.xml', $xslLib:cals2html.log.uri)" as="xs:anyURI"/>
+      <xsl:variable name="step.log.uri" select="resolve-uri('cals2html.step2.setCalsTableNS.xml', $xslLib:cals2html.log.uri)" as="xs:anyURI"/>
       <xsl:message>[INFO] writing <xsl:value-of select="$step.log.uri"/></xsl:message>
       <xsl:result-document href="{$step.log.uri}">
         <xsl:sequence select="$step"/>
       </xsl:result-document>
     </xsl:if>
-    <!--STEP1 : normalize cals table-->
+    <!--STEP3 : normalize cals table-->
     <xsl:variable name="step" as="document-node()">
       <xsl:document>
         <xsl:apply-templates select="$step" mode="xslLib:normalizeCalsTable.main"/>
       </xsl:document>
     </xsl:variable>
     <xsl:if test="$xslLib:cals2html.debug">
-      <xsl:variable name="step.log.uri" select="resolve-uri('cals2html.step1.xml', $xslLib:cals2html.log.uri)" as="xs:anyURI"/>
+      <xsl:variable name="step.log.uri" select="resolve-uri('cals2html.step3.normalizeCalsTable.xml', $xslLib:cals2html.log.uri)" as="xs:anyURI"/>
       <xsl:message>[INFO] writing <xsl:value-of select="$step.log.uri"/></xsl:message>
       <xsl:result-document href="{$step.log.uri}">
         <xsl:sequence select="$step"/>
       </xsl:result-document>
     </xsl:if>
-    <!--STEP2 : move attributes down to entries-->
+    <!--STEP4 : move attributes down to entries-->
     <xsl:variable name="step" as="document-node()">
       <xsl:document>
         <xsl:apply-templates select="$step" mode="xslLib:cals2html.moveAttributesDownEntries"/>
       </xsl:document>
     </xsl:variable>
     <xsl:if test="$xslLib:cals2html.debug">
-      <xsl:variable name="step.log.uri" select="resolve-uri('cals2html.step2.xml', $xslLib:cals2html.log.uri)" as="xs:anyURI"/>
+      <xsl:variable name="step.log.uri" select="resolve-uri('cals2html.step4.moveAttributesDownEntries.xml', $xslLib:cals2html.log.uri)" as="xs:anyURI"/>
       <xsl:message>[INFO] writing <xsl:value-of select="$step.log.uri"/></xsl:message>
       <xsl:result-document href="{$step.log.uri}">
         <xsl:sequence select="$step"/>
       </xsl:result-document>
     </xsl:if>    
-    <!--STEP3 : merge tgroup if asked-->
+    <!--STEP5 : merge tgroup if asked-->
     <xsl:variable name="step" as="document-node()">
       <xsl:choose>
         <xsl:when test="$xslLib:cals2html.forceMergingMultipleTgroup">
@@ -139,26 +146,26 @@
       </xsl:choose>
     </xsl:variable>
     <xsl:if test="$xslLib:cals2html.debug">
-      <xsl:variable name="step.log.uri" select="resolve-uri('cals2html.step3.xml', $xslLib:cals2html.log.uri)" as="xs:anyURI"/>
+      <xsl:variable name="step.log.uri" select="resolve-uri('cals2html.step5.mergeTgroups-if-asked.xml', $xslLib:cals2html.log.uri)" as="xs:anyURI"/>
       <xsl:message>[INFO] writing <xsl:value-of select="$step.log.uri"/></xsl:message>
       <xsl:result-document href="{$step.log.uri}">
         <xsl:sequence select="$step"/>
       </xsl:result-document>
     </xsl:if>
-    <!--STEP4 : cals2html.main-->
+    <!--STEP6 : cals2html.main-->
     <xsl:variable name="step" as="document-node()">
       <xsl:document>
         <xsl:apply-templates select="$step" mode="xslLib:cals2html.main"/>
       </xsl:document>
     </xsl:variable>
     <xsl:if test="$xslLib:cals2html.debug">
-      <xsl:variable name="step.log.uri" select="resolve-uri('cals2html.step4.xml', $xslLib:cals2html.log.uri)" as="xs:anyURI"/>
+      <xsl:variable name="step.log.uri" select="resolve-uri('cals2html.step6.cals2html.main.xml', $xslLib:cals2html.log.uri)" as="xs:anyURI"/>
       <xsl:message>[INFO] writing <xsl:value-of select="$step.log.uri"/></xsl:message>
       <xsl:result-document href="{$step.log.uri}">
         <xsl:sequence select="$step"/>
       </xsl:result-document>
     </xsl:if>
-    <!--STEP5 : convert class2style-->
+    <!--STEP7 : convert class2style-->
     <xsl:variable name="step" as="document-node()">
       <xsl:choose>
         <xsl:when test="$xslLib:cals2html.use-style-insteadOf-class">
@@ -172,7 +179,7 @@
       </xsl:choose>
     </xsl:variable>
     <xsl:if test="$xslLib:cals2html.debug">
-      <xsl:variable name="step.log.uri" select="resolve-uri('cals2html.step5.xml', $xslLib:cals2html.log.uri)" as="xs:anyURI"/>
+      <xsl:variable name="step.log.uri" select="resolve-uri('cals2html.step7.class2style.xml', $xslLib:cals2html.log.uri)" as="xs:anyURI"/>
       <xsl:message>[INFO] writing <xsl:value-of select="$step.log.uri"/></xsl:message>
       <xsl:result-document href="{$step.log.uri}">
         <xsl:sequence select="$step"/>
@@ -183,13 +190,25 @@
   </xsl:template>
   
   <!--==============================================================================================================================-->
-  <!-- STEP 1 -->
+  <!-- STEP 1 : set xml:base to init multi-step -->
+  <!--==============================================================================================================================-->
+  
+  <!--see setXmlBase.xsl-->
+  
+  <!--==============================================================================================================================-->
+  <!-- STEP 2 : add cals namespace on table elements if asked for -->
+  <!--==============================================================================================================================-->
+  
+  <!--see setCalsTableNS.xsl-->
+  
+  <!--==============================================================================================================================-->
+  <!-- STEP 3 : normalize cals table -->
   <!--==============================================================================================================================-->
   
   <!--see normalizeCalsTable.xsl-->
   
   <!--==============================================================================================================================-->
-  <!-- STEP 2 : move attributes down to entries-->
+  <!-- STEP 4 : move attributes down to entries-->
   <!--==============================================================================================================================-->
   
   <!--copy template-->
@@ -290,7 +309,7 @@
     mode="xslLib:cals2html.moveAttributesDownEntries"/>
   
   <!--==============================================================================================================================-->
-  <!-- STEP 3 : merge tgroups-->
+  <!-- STEP 5 : merge tgroups-->
   <!--==============================================================================================================================-->
   
   <xsl:mode name="xslLib:cals2html.mergeTgroups" on-no-match="shallow-copy"/>
@@ -371,7 +390,7 @@
   </xsl:template>
   
   <!--==============================================================================================================================-->
-  <!-- STEP 4 : cal2html.main -->
+  <!-- STEP 6 : cal2html.main -->
   <!--==============================================================================================================================-->
   
   <!--<xsl:mode name="xslLib:cals2html.main" on-no-match="shallow-copy" />-->
@@ -618,7 +637,7 @@
   </xsl:template>
   
   <!--==============================================================================================================================-->
-  <!-- STEP 5 : class2style -->
+  <!-- STEP 7 : convert class2style -->
   <!--==============================================================================================================================-->
   
   <xsl:mode name="xslLib:cals2html.class2style" on-no-match="shallow-copy"/>
@@ -675,9 +694,9 @@
     </xsl:copy>
   </xsl:template>
   
-  <!--==================================-->
+  <!--==============================================================================================================================-->
   <!--COMMON -->
-  <!--==================================-->
+  <!--==============================================================================================================================-->
   
   <!--cf. https://www.oasis-open.org/specs/tm9901.html#AEN530 : 
     @colwidth might be express in different units :
