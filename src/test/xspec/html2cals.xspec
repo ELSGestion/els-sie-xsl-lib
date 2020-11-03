@@ -112,7 +112,7 @@
       </x:expect>
     </x:scenario>
     
-    <x:scenario label="Issue #8: col width not correct when rowspan :">
+    <x:scenario label="Issue #8: colwidth not correct when rowspan :">
       <x:scenario label="table_test-colwith.style.htm > table_test-colwith.style.cals.xml">
         <x:context select="/">
           <xi:include href="table_test-colwith.style.htm"/>
@@ -133,6 +133,17 @@
           <xi:include href="table_test-colwith.style.widthInCell.cals.xml"/>
         </x:expect>
       </x:scenario>
+    </x:scenario>
+    
+    <x:scenario label="cals-table-multiple-tgroup.mergeTgroup.htm > cals-table-multiple-tgroup.mergeTgroup.cals.xml">
+      <x:context select="/">
+        <xi:include href="cals-table-multiple-tgroup.mergeTgroup.htm"/>
+      </x:context>
+      <x:expect label="OK"
+        select="serialize(/*) ! replace(., '(xml:base=&quot;.*?&quot;)', '') ! parse-xml(.)"
+        test="serialize(/*) ! replace(., '(xml:base=&quot;.*?&quot;)', '') ! parse-xml(.)">
+        <xi:include href="cals-table-multiple-tgroup.mergeTgroup.cals.xml"/>
+      </x:expect>
     </x:scenario>
     
   </x:scenario>

@@ -66,6 +66,16 @@
         <xi:include href="table_ELSSIEXDC-23.editor.cals.style.htm"/>
       </x:expect>
     </x:scenario>
+    <x:scenario label="cals-table-multiple-tgroup">
+      <x:context select="/">
+        <xi:include href="cals-table-multiple-tgroup.xml"/>
+      </x:context>
+      <x:expect label="OK"
+        select="serialize(/*) ! replace(., '(xml:base=&quot;.*?&quot;)', '') ! parse-xml(.)/html:html/html:body"
+        test="serialize(/*) ! replace(., '(xml:base=&quot;.*?&quot;)', '') ! parse-xml(.)/html:html/html:body">
+        <xi:include href="cals-table-multiple-tgroup.style.htm"/>
+      </x:expect>
+    </x:scenario>
   </x:scenario>
   
 </x:description>

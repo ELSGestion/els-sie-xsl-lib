@@ -158,11 +158,7 @@
         </thead>
         <tbody valign="middle">
           <row>
-            <entry valign="top" colname="c1" colsep="1" rowsep="1">Lorsque, à la clôture d'un exercice, une immobilisation (corporelle ou incorporelle)
-                     présente un indice de perte de valeur, un test de dépréciation doit être effectué,ce
-                     test consistant en une comparaison entre la valeur nette comptable de l'immobilisationet
-                     sa valeur actuelle
-                  </entry>
+            <entry valign="top" colname="c1" colsep="1" rowsep="1">Lorsque, à la clôture d'un exercice, une immobilisation (corporelle ou incorporelle)</entry>
             <entry valign="top" colname="c2" colsep="1" rowsep="1">Selon l'administration la dépréciation fondée sur la seule diminution des flux futurs</entry>
           </row>
           <row>
@@ -184,9 +180,7 @@
         </thead>
         <tbody valign="middle">
           <row>
-            <entry colname="c1" valign="top" colsep="1" rowsep="1">En cas de dépréciation calculée par référence à la seule valeur d'usage, à défaut
-                     de valeur vénale...
-                  </entry>
+            <entry colname="c1" valign="top" colsep="1" rowsep="1">En cas de dépréciation calculée par référence à la seule valeur d'usage</entry>
           </row>
         </tbody>
       </tgroup>
