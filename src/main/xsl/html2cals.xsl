@@ -1006,8 +1006,8 @@
     </entry>
   </xsl:template>
   
-  <!--FIXME : will be delete later on cals-optimize because we need these dummyCells to compute colwidth, convert it to cals for now
-    keeping its attributes--> 
+  <!-- Keep ghost cells here at this point because we need these dummyCells to compute colwidth and for cols reduction
+  they will be delete later at step "cals-optimize"--> 
   <xsl:template match="td[@xhtml2cals:DummyCell] | th[@xhtml2cals:DummyCell]" mode="xhtml2cals:convert-to-cals" priority="1">
     <entry>
       <xsl:attribute name="xhtml2cals:htmlname" select="local-name()"/>
@@ -1193,29 +1193,35 @@
   
   <xsl:template match="cals:tgroup" mode="xhtml2cals:reduceNumberOfCols">
     <xsl:variable name="rows" select="descendant::cals:row" as="element(cals:row)*"/>
-    <xsl:variable name="minGhostCells" as="xs:integer"
-      select="min($rows/count(cals:entry[@xhtml2cals:DummyCell='yes']))"/>
+    <xsl:variable name="minColspanGhostCells" as="xs:integer"
+      select="min($rows/count(cals:entry[xslLib:html2cals.isColspanGhostEntry(.)]))"/>
     <!--Get the positions of those ghost cells : they indicate expanded cols and rows-->
-    <xsl:variable name="minGhostCells.position" as="xs:integer*" select="
-      for $ghostEntry in ($rows[count(cals:entry[@xhtml2cals:DummyCell]) = $minGhostCells][1]/cals:entry[@xhtml2cals:DummyCell]) 
+    <xsl:variable name="minColspanGhostCells.position" as="xs:integer*" select="
+      for $ghostEntry in ($rows[count(cals:entry[xslLib:html2cals.isColspanGhostEntry(.)]) = $minColspanGhostCells][1]/cals:entry[xslLib:html2cals.isColspanGhostEntry(.)]) 
       return count($ghostEntry/preceding-sibling::cals:entry) + 1"/>
     <xsl:variable name="cols2delete" as="xs:integer*">
-      <xsl:for-each select="$minGhostCells.position">
+      <xsl:for-each select="$minColspanGhostCells.position">
         <xsl:variable name="pos" select="." as="xs:integer"/>
-        <xsl:if test="every $entry in $rows/cals:entry[position() = $pos] satisfies $entry/@xhtml2cals:DummyCell">
+        <xsl:if test="every $entry in $rows/cals:entry[position() = $pos] satisfies xslLib:html2cals.isColspanGhostEntry($entry)">
           <xsl:sequence select="$pos"/>
         </xsl:if>
       </xsl:for-each>
     </xsl:variable>
     <xsl:copy>
-      <!--<xsl:attribute name="minGhostCells" select="$minGhostCells"/>
-      <xsl:attribute name="minGhostCells.position" select="$minGhostCells.position"/>
+      <!--<xsl:attribute name="minColspanGhostCells" select="$minColspanGhostCells"/>
+      <xsl:attribute name="minColspanGhostCells.position" select="$minColspanGhostCells.position"/>
       <xsl:attribute name="cols2delete" select="$cols2delete"/>-->
       <xsl:apply-templates select="@* | node()" mode="#current">
         <xsl:with-param name="cols2delete" as="xs:integer*" select="$cols2delete" tunnel="true"/>
       </xsl:apply-templates>
     </xsl:copy>
   </xsl:template>
+  
+  <!--Indicate if an entry is a ghost one because of a colspan in html--> 
+  <xsl:function name="xslLib:html2cals.isColspanGhostEntry" as="xs:boolean">
+    <xsl:param name="entry" as="element(cals:entry)"/>
+    <xsl:sequence select="$entry/@xhtml2cals:DummyCell and $entry/@xhtml2cals:colspan"/>
+  </xsl:function>
   
   <!--Update tgroup/@cols-->
   <xsl:template match="cals:tgroup/@cols" mode="xhtml2cals:reduceNumberOfCols">
@@ -1247,12 +1253,13 @@
           </xsl:copy>
         </xsl:if>
         <!--if not, delete it-->
-        <!--<xsl:if test="$position = $cols2delete">
+        <!--debug : set use-when="true()"-->
+        <xsl:if test="$position = $cols2delete" use-when="false()">
           <xsl:copy copy-namespaces="false">
             <xsl:attribute name="delete" select="'true'"/>
             <xsl:copy-of select="@*"/>
           </xsl:copy>
-        </xsl:if>-->
+        </xsl:if>
       </xsl:otherwise>
     </xsl:choose>
   </xsl:template>
