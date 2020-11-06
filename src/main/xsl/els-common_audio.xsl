@@ -34,10 +34,11 @@
     <xd:desc>Constants for "Ausha" platform</xd:desc>
   </xd:doc>
   <xsl:variable name="els:audio.ausha" select="'ausha'" as="xs:string"/>
-  <xsl:variable name="els:audio.ausha.domain" select="'widget.ausha.co'" as="xs:string"/>
+  <xsl:variable name="els:audio.ausha.domain" select="'player.ausha.co'" as="xs:string"/>
+  <xsl:variable name="els:audio.ausha.alt.domain" select="'widget.ausha.co'" as="xs:string"/>
   <xsl:variable name="els:audio.ausha.embed.defaultWidth" select="'100%'" as="xs:string"/>
   <xsl:variable name="els:audio.ausha.embed.defaultHeight" select="'200'" as="xs:string"/>
-  <xsl:variable name="els:audio.ausha.embed.URL.prefix" select="'https://widget.ausha.co/index.html?podcastId='" as="xs:string"/>
+  <xsl:variable name="els:audio.ausha.embed.URL.prefix" select="'https://player.ausha.co/index.html?podcastId='" as="xs:string"/>
   <xsl:variable name="els:audio.ausha.embed.URL.suffix" select="'&amp;color=%23ffcd1b&amp;v=2&amp;display=horizontal'" as="xs:string"/>
   
   <xd:doc>
@@ -48,7 +49,7 @@
   <xsl:function name="els:isAudioUrl" as="xs:boolean">
     <xsl:param name="url" as="xs:string"/>
     <xsl:variable name="hostname" select="els:http-get-host($url)" as="xs:string?"/>
-    <xsl:sequence select="$hostname = ($els:audio.soundcloud.domain, $els:audio.ausha.domain)"/>
+    <xsl:sequence select="$hostname = ($els:audio.soundcloud.domain, $els:audio.ausha.domain, $els:audio.ausha.alt.domain)"/>
   </xsl:function>
   
   <xd:doc>
@@ -66,7 +67,7 @@
       <xsl:when test="$hostname = $els:audio.soundcloud.domain">
         <xsl:sequence select="$els:audio.soundcloud"/>
       </xsl:when>
-      <xsl:when test="$hostname = $els:audio.ausha.domain">
+      <xsl:when test="$hostname = ($els:audio.ausha.domain, $els:audio.ausha.alt.domain)">
         <xsl:sequence select="$els:audio.ausha"/>
       </xsl:when>
       <xsl:otherwise>
@@ -92,8 +93,8 @@
         <!-- FIXME : make it better! --> 
         <xsl:sequence select="tokenize(substring-after($url, 'tracks/'), '(\?|&amp;)')[1]"/>
       </xsl:when>
-      <!-- AUSHA : https://widget.ausha.co/index.html?showId=...&color=...&v=2&display=horizontal&podcastId=yJderFGXmEdY -->
-      <xsl:when test="$hostname = $els:audio.ausha.domain">
+      <!-- AUSHA : https://player.ausha.co/index.html?showId=...&color=...&v=2&display=horizontal&podcastId=yJderFGXmEdY -->
+      <xsl:when test="$hostname = ($els:audio.ausha.domain, $els:audio.ausha.alt.domain)">
         <!-- FIXME : make it better! --> 
         <xsl:sequence select="tokenize(substring-after($url, 'podcastId='), '(&amp;)')[1]"/>
       </xsl:when>
