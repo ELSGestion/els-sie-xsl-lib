@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="dependency:/eu.els.sie.models+ext-models/ext-models/oasis/cals/cals.nvdl" type="application/xml" schematypens="http://purl.oclc.org/dsdl/nvdl/ns/structure/1.0"?>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <style type="text/css">
+      table {
+        border-collapse: collapse;
+        margin-top: 0;
+      }
+      
+      *[data-cals-tgroupstyle="tgroupstyle-1"]{
+        background-color: skyblue;
+      }
+      *[data-cals-tgroupstyle="tgroupstyle-2"]{
+        background-color: #eba487;
+      }
+      th {
+        background-color: #ccc;
+      }
+    </style>
+  </head>
+  <body>
+    <table xmlns="http://docs.oasis-open.org/ns/oasis-exchange/table" tabstyle="tabstyle-1" pgwide="1"
+      frame="all" colsep="1"  rowsep="0">
+      <h1 xmlns="http://www.w3.org/1999/xhtml" style="text-align:center;">Table with multiple tgroup</h1>
+      <tgroup cols="3" tgroupstyle="tgroupstyle-1" align="center">
+        <colspec colname="tg1-c1" colwidth="1*" align="left"/>
+        <colspec colname="tg1-c2" colwidth="3*"/>
+        <colspec colname="tg1-c3" colwidth="2*" align="right"/>
+        <thead>
+          <row>
+            <entry colname="tg1-c1" rowsep="1">tgroup1:thead1</entry>
+            <entry colname="tg1-c2" rowsep="1">tgroup1:thead2</entry>
+            <entry colname="tg1-c3" rowsep="1">tgroup1:thead3</entry>
+          </row>
+        </thead>
+        <tbody valign="top">
+          <row>
+            <entry colname="tg1-c1" rowsep="0">tgroup1:td1</entry>
+            <entry colname="tg1-c2" align="right">tgroup1:td2</entry>
+            <entry colname="tg1-c3" rowsep="1">tgroup1:td3</entry>
+          </row>
+          <row>
+            <entry colname="tg1-c1" rowsep="1">tgroup1:td4</entry>
+            <entry colname="tg1-c2" rowsep="1" morerows="1">tgroup1:td5</entry>
+            <entry colname="tg1-c3" rowsep="1">tgroup1:td6</entry>
+          </row>
+          <row>
+            <entry colname="tg1-c1" rowsep="1">tgroup1:td7</entry>
+            <entry colname="tg1-c3" rowsep="1">tgroup1:td8</entry>
+          </row>
+          <row>
+            <entry rowsep="1" namest="tg1-c1" nameend="tg1-c2">tgroup1:td9</entry>
+            <entry colname="tg1-c3" rowsep="1">tgroup1:td10</entry>
+          </row>
+        </tbody>
+      </tgroup>
+      <tgroup cols="2" align="right" tgroupstyle="tgroupstyle-2">
+        <colspec colname="tg2-c1" align="center"/>
+        <colspec colname="tg2-c2" colwidth="0.6*"/>
+        <thead>
+          <row>
+            <entry colname="tg2-c1" colsep="0" rowsep="1" align="left">tgroup2:thead1</entry>
+            <entry colname="tg2-c2" rowsep="1">tgroup2:thead2</entry>
+          </row>
+        </thead>
+        <tbody valign="middle">
+          <row>
+            <entry colname="tg2-c1" rowsep="1" morerows="2">tgroup2:td1</entry>
+            <entry colname="tg2-c2" rowsep="1" align="center">tgroup2:td2</entry>
+          </row>
+          <row>
+            <entry colname="tg2-c2" rowsep="1">tgroup2:td3</entry>
+          </row>
+          <row>
+            <entry colname="tg2-c2" rowsep="1" align="center">tgroup2:td4</entry>
+          </row>
+          <row>
+            <entry rowsep="1" namest="tg2-c1" nameend="tg2-c2">tgroup2:td5</entry>
+          </row>
+        </tbody>
+      </tgroup>
+      <tgroup cols="2" tgroupstyle="tgroupstyle-1">
+        <colspec colname="tg3-c1" colwidth="30px" align="right"/>
+        <colspec colname="tg3-c2" colwidth="70px"/>
+        <thead>
+          <row>
+            <entry>tgroup3:thead1</entry>
+            <entry>tgroup3:thead2</entry>
+          </row>
+        </thead>
+        <tbody valign="middle">
+          <row>
+            <entry colname="tg3-c1" rowsep="1">tgroup3:td1</entry>
+            <entry colname="tg3-c2" rowsep="1">tgroup3:td2</entry>
+          </row>
+          <row>
+            <entry rowsep="1" namest="tg3-c1" nameend="tg3-c2" align="center">tgroup3:td3</entry>
+          </row>
+          <row>
+            <entry colname="tg3-c1" rowsep="1" align="left">tgroup3:td4</entry>
+            <entry colname="tg3-c2" rowsep="1" align="right">tgroup3:td5</entry>
+          </row>
+        </tbody>
+      </tgroup>
+      <tgroup cols="2" tgroupstyle="tgroupstyle-2">
+        <colspec colname="tg4-c1" colwidth="30px" align="right"/>
+        <colspec colname="tg4-c2" colwidth="70px"/>
+        <tbody valign="middle">
+          <row>
+            <entry colname="tg4-c1" rowsep="1">tgroup4:td1</entry>
+            <entry colname="tg4-c2" rowsep="1">tgroup4:td2</entry>
+          </row>
+          <row>
+            <entry rowsep="1" namest="tg4-c1" nameend="tg4-c2" align="center">tgroup4:td3</entry>
+          </row>
+          <row>
+            <entry colname="tg4-c1" rowsep="1" align="left">tgroup4:td4</entry>
+            <entry colname="tg4-c2" rowsep="1" align="right">tgroup4:td5</entry>
+          </row>
+        </tbody>
+      </tgroup>
+      <tgroup cols="1" tgroupstyle="tgroupstyle-1" align="center">
+        <colspec colname="tg5-c1" colwidth="0.5*" align="right" rowsep="0"/>
+        <thead>
+          <row>
+            <entry colname="tg5-c1" rowsep="1" align="center">tgroup5:th1</entry>
+          </row>
+        </thead>
+        <tbody valign="middle">
+          <row>
+            <entry colname="tg5-c1" align="left">tgroup5:td1</entry>
+          </row>
+          <row>
+            <entry colname="tg5-c1" align="center">tgroup5:td2</entry>
+          </row>
+          <row>
+            <entry colname="tg5-c1">tgroup5:td3</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+    <h2>SIETRAINMQ-312 : test #1</h2>
+    <table xmlns="http://docs.oasis-open.org/ns/oasis-exchange/table" frame="all" id="UI-cb155593-ed6b-4896-b126-ffb43f8c5a4f" tabstyle="FRCHS-style1">
+      <tgroup cols="1">
+        <colspec align="left" colname="c1" colsep="1" colwidth="100*" rowsep="1"/>
+        <thead valign="middle">
+          <row>
+            <entry align="center">Retraitements sur l’imprimé n° 2058-A</entry>
+          </row>
+        </thead>
+        <tbody valign="top">
+          <row>
+            <entry colname="c1">En cas de dépréciation calculée par référence à la seule valeur d'usage</entry>
+          </row>
+        </tbody>
+      </tgroup>
+      <tgroup cols="2">
+        <colspec align="left" colname="c1" colsep="1" colwidth="50*" rowsep="1"/>
+        <colspec align="left" colname="c2" colsep="1" colwidth="50*" rowsep="1"/>
+        <thead valign="middle">
+          <row>
+            <entry align="center" colname="c1">Comptabilité</entry>
+            <entry align="center" colname="c2">Fiscalité</entry>
+          </row>
+        </thead>
+        <tbody valign="top">
+          <row rowsep="0">
+            <entry colname="c1">Lorsque, à la clôture d'un exercice, une immobilisation (corporelle ou incorporelle)</entry>
+            <entry colname="c2">Selon l'administration la dépréciation fondée sur la seule diminution des flux futurs</entry>
+          </row>
+          <row rowsep="0">
+            <entry colname="c1">La valeur vénale s'entend nette des coûts de sortie</entry>
+            <entry colname="c2">Selon l'administration, la valeur vénale ne doit pas tenir compte des coûts de sortie...</entry>
+          </row>
+          <row rowsep="1">
+            <entry colname="c1">Compte tenu des divergences existant entre les règles comptables ...</entry>
+            <entry colname="c2">Quelle que soit la valeur actuelle retenue pour le calcul de la dépréciation ...</entry>
+          </row>
+        </tbody>
+      </tgroup>
+      <tgroup cols="1">
+        <colspec align="left" colname="c1" colsep="1" colwidth="100*" rowsep="1"/>
+        <thead valign="middle">
+          <row>
+            <entry align="center">Retraitements sur l’imprimé n° 2058-A </entry>
+          </row>
+        </thead>
+        <tbody valign="top">
+          <row>
+            <entry colname="c1">En cas de dépréciation calculée par référence à la seule valeur d'usage</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+  </body>
+</html>

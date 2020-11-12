@@ -58,6 +58,8 @@
   <xsl:param name="xslLib:html2cals.generate-upper-case-cals-elements" select="false()" as="xs:boolean"/>
   <!--Cals spec uses * instead of %, this param allow this conversion--> 
   <xsl:param name="xslLib:html2cals.convertWidthPercentsToStars" select="true()" as="xs:boolean"/>
+  <!--force to split single tgroup to multiple tgroup when encountering header's rows (with only <th> inside)-->
+  <xsl:param name="xslLib:html2cals.splitTgroupsByHeaders" select="true()" as="xs:boolean"/>
   
   <!--==============================================================================================================================-->
   <!-- INIT -->
@@ -86,7 +88,7 @@
       </xsl:choose>
     </xsl:variable>
     <xsl:if test="$xslLib:html2cals.debug">
-      <xsl:variable name="log.uri" select="resolve-uri('html2cals.step1.log.xml', $xslLib:html2cals.log.uri)" as="xs:anyURI"/>
+      <xsl:variable name="log.uri" select="resolve-uri('html2cals.step1.force-html-table-conversion.log.xml', $xslLib:html2cals.log.uri)" as="xs:anyURI"/>
       <xsl:message>[INFO] writing <xsl:value-of select="$log.uri"/></xsl:message>
       <xsl:result-document href="{$log.uri}">
         <xsl:sequence select="$step"/>
@@ -98,7 +100,7 @@
       </xsl:document>
     </xsl:variable>
     <xsl:if test="$xslLib:html2cals.debug">
-      <xsl:variable name="log.uri" select="resolve-uri('html2cals.step2.log.xml', $xslLib:html2cals.log.uri)" as="xs:anyURI"/>
+      <xsl:variable name="log.uri" select="resolve-uri('html2cals.step2.lowercase-html.log.xml', $xslLib:html2cals.log.uri)" as="xs:anyURI"/>
       <xsl:message>[INFO] writing <xsl:value-of select="$log.uri"/></xsl:message>
       <xsl:result-document href="{$log.uri}">
         <xsl:sequence select="$step"/>
@@ -110,7 +112,7 @@
       </xsl:document>
     </xsl:variable>
     <xsl:if test="$xslLib:html2cals.debug">
-      <xsl:variable name="log.uri" select="resolve-uri('html2cals.step3.log.xml', $xslLib:html2cals.log.uri)" as="xs:anyURI"/>
+      <xsl:variable name="log.uri" select="resolve-uri('html2cals.step3.normalize-to-xhtml.log.xml', $xslLib:html2cals.log.uri)" as="xs:anyURI"/>
       <xsl:message>[INFO] writing <xsl:value-of select="$log.uri"/></xsl:message>
       <xsl:result-document href="{$log.uri}">
         <xsl:sequence select="$step"/>
@@ -122,7 +124,7 @@
       </xsl:document>
     </xsl:variable>
     <xsl:if test="$xslLib:html2cals.debug">
-      <xsl:variable name="log.uri" select="resolve-uri('html2cals.step4.log.xml', $xslLib:html2cals.log.uri)" as="xs:anyURI"/>
+      <xsl:variable name="log.uri" select="resolve-uri('html2cals.step4.expand-spans.log.xml', $xslLib:html2cals.log.uri)" as="xs:anyURI"/>
       <xsl:message>[INFO] writing <xsl:value-of select="$log.uri"/></xsl:message>
       <xsl:result-document href="{$log.uri}">
         <xsl:sequence select="$step"/>
@@ -134,7 +136,7 @@
       </xsl:document>
     </xsl:variable>
     <xsl:if test="$xslLib:html2cals.debug">
-      <xsl:variable name="log.uri" select="resolve-uri('html2cals.step5.log.xml', $xslLib:html2cals.log.uri)" as="xs:anyURI"/>
+      <xsl:variable name="log.uri" select="resolve-uri('html2cals.step5.html4table2html5table.log.xml', $xslLib:html2cals.log.uri)" as="xs:anyURI"/>
       <xsl:message>[INFO] writing <xsl:value-of select="$log.uri"/></xsl:message>
       <xsl:result-document href="{$log.uri}">
         <xsl:sequence select="$step"/>
@@ -146,7 +148,46 @@
       </xsl:document>
     </xsl:variable>
     <xsl:if test="$xslLib:html2cals.debug">
-      <xsl:variable name="log.uri" select="resolve-uri('html2cals.step6.log.xml', $xslLib:html2cals.log.uri)" as="xs:anyURI"/>
+      <xsl:variable name="log.uri" select="resolve-uri('html2cals.step6.convert-to-cals.log.xml', $xslLib:html2cals.log.uri)" as="xs:anyURI"/>
+      <xsl:message>[INFO] writing <xsl:value-of select="$log.uri"/></xsl:message>
+      <xsl:result-document href="{$log.uri}">
+        <xsl:sequence select="$step"/>
+      </xsl:result-document>
+    </xsl:if>
+    <xsl:variable name="step" as="document-node()">
+      <xsl:choose>
+        <xsl:when test="$xslLib:html2cals.splitTgroupsByHeaders">
+          <xsl:document>
+            <xsl:apply-templates select="$step" mode="xhtml2cals:splitTgroupsByHeaders"/>
+          </xsl:document>
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:sequence select="$step"/>
+        </xsl:otherwise>
+      </xsl:choose>
+    </xsl:variable>
+    <xsl:if test="$xslLib:html2cals.debug">
+      <xsl:variable name="log.uri" select="resolve-uri('html2cals.step7.splitTgroupsByHeaders.log.xml', $xslLib:html2cals.log.uri)" as="xs:anyURI"/>
+      <xsl:message>[INFO] writing <xsl:value-of select="$log.uri"/></xsl:message>
+      <xsl:result-document href="{$log.uri}">
+        <xsl:sequence select="$step"/>
+      </xsl:result-document>
+    </xsl:if>
+    <xsl:variable name="step" as="document-node()">
+      <xsl:choose>
+        <xsl:when test="$xslLib:html2cals.splitTgroupsByHeaders">
+          <!--After spliting tgroups by headers, some tgroups may have too much cols with systematic spanning-->
+          <xsl:document>
+            <xsl:apply-templates select="$step" mode="xhtml2cals:reduceNumberOfCols"/>
+          </xsl:document>
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:sequence select="$step"/>
+        </xsl:otherwise>
+      </xsl:choose>
+    </xsl:variable>
+    <xsl:if test="$xslLib:html2cals.debug">
+      <xsl:variable name="log.uri" select="resolve-uri('html2cals.step8.reduceNumberOfCols.log.xml', $xslLib:html2cals.log.uri)" as="xs:anyURI"/>
       <xsl:message>[INFO] writing <xsl:value-of select="$log.uri"/></xsl:message>
       <xsl:result-document href="{$log.uri}">
         <xsl:sequence select="$step"/>
@@ -158,7 +199,7 @@
       </xsl:document>
     </xsl:variable>
     <xsl:if test="$xslLib:html2cals.debug">
-      <xsl:variable name="log.uri" select="resolve-uri('html2cals.step7.log.xml', $xslLib:html2cals.log.uri)" as="xs:anyURI"/>
+      <xsl:variable name="log.uri" select="resolve-uri('html2cals.step9.optimize-cals.log.xml', $xslLib:html2cals.log.uri)" as="xs:anyURI"/>
       <xsl:message>[INFO] writing <xsl:value-of select="$log.uri"/></xsl:message>
       <xsl:result-document href="{$log.uri}">
         <xsl:sequence select="$step"/>
@@ -177,7 +218,7 @@
       </xsl:choose>
     </xsl:variable>
     <xsl:if test="$xslLib:html2cals.debug">
-      <xsl:variable name="log.uri" select="resolve-uri('html2cals.step8.log.xml', $xslLib:html2cals.log.uri)" as="xs:anyURI"/>
+      <xsl:variable name="log.uri" select="resolve-uri('html2cals.step10.convert-upper-case-cals.log.xml', $xslLib:html2cals.log.uri)" as="xs:anyURI"/>
       <xsl:message>[INFO] writing <xsl:value-of select="$log.uri"/></xsl:message>
       <xsl:result-document href="{$log.uri}">
         <xsl:sequence select="$step"/>
@@ -914,6 +955,7 @@
       <!--<xsl:copy-of select="(@valign, (../../..//col)[$curr-col-num]/@valign)[1][not(. = 'baseline')]"/>
       <xsl:copy-of select="@id | @class | @align | @char | @charoff "/>-->
       <xsl:apply-templates select="@*" mode="xhtml2cals:convert-attributes-to-cals"/>
+      <xsl:attribute name="xhtml2cals:htmlname" select="local-name()"/>
       <xsl:if test="not(@xhtml2cals:DummyCell)">
         <xsl:if test="@xhtml2cals:rowspan > 1">
           <xsl:attribute name="morerows" select="number(@xhtml2cals:rowspan)-1"/>
@@ -964,10 +1006,11 @@
     </entry>
   </xsl:template>
   
-  <!--FIXME : will be delete later on cals-optimize because we need these dummyCells to compute colwidth, convert it to cals for now
-    keeping its attributes--> 
-  <xsl:template match="td[@xhtml2cals:DummyCell = 'yes'] | th[@xhtml2cals:DummyCell = 'yes']" mode="xhtml2cals:convert-to-cals" priority="1">
+  <!-- Keep ghost cells here at this point because we need these dummyCells to compute colwidth and for cols reduction
+  they will be delete later at step "cals-optimize"--> 
+  <xsl:template match="td[@xhtml2cals:DummyCell] | th[@xhtml2cals:DummyCell]" mode="xhtml2cals:convert-to-cals" priority="1">
     <entry>
+      <xsl:attribute name="xhtml2cals:htmlname" select="local-name()"/>
       <xsl:copy-of select="@*"/>
     </entry>
   </xsl:template>
@@ -984,7 +1027,7 @@
     <xsl:copy-of select="."/>
   </xsl:template>
   
-  <!--some class values might come from cals conversion, delete them but keep others class values-->
+  <!--some class values might come from cals2html conversion, delete them but keep others class values-->
   <xsl:template match="@class" mode="xhtml2cals:convert-attributes-to-cals">
     <xsl:variable name="class.token" select="tokenize(., '\s+')" as="xs:string*"/>
     <xsl:variable name="class.except-cals" select="string-join($class.token[not(starts-with(., 'cals_'))], ' ')" as="xs:string"/>
@@ -1095,18 +1138,263 @@
   
   <xd:doc>
     <!-- ==============================================================================================-->
-    <!-- STEP 7 : Mode xhtml2cals:optimize-cals-->
+    <!-- STEP 7 : Mode xhtml2cals:splitTgroupsByHeaders-->
     <!-- ==============================================================================================-->
   </xd:doc>
   
-  <xsl:template match="cals:entry[@xhtml2cals:DummyCell = 'yes']" mode="xhtml2cals:optimize-cals" priority="1"/>
+  <xsl:template match="cals:tgroup[*/cals:row[xslLib:html2cals.rowIsHeader(.)]]" mode="xhtml2cals:splitTgroupsByHeaders">
+    <xsl:for-each-group select="descendant::cals:row" 
+      group-starting-with="cals:row[xslLib:html2cals.rowIsHeader(.)][not(preceding-sibling::cals:row[1]/xslLib:html2cals.rowIsHeader(.))]">
+      <xsl:variable name="cg1" select="current-group()[1]" as="element(cals:row)"/>
+      <xsl:variable name="theadOrTboby" select="($cg1/ancestor::cals:thead[1], $cg1/ancestor::cals:tbody[1])[1]" as="element()"/>
+      <xsl:variable name="tgroup" select="$cg1/ancestor::cals:tgroup[1]" as="element(cals:tgroup)"/>
+      <tgroup>
+        <xsl:apply-templates select="$tgroup/@*" mode="#current"/>
+        <xsl:apply-templates select="$tgroup/cals:colspec" mode="#current"/>
+        <thead>
+          <xsl:apply-templates select="$theadOrTboby/@*" mode="#current"/>
+          <xsl:apply-templates select="current-group()[xslLib:html2cals.rowIsHeader(.)]" mode="#current"/>
+        </thead>
+        <tbody>
+          <xsl:apply-templates select="$theadOrTboby/@*" mode="#current"/>
+          <xsl:apply-templates select="current-group()[not(xslLib:html2cals.rowIsHeader(.))]" mode="#current"/>
+        </tbody>
+      </tgroup>
+    </xsl:for-each-group> 
+  </xsl:template>
+  
+  <!--Delete temporary attribute-->
+  <xsl:template match="@xhtml2cals:htmlname" mode="xhtml2cals:splitTgroupsByHeaders"/>
+    
+  <xsl:function name="xslLib:html2cals.rowIsHeader" as="xs:boolean">
+    <xsl:param name="row" as="element(cals:row)"/>
+    <xsl:sequence select="every $entry in $row/cals:entry satisfies $entry/@xhtml2cals:htmlname = 'th'"/>
+  </xsl:function>
+  
+  <!--copy template-->
+  <xsl:template match="node() | @*" mode="xhtml2cals:splitTgroupsByHeaders">
+    <xsl:copy copy-namespaces="false">
+      <xsl:apply-templates select="node() | @*" mode="#current"/>
+    </xsl:copy>
+  </xsl:template>
+  
+  <xd:doc>
+    <!-- ==============================================================================================-->
+    <!-- STEP 8 : Mode xhtml2cals:reduceNumberOfCols-->
+    <!-- ==============================================================================================-->
+  </xd:doc>
+  
+  <!--After spliting tgroups by headers, some tgroups may have too much colums (with spanning entries on each row) 
+  The algo here will only check 1st left cell of each row, if all of them are spanned (namest+nameend or morerows) 
+  then that mean there's an extra unuseful row which can be deleted
+  We could use cals:normalize(.) to simplify the algo but at this point, there are already some DummyCell that has been added 
+  from the HTML normalisation, let's count on this instead.
+  -->
+  
+  <xsl:template match="cals:tgroup" mode="xhtml2cals:reduceNumberOfCols">
+    <xsl:variable name="rows" select="descendant::cals:row" as="element(cals:row)*"/>
+    <xsl:variable name="minColspanGhostCells" as="xs:integer"
+      select="min($rows/count(cals:entry[xslLib:html2cals.isColspanGhostEntry(.)]))"/>
+    <!--Get the positions of those ghost cells : they indicate expanded cols and rows-->
+    <xsl:variable name="minColspanGhostCells.position" as="xs:integer*" select="
+      for $ghostEntry in ($rows[count(cals:entry[xslLib:html2cals.isColspanGhostEntry(.)]) = $minColspanGhostCells][1]/cals:entry[xslLib:html2cals.isColspanGhostEntry(.)]) 
+      return count($ghostEntry/preceding-sibling::cals:entry) + 1"/>
+    <xsl:variable name="cols2delete" as="xs:integer*">
+      <xsl:for-each select="$minColspanGhostCells.position">
+        <xsl:variable name="pos" select="." as="xs:integer"/>
+        <xsl:if test="every $entry in $rows/cals:entry[position() = $pos] satisfies xslLib:html2cals.isColspanGhostEntry($entry)">
+          <xsl:sequence select="$pos"/>
+        </xsl:if>
+      </xsl:for-each>
+    </xsl:variable>
+    <xsl:copy>
+      <!--<xsl:attribute name="minColspanGhostCells" select="$minColspanGhostCells"/>
+      <xsl:attribute name="minColspanGhostCells.position" select="$minColspanGhostCells.position"/>
+      <xsl:attribute name="cols2delete" select="$cols2delete"/>-->
+      <xsl:apply-templates select="@* | node()" mode="#current">
+        <xsl:with-param name="cols2delete" as="xs:integer*" select="$cols2delete" tunnel="true"/>
+      </xsl:apply-templates>
+    </xsl:copy>
+  </xsl:template>
+  
+  <!--Indicate if an entry is a ghost one because of a colspan in html--> 
+  <xsl:function name="xslLib:html2cals.isColspanGhostEntry" as="xs:boolean">
+    <xsl:param name="entry" as="element(cals:entry)"/>
+    <xsl:sequence select="$entry/@xhtml2cals:DummyCell and $entry/@xhtml2cals:colspan"/>
+  </xsl:function>
+  
+  <!--Update tgroup/@cols-->
+  <xsl:template match="cals:tgroup/@cols" mode="xhtml2cals:reduceNumberOfCols">
+    <xsl:param name="cols2delete" as="xs:integer*" tunnel="true"/>
+    <xsl:attribute name="cols" select="xs:integer(.) - count($cols2delete)"/>
+  </xsl:template>
+  
+  <!--Delete colspec that have been reduced-->
+  <xsl:template match="cals:colspec" mode="xhtml2cals:reduceNumberOfCols">
+    <xsl:param name="cols2delete" as="xs:integer*" tunnel="true"/>
+    <xsl:choose>
+      <xsl:when test="empty($cols2delete)">
+        <xsl:next-match/>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:variable name="position" as="xs:integer" select="count(preceding-sibling::cals:colspec) + 1"/>
+        <xsl:if test="not($position = $cols2delete)">
+          <xsl:variable name="followingColspecToDelete" as="element()*" 
+            select="following-sibling::cals:colspec[not($position = $cols2delete)]"/>
+          <xsl:copy copy-namespaces="false">
+            <xsl:apply-templates select="@*" mode="#current"/>
+            <xsl:variable name="colwidths" select="(@colwidth, $followingColspecToDelete/@colwidth)" as="xs:string*"/>
+            <xsl:variable name="colwidths.units" select="$colwidths ! xslLib:html2cals.getWidthUnit(.)" as="xs:string*"/>
+            <xsl:variable name="colwidths.values" select="$colwidths ! xslLib:html2cals.getWidthAsNumber(.)" as="xs:double*"/>
+            <xsl:if test="count($colwidths) != 0 and count(distinct-values($colwidths.units)) = 1">
+              <xsl:attribute name="colwidth" select="sum($colwidths.values) || $colwidths.units[1]"/>
+            </xsl:if>
+            <xsl:apply-templates select="node()" mode="#current"/>
+          </xsl:copy>
+        </xsl:if>
+        <!--if not, delete it-->
+        <!--debug : set use-when="true()"-->
+        <xsl:if test="$position = $cols2delete" use-when="false()">
+          <xsl:copy copy-namespaces="false">
+            <xsl:attribute name="delete" select="'true'"/>
+            <xsl:copy-of select="@*"/>
+          </xsl:copy>
+        </xsl:if>
+      </xsl:otherwise>
+    </xsl:choose>
+  </xsl:template>
+  
+  <!--calculate new values for entry @nameend after cols reduction--> 
+  <xsl:template match="cals:entry[not(@xhtml2cals:DummyCell)][@nameend]" mode="xhtml2cals:reduceNumberOfCols">
+    <xsl:param name="cols2delete" as="xs:integer*" tunnel="true"/>
+    <xsl:variable name="nameend" as="xs:string" select="@nameend"/>
+    <xsl:variable name="colspec-list" as="element(cals:colspec)*" select="ancestor::cals:tgroup[1]/cals:colspec"/>
+    <xsl:variable name="colspec" as="element(cals:colspec)" select="$colspec-list[@colname = $nameend]"/>
+    <xsl:variable name="colspec.position" as="xs:integer" select="count($colspec/preceding-sibling::cals:colspec) + 1"/>
+    <xsl:choose>
+      <!--When the @nameend arrive on a deleted col-->
+      <xsl:when test="$colspec.position = $cols2delete">
+        <!--e.g: cols2delete = (2, 3, 4, 8, 9, 11)
+        there are actually 3 adjacent groups of col to delete here : (2, 3, 4) (8, 9) and (11)
+        This cols are to be deleted because every rows has entries that spanned at minimun over it
+        For this reason, none of the @nameend can be 2, 3 or 8. @nameend can only be 4 or 9 or 11.
+        These @nameend has to be changed to the first col available (not deleted) on the left 
+        (it can't be on the right because that would merge entries that are not spanned to the left)
+        That means here: 
+        - nameend="c4" will be changed to "c1"
+        - nameend="c9" will be changed to "c7"
+        - nameend="c11" will be changed to "c10"
+        The first entry (c1) will never had to be deleted, in the way the algorithm is written, if c1, c2  rows are always spanned, 
+        then c2 will be deleted. Actually @nameend can never be equals to c1 in CALS. 
+        -->
+        <xsl:variable name="cols2delete.index" as="xs:integer*" select="index-of($cols2delete, $colspec.position)"/>
+        <xsl:variable name="cols2delete.group" as="xs:integer*" select="subsequence($cols2delete, 1, $cols2delete.index)"/>
+        <xsl:variable name="last-available-colspec" as="element(cals:colspec)?" 
+          select="$colspec-list[xslLib:html2cals.getLastAvailableColPosition($cols2delete.group)]"/>
+        <xsl:variable name="nameend.new" as="xs:string">
+          <xsl:choose>
+            <xsl:when test="exists($last-available-colspec)">
+              <xsl:value-of select="$last-available-colspec/@colname"/>
+            </xsl:when>
+            <xsl:otherwise>
+              <xsl:text>error : unable to get last available colspec</xsl:text>
+              <xsl:message>[ERROR][html2cals.xsl][xhtml2cals:reduceNumberOfCols] unable to get new nameend</xsl:message>
+            </xsl:otherwise>
+          </xsl:choose>
+        </xsl:variable>
+        <!--Inverse use-when true/false to debug-->
+        <xsl:copy copy-namespaces="false" use-when="false()">
+          <xsl:copy-of select="@*"/>
+          <xsl:attribute name="colspec.position" select="$colspec.position"/>
+          <xsl:attribute name="cols2delete.index" select="$cols2delete.index"/>
+          <xsl:attribute name="cols2delete.group" select="$cols2delete.group"/>
+          <xsl:attribute name="nameend.new" select="$nameend.new"/>
+          <xsl:apply-templates select="node()" mode="#current"/>
+        </xsl:copy>
+        <xsl:copy copy-namespaces="false" use-when="true()">
+          <xsl:choose>
+            <xsl:when test="empty($nameend.new)">
+              <xsl:attribute name="error" select="'unable to get new nameend'"/>
+              <xsl:message>[ERROR][html2cals.xsl][xhtml2cals:reduceNumberOfCols] unable to get new nameend</xsl:message>
+            </xsl:when>
+            <xsl:when test="@namest = $nameend.new">
+              <xsl:attribute name="colname" select="@namest"/>
+            </xsl:when>
+            <xsl:otherwise>
+              <xsl:copy-of select="@namest"/>
+              <xsl:attribute name="nameend" select="$nameend.new"/>
+            </xsl:otherwise>
+          </xsl:choose>
+          <xsl:apply-templates select="@* except (@namest | @nameend)" mode="#current"/>
+          <xsl:apply-templates select="node()" mode="#current"/>
+        </xsl:copy>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:next-match/>
+      </xsl:otherwise>
+    </xsl:choose>
+  </xsl:template>
+  
+  <!--Get the last col available (not to delete)
+    It actually get the 1st integer (in reverse order) that is not in the sequence, going back from 1 to 1 step
+  (3, 6, 8, 9) => 7
+  (3, 5, 6) => 4
+  (1, 2, 3, 10) => 9-->
+  <xsl:function name="xslLib:html2cals.getLastAvailableColPosition" as="xs:integer">
+    <xsl:param name="cols2delete" as="xs:integer*"/>
+    <xsl:choose>
+      <xsl:when test="$cols2delete[last() - 1] = $cols2delete[last()] - 1">
+        <xsl:sequence select="xslLib:html2cals.getLastAvailableColPosition($cols2delete[not(position() = last())])"/>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:sequence select="$cols2delete[last()] - 1"/>
+      </xsl:otherwise>
+    </xsl:choose>
+  </xsl:function>
+  
+  <xsl:template match="node() | @*" mode="xhtml2cals:reduceNumberOfCols">
+    <xsl:copy copy-namespaces="false">
+      <xsl:apply-templates select="node() | @*" mode="#current"/>
+    </xsl:copy>
+  </xsl:template>
+  
+  <xd:doc>
+    <!-- ==============================================================================================-->
+    <!-- STEP 9 : Mode xhtml2cals:optimize-cals-->
+    <!-- ==============================================================================================-->
+  </xd:doc>
+  
+  <xsl:template match="cals:entry[@xhtml2cals:DummyCell]" mode="xhtml2cals:optimize-cals" priority="1"/>
+  
+  <!--Rename colname to c1, c2, c3 ... sequentially  because step reduceNumberOfCols may have created gaps
+  This is purely "esthetic" to finished step reduceNumberOfCols in a clean manner-->
+  <xsl:template match="cals:colspec/@colname" mode="xhtml2cals:optimize-cals">
+    <xsl:variable name="colspec" select="parent::cals:colspec" as="element(cals:colspec)"/>
+    <xsl:attribute name="colname" select="'c' || count($colspec/preceding-sibling::cals:colspec) + 1"/>
+  </xsl:template>
+  
+  <xsl:template match="cals:entry/@*[local-name(.) = ('colname', 'namest', 'nameend')]" mode="xhtml2cals:optimize-cals">
+    <xsl:variable name="value" select="." as="xs:string"/>
+    <xsl:variable name="colspec" select="ancestor::cals:tgroup/cals:colspec[@colname = $value]" as="element(cals:colspec)*"/>
+    <xsl:attribute name="{local-name(.)}">
+      <xsl:choose>
+        <xsl:when test="count($colspec) = 1">
+          <xsl:value-of select="'c' || count($colspec/preceding-sibling::cals:colspec) + 1"/>
+        </xsl:when>
+        <xsl:otherwise>
+          <!--In case the colspec is not found, don't change anything-->
+          <xsl:value-of select="."/>
+        </xsl:otherwise>
+      </xsl:choose>
+    </xsl:attribute>
+  </xsl:template>
   
   <!--delete @html-width on cals elements, they had been added to compute colwidth (see after)-->
   <xsl:template match="cals:*/@html-width" mode="xhtml2cals:optimize-cals"/>
   
-  <!--When colspec has no colwidth (from html:col/@width) try to get it from the cell(s) is the col that has the max size (if size is consistent)-->
+  <!--When colspec has no colwidth (from html:col/@width) try to get it from the cell(s) : the col will have the size of the max size cell (if size is consistent)-->
   <!--At this point an html-width attribute has been added on each cells : this value has been normalized to x* if the size was %-->
-  <!--We have to check first the constitancy of width of the selected cells (we could not now if 2cm is larger than 1*)-->
+  <!--We have to check first the consistency of width of the selected cells (as we could't know if 2cm is larger than 1*)-->
   <xsl:template match="cals:colspec[not(@colwidth)][following-sibling::*/cals:row/cals:entry[@html-width]]" mode="xhtml2cals:optimize-cals">
     <xsl:variable name="position" select="count(preceding-sibling::cals:colspec) + 1" as="xs:integer"/>
     <xsl:variable name="col.unspanned-entries" as="element(cals:entry)*"
@@ -1137,7 +1425,6 @@
     </xsl:choose>
   </xsl:function>
   
-  
   <!--From a width with its unit (like 10px), get the unit (px)-->
   <!--FIXME : this function has been duplicated from cals2html one-->
   <xsl:function name="xslLib:html2cals.getWidthUnit" as="xs:string">
@@ -1163,7 +1450,8 @@
     </xsl:choose>
   </xsl:template>
   
-  <!--When the HTML come from xslLib:cals2html, one can convert the div class="cals_table" to an englobing cals table element, every html table inside has been converted to a cals tgroup-->
+  <!--When the HTML come from xslLib:cals2html, one can convert the div class="cals_table" to an englobing cals table element, 
+    every html table inside has been converted to a cals tgroup-->
   <xsl:template match="div[els:hasClass(., 'cals_table')][cals:table]" mode="xhtml2cals:optimize-cals">
     <table>
       <xsl:apply-templates select="@*" mode="#current"/>
@@ -1198,7 +1486,7 @@
         <xsl:variable name="value" select="." as="xs:string"/>
         <xsl:choose>
           <xsl:when test="starts-with($value, 'cals_')">
-            <!--delete cals specific cals attribute value inerited from conversion cals2html.xsl--> 
+            <!--delete cals specific class attribute value inerited from conversion cals2html.xsl--> 
           </xsl:when>
           <xsl:otherwise>
             <xsl:value-of select="$value"/>
@@ -1220,7 +1508,7 @@
   
   <xd:doc>
     <!-- ======================================================================-->
-    <!-- STEP 8 : Mode xhtml2cals:convert-upper-case-cals -->
+    <!-- STEP 10 : Mode xhtml2cals:convert-upper-case-cals -->
     <!-- ======================================================================-->
   </xd:doc>
   
@@ -1242,7 +1530,7 @@
   
   <xd:doc>
     <!-- ======================================================================-->
-    <!-- STEP 9 : Mode xhtml2cals:convert-cals-namespace -->
+    <!-- STEP 11 : Mode xhtml2cals:convert-cals-namespace -->
     <!-- ======================================================================-->
   </xd:doc>
   

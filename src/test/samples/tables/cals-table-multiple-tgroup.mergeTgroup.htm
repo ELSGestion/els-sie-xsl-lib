@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-model href="dependency:/eu.els.sie.models+ext-models/ext-models/oasis/cals/cals.nvdl" type="application/xml" schematypens="http://purl.oclc.org/dsdl/nvdl/ns/structure/1.0"?>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <style type="text/css">
+      table {
+        border-collapse: collapse;
+        margin-top: 0;
+      }
+      
+      *[data-cals-tgroupstyle = "tgroupstyle-1"] {
+        background-color: skyblue;
+      }
+      *[data-cals-tgroupstyle = "tgroupstyle-2"] {
+        background-color: #eba487;
+      }
+      th {
+        background-color: #ccc;
+      }</style>
+  </head>
+  <body>
+    <div class="cals_table" data-cals-tabstyle="tabstyle-1">
+      <h1 style="text-align:center;">Table with multiple tgroup</h1>
+      <table data-cals-tgroupstyle="tgroupstyle-1" class="cals_tgroup" style="width:100%; border:1px solid">
+        <colgroup>
+          <col style="width:17%" />
+          <col style="width:50%" />
+          <col style="width:33%" />
+        </colgroup>
+        <tbody>
+          <tr>
+            <th style="border-right:1px solid; border-bottom:1px solid; text-align:left; vertical-align:top">tgroup1:thead1</th>
+            <th style="border-right:1px solid; border-bottom:1px solid; vertical-align:top">tgroup1:thead2</th>
+            <th style="border-right:1px solid; border-bottom:1px solid; text-align:right; vertical-align:top">tgroup1:thead3</th>
+          </tr>
+          <tr>
+            <td style="border-right:1px solid; vertical-align:top">tgroup1:td1</td>
+            <td style="border-right:1px solid; text-align:right; vertical-align:top">tgroup1:td2</td>
+            <td style="border-right:1px solid; border-bottom:1px solid; text-align:right; vertical-align:top">tgroup1:td3</td>
+          </tr>
+          <tr>
+            <td style="border-right:1px solid; border-bottom:1px solid; vertical-align:top">tgroup1:td4</td>
+            <td rowspan="2" style="border-right:1px solid; border-bottom:1px solid; text-align:center; vertical-align:top">tgroup1:td5</td>
+            <td style="border-right:1px solid; border-bottom:1px solid; text-align:right; vertical-align:top">tgroup1:td6</td>
+          </tr>
+          <tr>
+            <td style="border-right:1px solid; border-bottom:1px solid; vertical-align:top">tgroup1:td7</td>
+            <td style="border-right:1px solid; border-bottom:1px solid; text-align:right; vertical-align:top">tgroup1:td8</td>
+          </tr>
+          <tr>
+            <td colspan="2" style="border-right:1px solid; border-bottom:1px solid; vertical-align:top">tgroup1:td9</td>
+            <td style="border-right:1px solid; border-bottom:1px solid; text-align:right; vertical-align:top">tgroup1:td10</td>
+          </tr>
+          <tr>
+            <th colspan="2" style="border-bottom:1px solid; text-align:left; vertical-align:top">tgroup2:thead1</th>
+            <th style="border-right:1px solid; border-bottom:1px solid; text-align:right; vertical-align:top">tgroup2:thead2</th>
+          </tr>
+          <tr>
+            <td colspan="2" rowspan="3" style="border-right:1px solid; border-bottom:1px solid; text-align:center">tgroup2:td1</td>
+            <td style="border-right:1px solid; border-bottom:1px solid; text-align:center">tgroup2:td2</td>
+          </tr>
+          <tr>
+            <td style="border-right:1px solid; border-bottom:1px solid; text-align:right">tgroup2:td3</td>
+          </tr>
+          <tr>
+            <td style="border-right:1px solid; border-bottom:1px solid; text-align:center">tgroup2:td4</td>
+          </tr>
+          <tr>
+            <td colspan="3" style="border-right:1px solid; border-bottom:1px solid; text-align:center">tgroup2:td5</td>
+          </tr>
+          <tr>
+            <th colspan="2" style="border-right:1px solid; text-align:right; vertical-align:top">tgroup3:thead1</th>
+            <th style="border-right:1px solid; text-align:left; vertical-align:top">tgroup3:thead2</th>
+          </tr>
+          <tr>
+            <td colspan="2" style="border-right:1px solid; border-bottom:1px solid; text-align:right">tgroup3:td1</td>
+            <td style="border-right:1px solid; border-bottom:1px solid">tgroup3:td2</td>
+          </tr>
+          <tr>
+            <td colspan="3" style="border-right:1px solid; border-bottom:1px solid; text-align:center">tgroup3:td3</td>
+          </tr>
+          <tr>
+            <td colspan="2" style="border-right:1px solid; border-bottom:1px solid">tgroup3:td4</td>
+            <td style="border-right:1px solid; border-bottom:1px solid; text-align:right">tgroup3:td5</td>
+          </tr>
+          <tr>
+            <td colspan="2" style="border-right:1px solid; border-bottom:1px solid; text-align:right">tgroup4:td1</td>
+            <td style="border-right:1px solid; border-bottom:1px solid">tgroup4:td2</td>
+          </tr>
+          <tr>
+            <td colspan="3" style="border-right:1px solid; border-bottom:1px solid; text-align:center">tgroup4:td3</td>
+          </tr>
+          <tr>
+            <td colspan="2" style="border-right:1px solid; border-bottom:1px solid">tgroup4:td4</td>
+            <td style="border-right:1px solid; border-bottom:1px solid; text-align:right">tgroup4:td5</td>
+          </tr>
+          <tr>
+            <th colspan="3" style="border-right:1px solid; border-bottom:1px solid; vertical-align:top">tgroup5:th1</th>
+          </tr>
+          <tr>
+            <td colspan="3" style="border-right:1px solid">tgroup5:td1</td>
+          </tr>
+          <tr>
+            <td colspan="3" style="border-right:1px solid; text-align:center">tgroup5:td2</td>
+          </tr>
+          <tr>
+            <td colspan="3" style="border-right:1px solid; text-align:right">tgroup5:td3</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>SIETRAINMQ-312 : test #1</h2>
+    <div class="cals_table" id="UI-cb155593-ed6b-4896-b126-ffb43f8c5a4f" data-cals-tabstyle="FRCHS-style1">
+      <table class="cals_tgroup" style="border:1px solid">
+        <colgroup>
+          <col style="width:50%" />
+          <col style="width:50%" />
+        </colgroup>
+        <tbody>
+          <tr>
+            <th colspan="2" style="border-right:1px solid; border-bottom:1px solid">Retraitements sur l’imprimé n° 2058-A</th>
+          </tr>
+          <tr>
+            <td colspan="2" style="border-right:1px solid; border-bottom:1px solid; vertical-align:top">En cas de dépréciation calculée par référence à la seule valeur d'usage</td>
+          </tr>
+          <tr>
+            <th style="border-right:1px solid; border-bottom:1px solid">Comptabilité</th>
+            <th style="border-right:1px solid; border-bottom:1px solid">Fiscalité</th>
+          </tr>
+          <tr>
+            <td style="border-right:1px solid; border-bottom:1px solid; vertical-align:top">Lorsque, à la clôture d'un exercice, une immobilisation (corporelle ou incorporelle)</td>
+            <td style="border-right:1px solid; border-bottom:1px solid; vertical-align:top">Selon l'administration la dépréciation fondée sur la seule diminution des flux futurs</td>
+          </tr>
+          <tr>
+            <td style="border-right:1px solid; border-bottom:1px solid; vertical-align:top">La valeur vénale s'entend nette des coûts de sortie</td>
+            <td style="border-right:1px solid; border-bottom:1px solid; vertical-align:top">Selon l'administration, la valeur vénale ne doit pas tenir compte des coûts de sortie...</td>
+          </tr>
+          <tr>
+            <td style="border-right:1px solid; border-bottom:1px solid; vertical-align:top">Compte tenu des divergences existant entre les règles comptables ...</td>
+            <td style="border-right:1px solid; border-bottom:1px solid; vertical-align:top">Quelle que soit la valeur actuelle retenue pour le calcul de la dépréciation ...</td>
+          </tr>
+          <tr>
+            <th colspan="2" style="border-right:1px solid; border-bottom:1px solid">Retraitements sur l’imprimé n° 2058-A </th>
+          </tr>
+          <tr>
+            <td colspan="2" style="border-right:1px solid; border-bottom:1px solid; vertical-align:top">En cas de dépréciation calculée par référence à la seule valeur d'usage</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </body>
+</html>

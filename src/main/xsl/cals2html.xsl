@@ -17,7 +17,8 @@
     <xd:desc>
       <xd:p>Convert CALS Table to HTML table</xd:p>
       <xd:p>Each cals:table will be converted to an html:div, then each cals:tgroup will be converted to an html:table</xd:p>
-      <xd:p>/!\ Cals element must be in cals namespace before proceding, other elements will be copied as is.</xd:p>
+      <xd:p>/!\ Cals elements must be in cals namespace before proceding, other elements will be copied as is, 
+        set param $xslLib:cals2html.set-cals-ns to true if you want to let this XSLT preform this namespace operation</xd:p>
     </xd:desc>
   </xd:doc>
   
@@ -55,7 +56,10 @@
   <!-- force @align / @valign default values to be specified in HTML (as class or css)-->
   <xsl:param name="xslLib:cals2html.default-align-force-explicit" select="false()" as="xs:boolean"/>
   <xsl:param name="xslLib:cals2html.default-valign-force-explicit" select="false()" as="xs:boolean"/>
-
+  <!--Try to merge multiple tgroup table into a single html table: be carefull this might have side effect 
+    (loose tgroupstyle or adding colspan that will make the table look a bit different)-->
+  <xsl:param name="xslLib:cals2html.forceMergingMultipleTgroup" select="false()" as="xs:boolean"/>
+  
   <!--==============================================================================================================================-->
   <!-- INIT -->
   <!--==============================================================================================================================-->
@@ -69,13 +73,20 @@
   <!--==============================================================================================================================-->
   
   <xsl:template match="/" mode="xslLib:cals2html">
-    <!--STEP0 : set xml:base to init multi-step-->
+    <!--STEP1 : set xml:base to init multi-step-->
     <xsl:variable name="step" as="document-node()">
       <xsl:document>
         <xsl:apply-templates select="." mode="xslLib:setXmlBase"/>
       </xsl:document>
     </xsl:variable>
-    <!--STEP0 : add cals namespace on table elements if asked for-->
+    <xsl:if test="$xslLib:cals2html.debug">
+      <xsl:variable name="step.log.uri" select="resolve-uri('cals2html.step1.setXmlBase.xml', $xslLib:cals2html.log.uri)" as="xs:anyURI"/>
+      <xsl:message>[INFO] writing <xsl:value-of select="$step.log.uri"/></xsl:message>
+      <xsl:result-document href="{$step.log.uri}">
+        <xsl:sequence select="$step"/>
+      </xsl:result-document>
+    </xsl:if>
+    <!--STEP2 : add cals namespace on table elements if asked for-->
     <xsl:variable name="step" as="document-node()">
       <xsl:choose>
         <xsl:when test="$xslLib:cals2html.set-cals-ns">
@@ -89,39 +100,72 @@
       </xsl:choose>
     </xsl:variable>
     <xsl:if test="$xslLib:cals2html.debug">
-      <xsl:variable name="step.log.uri" select="resolve-uri('cals2html.step0.xml', $xslLib:cals2html.log.uri)" as="xs:anyURI"/>
+      <xsl:variable name="step.log.uri" select="resolve-uri('cals2html.step2.setCalsTableNS.xml', $xslLib:cals2html.log.uri)" as="xs:anyURI"/>
       <xsl:message>[INFO] writing <xsl:value-of select="$step.log.uri"/></xsl:message>
       <xsl:result-document href="{$step.log.uri}">
         <xsl:sequence select="$step"/>
       </xsl:result-document>
     </xsl:if>
-    <!--STEP1 : normalize cals table-->
+    <!--STEP3 : normalize cals table-->
     <xsl:variable name="step" as="document-node()">
       <xsl:document>
         <xsl:apply-templates select="$step" mode="xslLib:normalizeCalsTable.main"/>
       </xsl:document>
     </xsl:variable>
     <xsl:if test="$xslLib:cals2html.debug">
-      <xsl:variable name="step.log.uri" select="resolve-uri('cals2html.step1.xml', $xslLib:cals2html.log.uri)" as="xs:anyURI"/>
+      <xsl:variable name="step.log.uri" select="resolve-uri('cals2html.step3.normalizeCalsTable.xml', $xslLib:cals2html.log.uri)" as="xs:anyURI"/>
       <xsl:message>[INFO] writing <xsl:value-of select="$step.log.uri"/></xsl:message>
       <xsl:result-document href="{$step.log.uri}">
         <xsl:sequence select="$step"/>
       </xsl:result-document>
     </xsl:if>
-    <!--STEP2 : cals2html.main-->
+    <!--STEP4 : move attributes down to entries-->
+    <xsl:variable name="step" as="document-node()">
+      <xsl:document>
+        <xsl:apply-templates select="$step" mode="xslLib:cals2html.moveAttributesDownEntries"/>
+      </xsl:document>
+    </xsl:variable>
+    <xsl:if test="$xslLib:cals2html.debug">
+      <xsl:variable name="step.log.uri" select="resolve-uri('cals2html.step4.moveAttributesDownEntries.xml', $xslLib:cals2html.log.uri)" as="xs:anyURI"/>
+      <xsl:message>[INFO] writing <xsl:value-of select="$step.log.uri"/></xsl:message>
+      <xsl:result-document href="{$step.log.uri}">
+        <xsl:sequence select="$step"/>
+      </xsl:result-document>
+    </xsl:if>    
+    <!--STEP5 : merge tgroup if asked-->
+    <xsl:variable name="step" as="document-node()">
+      <xsl:choose>
+        <xsl:when test="$xslLib:cals2html.forceMergingMultipleTgroup">
+          <xsl:document>
+            <xsl:apply-templates select="$step" mode="xslLib:cals2html.mergeTgroups"/>
+          </xsl:document>
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:sequence select="$step"/>
+        </xsl:otherwise>
+      </xsl:choose>
+    </xsl:variable>
+    <xsl:if test="$xslLib:cals2html.debug">
+      <xsl:variable name="step.log.uri" select="resolve-uri('cals2html.step5.mergeTgroups-if-asked.xml', $xslLib:cals2html.log.uri)" as="xs:anyURI"/>
+      <xsl:message>[INFO] writing <xsl:value-of select="$step.log.uri"/></xsl:message>
+      <xsl:result-document href="{$step.log.uri}">
+        <xsl:sequence select="$step"/>
+      </xsl:result-document>
+    </xsl:if>
+    <!--STEP6 : cals2html.main-->
     <xsl:variable name="step" as="document-node()">
       <xsl:document>
         <xsl:apply-templates select="$step" mode="xslLib:cals2html.main"/>
       </xsl:document>
     </xsl:variable>
     <xsl:if test="$xslLib:cals2html.debug">
-      <xsl:variable name="step.log.uri" select="resolve-uri('cals2html.step2.xml', $xslLib:cals2html.log.uri)" as="xs:anyURI"/>
+      <xsl:variable name="step.log.uri" select="resolve-uri('cals2html.step6.cals2html.main.xml', $xslLib:cals2html.log.uri)" as="xs:anyURI"/>
       <xsl:message>[INFO] writing <xsl:value-of select="$step.log.uri"/></xsl:message>
       <xsl:result-document href="{$step.log.uri}">
         <xsl:sequence select="$step"/>
       </xsl:result-document>
     </xsl:if>
-    <!--STEP3 : convert class2style-->
+    <!--STEP7 : convert class2style-->
     <xsl:variable name="step" as="document-node()">
       <xsl:choose>
         <xsl:when test="$xslLib:cals2html.use-style-insteadOf-class">
@@ -135,7 +179,7 @@
       </xsl:choose>
     </xsl:variable>
     <xsl:if test="$xslLib:cals2html.debug">
-      <xsl:variable name="step.log.uri" select="resolve-uri('cals2html.step3.xml', $xslLib:cals2html.log.uri)" as="xs:anyURI"/>
+      <xsl:variable name="step.log.uri" select="resolve-uri('cals2html.step7.class2style.xml', $xslLib:cals2html.log.uri)" as="xs:anyURI"/>
       <xsl:message>[INFO] writing <xsl:value-of select="$step.log.uri"/></xsl:message>
       <xsl:result-document href="{$step.log.uri}">
         <xsl:sequence select="$step"/>
@@ -146,13 +190,207 @@
   </xsl:template>
   
   <!--==============================================================================================================================-->
-  <!-- STEP 1 -->
+  <!-- STEP 1 : set xml:base to init multi-step -->
+  <!--==============================================================================================================================-->
+  
+  <!--see setXmlBase.xsl-->
+  
+  <!--==============================================================================================================================-->
+  <!-- STEP 2 : add cals namespace on table elements if asked for -->
+  <!--==============================================================================================================================-->
+  
+  <!--see setCalsTableNS.xsl-->
+  
+  <!--==============================================================================================================================-->
+  <!-- STEP 3 : normalize cals table -->
   <!--==============================================================================================================================-->
   
   <!--see normalizeCalsTable.xsl-->
   
   <!--==============================================================================================================================-->
-  <!-- STEP 2 : cal2html.main -->
+  <!-- STEP 4 : move attributes down to entries-->
+  <!--==============================================================================================================================-->
+  
+  <!--copy template-->
+  <xsl:template match="node() | @*" mode="xslLib:cals2html.moveAttributesDownEntries">
+    <xsl:copy copy-namespaces="no">
+      <xsl:apply-templates select="node() | @*" mode="#current"/>
+    </xsl:copy>
+  </xsl:template>
+  
+  <!--Add explicit cals attributes value on entry by resolving cals attributs inheritance for 
+  'colsep', 'rowsep', 'align', 'valign' except (FIXME) : 'char', 'charoff'--> 
+  <xsl:template match="entry[not(@calstable:rid)]" mode="xslLib:cals2html.moveAttributesDownEntries">
+    <xsl:variable name="current-colspec-list" select="xslLib:cals2html.get-colspecs(.)" as="element(colspec)*"/>
+    <xsl:variable name="colsep-current" as="xs:string">
+      <xsl:choose>
+        <xsl:when test="@colsep">
+          <xsl:value-of select="@colsep"/>
+        </xsl:when>
+        <!-- FIXME : que se passe-t-il lors d'un colspan ? a priori c'est le namest qui gagne-->
+        <xsl:when test="$current-colspec-list[1]/@colsep">
+          <xsl:value-of select="$current-colspec-list[1]/@colsep" />
+        </xsl:when>
+        <xsl:when test="ancestor::cals:*/@colsep">
+          <xsl:value-of select="ancestor::cals:*[@colsep][1]/@colsep" />
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:value-of select="$xslLib:cals2html.default-colsep"/>
+        </xsl:otherwise>
+      </xsl:choose>
+    </xsl:variable>
+    <xsl:variable name="rowsep-current" as="xs:string">
+      <xsl:choose>
+        <xsl:when test="@rowsep">
+          <xsl:value-of select="@rowsep"/>
+        </xsl:when>
+        <!-- FIXME : que se passe-t-il lors d'un colspan ? a priori c'est le namest qui gagne-->
+        <xsl:when test="$current-colspec-list[1]/@rowsep">
+          <xsl:value-of select="$current-colspec-list[1]/@rowsep"/>
+        </xsl:when>
+        <!--@rowsep allowed on table|tgroup|row-->
+        <xsl:when test="ancestor::cals:*/@rowsep">
+          <xsl:value-of select="ancestor::cals:*[@rowsep][1]/@rowsep"/>
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:value-of select="$xslLib:cals2html.default-rowsep"/>
+        </xsl:otherwise>
+      </xsl:choose>
+    </xsl:variable>
+    <xsl:variable name="align-current" as="xs:string">
+      <xsl:choose>
+        <xsl:when test="@align">
+          <xsl:value-of select="@align"/>
+        </xsl:when>
+        <!-- FIXME : que se passe-t-il lors d'un colspan ? a priori c'est le namest qui gagne-->
+        <xsl:when test="$current-colspec-list[1]/@align">
+          <xsl:value-of select="$current-colspec-list[1]/@align"/>
+        </xsl:when>
+        <!--@align is allowed on tgroup only (not table, thead, tbody, tfoot,row)-->
+        <xsl:when test="ancestor::cals:*/@align">
+          <xsl:value-of select="ancestor::cals:*[@align][1]/@align"/>
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:value-of select="$xslLib:cals2html.default-tgroup-align"/>
+        </xsl:otherwise>
+      </xsl:choose>
+    </xsl:variable>
+    <xsl:variable name="valign-current" as="xs:string">
+      <xsl:choose>
+        <xsl:when test="@valign">
+          <xsl:value-of select="@valign"/>
+        </xsl:when>
+        <!--@valign is actually not allowed on colspec--> 
+        <!--<xsl:when test="$current-colspec-list[1]/@valign">
+          <xsl:value-of select="$current-colspec-list[1]/@valign" />
+        </xsl:when>-->
+        <xsl:when test="ancestor::cals:*/@valign">
+          <xsl:value-of select="ancestor::cals:*[@valign][1]/@valign" />
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:value-of select="$xslLib:cals2html.default-tgroup-valign"/>
+        </xsl:otherwise>
+      </xsl:choose>
+    </xsl:variable>
+    <xsl:copy copy-namespaces="false">
+      <!--copy current attributes (cals attribute will be overwritten afterwards in this template)-->
+      <xsl:apply-templates select="@*" mode="#current"/>
+      <!--Set cals attributes values-->
+      <xsl:attribute name="colsep" select="$colsep-current"/>
+      <xsl:attribute name="rowsep" select="$rowsep-current"/>
+      <xsl:attribute name="align" select="$align-current"/>
+      <xsl:attribute name="valign" select="$valign-current"/>
+      <xsl:apply-templates select="node()" mode="#current"/>
+    </xsl:copy>
+  </xsl:template>
+  
+  <!--Delete attributes that have been moved to cells-->
+  <xsl:template match="cals:*[not(self::entry)]/@*[name() = ('colsep', 'rowsep', 'align', 'valign', 'char', 'charoff')]"
+    mode="xslLib:cals2html.moveAttributesDownEntries"/>
+  
+  <!--==============================================================================================================================-->
+  <!-- STEP 5 : merge tgroups-->
+  <!--==============================================================================================================================-->
+  
+  <xsl:mode name="xslLib:cals2html.mergeTgroups" on-no-match="shallow-copy"/>
+  
+  <!--Merge tgroups except when there are tfoot (which is difficult to merge here, FIXME later ?)-->
+  <xsl:template match="table[count(tgroup) gt 1][not(tgroup/tfoot)]"
+    mode="xslLib:cals2html.mergeTgroups">
+    <xsl:variable name="max.cols" select="xs:integer(max(tgroup/@cols))" as="xs:integer"/>
+    <xsl:copy copy-namespaces="false">
+      <xsl:apply-templates select="@*" mode="#current"/>
+      <!--adjacency condition : name is tgroup, keep other foreign markup if any --> 
+      <xsl:for-each-group select="*" group-adjacent="local-name(.)">
+        <xsl:choose>
+          <xsl:when test="current-group()[1]/local-name(.) = 'tgroup' and count(current-group()) gt 1">
+            <!--At this point align/valign/colsep/rowsep have been moved to entries-->
+            <cals:tgroup>
+              <!--different @tgroupstyle values might be loosed at this point-->
+              <xsl:sequence select="current-group()[1]/@*"/>
+              <!--colspec is necessary for colwidth and cells spanning (entry/@namest and entry/@nameend--> 
+              <xsl:apply-templates select="(current-group()[xs:integer(@cols) = $max.cols])[1]/colspec" mode="#current"/>
+              <!--No more <thead> here, an annotation will be add to keep thead cells information, and later convert them to html:th-->
+              <cals:tbody>
+                <xsl:apply-templates select="current-group()/*[self::thead or self::tbody]/row" mode="#current">
+                  <xsl:with-param name="max.cols" select="$max.cols" as="xs:integer" tunnel="true"/>
+                </xsl:apply-templates>
+              </cals:tbody>
+            </cals:tgroup>
+          </xsl:when>
+          <xsl:otherwise>
+            <xsl:apply-templates select="current-group()" mode="#current"/>
+          </xsl:otherwise>
+        </xsl:choose>
+      </xsl:for-each-group> 
+    </xsl:copy>
+  </xsl:template>
+  
+  <!--Add html annotations to be used later in the conversion to HTML-->
+  <!--FIXME : entrytbl is not implement here-->
+  <xsl:template match="table[count(tgroup) gt 1][not(tgroup/tfoot)]/tgroup/*[self::thead or self::tbody]/row/entry"
+    mode="xslLib:cals2html.mergeTgroups">
+    <xsl:param name="max.cols" as="xs:integer" tunnel="true"/>
+    <xsl:variable name="cols" select="xs:integer(ancestor::tgroup[1]/@cols)" as="xs:integer"/>
+    <xsl:variable name="nbColsToAdd" select="$max.cols - $cols" as="xs:integer"/>
+    <xsl:copy copy-namespaces="false">
+      <!--add an annotation to add fictiv cols in the merged cals table-->
+      <!--expand 1st entry that have less cols than the merge table--> 
+      <xsl:if test="not(preceding-sibling::entry) and $nbColsToAdd != 0">
+        <xsl:attribute name="html:colspanToAdd" select="$nbColsToAdd"/>
+      </xsl:if>
+      <!--Add an annotation to keep the information that this cell was a thead entry-->
+      <xsl:if test="parent::row/parent::thead">
+        <xsl:attribute name="html:name" select="'th'"/>
+      </xsl:if>
+      <xsl:apply-templates select="@* | node()" mode="#current"/>
+    </xsl:copy>
+  </xsl:template>
+  
+  <xsl:template match="table[count(tgroup) gt 1][not(tgroup/tfoot)]/tgroup/*[self::thead or self::tbody]/row/entry
+    /@*[local-name() = ('colname', 'namest', 'nameend')]"
+    mode="xslLib:cals2html.mergeTgroups">
+    <xsl:variable name="value" select="." as="xs:string"/>
+    <xsl:variable name="colspec" select="ancestor::tgroup[1]/colspec[@colname = $value]" as="element(colspec)*"/>
+    <xsl:choose>
+      <xsl:when test="count($colspec) != 1">
+        <xsl:message expand-text="true">[ERROR][cals2html.xsl] no colspec found for {name()}="{.}"</xsl:message>
+        <xsl:message terminate="true"><xsl:copy-of select="ancestor::tgroup[1]/colspec"/></xsl:message>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:variable name="colspec.position" select="count($colspec/preceding-sibling::colspec) + 1" as="xs:integer"/>
+        <xsl:attribute name="{name()}" select="'c' || $colspec.position"/>
+      </xsl:otherwise>
+    </xsl:choose>
+  </xsl:template>
+  
+  <xsl:template match="table[count(tgroup) gt 1][not(tgroup/tfoot)]/tgroup/colspec/@colname"
+    mode="xslLib:cals2html.mergeTgroups">
+    <xsl:attribute name="colname" select="'c' || count(../preceding-sibling::colspec) + 1"/>
+  </xsl:template>
+  
+  <!--==============================================================================================================================-->
+  <!-- STEP 6 : cal2html.main -->
   <!--==============================================================================================================================-->
   
   <!--<xsl:mode name="xslLib:cals2html.main" on-no-match="shallow-copy" />-->
@@ -221,13 +459,7 @@
       <xsl:if test="normalize-space(@cols) != '' and not(normalize-space(@cols) castable as xs:integer)">
         <xsl:message terminate="no">[ERROR][xslLib:cals2html] @cols="<xsl:value-of select="@cols"/>" is not an integer</xsl:message>
       </xsl:if>
-      <xsl:apply-templates mode="xslLib:cals2html.main" select="thead"/>
-      <xsl:if test="tfoot">
-        <tfoot>
-          <xsl:apply-templates select="tfoot" mode="#current"/>
-        </tfoot>
-      </xsl:if>
-      <xsl:apply-templates select="* except (thead, tfoot) (:head and foot has already been processed :)" mode="#current"/>
+      <xsl:apply-templates mode="#current"/>
     </table>
   </xsl:template>
   
@@ -250,7 +482,10 @@
   <!-- Table Foot -->
   <!-- CALS MODEL : tfoot ::= colspec*,row+ -->
   <xsl:template match="tfoot" mode="xslLib:cals2html.main">
-    <xsl:apply-templates select="*" mode="#current"/>
+    <tfoot>
+      <xsl:apply-templates select="@*" mode="xslLib:cals2html.attributes"/>
+      <xsl:apply-templates mode="#current"/>
+    </tfoot>
   </xsl:template>
   
   <!-- Table body -->
@@ -292,172 +527,27 @@
   
   <xsl:template match="entry[not(@calstable:rid)]" mode="xslLib:cals2html.main">
     <xsl:variable name="nb-cols" select="ancestor::tgroup[1]/@cols[. castable as xs:integer]" as="xs:integer?"/>
-    <xsl:variable name="entry" select="self::*" as="element(entry)"/>
     <xsl:variable name="current-tgroup" select="ancestor::tgroup[1]" as="element()"/>
-    <xsl:variable name="current-colspec-list" as="element(colspec)*">
-      <xsl:choose>
-        <!--First consider @colname-->
-        <xsl:when test="@colname">
-          <xsl:variable name="colname.colspec" select="$current-tgroup/colspec[@colname = current()/@colname]" as="element()*"/>
-          <xsl:if test="count($colname.colspec) != 1">
-            <xsl:message terminate="no">[ERROR][cals2html.xsl] No colspec exists in the current tgroup with @colname equals to current @colname="<xsl:value-of select="@colname"/>"</xsl:message>
-          </xsl:if>
-          <xsl:sequence select="$colname.colspec"/>
-        </xsl:when>
-        <!-- Then consider @namestart/nameend -->
-        <xsl:when test="@namest and @nameend">
-          <xsl:variable name="namest.colspec" select="$current-tgroup/colspec[@colname = current()/@namest]" as="element()*"/>
-          <xsl:variable name="nameend.colspec" select="$current-tgroup/colspec[@colname = current()/@nameend]" as="element()*"/>
-          <xsl:choose>
-            <xsl:when test="count($namest.colspec) != 1">
-              <xsl:message terminate="no">[ERROR][cals2html.xsl] No colspec exists in the current tgroup with @colname equals to current @namest="<xsl:value-of select="@namest"/>"</xsl:message>
-            </xsl:when>
-            <xsl:when test="count($nameend.colspec) != 1">
-              <xsl:message terminate="no">[ERROR][cals2html.xsl] No colspec exists in the current tgroup with @colname equals to current @nameend="<xsl:value-of select="@nameend"/>"</xsl:message>
-            </xsl:when>
-            <xsl:otherwise>
-              <!--FIXME : a-t-on vraiment besoin de passer par colnum, ne pourrait-on pas prendre les colspec situés entre namest.colspec et nameend.colspec dans le xml ?--> 
-              <xsl:variable name="colnumst" select="xslLib:cals2html.get-colnum($entry, $namest.colspec)" as="xs:integer"/>
-              <xsl:variable name="colnumend" select="xslLib:cals2html.get-colnum($entry, $nameend.colspec)" as="xs:integer"/>
-              <xsl:sequence 
-                select="$current-tgroup/colspec
-                [xslLib:cals2html.get-colnum($entry, .) ge $colnumst]
-                [xslLib:cals2html.get-colnum($entry, .) le $colnumend]"/>
-            </xsl:otherwise>
-          </xsl:choose>
-        </xsl:when>
-        <!--If one of the following/preceding entry has a namest/nameend colum, then consider the current colspec *from* this point, example : 
-            <tgroup>
-              <colspec ... colname="c1"/>
-              <colspec ... colname="c2"/>
-              <colspec ... colname="c3"/>
-              <colspec ... colname="c4"/>
-              <colspec ... colname="c5"/>
-              <colspec ... colname="c6"/>
-              <tbody>
-                <row>
-                  <entry ... /> => c1
-                  <entry ... /> => c2
-                  <entry ... namest="c3" nameend="c4"/> => c3/c4
-                  <entry ... /> => c5 
-                  <entry ... /> => c6
-                </row>
-              </tbody>
-            </tgroup>
-        -->
-        <!--There is no current namest/nameend, look if there is a preceding entry with a "nameend" column, if so then use the next colspec by position-->
-        <xsl:when test="preceding-sibling::entry[@nameend]">
-          <xsl:variable name="psib1.entry-nameend" select="preceding-sibling::entry[@nameend][1]" as="element()"/>
-          <xsl:variable name="distance" select="count(preceding-sibling::entry[. >> $psib1.entry-nameend]) + 1" as="xs:integer"/>
-          <xsl:sequence select="$current-tgroup/colspec[@colname = $psib1.entry-nameend/@nameend]/following-sibling::colspec[$distance]"/>
-        </xsl:when>
-        <!--There is no namest/nameend, look if there is a following entry with a "namest" column, if so then use the preceding colspec by position-->
-        <xsl:when test="following-sibling::entry[@namest]">
-          <xsl:variable name="fsib1.entry-namest" select="following-sibling::entry[@namest][1]" as="element()"/>
-          <xsl:variable name="distance" select="count(following-sibling::entry[. &lt;&lt; $fsib1.entry-namest]) + 1" as="xs:integer"/>
-          <xsl:sequence select="$current-tgroup/colspec[@colname = $fsib1.entry-namest/@namest]/preceding-sibling::colspec[$distance]"/>
-        </xsl:when>
-        <!--Finaly consider position-->
-        <!--FIXME : check those old messages => does it still make sens ? may it happens after cals normalisation-->
-        <xsl:when test="position() > 1 and ../entry[@colname]">
-          <xsl:message>[ERROR][cals2html.xsl] Unable to get colspec for this entry. @colname might be missing ? (<xsl:value-of select="els:getFileName(string(base-uri()))"/> : <xsl:sequence select="els:get-xpath(.)" />)</xsl:message>
-        </xsl:when>
-        <xsl:when test="position() > 1 and ../entry[(position() lt last() and (@namest and @nameend))]">
-          <xsl:message>[ERROR][cals2html.xsl] Unable to get colspec for this entry. Too much columns (<xsl:value-of select="els:getFileName(string(base-uri()))"/> : <xsl:sequence select="els:get-xpath(.)" />)</xsl:message>
-        </xsl:when>
-        <xsl:otherwise>
-          <xsl:variable name="pos" select="count(preceding-sibling::entry) + 1" as="xs:integer"/>
-          <xsl:sequence select="$current-tgroup/colspec[$pos]"/>
-        </xsl:otherwise>
-      </xsl:choose>
-    </xsl:variable>
-    <xsl:variable name="colsep-current" as="xs:string">
-      <xsl:choose>
-        <xsl:when test="@colsep">
-          <xsl:value-of select="@colsep"/>
-        </xsl:when>
-        <!-- FIXME : que se passe-t-il lors d'un colspan ? a priori c'est le namest qui gagne-->
-        <xsl:when test="$current-colspec-list[1]/@colsep">
-          <xsl:value-of select="$current-colspec-list[1]/@colsep" />
-        </xsl:when>
-        <xsl:when test="ancestor::cals:*/@colsep">
-          <xsl:value-of select="ancestor::cals:*[@colsep][1]/@colsep" />
-        </xsl:when>
-        <xsl:otherwise>
-          <xsl:value-of select="$xslLib:cals2html.default-colsep"/>
-        </xsl:otherwise>
-      </xsl:choose>
-    </xsl:variable>
-    <xsl:variable name="rowsep-current" as="xs:string">
-      <xsl:choose>
-        <xsl:when test="@rowsep">
-          <xsl:value-of select="@rowsep"/>
-        </xsl:when>
-        <!-- FIXME : que se passe-t-il lors d'un colspan ? a priori c'est le namest qui gagne-->
-        <xsl:when test="$current-colspec-list[1]/@rowsep">
-          <xsl:value-of select="$current-colspec-list[1]/@rowsep"/>
-        </xsl:when>
-        <!--@rowsep allowed on table|tgroup|row-->
-        <xsl:when test="ancestor::cals:*/@rowsep">
-          <xsl:value-of select="ancestor::cals:*[@rowsep][1]/@rowsep"/>
-        </xsl:when>
-        <xsl:otherwise>
-          <xsl:value-of select="$xslLib:cals2html.default-rowsep"/>
-        </xsl:otherwise>
-      </xsl:choose>
-    </xsl:variable>
-    <xsl:variable name="align-current" as="xs:string">
-      <xsl:choose>
-        <xsl:when test="@align">
-          <xsl:value-of select="@align"/>
-        </xsl:when>
-        <!-- FIXME : que se passe-t-il lors d'un colspan ? a priori c'est le namest qui gagne-->
-        <xsl:when test="$current-colspec-list[1]/@align">
-          <xsl:value-of select="$current-colspec-list[1]/@align"/>
-        </xsl:when>
-         <!--@align is allowed on tgroup only (not table, thead, tbody, tfoot,row)-->
-        <xsl:when test="ancestor::cals:*/@align">
-          <xsl:value-of select="ancestor::cals:*[@align][1]/@align"/>
-        </xsl:when>
-        <xsl:otherwise>
-          <xsl:value-of select="$xslLib:cals2html.default-tgroup-align"/>
-        </xsl:otherwise>
-      </xsl:choose>
-    </xsl:variable>
-    <xsl:variable name="valign-current" as="xs:string">
-      <xsl:choose>
-        <xsl:when test="@valign">
-          <xsl:value-of select="@valign"/>
-        </xsl:when>
-        <!--@valign is actually not allowed on colspec--> 
-        <!--<xsl:when test="$current-colspec-list[1]/@valign">
-          <xsl:value-of select="$current-colspec-list[1]/@valign" />
-        </xsl:when>-->
-        <xsl:when test="ancestor::cals:*/@valign">
-          <xsl:value-of select="ancestor::cals:*[@valign][1]/@valign" />
-        </xsl:when>
-        <xsl:otherwise>
-          <xsl:value-of select="$xslLib:cals2html.default-tgroup-valign"/>
-        </xsl:otherwise>
-      </xsl:choose>
-    </xsl:variable>
-    <xsl:variable name="name" select="if(ancestor::thead) then ('th') else('td')" as="xs:string"/>
+    <xsl:variable name="current-colspec-list" select="xslLib:cals2html.get-colspecs(.)" as="element(colspec)*"/>
+    <xsl:variable name="name" select="if(ancestor::thead or @html:name = 'th') then ('th') else('td')" as="xs:string"/>
     <xsl:element name="{$name}">
-      <xsl:apply-templates select="@*" mode="xslLib:cals2html.attributes"/> 
+      <xsl:apply-templates select="@*" mode="xslLib:cals2html.attributes"/>
+      <!--At this point 'colsep', 'rowsep', 'align' and 'valign' have been moved to entries 
+        cf. step "xslLib:cals2html.moveAttributesDownEntries"-->
       <xsl:variable name="class.tmp" as="xs:string*">
-        <xsl:if test="$colsep-current != '0'">
+        <xsl:if test="@colsep != '0'">
           <xsl:text>cals_colsep</xsl:text>
         </xsl:if>
-        <xsl:if test="$rowsep-current != '0'">
+        <xsl:if test="@rowsep != '0'">
           <xsl:text>cals_rowsep</xsl:text>
         </xsl:if>
         <xsl:variable name="align-default" as="xs:string" select="if($name = 'td') then($xslLib:cals2html.default-td-align) else($xslLib:cals2html.default-th-align)"/>
-        <xsl:if test="($align-current != $align-default) or $xslLib:cals2html.default-align-force-explicit">
-          <xsl:value-of select="concat('cals_align-', lower-case($align-current))" />
+        <xsl:if test="(@align != $align-default) or $xslLib:cals2html.default-align-force-explicit">
+          <xsl:value-of select="concat('cals_align-', lower-case(@align))" />
         </xsl:if>
         <xsl:variable name="valign-default" as="xs:string" select="if($name = 'td') then($xslLib:cals2html.default-td-valign) else($xslLib:cals2html.default-th-valign)"/>
-        <xsl:if test="($valign-current != $valign-default) or $xslLib:cals2html.default-valign-force-explicit">
-          <xsl:value-of select="concat('cals_valign-', lower-case($valign-current))" />
+        <xsl:if test="(@valign != $valign-default) or $xslLib:cals2html.default-valign-force-explicit">
+          <xsl:value-of select="concat('cals_valign-', lower-case(@valign))" />
         </xsl:if>
         <xsl:if test="not(empty($nb-cols))">
           <xsl:if test="$nb-cols > $xslLib:cals2html.nb-cols-max-before-font-reduction
@@ -484,8 +574,9 @@
           <xsl:with-param name="colspec-list-for-current-width" select="$current-colspec-list" as="element(colspec)*"/>
         </xsl:call-template>
       </xsl:if>
-      <xsl:if test="count($current-colspec-list) > 1">
-        <xsl:attribute name="colspan" select="count($current-colspec-list)"/>
+      <xsl:variable name="colspan" select="count($current-colspec-list) + xs:integer((@html:colspanToAdd, 0)[1])" as="xs:integer"/>
+      <xsl:if test="$colspan > 1">
+        <xsl:attribute name="colspan" select="$colspan"/>
       </xsl:if>
       <xsl:if test="normalize-space(@morerows) != '' and normalize-space(@morerows) castable as xs:integer">
         <xsl:attribute name="rowspan" select="xs:integer(@morerows) + 1"/>
@@ -494,7 +585,7 @@
     </xsl:element>
   </xsl:template>
 
-  <!-- === COMMON : STEP 2 === -->
+  <!-- === COMMON : STEP 4 === -->
   
   <!--Attributes to ignore here because they have already been processed before-->
   <xsl:template match="table/@frame | tgroup/@cols | entry/@namest | entry/@nameend | entry/@colname | entry/@morerows |
@@ -523,6 +614,12 @@
   <!--delete transpect ghost attributes-->
   <xsl:template match="@calstable:*" mode="xslLib:cals2html.attributes"/>
   
+  <!--delete html:name : temporary attribute (used for keeping thead entries information while merging tgroups)-->
+  <xsl:template match="@html:name" mode="xslLib:cals2html.attributes"/>
+  
+  <!--delete html:name : temporary attribute (used for keeping thead entries information while merging tgroups)-->
+  <xsl:template match="@html:colspanToAdd" mode="xslLib:cals2html.attributes"/>
+  
   <!--Attributes to keep as is-->
   <xsl:template match="@xml:* | @id" mode="xslLib:cals2html.attributes">
     <xsl:copy copy-namespaces="no"/>
@@ -539,9 +636,67 @@
     </xsl:choose>
   </xsl:template>
   
-  <!--==================================-->
+  <!--==============================================================================================================================-->
+  <!-- STEP 7 : convert class2style -->
+  <!--==============================================================================================================================-->
+  
+  <xsl:mode name="xslLib:cals2html.class2style" on-no-match="shallow-copy"/>
+  
+  <xsl:variable name="xslLib:cals2html.class2style.mapping" as="element()">
+    <!--Using cals namespace here so we can match elements with the xpath default namespace-->
+    <mapping xmlns="http://docs.oasis-open.org/ns/oasis-exchange/table">
+      <!-- frame ne se trouve qu'au niveau de l'élément table -->
+      <entry key="cals_frame-top">border-top:1px solid</entry>
+      <entry key="cals_frame-bottom">border-bottom:1px solid</entry>
+      <entry key="cals_frame-topbot">border-top:1px solid; border-bottom:1px solid</entry>
+      <entry key="cals_frame-sides">border-left:1px solid; border-right:1px solid</entry>
+      <entry key="cals_frame-all">border:1px solid</entry>
+      <entry key="cals_frame-none">border:none</entry>
+      <!-- align -->
+      <entry key="cals_align-left">text-align:left</entry>
+      <entry key="cals_align-right">text-align:right</entry>
+      <entry key="cals_align-center">text-align:center</entry>
+      <entry key="cals_align-justify">text-align:justify</entry>
+      <!-- FIXME sera utile pour les tableaux issus de FrameMaker
+      <entry key="cals_alignchar">text-align:left</entry> -->
+      <!-- valign -->
+      <entry key="cals_valign-top">vertical-align:top</entry>
+      <entry key="cals_valign-bottom">vertical-align:bottom</entry>
+      <entry key="cals_valign-middle">vertical-align:middle</entry>
+      <!-- colsep -->
+      <entry key="cals_colsep">border-right:1px solid</entry>
+      <!-- rowsep -->
+      <entry key="cals_rowsep">border-bottom:1px solid</entry>
+    </mapping>
+  </xsl:variable>
+  
+  <xsl:template match="html:table[els:hasClass(., 'cals_tgroup')] 
+    | html:table[els:hasClass(., 'cals_tgroup')]//*[local-name(.) = ('tr', 'td', 'th', 'thead', 'tbody', 'tfoot')]" 
+    mode="xslLib:cals2html.class2style">
+    <xsl:copy>
+      <xsl:copy-of select="@* except (@class | @style)"/>
+      <xsl:variable name="class" select="tokenize(@class, '\s+')[not(. = $xslLib:cals2html.class2style.mapping/entry/@key)]" as="xs:string*"/>
+      <xsl:if test="not(empty($class))">
+        <xsl:attribute name="class" select="string-join($class, ' ')"/>
+      </xsl:if>
+      <xsl:variable name="style" as="xs:string*">
+        <xsl:sequence select="tokenize(@style, ';')"/>
+        <xsl:for-each select="tokenize(@class, '\s+')[. = $xslLib:cals2html.class2style.mapping/entry/@key]">
+          <xsl:variable name="val" select="." as="xs:string"/>
+          <xsl:sequence select="tokenize($xslLib:cals2html.class2style.mapping/entry[@key = $val], ';')"/>
+        </xsl:for-each>
+      </xsl:variable>
+      <xsl:if test="not(empty($style))">
+        <xsl:attribute name="style" select="string-join($style, '; ')"/>
+      </xsl:if>
+      <xsl:copy-of select="@* except (@class | @style)"/>
+      <xsl:apply-templates mode="#current"/>
+    </xsl:copy>
+  </xsl:template>
+  
+  <!--==============================================================================================================================-->
   <!--COMMON -->
-  <!--==================================-->
+  <!--==============================================================================================================================-->
   
   <!--cf. https://www.oasis-open.org/specs/tm9901.html#AEN530 : 
     @colwidth might be express in different units :
@@ -704,62 +859,84 @@
     </xsl:choose>
   </xsl:function>
   
-  <!--==============================================================================================================================-->
-  <!-- STEP 3 : class2style -->
-  <!--==============================================================================================================================-->
-  
-  <xsl:mode name="xslLib:cals2html.class2style" on-no-match="shallow-copy"/>
-  
-  <xsl:variable name="xslLib:cals2html.class2style.mapping" as="element()">
-    <!--Using cals namespace here so we can match elements with the xpath default namespace-->
-    <mapping xmlns="http://docs.oasis-open.org/ns/oasis-exchange/table">
-      <!-- frame ne se trouve qu'au niveau de l'élément table -->
-      <entry key="cals_frame-top">border-top:1px solid</entry>
-      <entry key="cals_frame-bottom">border-bottom:1px solid</entry>
-      <entry key="cals_frame-topbot">border-top:1px solid; border-bottom:1px solid</entry>
-      <entry key="cals_frame-sides">border-left:1px solid; border-right:1px solid</entry>
-      <entry key="cals_frame-all">border:1px solid</entry>
-      <entry key="cals_frame-none">border:none</entry>
-      <!-- align -->
-      <entry key="cals_align-left">text-align:left</entry>
-      <entry key="cals_align-right">text-align:right</entry>
-      <entry key="cals_align-center">text-align:center</entry>
-      <entry key="cals_align-justify">text-align:justify</entry>
-      <!-- FIXME sera utile pour les tableaux issus de FrameMaker
-      <entry key="cals_alignchar">text-align:left</entry> -->
-      <!-- valign -->
-      <entry key="cals_valign-top">vertical-align:top</entry>
-      <entry key="cals_valign-bottom">vertical-align:bottom</entry>
-      <entry key="cals_valign-middle">vertical-align:middle</entry>
-      <!-- colsep -->
-      <entry key="cals_colsep">border-right:1px solid</entry>
-      <!-- rowsep -->
-      <entry key="cals_rowsep">border-bottom:1px solid</entry>
-    </mapping>
-  </xsl:variable>
-  
-  <xsl:template match="html:table[els:hasClass(., 'cals_tgroup')] 
-    | html:table[els:hasClass(., 'cals_tgroup')]//*[local-name(.) = ('tr', 'td', 'th', 'thead', 'tbody', 'tfoot')]" 
-    mode="xslLib:cals2html.class2style">
-    <xsl:copy>
-      <xsl:copy-of select="@* except (@class | @style)"/>
-      <xsl:variable name="class" select="tokenize(@class, '\s+')[not(. = $xslLib:cals2html.class2style.mapping/entry/@key)]" as="xs:string*"/>
-      <xsl:if test="not(empty($class))">
-        <xsl:attribute name="class" select="string-join($class, ' ')"/>
-      </xsl:if>
-      <xsl:variable name="style" as="xs:string*">
-        <xsl:sequence select="tokenize(@style, ';')"/>
-        <xsl:for-each select="tokenize(@class, '\s+')[. = $xslLib:cals2html.class2style.mapping/entry/@key]">
-          <xsl:variable name="val" select="." as="xs:string"/>
-          <xsl:sequence select="tokenize($xslLib:cals2html.class2style.mapping/entry[@key = $val], ';')"/>
-        </xsl:for-each>
-      </xsl:variable>
-      <xsl:if test="not(empty($style))">
-        <xsl:attribute name="style" select="string-join($style, '; ')"/>
-      </xsl:if>
-      <xsl:copy-of select="@* except (@class | @style)"/>
-      <xsl:apply-templates mode="#current"/>
-    </xsl:copy>
-  </xsl:template>
+  <xsl:function name="xslLib:cals2html.get-colspecs" as="element(colspec)*">
+    <xsl:param name="entry" as="element(entry)"/>
+    <xsl:variable name="current-tgroup" select="$entry/ancestor::tgroup[1]" as="element()"/>
+    <xsl:choose>
+      <!--First consider @colname-->
+      <xsl:when test="$entry/@colname">
+        <xsl:variable name="colname.colspec" select="$current-tgroup/colspec[@colname = $entry/@colname]" as="element()*"/>
+        <xsl:if test="count($colname.colspec) != 1">
+          <xsl:message terminate="no">[ERROR][cals2html.xsl] No colspec exists in the current tgroup with @colname equals to current @colname="<xsl:value-of select="$entry/@colname"/>"</xsl:message>
+        </xsl:if>
+        <xsl:sequence select="$colname.colspec"/>
+      </xsl:when>
+      <!-- Then consider @namestart/nameend -->
+      <xsl:when test="$entry/@namest and $entry/@nameend">
+        <xsl:variable name="namest.colspec" select="$current-tgroup/colspec[@colname = $entry/@namest]" as="element()*"/>
+        <xsl:variable name="nameend.colspec" select="$current-tgroup/colspec[@colname = $entry/@nameend]" as="element()*"/>
+        <xsl:choose>
+          <xsl:when test="count($namest.colspec) != 1">
+            <xsl:message terminate="no">[ERROR][cals2html.xsl] No colspec exists in the current tgroup with @colname equals to current @namest="<xsl:value-of select="$entry/@namest"/>"</xsl:message>
+          </xsl:when>
+          <xsl:when test="count($nameend.colspec) != 1">
+            <xsl:message terminate="no">[ERROR][cals2html.xsl] No colspec exists in the current tgroup with @colname equals to current @nameend="<xsl:value-of select="$entry/@nameend"/>"</xsl:message>
+          </xsl:when>
+          <xsl:otherwise>
+            <!--FIXME : a-t-on vraiment besoin de passer par colnum, ne pourrait-on pas prendre les colspec situés entre namest.colspec et nameend.colspec dans le xml ?--> 
+            <xsl:variable name="colnumst" select="xslLib:cals2html.get-colnum($entry, $namest.colspec)" as="xs:integer"/>
+            <xsl:variable name="colnumend" select="xslLib:cals2html.get-colnum($entry, $nameend.colspec)" as="xs:integer"/>
+            <xsl:sequence 
+              select="$current-tgroup/colspec
+              [xslLib:cals2html.get-colnum($entry, .) ge $colnumst]
+              [xslLib:cals2html.get-colnum($entry, .) le $colnumend]"/>
+          </xsl:otherwise>
+        </xsl:choose>
+      </xsl:when>
+      <!--If one of the following/preceding entry has a namest/nameend colum, then consider the current colspec *from* this point, example : 
+            <tgroup>
+              <colspec ... colname="c1"/>
+              <colspec ... colname="c2"/>
+              <colspec ... colname="c3"/>
+              <colspec ... colname="c4"/>
+              <colspec ... colname="c5"/>
+              <colspec ... colname="c6"/>
+              <tbody>
+                <row>
+                  <entry ... /> => c1
+                  <entry ... /> => c2
+                  <entry ... namest="c3" nameend="c4"/> => c3/c4
+                  <entry ... /> => c5 
+                  <entry ... /> => c6
+                </row>
+              </tbody>
+            </tgroup>
+        -->
+      <!--There is no current namest/nameend, look if there is a preceding entry with a "nameend" column, if so then use the next colspec by position-->
+      <xsl:when test="$entry/preceding-sibling::entry[@nameend]">
+        <xsl:variable name="psib1.entry-nameend" select="$entry/preceding-sibling::entry[@nameend][1]" as="element()"/>
+        <xsl:variable name="distance" select="count($entry/preceding-sibling::entry[. >> $psib1.entry-nameend]) + 1" as="xs:integer"/>
+        <xsl:sequence select="$current-tgroup/colspec[@colname = $psib1.entry-nameend/@nameend]/following-sibling::colspec[$distance]"/>
+      </xsl:when>
+      <!--There is no namest/nameend, look if there is a following entry with a "namest" column, if so then use the preceding colspec by position-->
+      <xsl:when test="$entry/following-sibling::entry[@namest]">
+        <xsl:variable name="fsib1.entry-namest" select="$entry/following-sibling::entry[@namest][1]" as="element()"/>
+        <xsl:variable name="distance" select="count($entry/following-sibling::entry[. &lt;&lt; $fsib1.entry-namest]) + 1" as="xs:integer"/>
+        <xsl:sequence select="$current-tgroup/colspec[@colname = $fsib1.entry-namest/@namest]/preceding-sibling::colspec[$distance]"/>
+      </xsl:when>
+      <!--Finaly consider position-->
+      <!--FIXME : check those old messages => does it still make sens ? may it happens after cals normalisation-->
+      <xsl:when test="$entry/position() > 1 and $entry/parent::*/entry[@colname]">
+        <xsl:message>[ERROR][cals2html.xsl] Unable to get colspec for this entry. @colname might be missing ? (<xsl:value-of select="els:getFileName(string(base-uri($entry)))"/> : <xsl:sequence select="els:get-xpath($entry)" />)</xsl:message>
+      </xsl:when>
+      <xsl:when test="$entry/position() > 1 and $entry/parent::*/entry[(position() lt last() and (@namest and @nameend))]">
+        <xsl:message>[ERROR][cals2html.xsl] Unable to get colspec for this entry. Too much columns (<xsl:value-of select="els:getFileName(string(base-uri($entry)))"/> : <xsl:sequence select="els:get-xpath($entry)" />)</xsl:message>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:variable name="pos" select="count($entry/preceding-sibling::entry) + 1" as="xs:integer"/>
+        <xsl:sequence select="$current-tgroup/colspec[$pos]"/>
+      </xsl:otherwise>
+    </xsl:choose>
+  </xsl:function>
   
 </xsl:stylesheet>
