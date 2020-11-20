@@ -438,8 +438,8 @@
         </tbody>
       </tgroup>
     </table>
-    <h2>Test valign default values</h2>
-    <h3>Test valign : vertical-align on cells only</h3>
+    <h2>Test default alignment</h2>
+    <h3>Test #1 : alignment on cells only</h3>
     <table xmlns="http://docs.oasis-open.org/ns/oasis-exchange/table" frame="all" colsep="0" rowsep="0">
       <tgroup cols="5">
         <colspec colname="c1"/>
@@ -450,25 +450,53 @@
         <thead valign="middle">
           <row>
             <entry align="center" colname="c1" colsep="1" rowsep="1">head-1</entry>
-            <entry valign="middle" align="center" colname="c2" colsep="1" rowsep="1">head-2</entry>
-            <entry valign="top" align="center" colname="c3" colsep="1" rowsep="1">head-3</entry>
-            <entry valign="bottom" align="center" colname="c4" colsep="1" rowsep="1">head-3</entry>
-            <entry valign="bottom" align="center" colname="c5" colsep="1" rowsep="1">head-4</entry>
+            <entry valign="middle" align="left" colname="c2" colsep="1" rowsep="1">head-2</entry>
+            <entry valign="top" align="right" colname="c3" colsep="1" rowsep="1">head-3</entry>
+            <entry valign="bottom" align="center" colname="c4" colsep="1" rowsep="1">head-4</entry>
+            <entry valign="bottom" align="justify" colname="c5" colsep="1" rowsep="1">head-5</entry>
           </row>
         </thead>
         <tbody valign="middle">
           <row>
             <entry colname="c1" colsep="1" rowsep="1">Cell-1</entry>
-            <entry valign="middle" colname="c2" colsep="1" rowsep="1">Cell-1</entry>
-            <entry valign="top" colname="c3" colsep="1" rowsep="1">Cell-2</entry>
-            <entry valign="bottom" colname="c4" colsep="1" rowsep="1">Cell-3</entry>
-            <entry valign="bottom" colname="c5" colsep="1" rowsep="1">Cell-4</entry>
+            <entry valign="middle" align="left" colname="c2" colsep="1" rowsep="1">Cell-2</entry>
+            <entry valign="top" align="right" colname="c3" colsep="1" rowsep="1">Cell-3</entry>
+            <entry valign="bottom" align="center" colname="c4" colsep="1" rowsep="1">Cell-4</entry>
+            <entry valign="bottom" align="justify" colname="c5" colsep="1" rowsep="1">Cell-5</entry>
           </row>
         </tbody>
       </tgroup>
     </table>
-    <h3>Test valign : vertical-align on cells and table (no inheritance actually)</h3>
+    <h3>Test #2 : alignment on colgroup : no effect (see https://www.w3.org/TR/CSS2/tables.html#columns)</h3>
     <table xmlns="http://docs.oasis-open.org/ns/oasis-exchange/table" frame="all" colsep="0" rowsep="0">
+      <tgroup cols="5">
+        <colspec colname="c1" valign="bottom" align="right"/>
+        <colspec colname="c2" valign="bottom" align="left"/>
+        <colspec colname="c3" align="right" valign="top"/>
+        <colspec colname="c4"/>
+        <colspec colname="c5"/>
+        <thead valign="middle">
+          <row>
+            <entry align="center" colname="c1" colsep="1" rowsep="1">head-1</entry>
+            <entry valign="middle" align="left" colname="c2" colsep="1" rowsep="1">head-2</entry>
+            <entry valign="top" align="right" colname="c3" colsep="1" rowsep="1">head-3</entry>
+            <entry valign="bottom" align="center" colname="c4" colsep="1" rowsep="1">head-4</entry>
+            <entry valign="bottom" align="justify" colname="c5" colsep="1" rowsep="1">head-5</entry>
+          </row>
+        </thead>
+        <tbody valign="middle">
+          <row>
+            <entry colname="c1" colsep="1" rowsep="1">Cell-1</entry>
+            <entry valign="middle" align="left" colname="c2" colsep="1" rowsep="1">Cell-2</entry>
+            <entry valign="top" align="right" colname="c3" colsep="1" rowsep="1">Cell-3</entry>
+            <entry valign="bottom" align="center" colname="c4" colsep="1" rowsep="1">Cell-4</entry>
+            <entry valign="bottom" align="justify" colname="c5" colsep="1" rowsep="1">Cell-5</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+    <h3>Test #3 : alignment on table : valign no inheritance - align has inheritance</h3>
+    <table xmlns="http://docs.oasis-open.org/ns/oasis-exchange/table" align="right" frame="all" colsep="0" rowsep="0">
       <tgroup cols="5">
         <colspec colname="c1"/>
         <colspec colname="c2"/>
@@ -478,47 +506,54 @@
         <thead valign="middle">
           <row>
             <entry align="center" colname="c1" colsep="1" rowsep="1">head-1</entry>
-            <entry valign="middle" align="center" colname="c2" colsep="1" rowsep="1">head-2</entry>
-            <entry valign="top" align="center" colname="c3" colsep="1" rowsep="1">head-3</entry>
-            <entry valign="bottom" align="center" colname="c4" colsep="1" rowsep="1">head-3</entry>
-            <entry valign="bottom" align="center" colname="c5" colsep="1" rowsep="1">head-4</entry>
+            <entry valign="middle" align="left" colname="c2" colsep="1" rowsep="1">head-2</entry>
+            <entry valign="top" align="right" colname="c3" colsep="1" rowsep="1">head-3</entry>
+            <entry valign="bottom" align="center" colname="c4" colsep="1" rowsep="1">head-4</entry>
+            <entry valign="bottom" align="justify" colname="c5" colsep="1" rowsep="1">head-5</entry>
           </row>
         </thead>
         <tbody valign="middle">
           <row>
             <entry colname="c1" colsep="1" rowsep="1">Cell-1</entry>
-            <entry valign="middle" colname="c2" colsep="1" rowsep="1">Cell-1</entry>
-            <entry valign="top" colname="c3" colsep="1" rowsep="1">Cell-2</entry>
-            <entry valign="bottom" colname="c4" colsep="1" rowsep="1">Cell-3</entry>
-            <entry valign="bottom" colname="c5" colsep="1" rowsep="1">Cell-4</entry>
+            <entry valign="middle" align="left" colname="c2" colsep="1" rowsep="1">Cell-2</entry>
+            <entry valign="top" align="right" colname="c3" colsep="1" rowsep="1">Cell-3</entry>
+            <entry valign="bottom" align="center" colname="c4" colsep="1" rowsep="1">Cell-4</entry>
+            <entry valign="bottom" align="justify" colname="c5" colsep="1" rowsep="1">Cell-5</entry>
           </row>
         </tbody>
       </tgroup>
     </table>
-    <h3>Test valign : vertical-align on cells and table (no inheritance actually), thead and tbody (inheritance)</h3>
-    <table xmlns="http://docs.oasis-open.org/ns/oasis-exchange/table" frame="all" colsep="0" rowsep="0">
+    <h3>Test #4 : alignment on thead/tbody/tr : inheritance</h3>
+    <table xmlns="http://docs.oasis-open.org/ns/oasis-exchange/table" align="right" frame="all" colsep="0" rowsep="0">
       <tgroup cols="5">
         <colspec colname="c1"/>
         <colspec colname="c2"/>
         <colspec colname="c3"/>
         <colspec colname="c4"/>
         <colspec colname="c5"/>
-        <thead valign="bottom">
+        <thead valign="bottom" align="right">
           <row>
             <entry align="center" colname="c1" colsep="1" rowsep="1">head-1</entry>
-            <entry valign="middle" align="center" colname="c2" colsep="1" rowsep="1">head-2</entry>
-            <entry valign="top" align="center" colname="c3" colsep="1" rowsep="1">head-3</entry>
-            <entry valign="bottom" align="center" colname="c4" colsep="1" rowsep="1">head-3</entry>
-            <entry valign="bottom" align="center" colname="c5" colsep="1" rowsep="1">head-4</entry>
+            <entry valign="middle" align="left" colname="c2" colsep="1" rowsep="1">head-2</entry>
+            <entry valign="top" align="right" colname="c3" colsep="1" rowsep="1">head-3</entry>
+            <entry valign="bottom" align="center" colname="c4" colsep="1" rowsep="1">head-4</entry>
+            <entry valign="bottom" align="justify" colname="c5" colsep="1" rowsep="1">head-5</entry>
           </row>
         </thead>
-        <tbody valign="bottom">
+        <tbody valign="bottom" align="right">
           <row>
             <entry colname="c1" colsep="1" rowsep="1">Cell-1</entry>
-            <entry valign="middle" colname="c2" colsep="1" rowsep="1">Cell-1</entry>
-            <entry valign="top" colname="c3" colsep="1" rowsep="1">Cell-2</entry>
-            <entry valign="bottom" colname="c4" colsep="1" rowsep="1">Cell-3</entry>
-            <entry valign="bottom" colname="c5" colsep="1" rowsep="1">Cell-4</entry>
+            <entry valign="middle" align="left" colname="c2" colsep="1" rowsep="1">Cell-2</entry>
+            <entry valign="top" align="right" colname="c3" colsep="1" rowsep="1">Cell-3</entry>
+            <entry valign="bottom" align="center" colname="c4" colsep="1" rowsep="1">Cell-4</entry>
+            <entry valign="bottom" align="justify" colname="c5" colsep="1" rowsep="1">Cell-5</entry>
+          </row>
+          <row>
+            <entry colname="c1" colsep="1" rowsep="1">Cell-1</entry>
+            <entry valign="middle" align="left" colname="c2" colsep="1" rowsep="1">Cell-2</entry>
+            <entry valign="top" align="right" colname="c3" colsep="1" rowsep="1">Cell-3</entry>
+            <entry valign="bottom" align="center" colname="c4" colsep="1" rowsep="1">Cell-4</entry>
+            <entry valign="bottom" align="justify" colname="c5" colsep="1" rowsep="1">Cell-5</entry>
           </row>
         </tbody>
       </tgroup>
