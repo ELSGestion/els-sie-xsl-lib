@@ -155,6 +155,18 @@
       </xsl:result-document>
     </xsl:if>
     <xsl:variable name="step" as="document-node()">
+      <xsl:document>
+        <xsl:apply-templates select="$step" mode="xhtml2cals:fix-alignments"/>
+      </xsl:document>
+    </xsl:variable>
+    <xsl:if test="$xslLib:html2cals.debug">
+      <xsl:variable name="log.uri" select="resolve-uri('html2cals.step7.fix-alignments.log.xml', $xslLib:html2cals.log.uri)" as="xs:anyURI"/>
+      <xsl:message>[INFO] writing <xsl:value-of select="$log.uri"/></xsl:message>
+      <xsl:result-document href="{$log.uri}">
+        <xsl:sequence select="$step"/>
+      </xsl:result-document>
+    </xsl:if>
+    <xsl:variable name="step" as="document-node()">
       <xsl:choose>
         <xsl:when test="$xslLib:html2cals.splitTgroupsByHeaders">
           <xsl:document>
@@ -167,7 +179,7 @@
       </xsl:choose>
     </xsl:variable>
     <xsl:if test="$xslLib:html2cals.debug">
-      <xsl:variable name="log.uri" select="resolve-uri('html2cals.step7.splitTgroupsByHeaders.log.xml', $xslLib:html2cals.log.uri)" as="xs:anyURI"/>
+      <xsl:variable name="log.uri" select="resolve-uri('html2cals.step8.splitTgroupsByHeaders.log.xml', $xslLib:html2cals.log.uri)" as="xs:anyURI"/>
       <xsl:message>[INFO] writing <xsl:value-of select="$log.uri"/></xsl:message>
       <xsl:result-document href="{$log.uri}">
         <xsl:sequence select="$step"/>
@@ -187,7 +199,7 @@
       </xsl:choose>
     </xsl:variable>
     <xsl:if test="$xslLib:html2cals.debug">
-      <xsl:variable name="log.uri" select="resolve-uri('html2cals.step8.reduceNumberOfCols.log.xml', $xslLib:html2cals.log.uri)" as="xs:anyURI"/>
+      <xsl:variable name="log.uri" select="resolve-uri('html2cals.step9.reduceNumberOfCols.log.xml', $xslLib:html2cals.log.uri)" as="xs:anyURI"/>
       <xsl:message>[INFO] writing <xsl:value-of select="$log.uri"/></xsl:message>
       <xsl:result-document href="{$log.uri}">
         <xsl:sequence select="$step"/>
@@ -199,7 +211,7 @@
       </xsl:document>
     </xsl:variable>
     <xsl:if test="$xslLib:html2cals.debug">
-      <xsl:variable name="log.uri" select="resolve-uri('html2cals.step9.optimize-cals.log.xml', $xslLib:html2cals.log.uri)" as="xs:anyURI"/>
+      <xsl:variable name="log.uri" select="resolve-uri('html2cals.step10.optimize-cals.log.xml', $xslLib:html2cals.log.uri)" as="xs:anyURI"/>
       <xsl:message>[INFO] writing <xsl:value-of select="$log.uri"/></xsl:message>
       <xsl:result-document href="{$log.uri}">
         <xsl:sequence select="$step"/>
@@ -218,7 +230,7 @@
       </xsl:choose>
     </xsl:variable>
     <xsl:if test="$xslLib:html2cals.debug">
-      <xsl:variable name="log.uri" select="resolve-uri('html2cals.step10.convert-upper-case-cals.log.xml', $xslLib:html2cals.log.uri)" as="xs:anyURI"/>
+      <xsl:variable name="log.uri" select="resolve-uri('html2cals.step11.convert-upper-case-cals.log.xml', $xslLib:html2cals.log.uri)" as="xs:anyURI"/>
       <xsl:message>[INFO] writing <xsl:value-of select="$log.uri"/></xsl:message>
       <xsl:result-document href="{$log.uri}">
         <xsl:sequence select="$step"/>
@@ -279,7 +291,7 @@
   
   <xd:doc>
     <!-- ==============================================================================================-->
-    <!-- STEP 3 : Mode normalize-to-xhtml: normalisation de la structure de table xhtml -->
+    <!-- STEP 3 : Mode normalize-to-xhtml: normalize XHTML table structure -->
     <!-- ==============================================================================================-->
   </xd:doc>
 
@@ -349,16 +361,6 @@
     </xsl:choose>
   </xsl:function>
   
-  <!--CALS entry are left aligned by default, whereas html headers are centered by default, so we have to force this center alignment when th has no align-->
-  <!--no need to force any aligment with td because CALS and HTML use the same default value (left)-->
-  <xsl:template match="th[css:getPropertyValue(css:parse-inline(@style), 'text-align') = '']" mode="xhtml2cals:normalize-to-xhtml">
-    <xsl:copy copy-namespaces="false">
-      <xsl:apply-templates select="@*" mode="#current"/>
-      <xsl:attribute name="style" select="string-join((@style, 'text-align:center;'), '; ')"/>
-      <xsl:apply-templates select="node()" mode="#current"/>
-    </xsl:copy>
-  </xsl:template>
-  
   <!--Default copy-->
   <xsl:template match="node() | @*" mode="xhtml2cals:normalize-to-xhtml">
     <xsl:copy>
@@ -415,6 +417,7 @@
              FIXME: A factoriser -->
         <xsl:variable name="first-row" as="element()">
           <tr xmlns="http://www.w3.org/1999/xhtml">
+            <xsl:copy-of select="$source-block/tr[1]/@*"/>
             <xsl:for-each select="$first-row-tmp">
               <xsl:element name="{local-name()}" namespace="http://www.w3.org/1999/xhtml" inherit-namespaces="no">
                 <xsl:copy-of select="@*[not(name() = 'rowspan')]" copy-namespaces="no"/>
@@ -468,6 +471,7 @@
     <!-- et dans la ligne ou les rowspans ont été expansés, on traite ensuite les colspans -->
     <xsl:variable name="expanded-row" as="element()">
       <tr xmlns="http://www.w3.org/1999/xhtml">
+        <xsl:copy-of select="$source-row/@*"/>
         <xsl:copy-of select="xhtml2cals:expand-colspans($expanding-row)"/>
       </tr>
     </xsl:variable>
@@ -628,15 +632,21 @@
   </xd:doc>
 
   <xsl:template match="table" mode="xhtml2cals:convert-to-cals">
+    <!--FIXME : align has already been converted to style-->
+    <xsl:variable name="tgroup-only-attributes" select="(@data-cals-tgroupstyle | @align)" as="attribute()*"/>
     <table>
-      <xsl:apply-templates select="@* except @data-cals-tgroupstyle" mode="xhtml2cals:convert-attributes-to-cals"/>
-      <!--<xsl:copy-of select="@id | @class | @align | @width" copy-namespaces="no"/>-->
+      <!--@style attribute is needed on table and tgroup (for @align) so we apply @style twice with scope table/tgroup-->
+      <xsl:apply-templates select="@* except $tgroup-only-attributes" mode="xhtml2cals:convert-attributes-to-cals">
+        <xsl:with-param name="scope" select="'cals:table'" as="xs:string" tunnel="true"/>
+      </xsl:apply-templates>
       <xsl:call-template name="xhtml2cals:compute-table-borders"/>
       <xsl:call-template name="xhtml2cals:compute-rowsep-colsep-defaults"/>
       <xsl:copy-of select="processing-instruction()|comment()"/>
       <xsl:apply-templates select="caption" mode="#current"/>
       <tgroup>
-        <xsl:apply-templates select="@data-cals-tgroupstyle" mode="xhtml2cals:convert-attributes-to-cals"/>
+        <xsl:apply-templates select="($tgroup-only-attributes, @style)" mode="xhtml2cals:convert-attributes-to-cals">
+          <xsl:with-param name="scope" select="'cals:tgroup'" as="xs:string" tunnel="true"/>
+        </xsl:apply-templates>
         <xsl:attribute name="cols" select="xhtml2cals:nb-cols(.)"/>
         <xsl:call-template name="xhtml2cals:make-colspec">
           <xsl:with-param name="context" select="colgroup | col"/>
@@ -900,10 +910,6 @@
     <xsl:variable name="css" select="css:parse-inline(@style)" as="element(css:css)?"/>
     <thead>
       <xsl:apply-templates select="@*" mode="xhtml2cals:convert-attributes-to-cals"/>
-      <xsl:if test="css:getPropertyValue($css, 'vertical-align') = ''">
-        <!--Default HTML valign is middle, whereas default CALS value is "top", so we have to set say it explicitely in cals-->
-        <xsl:attribute name="valign" select="'middle'"/>
-      </xsl:if>
       <!--<xsl:copy-of select="@id | @class | @style | @align | @char | @charoff | @valign" copy-namespaces="no"/>-->
       <xsl:apply-templates select="node()" mode="#current"/>
     </thead>
@@ -913,10 +919,6 @@
     <xsl:variable name="css" select="css:parse-inline(@style)" as="element(css:css)?"/>
     <tfoot>
       <xsl:apply-templates select="@*" mode="xhtml2cals:convert-attributes-to-cals"/>
-      <xsl:if test="css:getPropertyValue($css, 'vertical-align') = ''">
-        <!--Default HTML valign is middle, whereas default CALS value is "top", so we have to set say it explicitely in cals-->
-        <xsl:attribute name="valign" select="'middle'"/>
-      </xsl:if>
       <!--<xsl:copy-of select="@id | @class | @style | @align | @char | @charoff | @valign" copy-namespaces="no"/>-->
       <xsl:apply-templates select="node()" mode="#current"/>
     </tfoot>
@@ -926,10 +928,6 @@
     <xsl:variable name="css" select="css:parse-inline(@style)" as="element(css:css)?"/>
     <tbody>
       <xsl:apply-templates select="@*" mode="xhtml2cals:convert-attributes-to-cals"/>
-      <xsl:if test="css:getPropertyValue($css, 'vertical-align') = ''">
-        <!--Default HTML valign is middle, whereas default CALS value is "top", so we have to set say it explicitely in cals-->
-        <xsl:attribute name="valign" select="'middle'"/>
-      </xsl:if>
       <!--<xsl:copy-of select="@id | @class | @style | @align | @char | @charoff | @valign" copy-namespaces="no"/>-->
       <xsl:apply-templates select="node()" mode="#current"/>
     </tbody>
@@ -946,10 +944,7 @@
   <xsl:template match="td | th" mode="xhtml2cals:convert-to-cals">
     <entry>
       <xsl:variable name="curr-col-num" as="xs:integer" select="count(preceding-sibling::*) + 1"/>
-      <!-- copy attributes with same name -->            
-      <!-- If no @valign use col/@valign, @valign="baseline" has no correspondence in CALS -->
-      <!--<xsl:copy-of select="(@valign, (../../..//col)[$curr-col-num]/@valign)[1][not(. = 'baseline')]"/>
-      <xsl:copy-of select="@id | @class | @align | @char | @charoff "/>-->
+      <!-- convert attributes to cals -->            
       <xsl:apply-templates select="@*" mode="xhtml2cals:convert-attributes-to-cals"/>
       <xsl:attribute name="xhtml2cals:htmlname" select="local-name()"/>
       <xsl:if test="not(@xhtml2cals:DummyCell)">
@@ -1013,7 +1008,7 @@
   
   <!-- === Converting attributes === -->
   
-  <!--FIXME : after html4Table2html5Table.xsl there is no more @valign attribute-->
+  <!--FIXME : after html4Table2html5Table.xsl there is no more @align/@valign attribute, they are converted to css-->
   
   <xsl:template match="table/@valign" mode="xhtml2cals:convert-attributes-to-cals" priority="1">
     <!--valign is not allowed on cals:table or cals:troup, it has no effect on cells aligment, just delete it-->
@@ -1042,11 +1037,59 @@
     <xsl:attribute name="{substring-after(local-name(), 'data-cals-')}" select="."/>
   </xsl:template>
   
-  <xsl:template match="*[not(self::css:*)]/@style" mode="xhtml2cals:convert-attributes-to-cals">
+  <!--Style attribute-->
+  <xsl:template match="@style[not(parent::css:*)]" mode="xhtml2cals:convert-attributes-to-cals">
+    <!--scope indicates on which cals element we are working (after this step is finished
+    values : cals:table, cals:tgroup
+    FIXME : scope has been introduced to set @align on tgroup instead of table, we could get it of this
+    because the step mode="xhtml2cals:fix-alignments" doesn't care about this (as long as inheritence from
+    cals:table or cals:tgroup is the same). Let's keep it if we change strategy later ?-->
+    <xsl:param name="scope" as="xs:string?" tunnel="true"/>
     <xsl:variable name="e" select="parent::*" as="element()"/>
     <xsl:variable name="css" select="css:parse-inline(.)" as="element(css:css)?"/>
     <xsl:for-each select="css:getProperties($css)">
       <xsl:choose>
+        <xsl:when test="css:getPropertyName(.) = 'text-align'">
+          <xsl:choose>
+            <xsl:when test="$scope = 'cals:table'">
+              <!--cals:table/@align is not allowed, it has to be converted at tgroup level-->
+            </xsl:when>
+            <xsl:otherwise>
+              <xsl:attribute name="align" select="css:getPropertyValue($css, 'text-align')"/>
+            </xsl:otherwise>
+          </xsl:choose>
+        </xsl:when>
+        <xsl:when test="$scope = 'cals:tgroup'">
+          <!--At this point we are finished with @style in scope tgroup : only @align has to be on tgroup-->
+        </xsl:when>
+        <xsl:when test="css:getPropertyName(.) = 'vertical-align'">
+          <xsl:choose>
+            <xsl:when test="$e/self::table">
+              <!--valign is not allowed on cals:table (neither cals:troup), 
+                on html:table it has actually no effect on cells alignment, just delete it-->
+            </xsl:when>
+            <xsl:when test="$e/self::col">
+              <!--valign is not allowed on cals:colspec,
+                on html:col it has actually no effect on html cells alignment
+                only 4 css properties might be used width effect in html col element:
+                  border, background, width and visibility
+                * https://www.w3.org/TR/CSS2/tables.html#columns
+                * http://ln.hixie.ch/?start=1070385285
+              -->
+            </xsl:when>
+            <xsl:when test="css:getPropertyValue($css, 'vertical-align') = ('center', 'central')">
+              <xsl:attribute name="valign" select="'middle'"/>
+            </xsl:when>
+            <xsl:when test="css:getPropertyValue($css, 'vertical-align') = 'baseline'">
+              <!--"baseline" has no equivalent in CALS, 
+                according to our html sample it looks like a top alignment-->
+              <xsl:attribute name="valign" select="'top'"/>
+            </xsl:when>
+            <xsl:otherwise>
+              <xsl:attribute name="valign" select="css:getPropertyValue($css, 'vertical-align')"/>
+            </xsl:otherwise>
+          </xsl:choose>
+        </xsl:when>
         <xsl:when test="css:getPropertyName(.) = 'width'">
           <xsl:variable name="width" select="css:getPropertyValue($css, 'width')" as="xs:string"/>
           <xsl:choose>
@@ -1089,26 +1132,6 @@
             </xsl:otherwise>
           </xsl:choose>
         </xsl:when>
-        <xsl:when test="css:getPropertyName(.) = 'text-align'">
-          <xsl:attribute name="align" select="css:getPropertyValue($css, 'text-align')"/>
-        </xsl:when>
-        <xsl:when test="css:getPropertyName(.) = 'vertical-align'">
-          <xsl:choose>
-            <xsl:when test="$e/self::table">
-              <!--valign is not allowed on cals:table or cals:troup, it has no effect on cells aligment, just delete it-->
-            </xsl:when>
-            <xsl:when test="css:getPropertyValue($css, 'vertical-align') = ('center', 'central')">
-              <xsl:attribute name="valign" select="'middle'"/>
-            </xsl:when>
-            <xsl:when test="css:getPropertyValue($css, 'vertical-align') = 'baseline'">
-              <!--"baseline" has no correspondence in CALS-->
-              <xsl:attribute name="valign" select="'bottom'"/>
-            </xsl:when>
-            <xsl:otherwise>
-              <xsl:attribute name="valign" select="css:getPropertyValue($css, 'vertical-align')"/>
-            </xsl:otherwise>
-          </xsl:choose>
-        </xsl:when>
         <xsl:when test="starts-with(css:getPropertyName(.), 'border')">
           <!--rowsep and colsep has already been processed-->
         </xsl:when>
@@ -1143,7 +1166,61 @@
   
   <xd:doc>
     <!-- ==============================================================================================-->
-    <!-- STEP 7 : Mode xhtml2cals:splitTgroupsByHeaders-->
+    <!-- STEP 7 : Mode xhtml2cals:fix-alignments-->
+    <!-- ==============================================================================================-->
+  </xd:doc>
+  
+  <!--The main goal of this step it to make valid CALS table according to the fact that
+  @align is not allowed on thead, tbody, tfoot.
+  This might happen in the former xhtml2cals:convert-to-cals step, because we have just convert 
+  html attributes and style to cals without looking at validity
+  
+  Instead of just moving this attributes to the good place which is not always easy for inheritance reasons,
+  we decide to compute the correct alignments on entries and delete every other alignments-->
+  
+  <!--Set explicit align/valign on each cell, from inheritance or default (html) values-->
+  <!--At this point, nothing has been done with default values, alignment come from explicit html values-->
+  <xsl:template match="cals:entry[not(@xhtml2cals:DummyCell)]" mode="xhtml2cals:fix-alignments">
+    <xsl:copy copy-namespaces="false">
+      <!--SET ALIGN-->
+      <xsl:variable name="align.inherited" as="attribute()?" select="ancestor-or-self::cals:*[@align][1]/@align" />
+      <!--align : HTML default value is "center" for <th>, "left" for <td>
+                  CALS default value is "left" for <entry>
+                  => enforce cals align to the former html default value-->
+      <xsl:variable name="align.default" select="if(@xhtml2cals:htmlname = 'th') then ('center') else ('left')"/>
+      <xsl:attribute name="align" select="($align.inherited, $align.default)[1]"/>
+      <!--SET VALIGN-->
+      <xsl:variable name="valign.inherited" as="attribute()?" select="ancestor-or-self::cals:*[@valign][1]/@valign" />
+      <!--valign : HTML default value is "middle" for <th> and <td>
+                   CALS default value is "top" for <entry>
+                  => enforce cals align to the former html default value-->
+      <xsl:variable name="valign.default" select="'middle'"/>
+      <xsl:attribute name="valign" select="($valign.inherited, $valign.default)[1]"/>
+      <xsl:apply-templates select="@* except (@valign | @align)| node()" mode="#current"/>
+    </xsl:copy>
+  </xsl:template>
+  
+  
+  <!-- Instead we delete every @align/@valign 
+  <xsl:template match="(cals:thead | cals:tbody | cals:tfoot)/@align" mode="xhtml2cals:fix-alignments">
+    <!-\-delete : @align is not allowed in this context. 
+      Its value will be taken into account in other templates of this mode-\->
+  </xsl:template>-->
+  
+  <!--delete every @align/@valign : there values have been computed to each entries-->
+  <xsl:template match="cals:*[not(self::entry)]/@align | cals:*[not(self::entry)]/@valign" 
+    mode="xhtml2cals:fix-alignments"/>
+  
+  <!--default copy template-->
+  <xsl:template match="@* | node()" mode="xhtml2cals:fix-alignments">
+    <xsl:copy copy-namespaces="no">
+      <xsl:apply-templates select="@* | node()" mode="#current"/>
+    </xsl:copy>
+  </xsl:template>
+  
+  <xd:doc>
+    <!-- ==============================================================================================-->
+    <!-- STEP 8 : Mode xhtml2cals:splitTgroupsByHeaders-->
     <!-- ==============================================================================================-->
   </xd:doc>
   
@@ -1185,7 +1262,7 @@
   
   <xd:doc>
     <!-- ==============================================================================================-->
-    <!-- STEP 8 : Mode xhtml2cals:reduceNumberOfCols-->
+    <!-- STEP 9 : Mode xhtml2cals:reduceNumberOfCols-->
     <!-- ==============================================================================================-->
   </xd:doc>
   
@@ -1365,11 +1442,70 @@
   
   <xd:doc>
     <!-- ==============================================================================================-->
-    <!-- STEP 9 : Mode xhtml2cals:optimize-cals-->
+    <!-- STEP 10 : Mode xhtml2cals:optimize-cals-->
     <!-- ==============================================================================================-->
   </xd:doc>
   
+  <!--Delete ghost cells (couldn't be done before because we still need it at this step to compute width) fixme ? -->
   <xsl:template match="cals:entry[@xhtml2cals:DummyCell]" mode="xhtml2cals:optimize-cals" priority="1"/>
+  
+  <!-- *** Optimize Alignments ***
+    At this point there is no @align/@valign anywhere except on <entry>
+  
+    valign : HTML default value is "middle" for <th> and <td>
+            (CALS default value is "top" for <entry>)
+    
+     As the table was HTML, let's set the default HTML value "middle" on thead/tbody/tfoot
+     and delete entry/@valign which have this default value
+    
+    align :  HTML default value is "center" for <th>, "left" for <td>
+             CALS default value is "left" for <entry>
+             
+     @align is not allowed on thead/tbody/tgroup, so it's not possible to do the same
+     We could set @align at tgroup level and do the same optimization, but it make less sens
+     because there are 2 posssible default values "center" or "left"
+  --> 
+  
+  <xsl:template match="cals:thead" mode="xhtml2cals:optimize-cals">
+    <xsl:copy copy-namespaces="false">
+      <xsl:apply-templates select="@*" mode="#current"/>
+      <xsl:attribute name="valign" select="'middle'"/>
+      <xsl:apply-templates select="node()" mode="#current"/>
+    </xsl:copy>
+  </xsl:template>
+  
+  <xsl:template match="cals:tbody | cals:tfoot" mode="xhtml2cals:optimize-cals">
+    <xsl:copy copy-namespaces="false">
+      <xsl:apply-templates select="@*" mode="#current"/>
+      <xsl:attribute name="valign" select="'middle'"/>
+      <xsl:apply-templates select="node()" mode="#current"/>
+    </xsl:copy>
+  </xsl:template>
+  
+  <!--Delete entry @valign whose value is "middle", it has been set at thead/tbody/tfoot level-->
+  <xsl:template match="cals:entry/@valign[. = 'middle']" mode="xhtml2cals:optimize-cals"/>
+  
+  <!--Delete entry @align whose value is "left" the default cals value
+  (at this point there's no more @align defined out of entry)-->
+  <xsl:template match="cals:entry/@align[. = 'left']" mode="xhtml2cals:optimize-cals"/>
+  
+  <!--<xsl:template match="cals:entry/@valign" mode="xhtml2cals:optimize-cals">
+    <xsl:variable name="entry" select="parent::cals:entry" as="element(cals:entry)"/>
+    <xsl:variable name="valign" select="." as="attribute()"/>
+    <xsl:variable name="valign.inheritance" select="$entry/ancestor::cals:*[@valign][1]/@valign" as="attribute()?"/>
+    <xsl:choose>
+      <xsl:when test="$valign = $valign.inheritance">
+        <!-\-delete it : it will be inherited-\->
+      </xsl:when>
+      <!-\-if there is no inheritance : don't set value "top" which is the default one-\->
+      <xsl:when test="empty($valign.inheritance) and $valign = 'top'">
+        <!-\-delete it : it is the default value-\->
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:next-match/>
+      </xsl:otherwise>
+    </xsl:choose>
+  </xsl:template>-->
   
   <!--Rename colname to c1, c2, c3 ... sequentially  because step reduceNumberOfCols may have created gaps
   This is purely "esthetic" to finished step reduceNumberOfCols in a clean manner-->
@@ -1513,7 +1649,7 @@
   
   <xd:doc>
     <!-- ======================================================================-->
-    <!-- STEP 10 : Mode xhtml2cals:convert-upper-case-cals -->
+    <!-- STEP 11 : Mode xhtml2cals:convert-upper-case-cals -->
     <!-- ======================================================================-->
   </xd:doc>
   
@@ -1535,7 +1671,7 @@
   
   <xd:doc>
     <!-- ======================================================================-->
-    <!-- STEP 11 : Mode xhtml2cals:convert-cals-namespace -->
+    <!-- STEP 12 : Mode xhtml2cals:convert-cals-namespace -->
     <!-- ======================================================================-->
   </xd:doc>
   

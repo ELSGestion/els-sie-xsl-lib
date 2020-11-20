@@ -18,24 +18,24 @@
         <colspec colname="c5" colwidth="1.25*"/>
         <thead valign="middle">
           <row>
-            <entry align="left" morerows="1" colname="c1" colsep="1" rowsep="1">
+            <entry morerows="1" colname="c1" colsep="1" rowsep="1">
               <al>h1</al>
             </entry>
-            <entry align="left" morerows="1" colname="c2" colsep="1" rowsep="1">
+            <entry morerows="1" colname="c2" colsep="1" rowsep="1">
               <al>h2</al>
             </entry>
-            <entry align="left" namest="c3" nameend="c4" colsep="1" rowsep="1">
+            <entry namest="c3" nameend="c4" colsep="1" rowsep="1">
               <al>h3</al>
             </entry>
-            <entry align="left" morerows="1" colname="c5" colsep="1" rowsep="1">
+            <entry morerows="1" colname="c5" colsep="1" rowsep="1">
               <al>h4</al>
             </entry>
           </row>
           <row>
-            <entry align="left" colname="c3" colsep="1" rowsep="1">
+            <entry colname="c3" colsep="1" rowsep="1">
               <al>h5</al>
             </entry>
-            <entry align="left" colname="c4" colsep="1" rowsep="1">
+            <entry colname="c4" colsep="1" rowsep="1">
               <al>h6</al>
             </entry>
           </row>
@@ -70,10 +70,10 @@
         <colspec colname="c4" colwidth="1.6*"/>
         <thead valign="middle">
           <row>
-            <entry align="left" valign="top" colname="c1" colsep="1" rowsep="1">h1</entry>
-            <entry align="left" valign="top" colname="c2" colsep="1" rowsep="1">h2</entry>
-            <entry align="left" valign="top" colname="c3" colsep="1" rowsep="1">h3</entry>
-            <entry align="left" valign="top" colname="c4" colsep="1" rowsep="1">h4</entry>
+            <entry valign="top" colname="c1" colsep="1" rowsep="1">h1</entry>
+            <entry valign="top" colname="c2" colsep="1" rowsep="1">h2</entry>
+            <entry valign="top" colname="c3" colsep="1" rowsep="1">h3</entry>
+            <entry valign="top" colname="c4" colsep="1" rowsep="1">h4</entry>
           </row>
         </thead>
         <tbody valign="middle">
@@ -102,10 +102,10 @@
         <colspec colname="c4" colwidth="1.6*"/>
         <thead valign="middle">
           <row>
-            <entry align="left" valign="top" colname="c1" colsep="1" rowsep="1">h1</entry>
-            <entry align="left" valign="top" colname="c2" colsep="1" rowsep="1">h2</entry>
-            <entry align="left" valign="top" colname="c3" colsep="1" rowsep="1">h3</entry>
-            <entry align="left" valign="top" colname="c4" colsep="1" rowsep="1">h4</entry>
+            <entry valign="top" colname="c1" colsep="1" rowsep="1">h1</entry>
+            <entry valign="top" colname="c2" colsep="1" rowsep="1">h2</entry>
+            <entry valign="top" colname="c3" colsep="1" rowsep="1">h3</entry>
+            <entry valign="top" colname="c4" colsep="1" rowsep="1">h4</entry>
           </row>
         </thead>
         <tbody valign="middle">
@@ -134,10 +134,10 @@
         <colspec colname="c4" colwidth="4in"/>
         <thead valign="middle">
           <row>
-            <entry align="left" valign="top" colname="c1" colsep="1" rowsep="1">h1</entry>
-            <entry align="left" valign="top" colname="c2" colsep="1" rowsep="1">h2</entry>
-            <entry align="left" valign="top" colname="c3" colsep="1" rowsep="1">h3</entry>
-            <entry align="left" valign="top" colname="c4" colsep="1" rowsep="1">h4</entry>
+            <entry valign="top" colname="c1" colsep="1" rowsep="1">h1</entry>
+            <entry valign="top" colname="c2" colsep="1" rowsep="1">h2</entry>
+            <entry valign="top" colname="c3" colsep="1" rowsep="1">h3</entry>
+            <entry valign="top" colname="c4" colsep="1" rowsep="1">h4</entry>
           </row>
         </thead>
         <tbody valign="middle">
@@ -166,10 +166,10 @@
         <colspec colname="c4" colwidth="4in"/>
         <thead valign="middle">
           <row>
-            <entry align="left" valign="top" colname="c1" colsep="1" rowsep="1">h1</entry>
-            <entry align="left" valign="top" colname="c2" colsep="1" rowsep="1">h2</entry>
-            <entry align="left" valign="top" colname="c3" colsep="1" rowsep="1">h3</entry>
-            <entry align="left" valign="top" colname="c4" colsep="1" rowsep="1">h4</entry>
+            <entry valign="top" colname="c1" colsep="1" rowsep="1">h1</entry>
+            <entry valign="top" colname="c2" colsep="1" rowsep="1">h2</entry>
+            <entry valign="top" colname="c3" colsep="1" rowsep="1">h3</entry>
+            <entry valign="top" colname="c4" colsep="1" rowsep="1">h4</entry>
           </row>
         </thead>
         <tbody valign="middle">
@@ -198,10 +198,10 @@
         <colspec colname="c4" colwidth="200px"/>
         <thead valign="middle">
           <row>
-            <entry align="left" valign="top" colname="c1" colsep="1" rowsep="1">h1</entry>
-            <entry align="left" valign="top" colname="c2" colsep="1" rowsep="1">h2</entry>
-            <entry align="left" valign="top" colname="c3" colsep="1" rowsep="1">h3</entry>
-            <entry align="left" valign="top" colname="c4" colsep="1" rowsep="1">h4</entry>
+            <entry valign="top" colname="c1" colsep="1" rowsep="1">h1</entry>
+            <entry valign="top" colname="c2" colsep="1" rowsep="1">h2</entry>
+            <entry valign="top" colname="c3" colsep="1" rowsep="1">h3</entry>
+            <entry valign="top" colname="c4" colsep="1" rowsep="1">h4</entry>
           </row>
         </thead>
         <tbody valign="middle">
@@ -230,10 +230,10 @@
         <colspec colname="c4" colwidth="200px"/>
         <thead valign="middle">
           <row>
-            <entry align="left" valign="top" colname="c1" colsep="1" rowsep="1">h1</entry>
-            <entry align="left" valign="top" colname="c2" colsep="1" rowsep="1">h2</entry>
-            <entry align="left" valign="top" colname="c3" colsep="1" rowsep="1">h3</entry>
-            <entry align="left" valign="top" colname="c4" colsep="1" rowsep="1">h4</entry>
+            <entry valign="top" colname="c1" colsep="1" rowsep="1">h1</entry>
+            <entry valign="top" colname="c2" colsep="1" rowsep="1">h2</entry>
+            <entry valign="top" colname="c3" colsep="1" rowsep="1">h3</entry>
+            <entry valign="top" colname="c4" colsep="1" rowsep="1">h4</entry>
           </row>
         </thead>
         <tbody valign="middle">
@@ -262,10 +262,10 @@
         <colspec colname="c4"/>
         <thead valign="middle">
           <row>
-            <entry align="left" valign="top" colname="c1" colsep="1" rowsep="1">h1</entry>
-            <entry align="left" valign="top" colname="c2" colsep="1" rowsep="1">h2</entry>
-            <entry align="left" valign="top" colname="c3" colsep="1" rowsep="1">h3</entry>
-            <entry align="left" valign="top" colname="c4" colsep="1" rowsep="1">h4</entry>
+            <entry valign="top" colname="c1" colsep="1" rowsep="1">h1</entry>
+            <entry valign="top" colname="c2" colsep="1" rowsep="1">h2</entry>
+            <entry valign="top" colname="c3" colsep="1" rowsep="1">h3</entry>
+            <entry valign="top" colname="c4" colsep="1" rowsep="1">h4</entry>
           </row>
         </thead>
         <tbody valign="middle">
@@ -294,10 +294,10 @@
         <colspec colname="c4"/>
         <thead valign="middle">
           <row>
-            <entry align="left" valign="top" colname="c1" colsep="1" rowsep="1">h1</entry>
-            <entry align="left" valign="top" colname="c2" colsep="1" rowsep="1">h2</entry>
-            <entry align="left" valign="top" colname="c3" colsep="1" rowsep="1">h3</entry>
-            <entry align="left" valign="top" colname="c4" colsep="1" rowsep="1">h4</entry>
+            <entry valign="top" colname="c1" colsep="1" rowsep="1">h1</entry>
+            <entry valign="top" colname="c2" colsep="1" rowsep="1">h2</entry>
+            <entry valign="top" colname="c3" colsep="1" rowsep="1">h3</entry>
+            <entry valign="top" colname="c4" colsep="1" rowsep="1">h4</entry>
           </row>
         </thead>
         <tbody valign="middle">
@@ -327,10 +327,10 @@
         <colspec colname="c5"/>
         <thead valign="middle">
           <row>
-            <entry align="left" valign="top" colname="c1" colsep="1" rowsep="1">h1</entry>
-            <entry align="left" valign="top" namest="c2" nameend="c3" colsep="1" rowsep="1">h2</entry>
-            <entry align="left" valign="top" colname="c4" colsep="1" rowsep="1">h4</entry>
-            <entry align="left" valign="top" colname="c5" colsep="1" rowsep="1">h5</entry>
+            <entry valign="top" colname="c1" colsep="1" rowsep="1">h1</entry>
+            <entry valign="top" namest="c2" nameend="c3" colsep="1" rowsep="1">h2</entry>
+            <entry valign="top" colname="c4" colsep="1" rowsep="1">h4</entry>
+            <entry valign="top" colname="c5" colsep="1" rowsep="1">h5</entry>
           </row>
         </thead>
         <tbody valign="middle">

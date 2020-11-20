@@ -186,7 +186,7 @@
           <colspec colname="c4" colwidth="1*"/>
           <thead valign="middle">
             <row>
-              <entry align="left" colname="c1" colsep="1" rowsep="1"> </entry>
+              <entry colname="c1" colsep="1" rowsep="1"> </entry>
               <entry align="center" colname="c2" colsep="1" rowsep="1">
                 <p xmlns="http://www.w3.org/1999/xhtml">Avant</p>
                 <p xmlns="http://www.w3.org/1999/xhtml">le Règl. ANC 2015-05</p>

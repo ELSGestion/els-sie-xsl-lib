@@ -434,12 +434,12 @@
         </tr>
       </tbody>
     </table>
-    <h2>Test default alignment</h2>
+    <h2>Test default alignments</h2>
     <h3>Test #1 : alignment on cells only</h3>
     <table border="1" style="width:70%;">
       <thead>
         <tr>
-          <th>head-1</th>
+          <th id="test">head-1</th>
           <th style="vertical-align:middle;text-align:left;">head-2</th>
           <th style="vertical-align:top;text-align:right;">head-3</th>
           <th style="vertical-align:bottom;text-align:center;">head-4</th>
@@ -507,7 +507,7 @@
     </table>
     <h3>Test #4 : alignment on thead/tbody/tr : inheritance</h3>
     <table border="1" style="width:70%;vertical-align:top;text-align:right">
-      <thead style="vertical-align:bottom;text-align:right;">
+      <thead style="vertical-align:bottom;text-align:center;">
         <tr>
           <th>head-1</th>
           <th style="vertical-align:middle;text-align:left;">head-2</th>
@@ -516,7 +516,7 @@
           <th style="vertical-align:baseline;text-align:justify;">head-5</th>
         </tr>
       </thead>
-      <tbody style="vertical-align:bottom;text-align:right;">
+      <tbody style="vertical-align:bottom;text-align:center;">
         <tr>
           <td>Cell-1</td>
           <td style="vertical-align:middle;text-align:left;">Cell-2</td>
@@ -524,7 +524,7 @@
           <td style="vertical-align:bottom;text-align:center;">Cell-4</td>
           <td style="vertical-align:baseline;text-align:justify;">Cell-5</td>
         </tr>
-        <tr style="vertical-align:top;text-align:center;">
+        <tr style="vertical-align:top;text-align:justify;">
           <td>Cell-1</td>
           <td style="vertical-align:middle;text-align:left;">Cell-2</td>
           <td style="vertical-align:top;text-align:right;">Cell-3</td>
