@@ -645,9 +645,9 @@
         <!-- <xsl:call-template name="make-spanspec">
           <xsl:with-param name="context" select="colgroup | col"/>
         </xsl:call-template> -->
-        <xsl:variable name="css" select="css:parse-inline(@style)" as="element(css:css)?"/>
         <xsl:apply-templates select="thead, tfoot, tbody" mode="#current">
-          <xsl:with-param name="table.valign" select="css:getPropertyValue($css, 'vertical-align')" as="xs:string*"/>
+          <!--Don't need to pass table.valign because it has no effect on the cells in HTML-->
+          <!--<xsl:with-param name="table.valign" select="css:getPropertyValue($css, 'vertical-align')" as="xs:string*"/>-->
         </xsl:apply-templates>
       </tgroup>
     </table>
@@ -897,13 +897,11 @@
   </xsl:template>
   
   <xsl:template match="thead" mode="xhtml2cals:convert-to-cals">
-    <xsl:param name="table.valign" as="xs:string*"/>
     <xsl:variable name="css" select="css:parse-inline(@style)" as="element(css:css)?"/>
-    <!--FIXME : after html4Table2html5Table.xsl there is no more @valign attribute-->
     <thead>
       <xsl:apply-templates select="@*" mode="xhtml2cals:convert-attributes-to-cals"/>
-      <xsl:if test="$table.valign='' and css:getPropertyValue($css, 'vertical-align') = ''">
-        <!--Default HTML valign is middle, we have to say it explicitely in cals-->
+      <xsl:if test="css:getPropertyValue($css, 'vertical-align') = ''">
+        <!--Default HTML valign is middle, whereas default CALS value is "top", so we have to set say it explicitely in cals-->
         <xsl:attribute name="valign" select="'middle'"/>
       </xsl:if>
       <!--<xsl:copy-of select="@id | @class | @style | @align | @char | @charoff | @valign" copy-namespaces="no"/>-->
@@ -912,12 +910,11 @@
   </xsl:template>
   
   <xsl:template match="tfoot" mode="xhtml2cals:convert-to-cals">
-    <xsl:param name="table.valign" as="xs:string*"/>
     <xsl:variable name="css" select="css:parse-inline(@style)" as="element(css:css)?"/>
     <tfoot>
       <xsl:apply-templates select="@*" mode="xhtml2cals:convert-attributes-to-cals"/>
-      <xsl:if test="$table.valign='' and css:getPropertyValue($css, 'vertical-align') = ''">
-        <!--Default HTML valign is middle, we have to say it explicitely in cals-->
+      <xsl:if test="css:getPropertyValue($css, 'vertical-align') = ''">
+        <!--Default HTML valign is middle, whereas default CALS value is "top", so we have to set say it explicitely in cals-->
         <xsl:attribute name="valign" select="'middle'"/>
       </xsl:if>
       <!--<xsl:copy-of select="@id | @class | @style | @align | @char | @charoff | @valign" copy-namespaces="no"/>-->
@@ -926,12 +923,11 @@
   </xsl:template>
   
   <xsl:template match="tbody" mode="xhtml2cals:convert-to-cals">
-    <xsl:param name="table.valign" as="xs:string*"/>
     <xsl:variable name="css" select="css:parse-inline(@style)" as="element(css:css)?"/>
     <tbody>
       <xsl:apply-templates select="@*" mode="xhtml2cals:convert-attributes-to-cals"/>
-      <xsl:if test="$table.valign='' and css:getPropertyValue($css, 'vertical-align') = ''">
-        <!--Default HTML valign is middle, we have to say it explicitely in cals-->
+      <xsl:if test="css:getPropertyValue($css, 'vertical-align') = ''">
+        <!--Default HTML valign is middle, whereas default CALS value is "top", so we have to set say it explicitely in cals-->
         <xsl:attribute name="valign" select="'middle'"/>
       </xsl:if>
       <!--<xsl:copy-of select="@id | @class | @style | @align | @char | @charoff | @valign" copy-namespaces="no"/>-->
@@ -1017,6 +1013,12 @@
   
   <!-- === Converting attributes === -->
   
+  <!--FIXME : after html4Table2html5Table.xsl there is no more @valign attribute-->
+  
+  <xsl:template match="table/@valign" mode="xhtml2cals:convert-attributes-to-cals" priority="1">
+    <!--valign is not allowed on cals:table or cals:troup, it has no effect on cells aligment, just delete it-->
+  </xsl:template>
+  
   <!--Attributes which has the same name in html and cals are beeing copied-->
   <xsl:template match="@align | @valign | @char | @charoff" mode="xhtml2cals:convert-attributes-to-cals">
     <xsl:copy-of select="."/>
@@ -1092,6 +1094,9 @@
         </xsl:when>
         <xsl:when test="css:getPropertyName(.) = 'vertical-align'">
           <xsl:choose>
+            <xsl:when test="$e/self::table">
+              <!--valign is not allowed on cals:table or cals:troup, it has no effect on cells aligment, just delete it-->
+            </xsl:when>
             <xsl:when test="css:getPropertyValue($css, 'vertical-align') = ('center', 'central')">
               <xsl:attribute name="valign" select="'middle'"/>
             </xsl:when>

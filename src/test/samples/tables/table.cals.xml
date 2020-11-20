@@ -468,14 +468,14 @@
       </tgroup>
     </table>
     <h3>Test valign : vertical-align on cells and table (no inheritance actually)</h3>
-    <table xmlns="http://docs.oasis-open.org/ns/oasis-exchange/table" valign="top" frame="all" colsep="0" rowsep="0">
+    <table xmlns="http://docs.oasis-open.org/ns/oasis-exchange/table" frame="all" colsep="0" rowsep="0">
       <tgroup cols="5">
         <colspec colname="c1"/>
         <colspec colname="c2"/>
         <colspec colname="c3"/>
         <colspec colname="c4"/>
         <colspec colname="c5"/>
-        <thead>
+        <thead valign="middle">
           <row>
             <entry align="center" colname="c1" colsep="1" rowsep="1">head-1</entry>
             <entry valign="middle" align="center" colname="c2" colsep="1" rowsep="1">head-2</entry>
@@ -484,7 +484,7 @@
             <entry valign="bottom" align="center" colname="c5" colsep="1" rowsep="1">head-4</entry>
           </row>
         </thead>
-        <tbody>
+        <tbody valign="middle">
           <row>
             <entry colname="c1" colsep="1" rowsep="1">Cell-1</entry>
             <entry valign="middle" colname="c2" colsep="1" rowsep="1">Cell-1</entry>
@@ -496,7 +496,7 @@
       </tgroup>
     </table>
     <h3>Test valign : vertical-align on cells and table (no inheritance actually), thead and tbody (inheritance)</h3>
-    <table xmlns="http://docs.oasis-open.org/ns/oasis-exchange/table" valign="bottom" frame="all" colsep="0" rowsep="0">
+    <table xmlns="http://docs.oasis-open.org/ns/oasis-exchange/table" frame="all" colsep="0" rowsep="0">
       <tgroup cols="5">
         <colspec colname="c1"/>
         <colspec colname="c2"/>
