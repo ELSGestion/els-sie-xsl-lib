@@ -6,7 +6,11 @@
       table{
         border-collapse: collapse;
         margin-top: 2em;
-      }</style>
+      }
+      th,td{
+        height:50px;
+      }
+    </style>
   </head>
   <body>
     <div class="cals_table" id="table-1" data-cals-tabstyle="style-table-1">
@@ -427,6 +431,70 @@
           <td style="text-align: center;">5:5</td>
           <td colspan="3" style="text-align: center;">5:6-8</td>
           <td colspan="5" style="text-align: center;">5:9-13</td>
+        </tr>
+      </tbody>
+    </table>
+    <h2>Test valign default values</h2>
+    <h3>Test valign : vertical-align on cells only</h3>
+    <table border="1" style="width:70%;">
+      <thead>
+        <tr>
+          <th>head-1</th>
+          <th style="vertical-align:middle;">head-2</th>
+          <th style="vertical-align:top;">head-3</th>
+          <th style="vertical-align:bottom;">head-3</th>
+          <th style="vertical-align:baseline;">head-4</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Cell-1</td>
+          <td style="vertical-align:middle;">Cell-1</td>
+          <td style="vertical-align:top;">Cell-2</td>
+          <td style="vertical-align:bottom;">Cell-3</td>
+          <td style="vertical-align:baseline;">Cell-4</td>
+        </tr>
+      </tbody>
+    </table>
+    <h3>Test valign : vertical-align on cells and table (no inheritance actually)</h3>
+    <table border="1" style="width:70%;vertical-align:top;">
+      <thead>
+        <tr>
+          <th>head-1</th>
+          <th style="vertical-align:middle;">head-2</th>
+          <th style="vertical-align:top;">head-3</th>
+          <th style="vertical-align:bottom;">head-3</th>
+          <th style="vertical-align:baseline;">head-4</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Cell-1</td>
+          <td style="vertical-align:middle;">Cell-1</td>
+          <td style="vertical-align:top;">Cell-2</td>
+          <td style="vertical-align:bottom;">Cell-3</td>
+          <td style="vertical-align:baseline;">Cell-4</td>
+        </tr>
+      </tbody>
+    </table>
+    <h3>Test valign : vertical-align on cells and table (no inheritance actually), thead and tbody (inheritance)</h3>
+    <table border="1" style="width:70%;vertical-align:bottom;">
+      <thead style="vertical-align:bottom;">
+        <tr>
+          <th>head-1</th>
+          <th style="vertical-align:middle;">head-2</th>
+          <th style="vertical-align:top;">head-3</th>
+          <th style="vertical-align:bottom;">head-3</th>
+          <th style="vertical-align:baseline;">head-4</th>
+        </tr>
+      </thead>
+      <tbody style="vertical-align:bottom;">
+        <tr>
+          <td>Cell-1</td>
+          <td style="vertical-align:middle;">Cell-1</td>
+          <td style="vertical-align:top;">Cell-2</td>
+          <td style="vertical-align:bottom;">Cell-3</td>
+          <td style="vertical-align:baseline;">Cell-4</td>
         </tr>
       </tbody>
     </table>
