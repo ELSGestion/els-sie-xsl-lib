@@ -9,9 +9,12 @@
   <!--NOTE : this XSpec uses xi:include instead of href to avoid indentation differences. 
              See https://github.com/xspec/xspec/issues/1090-->
   
+  <!--xslLib:baseUri has a default xpath value : it has to be overrided in XSpec--> 
+  <x:param name="xslLib:baseUri" select="xs:anyURI('https://xspec.io/')" as="xs:anyURI"/>
+  
   <x:param name="xslLib:cals2html.use-style-insteadOf-class" select="false()"/>
   
-  <x:scenario label="CALS2HTML" xml:base="../samples/tables/">
+  <x:scenario label="CALS2HTML -class" xml:base="../samples/tables/">
     <x:scenario label="Table jira CHAINE-1885">
       <x:context select="/">
         <xi:include href="Table_CHAINE-1885.xml"/>

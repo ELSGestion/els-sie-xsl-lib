@@ -5,35 +5,20 @@
 /*=====================================*/
 
 table.cals_tgroup{
-  border-collapse:collapse;
+  /*border-collapse:collapse;*/
   margin-top:1.25em;
   -webkit-text-size-adjust: auto;
 }
 
 
-
-table.cals_tgroup tbody td{
-  padding:0.4em 0.44em;
-}
-
-table.cals_tgroup caption{
-  /* même chose que pour le titre des images */
-  padding:0.4em 0px;
-  /*font-size:0.8em;*/
-  font-weight:bold;
+table.cals_tgroup td,
+table.cals_tgroup th
+{
+  padding:0.5em;
 }
 
 table.cals_tgroup thead{
   background-color:#f5f5f5;
-}
-
-table.cals_tgroup thead td{
-  padding:0.44em 0.4em 0.44em 0.44em;
-}
-
-tfoot td{
-  /*background-color:#FCFFFE;*/
-  padding:0.44em 0.4em 0.44em 0.44em;
 }
 
 /*=====================================*/
@@ -70,11 +55,15 @@ table.cals_frame-all{
 /*H-ALIGN*/
 /*=====================================*/
 
+.cals_align-left{
+  text-align:left
+}
+
 .cals_align-right{
   text-align:right
 }
 
-/*bug ceci ne marche pas sous ie*/
+/*FIXME : ne marche pas sous ie*/
 .cals_align-center{
   text-align:center; 
 }
@@ -107,23 +96,20 @@ table.cals_frame-all{
 /*BORDERS*/
 /*=====================================*/
 
-/* filets */
-table.cals_tgroup td{
-  border-right:none;
-  border-bottom:none;
-}
-table.cals_tgroup thead td.cals_colsep{
-  border-right:1px solid black;
-}
-table.cals_tgroup td.cals_colsep{
+.cals_colsep{
   border-right:1px solid black;
 }
 
-table.cals_tgroup thead td.cals_rowsep{
+.cals_rowsep{
   border-bottom:1px solid black;
 }
-table.cals_tgroup td.cals_rowsep{
-  border-bottom:1px solid black;
+
+.cals_entry-border-left{
+  border-left:1px solid black;
+}
+
+.cals_entry-border-top{
+  border-top:1px solid black;
 }
 
 /*=====================================*/

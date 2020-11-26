@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="dependency:/eu.els.sie.models+ext-models/ext-models/oasis/cals/cals.nvdl" type="application/xml" schematypens="http://purl.oclc.org/dsdl/nvdl/ns/structure/1.0"?>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <style type="text/css">
+      table {
+        border-collapse: collapse;
+        margin-top:2em;
+      }
+      th {
+        background-color: #ccc;
+      }
+      td:before, th:before{
+        content:attr(data-cals2html-position);
+        color: blue;
+        display:block;
+        text-align:center;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 style="text-align:center;">Table to test src/test/xsl/test-cals2html.getOutlineCellPositions.xsl</h1>
+    <table xmlns="http://docs.oasis-open.org/ns/oasis-exchange/table" tabstyle="tabstyle-1" pgwide="1"
+      frame="all" rowsep="1">
+      <tgroup cols="2">
+        <colspec colname="tg0-c1"/>
+        <colspec colname="tg0-c2"/>
+        <thead>
+          <row>
+            <entry>tgroup0:thead1</entry>
+            <entry>tgroup0:thead2</entry>
+          </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry colname="tg0-c1">tgroup0:td1</entry>
+            <entry colname="tg0-c2">tgroup0:td2</entry>
+          </row>
+          <row>
+            <entry colname="tg0-c1">tgroup0:td3</entry>
+            <entry colname="tg0-c2">tgroup0:td4</entry>
+          </row>
+          <row>
+            <entry colname="tg0-c1">tgroup0:td4</entry>
+            <entry colname="tg0-c2">tgroup0:td5</entry>
+          </row>
+        </tbody>
+      </tgroup>
+      <tgroup cols="3">
+        <colspec colname="tg1-c1"/>
+        <colspec colname="tg1-c2"/>
+        <colspec colname="tg1-c3"/>
+        <thead>
+          <row>
+            <entry colname="tg1-c1">tgroup1:thead1</entry>
+            <entry colname="tg1-c2">tgroup1:thead2</entry>
+            <entry colname="tg1-c3">tgroup1:thead3</entry>
+          </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry colname="tg1-c1">tgroup1:td1</entry>
+            <entry colname="tg1-c2">tgroup1:td2</entry>
+            <entry colname="tg1-c3">tgroup1:td3</entry>
+          </row>
+          <row>
+            <entry colname="tg1-c1">tgroup1:td4</entry>
+            <entry colname="tg1-c2" morerows="1">tgroup1:td5</entry>
+            <entry colname="tg1-c3" morerows="2">tgroup1:td6</entry>
+          </row>
+          <row>
+            <entry colname="tg1-c1">tgroup1:td7</entry>
+          </row>
+          <row>
+            <entry namest="tg1-c1" nameend="tg1-c2">tgroup1:td9</entry>
+          </row>
+        </tbody>
+      </tgroup>
+      <tgroup cols="2">
+        <colspec colname="tg2-c1"/>
+        <colspec colname="tg2-c2"/>
+        <thead>
+          <row>
+            <entry colname="tg2-c1">tgroup2:thead1</entry>
+            <entry colname="tg2-c2">tgroup2:thead2</entry>
+          </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry colname="tg2-c1" morerows="2">tgroup2:td1</entry>
+            <entry colname="tg2-c2">tgroup2:td2</entry>
+          </row>
+          <row>
+            <entry colname="tg2-c2">tgroup2:td3</entry>
+          </row>
+          <row>
+            <entry colname="tg2-c2">tgroup2:td4</entry>
+          </row>
+          <row>
+            <entry namest="tg2-c1" nameend="tg2-c2">tgroup2:td5</entry>
+          </row>
+        </tbody>
+      </tgroup>
+      <tgroup cols="2">
+        <colspec colname="tg3-c1"/>
+        <colspec colname="tg3-c2"/>
+        <thead>
+          <row>
+            <entry>tgroup3:thead1</entry>
+            <entry>tgroup3:thead2</entry>
+          </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry colname="tg3-c1">tgroup3:td1</entry>
+            <entry colname="tg3-c2">tgroup3:td2</entry>
+          </row>
+          <row>
+            <entry namest="tg3-c1" nameend="tg3-c2">tgroup3:td3</entry>
+          </row>
+          <row>
+            <entry colname="tg3-c1">tgroup3:td4</entry>
+            <entry colname="tg3-c2">tgroup3:td5</entry>
+          </row>
+        </tbody>
+      </tgroup>
+      <tgroup cols="2">
+        <colspec colname="tg4-c1"/>
+        <colspec colname="tg4-c2"/>
+        <tbody>
+          <row>
+            <entry colname="tg4-c1">tgroup4:td1</entry>
+            <entry colname="tg4-c2">tgroup4:td2</entry>
+          </row>
+          <row>
+            <entry namest="tg4-c1" nameend="tg4-c2">tgroup4:td3</entry>
+          </row>
+          <row>
+            <entry colname="tg4-c1">tgroup4:td4</entry>
+            <entry colname="tg4-c2">tgroup4:td5</entry>
+          </row>
+        </tbody>
+      </tgroup>
+      <tgroup cols="1">
+        <colspec colname="tg5-c1"/>
+        <thead>
+          <row>
+            <entry colname="tg5-c1">tgroup5:th1</entry>
+          </row>
+        </thead>
+        <tbody>
+          <row>
+            <entry colname="tg5-c1">tgroup5:td1</entry>
+          </row>
+          <row>
+            <entry colname="tg5-c1">tgroup5:td2</entry>
+          </row>
+          <row>
+            <entry colname="tg5-c1">tgroup5:td3</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+  </body>
+</html>

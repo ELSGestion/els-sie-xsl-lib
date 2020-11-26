@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-model href="dependency:/eu.els.sie.models+ext-models/ext-models/oasis/cals/cals.nvdl" type="application/xml" schematypens="http://purl.oclc.org/dsdl/nvdl/ns/structure/1.0"?>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <style type="text/css">
+      table {
+        border-collapse: collapse;
+        margin-top: 2em;
+      }
+      th {
+        background-color: #ccc;
+      }
+      td:before,
+      th:before {
+        content: attr(data-cals2html-position);
+        color: blue;
+        display: block;
+        text-align: center;
+      }</style>
+  </head>
+  <body>
+    <h1 style="text-align:center;">Table to test src/test/xsl/test-cals2html.getOutlineCellPositions.xsl</h1>
+    <div class="cals_table" data-cals-tabstyle="tabstyle-1">
+      <table class="cals_tgroup" style="width:100%; border:1px solid">
+        <colgroup>
+          <col style="width:50%" />
+          <col style="width:50%" />
+        </colgroup>
+        <thead>
+          <tr>
+            <th data-cals2html-position="top left" style="border-right:1px solid; border-bottom:1px solid; text-align:left; vertical-align:top">tgroup0:thead1</th>
+            <th data-cals2html-position="top right" style="border-right:1px solid; border-bottom:1px solid; text-align:left; vertical-align:top">tgroup0:thead2</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td data-cals2html-position="left" style="border-right:1px solid; border-bottom:1px solid; vertical-align:top">tgroup0:td1</td>
+            <td data-cals2html-position="right" style="border-right:1px solid; border-bottom:1px solid; vertical-align:top">tgroup0:td2</td>
+          </tr>
+          <tr>
+            <td data-cals2html-position="left" style="border-right:1px solid; border-bottom:1px solid; vertical-align:top">tgroup0:td3</td>
+            <td data-cals2html-position="right" style="border-right:1px solid; border-bottom:1px solid; vertical-align:top">tgroup0:td4</td>
+          </tr>
+          <tr>
+            <td data-cals2html-position="bottom left" style="border-right:1px solid; border-bottom:1px solid; vertical-align:top">tgroup0:td4</td>
+            <td data-cals2html-position="bottom right" style="border-right:1px solid; border-bottom:1px solid; vertical-align:top">tgroup0:td5</td>
+          </tr>
+        </tbody>
+      </table>
+      <table class="cals_tgroup" style="width:100%; border:1px solid">
+        <colgroup>
+          <col style="width:33%" />
+          <col style="width:33%" />
+          <col style="width:33%" />
+        </colgroup>
+        <thead>
+          <tr>
+            <th data-cals2html-position="top left" style="border-right:1px solid; border-bottom:1px solid; text-align:left; vertical-align:top">tgroup1:thead1</th>
+            <th data-cals2html-position="top" style="border-right:1px solid; border-bottom:1px solid; text-align:left; vertical-align:top">tgroup1:thead2</th>
+            <th data-cals2html-position="top right" style="border-right:1px solid; border-bottom:1px solid; text-align:left; vertical-align:top">tgroup1:thead3</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td data-cals2html-position="left" style="border-right:1px solid; border-bottom:1px solid; vertical-align:top">tgroup1:td1</td>
+            <td style="border-right:1px solid; border-bottom:1px solid; vertical-align:top">tgroup1:td2</td>
+            <td data-cals2html-position="right" style="border-right:1px solid; border-bottom:1px solid; vertical-align:top">tgroup1:td3</td>
+          </tr>
+          <tr>
+            <td data-cals2html-position="left" style="border-right:1px solid; border-bottom:1px solid; vertical-align:top">tgroup1:td4</td>
+            <td rowspan="2" style="border-right:1px solid; border-bottom:1px solid; vertical-align:top">tgroup1:td5</td>
+            <td data-cals2html-position="bottom right" rowspan="3" style="border-right:1px solid; border-bottom:1px solid; vertical-align:top">tgroup1:td6</td>
+          </tr>
+          <tr>
+            <td data-cals2html-position="left" style="border-right:1px solid; border-bottom:1px solid; vertical-align:top">tgroup1:td7</td>
+          </tr>
+          <tr>
+            <td data-cals2html-position="bottom left" colspan="2" style="border-right:1px solid; border-bottom:1px solid; vertical-align:top">tgroup1:td9</td>
+          </tr>
+        </tbody>
+      </table>
+      <table class="cals_tgroup" style="width:100%; border:1px solid">
+        <colgroup>
+          <col style="width:50%" />
+          <col style="width:50%" />
+        </colgroup>
+        <thead>
+          <tr>
+            <th data-cals2html-position="top left" style="border-right:1px solid; border-bottom:1px solid; text-align:left; vertical-align:top">tgroup2:thead1</th>
+            <th data-cals2html-position="top right" style="border-right:1px solid; border-bottom:1px solid; text-align:left; vertical-align:top">tgroup2:thead2</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td data-cals2html-position="left" rowspan="3" style="border-right:1px solid; border-bottom:1px solid; vertical-align:top">tgroup2:td1</td>
+            <td data-cals2html-position="right" style="border-right:1px solid; border-bottom:1px solid; vertical-align:top">tgroup2:td2</td>
+          </tr>
+          <tr>
+            <td data-cals2html-position="right" style="border-right:1px solid; border-bottom:1px solid; vertical-align:top">tgroup2:td3</td>
+          </tr>
+          <tr>
+            <td data-cals2html-position="right" style="border-right:1px solid; border-bottom:1px solid; vertical-align:top">tgroup2:td4</td>
+          </tr>
+          <tr>
+            <td data-cals2html-position="bottom right left" colspan="2" style="border-right:1px solid; border-bottom:1px solid; vertical-align:top">tgroup2:td5</td>
+          </tr>
+        </tbody>
+      </table>
+      <table class="cals_tgroup" style="width:100%; border:1px solid">
+        <colgroup>
+          <col style="width:50%" />
+          <col style="width:50%" />
+        </colgroup>
+        <thead>
+          <tr>
+            <th data-cals2html-position="top left" style="border-right:1px solid; border-bottom:1px solid; text-align:left; vertical-align:top">tgroup3:thead1</th>
+            <th data-cals2html-position="top right" style="border-right:1px solid; border-bottom:1px solid; text-align:left; vertical-align:top">tgroup3:thead2</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td data-cals2html-position="left" style="border-right:1px solid; border-bottom:1px solid; vertical-align:top">tgroup3:td1</td>
+            <td data-cals2html-position="right" style="border-right:1px solid; border-bottom:1px solid; vertical-align:top">tgroup3:td2</td>
+          </tr>
+          <tr>
+            <td data-cals2html-position="right left" colspan="2" style="border-right:1px solid; border-bottom:1px solid; vertical-align:top">tgroup3:td3</td>
+          </tr>
+          <tr>
+            <td data-cals2html-position="bottom left" style="border-right:1px solid; border-bottom:1px solid; vertical-align:top">tgroup3:td4</td>
+            <td data-cals2html-position="bottom right" style="border-right:1px solid; border-bottom:1px solid; vertical-align:top">tgroup3:td5</td>
+          </tr>
+        </tbody>
+      </table>
+      <table class="cals_tgroup" style="width:100%; border:1px solid">
+        <colgroup>
+          <col style="width:50%" />
+          <col style="width:50%" />
+        </colgroup>
+        <tbody>
+          <tr>
+            <td data-cals2html-position="top left" style="border-right:1px solid; border-bottom:1px solid; vertical-align:top">tgroup4:td1</td>
+            <td data-cals2html-position="top right" style="border-right:1px solid; border-bottom:1px solid; vertical-align:top">tgroup4:td2</td>
+          </tr>
+          <tr>
+            <td data-cals2html-position="right left" colspan="2" style="border-right:1px solid; border-bottom:1px solid; vertical-align:top">tgroup4:td3</td>
+          </tr>
+          <tr>
+            <td data-cals2html-position="bottom left" style="border-right:1px solid; border-bottom:1px solid; vertical-align:top">tgroup4:td4</td>
+            <td data-cals2html-position="bottom right" style="border-right:1px solid; border-bottom:1px solid; vertical-align:top">tgroup4:td5</td>
+          </tr>
+        </tbody>
+      </table>
+      <table class="cals_tgroup" style="width:100%; border:1px solid">
+        <colgroup>
+          <col style="width:100%" />
+        </colgroup>
+        <thead>
+          <tr>
+            <th data-cals2html-position="top right left" style="border-right:1px solid; border-bottom:1px solid; text-align:left; vertical-align:top">tgroup5:th1</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td data-cals2html-position="right left" style="border-right:1px solid; border-bottom:1px solid; vertical-align:top">tgroup5:td1</td>
+          </tr>
+          <tr>
+            <td data-cals2html-position="right left" style="border-right:1px solid; border-bottom:1px solid; vertical-align:top">tgroup5:td2</td>
+          </tr>
+          <tr>
+            <td data-cals2html-position="bottom right left" style="border-right:1px solid; border-bottom:1px solid; vertical-align:top">tgroup5:td3</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </body>
+</html>

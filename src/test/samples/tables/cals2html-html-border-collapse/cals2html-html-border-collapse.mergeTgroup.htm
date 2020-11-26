@@ -1,0 +1,651 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-model href="dependency:/eu.els.sie.models+ext-models/ext-models/oasis/cals/cals.nvdl" type="application/xml" schematypens="http://purl.oclc.org/dsdl/nvdl/ns/structure/1.0"?>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <style type="text/css">
+      table {
+        border-collapse: separate !important;
+        border-spacing: 3px;
+        margin-top: 2em;
+      }
+      td,
+      th,
+      table {
+        border-width: 2px !important;
+      }
+      th {
+        background-color: #ccc;
+      }
+      td {
+        background-color: #eee;
+      }</style>
+    <link type="text/css" rel="stylesheet" href="../../../../main/css/cals2html.css" />
+  </head>
+  <body>
+    <h1 style="text-align:center;">Test cals2html with $xslLib:cals2html.html-border-collapse = true()</h1>
+    <h2>Frame all</h2>
+    <div class="cals_table" data-cals-tabstyle="frame-all">
+      <table class="cals_tgroup" style="width:100%; border:1px solid">
+        <colgroup>
+          <col style="width:33%" />
+          <col style="width:33%" />
+          <col style="width:33%" />
+        </colgroup>
+        <tbody>
+          <tr>
+            <th colspan="2" style="border-right:1px solid; text-align:left; vertical-align:top">tgroup0:thead1</th>
+            <th style="border-bottom:1px solid; text-align:left; vertical-align:top">tgroup0:thead2</th>
+          </tr>
+          <tr>
+            <td colspan="2" style="vertical-align:top">tgroup0:td1</td>
+            <td style="border-right:1px solid; border-bottom:1px solid; vertical-align:top">tgroup0:td2</td>
+          </tr>
+          <tr>
+            <td colspan="2" style="border-right:1px solid; vertical-align:top">tgroup0:td3</td>
+            <td style="border-bottom:1px solid; vertical-align:top">tgroup0:td4</td>
+          </tr>
+          <tr>
+            <td colspan="2" style="vertical-align:top">tgroup0:td4</td>
+            <td style="border-right:1px solid; border-bottom:1px solid; vertical-align:top">tgroup0:td5</td>
+          </tr>
+          <tr>
+            <th style="text-align:left; vertical-align:top">tgroup1:thead1</th>
+            <th style="border-right:1px solid; border-bottom:1px solid; text-align:left; vertical-align:top">tgroup1:thead2</th>
+            <th style="text-align:left; vertical-align:top">tgroup1:thead3</th>
+          </tr>
+          <tr>
+            <td style="border-right:1px solid; vertical-align:top">tgroup1:td1</td>
+            <td style="border-bottom:1px solid; vertical-align:top">tgroup1:td2</td>
+            <td style="border-bottom:1px solid; vertical-align:top">tgroup1:td3</td>
+          </tr>
+          <tr>
+            <td style="border-bottom:1px solid; vertical-align:top">tgroup1:td4</td>
+            <td rowspan="2" style="border-bottom:1px solid; vertical-align:top">tgroup1:td5</td>
+            <td rowspan="3" style="border-right:1px solid; border-bottom:1px solid; vertical-align:top">tgroup1:td6</td>
+          </tr>
+          <tr>
+            <td style="border-right:1px solid; vertical-align:top">tgroup1:td7</td>
+          </tr>
+          <tr>
+            <td colspan="2" style="border-right:1px solid; vertical-align:top">tgroup1:td8</td>
+          </tr>
+          <tr>
+            <th colspan="2" style="text-align:left; vertical-align:top">tgroup2:thead1</th>
+            <th style="border-right:1px solid; border-bottom:1px solid; text-align:left; vertical-align:top">tgroup2:thead2</th>
+          </tr>
+          <tr>
+            <td colspan="2" rowspan="3" style="border-right:1px solid; vertical-align:top">tgroup2:td1</td>
+            <td style="border-bottom:1px solid; vertical-align:top">tgroup2:td2</td>
+          </tr>
+          <tr>
+            <td style="border-bottom:1px solid; vertical-align:top">tgroup2:td3</td>
+          </tr>
+          <tr>
+            <td style="border-right:1px solid; vertical-align:top">tgroup2:td4</td>
+          </tr>
+          <tr>
+            <td colspan="3" style="border-right:1px solid; border-bottom:1px solid; vertical-align:top">tgroup2:td5</td>
+          </tr>
+          <tr>
+            <th colspan="2" style="text-align:left; vertical-align:top">tgroup3:thead1</th>
+            <th style="border-right:1px solid; border-bottom:1px solid; text-align:left; vertical-align:top">tgroup3:thead2</th>
+          </tr>
+          <tr>
+            <td colspan="2" style="vertical-align:top">tgroup3:td1</td>
+            <td style="border-right:1px solid; border-bottom:1px solid; vertical-align:top">tgroup3:td2</td>
+          </tr>
+          <tr>
+            <td colspan="3" style="border-right:1px solid; border-bottom:1px solid; vertical-align:top">tgroup3:td3</td>
+          </tr>
+          <tr>
+            <td colspan="2" style="vertical-align:top">tgroup3:td4</td>
+            <td style="border-right:1px solid; vertical-align:top">tgroup3:td5</td>
+          </tr>
+          <tr>
+            <td colspan="2" style="vertical-align:top">tgroup4:td1</td>
+            <td style="vertical-align:top">tgroup4:td2</td>
+          </tr>
+          <tr>
+            <td colspan="3" style="vertical-align:top">tgroup4:td3</td>
+          </tr>
+          <tr>
+            <td colspan="2" style="vertical-align:top">tgroup4:td4</td>
+            <td style="vertical-align:top">tgroup4:td5</td>
+          </tr>
+          <tr>
+            <th colspan="3" style="border-bottom:1px solid; text-align:left; vertical-align:top">tgroup5:th1</th>
+          </tr>
+          <tr>
+            <td colspan="3" style="border-bottom:1px solid; vertical-align:top">tgroup5:td1</td>
+          </tr>
+          <tr>
+            <td colspan="3" style="border-bottom:1px solid; vertical-align:top">tgroup5:td2</td>
+          </tr>
+          <tr>
+            <td colspan="3" style="border-bottom:1px solid; vertical-align:top">tgroup5:td3</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Frame none</h2>
+    <div class="cals_table" data-cals-tabstyle="frame-none">
+      <table class="cals_tgroup" style="width:100%; border:none">
+        <colgroup>
+          <col style="width:33%" />
+          <col style="width:33%" />
+          <col style="width:33%" />
+        </colgroup>
+        <tbody>
+          <tr>
+            <th colspan="2" style="border-right:1px solid; text-align:left; vertical-align:top">tgroup0:thead1</th>
+            <th style="border-bottom:1px solid; text-align:left; vertical-align:top">tgroup0:thead2</th>
+          </tr>
+          <tr>
+            <td colspan="2" style="vertical-align:top">tgroup0:td1</td>
+            <td style="border-right:1px solid; border-bottom:1px solid; vertical-align:top">tgroup0:td2</td>
+          </tr>
+          <tr>
+            <td colspan="2" style="border-right:1px solid; vertical-align:top">tgroup0:td3</td>
+            <td style="border-bottom:1px solid; vertical-align:top">tgroup0:td4</td>
+          </tr>
+          <tr>
+            <td colspan="2" style="vertical-align:top">tgroup0:td4</td>
+            <td style="border-right:1px solid; border-bottom:1px solid; vertical-align:top">tgroup0:td5</td>
+          </tr>
+          <tr>
+            <th style="text-align:left; vertical-align:top">tgroup1:thead1</th>
+            <th style="border-right:1px solid; border-bottom:1px solid; text-align:left; vertical-align:top">tgroup1:thead2</th>
+            <th style="text-align:left; vertical-align:top">tgroup1:thead3</th>
+          </tr>
+          <tr>
+            <td style="border-right:1px solid; vertical-align:top">tgroup1:td1</td>
+            <td style="border-bottom:1px solid; vertical-align:top">tgroup1:td2</td>
+            <td style="border-bottom:1px solid; vertical-align:top">tgroup1:td3</td>
+          </tr>
+          <tr>
+            <td style="border-bottom:1px solid; vertical-align:top">tgroup1:td4</td>
+            <td rowspan="2" style="border-bottom:1px solid; vertical-align:top">tgroup1:td5</td>
+            <td rowspan="3" style="border-right:1px solid; border-bottom:1px solid; vertical-align:top">tgroup1:td6</td>
+          </tr>
+          <tr>
+            <td style="border-right:1px solid; vertical-align:top">tgroup1:td7</td>
+          </tr>
+          <tr>
+            <td colspan="2" style="border-right:1px solid; vertical-align:top">tgroup1:td8</td>
+          </tr>
+          <tr>
+            <th colspan="2" style="text-align:left; vertical-align:top">tgroup2:thead1</th>
+            <th style="border-right:1px solid; border-bottom:1px solid; text-align:left; vertical-align:top">tgroup2:thead2</th>
+          </tr>
+          <tr>
+            <td colspan="2" rowspan="3" style="border-right:1px solid; vertical-align:top">tgroup2:td1</td>
+            <td style="border-bottom:1px solid; vertical-align:top">tgroup2:td2</td>
+          </tr>
+          <tr>
+            <td style="border-bottom:1px solid; vertical-align:top">tgroup2:td3</td>
+          </tr>
+          <tr>
+            <td style="border-right:1px solid; vertical-align:top">tgroup2:td4</td>
+          </tr>
+          <tr>
+            <td colspan="3" style="border-right:1px solid; border-bottom:1px solid; vertical-align:top">tgroup2:td5</td>
+          </tr>
+          <tr>
+            <th colspan="2" style="text-align:left; vertical-align:top">tgroup3:thead1</th>
+            <th style="border-right:1px solid; border-bottom:1px solid; text-align:left; vertical-align:top">tgroup3:thead2</th>
+          </tr>
+          <tr>
+            <td colspan="2" style="vertical-align:top">tgroup3:td1</td>
+            <td style="border-right:1px solid; border-bottom:1px solid; vertical-align:top">tgroup3:td2</td>
+          </tr>
+          <tr>
+            <td colspan="3" style="border-right:1px solid; border-bottom:1px solid; vertical-align:top">tgroup3:td3</td>
+          </tr>
+          <tr>
+            <td colspan="2" style="vertical-align:top">tgroup3:td4</td>
+            <td style="border-right:1px solid; vertical-align:top">tgroup3:td5</td>
+          </tr>
+          <tr>
+            <td colspan="2" style="vertical-align:top">tgroup4:td1</td>
+            <td style="vertical-align:top">tgroup4:td2</td>
+          </tr>
+          <tr>
+            <td colspan="3" style="vertical-align:top">tgroup4:td3</td>
+          </tr>
+          <tr>
+            <td colspan="2" style="vertical-align:top">tgroup4:td4</td>
+            <td style="vertical-align:top">tgroup4:td5</td>
+          </tr>
+          <tr>
+            <th colspan="3" style="border-bottom:1px solid; text-align:left; vertical-align:top">tgroup5:th1</th>
+          </tr>
+          <tr>
+            <td colspan="3" style="border-bottom:1px solid; vertical-align:top">tgroup5:td1</td>
+          </tr>
+          <tr>
+            <td colspan="3" style="border-bottom:1px solid; vertical-align:top">tgroup5:td2</td>
+          </tr>
+          <tr>
+            <td colspan="3" style="border-bottom:1px solid; vertical-align:top">tgroup5:td3</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Frame top</h2>
+    <div class="cals_table" data-cals-tabstyle="frame-top">
+      <table class="cals_tgroup" style="width:100%; border-top:1px solid">
+        <colgroup>
+          <col style="width:33%" />
+          <col style="width:33%" />
+          <col style="width:33%" />
+        </colgroup>
+        <tbody>
+          <tr>
+            <th colspan="2" style="border-right:1px solid; text-align:left; vertical-align:top">tgroup0:thead1</th>
+            <th style="border-bottom:1px solid; text-align:left; vertical-align:top">tgroup0:thead2</th>
+          </tr>
+          <tr>
+            <td colspan="2" style="vertical-align:top">tgroup0:td1</td>
+            <td style="border-right:1px solid; border-bottom:1px solid; vertical-align:top">tgroup0:td2</td>
+          </tr>
+          <tr>
+            <td colspan="2" style="border-right:1px solid; vertical-align:top">tgroup0:td3</td>
+            <td style="border-bottom:1px solid; vertical-align:top">tgroup0:td4</td>
+          </tr>
+          <tr>
+            <td colspan="2" style="vertical-align:top">tgroup0:td4</td>
+            <td style="border-right:1px solid; border-bottom:1px solid; vertical-align:top">tgroup0:td5</td>
+          </tr>
+          <tr>
+            <th style="text-align:left; vertical-align:top">tgroup1:thead1</th>
+            <th style="border-right:1px solid; border-bottom:1px solid; text-align:left; vertical-align:top">tgroup1:thead2</th>
+            <th style="text-align:left; vertical-align:top">tgroup1:thead3</th>
+          </tr>
+          <tr>
+            <td style="border-right:1px solid; vertical-align:top">tgroup1:td1</td>
+            <td style="border-bottom:1px solid; vertical-align:top">tgroup1:td2</td>
+            <td style="border-bottom:1px solid; vertical-align:top">tgroup1:td3</td>
+          </tr>
+          <tr>
+            <td style="border-bottom:1px solid; vertical-align:top">tgroup1:td4</td>
+            <td rowspan="2" style="border-bottom:1px solid; vertical-align:top">tgroup1:td5</td>
+            <td rowspan="3" style="border-right:1px solid; border-bottom:1px solid; vertical-align:top">tgroup1:td6</td>
+          </tr>
+          <tr>
+            <td style="border-right:1px solid; vertical-align:top">tgroup1:td7</td>
+          </tr>
+          <tr>
+            <td colspan="2" style="border-right:1px solid; vertical-align:top">tgroup1:td8</td>
+          </tr>
+          <tr>
+            <th colspan="2" style="text-align:left; vertical-align:top">tgroup2:thead1</th>
+            <th style="border-right:1px solid; border-bottom:1px solid; text-align:left; vertical-align:top">tgroup2:thead2</th>
+          </tr>
+          <tr>
+            <td colspan="2" rowspan="3" style="border-right:1px solid; vertical-align:top">tgroup2:td1</td>
+            <td style="border-bottom:1px solid; vertical-align:top">tgroup2:td2</td>
+          </tr>
+          <tr>
+            <td style="border-bottom:1px solid; vertical-align:top">tgroup2:td3</td>
+          </tr>
+          <tr>
+            <td style="border-right:1px solid; vertical-align:top">tgroup2:td4</td>
+          </tr>
+          <tr>
+            <td colspan="3" style="border-right:1px solid; border-bottom:1px solid; vertical-align:top">tgroup2:td5</td>
+          </tr>
+          <tr>
+            <th colspan="2" style="text-align:left; vertical-align:top">tgroup3:thead1</th>
+            <th style="border-right:1px solid; border-bottom:1px solid; text-align:left; vertical-align:top">tgroup3:thead2</th>
+          </tr>
+          <tr>
+            <td colspan="2" style="vertical-align:top">tgroup3:td1</td>
+            <td style="border-right:1px solid; border-bottom:1px solid; vertical-align:top">tgroup3:td2</td>
+          </tr>
+          <tr>
+            <td colspan="3" style="border-right:1px solid; border-bottom:1px solid; vertical-align:top">tgroup3:td3</td>
+          </tr>
+          <tr>
+            <td colspan="2" style="vertical-align:top">tgroup3:td4</td>
+            <td style="border-right:1px solid; vertical-align:top">tgroup3:td5</td>
+          </tr>
+          <tr>
+            <td colspan="2" style="vertical-align:top">tgroup4:td1</td>
+            <td style="vertical-align:top">tgroup4:td2</td>
+          </tr>
+          <tr>
+            <td colspan="3" style="vertical-align:top">tgroup4:td3</td>
+          </tr>
+          <tr>
+            <td colspan="2" style="vertical-align:top">tgroup4:td4</td>
+            <td style="vertical-align:top">tgroup4:td5</td>
+          </tr>
+          <tr>
+            <th colspan="3" style="border-bottom:1px solid; text-align:left; vertical-align:top">tgroup5:th1</th>
+          </tr>
+          <tr>
+            <td colspan="3" style="border-bottom:1px solid; vertical-align:top">tgroup5:td1</td>
+          </tr>
+          <tr>
+            <td colspan="3" style="border-bottom:1px solid; vertical-align:top">tgroup5:td2</td>
+          </tr>
+          <tr>
+            <td colspan="3" style="border-bottom:1px solid; vertical-align:top">tgroup5:td3</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Frame bottom</h2>
+    <div class="cals_table" data-cals-tabstyle="frame-bottom">
+      <table class="cals_tgroup" style="width:100%; border-bottom:1px solid">
+        <colgroup>
+          <col style="width:33%" />
+          <col style="width:33%" />
+          <col style="width:33%" />
+        </colgroup>
+        <tbody>
+          <tr>
+            <th colspan="2" style="border-right:1px solid; text-align:left; vertical-align:top">tgroup0:thead1</th>
+            <th style="border-bottom:1px solid; text-align:left; vertical-align:top">tgroup0:thead2</th>
+          </tr>
+          <tr>
+            <td colspan="2" style="vertical-align:top">tgroup0:td1</td>
+            <td style="border-right:1px solid; border-bottom:1px solid; vertical-align:top">tgroup0:td2</td>
+          </tr>
+          <tr>
+            <td colspan="2" style="border-right:1px solid; vertical-align:top">tgroup0:td3</td>
+            <td style="border-bottom:1px solid; vertical-align:top">tgroup0:td4</td>
+          </tr>
+          <tr>
+            <td colspan="2" style="vertical-align:top">tgroup0:td4</td>
+            <td style="border-right:1px solid; border-bottom:1px solid; vertical-align:top">tgroup0:td5</td>
+          </tr>
+          <tr>
+            <th style="text-align:left; vertical-align:top">tgroup1:thead1</th>
+            <th style="border-right:1px solid; border-bottom:1px solid; text-align:left; vertical-align:top">tgroup1:thead2</th>
+            <th style="text-align:left; vertical-align:top">tgroup1:thead3</th>
+          </tr>
+          <tr>
+            <td style="border-right:1px solid; vertical-align:top">tgroup1:td1</td>
+            <td style="border-bottom:1px solid; vertical-align:top">tgroup1:td2</td>
+            <td style="border-bottom:1px solid; vertical-align:top">tgroup1:td3</td>
+          </tr>
+          <tr>
+            <td style="border-bottom:1px solid; vertical-align:top">tgroup1:td4</td>
+            <td rowspan="2" style="border-bottom:1px solid; vertical-align:top">tgroup1:td5</td>
+            <td rowspan="3" style="border-right:1px solid; border-bottom:1px solid; vertical-align:top">tgroup1:td6</td>
+          </tr>
+          <tr>
+            <td style="border-right:1px solid; vertical-align:top">tgroup1:td7</td>
+          </tr>
+          <tr>
+            <td colspan="2" style="border-right:1px solid; vertical-align:top">tgroup1:td8</td>
+          </tr>
+          <tr>
+            <th colspan="2" style="text-align:left; vertical-align:top">tgroup2:thead1</th>
+            <th style="border-right:1px solid; border-bottom:1px solid; text-align:left; vertical-align:top">tgroup2:thead2</th>
+          </tr>
+          <tr>
+            <td colspan="2" rowspan="3" style="border-right:1px solid; vertical-align:top">tgroup2:td1</td>
+            <td style="border-bottom:1px solid; vertical-align:top">tgroup2:td2</td>
+          </tr>
+          <tr>
+            <td style="border-bottom:1px solid; vertical-align:top">tgroup2:td3</td>
+          </tr>
+          <tr>
+            <td style="border-right:1px solid; vertical-align:top">tgroup2:td4</td>
+          </tr>
+          <tr>
+            <td colspan="3" style="border-right:1px solid; border-bottom:1px solid; vertical-align:top">tgroup2:td5</td>
+          </tr>
+          <tr>
+            <th colspan="2" style="text-align:left; vertical-align:top">tgroup3:thead1</th>
+            <th style="border-right:1px solid; border-bottom:1px solid; text-align:left; vertical-align:top">tgroup3:thead2</th>
+          </tr>
+          <tr>
+            <td colspan="2" style="vertical-align:top">tgroup3:td1</td>
+            <td style="border-right:1px solid; border-bottom:1px solid; vertical-align:top">tgroup3:td2</td>
+          </tr>
+          <tr>
+            <td colspan="3" style="border-right:1px solid; border-bottom:1px solid; vertical-align:top">tgroup3:td3</td>
+          </tr>
+          <tr>
+            <td colspan="2" style="vertical-align:top">tgroup3:td4</td>
+            <td style="border-right:1px solid; vertical-align:top">tgroup3:td5</td>
+          </tr>
+          <tr>
+            <td colspan="2" style="vertical-align:top">tgroup4:td1</td>
+            <td style="vertical-align:top">tgroup4:td2</td>
+          </tr>
+          <tr>
+            <td colspan="3" style="vertical-align:top">tgroup4:td3</td>
+          </tr>
+          <tr>
+            <td colspan="2" style="vertical-align:top">tgroup4:td4</td>
+            <td style="vertical-align:top">tgroup4:td5</td>
+          </tr>
+          <tr>
+            <th colspan="3" style="border-bottom:1px solid; text-align:left; vertical-align:top">tgroup5:th1</th>
+          </tr>
+          <tr>
+            <td colspan="3" style="border-bottom:1px solid; vertical-align:top">tgroup5:td1</td>
+          </tr>
+          <tr>
+            <td colspan="3" style="border-bottom:1px solid; vertical-align:top">tgroup5:td2</td>
+          </tr>
+          <tr>
+            <td colspan="3" style="border-bottom:1px solid; vertical-align:top">tgroup5:td3</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Frame topbot</h2>
+    <div class="cals_table" data-cals-tabstyle="frame-topbot">
+      <table class="cals_tgroup" style="width:100%; border-top:1px solid;  border-bottom:1px solid">
+        <colgroup>
+          <col style="width:33%" />
+          <col style="width:33%" />
+          <col style="width:33%" />
+        </colgroup>
+        <tbody>
+          <tr>
+            <th colspan="2" style="border-right:1px solid; text-align:left; vertical-align:top">tgroup0:thead1</th>
+            <th style="border-bottom:1px solid; text-align:left; vertical-align:top">tgroup0:thead2</th>
+          </tr>
+          <tr>
+            <td colspan="2" style="vertical-align:top">tgroup0:td1</td>
+            <td style="border-right:1px solid; border-bottom:1px solid; vertical-align:top">tgroup0:td2</td>
+          </tr>
+          <tr>
+            <td colspan="2" style="border-right:1px solid; vertical-align:top">tgroup0:td3</td>
+            <td style="border-bottom:1px solid; vertical-align:top">tgroup0:td4</td>
+          </tr>
+          <tr>
+            <td colspan="2" style="vertical-align:top">tgroup0:td4</td>
+            <td style="border-right:1px solid; border-bottom:1px solid; vertical-align:top">tgroup0:td5</td>
+          </tr>
+          <tr>
+            <th style="text-align:left; vertical-align:top">tgroup1:thead1</th>
+            <th style="border-right:1px solid; border-bottom:1px solid; text-align:left; vertical-align:top">tgroup1:thead2</th>
+            <th style="text-align:left; vertical-align:top">tgroup1:thead3</th>
+          </tr>
+          <tr>
+            <td style="border-right:1px solid; vertical-align:top">tgroup1:td1</td>
+            <td style="border-bottom:1px solid; vertical-align:top">tgroup1:td2</td>
+            <td style="border-bottom:1px solid; vertical-align:top">tgroup1:td3</td>
+          </tr>
+          <tr>
+            <td style="border-bottom:1px solid; vertical-align:top">tgroup1:td4</td>
+            <td rowspan="2" style="border-bottom:1px solid; vertical-align:top">tgroup1:td5</td>
+            <td rowspan="3" style="border-right:1px solid; border-bottom:1px solid; vertical-align:top">tgroup1:td6</td>
+          </tr>
+          <tr>
+            <td style="border-right:1px solid; vertical-align:top">tgroup1:td7</td>
+          </tr>
+          <tr>
+            <td colspan="2" style="border-right:1px solid; vertical-align:top">tgroup1:td8</td>
+          </tr>
+          <tr>
+            <th colspan="2" style="text-align:left; vertical-align:top">tgroup2:thead1</th>
+            <th style="border-right:1px solid; border-bottom:1px solid; text-align:left; vertical-align:top">tgroup2:thead2</th>
+          </tr>
+          <tr>
+            <td colspan="2" rowspan="3" style="border-right:1px solid; vertical-align:top">tgroup2:td1</td>
+            <td style="border-bottom:1px solid; vertical-align:top">tgroup2:td2</td>
+          </tr>
+          <tr>
+            <td style="border-bottom:1px solid; vertical-align:top">tgroup2:td3</td>
+          </tr>
+          <tr>
+            <td style="border-right:1px solid; vertical-align:top">tgroup2:td4</td>
+          </tr>
+          <tr>
+            <td colspan="3" style="border-right:1px solid; border-bottom:1px solid; vertical-align:top">tgroup2:td5</td>
+          </tr>
+          <tr>
+            <th colspan="2" style="text-align:left; vertical-align:top">tgroup3:thead1</th>
+            <th style="border-right:1px solid; border-bottom:1px solid; text-align:left; vertical-align:top">tgroup3:thead2</th>
+          </tr>
+          <tr>
+            <td colspan="2" style="vertical-align:top">tgroup3:td1</td>
+            <td style="border-right:1px solid; border-bottom:1px solid; vertical-align:top">tgroup3:td2</td>
+          </tr>
+          <tr>
+            <td colspan="3" style="border-right:1px solid; border-bottom:1px solid; vertical-align:top">tgroup3:td3</td>
+          </tr>
+          <tr>
+            <td colspan="2" style="vertical-align:top">tgroup3:td4</td>
+            <td style="border-right:1px solid; vertical-align:top">tgroup3:td5</td>
+          </tr>
+          <tr>
+            <td colspan="2" style="vertical-align:top">tgroup4:td1</td>
+            <td style="vertical-align:top">tgroup4:td2</td>
+          </tr>
+          <tr>
+            <td colspan="3" style="vertical-align:top">tgroup4:td3</td>
+          </tr>
+          <tr>
+            <td colspan="2" style="vertical-align:top">tgroup4:td4</td>
+            <td style="vertical-align:top">tgroup4:td5</td>
+          </tr>
+          <tr>
+            <th colspan="3" style="border-bottom:1px solid; text-align:left; vertical-align:top">tgroup5:th1</th>
+          </tr>
+          <tr>
+            <td colspan="3" style="border-bottom:1px solid; vertical-align:top">tgroup5:td1</td>
+          </tr>
+          <tr>
+            <td colspan="3" style="border-bottom:1px solid; vertical-align:top">tgroup5:td2</td>
+          </tr>
+          <tr>
+            <td colspan="3" style="border-bottom:1px solid; vertical-align:top">tgroup5:td3</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Frame sides</h2>
+    <div class="cals_table" data-cals-tabstyle="frame-sides">
+      <table class="cals_tgroup" style="width:100%; border-left:1px solid;  border-right:1px solid">
+        <colgroup>
+          <col style="width:33%" />
+          <col style="width:33%" />
+          <col style="width:33%" />
+        </colgroup>
+        <tbody>
+          <tr>
+            <th colspan="2" style="border-right:1px solid; text-align:left; vertical-align:top">tgroup0:thead1</th>
+            <th style="border-bottom:1px solid; text-align:left; vertical-align:top">tgroup0:thead2</th>
+          </tr>
+          <tr>
+            <td colspan="2" style="vertical-align:top">tgroup0:td1</td>
+            <td style="border-right:1px solid; border-bottom:1px solid; vertical-align:top">tgroup0:td2</td>
+          </tr>
+          <tr>
+            <td colspan="2" style="border-right:1px solid; vertical-align:top">tgroup0:td3</td>
+            <td style="border-bottom:1px solid; vertical-align:top">tgroup0:td4</td>
+          </tr>
+          <tr>
+            <td colspan="2" style="vertical-align:top">tgroup0:td4</td>
+            <td style="border-right:1px solid; border-bottom:1px solid; vertical-align:top">tgroup0:td5</td>
+          </tr>
+          <tr>
+            <th style="text-align:left; vertical-align:top">tgroup1:thead1</th>
+            <th style="border-right:1px solid; border-bottom:1px solid; text-align:left; vertical-align:top">tgroup1:thead2</th>
+            <th style="text-align:left; vertical-align:top">tgroup1:thead3</th>
+          </tr>
+          <tr>
+            <td style="border-right:1px solid; vertical-align:top">tgroup1:td1</td>
+            <td style="border-bottom:1px solid; vertical-align:top">tgroup1:td2</td>
+            <td style="border-bottom:1px solid; vertical-align:top">tgroup1:td3</td>
+          </tr>
+          <tr>
+            <td style="border-bottom:1px solid; vertical-align:top">tgroup1:td4</td>
+            <td rowspan="2" style="border-bottom:1px solid; vertical-align:top">tgroup1:td5</td>
+            <td rowspan="3" style="border-right:1px solid; border-bottom:1px solid; vertical-align:top">tgroup1:td6</td>
+          </tr>
+          <tr>
+            <td style="border-right:1px solid; vertical-align:top">tgroup1:td7</td>
+          </tr>
+          <tr>
+            <td colspan="2" style="border-right:1px solid; vertical-align:top">tgroup1:td8</td>
+          </tr>
+          <tr>
+            <th colspan="2" style="text-align:left; vertical-align:top">tgroup2:thead1</th>
+            <th style="border-right:1px solid; border-bottom:1px solid; text-align:left; vertical-align:top">tgroup2:thead2</th>
+          </tr>
+          <tr>
+            <td colspan="2" rowspan="3" style="border-right:1px solid; vertical-align:top">tgroup2:td1</td>
+            <td style="border-bottom:1px solid; vertical-align:top">tgroup2:td2</td>
+          </tr>
+          <tr>
+            <td style="border-bottom:1px solid; vertical-align:top">tgroup2:td3</td>
+          </tr>
+          <tr>
+            <td style="border-right:1px solid; vertical-align:top">tgroup2:td4</td>
+          </tr>
+          <tr>
+            <td colspan="3" style="border-right:1px solid; border-bottom:1px solid; vertical-align:top">tgroup2:td5</td>
+          </tr>
+          <tr>
+            <th colspan="2" style="text-align:left; vertical-align:top">tgroup3:thead1</th>
+            <th style="border-right:1px solid; border-bottom:1px solid; text-align:left; vertical-align:top">tgroup3:thead2</th>
+          </tr>
+          <tr>
+            <td colspan="2" style="vertical-align:top">tgroup3:td1</td>
+            <td style="border-right:1px solid; border-bottom:1px solid; vertical-align:top">tgroup3:td2</td>
+          </tr>
+          <tr>
+            <td colspan="3" style="border-right:1px solid; border-bottom:1px solid; vertical-align:top">tgroup3:td3</td>
+          </tr>
+          <tr>
+            <td colspan="2" style="vertical-align:top">tgroup3:td4</td>
+            <td style="border-right:1px solid; vertical-align:top">tgroup3:td5</td>
+          </tr>
+          <tr>
+            <td colspan="2" style="vertical-align:top">tgroup4:td1</td>
+            <td style="vertical-align:top">tgroup4:td2</td>
+          </tr>
+          <tr>
+            <td colspan="3" style="vertical-align:top">tgroup4:td3</td>
+          </tr>
+          <tr>
+            <td colspan="2" style="vertical-align:top">tgroup4:td4</td>
+            <td style="vertical-align:top">tgroup4:td5</td>
+          </tr>
+          <tr>
+            <th colspan="3" style="border-bottom:1px solid; text-align:left; vertical-align:top">tgroup5:th1</th>
+          </tr>
+          <tr>
+            <td colspan="3" style="border-bottom:1px solid; vertical-align:top">tgroup5:td1</td>
+          </tr>
+          <tr>
+            <td colspan="3" style="border-bottom:1px solid; vertical-align:top">tgroup5:td2</td>
+          </tr>
+          <tr>
+            <td colspan="3" style="border-bottom:1px solid; vertical-align:top">tgroup5:td3</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </body>
+</html>

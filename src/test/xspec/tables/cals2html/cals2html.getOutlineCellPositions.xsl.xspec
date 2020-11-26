@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<x:description 
+  xmlns:x="http://www.jenitennison.com/xslt/xspec"
+  xmlns:xi="http://www.w3.org/2001/XInclude"
+  xmlns:xslLib="http://www.lefebvre-sarrut.eu/ns/els/xslLib"
+  xmlns:html="http://www.w3.org/1999/xhtml"
+  stylesheet="../../../xsl/cals2html.getOutlineCellPositions.xsl"
+  xslt-version="3.0">
+
+  <!--NOTE : this XSpec uses xi:include instead of href to avoid indentation differences. 
+             See https://github.com/xspec/xspec/issues/1090-->
+  
+  <!--xslLib:baseUri has a default xpath value : it has to be overrided in XSpec--> 
+  <x:param name="xslLib:baseUri" select="xs:anyURI('https://xspec.io/')" as="xs:anyURI"/>
+  
+  <x:scenario label="cals2html-getOutlineCellPositions.xml > cals2html-getOutlineCellPositions.xml.html" 
+    xml:base="../../../samples/tables/cals2html-getOutlineCellPositions/">
+    <x:context select="/">
+      <xi:include href="cals2html-getOutlineCellPositions.xml"/>
+    </x:context>
+    <x:expect label="OK"
+      select="serialize(/*) ! replace(., '(xml:base=&quot;.*?&quot;)', '') ! parse-xml(.)/html:html/html:body"
+      test="serialize(/*) ! replace(., '(xml:base=&quot;.*?&quot;)', '') ! parse-xml(.)/html:html/html:body">
+      <xi:include href="cals2html-getOutlineCellPositions.xml.html"/>
+    </x:expect>
+  </x:scenario>
+  
+  
+</x:description>

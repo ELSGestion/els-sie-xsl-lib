@@ -9,32 +9,22 @@
   
   <!--NOTE : this XSpec uses xi:include instead of href to avoid indentation differences. 
              See https://github.com/xspec/xspec/issues/1090-->
- 
+  
   <!--xslLib:baseUri has a default xpath value : it has to be overrided in XSpec--> 
   <x:param name="xslLib:baseUri" select="xs:anyURI('https://xspec.io/')" as="xs:anyURI"/>
   
-  <x:param name="xslLib:cals2html.forceMergingMultipleTgroup" select="true()"/>
+  <x:param name="xslLib:cals2html.use-style-insteadOf-class" select="false()"/>
+  <x:param name="xslLib:cals2html.html-border-collapse" select="true()"/>
   
-  <x:scenario label="CALS2HTML -style -mergeTgroup (issue #22)" xml:base="../samples/tables/">
-    <x:context select="/">
-      <xi:include href="cals-table-multiple-tgroup.xml"/>
-    </x:context>
-    <x:expect label="OK"
-      select="serialize(/*) ! replace(., '(xml:base=&quot;.*?&quot;)', '') ! parse-xml(.)/html:html/html:body"
-      test="serialize(/*) ! replace(., '(xml:base=&quot;.*?&quot;)', '') ! parse-xml(.)/html:html/html:body">
-      <xi:include href="cals-table-multiple-tgroup.mergeTgroup.htm"/>
-    </x:expect>
-  </x:scenario>
-  
-  <x:scenario label="CALS2HTML -style -mergeTgroup" xml:base="../samples/tables/cals2html-html-border-collapse/">
-    <x:scenario label="cals2html-html-border-collapse.xml > cals2html-html-border-collapse.mergeTgroup.htm">
+  <x:scenario label="CALS2HTML -style -border-collapse" xml:base="../samples/tables/cals2html-html-border-collapse/">
+    <x:scenario label="cals2html-html-border-collapse.xml > cals2html-html-border-collapse.class.border-collapse.htm">
       <x:context select="/">
         <xi:include href="cals2html-html-border-collapse.xml"/>
       </x:context>
       <x:expect label="OK"
         select="serialize(/*) ! replace(., '(xml:base=&quot;.*?&quot;)', '') ! parse-xml(.)/html:html/html:body"
         test="serialize(/*) ! replace(., '(xml:base=&quot;.*?&quot;)', '') ! parse-xml(.)/html:html/html:body">
-        <xi:include href="cals2html-html-border-collapse.mergeTgroup.htm"/>
+        <xi:include href="cals2html-html-border-collapse.class.border-collapse.htm"/>
       </x:expect>
     </x:scenario>
   </x:scenario>

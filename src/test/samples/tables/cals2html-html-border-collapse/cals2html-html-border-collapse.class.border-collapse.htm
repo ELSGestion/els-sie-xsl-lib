@@ -1,0 +1,945 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-model href="dependency:/eu.els.sie.models+ext-models/ext-models/oasis/cals/cals.nvdl" type="application/xml" schematypens="http://purl.oclc.org/dsdl/nvdl/ns/structure/1.0"?>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <style type="text/css">
+      table {
+        border-collapse: separate !important;
+        border-spacing: 3px;
+        margin-top: 2em;
+      }
+      td,
+      th,
+      table {
+        border-width: 2px !important;
+      }
+      th {
+        background-color: #ccc;
+      }
+      td {
+        background-color: #eee;
+      }</style>
+    <link type="text/css" rel="stylesheet" href="../../../../main/css/cals2html.css" />
+  </head>
+  <body>
+    <h1 style="text-align:center;">Test cals2html with $xslLib:cals2html.html-border-collapse = true()</h1>
+    <h2>Frame all</h2>
+    <div class="cals_table" data-cals-tabstyle="frame-all">
+      <table class="cals_tgroup cals_frame-none" style="width:100%">
+        <colgroup>
+          <col style="width:50%" />
+          <col style="width:50%" />
+        </colgroup>
+        <thead>
+          <tr>
+            <th class="cals_colsep cals_entry-border-top cals_entry-border-left cals_align-left cals_valign-top">tgroup0:thead1</th>
+            <th class="cals_colsep cals_rowsep cals_entry-border-top cals_align-left cals_valign-top">tgroup0:thead2</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="cals_entry-border-left cals_valign-top">tgroup0:td1</td>
+            <td class="cals_colsep cals_rowsep cals_valign-top">tgroup0:td2</td>
+          </tr>
+          <tr>
+            <td class="cals_colsep cals_entry-border-left cals_valign-top">tgroup0:td3</td>
+            <td class="cals_colsep cals_rowsep cals_valign-top">tgroup0:td4</td>
+          </tr>
+          <tr>
+            <td class="cals_rowsep cals_entry-border-left cals_valign-top">tgroup0:td4</td>
+            <td class="cals_colsep cals_rowsep cals_valign-top">tgroup0:td5</td>
+          </tr>
+        </tbody>
+      </table>
+      <table class="cals_tgroup cals_frame-none" style="width:100%">
+        <colgroup>
+          <col style="width:33%" />
+          <col style="width:33%" />
+          <col style="width:33%" />
+        </colgroup>
+        <thead>
+          <tr>
+            <th class="cals_entry-border-top cals_entry-border-left cals_align-left cals_valign-top">tgroup1:thead1</th>
+            <th class="cals_colsep cals_rowsep cals_entry-border-top cals_align-left cals_valign-top">tgroup1:thead2</th>
+            <th class="cals_colsep cals_entry-border-top cals_align-left cals_valign-top">tgroup1:thead3</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="cals_colsep cals_entry-border-left cals_valign-top">tgroup1:td1</td>
+            <td class="cals_rowsep cals_valign-top">tgroup1:td2</td>
+            <td class="cals_colsep cals_rowsep cals_valign-top">tgroup1:td3</td>
+          </tr>
+          <tr>
+            <td class="cals_rowsep cals_entry-border-left cals_valign-top">tgroup1:td4</td>
+            <td class="cals_rowsep cals_valign-top" rowspan="2">tgroup1:td5</td>
+            <td class="cals_colsep cals_rowsep cals_valign-top" rowspan="3">tgroup1:td6</td>
+          </tr>
+          <tr>
+            <td class="cals_colsep cals_entry-border-left cals_valign-top">tgroup1:td7</td>
+          </tr>
+          <tr>
+            <td class="cals_colsep cals_rowsep cals_entry-border-left cals_valign-top" colspan="2">tgroup1:td8</td>
+          </tr>
+        </tbody>
+      </table>
+      <table class="cals_tgroup cals_frame-none" style="width:100%">
+        <colgroup>
+          <col style="width:50%" />
+          <col style="width:50%" />
+        </colgroup>
+        <thead>
+          <tr>
+            <th class="cals_entry-border-top cals_entry-border-left cals_align-left cals_valign-top">tgroup2:thead1</th>
+            <th class="cals_colsep cals_rowsep cals_entry-border-top cals_align-left cals_valign-top">tgroup2:thead2</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="cals_colsep cals_entry-border-left cals_valign-top" rowspan="3">tgroup2:td1</td>
+            <td class="cals_colsep cals_rowsep cals_valign-top">tgroup2:td2</td>
+          </tr>
+          <tr>
+            <td class="cals_colsep cals_rowsep cals_valign-top">tgroup2:td3</td>
+          </tr>
+          <tr>
+            <td class="cals_colsep cals_valign-top">tgroup2:td4</td>
+          </tr>
+          <tr>
+            <td class="cals_colsep cals_rowsep cals_entry-border-left cals_valign-top" colspan="2">tgroup2:td5</td>
+          </tr>
+        </tbody>
+      </table>
+      <table class="cals_tgroup cals_frame-none" style="width:100%">
+        <colgroup>
+          <col style="width:50%" />
+          <col style="width:50%" />
+        </colgroup>
+        <thead>
+          <tr>
+            <th class="cals_entry-border-top cals_entry-border-left cals_align-left cals_valign-top">tgroup3:thead1</th>
+            <th class="cals_colsep cals_rowsep cals_entry-border-top cals_align-left cals_valign-top">tgroup3:thead2</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="cals_entry-border-left cals_valign-top">tgroup3:td1</td>
+            <td class="cals_colsep cals_rowsep cals_valign-top">tgroup3:td2</td>
+          </tr>
+          <tr>
+            <td class="cals_colsep cals_rowsep cals_entry-border-left cals_valign-top" colspan="2">tgroup3:td3</td>
+          </tr>
+          <tr>
+            <td class="cals_rowsep cals_entry-border-left cals_valign-top">tgroup3:td4</td>
+            <td class="cals_colsep cals_rowsep cals_valign-top">tgroup3:td5</td>
+          </tr>
+        </tbody>
+      </table>
+      <table class="cals_tgroup cals_frame-none" style="width:100%">
+        <colgroup>
+          <col style="width:50%" />
+          <col style="width:50%" />
+        </colgroup>
+        <tbody>
+          <tr>
+            <td class="cals_entry-border-top cals_entry-border-left cals_valign-top">tgroup4:td1</td>
+            <td class="cals_colsep cals_entry-border-top cals_valign-top">tgroup4:td2</td>
+          </tr>
+          <tr>
+            <td class="cals_colsep cals_entry-border-left cals_valign-top" colspan="2">tgroup4:td3</td>
+          </tr>
+          <tr>
+            <td class="cals_rowsep cals_entry-border-left cals_valign-top">tgroup4:td4</td>
+            <td class="cals_colsep cals_rowsep cals_valign-top">tgroup4:td5</td>
+          </tr>
+        </tbody>
+      </table>
+      <table class="cals_tgroup cals_frame-none" style="width:100%">
+        <colgroup>
+          <col style="width:100%" />
+        </colgroup>
+        <thead>
+          <tr>
+            <th class="cals_colsep cals_rowsep cals_entry-border-top cals_entry-border-left cals_align-left cals_valign-top">tgroup5:th1</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="cals_colsep cals_rowsep cals_entry-border-left cals_valign-top">tgroup5:td1</td>
+          </tr>
+          <tr>
+            <td class="cals_colsep cals_rowsep cals_entry-border-left cals_valign-top">tgroup5:td2</td>
+          </tr>
+          <tr>
+            <td class="cals_colsep cals_rowsep cals_entry-border-left cals_valign-top">tgroup5:td3</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Frame none</h2>
+    <div class="cals_table" data-cals-tabstyle="frame-none">
+      <table class="cals_tgroup cals_frame-none" style="width:100%">
+        <colgroup>
+          <col style="width:50%" />
+          <col style="width:50%" />
+        </colgroup>
+        <thead>
+          <tr>
+            <th class="cals_colsep cals_align-left cals_valign-top">tgroup0:thead1</th>
+            <th class="cals_rowsep cals_align-left cals_valign-top">tgroup0:thead2</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="cals_valign-top">tgroup0:td1</td>
+            <td class="cals_colsep cals_rowsep cals_valign-top">tgroup0:td2</td>
+          </tr>
+          <tr>
+            <td class="cals_colsep cals_valign-top">tgroup0:td3</td>
+            <td class="cals_rowsep cals_valign-top">tgroup0:td4</td>
+          </tr>
+          <tr>
+            <td class="cals_valign-top">tgroup0:td4</td>
+            <td class="cals_colsep cals_rowsep cals_valign-top">tgroup0:td5</td>
+          </tr>
+        </tbody>
+      </table>
+      <table class="cals_tgroup cals_frame-none" style="width:100%">
+        <colgroup>
+          <col style="width:33%" />
+          <col style="width:33%" />
+          <col style="width:33%" />
+        </colgroup>
+        <thead>
+          <tr>
+            <th class="cals_align-left cals_valign-top">tgroup1:thead1</th>
+            <th class="cals_colsep cals_rowsep cals_align-left cals_valign-top">tgroup1:thead2</th>
+            <th class="cals_align-left cals_valign-top">tgroup1:thead3</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="cals_colsep cals_valign-top">tgroup1:td1</td>
+            <td class="cals_rowsep cals_valign-top">tgroup1:td2</td>
+            <td class="cals_rowsep cals_valign-top">tgroup1:td3</td>
+          </tr>
+          <tr>
+            <td class="cals_rowsep cals_valign-top">tgroup1:td4</td>
+            <td class="cals_rowsep cals_valign-top" rowspan="2">tgroup1:td5</td>
+            <td class="cals_colsep cals_rowsep cals_valign-top" rowspan="3">tgroup1:td6</td>
+          </tr>
+          <tr>
+            <td class="cals_colsep cals_valign-top">tgroup1:td7</td>
+          </tr>
+          <tr>
+            <td class="cals_colsep cals_valign-top" colspan="2">tgroup1:td8</td>
+          </tr>
+        </tbody>
+      </table>
+      <table class="cals_tgroup cals_frame-none" style="width:100%">
+        <colgroup>
+          <col style="width:50%" />
+          <col style="width:50%" />
+        </colgroup>
+        <thead>
+          <tr>
+            <th class="cals_align-left cals_valign-top">tgroup2:thead1</th>
+            <th class="cals_colsep cals_rowsep cals_align-left cals_valign-top">tgroup2:thead2</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="cals_colsep cals_valign-top" rowspan="3">tgroup2:td1</td>
+            <td class="cals_rowsep cals_valign-top">tgroup2:td2</td>
+          </tr>
+          <tr>
+            <td class="cals_rowsep cals_valign-top">tgroup2:td3</td>
+          </tr>
+          <tr>
+            <td class="cals_colsep cals_valign-top">tgroup2:td4</td>
+          </tr>
+          <tr>
+            <td class="cals_colsep cals_rowsep cals_valign-top" colspan="2">tgroup2:td5</td>
+          </tr>
+        </tbody>
+      </table>
+      <table class="cals_tgroup cals_frame-none" style="width:100%">
+        <colgroup>
+          <col style="width:50%" />
+          <col style="width:50%" />
+        </colgroup>
+        <thead>
+          <tr>
+            <th class="cals_align-left cals_valign-top">tgroup3:thead1</th>
+            <th class="cals_colsep cals_rowsep cals_align-left cals_valign-top">tgroup3:thead2</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="cals_valign-top">tgroup3:td1</td>
+            <td class="cals_colsep cals_rowsep cals_valign-top">tgroup3:td2</td>
+          </tr>
+          <tr>
+            <td class="cals_colsep cals_rowsep cals_valign-top" colspan="2">tgroup3:td3</td>
+          </tr>
+          <tr>
+            <td class="cals_valign-top">tgroup3:td4</td>
+            <td class="cals_colsep cals_valign-top">tgroup3:td5</td>
+          </tr>
+        </tbody>
+      </table>
+      <table class="cals_tgroup cals_frame-none" style="width:100%">
+        <colgroup>
+          <col style="width:50%" />
+          <col style="width:50%" />
+        </colgroup>
+        <tbody>
+          <tr>
+            <td class="cals_valign-top">tgroup4:td1</td>
+            <td class="cals_valign-top">tgroup4:td2</td>
+          </tr>
+          <tr>
+            <td class="cals_valign-top" colspan="2">tgroup4:td3</td>
+          </tr>
+          <tr>
+            <td class="cals_valign-top">tgroup4:td4</td>
+            <td class="cals_valign-top">tgroup4:td5</td>
+          </tr>
+        </tbody>
+      </table>
+      <table class="cals_tgroup cals_frame-none" style="width:100%">
+        <colgroup>
+          <col style="width:100%" />
+        </colgroup>
+        <thead>
+          <tr>
+            <th class="cals_rowsep cals_align-left cals_valign-top">tgroup5:th1</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="cals_rowsep cals_valign-top">tgroup5:td1</td>
+          </tr>
+          <tr>
+            <td class="cals_rowsep cals_valign-top">tgroup5:td2</td>
+          </tr>
+          <tr>
+            <td class="cals_rowsep cals_valign-top">tgroup5:td3</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Frame top</h2>
+    <div class="cals_table" data-cals-tabstyle="frame-top">
+      <table class="cals_tgroup cals_frame-none" style="width:100%">
+        <colgroup>
+          <col style="width:50%" />
+          <col style="width:50%" />
+        </colgroup>
+        <thead>
+          <tr>
+            <th class="cals_colsep cals_entry-border-top cals_align-left cals_valign-top">tgroup0:thead1</th>
+            <th class="cals_rowsep cals_entry-border-top cals_align-left cals_valign-top">tgroup0:thead2</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="cals_valign-top">tgroup0:td1</td>
+            <td class="cals_colsep cals_rowsep cals_valign-top">tgroup0:td2</td>
+          </tr>
+          <tr>
+            <td class="cals_colsep cals_valign-top">tgroup0:td3</td>
+            <td class="cals_rowsep cals_valign-top">tgroup0:td4</td>
+          </tr>
+          <tr>
+            <td class="cals_valign-top">tgroup0:td4</td>
+            <td class="cals_colsep cals_rowsep cals_valign-top">tgroup0:td5</td>
+          </tr>
+        </tbody>
+      </table>
+      <table class="cals_tgroup cals_frame-none" style="width:100%">
+        <colgroup>
+          <col style="width:33%" />
+          <col style="width:33%" />
+          <col style="width:33%" />
+        </colgroup>
+        <thead>
+          <tr>
+            <th class="cals_entry-border-top cals_align-left cals_valign-top">tgroup1:thead1</th>
+            <th class="cals_colsep cals_rowsep cals_entry-border-top cals_align-left cals_valign-top">tgroup1:thead2</th>
+            <th class="cals_entry-border-top cals_align-left cals_valign-top">tgroup1:thead3</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="cals_colsep cals_valign-top">tgroup1:td1</td>
+            <td class="cals_rowsep cals_valign-top">tgroup1:td2</td>
+            <td class="cals_rowsep cals_valign-top">tgroup1:td3</td>
+          </tr>
+          <tr>
+            <td class="cals_rowsep cals_valign-top">tgroup1:td4</td>
+            <td class="cals_rowsep cals_valign-top" rowspan="2">tgroup1:td5</td>
+            <td class="cals_colsep cals_rowsep cals_valign-top" rowspan="3">tgroup1:td6</td>
+          </tr>
+          <tr>
+            <td class="cals_colsep cals_valign-top">tgroup1:td7</td>
+          </tr>
+          <tr>
+            <td class="cals_colsep cals_valign-top" colspan="2">tgroup1:td8</td>
+          </tr>
+        </tbody>
+      </table>
+      <table class="cals_tgroup cals_frame-none" style="width:100%">
+        <colgroup>
+          <col style="width:50%" />
+          <col style="width:50%" />
+        </colgroup>
+        <thead>
+          <tr>
+            <th class="cals_entry-border-top cals_align-left cals_valign-top">tgroup2:thead1</th>
+            <th class="cals_colsep cals_rowsep cals_entry-border-top cals_align-left cals_valign-top">tgroup2:thead2</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="cals_colsep cals_valign-top" rowspan="3">tgroup2:td1</td>
+            <td class="cals_rowsep cals_valign-top">tgroup2:td2</td>
+          </tr>
+          <tr>
+            <td class="cals_rowsep cals_valign-top">tgroup2:td3</td>
+          </tr>
+          <tr>
+            <td class="cals_colsep cals_valign-top">tgroup2:td4</td>
+          </tr>
+          <tr>
+            <td class="cals_colsep cals_rowsep cals_valign-top" colspan="2">tgroup2:td5</td>
+          </tr>
+        </tbody>
+      </table>
+      <table class="cals_tgroup cals_frame-none" style="width:100%">
+        <colgroup>
+          <col style="width:50%" />
+          <col style="width:50%" />
+        </colgroup>
+        <thead>
+          <tr>
+            <th class="cals_entry-border-top cals_align-left cals_valign-top">tgroup3:thead1</th>
+            <th class="cals_colsep cals_rowsep cals_entry-border-top cals_align-left cals_valign-top">tgroup3:thead2</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="cals_valign-top">tgroup3:td1</td>
+            <td class="cals_colsep cals_rowsep cals_valign-top">tgroup3:td2</td>
+          </tr>
+          <tr>
+            <td class="cals_colsep cals_rowsep cals_valign-top" colspan="2">tgroup3:td3</td>
+          </tr>
+          <tr>
+            <td class="cals_valign-top">tgroup3:td4</td>
+            <td class="cals_colsep cals_valign-top">tgroup3:td5</td>
+          </tr>
+        </tbody>
+      </table>
+      <table class="cals_tgroup cals_frame-none" style="width:100%">
+        <colgroup>
+          <col style="width:50%" />
+          <col style="width:50%" />
+        </colgroup>
+        <tbody>
+          <tr>
+            <td class="cals_entry-border-top cals_valign-top">tgroup4:td1</td>
+            <td class="cals_entry-border-top cals_valign-top">tgroup4:td2</td>
+          </tr>
+          <tr>
+            <td class="cals_valign-top" colspan="2">tgroup4:td3</td>
+          </tr>
+          <tr>
+            <td class="cals_valign-top">tgroup4:td4</td>
+            <td class="cals_valign-top">tgroup4:td5</td>
+          </tr>
+        </tbody>
+      </table>
+      <table class="cals_tgroup cals_frame-none" style="width:100%">
+        <colgroup>
+          <col style="width:100%" />
+        </colgroup>
+        <thead>
+          <tr>
+            <th class="cals_rowsep cals_entry-border-top cals_align-left cals_valign-top">tgroup5:th1</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="cals_rowsep cals_valign-top">tgroup5:td1</td>
+          </tr>
+          <tr>
+            <td class="cals_rowsep cals_valign-top">tgroup5:td2</td>
+          </tr>
+          <tr>
+            <td class="cals_rowsep cals_valign-top">tgroup5:td3</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Frame bottom</h2>
+    <div class="cals_table" data-cals-tabstyle="frame-bottom">
+      <table class="cals_tgroup cals_frame-none" style="width:100%">
+        <colgroup>
+          <col style="width:50%" />
+          <col style="width:50%" />
+        </colgroup>
+        <thead>
+          <tr>
+            <th class="cals_colsep cals_align-left cals_valign-top">tgroup0:thead1</th>
+            <th class="cals_rowsep cals_align-left cals_valign-top">tgroup0:thead2</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="cals_valign-top">tgroup0:td1</td>
+            <td class="cals_colsep cals_rowsep cals_valign-top">tgroup0:td2</td>
+          </tr>
+          <tr>
+            <td class="cals_colsep cals_valign-top">tgroup0:td3</td>
+            <td class="cals_rowsep cals_valign-top">tgroup0:td4</td>
+          </tr>
+          <tr>
+            <td class="cals_rowsep cals_valign-top">tgroup0:td4</td>
+            <td class="cals_colsep cals_rowsep cals_valign-top">tgroup0:td5</td>
+          </tr>
+        </tbody>
+      </table>
+      <table class="cals_tgroup cals_frame-none" style="width:100%">
+        <colgroup>
+          <col style="width:33%" />
+          <col style="width:33%" />
+          <col style="width:33%" />
+        </colgroup>
+        <thead>
+          <tr>
+            <th class="cals_align-left cals_valign-top">tgroup1:thead1</th>
+            <th class="cals_colsep cals_rowsep cals_align-left cals_valign-top">tgroup1:thead2</th>
+            <th class="cals_align-left cals_valign-top">tgroup1:thead3</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="cals_colsep cals_valign-top">tgroup1:td1</td>
+            <td class="cals_rowsep cals_valign-top">tgroup1:td2</td>
+            <td class="cals_rowsep cals_valign-top">tgroup1:td3</td>
+          </tr>
+          <tr>
+            <td class="cals_rowsep cals_valign-top">tgroup1:td4</td>
+            <td class="cals_rowsep cals_valign-top" rowspan="2">tgroup1:td5</td>
+            <td class="cals_colsep cals_rowsep cals_valign-top" rowspan="3">tgroup1:td6</td>
+          </tr>
+          <tr>
+            <td class="cals_colsep cals_valign-top">tgroup1:td7</td>
+          </tr>
+          <tr>
+            <td class="cals_colsep cals_rowsep cals_valign-top" colspan="2">tgroup1:td8</td>
+          </tr>
+        </tbody>
+      </table>
+      <table class="cals_tgroup cals_frame-none" style="width:100%">
+        <colgroup>
+          <col style="width:50%" />
+          <col style="width:50%" />
+        </colgroup>
+        <thead>
+          <tr>
+            <th class="cals_align-left cals_valign-top">tgroup2:thead1</th>
+            <th class="cals_colsep cals_rowsep cals_align-left cals_valign-top">tgroup2:thead2</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="cals_colsep cals_valign-top" rowspan="3">tgroup2:td1</td>
+            <td class="cals_rowsep cals_valign-top">tgroup2:td2</td>
+          </tr>
+          <tr>
+            <td class="cals_rowsep cals_valign-top">tgroup2:td3</td>
+          </tr>
+          <tr>
+            <td class="cals_colsep cals_valign-top">tgroup2:td4</td>
+          </tr>
+          <tr>
+            <td class="cals_colsep cals_rowsep cals_valign-top" colspan="2">tgroup2:td5</td>
+          </tr>
+        </tbody>
+      </table>
+      <table class="cals_tgroup cals_frame-none" style="width:100%">
+        <colgroup>
+          <col style="width:50%" />
+          <col style="width:50%" />
+        </colgroup>
+        <thead>
+          <tr>
+            <th class="cals_align-left cals_valign-top">tgroup3:thead1</th>
+            <th class="cals_colsep cals_rowsep cals_align-left cals_valign-top">tgroup3:thead2</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="cals_valign-top">tgroup3:td1</td>
+            <td class="cals_colsep cals_rowsep cals_valign-top">tgroup3:td2</td>
+          </tr>
+          <tr>
+            <td class="cals_colsep cals_rowsep cals_valign-top" colspan="2">tgroup3:td3</td>
+          </tr>
+          <tr>
+            <td class="cals_rowsep cals_valign-top">tgroup3:td4</td>
+            <td class="cals_colsep cals_rowsep cals_valign-top">tgroup3:td5</td>
+          </tr>
+        </tbody>
+      </table>
+      <table class="cals_tgroup cals_frame-none" style="width:100%">
+        <colgroup>
+          <col style="width:50%" />
+          <col style="width:50%" />
+        </colgroup>
+        <tbody>
+          <tr>
+            <td class="cals_valign-top">tgroup4:td1</td>
+            <td class="cals_valign-top">tgroup4:td2</td>
+          </tr>
+          <tr>
+            <td class="cals_valign-top" colspan="2">tgroup4:td3</td>
+          </tr>
+          <tr>
+            <td class="cals_rowsep cals_valign-top">tgroup4:td4</td>
+            <td class="cals_rowsep cals_valign-top">tgroup4:td5</td>
+          </tr>
+        </tbody>
+      </table>
+      <table class="cals_tgroup cals_frame-none" style="width:100%">
+        <colgroup>
+          <col style="width:100%" />
+        </colgroup>
+        <thead>
+          <tr>
+            <th class="cals_rowsep cals_align-left cals_valign-top">tgroup5:th1</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="cals_rowsep cals_valign-top">tgroup5:td1</td>
+          </tr>
+          <tr>
+            <td class="cals_rowsep cals_valign-top">tgroup5:td2</td>
+          </tr>
+          <tr>
+            <td class="cals_rowsep cals_valign-top">tgroup5:td3</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Frame topbot</h2>
+    <div class="cals_table" data-cals-tabstyle="frame-topbot">
+      <table class="cals_tgroup cals_frame-none" style="width:100%">
+        <colgroup>
+          <col style="width:50%" />
+          <col style="width:50%" />
+        </colgroup>
+        <thead>
+          <tr>
+            <th class="cals_colsep cals_entry-border-top cals_align-left cals_valign-top">tgroup0:thead1</th>
+            <th class="cals_rowsep cals_entry-border-top cals_align-left cals_valign-top">tgroup0:thead2</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="cals_valign-top">tgroup0:td1</td>
+            <td class="cals_colsep cals_rowsep cals_valign-top">tgroup0:td2</td>
+          </tr>
+          <tr>
+            <td class="cals_colsep cals_valign-top">tgroup0:td3</td>
+            <td class="cals_rowsep cals_valign-top">tgroup0:td4</td>
+          </tr>
+          <tr>
+            <td class="cals_rowsep cals_valign-top">tgroup0:td4</td>
+            <td class="cals_colsep cals_rowsep cals_valign-top">tgroup0:td5</td>
+          </tr>
+        </tbody>
+      </table>
+      <table class="cals_tgroup cals_frame-none" style="width:100%">
+        <colgroup>
+          <col style="width:33%" />
+          <col style="width:33%" />
+          <col style="width:33%" />
+        </colgroup>
+        <thead>
+          <tr>
+            <th class="cals_entry-border-top cals_align-left cals_valign-top">tgroup1:thead1</th>
+            <th class="cals_colsep cals_rowsep cals_entry-border-top cals_align-left cals_valign-top">tgroup1:thead2</th>
+            <th class="cals_entry-border-top cals_align-left cals_valign-top">tgroup1:thead3</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="cals_colsep cals_valign-top">tgroup1:td1</td>
+            <td class="cals_rowsep cals_valign-top">tgroup1:td2</td>
+            <td class="cals_rowsep cals_valign-top">tgroup1:td3</td>
+          </tr>
+          <tr>
+            <td class="cals_rowsep cals_valign-top">tgroup1:td4</td>
+            <td class="cals_rowsep cals_valign-top" rowspan="2">tgroup1:td5</td>
+            <td class="cals_colsep cals_rowsep cals_valign-top" rowspan="3">tgroup1:td6</td>
+          </tr>
+          <tr>
+            <td class="cals_colsep cals_valign-top">tgroup1:td7</td>
+          </tr>
+          <tr>
+            <td class="cals_colsep cals_rowsep cals_valign-top" colspan="2">tgroup1:td8</td>
+          </tr>
+        </tbody>
+      </table>
+      <table class="cals_tgroup cals_frame-none" style="width:100%">
+        <colgroup>
+          <col style="width:50%" />
+          <col style="width:50%" />
+        </colgroup>
+        <thead>
+          <tr>
+            <th class="cals_entry-border-top cals_align-left cals_valign-top">tgroup2:thead1</th>
+            <th class="cals_colsep cals_rowsep cals_entry-border-top cals_align-left cals_valign-top">tgroup2:thead2</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="cals_colsep cals_valign-top" rowspan="3">tgroup2:td1</td>
+            <td class="cals_rowsep cals_valign-top">tgroup2:td2</td>
+          </tr>
+          <tr>
+            <td class="cals_rowsep cals_valign-top">tgroup2:td3</td>
+          </tr>
+          <tr>
+            <td class="cals_colsep cals_valign-top">tgroup2:td4</td>
+          </tr>
+          <tr>
+            <td class="cals_colsep cals_rowsep cals_valign-top" colspan="2">tgroup2:td5</td>
+          </tr>
+        </tbody>
+      </table>
+      <table class="cals_tgroup cals_frame-none" style="width:100%">
+        <colgroup>
+          <col style="width:50%" />
+          <col style="width:50%" />
+        </colgroup>
+        <thead>
+          <tr>
+            <th class="cals_entry-border-top cals_align-left cals_valign-top">tgroup3:thead1</th>
+            <th class="cals_colsep cals_rowsep cals_entry-border-top cals_align-left cals_valign-top">tgroup3:thead2</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="cals_valign-top">tgroup3:td1</td>
+            <td class="cals_colsep cals_rowsep cals_valign-top">tgroup3:td2</td>
+          </tr>
+          <tr>
+            <td class="cals_colsep cals_rowsep cals_valign-top" colspan="2">tgroup3:td3</td>
+          </tr>
+          <tr>
+            <td class="cals_rowsep cals_valign-top">tgroup3:td4</td>
+            <td class="cals_colsep cals_rowsep cals_valign-top">tgroup3:td5</td>
+          </tr>
+        </tbody>
+      </table>
+      <table class="cals_tgroup cals_frame-none" style="width:100%">
+        <colgroup>
+          <col style="width:50%" />
+          <col style="width:50%" />
+        </colgroup>
+        <tbody>
+          <tr>
+            <td class="cals_entry-border-top cals_valign-top">tgroup4:td1</td>
+            <td class="cals_entry-border-top cals_valign-top">tgroup4:td2</td>
+          </tr>
+          <tr>
+            <td class="cals_valign-top" colspan="2">tgroup4:td3</td>
+          </tr>
+          <tr>
+            <td class="cals_rowsep cals_valign-top">tgroup4:td4</td>
+            <td class="cals_rowsep cals_valign-top">tgroup4:td5</td>
+          </tr>
+        </tbody>
+      </table>
+      <table class="cals_tgroup cals_frame-none" style="width:100%">
+        <colgroup>
+          <col style="width:100%" />
+        </colgroup>
+        <thead>
+          <tr>
+            <th class="cals_rowsep cals_entry-border-top cals_align-left cals_valign-top">tgroup5:th1</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="cals_rowsep cals_valign-top">tgroup5:td1</td>
+          </tr>
+          <tr>
+            <td class="cals_rowsep cals_valign-top">tgroup5:td2</td>
+          </tr>
+          <tr>
+            <td class="cals_rowsep cals_valign-top">tgroup5:td3</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Frame sides</h2>
+    <div class="cals_table" data-cals-tabstyle="frame-sides">
+      <table class="cals_tgroup cals_frame-none" style="width:100%">
+        <colgroup>
+          <col style="width:50%" />
+          <col style="width:50%" />
+        </colgroup>
+        <thead>
+          <tr>
+            <th class="cals_colsep cals_entry-border-left cals_align-left cals_valign-top">tgroup0:thead1</th>
+            <th class="cals_colsep cals_rowsep cals_align-left cals_valign-top">tgroup0:thead2</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="cals_entry-border-left cals_valign-top">tgroup0:td1</td>
+            <td class="cals_colsep cals_rowsep cals_valign-top">tgroup0:td2</td>
+          </tr>
+          <tr>
+            <td class="cals_colsep cals_entry-border-left cals_valign-top">tgroup0:td3</td>
+            <td class="cals_colsep cals_rowsep cals_valign-top">tgroup0:td4</td>
+          </tr>
+          <tr>
+            <td class="cals_entry-border-left cals_valign-top">tgroup0:td4</td>
+            <td class="cals_colsep cals_rowsep cals_valign-top">tgroup0:td5</td>
+          </tr>
+        </tbody>
+      </table>
+      <table class="cals_tgroup cals_frame-none" style="width:100%">
+        <colgroup>
+          <col style="width:33%" />
+          <col style="width:33%" />
+          <col style="width:33%" />
+        </colgroup>
+        <thead>
+          <tr>
+            <th class="cals_entry-border-left cals_align-left cals_valign-top">tgroup1:thead1</th>
+            <th class="cals_colsep cals_rowsep cals_align-left cals_valign-top">tgroup1:thead2</th>
+            <th class="cals_colsep cals_align-left cals_valign-top">tgroup1:thead3</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="cals_colsep cals_entry-border-left cals_valign-top">tgroup1:td1</td>
+            <td class="cals_rowsep cals_valign-top">tgroup1:td2</td>
+            <td class="cals_colsep cals_rowsep cals_valign-top">tgroup1:td3</td>
+          </tr>
+          <tr>
+            <td class="cals_rowsep cals_entry-border-left cals_valign-top">tgroup1:td4</td>
+            <td class="cals_rowsep cals_valign-top" rowspan="2">tgroup1:td5</td>
+            <td class="cals_colsep cals_rowsep cals_valign-top" rowspan="3">tgroup1:td6</td>
+          </tr>
+          <tr>
+            <td class="cals_colsep cals_entry-border-left cals_valign-top">tgroup1:td7</td>
+          </tr>
+          <tr>
+            <td class="cals_colsep cals_entry-border-left cals_valign-top" colspan="2">tgroup1:td8</td>
+          </tr>
+        </tbody>
+      </table>
+      <table class="cals_tgroup cals_frame-none" style="width:100%">
+        <colgroup>
+          <col style="width:50%" />
+          <col style="width:50%" />
+        </colgroup>
+        <thead>
+          <tr>
+            <th class="cals_entry-border-left cals_align-left cals_valign-top">tgroup2:thead1</th>
+            <th class="cals_colsep cals_rowsep cals_align-left cals_valign-top">tgroup2:thead2</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="cals_colsep cals_entry-border-left cals_valign-top" rowspan="3">tgroup2:td1</td>
+            <td class="cals_colsep cals_rowsep cals_valign-top">tgroup2:td2</td>
+          </tr>
+          <tr>
+            <td class="cals_colsep cals_rowsep cals_valign-top">tgroup2:td3</td>
+          </tr>
+          <tr>
+            <td class="cals_colsep cals_valign-top">tgroup2:td4</td>
+          </tr>
+          <tr>
+            <td class="cals_colsep cals_rowsep cals_entry-border-left cals_valign-top" colspan="2">tgroup2:td5</td>
+          </tr>
+        </tbody>
+      </table>
+      <table class="cals_tgroup cals_frame-none" style="width:100%">
+        <colgroup>
+          <col style="width:50%" />
+          <col style="width:50%" />
+        </colgroup>
+        <thead>
+          <tr>
+            <th class="cals_entry-border-left cals_align-left cals_valign-top">tgroup3:thead1</th>
+            <th class="cals_colsep cals_rowsep cals_align-left cals_valign-top">tgroup3:thead2</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="cals_entry-border-left cals_valign-top">tgroup3:td1</td>
+            <td class="cals_colsep cals_rowsep cals_valign-top">tgroup3:td2</td>
+          </tr>
+          <tr>
+            <td class="cals_colsep cals_rowsep cals_entry-border-left cals_valign-top" colspan="2">tgroup3:td3</td>
+          </tr>
+          <tr>
+            <td class="cals_entry-border-left cals_valign-top">tgroup3:td4</td>
+            <td class="cals_colsep cals_valign-top">tgroup3:td5</td>
+          </tr>
+        </tbody>
+      </table>
+      <table class="cals_tgroup cals_frame-none" style="width:100%">
+        <colgroup>
+          <col style="width:50%" />
+          <col style="width:50%" />
+        </colgroup>
+        <tbody>
+          <tr>
+            <td class="cals_entry-border-left cals_valign-top">tgroup4:td1</td>
+            <td class="cals_colsep cals_valign-top">tgroup4:td2</td>
+          </tr>
+          <tr>
+            <td class="cals_colsep cals_entry-border-left cals_valign-top" colspan="2">tgroup4:td3</td>
+          </tr>
+          <tr>
+            <td class="cals_entry-border-left cals_valign-top">tgroup4:td4</td>
+            <td class="cals_colsep cals_valign-top">tgroup4:td5</td>
+          </tr>
+        </tbody>
+      </table>
+      <table class="cals_tgroup cals_frame-none" style="width:100%">
+        <colgroup>
+          <col style="width:100%" />
+        </colgroup>
+        <thead>
+          <tr>
+            <th class="cals_colsep cals_rowsep cals_entry-border-left cals_align-left cals_valign-top">tgroup5:th1</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="cals_colsep cals_rowsep cals_entry-border-left cals_valign-top">tgroup5:td1</td>
+          </tr>
+          <tr>
+            <td class="cals_colsep cals_rowsep cals_entry-border-left cals_valign-top">tgroup5:td2</td>
+          </tr>
+          <tr>
+            <td class="cals_colsep cals_rowsep cals_entry-border-left cals_valign-top">tgroup5:td3</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </body>
+</html>

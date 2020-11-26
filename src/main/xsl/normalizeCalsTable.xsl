@@ -58,6 +58,14 @@
   
   <xsl:mode name="xslLib:normalizeCalsTable" on-no-match="shallow-copy"/>
   
+  <!--Default frame value is "all"-->
+  <xsl:template match="table[not(@frame)]" mode="xslLib:normalizeCalsTable">
+    <xsl:copy copy-namespaces="no">
+      <xsl:attribute name="frame" select="'all'"/>
+      <xsl:apply-templates select="@* | node()" mode="#current"/>
+    </xsl:copy>
+  </xsl:template>
+  
   <!--Normalize yesorno values (0/false or 1/true becomes yes/no)-->
   <xsl:template match="
     table/@colsep | table/@rowsep | table/@tocentry | table/@shortentry | table/@pgwide |
@@ -115,7 +123,7 @@
   
   <xsl:mode name="xslLib:normalizeCalsTable.transpec-normalization" on-no-match="shallow-copy"/>
   
-  <xsl:template match="thead | tbody | tfoot" mode="xslLib:normalizeCalsTable.transpec-normalization" >
+  <xsl:template match="tgroup" mode="xslLib:normalizeCalsTable.transpec-normalization" >
     <xsl:sequence select="cals:normalize(.)"/>
   </xsl:template>
   
@@ -129,9 +137,6 @@
     mode="xslLib:normalizeCalsTable.finally">
     <xsl:attribute name="{local-name()}" select="."/>
   </xsl:template>
-  
-  <xsl:template match="(:@calstable:morerows[. = '0'] |:) @calstable:id"
-    mode="xslLib:normalizeCalsTable.finally"/>
   
   <!--pretty print : namespace at root element-->
   <xsl:template match="/*" mode="xslLib:normalizeCalsTable.finally">

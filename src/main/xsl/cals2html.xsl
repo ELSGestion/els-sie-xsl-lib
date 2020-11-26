@@ -28,6 +28,9 @@
   <xsl:import href="setCalsTableNS.xsl"/>
   <xsl:import href="normalizeCalsTable.xsl"/>
   
+  <!--KEYS-->
+  <xsl:key name="xslLib:cals2html.getGhostEntriesByRid" match="entry[@calstable:rid]" use="@calstable:rid"/>
+  
   <!--PARAMETERS-->
   <!--common-->
   <xsl:param name="xslLib:cals2html.log.uri" select="resolve-uri('log/', base-uri())" as="xs:string"/>
@@ -56,9 +59,11 @@
   <!-- force @align / @valign default values to be specified in HTML (as class or css)-->
   <xsl:param name="xslLib:cals2html.default-align-force-explicit" select="false()" as="xs:boolean"/>
   <xsl:param name="xslLib:cals2html.default-valign-force-explicit" select="false()" as="xs:boolean"/>
-  <!--Try to merge multiple tgroup table into a single html table: be carefull this might have side effect 
+  <!--force to merge multiple tgroup table into a single html table: be carefull this might have side effect 
     (loose tgroupstyle or adding colspan that will make the table look a bit different)-->
   <xsl:param name="xslLib:cals2html.forceMergingMultipleTgroup" select="false()" as="xs:boolean"/>
+  <!--When html border collapse (table border and cells borders are collapsing) one can set borders on cells only and set no border at table-->
+  <xsl:param name="xslLib:cals2html.html-border-collapse" select="false()" as="xs:boolean"/>
   
   <!--==============================================================================================================================-->
   <!-- INIT -->
@@ -427,10 +432,14 @@
       <!--attributes that doesn't generate @style or @class like : ../@orient | @id ?-->
       <xsl:apply-templates select="@*" mode="xslLib:cals2html.attributes"/> 
       <xsl:variable name="class.tmp" as="xs:string*">
+        <!--Assume : frame is applied on each tgroups-->
         <xsl:text>cals_tgroup</xsl:text>
         <!--cals:table/@frame ::= none | top | bottom | topbot | sides | all
-        default is "all"-->
-        <xsl:value-of select="concat('cals_frame-', (../@frame, 'all')[1])"/>
+        default "all" has been set at normalizeCalsTable step-->
+        <!--When border collapse, set the frame to "none" because frame border has been set on the cells-->
+        <xsl:variable name="frame" as="xs:string" 
+          select="if ($xslLib:cals2html.html-border-collapse) then ('none') else (../@frame)"/>
+        <xsl:value-of select="'cals_frame-' || $frame"/>
       </xsl:variable>
       <xsl:if test="not(empty($class.tmp))">
         <xsl:attribute name="class" select="string-join($class.tmp, ' ')"/>
@@ -492,6 +501,7 @@
   <!-- CALS MODEL : tbody ::= row+-->
   <xsl:template match="tbody" mode="xslLib:cals2html.main">
     <tbody>
+      <xsl:apply-templates select="@*" mode="xslLib:cals2html.attributes"/>
       <xsl:apply-templates mode="#current"/>
     </tbody>
   </xsl:template>
@@ -535,12 +545,69 @@
       <!--At this point 'colsep', 'rowsep', 'align' and 'valign' have been moved to entries 
         cf. step "xslLib:cals2html.moveAttributesDownEntries"-->
       <xsl:variable name="class.tmp" as="xs:string*">
-        <xsl:if test="@colsep != '0'">
-          <xsl:text>cals_colsep</xsl:text>
-        </xsl:if>
-        <xsl:if test="@rowsep != '0'">
-          <xsl:text>cals_rowsep</xsl:text>
-        </xsl:if>
+        <xsl:variable name="colsep" as="xs:string?"
+          select="if (@colsep != '0') then ('cals_colsep') else ()"/>
+        <xsl:variable name="rowsep" as="xs:string?"
+          select="if (@rowsep != '0') then ('cals_rowsep') else ()"/>
+        <xsl:choose>
+          <xsl:when test="$xslLib:cals2html.html-border-collapse">
+            <!--At this point the table @frame has been forced to "none", let's get its original value-->
+            <!--if asbent, @frame has been added at normalization-->
+            <xsl:variable name="frame" select="ancestor::table[1]/@frame" as="xs:string"/>
+            <!--BORDER-RIGHT => COLSEP -->
+            <!--When cell border is collapsing with table border we have to apply these rules : 
+              - If the cell has no colsep but the table frame defines one at this cell, set it.
+              - If the cell has no colsep and the table frame defines an empty one at this cell, keep it
+              - If the cell has colsep and the table frame defines an empty one at this cell, keep it
+              - If the cell has colsep and the table frame defines one at this cell, keep it-->
+            <xsl:choose>
+              <xsl:when test="$frame = ('all', 'sides') 
+                and xslLib:cals2html.getOutlineCellPositions(.) = 'right' 
+                and @colsep = '0'">
+                <xsl:text>cals_colsep</xsl:text>
+              </xsl:when>
+              <xsl:otherwise>
+                <xsl:sequence select="$colsep"/>
+              </xsl:otherwise>
+            </xsl:choose>
+            <!--BORDER-BOTTOM => ROWSEP-->
+            <!--When cell border is collapsing with table border we have to apply these rules : 
+              - If the cell has no rowsep but the table frame defines one at this cell, set it.
+              - If the cell has no rowsep and the table frame defines an empty one at this cell, keep it
+              - If the cell has rowsep and the table frame defines an empty one at this cell, keep it
+              - If the cell has rowsep and the table frame defines one at this cell, keep it-->
+            <xsl:choose>
+              <xsl:when test="$frame = ('all', 'bottom', 'topbot')
+                (: and not($current-tgroup/following-sibling::tgroup) (:we should check if this is the last tgroup:) :)
+                (: NOTE : if so then we shouldn't set the frame (as class) on tgroup (cf. l.440) but on the div class='cals_table'
+                  Assume : frame is applied on each tgroups:)
+                and xslLib:cals2html.getOutlineCellPositions(.) = 'bottom'
+                and @rowsep = '0'">
+                <xsl:text>cals_rowsep</xsl:text>
+              </xsl:when>
+              <xsl:otherwise>
+                <xsl:sequence select="$rowsep"/>
+              </xsl:otherwise>
+            </xsl:choose>
+            <!--BORDER-TOP => no equivalent in CALS-->
+            <xsl:if test="$frame = ('all', 'topbot', 'top')
+              (: and not($current-tgroup/preceding-sibling::tgroup) (:check this is the 1st tgroup:) :)
+              (: NOTE : if so then we shouldn't set the frame (as class) on tgroup (cf. l.440) but on the div class='cals_table'
+                 Assume : frame is applied on each tgroups :)
+              and xslLib:cals2html.getOutlineCellPositions(.) = 'top'">
+              <xsl:text>cals_entry-border-top</xsl:text>
+            </xsl:if>
+            <!--BORDER-LEFT => no equivalent in CALS-->
+            <xsl:if test="$frame = ('all', 'sides')
+              and xslLib:cals2html.getOutlineCellPositions(.) = 'left'">
+              <xsl:text>cals_entry-border-left</xsl:text>
+            </xsl:if>
+          </xsl:when>
+          <xsl:otherwise>
+            <xsl:sequence select="$colsep"/>
+            <xsl:sequence select="$rowsep"/>
+          </xsl:otherwise>
+        </xsl:choose>
         <xsl:variable name="align-default" as="xs:string" select="if($name = 'td') then($xslLib:cals2html.default-td-align) else($xslLib:cals2html.default-th-align)"/>
         <xsl:if test="(@align != $align-default) or $xslLib:cals2html.default-align-force-explicit">
           <xsl:value-of select="concat('cals_align-', lower-case(@align))" />
@@ -667,6 +734,9 @@
       <entry key="cals_colsep">border-right:1px solid</entry>
       <!-- rowsep -->
       <entry key="cals_rowsep">border-bottom:1px solid</entry>
+      <!--Other values to get the top and left frame when $xslLib:cals2html.html-border-collapse-->
+      <entry key="cals_entry-border-top">border-top:1px solid</entry>
+      <entry key="cals_entry-border-left">border-left:1px solid</entry>
     </mapping>
   </xsl:variable>
   
@@ -682,8 +752,8 @@
       <xsl:variable name="style" as="xs:string*">
         <xsl:sequence select="tokenize(@style, ';')"/>
         <xsl:for-each select="tokenize(@class, '\s+')[. = $xslLib:cals2html.class2style.mapping/entry/@key]">
-          <xsl:variable name="val" select="." as="xs:string"/>
-          <xsl:sequence select="tokenize($xslLib:cals2html.class2style.mapping/entry[@key = $val], ';')"/>
+          <xsl:variable name="val" select="." as="xs:string*"/>
+          <xsl:sequence select="$xslLib:cals2html.class2style.mapping/entry[@key = $val] ! tokenize(., ';')"/>
         </xsl:for-each>
       </xsl:variable>
       <xsl:if test="not(empty($style))">
@@ -939,4 +1009,70 @@
     </xsl:choose>
   </xsl:function>
   
+  <!--Cals table need to be first normalized (with ghost entries). This function give the position(s)
+  of an outline cell (a cell that touch the table frame). Position can be : top, left, bottom, right.
+  It can also have several values, for example corner cell: ('bottom', 'right')-->
+  <xsl:function name="xslLib:cals2html.getOutlineCellPositions" as="xs:string*">
+    <xsl:param name="entry" as="element(entry)"/>
+    <xsl:variable name="row" select="$entry/parent::row" as="element(row)"/>
+    <xsl:variable name="tgroup" select="$entry/ancestor::tgroup[1]" as="element(tgroup)"/>
+    <!--If this entry is spanning (row or col) let's add all its ghost entries-->
+    <xsl:variable name="entries" as="element(entry)+"
+      select="if ($entry/@calstable:id) then(
+      ($entry, key('xslLib:cals2html.getGhostEntriesByRid', $entry/@calstable:id, $tgroup))
+      ) else ($entry)"/>
+    <xsl:variable name="top" as="xs:boolean">
+      <xsl:choose>
+        <!--the current cell row is the last of the current tgroup-->
+        <xsl:when test="($tgroup/descendant::row)[1] is $row">
+          <xsl:sequence select="true()"/>
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:sequence select="false()"/>
+        </xsl:otherwise>
+      </xsl:choose>
+    </xsl:variable>
+    <xsl:variable name="bottom" as="xs:boolean">
+      <xsl:choose>
+        <!--one of the entries (including ghost ones) is in the last row of the table-->
+        <!--fixme : we should also check for tfoot-->
+        <xsl:when test="some $cell in $entries satisfies 
+          ($cell/parent::row is ($tgroup/descendant::row)[last()])">
+          <xsl:sequence select="true()"/>
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:sequence select="false()"/>
+        </xsl:otherwise>
+      </xsl:choose>
+    </xsl:variable>
+    <xsl:variable name="right" as="xs:boolean">
+      <xsl:choose>
+        <!--there's no following entries (except ghost ones which doesn't come from a row spanning)
+            => we are at the end of the row-->
+        <xsl:when test="count($entry/following-sibling::entry except $entry/following-sibling::entry[@calstable:rid][not(@morerows)]) = 0">
+          <xsl:sequence select="true()"/>
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:sequence select="false()"/>
+        </xsl:otherwise>
+      </xsl:choose>
+    </xsl:variable>
+    <xsl:variable name="left" as="xs:boolean">
+      <xsl:choose>
+        <!--there's no preceding entries (except ghost ones which doesn't come from a row spanning)
+            => we are at the beginning of the row-->
+        <xsl:when test="count($entry/preceding-sibling::entry except $entry/following-sibling::entry[@calstable:rid][not(@morerows)]) = 0">
+          <xsl:sequence select="true()"/>
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:sequence select="false()"/>
+        </xsl:otherwise>
+      </xsl:choose>
+    </xsl:variable>
+    <!--Result as multiple string-->
+    <xsl:sequence select="if ($top) then 'top' else()"/>
+    <xsl:sequence select="if ($bottom) then 'bottom' else()"/>
+    <xsl:sequence select="if ($right) then 'right' else()"/>
+    <xsl:sequence select="if ($left) then 'left' else()"/>
+  </xsl:function>
 </xsl:stylesheet>

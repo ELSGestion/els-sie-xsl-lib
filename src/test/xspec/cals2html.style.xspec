@@ -15,7 +15,7 @@
   
   <x:param name="xslLib:cals2html.use-style-insteadOf-class" select="true()"/>
   
-  <x:scenario label="CALS2HTML" xml:base="../samples/tables/">
+  <x:scenario label="CALS2HTML -style" xml:base="../samples/tables/">
     <x:scenario label="Table jira CHAINE-1885">
       <x:context select="/">
         <xi:include href="Table_CHAINE-1885.xml"/>
@@ -74,6 +74,19 @@
         select="serialize(/*) ! replace(., '(xml:base=&quot;.*?&quot;)', '') ! parse-xml(.)/html:html/html:body"
         test="serialize(/*) ! replace(., '(xml:base=&quot;.*?&quot;)', '') ! parse-xml(.)/html:html/html:body">
         <xi:include href="cals-table-multiple-tgroup.style.htm"/>
+      </x:expect>
+    </x:scenario>
+  </x:scenario>
+  
+  <x:scenario label="CALS2HTML -style" xml:base="../samples/tables/cals2html-html-border-collapse/">
+    <x:scenario label="cals2html-html-border-collapse.xml > cals2html-html-border-collapse.style.htm">
+      <x:context select="/">
+        <xi:include href="cals2html-html-border-collapse.xml"/>
+      </x:context>
+      <x:expect label="OK"
+        select="serialize(/*) ! replace(., '(xml:base=&quot;.*?&quot;)', '') ! parse-xml(.)/html:html/html:body"
+        test="serialize(/*) ! replace(., '(xml:base=&quot;.*?&quot;)', '') ! parse-xml(.)/html:html/html:body">
+        <xi:include href="cals2html-html-border-collapse.style.htm"/>
       </x:expect>
     </x:scenario>
   </x:scenario>

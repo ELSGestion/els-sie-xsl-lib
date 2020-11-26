@@ -14,27 +14,17 @@
   <x:param name="xslLib:baseUri" select="xs:anyURI('https://xspec.io/')" as="xs:anyURI"/>
   
   <x:param name="xslLib:cals2html.forceMergingMultipleTgroup" select="true()"/>
+  <x:param name="xslLib:cals2html.html-border-collapse" select="true()"/>
   
-  <x:scenario label="CALS2HTML -style -mergeTgroup (issue #22)" xml:base="../samples/tables/">
-    <x:context select="/">
-      <xi:include href="cals-table-multiple-tgroup.xml"/>
-    </x:context>
-    <x:expect label="OK"
-      select="serialize(/*) ! replace(., '(xml:base=&quot;.*?&quot;)', '') ! parse-xml(.)/html:html/html:body"
-      test="serialize(/*) ! replace(., '(xml:base=&quot;.*?&quot;)', '') ! parse-xml(.)/html:html/html:body">
-      <xi:include href="cals-table-multiple-tgroup.mergeTgroup.htm"/>
-    </x:expect>
-  </x:scenario>
-  
-  <x:scenario label="CALS2HTML -style -mergeTgroup" xml:base="../samples/tables/cals2html-html-border-collapse/">
-    <x:scenario label="cals2html-html-border-collapse.xml > cals2html-html-border-collapse.mergeTgroup.htm">
+  <x:scenario label="CALS2HTML -style -mergeTgroup -border-collapse" xml:base="../samples/tables/cals2html-html-border-collapse/">
+    <x:scenario label="cals2html-html-border-collapse.xml > cals2html-html-border-collapse.mergeTgroup.border-collapse.htm">
       <x:context select="/">
         <xi:include href="cals2html-html-border-collapse.xml"/>
       </x:context>
       <x:expect label="OK"
         select="serialize(/*) ! replace(., '(xml:base=&quot;.*?&quot;)', '') ! parse-xml(.)/html:html/html:body"
         test="serialize(/*) ! replace(., '(xml:base=&quot;.*?&quot;)', '') ! parse-xml(.)/html:html/html:body">
-        <xi:include href="cals2html-html-border-collapse.mergeTgroup.htm"/>
+        <xi:include href="cals2html-html-border-collapse.mergeTgroup.border-collapse.htm"/>
       </x:expect>
     </x:scenario>
   </x:scenario>
