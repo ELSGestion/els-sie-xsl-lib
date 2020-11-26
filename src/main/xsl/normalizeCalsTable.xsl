@@ -66,7 +66,7 @@
     </xsl:copy>
   </xsl:template>
   
-  <!--Normalize yesorno values (0/false or 1/true becomes yes/no)-->
+  <!--Normalize yesorno values (yes/no becomes 1/0)-->
   <xsl:template match="
     table/@colsep | table/@rowsep | table/@tocentry | table/@shortentry | table/@pgwide |
     tgroup/@colsep | tgroup/@rowsep |

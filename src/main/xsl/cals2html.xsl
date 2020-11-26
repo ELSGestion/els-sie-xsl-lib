@@ -19,6 +19,8 @@
       <xd:p>Each cals:table will be converted to an html:div, then each cals:tgroup will be converted to an html:table</xd:p>
       <xd:p>/!\ Cals elements must be in cals namespace before proceding, other elements will be copied as is, 
         set param $xslLib:cals2html.set-cals-ns to true if you want to let this XSLT preform this namespace operation</xd:p>
+      <xd:p>CALS specification interpretation : </xd:p>
+      <xd:ul>table/@frame is applied on each tgroups (not the whole table)</xd:ul>
     </xd:desc>
   </xd:doc>
   
@@ -227,8 +229,23 @@
   'colsep', 'rowsep', 'align', 'valign' except (FIXME) : 'char', 'charoff'--> 
   <xsl:template match="entry[not(@calstable:rid)]" mode="xslLib:cals2html.moveAttributesDownEntries">
     <xsl:variable name="current-colspec-list" select="xslLib:cals2html.get-colspecs(.)" as="element(colspec)*"/>
+    <xsl:variable name="tgroup" select="ancestor::tgroup[1]" as="element(tgroup)"/>
+    <xsl:variable name="table" select="ancestor::table[1]" as="element(table)"/>
     <xsl:variable name="colsep-current" as="xs:string">
       <xsl:choose>
+        <!--when tgroup merge is asked, and there are multiple tgroup in the current table
+        and the entry is one that touch right border of the table, table frame setting wins-->
+        <xsl:when test="$xslLib:cals2html.forceMergingMultipleTgroup and count($table/tgroup) gt 1 
+          and xslLib:cals2html.getOutlineCellPositions(.) = 'right'">
+          <xsl:choose>
+            <xsl:when test="$table/@frame = ('all', 'sides')">
+              <xsl:text>1</xsl:text>
+            </xsl:when>
+            <xsl:otherwise>
+              <xsl:text>0</xsl:text>
+            </xsl:otherwise>
+          </xsl:choose>
+        </xsl:when>
         <xsl:when test="@colsep">
           <xsl:value-of select="@colsep"/>
         </xsl:when>
@@ -246,6 +263,25 @@
     </xsl:variable>
     <xsl:variable name="rowsep-current" as="xs:string">
       <xsl:choose>
+        <!--when tgroup merge is asked, and there are multiple tgroup in the current table
+        and the entry is one that touch the bottom border of the table, table frame setting wins-->
+        <xsl:when test="$xslLib:cals2html.forceMergingMultipleTgroup and count($table/tgroup) gt 1 
+          and xslLib:cals2html.getOutlineCellPositions(.) = 'bottom'">
+          <xsl:choose>
+            <xsl:when test="$table/@frame = ('all', 'bottom', 'topbot')">
+              <!--info : we could also add "and $tgroup/following-sibling::tgroup" here, it would work too-->
+              <xsl:text>1</xsl:text>
+            </xsl:when>
+            <!--We are here at the end of a tgroup, if there's a following tgroup
+            and if frame is top we must set rowsep at bottom (to "simulate" top border of next tgroup)-->
+            <xsl:when test="$table/@frame = 'top' and $tgroup/following-sibling::tgroup">
+              <xsl:text>1</xsl:text>
+            </xsl:when>
+            <xsl:otherwise>
+              <xsl:text>0</xsl:text>
+            </xsl:otherwise>
+          </xsl:choose>
+        </xsl:when>
         <xsl:when test="@rowsep">
           <xsl:value-of select="@rowsep"/>
         </xsl:when>
@@ -309,7 +345,7 @@
     </xsl:copy>
   </xsl:template>
   
-  <!--Delete attributes that have been moved to cells-->
+  <!--Delete attributes that have been moved to entries-->
   <xsl:template match="cals:*[not(self::entry)]/@*[name() = ('colsep', 'rowsep', 'align', 'valign', 'char', 'charoff')]"
     mode="xslLib:cals2html.moveAttributesDownEntries"/>
   
@@ -333,7 +369,8 @@
             <cals:tgroup>
               <!--different @tgroupstyle values might be loosed at this point-->
               <xsl:sequence select="current-group()[1]/@*"/>
-              <!--colspec is necessary for colwidth and cells spanning (entry/@namest and entry/@nameend--> 
+              <!--after moveAttributesDownEntries step, colspec is still necessary for colwidth and cells spanning (entry/@namest and entry/@nameend)
+              let's keep the first maxsize one, it will drive some colwidth all allong the new table--> 
               <xsl:apply-templates select="(current-group()[xs:integer(@cols) = $max.cols])[1]/colspec" mode="#current"/>
               <!--No more <thead> here, an annotation will be add to keep thead cells information, and later convert them to html:th-->
               <cals:tbody>
@@ -351,7 +388,7 @@
     </xsl:copy>
   </xsl:template>
   
-  <!--Add html annotations to be used later in the conversion to HTML-->
+  <!--Add html annotations to be used later in the main cals2html step-->
   <!--FIXME : entrytbl is not implement here-->
   <xsl:template match="table[count(tgroup) gt 1][not(tgroup/tfoot)]/tgroup/*[self::thead or self::tbody]/row/entry"
     mode="xslLib:cals2html.mergeTgroups">
@@ -372,6 +409,7 @@
     </xsl:copy>
   </xsl:template>
   
+  <!--Update references to colspec: colname, namest and nameend values-->
   <xsl:template match="table[count(tgroup) gt 1][not(tgroup/tfoot)]/tgroup/*[self::thead or self::tbody]/row/entry
     /@*[local-name() = ('colname', 'namest', 'nameend')]"
     mode="xslLib:cals2html.mergeTgroups">
@@ -389,6 +427,7 @@
     </xsl:choose>
   </xsl:template>
   
+  <!--update colspec : colname-->
   <xsl:template match="table[count(tgroup) gt 1][not(tgroup/tfoot)]/tgroup/colspec/@colname"
     mode="xslLib:cals2html.mergeTgroups">
     <xsl:attribute name="colname" select="'c' || count(../preceding-sibling::colspec) + 1"/>
@@ -432,7 +471,7 @@
       <!--attributes that doesn't generate @style or @class like : ../@orient | @id ?-->
       <xsl:apply-templates select="@*" mode="xslLib:cals2html.attributes"/> 
       <xsl:variable name="class.tmp" as="xs:string*">
-        <!--Assume : frame is applied on each tgroups-->
+        <!--Assume : frame is applied on each tgroups (not the whole table)-->
         <xsl:text>cals_tgroup</xsl:text>
         <!--cals:table/@frame ::= none | top | bottom | topbot | sides | all
         default "all" has been set at normalizeCalsTable step-->
@@ -580,7 +619,7 @@
               <xsl:when test="$frame = ('all', 'bottom', 'topbot')
                 (: and not($current-tgroup/following-sibling::tgroup) (:we should check if this is the last tgroup:) :)
                 (: NOTE : if so then we shouldn't set the frame (as class) on tgroup (cf. l.440) but on the div class='cals_table'
-                  Assume : frame is applied on each tgroups:)
+                Assume : frame is applied on each tgroups (not the whole table) (not the whole table):)
                 and xslLib:cals2html.getOutlineCellPositions(.) = 'bottom'
                 and @rowsep = '0'">
                 <xsl:text>cals_rowsep</xsl:text>
