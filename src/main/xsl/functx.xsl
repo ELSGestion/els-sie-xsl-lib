@@ -1,5 +1,5 @@
 <!--
-	cf. http://www.xsltfunctions.com/xsl/functx-1.0-doc-2007-01.xsl
+	cf. http://www.xsltfunctions.com/xsl/functx-1.0.1-doc.xsl
 	ADAPTATION ELS : 
 	Suppression de xmlns:local="http://www.datypic.com/local" à la racine
 	Inutile et peut créer des conflits
@@ -12,7 +12,7 @@
  The FunctX XSLT Function Library
  ********************************
 
- Copyright (C) 2007 Datypic
+ Copyright (C) 2019 Datypic
 
  This library is free software; you can redistribute it and/or
  modify it under the terms of the GNU Lesser General Public
@@ -30,7 +30,7 @@
 
  For more information on the FunctX XSLT library, contact contrib@functx.com.
 
- @version 1.0
+ @version 1.0.1
  @see     http://www.xsltfunctions.com
 -->
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:dxmlf="http://www.datypic.com/xmlf" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:fn="http://www.w3.org/2005/xpath-functions" xmlns:functx="http://www.functx.com" exclude-result-prefixes="dxmlf xs" version="3.0">
@@ -40,13 +40,13 @@
   Adds attributes to XML elements 
 
  @author  Priscilla Walmsley, Datypic 
- @version 1.0 
+ @version 1.0.1 
  @see     http://www.xsltfunctions.com/xsl/functx_add-attributes.html 
  @param   $elements the element(s) to which you wish to add the attribute 
  @param   $attrNames the name(s) of the attribute(s) to add 
  @param   $attrValues the value(s) of the attribute(s) to add 
 -->
-<xsl:function xmlns:functx="http://www.functx.com" name="functx:add-attributes" as="element()?">
+<xsl:function xmlns:functx="http://www.functx.com" name="functx:add-attributes" as="element()*">
 <xsl:param name="elements" as="element()*"/>
 <xsl:param name="attrNames" as="xs:QName*"/>
 <xsl:param name="attrValues" as="xs:anyAtomicType*"/>
@@ -83,13 +83,13 @@
   Adds attributes to XML elements 
 
  @author  Priscilla Walmsley, Datypic 
- @version 1.0 
+ @version 1.0.1 
  @see     http://www.xsltfunctions.com/xsl/functx_add-or-update-attributes.html 
  @param   $elements the element(s) to which you wish to add the attribute 
  @param   $attrNames the name(s) of the attribute(s) to add 
  @param   $attrValues the value(s) of the attribute(s) to add 
 -->
-<xsl:function xmlns:functx="http://www.functx.com" name="functx:add-or-update-attributes" as="element()?">
+<xsl:function xmlns:functx="http://www.functx.com" name="functx:add-or-update-attributes" as="element()*">
 <xsl:param name="elements" as="element()*"/>
 <xsl:param name="attrNames" as="xs:QName*"/>
 <xsl:param name="attrValues" as="xs:anyAtomicType*"/>
@@ -296,13 +296,13 @@
   Changes the namespace of XML elements 
 
  @author  Priscilla Walmsley, Datypic 
- @version 1.0 
+ @version 1.0.1 
  @see     http://www.xsltfunctions.com/xsl/functx_change-element-ns.html 
  @param   $elements the elements to change 
  @param   $newns the new namespace 
  @param   $prefix the prefix to use for the new namespace 
 -->
-<xsl:function xmlns:functx="http://www.functx.com" name="functx:change-element-ns" as="element()?">
+<xsl:function xmlns:functx="http://www.functx.com" name="functx:change-element-ns" as="element()*">
 <xsl:param name="elements" as="element()*"/>
 <xsl:param name="newns" as="xs:string"/>
 <xsl:param name="prefix" as="xs:string"/>
@@ -346,12 +346,12 @@
   Whether one string contains another, without regard to case 
 
  @author  Priscilla Walmsley, Datypic 
- @version 1.0 
+ @version 1.0.1 
  @see     http://www.xsltfunctions.com/xsl/functx_contains-case-insensitive.html 
  @param   $arg the string to search 
  @param   $substring the substring to find 
 -->
-<xsl:function xmlns:functx="http://www.functx.com" name="functx:contains-case-insensitive" as="xs:boolean?">
+<xsl:function xmlns:functx="http://www.functx.com" name="functx:contains-case-insensitive" as="xs:boolean">
 <xsl:param name="arg" as="xs:string?"/>
 <xsl:param name="substring" as="xs:string"/>
 <xsl:sequence select=" contains(upper-case($arg), upper-case($substring)) "/>
@@ -1221,11 +1221,11 @@
   The maximum line length 
 
  @author  Priscilla Walmsley, Datypic 
- @version 1.0 
+ @version 1.0.1 
  @see     http://www.xsltfunctions.com/xsl/functx_max-line-length.html 
  @param   $arg the string to test 
 -->
-<xsl:function xmlns:functx="http://www.functx.com" name="functx:max-line-length" as="xs:integer">
+<xsl:function xmlns:functx="http://www.functx.com" name="functx:max-line-length" as="xs:integer?">
 <xsl:param name="arg" as="xs:string?"/>
 <xsl:sequence select=" max( for $line in functx:lines($arg) return string-length($line)) "/>
 </xsl:function>
@@ -1418,7 +1418,7 @@
   The number of regions that match a pattern 
 
  @author  Priscilla Walmsley, Datypic 
- @version 1.0 
+ @version 1.0.1 
  @see     http://www.xsltfunctions.com/xsl/functx_number-of-matches.html 
  @param   $arg the string to test 
  @param   $pattern the regular expression 
@@ -1426,20 +1426,20 @@
 <xsl:function xmlns:functx="http://www.functx.com" name="functx:number-of-matches" as="xs:integer">
 <xsl:param name="arg" as="xs:string?"/>
 <xsl:param name="pattern" as="xs:string"/>
-<xsl:sequence select=" count(tokenize($arg,$pattern)) - 1 "/>
+<xsl:sequence select=" if ($arg != '') then count(tokenize($arg,$pattern)) - 1 else 0 "/>
 </xsl:function>
 <!--
 
   Resolves a relative URI and references it, returning an XML document 
 
  @author  Priscilla Walmsley, Datypic 
- @version 1.0 
+ @version 1.0.1 
  @see     http://www.xsltfunctions.com/xsl/functx_open-ref-document.html 
  @param   $refNode a node whose value is a relative URI reference 
 -->
-<xsl:function xmlns:functx="http://www.functx.com" name="functx:open-ref-document" as="document-node()">
+<xsl:function xmlns:functx="http://www.functx.com" name="functx:open-ref-document" as="document-node()?">
 <xsl:param name="refNode" as="node()"/>
-<xsl:sequence select=" if (base-uri($refNode)) then doc(resolve-uri($refNode, base-uri($refNode))) else doc(resolve-uri($refNode)) "/>
+<xsl:sequence select=" if (base-uri($refNode)) then doc(resolve-uri($refNode, base-uri($refNode))) else if (static-base-uri()) then doc(resolve-uri($refNode, static-base-uri())) else () "/>
 </xsl:function>
 <!--
 
@@ -1583,12 +1583,12 @@
   Removes attributes from an XML element, based on name 
 
  @author  Priscilla Walmsley, Datypic 
- @version 1.0 
+ @version 1.0.1 
  @see     http://www.xsltfunctions.com/xsl/functx_remove-attributes.html 
  @param   $elements the element(s) from which to remove the attributes 
  @param   $names the names of the attributes to remove, or * for all attributes 
 -->
-<xsl:function xmlns:functx="http://www.functx.com" name="functx:remove-attributes" as="element()">
+<xsl:function xmlns:functx="http://www.functx.com" name="functx:remove-attributes" as="element()*">
 <xsl:param name="elements" as="element()*"/>
 <xsl:param name="names" as="xs:string*"/>
 <xsl:for-each select="$elements">
@@ -1804,11 +1804,11 @@
   Returns the scheme from a URI 
 
  @author  Priscilla Walmsley, Datypic 
- @version 1.0 
+ @version 1.0.1 
  @see     http://www.xsltfunctions.com/xsl/functx_scheme-from-uri.html 
  @param   $uri the URI 
 -->
-<xsl:function xmlns:functx="http://www.functx.com" name="functx:scheme-from-uri" as="xs:string?">
+<xsl:function xmlns:functx="http://www.functx.com" name="functx:scheme-from-uri" as="xs:string">
 <xsl:param name="uri" as="xs:string?"/>
 <xsl:sequence select=" substring-before($uri,':') "/>
 </xsl:function>
@@ -1977,12 +1977,12 @@
   The substring after the last text that matches a regex 
 
  @author  Priscilla Walmsley, Datypic 
- @version 1.0 
+ @version 1.0.1 
  @see     http://www.xsltfunctions.com/xsl/functx_substring-after-last-match.html 
  @param   $arg the string to substring 
  @param   $regex the regular expression 
 -->
-<xsl:function xmlns:functx="http://www.functx.com" name="functx:substring-after-last-match" as="xs:string">
+<xsl:function xmlns:functx="http://www.functx.com" name="functx:substring-after-last-match" as="xs:string?">
 <xsl:param name="arg" as="xs:string?"/>
 <xsl:param name="regex" as="xs:string"/>
 <xsl:sequence select=" replace($arg,concat('^.*',$regex),'') "/>
@@ -1992,12 +1992,12 @@
   The substring after the last occurrence of a delimiter 
 
  @author  Priscilla Walmsley, Datypic 
- @version 1.0 
+ @version 1.0.1 
  @see     http://www.xsltfunctions.com/xsl/functx_substring-after-last.html 
  @param   $arg the string to substring 
  @param   $delim the delimiter 
 -->
-<xsl:function xmlns:functx="http://www.functx.com" name="functx:substring-after-last" as="xs:string">
+<xsl:function xmlns:functx="http://www.functx.com" name="functx:substring-after-last" as="xs:string?">
 <xsl:param name="arg" as="xs:string?"/>
 <xsl:param name="delim" as="xs:string"/>
 <xsl:sequence select=" replace ($arg,concat('^.*',functx:escape-for-regex($delim)),'') "/>
@@ -2067,12 +2067,12 @@
   The substring before the last text that matches a regex 
 
  @author  Priscilla Walmsley, Datypic 
- @version 1.0 
+ @version 1.0.1 
  @see     http://www.xsltfunctions.com/xsl/functx_substring-before-match.html 
  @param   $arg the string to substring 
  @param   $regex the regular expression 
 -->
-<xsl:function xmlns:functx="http://www.functx.com" name="functx:substring-before-match" as="xs:string">
+<xsl:function xmlns:functx="http://www.functx.com" name="functx:substring-before-match" as="xs:string?">
 <xsl:param name="arg" as="xs:string?"/>
 <xsl:param name="regex" as="xs:string"/>
 <xsl:sequence select=" tokenize($arg,$regex)[1] "/>
@@ -2203,13 +2203,13 @@
   Updates the attribute value of an XML element 
 
  @author  Priscilla Walmsley, Datypic 
- @version 1.0 
+ @version 1.0.1 
  @see     http://www.xsltfunctions.com/xsl/functx_update-attributes.html 
  @param   $elements the element(s) for which you wish to update the attribute 
  @param   $attrNames the name(s) of the attribute(s) to add 
  @param   $attrValues the value(s) of the attribute(s) to add 
 -->
-<xsl:function xmlns:functx="http://www.functx.com" name="functx:update-attributes" as="element()?">
+<xsl:function xmlns:functx="http://www.functx.com" name="functx:update-attributes" as="element()*">
 <xsl:param name="elements" as="element()*"/>
 <xsl:param name="attrNames" as="xs:QName*"/>
 <xsl:param name="attrValues" as="xs:anyAtomicType*"/>
