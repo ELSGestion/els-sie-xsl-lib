@@ -57,7 +57,7 @@
   <xsl:variable name="els:infographic.knightlab-timeline.domain" select="'cdn.knightlab.com'" as="xs:string"/>
   <xsl:variable name="els:infographic.knightlab-timeline.embed.defaultWidth" select="'640'" as="xs:string"/>
   <xsl:variable name="els:infographic.knightlab-timeline.embed.defaultHeight" select="'600'" as="xs:string"/>
-  <xsl:variable name="els:infographic.knightlab-timeline.embed.URL.prefix" select="'https://cdn.knightlab.com/libs/timeline/latest/embed/?source='" as="xs:string"/>
+  <xsl:variable name="els:infographic.knightlab-timeline.embed.URL.prefix" select="'https://cdn.knightlab.com/libs/timeline3/latest/embed/?source='" as="xs:string"/>
   <xsl:variable name="els:infographic.knightlab-timeline.embed.URL.suffix" select="''" as="xs:string"/>
   
   <xd:doc>
@@ -125,7 +125,7 @@
       <xsl:when test="$hostname = $els:infographic.piktochart.domain">
         <xsl:sequence select="tokenize(els:http-get-path($url), '/')[2]"/>
       </xsl:when>
-      <!-- TIMELINE (KNIGHTLAB) :  https://cdn.knightlab.com/ + libs/timeline/latest/embed/?source= + timeline-id -->
+      <!-- TIMELINE (KNIGHTLAB) :  https://cdn.knightlab.com/ + libs/timeline3/latest/embed/?source= + timeline-id -->
       <!-- /!\ To be reworked if another Knightlab service is added, because the hostname will be the same -->
       <xsl:when test="$hostname = $els:infographic.knightlab-timeline.domain">
         <xsl:sequence select="tokenize(els:http-get-query-string($url),'&amp;')[matches(.,'^source=')]!substring-after(.,'source=')"/>

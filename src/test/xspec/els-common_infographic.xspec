@@ -29,7 +29,7 @@
     
     <x:scenario label="els:isInfographicUrl : Knightlab (timeline)">
       <x:call function="els:isInfographicUrl">
-        <x:param name="url" select="'https://cdn.knightlab.com/libs/timeline/latest/embed/?source=0AiWUhxLpQgUXdEwtOEZVZU1lcllGVHJRbjlsYTJ1VGc&amp;font=Bevan-PotanoSans'" />
+        <x:param name="url" select="'https://cdn.knightlab.com/libs/timeline3/latest/embed/?source=0AiWUhxLpQgUXdEwtOEZVZU1lcllGVHJRbjlsYTJ1VGc&amp;font=Bevan-PotanoSans'" />
       </x:call>
       <x:expect label="Knightlab (timeline) => true()" select="true()" />
     </x:scenario>
@@ -68,7 +68,7 @@
     
     <x:scenario label="els:infographic-platformFromUrl : Knightlab (timeline)">
       <x:call function="els:infographic-platformFromUrl">
-        <x:param name="url" select="'https://cdn.knightlab.com/libs/timeline/latest/embed/?source=0AiWUhxLpQgUXdEwtOEZVZU1lcllGVHJRbjlsYTJ1VGc&amp;font=Bevan-PotanoSans'" />
+        <x:param name="url" select="'https://cdn.knightlab.com/libs/timeline3/latest/embed/?source=0AiWUhxLpQgUXdEwtOEZVZU1lcllGVHJRbjlsYTJ1VGc&amp;font=Bevan-PotanoSans'" />
       </x:call>
       <x:expect label="Knightlab (timeline) => 'knightlab-timeline'" select="'knightlab-timeline'" />
     </x:scenario>
@@ -107,7 +107,7 @@
     
     <x:scenario label="els:infographic-idFromUrl : Knightlab (timeline)">
       <x:call function="els:infographic-idFromUrl">
-        <x:param name="url" select="'https://cdn.knightlab.com/libs/timeline/latest/embed/?source=0AiWUhxLpQgUXdEwtOEZVZU1lcllGVHJRbjlsYTJ1VGc&amp;font=Bevan-PotanoSans'" />
+        <x:param name="url" select="'https://cdn.knightlab.com/libs/timeline3/latest/embed/?source=0AiWUhxLpQgUXdEwtOEZVZU1lcllGVHJRbjlsYTJ1VGc&amp;font=Bevan-PotanoSans'" />
       </x:call>
       <x:expect label="Knightlab (timeline)" select="'0AiWUhxLpQgUXdEwtOEZVZU1lcllGVHJRbjlsYTJ1VGc'" />
     </x:scenario>
@@ -339,7 +339,7 @@
     
     <x:scenario label="els:infographic-makeHtmlEmbed : Knightlab (timeline) (full infographic URL + height/width)">
       <x:call function="els:infographic-makeHtmlEmbed">
-        <x:param name="url" select="'https://cdn.knightlab.com/libs/timeline/latest/embed/?source=0AiWUhxLpQgUXdEwtOEZVZU1lcllGVHJRbjlsYTJ1VGc&amp;font=Bevan-PotanoSans'"/>
+        <x:param name="url" select="'https://cdn.knightlab.com/libs/timeline3/latest/embed/?source=0AiWUhxLpQgUXdEwtOEZVZU1lcllGVHJRbjlsYTJ1VGc&amp;font=Bevan-PotanoSans'"/>
         <x:param name="width" select="'xxx'"/>
         <x:param name="height" select="'yyy'"/>
       </x:call>
@@ -349,13 +349,13 @@
           height="yyy"
           frameborder="0"
           scrolling="no"
-          src="https://cdn.knightlab.com/libs/timeline/latest/embed/?source=0AiWUhxLpQgUXdEwtOEZVZU1lcllGVHJRbjlsYTJ1VGc"/>
+          src="https://cdn.knightlab.com/libs/timeline3/latest/embed/?source=0AiWUhxLpQgUXdEwtOEZVZU1lcllGVHJRbjlsYTJ1VGc"/>
       </x:expect>
     </x:scenario>
     
     <x:scenario label="els:infographic-makeHtmlEmbed : Knightlab (timeline) (full infographic URL)">
       <x:call function="els:infographic-makeHtmlEmbed">
-        <x:param name="url" select="'https://cdn.knightlab.com/libs/timeline/latest/embed/?source=0AiWUhxLpQgUXdEwtOEZVZU1lcllGVHJRbjlsYTJ1VGc&amp;font=Bevan-PotanoSans'"/>
+        <x:param name="url" select="'https://cdn.knightlab.com/libs/timeline3/latest/embed/?source=0AiWUhxLpQgUXdEwtOEZVZU1lcllGVHJRbjlsYTJ1VGc&amp;font=Bevan-PotanoSans'"/>
       </x:call>
       <x:expect label="iframe">
         <html:iframe 
@@ -363,7 +363,7 @@
           height="600"
           frameborder="0"
           scrolling="no"
-          src="https://cdn.knightlab.com/libs/timeline/latest/embed/?source=0AiWUhxLpQgUXdEwtOEZVZU1lcllGVHJRbjlsYTJ1VGc"/>
+          src="https://cdn.knightlab.com/libs/timeline3/latest/embed/?source=0AiWUhxLpQgUXdEwtOEZVZU1lcllGVHJRbjlsYTJ1VGc"/>
       </x:expect>
     </x:scenario>
     
@@ -380,7 +380,7 @@
           height="yyy"
           frameborder="0"
           scrolling="no"
-          src="https://cdn.knightlab.com/libs/timeline/latest/embed/?source=0AiWUhxLpQgUXdEwtOEZVZU1lcllGVHJRbjlsYTJ1VGc"/>
+          src="https://cdn.knightlab.com/libs/timeline3/latest/embed/?source=0AiWUhxLpQgUXdEwtOEZVZU1lcllGVHJRbjlsYTJ1VGc"/>
       </x:expect>
     </x:scenario>
     
@@ -395,7 +395,7 @@
           height="600"
           frameborder="0"
           scrolling="no"
-          src="https://cdn.knightlab.com/libs/timeline/latest/embed/?source=0AiWUhxLpQgUXdEwtOEZVZU1lcllGVHJRbjlsYTJ1VGc"/>
+          src="https://cdn.knightlab.com/libs/timeline3/latest/embed/?source=0AiWUhxLpQgUXdEwtOEZVZU1lcllGVHJRbjlsYTJ1VGc"/>
       </x:expect>
     </x:scenario>
     
