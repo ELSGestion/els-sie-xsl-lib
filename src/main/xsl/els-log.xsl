@@ -190,7 +190,7 @@
   <xsl:function name="els:isLogToBeProcessed" as="xs:boolean">
     <xsl:param name="level" as="xs:string"/>
     <xsl:param name="levelProcessFlag" as="xs:string"/>
-    <xsl:value-of
+    <xsl:sequence
       select="if ($levelProcessFlag = 'all') then (true()) 
               else (if ($levelProcessFlag = 'off') then (false()) 
               else (boolean(els:getLevelPriority($level) >= els:getLevelPriority($levelProcessFlag))))"/>

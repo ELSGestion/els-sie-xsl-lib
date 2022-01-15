@@ -167,9 +167,9 @@
     <xd:desc>
       <xd:p>Convert a string with format "JJ/MM/AAAA" (or "JJ-MM-AAAA" or "JJ/MM/AA") to a string representing an ISO date format "AAAA-MM-JJ"</xd:p>
       <xd:param name="s">String to convert as iso date string</xd:param>
-      <xd:param name="sep">string representing the separator "/" (or something els) within the original string ($s)</xd:param>
+      <xd:param name="sep">string representing the separator "/" (or something else) within the original string ($s)</xd:param>
     </xd:desc>
-    <xd:return>Iso date of $s as a xs:string (if the convesion fails, it will return the original $s string)</xd:return>
+    <xd:return>Iso date of $s as a xs:string (if the conversion fails, it will return the original $s string)</xd:return>
   </xd:doc>
   <xsl:function name="els:makeIsoDate" as="xs:string">
     <xsl:param name="s" as="xs:string?"/>
