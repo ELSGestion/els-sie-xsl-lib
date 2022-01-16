@@ -29,6 +29,8 @@
   <!--Default serialization option for json-->
   <!--cf. https://www.w3.org/TR/xslt-30/#func-xml-to-json-->
   <xsl:param name="xslLib:xjson2json.options" select="map{'indent':false()}" as="map(*)"/>
+  <!--Will break the process when an error is encountered while json conversion, if set to false, the error will only be exposed within the json result-->
+  <xsl:param name="xslLib:xjson2json.break-on-error" select="false()" as="xs:boolean"/>
   
   <!--==============================================-->
   <!--INIT-->
@@ -54,7 +56,6 @@
         <xsl:message terminate="yes"><xsl:copy-of select="*"/></xsl:message>
       </xsl:otherwise>
     </xsl:choose>
-    
   </xsl:template>
 
   <!--Specific template to serialize to JSON with
@@ -81,12 +82,20 @@
     <xsl:param name="options" as="map(*)"/>
     <xsl:try select="xml-to-json($xjson, $options)">
       <xsl:catch>
+        <xsl:variable name="error" select="$err:code || ' : ' || $err:description" as="xs:string"/>
         <!--conversion errors are also jsonified-->
         <xsl:variable name="err" as="element()">
-          <fn:map><fn:string key="error"><xsl:value-of select="$err:code || ' : ' || $err:description"/></fn:string></fn:map>
+          <fn:map><fn:string key="error"><xsl:value-of select="$error"/></fn:string></fn:map>
         </xsl:variable>
         <xsl:value-of select="xml-to-json($err, $options)"/>
-        <xsl:message>[ERROR][xslLib:xjson2json] <xsl:value-of select="$err"/></xsl:message>
+        <xsl:choose>
+          <xsl:when test="$xslLib:xjson2json.break-on-error">
+            <xsl:message terminate="true">[ERROR][xslLib:xjson2json] <xsl:value-of select="$error"/></xsl:message>
+          </xsl:when>
+          <xsl:otherwise>
+            <xsl:message>[ERROR][xslLib:xjson2json] <xsl:value-of select="$error"/></xsl:message>
+          </xsl:otherwise>
+        </xsl:choose>
       </xsl:catch>
     </xsl:try>
   </xsl:function>

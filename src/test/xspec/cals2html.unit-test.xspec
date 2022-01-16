@@ -2,49 +2,110 @@
 <x:description 
   xmlns:x="http://www.jenitennison.com/xslt/xspec" 
   xmlns:xslLib="http://www.lefebvre-sarrut.eu/ns/els/xslLib"
-  xmlns:xi="http://www.w3.org/2001/XInclude"
   stylesheet="../../main/xsl/cals2html.xsl"
   xslt-version="3.0">
   
-  <!--NOTE : this XSpec uses xi:include instead of href to avoid indentation differences. 
-             See https://github.com/xspec/xspec/issues/1090-->
-  
-  <!--xslLib:baseUri has a default xpath value : it has to be overrided in XSpec--> 
-  <x:param name="xslLib:baseUri" select="xs:anyURI('https://xspec.io/')" as="xs:anyURI"/>
-  
-  <x:param name="xslLib:cals2html.use-style-insteadOf-class" select="false()"/>
-  
-  <x:scenario label="CALS2HTML -class" xml:base="../samples/tables/">
-    <x:scenario label="Table jira CHAINE-1885">
-      <x:context select="/">
-        <xi:include href="Table_CHAINE-1885.xml"/>
-      </x:context>
-      <x:expect label="OK"
-        select="serialize(/*) ! replace(., '(xml:base=&quot;.*?&quot;)', '') ! parse-xml(.)"
-        test="serialize(/*) ! replace(., '(xml:base=&quot;.*?&quot;)', '') ! parse-xml(.)">
-        <xi:include href="Table_CHAINE-1885.htm"/>
-      </x:expect>
-    </x:scenario>
-    <x:scenario label="frchs1603cx.tables">
-      <x:context select="/">
-        <xi:include href="frchs1603cx.tables.xml"/>
-      </x:context>
-      <x:expect label="OK"
-        select="serialize(/*) ! replace(., '(xml:base=&quot;.*?&quot;)', '') ! parse-xml(.)"
-        test="serialize(/*) ! replace(., '(xml:base=&quot;.*?&quot;)', '') ! parse-xml(.)">
-        <xi:include href="frchs1603cx.tables.htm"/>
-      </x:expect>
-    </x:scenario>
-    <x:scenario label="isosts_tables">
-      <x:context select="/">
-        <xi:include href="isosts_tables.cals.xml"/>
-      </x:context>
-      <x:expect label="OK"
-        select="serialize(/*) ! replace(., '(xml:base=&quot;.*?&quot;)', '') ! parse-xml(.)"
-        test="serialize(/*) ! replace(., '(xml:base=&quot;.*?&quot;)', '') ! parse-xml(.)">
-        <xi:include href="isosts_tables.cals.htm"/>
-      </x:expect>
-    </x:scenario>
+  <x:scenario label="Cals Table upper-case">
+    <x:context select="/">
+      <TABLE xmlns="http://docs.oasis-open.org/ns/oasis-exchange/table">
+        <TGROUP COLS="5" ALIGN="LEFT" COLSEP="1" ROWSEP="1" TGROUPSTYLE="style1">
+          <COLSPEC COLNUM="1" COLNAME="c1" COLWIDTH="0.32*"/>
+          <COLSPEC COLNUM="2" COLNAME="c2" COLWIDTH="1.49*"/>
+          <COLSPEC COLNUM="3" COLNAME="c3" COLWIDTH="1.15*"/>
+          <COLSPEC COLNUM="4" COLNAME="c4" COLWIDTH="0.4*"/>
+          <COLSPEC COLNUM="5" COLNAME="c5" COLWIDTH="1.67*"/>
+          <THEAD>
+            <ROW>
+              <ENTRY NAMEST="c1" NAMEEND="c2" ALIGN="CENTER">HORIZONTAL SPAN</ENTRY>
+              <ENTRY>A3</ENTRY>
+              <ENTRY>A4</ENTRY>
+              <ENTRY>A5</ENTRY>
+            </ROW>
+          </THEAD>
+          <TFOOT>
+            <ROW>
+              <ENTRY>F1</ENTRY>
+              <ENTRY>F2</ENTRY>
+              <ENTRY>F3</ENTRY>
+              <ENTRY>F4</ENTRY>
+              <ENTRY>F5</ENTRY>
+            </ROW>
+          </TFOOT>
+          <TBODY>
+            <ROW>
+              <ENTRY>B1</ENTRY>
+              <ENTRY>B2</ENTRY>
+              <ENTRY>B3</ENTRY>
+              <ENTRY>B4</ENTRY>
+              <ENTRY MOREROWS="1" VALIGN="MIDDLE">VERTICAL SPAN</ENTRY>
+            </ROW>
+            <ROW>
+              <ENTRY>C1</ENTRY>
+              <ENTRY NAMEST="c2" NAMEEND="c3" ALIGN="CENTER" MOREROWS="1" VALIGN="BOTTOM">SPANS BOTH DIRECTIONS</ENTRY>
+              <ENTRY>C4</ENTRY>
+            </ROW>
+            <ROW>
+              <ENTRY>D1</ENTRY>
+              <ENTRY>D4</ENTRY>
+              <ENTRY>D5</ENTRY>
+            </ROW>
+          </TBODY>
+        </TGROUP>
+      </TABLE>
+    </x:context>
+    <x:expect label="OK">
+      <div xmlns="http://www.w3.org/1999/xhtml" class="cals_table">
+        <table class="cals_tgroup" style="border:1px solid" data-cals-tgroupstyle="style1">
+          <colgroup>
+            <col style="width:6%" />
+            <col style="width:30%" />
+            <col style="width:23%" />
+            <col style="width:8%" />
+            <col style="width:33%" />
+          </colgroup>
+          <thead>
+            <tr>
+              <th style="border-right:1px solid; border-bottom:1px solid; vertical-align:top"
+                colspan="2">HORIZONTAL SPAN</th>
+              <th style="border-right:1px solid; border-bottom:1px solid; text-align:left; vertical-align:top">A3</th>
+              <th style="border-right:1px solid; border-bottom:1px solid; text-align:left; vertical-align:top">A4</th>
+              <th style="border-right:1px solid; border-bottom:1px solid; text-align:left; vertical-align:top">A5</th>
+            </tr>
+          </thead>
+          <tfoot>
+            <tr>
+              <td style="border-right:1px solid; border-bottom:1px solid; vertical-align:top">F1</td>
+              <td style="border-right:1px solid; border-bottom:1px solid; vertical-align:top">F2</td>
+              <td style="border-right:1px solid; border-bottom:1px solid; vertical-align:top">F3</td>
+              <td style="border-right:1px solid; border-bottom:1px solid; vertical-align:top">F4</td>
+              <td style="border-right:1px solid; border-bottom:1px solid; vertical-align:top">F5</td>
+            </tr>
+          </tfoot>
+          <tbody>
+            <tr>
+              <td style="border-right:1px solid; border-bottom:1px solid; vertical-align:top">B1</td>
+              <td style="border-right:1px solid; border-bottom:1px solid; vertical-align:top">B2</td>
+              <td style="border-right:1px solid; border-bottom:1px solid; vertical-align:top">B3</td>
+              <td style="border-right:1px solid; border-bottom:1px solid; vertical-align:top">B4</td>
+              <td style="border-right:1px solid; border-bottom:1px solid"
+                rowspan="2">VERTICAL SPAN</td>
+            </tr>
+            <tr>
+              <td style="border-right:1px solid; border-bottom:1px solid; vertical-align:top">C1</td>
+              <td style="border-right:1px solid; border-bottom:1px solid; text-align:center; vertical-align:bottom"
+                colspan="2"
+                rowspan="2">SPANS BOTH DIRECTIONS</td>
+              <td style="border-right:1px solid; border-bottom:1px solid; vertical-align:top">C4</td>
+            </tr>
+            <tr>
+              <td style="border-right:1px solid; border-bottom:1px solid; vertical-align:top">D1</td>
+              <td style="border-right:1px solid; border-bottom:1px solid; vertical-align:top">D4</td>
+              <td style="border-right:1px solid; border-bottom:1px solid; vertical-align:top">D5</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </x:expect>
   </x:scenario>
   
 </x:description>
