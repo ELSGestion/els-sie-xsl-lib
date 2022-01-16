@@ -36,6 +36,11 @@
     <xsl:variable name="step" select="." as="document-node()"/>
     <xsl:variable name="step" as="document-node()">
       <xsl:document>
+        <xsl:apply-templates select="$step" mode="xslLib:normalizeToLowerCaseCals"/>
+      </xsl:document>
+    </xsl:variable>
+    <xsl:variable name="step" as="document-node()">
+      <xsl:document>
         <xsl:apply-templates select="$step" mode="xslLib:normalizeCalsTable"/>
       </xsl:document>
     </xsl:variable>
@@ -50,6 +55,51 @@
       </xsl:document>
     </xsl:variable>
     <xsl:sequence select="$step"/>
+  </xsl:template>
+  
+  <!--==================================================================================-->
+  <!-- xslLib:normalizeToLowerCaseCals -->
+  <!--==================================================================================-->
+  
+  <xsl:mode name="xslLib:normalizeToLowerCaseCals" on-no-match="shallow-copy"/>
+  
+  <!--Set all cals element's name to lower-case-->
+  <xsl:template match="cals:*" mode="xslLib:normalizeToLowerCaseCals">
+    <xsl:element name="{lower-case(local-name())}">
+      <xsl:apply-templates select="@* | node()" mode="#current"/>
+    </xsl:element>
+  </xsl:template>
+  
+  <xsl:template match="cals:*/@*[lower-case(name()) = 'id']" mode="xslLib:normalizeToLowerCaseCals">
+    <xsl:attribute name="{lower-case(name())}" select="."/>
+  </xsl:template>
+  
+  <!--Set cals attributes name and values to lower-case-->
+  <xsl:template mode="xslLib:normalizeToLowerCaseCals"
+    match="cals:*[lower-case(local-name())= 'table']/@*[lower-case(local-name()) = ('frame', 'colsep', 'rowsep', 'tocentry', 'shortentry', 'orient', 'pgwide')]
+    | cals:*[lower-case(local-name())= 'tgroup']/@*[lower-case(local-name()) = ('cols', 'colsep', 'rowsep', 'align')]
+    | cals:*[lower-case(local-name())= 'colspec']/@*[lower-case(local-name()) = ('colwidth', 'colsep', 'rowsep', 'align')]
+    | cals:*[lower-case(local-name())= 'spanspec']/@*[lower-case(local-name()) = ('colsep', 'rowsep', 'align')]
+    | cals:*[lower-case(local-name())= 'thead']/@*[lower-case(local-name()) = ('valign')]
+    | cals:*[lower-case(local-name())= 'tfoot']/@*[lower-case(local-name()) = ('valign')]
+    | cals:*[lower-case(local-name())= 'tbody']/@*[lower-case(local-name()) = ('valign')]
+    | cals:*[lower-case(local-name())= 'row']/@*[lower-case(local-name()) = ('valign', 'rowsep')]
+    | cals:*[lower-case(local-name())= 'entry']/@*[lower-case(local-name()) = ('morerows', 'colsep', 'rowsep', 'align', 'valign', 'rotate')]
+    | cals:*[lower-case(local-name())= 'entrytbl']/@*[lower-case(local-name()) = ('cols', 'colsep', 'rowsep', 'align')]"
+    >
+    <xsl:attribute name="{lower-case(name())}" select="lower-case(.)"/>
+  </xsl:template>
+  
+  <!--Set cals attributes name to lower-case, force keeping values as is -->
+  <xsl:template mode="xslLib:normalizeToLowerCaseCals"
+    match="cals:*[lower-case(local-name())= 'table']/@*[lower-case(local-name()) = ('tabstyle')]
+    | cals:*[lower-case(local-name())= 'tgroup']/@*[lower-case(local-name()) = ('tgroupstyle', 'char', 'charoff')]
+    | cals:*[lower-case(local-name())= 'colspec']/@*[lower-case(local-name()) = ('colnum', 'colname', 'char', 'charoff')]
+    | cals:*[lower-case(local-name())= 'spanspec']/@*[lower-case(local-name()) = ('namest', 'nameend', 'spanname', 'char', 'charoff')]
+    | cals:*[lower-case(local-name())= 'entry']/@*[lower-case(local-name()) = ('colname', 'namest', 'nameend', 'spanname', 'char', 'charoff')]
+    | cals:*[lower-case(local-name())= 'entrytbl']/@*[lower-case(local-name()) = ('tgroupstyle', 'colname', 'spanname', 'namest', 'nameend', 'char', 'charoff')]"
+    >
+    <xsl:attribute name="{lower-case(name())}" select="."/>
   </xsl:template>
   
   <!--==================================================================================-->
@@ -124,6 +174,10 @@
   <xsl:mode name="xslLib:normalizeCalsTable.transpec-normalization" on-no-match="shallow-copy"/>
   
   <xsl:template match="tgroup" mode="xslLib:normalizeCalsTable.transpec-normalization" >
+    <xsl:variable name="result" select="cals:normalize(.)" as="item()*"/>
+    <xsl:if test="count($result) != 1">
+      <xsl:processing-instruction name="ERROR">cals:normalize(.) should return a single element</xsl:processing-instruction>
+    </xsl:if>
     <xsl:sequence select="cals:normalize(.)"/>
   </xsl:template>
   

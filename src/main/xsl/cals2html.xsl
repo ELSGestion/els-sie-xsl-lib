@@ -19,6 +19,7 @@
       <xd:p>Each cals:table will be converted to an html:div, then each cals:tgroup will be converted to an html:table</xd:p>
       <xd:p>/!\ Cals elements must be in cals namespace before proceding, other elements will be copied as is, 
         set param $xslLib:cals2html.set-cals-ns to true if you want to let this XSLT preform this namespace operation</xd:p>
+      <xd:p>Upper or lower-case cals structure will be converted the same thanks to lower-case normalization</xd:p>
       <xd:p>CALS specification interpretation : </xd:p>
       <xd:ul>table/@frame is applied on each tgroups (not the whole table)</xd:ul>
     </xd:desc>
@@ -783,7 +784,6 @@
     | html:table[els:hasClass(., 'cals_tgroup')]//*[local-name(.) = ('tr', 'td', 'th', 'thead', 'tbody', 'tfoot')]" 
     mode="xslLib:cals2html.class2style">
     <xsl:copy>
-      <xsl:copy-of select="@* except (@class | @style)"/>
       <xsl:variable name="class" select="tokenize(@class, '\s+')[not(. = $xslLib:cals2html.class2style.mapping/entry/@key)]" as="xs:string*"/>
       <xsl:if test="not(empty($class))">
         <xsl:attribute name="class" select="string-join($class, ' ')"/>

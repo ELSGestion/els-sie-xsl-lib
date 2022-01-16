@@ -17,9 +17,9 @@
     </xd:desc>
   </xd:doc>
   
-  <xsl:variable as="xs:string*" name="cals-table-elements-names"
+  <xsl:variable as="xs:string*" name="xslLib:cals-table-elements-names"
     select="('table', 'tgroup', 'colspec', 'spanspec', 'thead', 
-             'tfoot', 'tbody', 'row', 'entrytbl', 'entry')"/>
+    'tfoot', 'tbody', 'row', 'entrytbl', 'entry')"/>
   
   <!--==================================================================================-->
   <!-- INIT -->
@@ -56,14 +56,14 @@
     <xsl:sequence select="
       (:check element's name:)
       xslLib:hasCalsTableElementLocalName($e) 
-      (:also check global structure - avoid converting an html tabble to cals table for instance:)
-      and ($e/ancestor-or-self::*:table[*:tgroup])"/>
+      (:also check global structure - avoid converting an html table to cals table for instance:)
+      and ($e/ancestor-or-self::*[lower-case(local-name())= 'table'][*[lower-case(local-name()) = 'tgroup']])"/>
   </xsl:function>
   
   <!--Indicates if an element has the same local name as a CALS table element-->
   <xsl:function name="xslLib:hasCalsTableElementLocalName" as="xs:boolean">
     <xsl:param name="e" as="element()"/>
-    <xsl:sequence select="(lower-case(local-name($e)) = $cals-table-elements-names)"/>
+    <xsl:sequence select="(lower-case(local-name($e)) = $xslLib:cals-table-elements-names)"/>
   </xsl:function>
   
 </xsl:stylesheet>
