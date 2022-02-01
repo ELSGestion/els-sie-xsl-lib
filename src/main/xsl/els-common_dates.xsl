@@ -144,7 +144,7 @@
       <xd:p>Get the month num as integer from its verbalization</xd:p>
     </xd:desc>
     <xd:param name="monthString">[String] The month string (ex : "january", "février", etc.)</xd:param>
-    <xd:param name="months.verbalized">[String+] All months as regex strings verbalized in the good language</xd:param>
+    <xd:param name="months.verbalized">[String+] All months as regex strings verbalized in the appropriate language</xd:param>
     <xd:return>[String] The verbalized month</xd:return>
   </xd:doc>
   <xsl:function name="els:getMonthNumFromVerbalizeMonth" as="xs:integer">
@@ -385,8 +385,8 @@
               <xsl:value-of select="format-number($day cast as xs:integer, '00')"/>
             </xsl:otherwise>
           </xsl:choose>
-        </xsl:variable>    
-        <xsl:variable name="month" select="format-number(els:getMonthNumFromVerbalizeMonth($month), '00')" as="xs:string"/>
+        </xsl:variable>
+        <xsl:variable name="month" select="format-number(els:getMonthNumFromVerbalizeMonth($month, if ($shortMonth) then $els:monthsShort.fr else $els:months.fr ), '00')" as="xs:string"/>
         <xsl:value-of select="string-join(($day, $month, $year), '/')"/>
       </xsl:otherwise>
     </xsl:choose>    
