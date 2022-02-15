@@ -1,13 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project version="20.1">
+<project version="17.1">
     <meta>
         <filters directoryPatterns="" filePatterns="" positiveFilePatterns="" showHiddenFiles="false"/>
         <options>
-            <serialized version="20.1" xml:space="preserve">
+            <serialized version="17.1" xml:space="preserve">
                 <serializableOrderedMap>
                     <entry>
                         <String>scenario.associations</String>
                         <scenarioAssociation-array>
+                            <scenarioAssociation>
+                                <field name="url">
+                                    <String>src/test/samples/els-common/els-common_url-classifier/els-common_url-classifier.sample.xml</String>
+                                </field>
+                                <field name="scenarioIds">
+                                    <list>
+                                        <String>els-common_url-classifier-test.xsl</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioTypes">
+                                    <list>
+                                        <String>XSL</String>
+                                    </list>
+                                </field>
+                            </scenarioAssociation>
                             <scenarioAssociation>
                                 <field name="url">
                                     <String>src/test/samples/tables/cals2html-html-border-collapse/cals2html-html-border-collapse.xml</String>
@@ -1701,20 +1716,14 @@
                                                 <field name="addCommentsForValidationErrors">
                                                     <Boolean>true</Boolean>
                                                 </field>
-                                                <field name="streamingEnabled">
+                                                <field name="generateByteCode">
                                                     <Boolean>false</Boolean>
-                                                </field>
-                                                <field name="isJITEnabled">
-                                                    <Boolean>true</Boolean>
                                                 </field>
                                                 <field name="allowCallsOnExtensionFunctions">
                                                     <Boolean>true</Boolean>
                                                 </field>
                                                 <field name="registerSaxonCEExtensions">
                                                     <Boolean>true</Boolean>
-                                                </field>
-                                                <field name="enableAssertions">
-                                                    <Boolean>false</Boolean>
                                                 </field>
                                                 <field name="showVersionWarnings">
                                                     <Boolean>false</Boolean>
@@ -1746,8 +1755,8 @@
                                                 <field name="stripWS">
                                                     <String>saxon.strip.ws.none</String>
                                                 </field>
-                                                <field name="optimizationEnabled">
-                                                    <Boolean>true</Boolean>
+                                                <field name="optimizationLevel">
+                                                    <String>0</String>
                                                 </field>
                                                 <field name="useConfigFile">
                                                     <Boolean>false</Boolean>
@@ -1862,20 +1871,14 @@
                                                 <field name="addCommentsForValidationErrors">
                                                     <Boolean>true</Boolean>
                                                 </field>
-                                                <field name="streamingEnabled">
+                                                <field name="generateByteCode">
                                                     <Boolean>false</Boolean>
-                                                </field>
-                                                <field name="isJITEnabled">
-                                                    <Boolean>true</Boolean>
                                                 </field>
                                                 <field name="allowCallsOnExtensionFunctions">
                                                     <Boolean>true</Boolean>
                                                 </field>
                                                 <field name="registerSaxonCEExtensions">
                                                     <Boolean>true</Boolean>
-                                                </field>
-                                                <field name="enableAssertions">
-                                                    <Boolean>false</Boolean>
                                                 </field>
                                                 <field name="showVersionWarnings">
                                                     <Boolean>false</Boolean>
@@ -1907,8 +1910,8 @@
                                                 <field name="stripWS">
                                                     <String>saxon.strip.ws.none</String>
                                                 </field>
-                                                <field name="optimizationEnabled">
-                                                    <Boolean>true</Boolean>
+                                                <field name="optimizationLevel">
+                                                    <String>0</String>
                                                 </field>
                                                 <field name="useConfigFile">
                                                     <Boolean>false</Boolean>
@@ -2023,20 +2026,14 @@
                                                 <field name="addCommentsForValidationErrors">
                                                     <Boolean>true</Boolean>
                                                 </field>
-                                                <field name="streamingEnabled">
+                                                <field name="generateByteCode">
                                                     <Boolean>false</Boolean>
-                                                </field>
-                                                <field name="isJITEnabled">
-                                                    <Boolean>true</Boolean>
                                                 </field>
                                                 <field name="allowCallsOnExtensionFunctions">
                                                     <Boolean>true</Boolean>
                                                 </field>
                                                 <field name="registerSaxonCEExtensions">
                                                     <Boolean>true</Boolean>
-                                                </field>
-                                                <field name="enableAssertions">
-                                                    <Boolean>false</Boolean>
                                                 </field>
                                                 <field name="showVersionWarnings">
                                                     <Boolean>false</Boolean>
@@ -2068,8 +2065,8 @@
                                                 <field name="stripWS">
                                                     <String>saxon.strip.ws.none</String>
                                                 </field>
-                                                <field name="optimizationEnabled">
-                                                    <Boolean>true</Boolean>
+                                                <field name="optimizationLevel">
+                                                    <String>0</String>
                                                 </field>
                                                 <field name="useConfigFile">
                                                     <Boolean>false</Boolean>
@@ -2206,20 +2203,14 @@
                                                 <field name="addCommentsForValidationErrors">
                                                     <Boolean>true</Boolean>
                                                 </field>
-                                                <field name="streamingEnabled">
+                                                <field name="generateByteCode">
                                                     <Boolean>false</Boolean>
-                                                </field>
-                                                <field name="isJITEnabled">
-                                                    <Boolean>true</Boolean>
                                                 </field>
                                                 <field name="allowCallsOnExtensionFunctions">
                                                     <Boolean>true</Boolean>
                                                 </field>
                                                 <field name="registerSaxonCEExtensions">
                                                     <Boolean>true</Boolean>
-                                                </field>
-                                                <field name="enableAssertions">
-                                                    <Boolean>false</Boolean>
                                                 </field>
                                                 <field name="showVersionWarnings">
                                                     <Boolean>false</Boolean>
@@ -2251,8 +2242,8 @@
                                                 <field name="stripWS">
                                                     <String>saxon.strip.ws.none</String>
                                                 </field>
-                                                <field name="optimizationEnabled">
-                                                    <Boolean>true</Boolean>
+                                                <field name="optimizationLevel">
+                                                    <String>0</String>
                                                 </field>
                                                 <field name="useConfigFile">
                                                     <Boolean>false</Boolean>
@@ -2452,20 +2443,14 @@
                                                 <field name="addCommentsForValidationErrors">
                                                     <Boolean>true</Boolean>
                                                 </field>
-                                                <field name="streamingEnabled">
+                                                <field name="generateByteCode">
                                                     <Boolean>false</Boolean>
-                                                </field>
-                                                <field name="isJITEnabled">
-                                                    <Boolean>true</Boolean>
                                                 </field>
                                                 <field name="allowCallsOnExtensionFunctions">
                                                     <Boolean>true</Boolean>
                                                 </field>
                                                 <field name="registerSaxonCEExtensions">
                                                     <Boolean>true</Boolean>
-                                                </field>
-                                                <field name="enableAssertions">
-                                                    <Boolean>false</Boolean>
                                                 </field>
                                                 <field name="showVersionWarnings">
                                                     <Boolean>false</Boolean>
@@ -2497,8 +2482,8 @@
                                                 <field name="stripWS">
                                                     <String>saxon.strip.ws.none</String>
                                                 </field>
-                                                <field name="optimizationEnabled">
-                                                    <Boolean>true</Boolean>
+                                                <field name="optimizationLevel">
+                                                    <String>0</String>
                                                 </field>
                                                 <field name="useConfigFile">
                                                     <Boolean>false</Boolean>
@@ -2613,20 +2598,14 @@
                                                 <field name="addCommentsForValidationErrors">
                                                     <Boolean>true</Boolean>
                                                 </field>
-                                                <field name="streamingEnabled">
+                                                <field name="generateByteCode">
                                                     <Boolean>false</Boolean>
-                                                </field>
-                                                <field name="isJITEnabled">
-                                                    <Boolean>true</Boolean>
                                                 </field>
                                                 <field name="allowCallsOnExtensionFunctions">
                                                     <Boolean>true</Boolean>
                                                 </field>
                                                 <field name="registerSaxonCEExtensions">
                                                     <Boolean>true</Boolean>
-                                                </field>
-                                                <field name="enableAssertions">
-                                                    <Boolean>false</Boolean>
                                                 </field>
                                                 <field name="showVersionWarnings">
                                                     <Boolean>false</Boolean>
@@ -2658,8 +2637,8 @@
                                                 <field name="stripWS">
                                                     <String>saxon.strip.ws.none</String>
                                                 </field>
-                                                <field name="optimizationEnabled">
-                                                    <Boolean>true</Boolean>
+                                                <field name="optimizationLevel">
+                                                    <String>0</String>
                                                 </field>
                                                 <field name="useConfigFile">
                                                     <Boolean>false</Boolean>
@@ -2774,20 +2753,14 @@
                                                 <field name="addCommentsForValidationErrors">
                                                     <Boolean>true</Boolean>
                                                 </field>
-                                                <field name="streamingEnabled">
+                                                <field name="generateByteCode">
                                                     <Boolean>false</Boolean>
-                                                </field>
-                                                <field name="isJITEnabled">
-                                                    <Boolean>true</Boolean>
                                                 </field>
                                                 <field name="allowCallsOnExtensionFunctions">
                                                     <Boolean>true</Boolean>
                                                 </field>
                                                 <field name="registerSaxonCEExtensions">
                                                     <Boolean>true</Boolean>
-                                                </field>
-                                                <field name="enableAssertions">
-                                                    <Boolean>false</Boolean>
                                                 </field>
                                                 <field name="showVersionWarnings">
                                                     <Boolean>false</Boolean>
@@ -2819,8 +2792,8 @@
                                                 <field name="stripWS">
                                                     <String>saxon.strip.ws.none</String>
                                                 </field>
-                                                <field name="optimizationEnabled">
-                                                    <Boolean>true</Boolean>
+                                                <field name="optimizationLevel">
+                                                    <String>0</String>
                                                 </field>
                                                 <field name="useConfigFile">
                                                     <Boolean>false</Boolean>
@@ -2935,20 +2908,14 @@
                                                 <field name="addCommentsForValidationErrors">
                                                     <Boolean>true</Boolean>
                                                 </field>
-                                                <field name="streamingEnabled">
+                                                <field name="generateByteCode">
                                                     <Boolean>false</Boolean>
-                                                </field>
-                                                <field name="isJITEnabled">
-                                                    <Boolean>true</Boolean>
                                                 </field>
                                                 <field name="allowCallsOnExtensionFunctions">
                                                     <Boolean>true</Boolean>
                                                 </field>
                                                 <field name="registerSaxonCEExtensions">
                                                     <Boolean>true</Boolean>
-                                                </field>
-                                                <field name="enableAssertions">
-                                                    <Boolean>false</Boolean>
                                                 </field>
                                                 <field name="showVersionWarnings">
                                                     <Boolean>false</Boolean>
@@ -2980,8 +2947,8 @@
                                                 <field name="stripWS">
                                                     <String>saxon.strip.ws.none</String>
                                                 </field>
-                                                <field name="optimizationEnabled">
-                                                    <Boolean>true</Boolean>
+                                                <field name="optimizationLevel">
+                                                    <String>0</String>
                                                 </field>
                                                 <field name="useConfigFile">
                                                     <Boolean>false</Boolean>
@@ -3096,20 +3063,14 @@
                                                 <field name="addCommentsForValidationErrors">
                                                     <Boolean>true</Boolean>
                                                 </field>
-                                                <field name="streamingEnabled">
+                                                <field name="generateByteCode">
                                                     <Boolean>false</Boolean>
-                                                </field>
-                                                <field name="isJITEnabled">
-                                                    <Boolean>true</Boolean>
                                                 </field>
                                                 <field name="allowCallsOnExtensionFunctions">
                                                     <Boolean>true</Boolean>
                                                 </field>
                                                 <field name="registerSaxonCEExtensions">
                                                     <Boolean>true</Boolean>
-                                                </field>
-                                                <field name="enableAssertions">
-                                                    <Boolean>false</Boolean>
                                                 </field>
                                                 <field name="showVersionWarnings">
                                                     <Boolean>false</Boolean>
@@ -3141,8 +3102,8 @@
                                                 <field name="stripWS">
                                                     <String>saxon.strip.ws.none</String>
                                                 </field>
-                                                <field name="optimizationEnabled">
-                                                    <Boolean>true</Boolean>
+                                                <field name="optimizationLevel">
+                                                    <String>0</String>
                                                 </field>
                                                 <field name="useConfigFile">
                                                     <Boolean>false</Boolean>
@@ -3257,20 +3218,14 @@
                                                 <field name="addCommentsForValidationErrors">
                                                     <Boolean>true</Boolean>
                                                 </field>
-                                                <field name="streamingEnabled">
+                                                <field name="generateByteCode">
                                                     <Boolean>false</Boolean>
-                                                </field>
-                                                <field name="isJITEnabled">
-                                                    <Boolean>true</Boolean>
                                                 </field>
                                                 <field name="allowCallsOnExtensionFunctions">
                                                     <Boolean>true</Boolean>
                                                 </field>
                                                 <field name="registerSaxonCEExtensions">
                                                     <Boolean>true</Boolean>
-                                                </field>
-                                                <field name="enableAssertions">
-                                                    <Boolean>false</Boolean>
                                                 </field>
                                                 <field name="showVersionWarnings">
                                                     <Boolean>false</Boolean>
@@ -3302,8 +3257,8 @@
                                                 <field name="stripWS">
                                                     <String>saxon.strip.ws.none</String>
                                                 </field>
-                                                <field name="optimizationEnabled">
-                                                    <Boolean>true</Boolean>
+                                                <field name="optimizationLevel">
+                                                    <String>0</String>
                                                 </field>
                                                 <field name="useConfigFile">
                                                     <Boolean>false</Boolean>
@@ -3377,6 +3332,92 @@
                                 </field>
                                 <field name="showInXMLPane">
                                     <Boolean>true</Boolean>
+                                </field>
+                                <field name="showInSVGPane">
+                                    <Boolean>false</Boolean>
+                                </field>
+                                <field name="showInResultSetPane">
+                                    <Boolean>false</Boolean>
+                                </field>
+                                <field name="useXSLTInput">
+                                    <Boolean>true</Boolean>
+                                </field>
+                                <field name="xsltParams">
+                                    <list/>
+                                </field>
+                                <field name="cascadingStylesheets">
+                                    <String-array/>
+                                </field>
+                                <field name="xslTransformer">
+                                    <String>Saxon-EE</String>
+                                </field>
+                                <field name="extensionURLs">
+                                    <String-array/>
+                                </field>
+                            </scenario>
+                            <scenario>
+                                <field name="advancedOptionsMap">
+                                    <null/>
+                                </field>
+                                <field name="name">
+                                    <String>els-common_url-classifier-test.xsl</String>
+                                </field>
+                                <field name="baseURL">
+                                    <String></String>
+                                </field>
+                                <field name="footerURL">
+                                    <String></String>
+                                </field>
+                                <field name="fOPMethod">
+                                    <String>pdf</String>
+                                </field>
+                                <field name="fOProcessorName">
+                                    <String>Apache FOP</String>
+                                </field>
+                                <field name="headerURL">
+                                    <String></String>
+                                </field>
+                                <field name="inputXSLURL">
+                                    <String>${pdu}/src/test/xsl/els-common_url-classifier-test.xsl</String>
+                                </field>
+                                <field name="inputXMLURL">
+                                    <String>${currentFileURL}</String>
+                                </field>
+                                <field name="defaultScenario">
+                                    <Boolean>false</Boolean>
+                                </field>
+                                <field name="isFOPPerforming">
+                                    <Boolean>false</Boolean>
+                                </field>
+                                <field name="type">
+                                    <String>XSL</String>
+                                </field>
+                                <field name="saveAs">
+                                    <Boolean>true</Boolean>
+                                </field>
+                                <field name="openInBrowser">
+                                    <Boolean>false</Boolean>
+                                </field>
+                                <field name="outputFile">
+                                    <File>${cfn}.url-classified.xml</File>
+                                </field>
+                                <field name="outputResource">
+                                    <String>${cfn}.url-classified.xml</String>
+                                </field>
+                                <field name="openOtherLocationInBrowser">
+                                    <Boolean>false</Boolean>
+                                </field>
+                                <field name="locationToOpenInBrowserURL">
+                                    <null/>
+                                </field>
+                                <field name="openInEditor">
+                                    <Boolean>true</Boolean>
+                                </field>
+                                <field name="showInHTMLPane">
+                                    <Boolean>false</Boolean>
+                                </field>
+                                <field name="showInXMLPane">
+                                    <Boolean>false</Boolean>
                                 </field>
                                 <field name="showInSVGPane">
                                     <Boolean>false</Boolean>

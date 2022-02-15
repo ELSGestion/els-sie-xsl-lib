@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<x:description xmlns:x="http://www.jenitennison.com/xslt/xspec" 
+  xmlns:xi="http://www.w3.org/2001/XInclude"
+  stylesheet="../xsl/els-common_url-classifier-test.xsl"
+  xslt-version="3.0">
+  
+  <!--NOTE : this XSpec uses xi:include instead of href to avoid indentation differences. 
+             See https://github.com/xspec/xspec/issues/1090-->
+  
+  <x:scenario label="Test els:classify-url()" xml:base="../samples/">
+    <x:context>
+      <xi:include href="els-common/els-common_url-classifier/els-common_url-classifier.sample.xml"/>
+    </x:context>
+    <x:expect label="OK" 
+      select="serialize(/*) ! replace(., '(xml:base=&quot;.*?&quot;)', '') ! parse-xml(.)"
+      test="serialize(/*) ! replace(., '(xml:base=&quot;.*?&quot;)', '') ! parse-xml(.)"
+      >
+      <xi:include href="els-common/els-common_url-classifier/els-common_url-classifier.sample.url-classified.xml"/>
+    </x:expect>
+  </x:scenario>
+  
+</x:description>
