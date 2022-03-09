@@ -12,7 +12,7 @@
     <xsl:sequence select="xs:boolean(els:url-classifier($url)[name() = 'els'])"/>
   </xsl:function>
   
-  <xsl:function name="els:url-is-an-publishing-document" as="xs:boolean">
+  <xsl:function name="els:url-is-a-publishing-document" as="xs:boolean">
     <xsl:param name="url" as="xs:string?"/>
     <xsl:sequence select="xs:boolean(els:url-classifier($url)[name() = 'doc'])"/>
   </xsl:function>
@@ -30,7 +30,7 @@
         <xd:li>@doc: 2nd value: boolean is true
           <xd:ul>
             <xd:li>For a Lefebvre-Dalloz URL ("internal") : if it's pointing a editorial document</xd:li>
-            <xd:li>For other URL ("external"): if it's pointing a editorial document that might also be accessed through a Lefebvre-Dalloz URL ("internal") URL.</xd:li>
+            <xd:li>For other URL ("external"): if it's pointing an editorial document which has an equivalent version (ex. Jurisprudence) as a Lefebvre-Dalloz URL ("internal") URL.</xd:li>
           </xd:ul>
         </xd:li>
         <xd:li>@login [boolean]: : true if the url's website requires an authentification login/pwd</xd:li>
@@ -263,7 +263,7 @@
         <xsl:attribute name="publisher" select="'el'"/>
         <xsl:attribute name="office" select="'front'"/>
         <xsl:attribute name="env" select="$env"/>
-        <xsl:attribute name="doc" select="matches($path, '^(flash|interview|sites/dalloz-actualite.fr/files/resources/\d+/\d+)/[^/]+$')"/>
+        <xsl:attribute name="doc" select="matches($path, '^(flash|interview|breve|sites/dalloz-actualite.fr/files/resources/\d+/\d+)/[^/]+$')"/>
         <xsl:attribute name="login" select="'false'"/>
       </xsl:when>
       <xsl:when test="$host.reduced = 'dalloz-avocats.fr'">  <!-- a améliorer sur un échantillon représentatif -->
@@ -331,7 +331,33 @@
         <xsl:attribute name="doc" select="matches($file, '.+')"/>
         <xsl:attribute name="login" select="'false'"/>
       </xsl:when>
-      <xsl:when test="$host.reduced = 'elegia.fr'">  <!-- boutique Formation -->
+      <xsl:when test="$host.reduced = 'backend.gateway-ppd.lefebvre-sarrut.eu'">
+        <xsl:attribute name="els" select="'true'"/>
+        <xsl:attribute name="publisher" select="'els'"/>
+        <xsl:attribute name="office" select="'front'"/>
+        <xsl:attribute name="env" select="'dev'"/>
+        <xsl:attribute name="doc" select="matches($file, '.+')"/>
+        <xsl:attribute name="login" select="'false'"/>
+      </xsl:when>
+      <xsl:when test="$host.reduced = 'backend.gateway.lefebvre-sarrut.eu'">
+        <xsl:attribute name="els" select="'true'"/>
+        <xsl:attribute name="publisher" select="'els'"/>
+        <xsl:attribute name="office" select="'front'"/>
+        <xsl:attribute name="env" select="'prod'"/>
+        <xsl:attribute name="doc" select="matches($file, '.+')"/>
+        <xsl:attribute name="login" select="'false'"/>
+      </xsl:when>
+      <!--front gateway : url finale client-->
+      <xsl:when test="$host.reduced = 'open.lefebvre-dalloz.fr'">
+        <xsl:attribute name="els" select="'true'"/>
+        <xsl:attribute name="publisher" select="'els'"/>
+        <xsl:attribute name="office" select="'front'"/>
+        <xsl:attribute name="env" select="'prod'"/>
+        <xsl:attribute name="doc" select="matches($file, '.+')"/>
+        <xsl:attribute name="login" select="'false'"/>
+      </xsl:when>
+      <!-- boutique Formation -->
+      <xsl:when test="$host.reduced = 'elegia.fr'">
         <xsl:attribute name="els" select="'true'"/>
         <xsl:attribute name="publisher" select="'els'"/>
         <xsl:attribute name="office" select="'front'"/>

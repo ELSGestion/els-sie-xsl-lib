@@ -18,7 +18,7 @@
     <xsl:copy>
       <xsl:apply-templates select="@*"/>
       <xsl:attribute name="is-lefebvre-dalloz" select="els:url-is-lefebvre-dalloz(@href)"/>
-      <xsl:attribute name="is-an-publishing-document" select="els:url-is-an-publishing-document(@href)"/>
+      <xsl:attribute name="is-an-publishing-document" select="els:url-is-a-publishing-document(@href)"/>
       <xsl:apply-templates/>
     </xsl:copy>
   </xsl:template>
