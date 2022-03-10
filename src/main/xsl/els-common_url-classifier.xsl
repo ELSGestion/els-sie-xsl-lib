@@ -17,6 +17,11 @@
     <xsl:sequence select="xs:boolean(els:url-classifier($url)[name() = 'doc'])"/>
   </xsl:function>
   
+  <xsl:function name="els:url-access-needs-login" as="xs:boolean">
+    <xsl:param name="url" as="xs:string?"/>
+    <xsl:sequence select="xs:boolean(els:url-classifier($url)[name() = 'login'])"/>
+  </xsl:function>
+  
   <xd:doc>
     <xd:desc>
       <xd:p>Analyze an URL to classify it</xd:p>
@@ -179,7 +184,7 @@
         <xsl:attribute name="office" select="'front'"/>
         <xsl:attribute name="env" select="$env"/>
         <xsl:attribute name="doc" select="matches($path, '^(content|sites/default/files)/.+')"/>
-        <xsl:attribute name="login" select="'false'"/>
+        <xsl:attribute name="login" select="'false'"/> <!--fixme : pour lire certains article en entier un login est nécessaire-->
       </xsl:when>
       <xsl:when test="$host.reduced = 'bdes.editions-legislatives.fr'">  <!-- a priori -->
         <xsl:attribute name="els" select="'true'"/>
@@ -239,7 +244,7 @@
           or matches($path, '^aboveille/logon\.do\?.*zone=(CCACTU|AJACTU).*attId=\d+&amp;forward=view(cc)?article(Guide)?$')
           or matches($path, '^aboveille/editdoc\.do\?.*attId=\d+$')
           or matches($path, '^aboveille/actucontinue/source\.do\?.*docId=\d+.*$'))"/>
-        <xsl:attribute name="login" select="'false'"/>
+        <xsl:attribute name="login" select="if($path = '') then ('false') else ('true')"/>
       </xsl:when>
       <!-- === DALLOZ === -->
       <xsl:when test="$host.reduced = 'boutique-dalloz.fr'">  <!-- boutique Dalloz -->
@@ -255,8 +260,9 @@
         <xsl:attribute name="publisher" select="'el'"/>
         <xsl:attribute name="office" select="'front'"/>
         <xsl:attribute name="env" select="$env"/>
-        <xsl:attribute name="doc" select="matches($path, '^lien\?famille=.+&amp;dochype=[A-Z0-9]+/[A-Z0-9]+/\d+/\d+$')"/>
-        <xsl:attribute name="login" select="'false'"/>
+        <xsl:attribute name="doc" select="matches($path, '^lien\?famille=.+&amp;dochype=[A-Z0-9]+/[A-Z0-9]+/\d+/\d+$')
+          or matches($path, '^documentation/Document\?id=.*$')"/>
+        <xsl:attribute name="login" select="if($path = '') then ('false') else ('true')"/>
       </xsl:when>
       <xsl:when test="$host.reduced = 'dalloz-actualite.fr'">
         <xsl:attribute name="els" select="'true'"/>
