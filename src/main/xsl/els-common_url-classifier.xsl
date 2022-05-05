@@ -329,7 +329,16 @@
         <xsl:attribute name="login" select="'false'"/>
       </xsl:when>
       <!-- === ELS / LD === -->
-      <xsl:when test="$host.reduced = 'backend.gateway-dev.lefebvre-sarrut.eu'">
+      <!--Gateway cf. https://confluence.els-gestion.eu/x/tyN4BQ-->
+      <xsl:when test="$host.reduced = 'gateway-backend.int-pld.lefebvre-sarrut.eu'">
+        <xsl:attribute name="els" select="'true'"/>
+        <xsl:attribute name="publisher" select="'els'"/>
+        <xsl:attribute name="office" select="'front'"/>
+        <xsl:attribute name="env" select="'integration'"/>
+        <xsl:attribute name="doc" select="matches($file, '.+')"/>
+        <xsl:attribute name="login" select="'false'"/>
+      </xsl:when>
+      <xsl:when test="$host.reduced = 'open-dev.lefebvre-dalloz.fr'">
         <xsl:attribute name="els" select="'true'"/>
         <xsl:attribute name="publisher" select="'els'"/>
         <xsl:attribute name="office" select="'front'"/>
@@ -337,19 +346,19 @@
         <xsl:attribute name="doc" select="matches($file, '.+')"/>
         <xsl:attribute name="login" select="'false'"/>
       </xsl:when>
-      <xsl:when test="$host.reduced = 'backend.gateway-ppd.lefebvre-sarrut.eu'">
+      <xsl:when test="$host.reduced = 'open-ppd.lefebvre-dalloz.fr'">
         <xsl:attribute name="els" select="'true'"/>
         <xsl:attribute name="publisher" select="'els'"/>
         <xsl:attribute name="office" select="'front'"/>
-        <xsl:attribute name="env" select="'dev'"/>
+        <xsl:attribute name="env" select="'preprod'"/>
         <xsl:attribute name="doc" select="matches($file, '.+')"/>
         <xsl:attribute name="login" select="'false'"/>
       </xsl:when>
-      <xsl:when test="$host.reduced = 'backend.gateway.lefebvre-sarrut.eu'">
+      <xsl:when test="$host.reduced = 'open-validation.lefebvre-dalloz.fr'">
         <xsl:attribute name="els" select="'true'"/>
         <xsl:attribute name="publisher" select="'els'"/>
         <xsl:attribute name="office" select="'front'"/>
-        <xsl:attribute name="env" select="'prod'"/>
+        <xsl:attribute name="env" select="'prod-validation'"/>
         <xsl:attribute name="doc" select="matches($file, '.+')"/>
         <xsl:attribute name="login" select="'false'"/>
       </xsl:when>
