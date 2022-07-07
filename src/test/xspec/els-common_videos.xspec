@@ -252,6 +252,13 @@
       <x:expect label="id" select="'259053952'"/>
     </x:scenario>
     
+    <x:scenario label="video-idFromUrl : Vimeo embed url">
+      <x:call function="els:video-idFromUrl">
+        <x:param name="url" select="'https://player.vimeo.com/video/672871516?h=d86e5eab90'"/>
+      </x:call>
+      <x:expect label="id" select="'672871516'"/>
+    </x:scenario>
+    
     <x:scenario label="video-idFromUrl : Vimeo (Not a video)">
       <x:call function="els:video-idFromUrl">
         <x:param name="url" select="'https://vimeo.com/fr/upgrade'"/>

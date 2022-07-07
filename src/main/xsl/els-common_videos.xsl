@@ -88,7 +88,7 @@
     <xsl:param name="url" as="xs:string"/>
     <xsl:variable name="hostname" select="els:http-get-host($url)" as="xs:string?"/>
     <xsl:choose>
-      <xsl:when test="$hostname = $els:video.vimeo.embed.domain or starts-with($url, $els:video.youtube.embed.URL.prefix)">
+      <xsl:when test="starts-with($url, $els:video.vimeo.embed.URL.prefix) or starts-with($url, $els:video.youtube.embed.URL.prefix)">
         <!--Recursive call needs an if statement to prevent infinite loop-->
         <xsl:variable name="url-link" select="els:video-embedUrlToUrl($url)" as="xs:string"/>
         <xsl:if test="$url-link != $url">
