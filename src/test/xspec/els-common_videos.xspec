@@ -6,112 +6,264 @@
   
   <x:scenario label="isVideoUrl()">
     
-    <x:scenario label="isVideoUrl : Youtube (Full domain)">
+    <x:scenario label="isVideoUrl : Youtube full url">
       <x:call function="els:isVideoUrl">
-        <x:param name="url" select="'https://www.youtube.com/watch?v=qWFHsVQjJPA&amp;list=PLQpqh98e9RgVcYmjmJ9OXrkHNDXuYB035&amp;index=21'" />
+        <x:param name="url" select="'https://www.youtube.com/watch?v=qWFHsVQjJPA&amp;list=PLQpqh98e9RgVcYmjmJ9OXrkHNDXuYB035&amp;index=21'"/>
       </x:call>
-      <x:expect label="Youtube (Full domain) => true()" select="true()" />
+      <x:expect label="true" select="true()"/>
     </x:scenario>
     
-    <x:scenario label="isVideoUrl : Youtube (Short domain, Share)">
+    <x:scenario label="isVideoUrl : Youtube short link">
       <x:call function="els:isVideoUrl">
-        <x:param name="url" select="'https://youtu.be/qWFHsVQjJPA'" />
+        <x:param name="url" select="'https://youtu.be/qWFHsVQjJPA'"/>
       </x:call>
-      <x:expect label="Youtube (Share) => true()" select="true()" />
+      <x:expect label="true" select="true()"/>
+    </x:scenario>
+    
+    <x:scenario label="isVideoUrl : Youtube embed url">
+      <x:call function="els:isVideoUrl">
+        <x:param name="url" select="'https://www.youtube.com/embed/GBZPKuBFedw'"/>
+      </x:call>
+      <x:expect label="true" select="true()"/>
+    </x:scenario>
+    
+    <x:scenario label="isVideoUrl : Youtube embed url with params">
+      <x:call function="els:isVideoUrl">
+        <x:param name="url" select="'https://www.youtube.com/embed/GBZPKuBFedw?autoplay=1&amp;origin=http://example.com'"/>
+      </x:call>
+      <x:expect label="true" select="true()"/>
     </x:scenario>
     
     <x:scenario label="isVideoUrl : Vimeo">
       <x:call function="els:isVideoUrl">
-        <x:param name="url" select="'https://vimeo.com/259053952'" />
+        <x:param name="url" select="'https://vimeo.com/259053952'"/>
       </x:call>
-      <x:expect label="Vimeo => true()" select="true()" />
+      <x:expect label="true" select="true()"/>
+    </x:scenario>
+    
+    <x:scenario label="isVideoUrl : Vimeo embed">
+      <x:call function="els:isVideoUrl">
+        <x:param name="url" select="'https://player.vimeo.com/video/259053952'"/>
+      </x:call>
+      <x:expect label="true" select="true()"/>
     </x:scenario>
     
     <x:scenario label="isVideoUrl : Random URL">
       <x:call function="els:isVideoUrl">
-        <x:param name="url" select="'https://google.com/'" />
+        <x:param name="url" select="'https://google.com/'"/>
       </x:call>
-      <x:expect label="Google.com => false()" select="false()" />
+      <x:expect label="false" select="false()"/>
+    </x:scenario>
+    
+  </x:scenario>
+  
+  <x:scenario label="video-embedUrlToUrl">
+    
+    <x:scenario label="video-embedUrlToUrl : Vimeo embed url">
+      <x:call function="els:video-embedUrlToUrl">
+        <x:param name="url.embed" select="'https://player.vimeo.com/video/672871516?h=d86e5eab90'"/>
+      </x:call>
+      <x:expect label="Vimeo link" select="'https://vimeo.com/672871516'"/>
+    </x:scenario>
+    
+    <x:scenario label="video-embedUrlToUrl : Vimeo embed url with params">
+      <x:call function="els:video-embedUrlToUrl">
+        <x:param name="url.embed" select="'https://player.vimeo.com/video/259053952?h=9c09917a50&amp;title=0&amp;byline=0&amp;portrait=0'"/>
+      </x:call>
+      <x:expect label="Vimeo link" select="'https://vimeo.com/259053952'"/>
+    </x:scenario>
+    
+    <x:scenario label="video-embedUrlToUrl : Youtube embed url">
+      <x:call function="els:video-embedUrlToUrl">
+        <x:param name="url.embed" select="'https://www.youtube.com/embed/GBZPKuBFedw'"/>
+      </x:call>
+      <x:expect label="Youtube short link" select="'https://youtu.be/GBZPKuBFedw'"/>
+    </x:scenario>
+    
+    <x:scenario label="video-embedUrlToUrl : Youtube embed url with params">
+      <x:call function="els:video-embedUrlToUrl">
+        <x:param name="url.embed" select="'https://www.youtube.com/embed/GBZPKuBFedw?autoplay=1&amp;origin=http://example.com'"/>
+      </x:call>
+      <x:expect label="Youtube short link" select="'https://youtu.be/GBZPKuBFedw'"/>
+    </x:scenario>
+    
+    <x:scenario label="video-embedUrlToUrl : Youtube short url">
+      <x:call function="els:video-embedUrlToUrl">
+        <x:param name="url.embed" select="'https://youtu.be/GBZPKuBFedw'"/>
+      </x:call>
+      <x:expect label="Same url" select="'https://youtu.be/GBZPKuBFedw'"/>
+    </x:scenario>
+    
+    <x:scenario label="video-embedUrlToUrl : Youtube full url">
+      <x:call function="els:video-embedUrlToUrl">
+        <x:param name="url.embed" select="'https://www.youtube.com/watch?v=qWFHsVQjJPA&amp;list=PLQpqh98e9RgVcYmjmJ9OXrkHNDXuYB035&amp;index=21'"/>
+      </x:call>
+      <x:expect label="Same url" select="'https://www.youtube.com/watch?v=qWFHsVQjJPA&amp;list=PLQpqh98e9RgVcYmjmJ9OXrkHNDXuYB035&amp;index=21'"/>
+    </x:scenario>
+    
+    <x:scenario label="video-embedUrlToUrl : Youtube videoseries">
+      <x:call function="els:video-embedUrlToUrl">
+        <x:param name="url.embed" select="'https://www.youtube.com/embed/videoseries?list=PLQpqh98e9RgVcYmjmJ9OXrkHNDXuYB035'"/>
+      </x:call>
+      <!--
+        Quand on test sur Youtube : 
+        -> https://www.youtube.com/watch?v=qKw6oDnf3XQ&list=PLRiOTYOXvFzaARHOdX5Q7aw70NLaIMPem
+        -> https://youtu.be/qKw6oDnf3XQ
+      -->
+      <x:expect label="Same URL (TODO better ?)" select="'https://www.youtube.com/embed/videoseries?list=PLQpqh98e9RgVcYmjmJ9OXrkHNDXuYB035'"/>
+    </x:scenario>
+    
+    <x:scenario label="video-embedUrlToUrl : Youtube dynamic playlist">
+      <x:call function="els:video-embedUrlToUrl">
+        <x:param name="url.embed" select="'https://www.youtube.com/embed/Yc4VO8yzYcU?playlist=Y8R4Wvw7wlg,hz2HIKsQfIw,0UbCOpRye5c&amp;playsinline=1'"/>
+      </x:call>
+      <x:expect label="Same URL (TODO better)" select="'https://www.youtube.com/embed/Yc4VO8yzYcU?playlist=Y8R4Wvw7wlg,hz2HIKsQfIw,0UbCOpRye5c&amp;playsinline=1'"/>
+    </x:scenario>
+    
+    <x:scenario label="video-embedUrlToUrl : Youtube listtype=playlist">
+      <x:call function="els:video-embedUrlToUrl">
+        <x:param name="url.embed" select="'http://www.youtube.com/embed?listType=playlist&amp;list=PLC77007E23FF423C6'"/>
+      </x:call>
+      <!--
+        Quand on test sur Youtube : 
+        -> https://www.youtube.com/watch?v=96URE_-aj-8&list=PLC77007E23FF423C6
+        -> https://youtu.be/96URE_-aj-8
+      -->
+      <x:expect label="Same URL (TODO better)" select="'http://www.youtube.com/embed?listType=playlist&amp;list=PLC77007E23FF423C6'"/>
+    </x:scenario>
+    
+    <x:scenario label="video-embedUrlToUrl : random url">
+      <x:call function="els:video-embedUrlToUrl">
+        <x:param name="url.embed" select="'https://google.com/'"/>
+      </x:call>
+      <x:expect label="Same URL" select="'https://google.com/'"/>
     </x:scenario>
     
   </x:scenario>
   
   <x:scenario label="video-platformFromUrl()">
     
-    <x:scenario label="video-platformFromUrl : Youtube (Full domain)">
+    <x:scenario label="video-platformFromUrl : Youtube full url">
       <x:call function="els:video-platformFromUrl">
-        <x:param name="url" select="'https://www.youtube.com/watch?v=qWFHsVQjJPA&amp;list=PLQpqh98e9RgVcYmjmJ9OXrkHNDXuYB035&amp;index=21'" />
+        <x:param name="url" select="'https://www.youtube.com/watch?v=qWFHsVQjJPA&amp;list=PLQpqh98e9RgVcYmjmJ9OXrkHNDXuYB035&amp;index=21'"/>
       </x:call>
-      <x:expect label="Youtube (Full domain) => 'youtube'" select="'youtube'" />
+      <x:expect label="youtube" select="'youtube'"/>
     </x:scenario>
     
-    <x:scenario label="video-platformFromUrl : Youtube (Short domain, Share)">
+    <x:scenario label="video-platformFromUrl : Youtube short link">
       <x:call function="els:video-platformFromUrl">
-        <x:param name="url" select="'https://youtu.be/qWFHsVQjJPA'" />
+        <x:param name="url" select="'https://youtu.be/qWFHsVQjJPA'"/>
       </x:call>
-      <x:expect label="Youtube (Short domain) => 'youtube'" select="'youtube'" />
+      <x:expect label="youtube" select="'youtube'"/>
+    </x:scenario>
+    
+    <x:scenario label="video-platformFromUrl : Youtube embed">
+      <x:call function="els:video-platformFromUrl">
+        <x:param name="url" select="'https://www.youtube.com/embed/GBZPKuBFedw'"/>
+      </x:call>
+      <x:expect label="youtube" select="'youtube'"/>
     </x:scenario>
     
     <x:scenario label="video-platformFromUrl : Vimeo">
       <x:call function="els:video-platformFromUrl">
-        <x:param name="url" select="'https://vimeo.com/259053952'" />
+        <x:param name="url" select="'https://vimeo.com/259053952'"/>
       </x:call>
-      <x:expect label="Vimeo  => 'vimeo'" select="'vimeo'" />
+      <x:expect label="vimeo" select="'vimeo'"/>
+    </x:scenario>
+    
+    <x:scenario label="video-platformFromUrl : Vimeo embed">
+      <x:call function="els:video-platformFromUrl">
+        <x:param name="url" select="'https://player.vimeo.com/video/259053952'"/>
+      </x:call>
+      <x:expect label="vimeo" select="'vimeo'"/>
     </x:scenario>
     
     <x:scenario label="video-platformFromUrl : Random URL">
       <x:call function="els:video-platformFromUrl">
-        <x:param name="url" select="'https://google.com/'" />
+        <x:param name="url" select="'https://google.com/'"/>
       </x:call>
-      <x:expect label="Google.com => ()" select="()" />
+      <x:expect label="empty" select="()"/>
     </x:scenario>
     
   </x:scenario>
   
   <x:scenario label="video-idFromUrl()">
     
-    <x:scenario label="video-idFromUrl : Youtube (Full domain)">
+    <x:scenario label="video-idFromUrl : Youtube full url">
       <x:call function="els:video-idFromUrl">
-        <x:param name="url" select="'https://www.youtube.com/watch?v=qWFHsVQjJPA&amp;list=PLQpqh98e9RgVcYmjmJ9OXrkHNDXuYB035&amp;index=21'" />
+        <x:param name="url" select="'https://www.youtube.com/watch?v=qWFHsVQjJPA&amp;list=PLQpqh98e9RgVcYmjmJ9OXrkHNDXuYB035&amp;index=21'"/>
       </x:call>
-      <x:expect label="Youtube (Full domain) " select="'qWFHsVQjJPA'" />
+      <x:expect label="id" select="'qWFHsVQjJPA'"/>
     </x:scenario>
     
-    <x:scenario label="video-idFromUrl : Youtube (Short domain, Share)">
+    <x:scenario label="video-idFromUrl : Youtube short link">
       <x:call function="els:video-idFromUrl">
-        <x:param name="url" select="'https://youtu.be/qWFHsVQjJPA'" />
+        <x:param name="url" select="'https://youtu.be/qWFHsVQjJPA'"/>
       </x:call>
-      <x:expect label="Youtube (Short domain)" select="'qWFHsVQjJPA'" />
+      <x:expect label="id" select="'qWFHsVQjJPA'"/>
     </x:scenario>
     
-    <x:scenario label="video-idFromUrl : Youtube (Not a video)">
+    <x:scenario label="video-idFromUrl : Youtube embed">
       <x:call function="els:video-idFromUrl">
-        <x:param name="url" select="'https://www.youtube.com/playlist?list=PLQpqh98e9RgVcYmjmJ9OXrkHNDXuYB035'" />
+        <x:param name="url" select="'https://www.youtube.com/embed/GBZPKuBFedw'"/>
       </x:call>
-      <x:expect label="Youtube Playlist => ()" select="()" />
+      <x:expect label="id" select="'GBZPKuBFedw'"/>
     </x:scenario>
     
+    <x:scenario label="video-idFromUrl : Youtube embed with params">
+      <x:call function="els:video-idFromUrl">
+        <x:param name="url" select="'https://www.youtube.com/embed/GBZPKuBFedw?autoplay=1&amp;origin=http://example.com'"/>
+      </x:call>
+      <x:expect label="id" select="'GBZPKuBFedw'"/>
+    </x:scenario>
+    
+    <x:scenario label="video-idFromUrl : Youtube embed videoseries (Not a video)">
+      <x:call function="els:video-idFromUrl">
+        <x:param name="url" select="'https://www.youtube.com/embed/videoseries?list=PLQpqh98e9RgVcYmjmJ9OXrkHNDXuYB035'"/>
+      </x:call>
+      <x:expect label="empty" select="()"/>
+    </x:scenario>
+    
+    <x:scenario label="video-idFromUrl : Youtube playlist (Not a video)">
+      <x:call function="els:video-idFromUrl">
+        <x:param name="url" select="'https://www.youtube.com/playlist?list=PLQpqh98e9RgVcYmjmJ9OXrkHNDXuYB035'"/>
+      </x:call>
+      <x:expect label="empty" select="()"/>
+    </x:scenario>
+    
+    <x:scenario label="video-idFromUrl : Youtube embed listtype=playlist (Not a video)">
+      <x:call function="els:video-idFromUrl">
+        <x:param name="url" select="'http://www.youtube.com/embed?listType=playlist&amp;list=PLC77007E23FF423C6'"/>
+      </x:call>
+      <x:expect label="empty" select="()"/>
+    </x:scenario>
+    
+    <x:scenario label="video-idFromUrl : Youtube explore (Not a video)">
+      <x:call function="els:video-idFromUrl">
+        <x:param name="url" select="'https://www.youtube.com/feed/explore'"/>
+      </x:call>
+      <x:expect label="empty" select="()"/>
+    </x:scenario>
     
     <x:scenario label="video-idFromUrl : Vimeo">
       <x:call function="els:video-idFromUrl">
-        <x:param name="url" select="'https://vimeo.com/259053952'" />
+        <x:param name="url" select="'https://vimeo.com/259053952'"/>
       </x:call>
-      <x:expect label="Vimeo" select="'259053952'" />
+      <x:expect label="id" select="'259053952'"/>
     </x:scenario>
     
     <x:scenario label="video-idFromUrl : Vimeo (Not a video)">
       <x:call function="els:video-idFromUrl">
-        <x:param name="url" select="'https://vimeo.com/fr/upgrade'" />
+        <x:param name="url" select="'https://vimeo.com/fr/upgrade'"/>
       </x:call>
-      <x:expect label="Vimeo page => ()" select="()" />
+      <x:expect label="empty" select="()"/>
     </x:scenario>
-    
     
     <x:scenario label="video-idFromUrl : Random URL">
       <x:call function="els:video-idFromUrl">
-        <x:param name="url" select="'https://google.com/'" />
+        <x:param name="url" select="'https://google.com/'"/>
       </x:call>
-      <x:expect label="Google.com => ()" select="()" />
+      <x:expect label="empty" select="()"/>
     </x:scenario>
     
   </x:scenario>
@@ -120,9 +272,9 @@
     
     <x:scenario label="video-makeHtmlEmbed : Youtube (with URL + width/height)">
       <x:call function="els:video-makeHtmlEmbed">
-        <x:param name="url" select="'https://youtu.be/qWFHsVQjJPA'" />
-        <x:param name="width" select="'xxx'" />
-        <x:param name="height" select="'yyy'" />
+        <x:param name="url" select="'https://youtu.be/qWFHsVQjJPA'"/>
+        <x:param name="width" select="'xxx'"/>
+        <x:param name="height" select="'yyy'"/>
       </x:call>
       <x:expect label="Youtube Video">
         <html:iframe 
@@ -131,13 +283,13 @@
           frameborder="0"
           allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
           allowfullscreen="allowfullscreen"
-          src="https://www.youtube.com/embed/qWFHsVQjJPA" />
+          src="https://www.youtube.com/embed/qWFHsVQjJPA"/>
       </x:expect>
     </x:scenario>
     
-    <x:scenario label="video-makeHtmlEmbed : Youtube (with URL)">
+    <x:scenario label="video-makeHtmlEmbed : Youtube (with URL - short)">
       <x:call function="els:video-makeHtmlEmbed">
-        <x:param name="url" select="'https://youtu.be/qWFHsVQjJPA'" />
+        <x:param name="url" select="'https://youtu.be/qWFHsVQjJPA'"/>
       </x:call>
       <x:expect label="Youtube Video">
         <html:iframe 
@@ -146,16 +298,46 @@
           frameborder="0"
           allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
           allowfullscreen="allowfullscreen"
-          src="https://www.youtube.com/embed/qWFHsVQjJPA" />
+          src="https://www.youtube.com/embed/qWFHsVQjJPA"/>
+      </x:expect>
+    </x:scenario>
+    
+    <x:scenario label="video-makeHtmlEmbed : Youtube (with URL - embed)">
+      <x:call function="els:video-makeHtmlEmbed">
+        <x:param name="url" select="'https://www.youtube.com/embed/GBZPKuBFedw?autoplay=1&amp;origin=http://example.com'"/>
+      </x:call>
+      <x:expect label="Youtube Video">
+        <html:iframe 
+          width="560"
+          height="315"
+          frameborder="0"
+          allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen="allowfullscreen"
+          src="https://www.youtube.com/embed/GBZPKuBFedw"/>
+      </x:expect>
+    </x:scenario>
+    
+    <x:scenario label="video-makeHtmlEmbed : Youtube (with embed URL - videoseries)" pending="not implemented for now, should keep the embed url">
+      <x:call function="els:video-makeHtmlEmbed">
+        <x:param name="url" select="'https://www.youtube.com/embed/videoseries?list=PLQpqh98e9RgVcYmjmJ9OXrkHNDXuYB035'"/>
+      </x:call>
+      <x:expect label="Youtube Video">
+        <html:iframe 
+          width="560"
+          height="315"
+          frameborder="0"
+          allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen="allowfullscreen"
+          src="https://www.youtube.com/embed/videoseries?list=PLQpqh98e9RgVcYmjmJ9OXrkHNDXuYB035"/>
       </x:expect>
     </x:scenario>
     
     <x:scenario label="video-makeHtmlEmbed : Youtube (with video ID + width/height)">
       <x:call function="els:video-makeHtmlEmbed">
-        <x:param name="platform" select="'youtube'" />
-        <x:param name="videoId" select="'qWFHsVQjJPA'" />
-        <x:param name="width" select="'xxx'" />
-        <x:param name="height" select="'yyy'" />
+        <x:param name="platform" select="'youtube'"/>
+        <x:param name="videoId" select="'qWFHsVQjJPA'"/>
+        <x:param name="width" select="'xxx'"/>
+        <x:param name="height" select="'yyy'"/>
       </x:call>
       <x:expect label="Youtube Video">
         <html:iframe 
@@ -164,14 +346,14 @@
           frameborder="0"
           allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
           allowfullscreen="allowfullscreen"
-          src="https://www.youtube.com/embed/qWFHsVQjJPA" />
+          src="https://www.youtube.com/embed/qWFHsVQjJPA"/>
       </x:expect>
     </x:scenario>
     
     <x:scenario label="video-makeHtmlEmbed : Youtube (with video ID)">
       <x:call function="els:video-makeHtmlEmbed">
-        <x:param name="platform" select="'youtube'" />
-        <x:param name="videoId" select="'qWFHsVQjJPA'" />
+        <x:param name="platform" select="'youtube'"/>
+        <x:param name="videoId" select="'qWFHsVQjJPA'"/>
       </x:call>
       <x:expect label="Youtube Video">
         <html:iframe 
@@ -180,15 +362,15 @@
           frameborder="0"
           allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
           allowfullscreen="allowfullscreen"
-          src="https://www.youtube.com/embed/qWFHsVQjJPA" />
+          src="https://www.youtube.com/embed/qWFHsVQjJPA"/>
       </x:expect>
     </x:scenario>
     
     <x:scenario label="video-makeHtmlEmbed : Vimeo (with URL + width/height)">
       <x:call function="els:video-makeHtmlEmbed">
-        <x:param name="url" select="'https://vimeo.com/259053952'" />
-        <x:param name="width" select="'xxx'" />
-        <x:param name="height" select="'yyy'" />
+        <x:param name="url" select="'https://vimeo.com/259053952'"/>
+        <x:param name="width" select="'xxx'"/>
+        <x:param name="height" select="'yyy'"/>
       </x:call>
       <x:expect label="Vimeo Video">
         <html:iframe
@@ -196,13 +378,13 @@
           height="yyy"
           frameborder="0"
           allowfullscreen="allowfullscreen"
-          src="https://player.vimeo.com/video/259053952" />
+          src="https://player.vimeo.com/video/259053952"/>
       </x:expect>
     </x:scenario>
 
     <x:scenario label="video-makeHtmlEmbed : Vimeo (with URL)">
       <x:call function="els:video-makeHtmlEmbed">
-        <x:param name="url" select="'https://vimeo.com/259053952'" />
+        <x:param name="url" select="'https://vimeo.com/259053952'"/>
       </x:call>
       <x:expect label="Vimeo Video">
         <html:iframe
@@ -210,16 +392,16 @@
           height="465"
           frameborder="0"
           allowfullscreen="allowfullscreen"
-          src="https://player.vimeo.com/video/259053952" />
+          src="https://player.vimeo.com/video/259053952"/>
       </x:expect>
     </x:scenario>
     
     <x:scenario label="video-makeHtmlEmbed : Vimeo (with video ID + width/height)">
       <x:call function="els:video-makeHtmlEmbed">
-        <x:param name="platform" select="'vimeo'" />
-        <x:param name="videoId" select="'259053952'" />
-        <x:param name="width" select="'xxx'" />
-        <x:param name="height" select="'yyy'" />
+        <x:param name="platform" select="'vimeo'"/>
+        <x:param name="videoId" select="'259053952'"/>
+        <x:param name="width" select="'xxx'"/>
+        <x:param name="height" select="'yyy'"/>
       </x:call>
       <x:expect label="Vimeo Video">
         <html:iframe
@@ -227,14 +409,14 @@
           height="yyy"
           frameborder="0"
           allowfullscreen="allowfullscreen"
-          src="https://player.vimeo.com/video/259053952" />
+          src="https://player.vimeo.com/video/259053952"/>
       </x:expect>
     </x:scenario>
     
     <x:scenario label="video-makeHtmlEmbed : Vimeo (with video ID)">
       <x:call function="els:video-makeHtmlEmbed">
-        <x:param name="platform" select="'vimeo'" />
-        <x:param name="videoId" select="'259053952'" />
+        <x:param name="platform" select="'vimeo'"/>
+        <x:param name="videoId" select="'259053952'"/>
       </x:call>
       <x:expect label="Vimeo Video">
         <html:iframe
@@ -242,7 +424,7 @@
           height="465"
           frameborder="0"
           allowfullscreen="allowfullscreen"
-          src="https://player.vimeo.com/video/259053952" />
+          src="https://player.vimeo.com/video/259053952"/>
       </x:expect>
     </x:scenario>
     

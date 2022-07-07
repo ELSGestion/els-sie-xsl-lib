@@ -14,7 +14,7 @@
     <xd:desc>
       <xd:p>ELS-COMMON lib : "Audio" module.</xd:p>
       <xd:p>Utility functions to deal with cloud-hosted audio links and embed content.</xd:p>
-      <xd:p>Supported platforms are curently: Soundcloud.</xd:p>
+      <xd:p>Supported platforms are curently: Soundcloud, ausha.</xd:p>
     </xd:desc>
   </xd:doc>
   

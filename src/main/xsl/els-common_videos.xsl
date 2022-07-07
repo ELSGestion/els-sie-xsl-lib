@@ -27,8 +27,9 @@
   <xsl:variable name="els:video.vimeo.domain" select="'vimeo.com'" as="xs:string"/>
   <xsl:variable name="els:video.vimeo.embed.defaultWidth" select="'640'" as="xs:string"/>
   <xsl:variable name="els:video.vimeo.embed.defaultHeight" select="'465'" as="xs:string"/>
-  <xsl:variable name="els:audio.vimeo.embed.URL.prefix" select="'https://player.vimeo.com/video/'" as="xs:string"/>
-  <xsl:variable name="els:audio.vimeo.embed.URL.suffix" select="''" as="xs:string"/>
+  <xsl:variable name="els:video.vimeo.embed.domain" select="'player.vimeo.com'" as="xs:string"/>
+  <xsl:variable name="els:video.vimeo.embed.URL.prefix" select="'https://player.vimeo.com/video/'" as="xs:string"/>
+  <xsl:variable name="els:video.vimeo.embed.URL.suffix" select="''" as="xs:string"/>
   
   <xd:doc>
     <xd:desc>Constant for "YouTube" Platform</xd:desc>
@@ -37,19 +38,21 @@
   <xsl:variable name="els:video.youtube.domain.full" select="'www.youtube.com'" as="xs:string"/>
   <xsl:variable name="els:video.youtube.domain.short" select="'youtu.be'" as="xs:string"/>
   <xsl:variable name="els:video.youtube.embed.defaultWidth" select="'560'" as="xs:string"/>
-  <xsl:variable name="els:video.youtube.embed.defaultHeight" select="'315'" as="xs:string"/>  
-  <xsl:variable name="els:audio.youtube.embed.URL.prefix" select="'https://www.youtube.com/embed/'" as="xs:string"/>
-  <xsl:variable name="els:audio.youtube.embed.URL.suffix" select="''" as="xs:string"/>
+  <xsl:variable name="els:video.youtube.embed.defaultHeight" select="'315'" as="xs:string"/>
+  <xsl:variable name="els:video.youtube.embed.domain" select="'www.youtube.com'" as="xs:string"/>
+  <xsl:variable name="els:video.youtube.embed.URL.prefix" select="'https://www.youtube.com/embed/'" as="xs:string"/>
+  <xsl:variable name="els:video.youtube.embed.URL.suffix" select="''" as="xs:string"/>
   
   <xd:doc>
     <xd:desc>Returns true if the given URL is a link to a web-hosted video.</xd:desc>
     <xd:param name="url">[xs:string] The URL to check</xd:param>
-    <xd:return>[xs:boolean] The result of the URL checking.</xd:return>
+    <xd:return>[xs:boolean] The result of the URL checking, is true for any of the supported plateform,
+      not depending on the type of link (embed or not).</xd:return>
   </xd:doc>
   <xsl:function as="xs:boolean" name="els:isVideoUrl">
     <xsl:param name="url" as="xs:string"/>
     <xsl:variable name="hostname" select="els:http-get-host($url)" as="xs:string?"/>
-    <xsl:sequence select="$hostname = ($els:video.vimeo.domain,$els:video.youtube.domain.full,$els:video.youtube.domain.short)"/>
+    <xsl:sequence select="$hostname = ($els:video.vimeo.domain, $els:video.vimeo.embed.domain, $els:video.youtube.domain.full, $els:video.youtube.domain.short, $els:video.youtube.embed.domain)"/>
   </xsl:function>
   
   <xd:doc>
@@ -64,15 +67,12 @@
     <xsl:param name="url" as="xs:string" />
     <xsl:variable name="hostname" select="els:http-get-host($url)" as="xs:string?"/>
     <xsl:choose>
-      <xsl:when test="$hostname = $els:video.vimeo.domain">
+      <xsl:when test="$hostname = ($els:video.vimeo.domain, $els:video.vimeo.embed.domain)">
         <xsl:sequence select="$els:video.vimeo"/>
       </xsl:when>
-      <xsl:when test="$hostname = ($els:video.youtube.domain.full,$els:video.youtube.domain.short)">
+      <xsl:when test="$hostname = ($els:video.youtube.domain.full, $els:video.youtube.domain.short, $els:video.youtube.embed.domain)">
         <xsl:sequence select="$els:video.youtube"/>
       </xsl:when>
-      <xsl:otherwise>
-        <xsl:sequence select="()" />
-      </xsl:otherwise>
     </xsl:choose>
   </xsl:function>
   
@@ -81,14 +81,21 @@
       <xd:p>Returns the ID of a cloud-hosted video.</xd:p>
       <xd:p>Returns the empty sequence if the URL is not a video URL from a supported platform.</xd:p>
     </xd:desc>
-    <xd:param name="url">[xs:string] The video clip URL.</xd:param>
+    <xd:param name="url">[xs:string] The video clip URL (embed or not).</xd:param>
     <xd:return>[xs:string?] The ID of the video clip.</xd:return>
   </xd:doc>
   <xsl:function as="xs:string?" name="els:video-idFromUrl">
     <xsl:param name="url" as="xs:string"/>
     <xsl:variable name="hostname" select="els:http-get-host($url)" as="xs:string?"/>
     <xsl:choose>
-      <xsl:when test="$hostname = ($els:video.vimeo.domain,$els:video.youtube.domain.short)">
+      <xsl:when test="$hostname = $els:video.vimeo.embed.domain or starts-with($url, $els:video.youtube.embed.URL.prefix)">
+        <!--Recursive call needs an if statement to prevent infinite loop-->
+        <xsl:variable name="url-link" select="els:video-embedUrlToUrl($url)" as="xs:string"/>
+        <xsl:if test="$url-link != $url">
+          <xsl:sequence select="els:video-idFromUrl($url-link)"/>
+        </xsl:if>
+      </xsl:when>
+      <xsl:when test="$hostname = ($els:video.vimeo.domain, $els:video.youtube.domain.short)">
         <xsl:variable name="path" select="els:http-get-path($url)" />
         <!-- The condition below should exclude Vimeo Pages that are not videos, eg "en/pricing" -->
         <xsl:sequence select="if (contains($path,'/')) then () else $path"/>
@@ -96,9 +103,41 @@
       <xsl:when test="$hostname = $els:video.youtube.domain.full">
         <xsl:sequence select="els:http-get-param($url,'v')"/>
       </xsl:when>
-      <xsl:otherwise>
-        <xsl:sequence select="()" />
-      </xsl:otherwise>
+    </xsl:choose>
+  </xsl:function>
+  
+  <xd:doc>
+    <xd:desc>
+      <xd:p>Convert an embed video URL (typically from iframe) to a link video URL</xd:p>
+      <xd:p>Returns the same embed URL video if the conversion has failed or if the URL is not a video URL from a supported platform.</xd:p>
+    </xd:desc>
+    <xd:param name="url.embed">[xs:string] The video clip URL when it's embed with an iframe for example.</xd:param>
+    <xd:return>[xs:string?] The video clip URL (as non-embedded link)</xd:return>
+  </xd:doc>
+  <xsl:function as="xs:string" name="els:video-embedUrlToUrl">
+    <xsl:param name="url.embed" as="xs:string"/>
+    <xsl:choose>
+      <!--ce n'est pas une URL embed supportée-->
+      <xsl:when test="not(starts-with($url.embed, $els:video.vimeo.embed.URL.prefix))
+        and not(starts-with($url.embed, $els:video.youtube.embed.URL.prefix))">
+        <xsl:sequence select="$url.embed"/>
+      </xsl:when>
+      <xsl:when test="starts-with($url.embed, $els:video.vimeo.embed.URL.prefix)">
+        <xsl:variable name="link-url-with-param" select="concat('https://', $els:video.vimeo.domain, '/', substring-after($url.embed, $els:video.vimeo.embed.URL.prefix)) "/>
+        <xsl:sequence select="if (contains($link-url-with-param, '?')) then (substring-before($link-url-with-param, '?')) else ($link-url-with-param)"/>
+      </xsl:when>
+      <xsl:when test="starts-with($url.embed, $els:video.youtube.embed.URL.prefix)">
+        <xsl:variable name="idAndParam" select="substring-after($url.embed, $els:video.youtube.embed.URL.prefix)"/>
+        <xsl:variable name="id" select="if (contains($idAndParam, '?')) then (substring-before($idAndParam, '?')) else ($idAndParam)"/>
+        <xsl:choose>
+          <xsl:when test="$id = 'videoseries' or els:http-get-param($url.embed, 'playlist') != ''">
+            <xsl:sequence select="$url.embed"/>
+          </xsl:when>
+          <xsl:otherwise>
+            <xsl:sequence select="concat('https://', $els:video.youtube.domain.short, '/', $id) "/>
+          </xsl:otherwise>
+        </xsl:choose>
+      </xsl:when>
     </xsl:choose>
   </xsl:function>
   
@@ -191,7 +230,7 @@
       frameborder="0"
       allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
       allowfullscreen="allowfullscreen"
-      src="{$els:audio.youtube.embed.URL.prefix || $videoId || $els:audio.youtube.embed.URL.suffix}"/>
+      src="{$els:video.youtube.embed.URL.prefix || $videoId || $els:video.youtube.embed.URL.suffix}"/>
   </xsl:function>
   
   <xd:doc>
@@ -213,7 +252,7 @@
       height="{if ($height) then $height else $els:video.vimeo.embed.defaultHeight}"
       frameborder="0"
       allowfullscreen="allowfullscreen"
-      src="{$els:audio.vimeo.embed.URL.prefix || $videoId || $els:audio.vimeo.embed.URL.suffix}" />   
+      src="{$els:video.vimeo.embed.URL.prefix || $videoId || $els:video.vimeo.embed.URL.suffix}" />   
   </xsl:function>
  
 </xsl:stylesheet>
