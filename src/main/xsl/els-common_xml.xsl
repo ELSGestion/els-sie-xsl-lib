@@ -45,9 +45,23 @@
           </xsl:if>
         </xsl:for-each>
       </xsl:for-each>
-      <xsl:if test="not($node/self::*)">
-        <xsl:value-of select="concat('/@',name($node))"/>
-      </xsl:if>
+      <xsl:choose>
+        <xsl:when test="$node/self::*">
+          <!--nothing to add-->
+        </xsl:when>
+        <xsl:when test="$node/self::attribute()">
+          <xsl:value-of select="concat('/@', name($node))"/>
+        </xsl:when>
+        <xsl:when test="$node/self::text()">
+          <xsl:value-of select="concat('/text()[', count($node/preceding-sibling::text()) + 1, ']')"/>
+        </xsl:when>
+        <xsl:when test="$node/self::comment()">
+          <xsl:value-of select="concat('/comment()[', count($node/preceding-sibling::comment()) + 1, ']')"/>
+        </xsl:when>
+        <xsl:when test="$node/self::processing-instruction()">
+          <xsl:value-of select="concat('/comment()[', count($node/preceding-sibling::processing-instruction()) + 1, ']')"/>
+        </xsl:when>
+      </xsl:choose>
     </xsl:variable>
     <xsl:value-of select="string-join($result, '')"/>
   </xsl:template>
@@ -66,7 +80,7 @@
       <xsl:when test="function-available('saxon:path')">
         <xsl:value-of select="saxon:path($node)" use-when="function-available('saxon:path')"/>
         <!--To avoid a saxon warning at compilation time, we plan the case (impossible in this when) of the "inverse" use-when 
-        (If not, Saxon will warng of a condition brnanch that could return an empty seq instead of a string-->
+        (If not, Saxon will warn of a condition branch that could return an empty seq instead of a string-->
         <xsl:value-of select="'This will never happen here'" use-when="not(function-available('saxon:path'))"/>
       </xsl:when>
       <xsl:otherwise>
