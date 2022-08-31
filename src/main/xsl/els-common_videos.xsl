@@ -117,11 +117,6 @@
   <xsl:function as="xs:string" name="els:video-embedUrlToUrl">
     <xsl:param name="url.embed" as="xs:string"/>
     <xsl:choose>
-      <!--ce n'est pas une URL embed supportée-->
-      <xsl:when test="not(starts-with($url.embed, $els:video.vimeo.embed.URL.prefix))
-        and not(starts-with($url.embed, $els:video.youtube.embed.URL.prefix))">
-        <xsl:sequence select="$url.embed"/>
-      </xsl:when>
       <xsl:when test="starts-with($url.embed, $els:video.vimeo.embed.URL.prefix)">
         <xsl:variable name="link-url-with-param" select="concat('https://', $els:video.vimeo.domain, '/', substring-after($url.embed, $els:video.vimeo.embed.URL.prefix)) "/>
         <xsl:sequence select="if (contains($link-url-with-param, '?')) then (substring-before($link-url-with-param, '?')) else ($link-url-with-param)"/>
@@ -138,6 +133,10 @@
           </xsl:otherwise>
         </xsl:choose>
       </xsl:when>
+      <!--ce n'est pas une URL embed supportée-->
+      <xsl:otherwise>
+        <xsl:sequence select="$url.embed"/>
+      </xsl:otherwise>
     </xsl:choose>
   </xsl:function>
   
