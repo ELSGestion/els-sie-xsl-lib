@@ -106,7 +106,7 @@
   
   <xd:doc>
     <xd:desc>
-      <xd:p>Function that a returns a generated web-integration-ready html tag embedding the cloud-hosted audio clip.</xd:p>
+      <xd:p>Function that returns a generated web-integration-ready html tag embedding the cloud-hosted audio clip.</xd:p>
     </xd:desc>
     <xd:param name="platform">[xs:string] The platform identifier (cf. constants here in els-common_audio.xsl).</xd:param>
     <xd:param name="audioId">[xs:string] The ID of the cloud-hosted audio clip.</xd:param>
@@ -134,7 +134,7 @@
   
   <xd:doc>
     <xd:desc>
-      <xd:p>Function that a returns a generated web-integration-ready html tag embedding the cloud-hosted audio clip.</xd:p>
+      <xd:p>Function that returns a generated web-integration-ready html tag embedding the cloud-hosted audio clip.</xd:p>
       <xd:p>2-args signature without width/height arguments, which will be set to the platform default.</xd:p>
     </xd:desc>
     <xd:param name="platform">[xs:string] The platform identifier (cf. constants here in els-common_audio.xsl).</xd:param>
@@ -149,7 +149,7 @@
   
   <xd:doc>
     <xd:desc>
-      <xd:p>Function that a returns a generated web-integration-ready html tag embedding the cloud-hosted audio clip.</xd:p>
+      <xd:p>Function that returns a generated web-integration-ready html tag embedding the cloud-hosted audio clip.</xd:p>
     </xd:desc>
     <xd:param name="url">[xs:string] The cloud-hosted audio clip URL.</xd:param>
     <xd:param name="width">[xs:string?] A fixed width.</xd:param>
@@ -165,7 +165,7 @@
   
   <xd:doc>
     <xd:desc>
-      <xd:p>Function that a returns a generated web-integration-ready html tag embedding the cloud-hosted audio clip.</xd:p>
+      <xd:p>Function that returns a generated web-integration-ready html tag embedding the cloud-hosted audio clip.</xd:p>
       <xd:p>1-arg signature without width/height arguments, which will be set to the platform default.</xd:p>
     </xd:desc>
     <xd:param name="url">[xs:string] The cloud-hosted audio clip URL.</xd:param>

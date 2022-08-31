@@ -112,7 +112,7 @@
   <xd:doc>
     <xd:desc>
       <xd:p>Function that a returns a generated web-integration-ready html tag embedding the social network post.</xd:p>
-      <xd:p>2-Args signature without width/height arguments, that will be set to the platform default.</xd:p>
+      <xd:p>2-Args signature without width/height arguments, which will be set to the default value of the platform.</xd:p>
     </xd:desc>
     <xd:param name="platform">[xs:string] The platform identifier (cf. constants here in els-common_social-network.xsl).</xd:param>
     <xd:param name="postId">[xs:string] The ID of the post.</xd:param>
