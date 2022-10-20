@@ -376,20 +376,28 @@
         <xsl:variable name="day" select="$dateVerbalized.token[1]" as="xs:string"/>
         <xsl:variable name="month" select="$dateVerbalized.token[2]" as="xs:string"/>
         <xsl:variable name="year" select="$dateVerbalized.token[3]" as="xs:string"/>
-        <xsl:variable name="day" as="xs:string">
+        <xsl:variable name="day.as-digit" as="xs:string?">
           <xsl:choose>
             <xsl:when test="$day = '1er'">
               <xsl:value-of select="'01'"/>
             </xsl:when>
-            <xsl:otherwise>
+            <xsl:when test="$day castable as xs:integer">
               <xsl:value-of select="format-number($day cast as xs:integer, '00')"/>
-            </xsl:otherwise>
+            </xsl:when>
           </xsl:choose>
         </xsl:variable>
-        <xsl:variable name="month" select="format-number(els:getMonthNumFromVerbalizeMonth($month, if ($shortMonth) then $els:monthsShort.fr else $els:months.fr ), '00')" as="xs:string"/>
-        <xsl:value-of select="string-join(($day, $month, $year), '/')"/>
+        <xsl:choose>
+          <xsl:when test="empty($day.as-digit)">
+            <xsl:message>[ERROR][els:date-string-to-number-slash] Unable to get a day as digit from '<xsl:value-of select="$dateVerbalized"/>'</xsl:message>
+            <xsl:sequence select="$dateVerbalized"/>
+          </xsl:when>
+          <xsl:otherwise>
+            <xsl:variable name="month.as-digit" select="format-number(els:getMonthNumFromVerbalizeMonth($month, if ($shortMonth) then $els:monthsShort.fr else $els:months.fr ), '00')" as="xs:string"/>
+            <xsl:value-of select="string-join(($day.as-digit, $month.as-digit, $year), '/')"/>
+          </xsl:otherwise>
+        </xsl:choose>
       </xsl:otherwise>
-    </xsl:choose>    
+    </xsl:choose>
   </xsl:function>
   
   <xd:p>1 arg signature of els:date-string-to-number-slash() - Default $shortMonth = false()</xd:p>
