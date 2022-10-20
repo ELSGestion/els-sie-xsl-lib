@@ -26,7 +26,7 @@
   </xsl:function>
   
   <xd:doc>Get the year as string from any ISO date : YYYY-MM-DD would get "YYYY"</xd:doc>
-  <xsl:function name="els:getYearFromIsoDate" as="xs:string">
+  <xsl:function name="els:getYearFromIsoDate" as="xs:string?">
     <xsl:param name="isoDate" as="xs:string"/>
     <xsl:choose>
       <xsl:when test="els:isIsoDate($isoDate)">
@@ -39,7 +39,7 @@
   </xsl:function>
   
   <xd:doc>Get the month number as string from any ISO date : YYYY-MM-DD would get "MM"</xd:doc>
-  <xsl:function name="els:getMonthFromIsoDate" as="xs:string">
+  <xsl:function name="els:getMonthFromIsoDate" as="xs:string?">
     <xsl:param name="isoDate" as="xs:string"/>
     <xsl:choose>
       <xsl:when test="els:isIsoDate($isoDate)">
@@ -52,7 +52,7 @@
   </xsl:function>
   
   <xd:doc>Get the day number as string from any ISO date : YYYY-MM-DD would get "DD"</xd:doc>
-  <xsl:function name="els:getDayFromIsoDate" as="xs:string">
+  <xsl:function name="els:getDayFromIsoDate" as="xs:string?">
     <xsl:param name="isoDate" as="xs:string"/>
     <xsl:choose>
       <xsl:when test="els:isIsoDate($isoDate)">
@@ -104,7 +104,7 @@
   </xsl:function>
   
   <xd:doc>1 arg signature of els:verbalizeMonthFromNum : default language is "french"</xd:doc>
-  <xsl:function name="els:verbalizeMonthFromNum" as="xs:string">
+  <xsl:function name="els:verbalizeMonthFromNum" as="xs:string?">
     <xsl:param name="monthNumString" as="xs:string"/>
     <xsl:sequence select="els:verbalizeMonthFromNum($monthNumString, $els:months.fr)"/>
   </xsl:function>
@@ -117,7 +117,7 @@
     <xd:param name="months.verbalized">[String+] All months verbalized in the good language</xd:param>
     <xd:return>[String] The verbalized month</xd:return>
   </xd:doc>
-  <xsl:function name="els:verbalizeMonthFromNum" as="xs:string">
+  <xsl:function name="els:verbalizeMonthFromNum" as="xs:string?">
     <xsl:param name="monthNumString" as="xs:string"/>
     <xsl:param name="months.verbalized" as="xs:string+"/>
     <xsl:variable name="monthNumInt" select="if($monthNumString castable as xs:integer) then(xs:integer($monthNumString)) else(0)" as="xs:integer"/>
@@ -127,14 +127,13 @@
         <xsl:sequence select="$result"/>
       </xsl:when>
       <xsl:otherwise>
-        <xsl:text>[ErreurMois]</xsl:text>
         <xsl:message>[ERROR][els:verbalizeMonthFromNum] Unable to get the month string from month number '<xsl:value-of select="$monthNumString"/>'</xsl:message>
       </xsl:otherwise>
     </xsl:choose>
   </xsl:function>
   
   <xd:doc>1 arg signature of els:getMonthNumFromVerbalizeMonth : default language is "french"</xd:doc>
-  <xsl:function name="els:getMonthNumFromVerbalizeMonth" as="xs:integer">
+  <xsl:function name="els:getMonthNumFromVerbalizeMonth" as="xs:integer?">
     <xsl:param name="monthString" as="xs:string"/>
     <xsl:sequence select="els:getMonthNumFromVerbalizeMonth($monthString, $els:months.fr)"/>
   </xsl:function>
@@ -144,10 +143,10 @@
       <xd:p>Get the month num as integer from its verbalization</xd:p>
     </xd:desc>
     <xd:param name="monthString">[String] The month string (ex : "january", "février", etc.)</xd:param>
-    <xd:param name="months.verbalized">[String+] All months as regex strings verbalized in the appropriate language</xd:param>
+    <xd:param name="months.verbalized">[String+] All months as regex strings verbalized in the good language</xd:param>
     <xd:return>[String] The verbalized month</xd:return>
   </xd:doc>
-  <xsl:function name="els:getMonthNumFromVerbalizeMonth" as="xs:integer">
+  <xsl:function name="els:getMonthNumFromVerbalizeMonth" as="xs:integer?">
     <xsl:param name="monthString" as="xs:string"/>
     <xsl:param name="months.verbalized" as="xs:string+"/>
     <xsl:variable name="result" select="$months.verbalized[matches($monthString, ., 'i')]!index-of($months.verbalized, .)" as="xs:integer*"/>
@@ -157,7 +156,6 @@
         <xsl:sequence select="$result"/>
       </xsl:when>
       <xsl:otherwise>
-        <xsl:sequence select="0"/>
         <xsl:message>[ERROR][els:getMonthNumFromVerbalizeMonth] Unable to get an integer representation of the month from the string '<xsl:value-of select="$monthString"/>' : <xsl:value-of select="count($result)"/> match.</xsl:message>
       </xsl:otherwise>
     </xsl:choose>
@@ -363,12 +361,11 @@
     <xd:return>[String]The date with format "DD/MM/YYYY"</xd:return>
   </xd:doc>
   <!--FIXME : fonction format-date() le fait déjà ?-->
-  <xsl:function name="els:date-string-to-number-slash" as="xs:string">
+  <xsl:function name="els:date-string-to-number-slash" as="xs:string?">
     <xsl:param name="dateVerbalized" as="xs:string"/>
     <xsl:param name="shortMonth" as="xs:boolean"/>
     <xsl:choose>
       <xsl:when test="empty($dateVerbalized) or count(tokenize($dateVerbalized, $els:regAnySpace)) &lt; 3">
-        <xsl:text>[ErreurDate]</xsl:text>
         <xsl:message>[ERROR][els:date-string-to-number-slash] Unable to get the date from '<xsl:value-of select="$dateVerbalized"/>'</xsl:message>
       </xsl:when>
       <xsl:otherwise>
@@ -389,7 +386,6 @@
         <xsl:choose>
           <xsl:when test="empty($day.as-digit)">
             <xsl:message>[ERROR][els:date-string-to-number-slash] Unable to get a day as digit from '<xsl:value-of select="$dateVerbalized"/>'</xsl:message>
-            <xsl:sequence select="$dateVerbalized"/>
           </xsl:when>
           <xsl:otherwise>
             <xsl:variable name="month.as-digit" select="format-number(els:getMonthNumFromVerbalizeMonth($month, if ($shortMonth) then $els:monthsShort.fr else $els:months.fr ), '00')" as="xs:string"/>
@@ -401,7 +397,7 @@
   </xsl:function>
   
   <xd:p>1 arg signature of els:date-string-to-number-slash() - Default $shortMonth = false()</xd:p>
-  <xsl:function name="els:date-string-to-number-slash" as="xs:string">
+  <xsl:function name="els:date-string-to-number-slash" as="xs:string?">
     <xsl:param name="dateVerbalized" as="xs:string"/>
     <xsl:sequence select="els:date-string-to-number-slash($dateVerbalized, false())"/>
   </xsl:function>
@@ -413,12 +409,12 @@
     <xd:param name="year">[xs:string] The 4 digit year.</xd:param>
     <xd:return>[xs:string] A 2 digit year (if the input year really was on 4 digits).</xd:return>
   </xd:doc>
-  <xsl:function name="els:getYearOn2Digits" as="xs:string">
+  <xsl:function name="els:getYearOn2Digits" as="xs:string?">
     <xsl:param name="year" as="xs:string"/>
     <xsl:variable name="year.norm" select="normalize-space($year)" as="xs:string"/>
     <xsl:sequence select="if    (string-length($year.norm) = 4 and $year.norm castable as xs:integer)
                           then  (substring($year.norm,3,2))
-                          else  ($year)"/>
+                          else  ()"/>
   </xsl:function>
   
   <xd:doc>
@@ -431,7 +427,7 @@
     <xd:param name="currentCenturyLimit">[xs:integer] The maximum value for a year to belong to the current century.</xd:param>
     <xd:return>[xs:string] A 4 digit year, resolved according to <xd:ref name="currentCenturyLimit" type="parameter">$currentCenturyLimit</xd:ref>.</xd:return>
   </xd:doc>
-  <xsl:function name="els:getYearOn4Digits" as="xs:string">
+  <xsl:function name="els:getYearOn4Digits" as="xs:string?">
     <xsl:param name="year" as="xs:string"/>
     <xsl:param name="currentCenturyLimit" as="xs:integer"/>
     <!-- Get the current century -->
@@ -448,7 +444,6 @@
       </xsl:when>
       <xsl:otherwise>
         <xsl:message>[ERROR][els:getYearOn4Digits] The supplied year is not valid: <xsl:value-of select="$year"/>.</xsl:message>
-        <xsl:sequence select="$year"/>
       </xsl:otherwise>
     </xsl:choose>
   </xsl:function>

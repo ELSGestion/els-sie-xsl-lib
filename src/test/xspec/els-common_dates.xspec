@@ -59,7 +59,7 @@
       <x:call>
         <x:param name="monthNumString" select="'13'"/>
       </x:call>
-      <x:expect label="Error" select="'[ErreurMois]'"/>
+      <x:expect label="Error" select="()"/>
     </x:scenario>
   </x:scenario>
   
@@ -82,7 +82,7 @@
         <x:call>
           <x:param name="monthString" select="'foobar'"/>
         </x:call>
-        <x:expect label="Error" select="0"/>
+        <x:expect label="Error" select="()"/>
       </x:scenario>
     </x:scenario>
     <x:scenario label="2 arguments">
@@ -159,7 +159,7 @@
       <x:call>
         <x:param name="date" select="'null'"/>
       </x:call>
-      <x:expect label="Returns an empty sequence" select="()"/>
+      <x:expect label="empty sequence" select="()"/>
     </x:scenario>
   </x:scenario>
   
@@ -181,7 +181,7 @@
       <x:call>
         <x:param name="date" select="'null'"/>
       </x:call>
-      <x:expect label="Returns an empty sequence" select="()"/>
+      <x:expect label="empty sequence" select="()"/>
     </x:scenario>
   </x:scenario>
   
@@ -228,6 +228,13 @@
     <x:expect label="19750910" select="'10/09/1975'"/>
   </x:scenario>
   
+  <x:scenario label="els:date-string-to-number-slash">
+    <x:call function="els:date-string-to-number-slash">
+      <x:param name="dateVerbalized" select="'aff. 1874/13 et 8567/13'"/>
+    </x:call>
+    <x:expect label="empty sequence" select="()"/>
+  </x:scenario>
+  
   <x:scenario label="els:getYearOn2Digits">
     <x:call function="els:getYearOn2Digits"/>
     <x:scenario label="/ 4 digit year to 2 digit year (1)">
@@ -246,19 +253,19 @@
       <x:call>
         <x:param name="annee" select="'2a18'"/>
       </x:call>
-      <x:expect label="2a18" select="'2a18'"/>
+      <x:expect label="empty sequence" select="()"/>
     </x:scenario>
     <x:scenario label="/ more than 4 digits">
       <x:call>
         <x:param name="annee" select="'20180'"/>
       </x:call>
-      <x:expect label="20180" select="'20180'"/>
+      <x:expect label="empty sequence" select="()"/>
     </x:scenario>
     <x:scenario label="/ less than 4 digits">
       <x:call>
         <x:param name="annee" select="'201'"/>
       </x:call>
-      <x:expect label="201" select="'201'"/>
+      <x:expect label="empty sequence" select="()"/>
     </x:scenario>
   </x:scenario>
   
@@ -282,13 +289,13 @@
       <x:call>
         <x:param name="year" select="'2a'" position="1"/>
       </x:call>
-      <x:expect label="2a" select="'2a'"/>
+      <x:expect label="empty sequence" select="()"/>
     </x:scenario>
     <x:scenario label="/ negative integer">
       <x:call>
         <x:param name="year" select="'-01'" position="1"/>
       </x:call>
-      <x:expect label="-01" select="'-01'"/>
+      <x:expect label="empty sequence" select="()"/>
     </x:scenario>
     <x:scenario label="/ 00">
       <x:call>
@@ -300,7 +307,7 @@
       <x:call>
         <x:param name="year" select="'123'" position="1"/>
       </x:call>
-      <x:expect label="123" select="'123'"/>
+      <x:expect label="empty sequence" select="()"/>
     </x:scenario>
     <x:scenario label="/ less than 2 digits">
       <x:call>
