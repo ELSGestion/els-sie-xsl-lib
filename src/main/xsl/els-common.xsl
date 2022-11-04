@@ -25,5 +25,6 @@
   <xsl:import href="els-common_audio.xsl"/>
   <xsl:import href="els-common_infographic.xsl"/>
   <xsl:import href="els-common_url-classifier.xsl"/>
+  <xsl:import href="els-common_compareXML.xsl"/>
   
 </xsl:stylesheet>

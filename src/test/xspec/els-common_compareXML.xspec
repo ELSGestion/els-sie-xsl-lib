@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<x:description 
+  xmlns:x="http://www.jenitennison.com/xslt/xspec" 
+  xmlns:els="http://www.lefebvre-sarrut.eu/ns/els"
+  stylesheet="../../main/xsl/els-common_compareXML.xsl"
+  xslt-version="3.0">
+
+  <x:scenario label="els:compareXML">
+    <x:call function="els:compareXML">
+      <x:param name="docA" select="/">
+        <doc id="id-docA" type="test" about="docA">
+          <section type="type1">
+            <a id="..." class="anchor"/>
+            <a id="a2"/>
+            <div toto="tata">
+              <p>1<sup>st</sup>text </p>
+              <p>text1</p>
+            </div>
+          </section>
+        </doc>
+      </x:param>
+      <x:param name="docB" select="/">
+        <doc id="id-docB" type="test" about="docB">
+          <section type="type2" num="1">
+            <a id="a1"/>
+            <a id="..."/>
+            <a id="a3"/>
+            <div>
+              <p>2<sup>nd</sup> text : <a href="xxx">here too</a></p>
+              <p>text2</p>
+              <blockquote>
+                <p>content</p>
+              </blockquote>
+            </div>
+          </section>
+        </doc>
+      </x:param>
+    </x:call>
+    <x:expect label="Report Differences" >
+      <differences docA-uri="docA" docB-uri="docB">
+        <found path="/doc">
+          <difference>
+            <attributes>
+              <elemen1>about="docA" | id="id-docA"</elemen1>
+              <elemen1>about="docB" | id="id-docB"</elemen1>
+            </attributes>
+          </difference>
+        </found>
+        <found path="/doc/section[1]">
+          <difference>
+            <attributes>
+              <elemen1>type="type1"</elemen1>
+              <elemen1>num="1" | type="type2"</elemen1>
+            </attributes>
+            <children>
+              <element1>a | a | div</element1>
+              <element2>a | a | a | div</element2>
+            </children>
+          </difference>
+        </found>
+        <found path="/doc/section[1]/a[1]">
+          <difference>
+            <attributes>
+              <elemen1>class="anchor"</elemen1>
+              <elemen1/>
+            </attributes>
+          </difference>
+        </found>
+        <found path="/doc/section[1]/div[1]">
+          <difference>
+            <attributes>
+              <elemen1>toto="tata"</elemen1>
+              <elemen1/>
+            </attributes>
+            <children>
+              <element1>p | p</element1>
+              <element2>p | p | blockquote</element2>
+            </children>
+          </difference>
+        </found>
+        <found path="/doc/section[1]/div[1]/p[1]">
+          <difference>
+            <children>
+              <element1>sup</element1>
+              <element2>sup | a</element2>
+            </children>
+            <content>
+              <element1>1 text</element1>
+              <element2>2 text :</element2>
+            </content>
+          </difference>
+        </found>
+        <found path="/doc/section[1]/div[1]/p[1]/sup[1]">
+          <difference>
+            <content>
+              <element1>st</element1>
+              <element2>nd</element2>
+            </content>
+          </difference>
+        </found>
+        <found path="/doc/section[1]/div[1]/p[2]">
+          <difference>
+            <content>
+              <element1>text1</element1>
+              <element2>text2</element2>
+            </content>
+          </difference>
+        </found>
+      </differences>
+      
+    </x:expect>
+  </x:scenario>
+  
+</x:description>
