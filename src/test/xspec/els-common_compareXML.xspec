@@ -41,73 +41,72 @@
         <found path="/doc">
           <difference>
             <attributes>
-              <elemen1>about="docA" | id="id-docA"</elemen1>
-              <elemen1>about="docB" | id="id-docB"</elemen1>
+              <e1>about="docB" | id="id-docB"</e1>
+              <e2>about="docA" | id="id-docA"</e2>
             </attributes>
           </difference>
         </found>
         <found path="/doc/section[1]">
           <difference>
             <attributes>
-              <elemen1>type="type1"</elemen1>
-              <elemen1>num="1" | type="type2"</elemen1>
+              <e1>num="1" | type="type2"</e1>
+              <e2>type="type1"</e2>
             </attributes>
             <children>
-              <element1>a | a | div</element1>
-              <element2>a | a | a | div</element2>
+              <e1>a | a | div</e1>
+              <e2>a | a | a | div</e2>
             </children>
           </difference>
         </found>
         <found path="/doc/section[1]/a[1]">
           <difference>
             <attributes>
-              <elemen1>class="anchor"</elemen1>
-              <elemen1/>
+              <e1 />
+              <e2>class="anchor"</e2>
             </attributes>
           </difference>
         </found>
         <found path="/doc/section[1]/div[1]">
           <difference>
             <attributes>
-              <elemen1>toto="tata"</elemen1>
-              <elemen1/>
+              <e1 />
+              <e2>toto="tata"</e2>
             </attributes>
             <children>
-              <element1>p | p</element1>
-              <element2>p | p | blockquote</element2>
+              <e1>p | p</e1>
+              <e2>p | p | blockquote</e2>
             </children>
           </difference>
         </found>
         <found path="/doc/section[1]/div[1]/p[1]">
           <difference>
             <children>
-              <element1>sup</element1>
-              <element2>sup | a</element2>
+              <e1>sup</e1>
+              <e2>sup | a</e2>
             </children>
             <content>
-              <element1>1 text</element1>
-              <element2>2 text :</element2>
+              <e1>1 text</e1>
+              <e2>2 text :</e2>
             </content>
           </difference>
         </found>
         <found path="/doc/section[1]/div[1]/p[1]/sup[1]">
           <difference>
             <content>
-              <element1>st</element1>
-              <element2>nd</element2>
+              <e1>st</e1>
+              <e2>nd</e2>
             </content>
           </difference>
         </found>
         <found path="/doc/section[1]/div[1]/p[2]">
           <difference>
             <content>
-              <element1>text1</element1>
-              <element2>text2</element2>
+              <e1>text1</e1>
+              <e2>text2</e2>
             </content>
           </difference>
         </found>
       </differences>
-      
     </x:expect>
   </x:scenario>
   

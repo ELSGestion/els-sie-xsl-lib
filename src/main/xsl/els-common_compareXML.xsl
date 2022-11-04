@@ -49,7 +49,9 @@
         <!--If current docA element has an @id : try to found within docB, another element with the same id (or one of its descendant) and the same name (ou nearest ancestor)-->
         <!--<xsl:variable name="v1" select="$docB//*[$nd1/@id and @id = (($nd1//@id)[1])]"/>-->
         <!--<xsl:variable name="v2" select="$v1/ancestor-or-self::*[local-name() = local-name($nd1)]"/>-->
-        <xsl:variable name="otherElementsInDocB" select="$docB//*[$docA.element/@id and @id = (($docA.element//@id)[1])]/ancestor-or-self::*[local-name() = local-name($docA.element)]"/>
+        <xsl:variable name="otherElementsInDocB" select="if (exists($docA.element/@id)) then 
+          ($docB//*[@id = $docA.element/@id]/ancestor-or-self::*[local-name() = local-name($docA.element)])
+          else()"/>
         <xsl:choose>
           <!--When this element exists (or many) excluding those whose id='...' (like xspec)-->
           <xsl:when test="not(empty($otherElementsInDocB)) and $docA.element/@id != '...'">
@@ -58,9 +60,8 @@
               <xsl:copy-of select="$comparison"/>
               <xsl:for-each select="$otherElementsInDocB">
                 <xsl:variable name="otherElementsInDocB.element" select="." as="element()"/>
-                <!--Process comparison between each other element found in doc B and the current element children in docA--> 
-                <xsl:variable name="candidate.comparison" select="els:compare-2-elements($docA.element/*, $otherElementsInDocB.element)"/>
-                <!--FIXME els:compare-2-elements 1st arg is one element only-->
+                <!--Process comparison between each other element found in doc B and the current element in docA--> 
+                <xsl:variable name="candidate.comparison" select="els:compare-2-elements($docA.element, $otherElementsInDocB.element)"/>
                 <xsl:choose>
                   <!--If no differences found keep trace of this other element as candidate-->
                   <xsl:when test="empty($candidate.comparison)">
@@ -135,12 +136,12 @@
     <!--<xsl:message>same-att = <xsl:value-of select="string-join($att1, '') = string-join($att2, '')"/></xsl:message>-->
     <xsl:if test="not(string-join($att1, '') = string-join($att2, ''))">
       <difference>
-        <elemen1>
-          <xsl:value-of select="$att1[let $token := . return not(exists($att2[. = $token]))]" separator=" | "/>
-        </elemen1>
-        <elemen1>
-          <xsl:value-of select="$att2[let $token := . return not(exists($att1[. = $token]))]" separator=" | "/>
-        </elemen1>
+        <e1>
+          <xsl:value-of select="$att2[not(. = $att1)]" separator=" | "/>
+        </e1>
+        <e2>
+          <xsl:value-of select="$att1[not(. = $att2)]" separator=" | "/>
+        </e2>
       </difference>
     </xsl:if>
   </xsl:function>
@@ -161,19 +162,19 @@
         <!--element e1 missing-->
         <xsl:when test="empty($e1)">
           <missing>
-            <element1/>
-            <element2>
+            <e1/>
+            <e2>
               <xsl:value-of select="name($e2)"/>
-            </element2>
+            </e2>
           </missing>
         </xsl:when>
         <!--element e2 missing-->
         <xsl:when test="empty($e2)">
           <missing>
-            <element1>
+            <e1>
               <xsl:value-of select="name($e1)"/>
-            </element1>
-            <element2/>
+            </e1>
+            <e2/>
           </missing>
         </xsl:when>
         <xsl:otherwise>
@@ -191,23 +192,23 @@
           <xsl:variable name="children2.list" select="string-join($e2/*/local-name(), ' | ')"/>
           <xsl:if test="$children1.list != $children2.list">
             <children>
-              <element1>
+              <e1>
                 <xsl:value-of select="$children1.list"/>
-              </element1>
-              <element2>
+              </e1>
+              <e2>
                 <xsl:value-of select="$children2.list"/>
-              </element2>
+              </e2>
             </children>
           </xsl:if>
           <!--TEXT CONTENT-->
           <xsl:if test="normalize-space(string-join($e1/text(), ' ')) != normalize-space(string-join($e2/text(), ' '))">
             <content>
-              <element1>
+              <e1>
                 <xsl:value-of select="normalize-space(string-join($e1/text(), ' '))"/>
-              </element1>
-              <element2>
+              </e1>
+              <e2>
                 <xsl:value-of select="normalize-space(string-join($e2/text(), ' '))"/>
-              </element2>
+              </e2>
             </content>
           </xsl:if>
         </xsl:otherwise>
