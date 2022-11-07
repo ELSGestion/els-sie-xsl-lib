@@ -25,71 +25,73 @@
   <!--COMPARE XML-->
   <!--===============================-->
   
-  <xd:p>Given DocA and DocB this function compares the 2 documents to show out their differences</xd:p>
+  <xd:p>Given doc1 and doc2 this function compares the 2 documents to show out their differences</xd:p>
   
   <xsl:function name="els:compareXML" as="element()">
-    <xsl:param name="docA" as="document-node()"/>
-    <xsl:param name="docB" as="document-node()"/>
-    <differences docA-uri="{($docA/*/@about, $docA/base-uri())[1]}" docB-uri="{($docB/*/@about, $docB/base-uri())[1]}">
-      <xsl:apply-templates select="$docA/*" mode="els:compareXML">
-        <xsl:with-param name="docB" select="$docB" as="document-node()" tunnel="yes"/>
+    <xsl:param name="doc1" as="document-node()"/>
+    <xsl:param name="doc2" as="document-node()"/>
+    <differences doc1-uri="{($doc1/*/@about, $doc1/base-uri())[1]}" doc2-uri="{($doc2/*/@about, $doc2/base-uri())[1]}">
+      <xsl:apply-templates select="$doc1/*" mode="els:compareXML">
+        <xsl:with-param name="doc2" select="$doc2" as="document-node()" tunnel="yes"/>
       </xsl:apply-templates>
     </differences>
   </xsl:function>
   
   <xsl:template match="*" mode="els:compareXML">
-    <xsl:param name="docB" as="document-node()" tunnel="yes"/>
-    <xsl:variable name="docA.element.path" select="els:get-xpath(.)" as="xs:string"/>
-    <xsl:variable name="docA.element" select="." as="element()" />
-    <xsl:variable name="docB.element" select="key('getElementByPath', $docA.element.path , $docB)" as="element()?" />
-    <xsl:variable name="comparison" select="els:compare-2-elements($docA.element, $docB.element)"/>
+    <xsl:param name="doc2" as="document-node()" tunnel="yes"/>
+    <xsl:variable name="doc1.element.path" select="els:get-xpath(.)" as="xs:string"/>
+    <xsl:variable name="doc1.element" select="." as="element()" />
+    <xsl:variable name="doc2.element" select="key('getElementByPath', $doc1.element.path , $doc2)" as="element()?" />
+    <xsl:variable name="comparison" select="els:compare-2-elements($doc1.element, $doc2.element)"/>
     <xsl:choose>
       <!--If there are differences-->
       <xsl:when test="not(empty($comparison))">
-        <!--If current docA element has an @id : try to found within docB, another element with the same id (or one of its descendant) and the same name (ou nearest ancestor)-->
-        <!--<xsl:variable name="v1" select="$docB//*[$nd1/@id and @id = (($nd1//@id)[1])]"/>-->
+        <!--If current doc1 element has an @id : try to found within doc2, another element with the same id (or one of its descendant) and the same name (ou nearest ancestor)-->
+        <!--<xsl:variable name="v1" select="$doc2//*[$nd1/@id and @id = (($nd1//@id)[1])]"/>-->
         <!--<xsl:variable name="v2" select="$v1/ancestor-or-self::*[local-name() = local-name($nd1)]"/>-->
-        <xsl:variable name="otherElementsInDocB" select="if (exists($docA.element/@id)) then 
-          ($docB//*[@id = $docA.element/@id]/ancestor-or-self::*[local-name() = local-name($docA.element)])
+        <xsl:variable name="otherElementsIndoc2" select="if (exists($doc1.element/@id)) then 
+          ($doc2//*[@id = $doc1.element/@id]/ancestor-or-self::*[local-name() = local-name($doc1.element)])
           else()"/>
         <xsl:choose>
           <!--When this element exists (or many) excluding those whose id='...' (like xspec)-->
-          <xsl:when test="not(empty($otherElementsInDocB)) and $docA.element/@id != '...'">
-            <found-ID path="{$docA.element.path}" id="{$docA.element/@id}">
+          <xsl:when test="not(empty($otherElementsIndoc2)) and $doc1.element/@id != '...'">
+            <found-ID path="{$doc1.element.path}" id="{$doc1.element/@id}">
               <!--copy former comparison-->
               <xsl:copy-of select="$comparison"/>
-              <xsl:for-each select="$otherElementsInDocB">
-                <xsl:variable name="otherElementsInDocB.element" select="." as="element()"/>
-                <!--Process comparison between each other element found in doc B and the current element in docA--> 
-                <xsl:variable name="candidate.comparison" select="els:compare-2-elements($docA.element, $otherElementsInDocB.element)"/>
+              <xsl:for-each select="$otherElementsIndoc2">
+                <xsl:variable name="otherElementsIndoc2.element" select="." as="element()"/>
+                <!--Process comparison between each other element found in doc B and the current element in doc1--> 
+                <xsl:variable name="candidate.comparison" select="els:compare-2-elements($doc1.element, $otherElementsIndoc2.element)"/>
                 <xsl:choose>
                   <!--If no differences found keep trace of this other element as candidate-->
                   <xsl:when test="empty($candidate.comparison)">
                     <candidate>
-                      <xsl:copy-of select="$docA.element/*"/>
-                      <xsl:copy-of select="$otherElementsInDocB.element"/>
+                      <xsl:copy-of select="$doc1.element/*"/>
+                      <xsl:copy-of select="$otherElementsIndoc2.element"/>
                     </candidate>
                   </xsl:when>
                   <!--If there are differences display them-->
                   <xsl:otherwise>
                     <xsl:variable name="genId" select="generate-id(.)"/>
-                    <found path="{els:get-xpath($otherElementsInDocB.element)}">
-                      <xsl:copy-of select="$candidate.comparison/difference"/>
+                    <found path="{els:get-xpath($otherElementsIndoc2.element)}">
+                      <xsl:copy-of select="$candidate.comparison"/>
                     </found>
                   </xsl:otherwise>
                 </xsl:choose>
               </xsl:for-each>
             </found-ID>
           </xsl:when>
-          <xsl:when test="not(empty($docB.element))">
-            <found path="{$docA.element.path}">
+          <xsl:otherwise>
+            <found path="{$doc1.element.path}">
               <xsl:copy-of select="$comparison"/>
             </found>
-            <xsl:apply-templates select="*" mode="#current"/>
-          </xsl:when>
+            <xsl:if test="not(empty($doc2.element))">
+              <xsl:apply-templates select="*" mode="#current"/>
+            </xsl:if>
+          </xsl:otherwise>
         </xsl:choose>
       </xsl:when>
-      <!--If there are no differences, continue with the children of the current element in docA-->
+      <!--If there are no differences, continue with the children of the current element in doc1-->
       <xsl:otherwise>
         <xsl:apply-templates select="*" mode="#current"/>
       </xsl:otherwise>
@@ -137,10 +139,10 @@
     <xsl:if test="not(string-join($att1, '') = string-join($att2, ''))">
       <difference>
         <e1>
-          <xsl:value-of select="$att2[not(. = $att1)]" separator=" | "/>
+          <xsl:value-of select="$att1[not(. = $att2)]" separator=" | "/>
         </e1>
         <e2>
-          <xsl:value-of select="$att1[not(. = $att2)]" separator=" | "/>
+          <xsl:value-of select="$att2[not(. = $att1)]" separator=" | "/>
         </e2>
       </difference>
     </xsl:if>
@@ -157,7 +159,7 @@
   <xsl:function name="els:compare-2-elements" as="element(difference)?">
     <xsl:param name="e1" as="element()?"/>
     <xsl:param name="e2" as="element()?"/>
-    <xsl:variable name="diffence" as="element()*">
+    <xsl:variable name="difference" as="element()*">
       <xsl:choose>
         <!--element e1 missing-->
         <xsl:when test="empty($e1)">
@@ -214,9 +216,9 @@
         </xsl:otherwise>
       </xsl:choose>
     </xsl:variable>
-    <xsl:if test="not(empty($diffence))">
+    <xsl:if test="not(empty($difference))">
       <difference>
-        <xsl:sequence select="$diffence"/>
+        <xsl:sequence select="$difference"/>
       </difference>
     </xsl:if>
   </xsl:function>

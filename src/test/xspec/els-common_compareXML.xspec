@@ -7,8 +7,8 @@
 
   <x:scenario label="els:compareXML">
     <x:call function="els:compareXML">
-      <x:param name="docA" select="/">
-        <doc id="id-docA" type="test" about="docA">
+      <x:param name="doc1" select="/">
+        <doc id="id-doc1" type="test" about="doc1">
           <section type="type1">
             <a id="..." class="anchor"/>
             <a id="a2"/>
@@ -19,8 +19,8 @@
           </section>
         </doc>
       </x:param>
-      <x:param name="docB" select="/">
-        <doc id="id-docB" type="test" about="docB">
+      <x:param name="doc2" select="/">
+        <doc id="id-doc2" type="test" about="doc2">
           <section type="type2" num="1">
             <a id="a1"/>
             <a id="..."/>
@@ -37,20 +37,20 @@
       </x:param>
     </x:call>
     <x:expect label="Report Differences" >
-      <differences docA-uri="docA" docB-uri="docB">
+      <differences doc1-uri="doc1" doc2-uri="doc2">
         <found path="/doc">
           <difference>
             <attributes>
-              <e1>about="docB" | id="id-docB"</e1>
-              <e2>about="docA" | id="id-docA"</e2>
+              <e1>about="doc1" | id="id-doc1"</e1>
+              <e2>about="doc2" | id="id-doc2"</e2>
             </attributes>
           </difference>
         </found>
         <found path="/doc/section[1]">
           <difference>
             <attributes>
-              <e1>num="1" | type="type2"</e1>
-              <e2>type="type1"</e2>
+              <e1>type="type1"</e1>
+              <e2>num="1" | type="type2"</e2>
             </attributes>
             <children>
               <e1>a | a | div</e1>
@@ -61,16 +61,16 @@
         <found path="/doc/section[1]/a[1]">
           <difference>
             <attributes>
-              <e1 />
-              <e2>class="anchor"</e2>
+              <e1>class="anchor"</e1>
+              <e2 />
             </attributes>
           </difference>
         </found>
         <found path="/doc/section[1]/div[1]">
           <difference>
             <attributes>
-              <e1 />
-              <e2>toto="tata"</e2>
+              <e1>toto="tata"</e1>
+              <e2 />
             </attributes>
             <children>
               <e1>p | p</e1>
@@ -104,6 +104,35 @@
               <e1>text1</e1>
               <e2>text2</e2>
             </content>
+          </difference>
+        </found>
+      </differences>
+    </x:expect>
+  </x:scenario>
+  
+  <x:scenario label="els:compareXML">
+    <x:call function="els:compareXML">
+      <x:param name="doc1" select="/">
+        <root1 about="doc1">
+          <a/>
+          <b foo="bar"/>
+        </root1>
+      </x:param>
+      <x:param name="doc2" select="/">
+        <root2 about="doc2">
+          <a/>
+          <b/>
+        </root2>
+      </x:param>
+    </x:call>
+    <x:expect label="Report Differences">
+      <differences doc1-uri="doc1" doc2-uri="doc2">
+        <found path="/root1">
+          <difference>
+            <missing>
+              <e1>root1</e1>
+              <e2/>
+            </missing>
           </difference>
         </found>
       </differences>
