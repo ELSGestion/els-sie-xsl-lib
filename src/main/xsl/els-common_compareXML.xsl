@@ -46,31 +46,38 @@
     <xsl:choose>
       <!--If there are differences-->
       <xsl:when test="not(empty($comparison))">
+        <found path="{$doc1.element.path}">
+          <xsl:copy-of select="$comparison"/>
+        </found>
+        <xsl:if test="not(empty($doc2.element))">
+          <xsl:apply-templates select="*" mode="#current"/>
+        </xsl:if>
+        <!--OLD code that try to get an element with a same id to get better diff, FIXME : make it better-->
         <!--If current doc1 element has an @id : try to found within doc2, another element with the same id (or one of its descendant) and the same name (ou nearest ancestor)-->
-        <!--<xsl:variable name="v1" select="$doc2//*[$nd1/@id and @id = (($nd1//@id)[1])]"/>-->
-        <!--<xsl:variable name="v2" select="$v1/ancestor-or-self::*[local-name() = local-name($nd1)]"/>-->
+        <!--<!-\-<xsl:variable name="v1" select="$doc2//*[$nd1/@id and @id = (($nd1//@id)[1])]"/>-\->
+        <!-\-<xsl:variable name="v2" select="$v1/ancestor-or-self::*[local-name() = local-name($nd1)]"/>-\->
         <xsl:variable name="otherElementsIndoc2" select="if (exists($doc1.element/@id)) then 
           ($doc2//*[@id = $doc1.element/@id]/ancestor-or-self::*[local-name() = local-name($doc1.element)])
           else()"/>
         <xsl:choose>
-          <!--When this element exists (or many) excluding those whose id='...' (like xspec)-->
+          <!-\-When this element exists (or many) excluding those whose id='...' (like xspec)-\->
           <xsl:when test="not(empty($otherElementsIndoc2)) and $doc1.element/@id != '...'">
             <found-ID path="{$doc1.element.path}" id="{$doc1.element/@id}">
-              <!--copy former comparison-->
+              <!-\-copy former comparison-\->
               <xsl:copy-of select="$comparison"/>
               <xsl:for-each select="$otherElementsIndoc2">
                 <xsl:variable name="otherElementsIndoc2.element" select="." as="element()"/>
-                <!--Process comparison between each other element found in doc B and the current element in doc1--> 
+                <!-\-Process comparison between each other element found in doc B and the current element in doc1-\-> 
                 <xsl:variable name="candidate.comparison" select="els:compare-2-elements($doc1.element, $otherElementsIndoc2.element)"/>
                 <xsl:choose>
-                  <!--If no differences found keep trace of this other element as candidate-->
+                  <!-\-If no differences found keep trace of this other element as candidate-\->
                   <xsl:when test="empty($candidate.comparison)">
                     <candidate>
                       <xsl:copy-of select="$doc1.element/*"/>
                       <xsl:copy-of select="$otherElementsIndoc2.element"/>
                     </candidate>
                   </xsl:when>
-                  <!--If there are differences display them-->
+                  <!-\-If there are differences display them-\->
                   <xsl:otherwise>
                     <xsl:variable name="genId" select="generate-id(.)"/>
                     <found path="{els:get-xpath($otherElementsIndoc2.element)}">
@@ -89,8 +96,8 @@
               <xsl:apply-templates select="*" mode="#current"/>
             </xsl:if>
           </xsl:otherwise>
-        </xsl:choose>
-      </xsl:when>
+        </xsl:choose>-->
+        </xsl:when>
       <!--If there are no differences, continue with the children of the current element in doc1-->
       <xsl:otherwise>
         <xsl:apply-templates select="*" mode="#current"/>
