@@ -16,7 +16,8 @@
   </xd:doc>
 
   <xsl:import href="els-common_constants.xsl"/>
-
+  <xsl:import href="els-common_strings.xsl"/>
+  
   <xd:doc>Get the full XML path of any node in an XML with position predicates([n])
     cf. http://www.xsltfunctions.com/xsl/functx_path-to-node-with-pos.html
   </xd:doc>
@@ -364,27 +365,28 @@
           </xsl:if>
           <xsl:for-each select="$node/@*">
             <xsl:sort/>
-            <xsl:value-of select="concat('@',name(),'=',$els:dquot,.,$els:dquot,if (position()!=last()) then ('_') else (''))"/>
+            <xsl:value-of select="concat('@', name(), '=', $els:dquot, els:displaySubstring(., 1, 30), $els:dquot, if (position() != last()) then ('_') else (''))"/>
           </xsl:for-each>
         </xsl:when>
-        <!--FIXME : ce test ne marche pas... ?-->
         <xsl:when test="$node/self::text()">
-          <xsl:text>text() </xsl:text>
-          <xsl:value-of select="substring($node,1,30)"/>
+          <xsl:text>text():</xsl:text>
+          <xsl:value-of select="els:displaySubstring($node, 1, 30)"/>
         </xsl:when>
         <xsl:when test="$node/self::attribute()">
-          <xsl:value-of select="'attribute_@' || name($node) || '=' || $els:dquot || $node || $els:dquot"/>
+          <xsl:value-of select="'attribute:@' || name($node) || '=' || $els:dquot || els:displaySubstring($node, 1, 30) || $els:dquot"/>
         </xsl:when>
         <xsl:when test="$node/self::comment()">
-          <xsl:text>comment() </xsl:text>
-          <xsl:value-of select="substring($node,1,30)"/>
+          <xsl:text>comment():</xsl:text>
+          <xsl:value-of select="els:displaySubstring($node, 1, 30)"/>
         </xsl:when>
         <xsl:when test="$node/self::processing-instruction()">
-          <xsl:text>processing-instruction() </xsl:text>
-          <xsl:value-of select="substring($node,1,30)"/>
+          <xsl:text>processing-instruction('</xsl:text>
+          <xsl:value-of select="$node/name()"/>
+          <xsl:text>'):</xsl:text>
+          <xsl:value-of select="els:displaySubstring($node, 1, 30)"/>
         </xsl:when>
         <xsl:when test="$node/self::document-node()">
-          <xsl:text>document-node() </xsl:text>
+          <xsl:text>document-node()</xsl:text>
         </xsl:when>
         <xsl:otherwise>
           <xsl:text>unrecognized node type</xsl:text>

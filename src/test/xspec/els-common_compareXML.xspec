@@ -5,7 +5,7 @@
   stylesheet="../../main/xsl/els-common_compareXML.xsl"
   xslt-version="3.0">
 
-  <x:scenario label="els:compareXML">
+  <x:scenario label="els:compareXML : differences in elements and attributes">
     <x:call function="els:compareXML">
       <x:param name="doc1" select="/">
         <doc id="id-doc1" type="test" about="doc1">
@@ -110,7 +110,7 @@
     </x:expect>
   </x:scenario>
   
-  <x:scenario label="els:compareXML">
+  <x:scenario label="els:compareXML : different roots elements">
     <x:call function="els:compareXML">
       <x:param name="doc1" select="/">
         <root1 about="doc1">
@@ -132,6 +132,110 @@
             <missing>
               <e1>root1</e1>
               <e2/>
+            </missing>
+          </difference>
+        </found>
+      </differences>
+    </x:expect>
+  </x:scenario>
+  
+  <x:scenario label="els:compareXML : differences in comments">
+    <x:call function="els:compareXML">
+      <x:param name="doc1" select="/">
+        <root about="doc1">
+          <a>
+            <b foo="bar"/>
+            <!--comment1-->
+            <!--comment2-->
+            <!--comment3-->
+            <!--...-->
+            <c/>
+          </a>
+        </root>
+      </x:param>
+      <x:param name="doc2" select="/">
+        <root about="...">
+          <a>
+            <b foo="bar"/>
+            <!--comment1-->
+            <!--COMMENT2-->
+            <!--...-->
+            <c/>
+            <!--COMMENT4-->
+            <!--comment5-->
+          </a>
+        </root>
+      </x:param>
+    </x:call>
+    <x:expect label="Report Differences">
+      <differences doc1-uri="doc1" doc2-uri="...">
+        <found path="/root/a[1]">
+          <difference>
+            <children>
+              <e1>b | comment() | comment() | comment() | comment() | c</e1>
+              <e2>b | comment() | comment() | comment() | c | comment() | comment()</e2>
+            </children>
+            <comment>
+              <e1>comment():comment2</e1>
+              <e2>comment():COMMENT2</e2>
+            </comment>
+            <comment>
+              <missing>
+                <e1 />
+                <e2>comment():comment5</e2>
+              </missing>
+            </comment>
+          </difference>
+        </found>
+      </differences>
+    </x:expect>
+  </x:scenario>
+  
+  <x:scenario label="els:compareXML : differences in processing-instructions">
+    <x:call function="els:compareXML">
+      <x:param name="doc1" select="/">
+        <root about="doc1">
+          <a>
+            <b foo="bar"/>
+            <?pi processing-instruction1?>
+            <?pi processing-instruction2?>
+            <?pi processing-instruction3?>
+            <?pi ...?>
+            <c/>
+            <?pi processing-instruction5?>
+          </a>
+        </root>
+      </x:param>
+      <x:param name="doc2" select="/">
+        <root about="...">
+          <a>
+            <b foo="bar"/>
+            <?pi processing-instruction1?>
+            <?pi processing-instruction2?>
+            <?pi ...?>
+            <?pi processing-instruction4?>
+            <?PI processing-instruction5?>
+            <c/>
+            <?pi processing-instruction6?>
+          </a>
+        </root>
+      </x:param>
+    </x:call>
+    <x:expect label="Report Differences">
+      <differences doc1-uri="doc1" doc2-uri="...">
+        <found path="/root/a[1]">
+          <difference>
+            <children>
+              <e1>b | processing-instruction('pi') | processing-instruction('pi') | processing-instruction('pi') | processing-instruction('pi') | c | processing-instruction('pi')</e1>
+              <e2>b | processing-instruction('pi') | processing-instruction('pi') | processing-instruction('pi') | processing-instruction('pi') | processing-instruction('PI') | c | processing-instruction('pi')</e2>
+            </children>
+            <processing-instruction>
+              <e1>processing-instruction('pi'):processing-instruction5</e1>
+              <e2>processing-instruction('PI'):processing-instruction5</e2>
+            </processing-instruction>
+            <missing>
+              <e1 />
+              <e2>processing-instruction('pi'):processing-instruction6</e2>
             </missing>
           </difference>
         </found>

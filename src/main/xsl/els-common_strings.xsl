@@ -15,7 +15,7 @@
   </xd:doc>
 
   <xsl:import href="els-common_constants.xsl"/>
-
+  
   <xd:doc>
     <xd:desc>
       <xd:p>Perform successiv regex replacements on a string with 2 parameters</xd:p>
@@ -152,6 +152,24 @@
     </xsl:if>
   </xsl:function>
   
+  <xd:doc>If the substring to display is shorter than the string : add [...] before and/or after</xd:doc>
+  <xsl:function name="els:displaySubstring" as="xs:string">
+    <xsl:param name="s" as="xs:string"/>
+    <xsl:param name="startingLoc" as="xs:integer"/>
+    <xsl:param name="length" as="xs:integer"/>
+    <xsl:variable name="substring" select="substring($s, $startingLoc, $length)"/>
+    <xsl:variable name="result" as="xs:string*">
+      <xsl:if test="$startingLoc gt 1">
+        <xsl:text>[...]&#160;</xsl:text>
+      </xsl:if>
+      <xsl:sequence select="$substring"/>
+      <xsl:if test="substring($s, $startingLoc, $length + 1) != $substring">
+        <xsl:text>&#160;[...]</xsl:text>
+      </xsl:if>
+    </xsl:variable>
+    <xsl:sequence select="string-join($result, '')"/>
+  </xsl:function>
+  
   <xd:doc>0 args Signature for els:crlf() : by default only one carriage return</xd:doc>
   <xsl:function name="els:crlf" as="xs:string">
     <xsl:sequence select="els:crlf(1)"/>
@@ -252,7 +270,7 @@
   <xd:doc>
     <xd:desc>
       <xd:p>Join items of strings sequence with separators and a specific last separator.</xd:p>
-      <xd:p>for sample : the result of ('text1', 'text2', 'text3') is "text1, text2 and text3" (with $sep="', '" and $lastSep="' and '")</xd:p>
+      <xd:p>for example : the result of ('text1', 'text2', 'text3') is "text1, text2 and text3" (with $sep="', '" and $lastSep="' and '")</xd:p>
       <xd:p></xd:p>
     </xd:desc>
     <xd:param name="seq">string sequence</xd:param>

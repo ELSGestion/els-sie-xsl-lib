@@ -233,7 +233,7 @@
         </x:param>
       </x:call>
       <x:expect label="Test" select="string(*/text())">
-        <string>attribute_@foo="bar"</string>
+        <string>attribute:@foo="bar"</string>
       </x:expect>
     </x:scenario>
     <x:scenario label="text()">
@@ -243,7 +243,7 @@
         </x:param>
       </x:call>
       <x:expect label="Test" select="string(*/text())">
-        <string>text() foobar</string>
+        <string>text():foobar</string>
       </x:expect>
     </x:scenario>
     <x:scenario label="comment()">
@@ -253,7 +253,7 @@
         </x:param>
       </x:call>
       <x:expect label="Test" select="string(*/text())">
-        <string>comment() foobar</string>
+        <string>comment():foobar</string>
       </x:expect>
     </x:scenario>
     <x:scenario label="pi()">
@@ -263,7 +263,7 @@
         </x:param>
       </x:call>
       <x:expect label="Test" select="string(*/text())">
-        <string>processing-instruction() foo="bar"</string>
+        <string>processing-instruction('pi'):foo="bar"</string>
       </x:expect>
     </x:scenario>
   </x:scenario>

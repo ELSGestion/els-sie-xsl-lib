@@ -70,7 +70,6 @@
     <x:expect label="String with replacements" select="'MAC 2018#SEP#2016#SEP#2015#SEP#2018'"/>
   </x:scenario>
   
-
   <x:scenario label="els:normalize-no-diacritic">
     <x:call function="els:normalize-no-diacritic">
       <x:param name="string" select="'abcçdéêèàœ'"/>
@@ -95,6 +94,33 @@
   <x:scenario label="els:crlf">
     <x:call function="els:crlf"/> 
     <x:expect label="1 carriage return" select="'&#10;'"/>
+  </x:scenario>
+  
+  <x:scenario label="els:displaySubstring">
+    <x:call function="els:displaySubstring">
+      <x:param name="s" select="'This is a specific text to be displayed'"/>
+    </x:call>
+    <x:scenario label="[...] before">
+      <x:call>
+        <x:param name="startingLoc" select="6"/>
+        <x:param name="length" select="50"/>
+      </x:call>
+      <x:expect label="true" select="'[...]&#160;is a specific text to be displayed'"/>
+    </x:scenario>
+    <x:scenario label="[...] after">
+      <x:call>
+        <x:param name="startingLoc" select="1"/>
+        <x:param name="length" select="10"/>
+      </x:call>
+      <x:expect label="true" select="'This is a &#160;[...]'"/>
+    </x:scenario>
+    <x:scenario label="[...] before and after">
+      <x:call>
+        <x:param name="startingLoc" select="11"/>
+        <x:param name="length" select="13"/>
+      </x:call>
+      <x:expect label="true" select="'[...]&#160;specific text&#160;[...]'"/>
+    </x:scenario>
   </x:scenario>
   
   <x:scenario label="els:getFirstChar">
