@@ -18,27 +18,24 @@
         </doc>
       </x:param>
     </x:call>
-    <x:expect label="Xpath to d" select="'/doc/a[1]/b[2]/c[1]/d[1]'"/>
+    <x:scenario label="els:get-xpath with saxon:path() if available">
+      <x:expect label="Xpath to d with position" select="'/doc/a[1]/b[2]/c[1]/d[1]'"/>
+    </x:scenario>
+    <x:scenario label="els:get-xpath without saxon:path() - giving the same result as saxon">
+      <x:call>
+        <x:param name="display_position" select="true()"/>
+      </x:call>
+      <x:expect label="Xpath to d with position" select="'/doc/a[1]/b[2]/c[1]/d[1]'"/>
+    </x:scenario>
+    <x:scenario label="els:get-xpath without saxon:path() - nsprefix:ns1 - display_position:false">
+      <x:call function="els:get-xpath">
+        <x:param name="display_position" select="false()"/>
+        <x:param name="nsprefix" select="'ns1'"/>
+      </x:call>
+      <x:expect label="Xpath to d without position, with ns prefixes" select="'/ns1:doc/ns1:a/ns1:b/ns1:c/ns1:d'"/>
+    </x:scenario>
   </x:scenario>
-
-  <x:scenario label="els:get-xpath">
-    <x:call function="els:get-xpath">
-      <x:param name="node" select="//d">
-        <doc xmlns="">
-          <a>
-            <b/>
-            <b>
-              <c>text <d/></c>
-            </b>
-          </a>
-        </doc>
-      </x:param>
-      <x:param name="nsprefix" select="'ns1'"/>
-      <x:param name="display_position" select="false()"/>
-    </x:call>
-    <x:expect label="Xpath to d" select="'/ns1:doc/ns1:a/ns1:b/ns1:c/ns1:d'"/>
-  </x:scenario>
-
+  
   <x:scenario label="PSEUDO ATTRIBUTES">
 
     <x:scenario label="els:pseudoAttributes2xml($str, $attQuot)">

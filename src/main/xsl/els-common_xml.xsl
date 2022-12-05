@@ -31,40 +31,38 @@
         <xsl:variable name="name" select="name()" as="xs:string"/>
         <xsl:choose>
           <xsl:when test="not(contains($name,':'))">
-            <xsl:value-of select="concat('/',if ($nsprefix!='') then (concat($nsprefix,':')) else(''), $name)"/>
+            <xsl:value-of select="concat('/', if ($nsprefix != '') then (concat($nsprefix, ':')) else(''), $name)"/>
           </xsl:when>
           <xsl:otherwise>
             <xsl:value-of select="concat('/', $name)"/>
           </xsl:otherwise>
         </xsl:choose>
-        <xsl:for-each select="../*[name() = $name]">
-          <xsl:if test="generate-id(.)=$id and $display_position">
-            <!--FIXME : add position() != 1 to get rid of unusfull "[1]" predicates-->
-            <xsl:text>[</xsl:text>
-            <xsl:value-of select="format-number(position(),'0')"/>
-            <xsl:text>]</xsl:text>
-          </xsl:if>
-        </xsl:for-each>
+        <xsl:if test="$display_position and parent::*">
+          <!--Keep unusefull "[1]" predicates except at root level : like saxon:path()-->
+          <xsl:text>[</xsl:text>
+          <xsl:value-of select="count(preceding-sibling::*[name() = $name]) + 1"/>
+          <xsl:text>]</xsl:text>
+        </xsl:if>
       </xsl:for-each>
       <xsl:choose>
         <xsl:when test="$node/self::*">
           <!--nothing to add-->
         </xsl:when>
         <xsl:when test="$node/self::attribute()">
-          <xsl:value-of select="concat('/@', name($node))"/>
+          <xsl:sequence select="concat('/@', name($node))"/>
         </xsl:when>
         <xsl:when test="$node/self::text()">
-          <xsl:value-of select="concat('/text()[', count($node/preceding-sibling::text()) + 1, ']')"/>
+          <xsl:sequence select="concat('/text()[', count($node/preceding-sibling::text()) + 1, ']')"/>
         </xsl:when>
         <xsl:when test="$node/self::comment()">
-          <xsl:value-of select="concat('/comment()[', count($node/preceding-sibling::comment()) + 1, ']')"/>
+          <xsl:sequence select="concat('/comment()[', count($node/preceding-sibling::comment()) + 1, ']')"/>
         </xsl:when>
         <xsl:when test="$node/self::processing-instruction()">
-          <xsl:value-of select="concat('/comment()[', count($node/preceding-sibling::processing-instruction()) + 1, ']')"/>
+          <xsl:sequence select="concat('/comment()[', count($node/preceding-sibling::processing-instruction()) + 1, ']')"/>
         </xsl:when>
       </xsl:choose>
     </xsl:variable>
-    <xsl:value-of select="string-join($result, '')"/>
+    <xsl:sequence select="string-join($result, '')"/>
   </xsl:template>
   
   <xd:doc>
@@ -100,14 +98,14 @@
       <xd:p>els:get-xpath with more arguments (call for template els:get-xpath instead of saxon:path)</xd:p>
     </xd:desc>
     <xd:param name="node">[Node] node to get the XML path</xd:param>
-    <xd:param name="nsprefix">Adding a prefixe on each path item</xd:param>
     <xd:param name="display_position">Diplay position predicate for each item of the path</xd:param>
+    <xd:param name="nsprefix">Adding a prefixe on each path item</xd:param>
     <xd:return>XML path of the $node formated as indicated with $nsprefix and $display_position</xd:return>
   </xd:doc>
   <xsl:function name="els:get-xpath" as="xs:string">
     <xsl:param name="node" as="node()"/>
-    <xsl:param name="nsprefix" as="xs:string"/>
     <xsl:param name="display_position" as="xs:boolean"/>
+    <xsl:param name="nsprefix" as="xs:string"/>
     <xsl:variable name="xpath" as="xs:string">
       <xsl:call-template name="els:get-xpath">
         <xsl:with-param name="node" select="$node" as="node()"/>
@@ -116,6 +114,13 @@
       </xsl:call-template>
     </xsl:variable>
     <xsl:value-of select="string-join(tokenize($xpath,'/'),'/')"/>
+  </xsl:function>
+  
+  <!--2 arg signature of els:get-xpath-->
+  <xsl:function name="els:get-xpath" as="xs:string">
+    <xsl:param name="node" as="node()"/>
+    <xsl:param name="display_position" as="xs:boolean"/>
+    <xsl:sequence select="els:get-xpath($node, $display_position, '')"/>
   </xsl:function>
 
   <!--============================-->
@@ -345,15 +350,24 @@
     </xsl:copy>
   </xsl:template>
   
+  <xd:doc>1 arg signature of els:displayNode()</xd:doc>
+  <xsl:function name="els:displayNode" as="xs:string">
+    <xsl:param name="node" as="item()"/>
+    <xsl:sequence select="els:displayNode($node, ())"/>
+  </xsl:function>
+  
   <xd:doc>
     <xd:desc>
       <xd:p>Display any node (element, attribute, text, pi, etc.) as a readable string</xd:p>
     </xd:desc>
     <xd:param name="node">The node to be displayed</xd:param>
+    <xd:param name="text-extract-length">Length of the extraction text for displaying comment, pi, processing-instruction :
+      Use -1 to extract the whole string without restriction</xd:param>
     <xd:return>A textual representation of <xd:ref name="$node" type="parameter">$node</xd:ref></xd:return>
   </xd:doc>
   <xsl:function name="els:displayNode" as="xs:string">
     <xsl:param name="node" as="item()"/>
+    <xsl:param name="text-extract-length" as="xs:integer?"/>
     <xsl:variable name="tmp" as="xs:string*">
       <xsl:choose>
         <xsl:when test="empty($node)">empty_sequence</xsl:when>
@@ -365,25 +379,25 @@
           </xsl:if>
           <xsl:for-each select="$node/@*">
             <xsl:sort/>
-            <xsl:value-of select="concat('@', name(), '=', $els:dquot, els:displaySubstring(., 1, 30), $els:dquot, if (position() != last()) then ('_') else (''))"/>
+            <xsl:value-of select="concat('@', name(), '=', $els:dquot, els:displaySubstring(., 1, $text-extract-length), $els:dquot, if (position() != last()) then ('_') else (''))"/>
           </xsl:for-each>
         </xsl:when>
         <xsl:when test="$node/self::text()">
           <xsl:text>text():</xsl:text>
-          <xsl:value-of select="els:displaySubstring($node, 1, 30)"/>
+          <xsl:value-of select="els:displaySubstring($node, 1, $text-extract-length)"/>
         </xsl:when>
         <xsl:when test="$node/self::attribute()">
-          <xsl:value-of select="'attribute:@' || name($node) || '=' || $els:dquot || els:displaySubstring($node, 1, 30) || $els:dquot"/>
+          <xsl:value-of select="concat('attribute:@',  name($node),  '=',  $els:dquot,  els:displaySubstring($node, 1, 30),  $els:dquot)"/>
         </xsl:when>
         <xsl:when test="$node/self::comment()">
           <xsl:text>comment():</xsl:text>
-          <xsl:value-of select="els:displaySubstring($node, 1, 30)"/>
+          <xsl:value-of select="els:displaySubstring($node, 1, $text-extract-length)"/>
         </xsl:when>
         <xsl:when test="$node/self::processing-instruction()">
           <xsl:text>processing-instruction('</xsl:text>
           <xsl:value-of select="$node/name()"/>
           <xsl:text>'):</xsl:text>
-          <xsl:value-of select="els:displaySubstring($node, 1, 30)"/>
+          <xsl:value-of select="els:displaySubstring($node, 1, $text-extract-length)"/>
         </xsl:when>
         <xsl:when test="$node/self::document-node()">
           <xsl:text>document-node()</xsl:text>

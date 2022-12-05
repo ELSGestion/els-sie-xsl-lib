@@ -190,7 +190,7 @@
   <xsl:function name="rng:getSRNGdataModelFromXmlElement" as="element(rng:element)?">
     <xsl:param name="e" as="element()"/>
     <xsl:param name="grammar" as="element(rng:grammar)"/>
-    <xsl:sequence select="rng:getSRNGdataModelFromXpath(els:get-xpath($e, '',  false()), $grammar, ())"/>
+    <xsl:sequence select="rng:getSRNGdataModelFromXpath(els:get-xpath($e, false(), ''), $grammar, ())"/>
   </xsl:function>
   
   <!--2 args signature-->
