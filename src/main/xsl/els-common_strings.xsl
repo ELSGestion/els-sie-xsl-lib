@@ -156,15 +156,26 @@
   <xsl:function name="els:displaySubstring" as="xs:string">
     <xsl:param name="s" as="xs:string"/>
     <xsl:param name="startingLoc" as="xs:integer"/>
-    <xsl:param name="length" as="xs:integer"/>
-    <xsl:variable name="substring" select="substring($s, $startingLoc, $length)"/>
+    <xsl:param name="length" as="xs:integer?"/>
+    <xsl:variable name="substring">
+      <xsl:choose>
+        <xsl:when test="empty($length)">
+          <xsl:sequence select="substring($s, $startingLoc)"/>
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:sequence select="substring($s, $startingLoc, $length)"/>
+        </xsl:otherwise>
+      </xsl:choose>
+    </xsl:variable>
     <xsl:variable name="result" as="xs:string*">
       <xsl:if test="$startingLoc gt 1">
         <xsl:text>[...]&#160;</xsl:text>
       </xsl:if>
       <xsl:sequence select="$substring"/>
-      <xsl:if test="substring($s, $startingLoc, $length + 1) != $substring">
-        <xsl:text>&#160;[...]</xsl:text>
+      <xsl:if test="not(empty($length))">
+        <xsl:if test="substring($s, $startingLoc, $length + 1) != $substring">
+          <xsl:text>&#160;[...]</xsl:text>
+        </xsl:if>
       </xsl:if>
     </xsl:variable>
     <xsl:sequence select="string-join($result, '')"/>

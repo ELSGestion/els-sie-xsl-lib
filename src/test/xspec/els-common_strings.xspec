@@ -121,6 +121,13 @@
       </x:call>
       <x:expect label="true" select="'[...]&#160;specific text&#160;[...]'"/>
     </x:scenario>
+    <x:scenario label="empty length">
+      <x:call>
+        <x:param name="startingLoc" select="11"/>
+        <x:param name="length" select="()"/>
+      </x:call>
+      <x:expect label="true" select="'[...]&#160;specific text to be displayed'"/>
+    </x:scenario>
   </x:scenario>
   
   <x:scenario label="els:getFirstChar">
