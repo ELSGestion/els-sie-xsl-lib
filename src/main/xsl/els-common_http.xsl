@@ -58,6 +58,26 @@
  
   <xd:doc>
     <xd:desc>
+      <xd:p>Return the resource file from an URL </xd:p>
+      <xd:p>For the given URL : <xd:pre>http://foo.bar/baz/some/page.html</xd:pre>,
+        the file is <xd:pre>page.html</xd:pre></xd:p>
+    </xd:desc>
+    <xd:param name="url">The input URL</xd:param>
+  </xd:doc>
+  <xsl:function name="els:http-get-file" as="xs:string?">
+    <xsl:param name="url" as="xs:string"/>
+    <xsl:variable name="query" select="tokenize(els:http-get-path($url), '/')[last()]"/>
+    <xsl:variable name="filename" select="
+      if (matches($query, '^[\w,\s_-]+\.[A-Za-z]{3,4}$')) then
+      ($query)
+      else
+      ''"/>
+    <xsl:sequence select="$filename"/>
+  </xsl:function>
+ 
+ 
+  <xd:doc>
+    <xd:desc>
       <xd:p>Return the host name from an URL </xd:p>
       <xd:p>For the given URL : <xd:pre>http://foo.bar:9090/baz?p1=v1&amp;p2=v2</xd:pre>,
         the host name is <xd:pre>foo.bar</xd:pre></xd:p>

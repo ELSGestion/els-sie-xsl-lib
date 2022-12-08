@@ -58,6 +58,35 @@
     <x:expect label="URL Host (no protocol no trailing slash)" select="'www.foo.bar'" />
   </x:scenario>
   
+  <x:scenario label="URL file (https)">
+    <x:call function="els:http-get-file">
+      <x:param name="url" select="'https://www.foo.bar:8282/baz/some/page.html?lang=FR&amp;layout=full&amp;turbo=true'" />
+    </x:call>
+    <x:expect label="URL file (https)" select="'page.html'" />
+  </x:scenario>
+  
+  <x:scenario label="URL file (http)">
+    <x:call function="els:http-get-file">
+      <x:param name="url" select="'http://www.foo.bar:8282/baz/some/page.html?lang=FR&amp;layout=full&amp;turbo=true'" />
+    </x:call>
+    <x:expect label="URL file (http)" select="'page.html'" />
+  </x:scenario>
+  
+  <x:scenario label="URL file (no protocol)">
+    <x:call function="els:http-get-file">
+      <x:param name="url" select="'//www.foo.bar:8282/baz/some/page.html?lang=FR&amp;layout=full&amp;turbo=true'" />
+    </x:call>
+    <x:expect label="URL file (no protocol)" select="'page.html'" />
+  </x:scenario>
+  
+  <x:scenario label="URL file (no param or query strings)">
+    <x:call function="els:http-get-file">
+      <x:param name="url" select="'https://www.foo.bar:8282/baz/some/page.html'" />
+    </x:call>
+    <x:expect label="URL file (no protocol)" select="'page.html'" />
+  </x:scenario>
+  
+  
   <x:scenario label="URL port">
     <x:call function="els:http-get-port">
       <x:param name="url" select="'https://www.foo.bar:8282/baz/some/page.html?lang=FR&amp;layout=full&amp;turbo=true'" />

@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <x:description xmlns:x="http://www.jenitennison.com/xslt/xspec" 
   xmlns:xi="http://www.w3.org/2001/XInclude"
+  xmlns:els-common_url-classifier="http://www.lefebvre-sarrut.eu/ns/els/els-common_url-classifier.xsl"
   stylesheet="../xsl/els-common_url-classifier-test.xsl"
   xslt-version="3.0">
   
   <!--NOTE : this XSpec uses xi:include instead of href to avoid indentation differences. 
              See https://github.com/xspec/xspec/issues/1090-->
-  
+  <x:param name="els-common_url-classifier:debug" select="false()"/>
   <x:scenario label="Test els:classify-url()" xml:base="../samples/">
     <x:context>
       <xi:include href="els-common/els-common_url-classifier/els-common_url-classifier.sample.xml"/>
