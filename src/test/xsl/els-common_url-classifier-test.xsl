@@ -3,6 +3,7 @@
   xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl" 
   xmlns:xs="http://www.w3.org/2001/XMLSchema"
   xmlns:els="http://www.lefebvre-sarrut.eu/ns/els"
+  xmlns:els-common_url-classifier="http://www.lefebvre-sarrut.eu/ns/els/els-common_url-classifier.xsl"
   exclude-result-prefixes="#all"
   version="3.0">
   
@@ -12,11 +13,16 @@
     </xd:desc>
   </xd:doc>
   
+
+  
   <xsl:import href="../../main/xsl/els-common_url-classifier.xsl"/>
   
   <xsl:template match="*[@href]">
     <xsl:copy>
       <xsl:apply-templates select="@*"/>
+      <xsl:if test="$els-common_url-classifier:debug">
+        <xsl:sequence select="els:url-classifier(@href)"/>
+      </xsl:if>
       <xsl:attribute name="is-lefebvre-dalloz" select="els:url-is-lefebvre-dalloz(@href)"/>
       <xsl:attribute name="is-an-publishing-document" select="els:url-is-a-publishing-document(@href)"/>
       <xsl:attribute name="needs-login" select="els:url-access-needs-login(@href)"/>
