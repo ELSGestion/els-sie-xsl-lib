@@ -139,6 +139,48 @@
       </x:call>
       <x:expect label="1972-01-01" select="'1972-01-01'"/>
     </x:scenario>
+    <x:scenario label="21/10/02">
+      <x:call>
+        <x:param name="s" select="'21/10/02'"/>
+        <x:param name="sep" select="'/'"/>
+      </x:call>
+      <x:expect label="2002-10-21" select="'2002-10-21'"/>
+    </x:scenario>
+    <x:scenario label="1/10/02">
+      <x:call>
+        <x:param name="s" select="'1/10/02'"/>
+        <x:param name="sep" select="'/'"/>
+      </x:call>
+      <x:expect label="2002-10-01" select="'2002-10-01'"/>
+    </x:scenario>
+    <x:scenario label="1/1/02">
+      <x:call>
+        <x:param name="s" select="'1/1/02'"/>
+        <x:param name="sep" select="'/'"/>
+      </x:call>
+      <x:expect label="2002-01-01" select="'2002-01-01'"/>
+    </x:scenario>
+    <x:scenario label="21/10/00">
+      <x:call>
+        <x:param name="s" select="'21/10/00'"/>
+        <x:param name="sep" select="'/'"/>
+      </x:call>
+      <x:expect label="2000-10-21" select="'2000-10-21'"/>
+    </x:scenario>
+    <x:scenario label="1/10/00">
+      <x:call>
+        <x:param name="s" select="'1/10/00'"/>
+        <x:param name="sep" select="'/'"/>
+      </x:call>
+      <x:expect label="2000-10-01" select="'2000-10-01'"/>
+    </x:scenario>
+    <x:scenario label="1/1/00">
+      <x:call>
+        <x:param name="s" select="'1/1/00'"/>
+        <x:param name="sep" select="'/'"/>
+      </x:call>
+      <x:expect label="2000-01-01" select="'2000-01-01'"/>
+    </x:scenario>
   </x:scenario>
   
   <x:scenario label="els:makeIsoDateFromYYYYMMDD">
