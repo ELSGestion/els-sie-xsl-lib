@@ -464,4 +464,85 @@
     </x:call>
     <x:expect label="OK" select="false()"/>    
   </x:scenario>
+  
+  <x:scenario label="els:isEmptyElement">
+    <x:call function="els:isEmptyElement"/>
+    <x:scenario label="element with text content">
+      <x:call>
+        <x:param name="e">
+          <e> text </e>
+        </x:param>
+      </x:call>
+      <x:expect label="False" select="false()"/>
+    </x:scenario>
+    <x:scenario label="element with child with text content">
+      <x:call>
+        <x:param name="e">
+          <e><child>text</child></e>
+        </x:param>
+      </x:call>
+      <x:expect label="False" select="false()"/>
+    </x:scenario>
+    <x:scenario label="element with whitespaces">
+      <x:call>
+        <x:param name="e">
+          <e>  </e>
+        </x:param>
+      </x:call>
+      <x:expect label="True" select="true()"/>
+    </x:scenario>
+    <x:scenario label="element with child">
+      <x:call>
+        <x:param name="e">
+          <e> <child> </child> </e>
+        </x:param>
+      </x:call>
+      <x:expect label="True" select="true()"/>
+    </x:scenario>
+    <x:scenario label="element with PI">
+      <x:call>
+        <x:param name="e">
+          <e> <?pi this is a PI?> </e>
+        </x:param>
+      </x:call>
+      <x:expect label="True" select="true()"/>
+    </x:scenario>
+    <x:scenario label="element with comment">
+      <x:call>
+        <x:param name="e">
+          <e><!--comment--></e>
+        </x:param>
+      </x:call>
+      <x:expect label="True" select="true()"/>
+    </x:scenario>
+  </x:scenario>
+  
+  <x:scenario label="els:isEmptyAttribute">
+    <x:call function="els:isEmptyAttribute"/>
+    <x:scenario label="attribute with text content">
+      <x:call>
+        <x:param name="e" select="/e/@test">
+          <e test="text"/>
+        </x:param>
+      </x:call>
+      <x:expect label="False" select="false()"/>
+    </x:scenario>
+    <x:scenario label="attribute with no-break-space">
+      <x:call>
+        <x:param name="e" select="/e/@test">
+          <e test="&#160;"/>
+        </x:param>
+      </x:call>
+      <x:expect label="False" select="false()"/>
+    </x:scenario>
+    <x:scenario label="attribute with white-spaces">
+      <x:call>
+        <x:param name="e" select="/e/@test">
+          <e test="   "/>
+        </x:param>
+      </x:call>
+      <x:expect label="True" select="true()"/>
+    </x:scenario>
+  </x:scenario>
+  
 </x:description>

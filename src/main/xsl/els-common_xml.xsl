@@ -305,6 +305,19 @@
     </xsl:choose>
   </xsl:function>
   
+  <xd:p>Indicate if the string content of an element is empty</xd:p>
+  <xsl:function name="els:isEmptyElement" as="xs:boolean">
+    <xsl:param name="e" as="element()"/>
+    <!--FIXME : use els:is-empty-or-whitespace and check if child ?-->
+    <xsl:sequence select="normalize-space(string-join($e//text(), '')) = ''"/>
+  </xsl:function>
+  
+  <xd:p>Indicate if an attribute is empty</xd:p>
+  <xsl:function name="els:isEmptyAttribute" as="xs:boolean">
+    <xsl:param name="a" as="attribute()"/>
+    <xsl:sequence select="normalize-space(string($a)) = ''"/>
+  </xsl:function>
+  
   <xd:doc>Mode to delete indentations</xd:doc>
   <xsl:template match="text()[matches(.,'(\s|\t)*\n(\s|\t)*')]" mode="els:deleteIndentation">
     <xsl:value-of select="replace(.,'(\s|\t)*\n(\s|\t)*', ' ')"/>

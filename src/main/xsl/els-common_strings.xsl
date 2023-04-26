@@ -152,6 +152,11 @@
     </xsl:if>
   </xsl:function>
   
+  <xd:doc>0 args Signature for els:crlf() : by default only one carriage return</xd:doc>
+  <xsl:function name="els:crlf" as="xs:string">
+    <xsl:sequence select="els:crlf(1)"/>
+  </xsl:function>
+  
   <xd:doc>If the substring to display is shorter than the string : add [...] before and/or after</xd:doc>
   <xsl:function name="els:displaySubstring" as="xs:string">
     <xsl:param name="s" as="xs:string"/>
@@ -179,11 +184,6 @@
       </xsl:if>
     </xsl:variable>
     <xsl:sequence select="string-join($result, '')"/>
-  </xsl:function>
-  
-  <xd:doc>0 args Signature for els:crlf() : by default only one carriage return</xd:doc>
-  <xsl:function name="els:crlf" as="xs:string">
-    <xsl:sequence select="els:crlf(1)"/>
   </xsl:function>
   
   <xd:doc>1 args Signature for els:getFirstChar : by default the first 1 character</xd:doc>
