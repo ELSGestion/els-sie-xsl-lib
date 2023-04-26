@@ -13,6 +13,9 @@
       <xd:p>ELS-COMMON lib : module "DATES" utilities</xd:p>
     </xd:desc>
   </xd:doc>
+  
+  <xsl:param name="debug" as="xs:boolean" select="false()"/>
+  <xsl:variable name="debugHeader" as="xs:string" select="concat('[debug ',tokenize(static-base-uri(),'/')[last()],']')"/>
 
   <xsl:import href="els-common_constants.xsl"/>
 
@@ -174,8 +177,10 @@
     <xsl:param name="sep" as="xs:string"/>
     <xsl:variable name="sToken" select="tokenize($s, $sep)" as="xs:string*"/>
     <xsl:variable name="regJJMMAAAA" as="xs:string" select="concat('^\d\d', $sep, '\d\d', $sep, '\d\d\d\d$')"/>
-    <xsl:variable name="regJJMMAA" as="xs:string" select="concat('^\d\d', $sep, '\d\d', $sep, '\d\d')"/>
+    <xsl:variable name="regJJMMAA" as="xs:string" select="concat('^\d?\d', $sep, '\d?\d', $sep, '\d\d')"/>
     <xsl:variable name="regJMAAAA" as="xs:string" select="concat('^\d?\d', $sep, '\d?\d', $sep, '\d\d\d\d$')"/>
+   
+    
     <xsl:choose>
       <!--If $s is empty, we can't do anything : return the empty string-->
       <xsl:when test="empty($s)">
@@ -187,20 +192,17 @@
       </xsl:when>
       <!--The string $s format is correct "JJ/MM/AAAA" : convert it to "AAAA-MM-JJ" -->
       <xsl:when test="matches($s, $regJJMMAAAA)">
+        <xsl:if test="$debug">
+          <xsl:message>debug when $regJJMMAAAA</xsl:message>
+        </xsl:if>
         <xsl:value-of select="concat($sToken[3], '-', $sToken[2], '-', $sToken[1])"/>
-      </xsl:when>
-      <!--The string $s format is correct except the year which is on 2 digit "JJ/MM/AA" : convert it to "AAAA-MM-JJ" (trying to guess the century)-->
-      <!--ASSUME : if AA is later than current AA, we consider AA was in the last century-->
-      <xsl:when test="matches($s, $regJJMMAA)">
-        <xsl:variable name="currentAAAA" select="year-from-date(current-date())" as="xs:integer"/>
-        <xsl:variable name="currentAA__" select="substring(string($currentAAAA), 1, 2) cast as xs:integer" as="xs:integer"/>
-        <xsl:variable name="current__AA" select="substring(string($currentAAAA), 3, 2) cast as xs:integer" as="xs:integer"/>
-        <xsl:variable name="AA" select="xs:integer($sToken[3])" as="xs:integer"/>
-        <xsl:variable name="AAAA" select="if ($AA gt $current__AA) then (concat($currentAA__ -1, $AA))  else (concat($currentAA__, $AA))" as="xs:string"/>
-        <xsl:value-of select="concat($AAAA, '-', $sToken[2], '-', $sToken[1])"/>
       </xsl:when>
       <!--the day or month is one digit-->
       <xsl:when test="matches($s,$regJMAAAA)">
+        <xsl:if test="$debug">
+          <xsl:message><xsl:value-of select="$debugHeader"></xsl:value-of> els:makeIsoDate()</xsl:message>
+          <xsl:message>when $regJMAAAA</xsl:message>
+        </xsl:if>
         <xsl:variable name="month" as="xs:string">
           <xsl:choose>
             <xsl:when test="string-length($sToken[2]) = 1">
@@ -223,6 +225,54 @@
         </xsl:variable>
         <xsl:value-of select="concat($sToken[3],'-',$month,'-',$day )"/>
       </xsl:when>
+      <!--The string $s format day and month are on one digit and the year is on 2 digit "J/M/AA" : convert it to "AAAA-MM-JJ" (trying to guess the century)-->
+      <!--ASSUME : if AA is later than current AA, we consider AA was in the last century-->
+      <xsl:when test="matches($s, $regJJMMAA)">
+        <xsl:if test="$debug">
+          <xsl:message><xsl:value-of select="$debugHeader"/> els:makeIsoDate()</xsl:message>
+          <xsl:message> when $regJJMMAA</xsl:message>
+        </xsl:if>
+        <xsl:variable name="month" as="xs:string">
+          <xsl:choose>
+            <xsl:when test="string-length($sToken[2]) = 1">
+              <xsl:value-of select="concat('0',$sToken[2])"/>
+            </xsl:when>
+            <xsl:otherwise>
+              <xsl:value-of select="$sToken[2]"/>
+            </xsl:otherwise>
+          </xsl:choose>
+        </xsl:variable>
+        <xsl:variable name="day" as="xs:string">
+          <xsl:choose>
+            <xsl:when test="string-length($sToken[1]) = 1">
+              <xsl:value-of select="concat('0',$sToken[1])"/>
+            </xsl:when>
+            <xsl:otherwise>
+              <xsl:value-of select="$sToken[1]"/>
+            </xsl:otherwise>
+          </xsl:choose>
+        </xsl:variable>
+        <xsl:variable name="currentAAAA" select="year-from-date(current-date())" as="xs:integer"/>
+        <xsl:variable name="currentAA__" select="substring(string($currentAAAA), 1, 2) cast as xs:integer" as="xs:integer"/>
+        <xsl:variable name="current__AA" select="substring(string($currentAAAA), 3, 2) cast as xs:integer" as="xs:integer"/>
+        <xsl:variable name="AA" select="xs:integer($sToken[3])" as="xs:integer"/>
+        <xsl:variable name="AA_str" select="$sToken[3]" as="xs:string"/>
+        <xsl:variable name="AAAA" select="if ($AA gt $current__AA) then (concat($currentAA__ -1, $AA_str))  else (concat($currentAA__, $AA_str))" as="xs:string"/>
+        
+        <xsl:if test="$debug">
+          <xsl:message><xsl:value-of select="$debugHeader"/> els:makeIsoDate()</xsl:message>
+          <xsl:message>currentAAAA <xsl:value-of select="$currentAAAA"/></xsl:message>
+          <xsl:message>currentAA__ <xsl:value-of select="$currentAA__"/></xsl:message>
+          <xsl:message>current__AA <xsl:value-of select="$current__AA"/></xsl:message>
+          <xsl:message>AA <xsl:value-of select="$AA"/></xsl:message>
+          <xsl:message>AA_str <xsl:value-of select="$AA"/></xsl:message>
+          <xsl:message>AAAA <xsl:value-of select="$AAAA"/></xsl:message>
+        </xsl:if>
+ 
+        
+        <xsl:value-of select="concat($AAAA, '-', $month, '-', $day)"/>
+      </xsl:when>
+     
       <!--Unknown format : return the original string $s--> 
       <xsl:otherwise>
         <xsl:value-of select="$s"/>
