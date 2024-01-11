@@ -25,6 +25,21 @@
   <!--===================================================  -->
   <!--                COMMON VAR      -->
   <!--===================================================  -->
+  
+  <xd:doc>
+    <xd:desc>
+      <xd:p>An dummy document-node, might be usefull as 3rg arg of key which may not be empty for instance : 
+        key('my-key', 'key-value', ($possible-non-existant-doc, $els:dummy-document-node)[1])
+      </xd:p>
+    </xd:desc>
+  </xd:doc>
+  <xsl:variable name="els:dummy-document-node" as="xs:string">
+    <xsl:document>
+      <dummyRoot/>
+    </xsl:document>
+  </xsl:variable>
+  
+  
   <xd:doc>
     <xd:desc>
       <xd:p>double/simple quot variable, might be usefull within a concat for example</xd:p>
@@ -41,7 +56,7 @@
   <xsl:variable name="els:regAnySpace" select="'\p{Z}'" as="xs:string"/>
   
   <xd:p>Variable "regAnyDash" : matches any dash</xd:p>
-  <xsl:variable name="els:regAnyDash" select="(' \p{Pd} | &#x2D; | &#xAD; | &#x2043; | &#x2212; ')" as="xs:string"/>
+  <xsl:variable name="els:regAnyDash" select="'(\p{Pd}|&#x2D;|&#xAD;|&#x2043;|&#x2212;)'" as="xs:string"/>
   
   <xd:p>Variable "regAnyPonctuation" : matches any ponctuation (point, coma, semicolon, etc.)</xd:p>
   <xd:p>(cf. http://www.regular-expressions.info/unicode.html)</xd:p>
