@@ -478,7 +478,7 @@
         default "all" has been set at normalizeCalsTable step-->
         <!--When border collapse, set the frame to "none" because frame border has been set on the cells-->
         <xsl:variable name="frame" as="xs:string" 
-          select="if ($xslLib:cals2html.html-border-collapse) then ('none') else (../@frame)"/>
+          select="if ($xslLib:cals2html.html-border-collapse) then ('none') else (ancestor::table/@frame)"/>
         <xsl:value-of select="'cals_frame-' || $frame"/>
       </xsl:variable>
       <xsl:if test="not(empty($class.tmp))">
