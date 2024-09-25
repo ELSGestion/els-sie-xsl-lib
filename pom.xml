@@ -151,6 +151,18 @@
           </xslDirEntries>
         </configuration>
       </plugin>
+      <!-- verification des vulnerabilité des dependences -->
+      <plugin>
+        <groupId>org.owasp</groupId>
+        <artifactId>dependency-check-maven</artifactId>
+        <configuration>
+            <retireJsAnalyzerEnabled>false</retireJsAnalyzerEnabled>
+            <formats>
+                <format>XML</format>
+                <format>HTML</format>
+            </formats>
+        </configuration>
+      </plugin>   
     </plugins>
   </reporting>
 
