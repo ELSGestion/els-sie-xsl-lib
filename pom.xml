@@ -14,7 +14,7 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <saxon.version>9.9.1.7</saxon.version>
-    <saxon.licence.version>9.9.2020</saxon.licence.version>
+    <saxon.licence.version>12.3.2024</saxon.licence.version>
   </properties>
 
   <scm>

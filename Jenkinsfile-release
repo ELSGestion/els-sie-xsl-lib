@@ -1,49 +1,97 @@
-@Library('jenkins-shared-libraries') _
+@Library('jenkins-sharedlibs-linux')
+@Library('pipeline-utility-steps')_
+//@Library('jenkins-sharedlibs-linux@mvnrelease_cred_error')
 
-import static eu.els.ci.MvnVersion.MVN_3_6_0
-import static eu.els.ci.JdkVersion.JDK8
-import static eu.els.ci.MvnUtils.MAJOR_INCREMENT
-import static eu.els.ci.MvnUtils.MINOR_INCREMENT
-import static eu.els.ci.MvnUtils.PATCH_INCREMENT
-
-pipeline {
-    agent { label 'slave_linux_sie' }
-
-    tools {
-        maven MVN_3_6_0.get()
-        jdk JDK8.get()
+pipeline{
+    agent { label "linux" }
+    parameters{
+        booleanParam(defaultValue: false, description: "Release", name: "IS_RELEASE")
+        string(description: 'Version suivante (termine par -SNAPSHOT)', defaultValue: '', name: 'NEXT_VERSION')
     }
 
-    options {
-        disableConcurrentBuilds()
-        buildDiscarder(logRotator(numToKeepStr: '2'))
+    tools{
+        maven "maven-latest"
+        jdk "jdk-21"
     }
-
-    parameters {
-        string(name: 'TAG_VERSION', defaultValue: '', description: 'Le numéro de version de la release')
-        string(name: 'DEV_VERSION', defaultValue: '', description: 'Le numéro de la prochaine version (mettre le -SNAPSHOT)')
-    }
-
     stages {
-        stage('Clean') {
+        stage('Test') {
             steps {
-                deleteDir()
+                mvnBuild(GOAL: "test")
             }
         }
-
-        stage('Clone') {
+        stage('build') {
             steps {
-                 git(
-                     url: "https://github.com/ELSGestion/els-sie-xsl-lib.git",
-                     credentialsId: 'GitHub_IC_LSS',
-                     branch: env.BRANCH_NAME
+                mvnBuild(GOAL: "install", OPTIONS: "-DskipTests")
+            }
+        }
+        stage('sonar') {
+            steps {
+                withSonarQubeEnv('sonar') {
+                    mvnBuild(GOAL: "sonar:sonar", OPTIONS: "-DskipTests")
+                }
+            }
+        }
+        stage("Quality Gate") {
+            steps {
+                timeout(time: 5, unit: 'MINUTES') {
+                    waitForQualityGate abortPipeline: false
+                }
+            }
+        }
+        stage("dependency check") {
+            steps {
+                mvnBuild(GOAL: "dependency-check:check")
+                dependencyCheckPublisher pattern: 'target/dependency-check-report.xml'
+            }
+        }
+        stage('deploy') {
+            when {
+                not {
+                    allOf {
+                        triggeredBy cause: "UserIdCause";
+                        expression { return params.IS_RELEASE }
+                    }
+                }
+            }
+            steps {
+                mvnBuild(GOAL: "deploy", OPTIONS: "-DskipTests")
+            }
+        }
+        stage('Clone') {
+            when {
+                allOf {
+                    triggeredBy cause: "UserIdCause";
+                    expression { return params.IS_RELEASE }
+                }
+            }
+            steps {
+                git(
+                    url: "https://github.com/ELSGestion/els-sie-xsl-lib.git",
+                    credentialsId: 'GitHub_IC_LSS',
+                    branch: env.BRANCH_NAME
                 )
             }
         }
-
-        stage('Release') {
+        stage('release') {
+            when {
+                allOf {
+                    triggeredBy cause: "UserIdCause";
+                    expression { return params.IS_RELEASE }
+                }
+            }
             steps {
-                mvnRelease(tagVersion: TAG_VERSION, devVersion: DEV_VERSION, CREDENTIALS_ID: 'GitHub_IC_LSS')
+                withCredentials([usernamePassword(credentialsId: "GitHub_IC_LSS", usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+                    script {
+                        def pom = readMavenPom file: 'pom.xml'
+                        def version = pom.version
+                        def versionWithoutSnapshot = version.replaceAll(/-SNAPSHOT$/, "")
+                        echo "Version " + versionWithoutSnapshot
+                        sh "git config user.name ${USERNAME}"
+                        sh "git config user.password ${PASSWORD}"
+                        echo "Version " + version
+                        mvnRelease(REL_VERSION: versionWithoutSnapshot, DEV_VERSION: params.NEXT_VERSION, MVN_PROFILES: "release", OPTIONS: '-DskipTests')
+                    }
+                }
             }
         }
     }
