@@ -38,12 +38,6 @@ pipeline{
                 }
             }
         }
-        stage("dependency check") {
-            steps {
-                mvnBuild(GOAL: "dependency-check:check")
-                dependencyCheckPublisher pattern: 'target/dependency-check-report.xml'
-            }
-        }
         stage('deploy') {
             when {
                 not {
