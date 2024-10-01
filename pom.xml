@@ -5,7 +5,7 @@
 
   <groupId>eu.els.sie.lib.xsl.common</groupId>
   <artifactId>xslLib</artifactId>
-  <version>4.07.02-SNAPSHOT</version>
+  <version>4.07.02</version>
   <packaging>jar</packaging>
 
   <name>xslLib</name>
