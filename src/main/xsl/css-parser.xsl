@@ -491,7 +491,8 @@
         <xsl:sequence select="$css/css:*/css:*[local-name() = $name]"/>
       </xsl:otherwise>
     </xsl:choose>-->
-    <xsl:sequence select="$css/css:*/css:*[local-name() = $name]"/>
+    <!--Get last value because css last value is alway prioritary-->
+    <xsl:sequence select="($css/css:*/css:*[local-name() = $name])[last()]"/>
   </xsl:function>
   
   <xsl:function name="css:getProperties" as="element()*">
