@@ -404,4 +404,29 @@
     </x:scenario>
   </x:scenario>
   
+  <x:scenario label="els:labelToId">
+    <x:call function="els:labelToId"/>
+    <x:scenario label="Affaires - Société et marché financier">
+      <x:call>
+        <x:param name="string" select="'Affaires - Société et marché financier'"/>
+      </x:call>
+      <x:expect label="affaires_societe_marche_financier"
+        select="'affaires_societe_marche_financier'"/>
+    </x:scenario>
+    <x:scenario label="Affaires   -   Société   et marché financier  ">
+      <x:call>
+        <x:param name="string" select="'Affaires   -   Société   et marché financier  '"/>
+      </x:call>
+      <x:expect label="affaires_societe_marche_financier"
+        select="'affaires_societe_marche_financier'"/>
+    </x:scenario>
+    <x:scenario label="-">
+      <x:call>
+        <x:param name="string" select="'-'"/>
+      </x:call>
+      <x:expect label="empty string"
+        select="''"/>
+    </x:scenario>
+  </x:scenario>
+  
 </x:description>

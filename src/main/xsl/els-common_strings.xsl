@@ -131,8 +131,8 @@
     <xd:param name="string"/>
     <xd:return>the <xd:b>string</xd:b> normalized</xd:return>
   </xd:doc>
-  <xsl:function name="els:normalize-no-diacritic" as="xs:string">
-    <xsl:param name="string" as="xs:string"/>
+  <xsl:function name="els:normalize-no-diacritic" as="xs:string?">
+    <xsl:param name="string" as="xs:string?"/>
     <xsl:sequence select="replace(normalize-unicode($string, 'NFD'), '[\p{M}]', '')"/>
   </xsl:function>
 
@@ -300,6 +300,21 @@
         <xsl:value-of select="$seq"/>
       </xsl:otherwise>
     </xsl:choose>   
+  </xsl:function>
+  
+  <xd:doc>
+    <xd:desc>
+      <xd:p>Function that convert any string (typically a label) to an ID.</xd:p>
+      <xd:p>for example : the result of "Affaires - Société et marché financier" is "affaires_societe_marche_financier"</xd:p>
+      <xd:p></xd:p>
+    </xd:desc>
+    <xd:param name="s">label (string)</xd:param>
+  </xd:doc>
+  <xsl:function name="els:labelToId" as="xs:string">
+    <xsl:param name="s" as="xs:string"/>
+    <xsl:variable name="stopWords" select="('_et_|_la_|_le_|_les_|_de_la_|_de_l_|_de_|_des_|_d_|_a_l_|_l_|_a_|_un_|_une_|/')" as="xs:string"/>
+    <xsl:value-of select="$s => lower-case() => replace('-', '') => normalize-space() => replace($els:regAnySpace, '_')
+      => els:normalize-no-diacritic() => replace(&quot;&apos;&quot;, &quot;_&quot;) => replace($stopWords, '_')"/>
   </xsl:function>
   
   <!--=====================-->
