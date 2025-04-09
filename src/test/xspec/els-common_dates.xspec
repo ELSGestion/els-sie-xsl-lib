@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <x:description 
-  xmlns:x="http://www.jenitennison.com/xslt/xspec" 
+  xmlns:x="http://www.jenitennison.com/xslt/xspec"
+  xmlns:xs="http://www.w3.org/2001/XMLSchema"
   xmlns:els="http://www.lefebvre-sarrut.eu/ns/els"
   stylesheet="../../main/xsl/els-common_dates.xsl"
   xslt-version="3.0">
@@ -78,22 +79,23 @@
         </x:call>
         <x:expect label="11" select="11"/>
       </x:scenario>
-      <x:scenario label="foobar">
+      <x:scenario label="octobre">
         <x:call>
-          <x:param name="monthString" select="'foobar'"/>
+          <x:param name="monthString" select="'octobre'"/>
         </x:call>
-        <x:expect label="Error" select="()"/>
+        <x:expect label="10" select="10"/>
       </x:scenario>
-    </x:scenario>
-    <x:scenario label="2 arguments">
-      <x:call function="els:getMonthNumFromVerbalizeMonth">
-        <x:param name="months.verbalized" select="('janv(\.?|ier)','f[eé]vr(\.?|ier)')" position="2"/>
-      </x:call>
-      <x:scenario label="févr.">
+      <x:scenario label="oct.">
         <x:call>
-          <x:param name="monthString" select="'févr.'" position="1"/>
+          <x:param name="monthString" select="'oct.'"/>
         </x:call>
-        <x:expect label="2" select="2"/>
+        <x:expect label="10" select="10"/>
+      </x:scenario>
+      <x:scenario label="déc.">
+        <x:call>
+          <x:param name="monthString" select="'déc.'"/>
+        </x:call>
+        <x:expect label="12" select="12"/>
       </x:scenario>
       <x:scenario label="Février">
         <x:call>
@@ -101,17 +103,77 @@
         </x:call>
         <x:expect label="2" select="2"/>
       </x:scenario>
+      <x:scenario label="févr.">
+        <x:call>
+          <x:param name="monthString" select="'févr.'" position="1"/>
+        </x:call>
+        <x:expect label="2" select="2"/>
+      </x:scenario>
+      <x:scenario label="févr">
+        <x:call>
+          <x:param name="monthString" select="'févr'" position="1"/>
+        </x:call>
+        <x:expect label="2" select="2"/>
+      </x:scenario>
+      <x:scenario label="fe[discritique accent aigu]́vr">
+        <x:call>
+          <x:param name="monthString" select="'févr'" position="1"/>
+        </x:call>
+        <x:expect label="2" select="2"/>
+      </x:scenario>
+      <x:scenario label="Aou[diacritique accent circonflexe]ut">
+        <x:call>
+          <x:param name="monthString" select="'Août'" position="1"/>
+        </x:call>
+        <x:expect label="8" select="8"/>
+      </x:scenario>
       <x:scenario label="fevr">
         <x:call>
           <x:param name="monthString" select="'fevr'" position="1"/>
         </x:call>
         <x:expect label="2" select="2"/>
       </x:scenario>
-      <x:scenario label="fevrier">
+      <x:scenario label="fev">
         <x:call>
-          <x:param name="monthString" select="'fevrier'" position="1"/>
+          <x:param name="monthString" select="'fev'" position="1"/>
         </x:call>
         <x:expect label="2" select="2"/>
+      </x:scenario>
+      <x:scenario label="fev.">
+        <x:call>
+          <x:param name="monthString" select="'fev.'" position="1"/>
+        </x:call>
+        <x:expect label="2" select="2"/>
+      </x:scenario>
+      <x:scenario label="[esp]févr.[esp]">
+        <x:call>
+          <x:param name="monthString" select="' févr. '" position="1"/>
+        </x:call>
+        <x:expect label="2" select="2"/>
+      </x:scenario>
+      <x:scenario label="[insec][esp][insec]févr.[esp]">
+        <x:call>
+          <x:param name="monthString" select="'&#160; &#160;févr. '" position="1"/>
+        </x:call>
+        <x:expect label="2" select="2"/>
+      </x:scenario>
+      <x:scenario label="[insec][esp]">
+        <x:call>
+          <x:param name="monthString" select="'&#160; '" position="1"/>
+        </x:call>
+        <x:expect label="Empty sequence" select="()"/>
+      </x:scenario>
+      <x:scenario label="text févr. text">
+        <x:call>
+          <x:param name="monthString" select="'text févr. text'" position="1"/>
+        </x:call>
+        <x:expect label="Empty sequence" select="()"/>
+      </x:scenario>
+      <x:scenario label="foobar">
+        <x:call>
+          <x:param name="Empty" select="'foobar'"/>
+        </x:call>
+        <x:expect label="Empty sequence" select="()"/>
       </x:scenario>
     </x:scenario>
   </x:scenario>
@@ -258,7 +320,6 @@
   <x:scenario label="els:date-string-to-number-slash">
     <x:call function="els:date-string-to-number-slash">
       <x:param name="dateVerbalized" select="'10 septembre 1975'"/>
-      <x:param name="shortMonth" select="true()"/>
     </x:call>
     <x:expect label="19750910" select="'10/09/1975'"/>
   </x:scenario>

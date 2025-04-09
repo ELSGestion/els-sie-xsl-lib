@@ -14,14 +14,20 @@
     </xd:desc>
   </xd:doc>
   
-  <xsl:param name="debug" as="xs:boolean" select="false()"/>
+  <xsl:param name="els:debug" as="xs:boolean" select="false()"/>
   <xsl:variable name="debugHeader" as="xs:string" select="concat('[debug ',tokenize(static-base-uri(),'/')[last()],']')"/>
 
   <xsl:import href="els-common_constants.xsl"/>
 
-  <xd:doc>Variables for giving Month in any language</xd:doc>
-  <xsl:variable name="els:months.fr" select="('janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre')" as="xs:string+"/>
-  <xsl:variable name="els:monthsShort.fr" select="('janv.', 'févr.', 'mars', 'avr.', 'mai', 'juin', 'juill.', 'août', 'sept.', 'oct.', 'nov.', 'déc.')" as="xs:string+"/>
+  <xd:doc>Variable for giving Month as regex in french language</xd:doc>
+  <xsl:variable name="els:months.reg.fr" as="xs:string+"
+    select="('^(janvier|janv?\.?)$', '^(f([ée]|é)vrier|f([ée]|é)vr?\.?)$', '^mars$', '^(avril|avr\.?)$', '^mai$', '^juin$', '^(juillet|juill?\.?)$',
+    '^ao([ûu]|û)t$', '^(septembre|sept\.?)$', '^(octobre|oct\.?)$', '^(novembre|nov\.?)$', '^(d([ée]|é)cembre|d([ée]|é)c\.?)$')" />
+  
+  <xd:doc>Variable listing each month in french language</xd:doc>
+  <xsl:variable name="els:months.list.fr" select="('janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre')" as="xs:string+"/>
+  <xd:doc>Variable listing each month as short abbeviation in french language</xd:doc>
+  <xsl:variable name="els:monthsShort.list.fr" select="('janv.', 'févr.', 'mars', 'avr.', 'mai', 'juin', 'juill.', 'août', 'sept.', 'oct.', 'nov.', 'déc.')" as="xs:string+"/>
   
   <xd:doc>Get the current date as string in ISO format YYYY-MM-DD</xd:doc>
   <xsl:function name="els:getCurrentIsoDate" as="xs:string">
@@ -109,7 +115,7 @@
   <xd:doc>1 arg signature of els:verbalizeMonthFromNum : default language is "french"</xd:doc>
   <xsl:function name="els:verbalizeMonthFromNum" as="xs:string?">
     <xsl:param name="monthNumString" as="xs:string"/>
-    <xsl:sequence select="els:verbalizeMonthFromNum($monthNumString, $els:months.fr)"/>
+    <xsl:sequence select="els:verbalizeMonthFromNum($monthNumString, $els:months.list.fr)"/>
   </xsl:function>
   
   <xd:doc>
@@ -138,7 +144,7 @@
   <xd:doc>1 arg signature of els:getMonthNumFromVerbalizeMonth : default language is "french"</xd:doc>
   <xsl:function name="els:getMonthNumFromVerbalizeMonth" as="xs:integer?">
     <xsl:param name="monthString" as="xs:string"/>
-    <xsl:sequence select="els:getMonthNumFromVerbalizeMonth($monthString, $els:months.fr)"/>
+    <xsl:sequence select="els:getMonthNumFromVerbalizeMonth($monthString, $els:months.reg.fr)"/>
   </xsl:function>
   
   <xd:doc>
@@ -152,7 +158,8 @@
   <xsl:function name="els:getMonthNumFromVerbalizeMonth" as="xs:integer?">
     <xsl:param name="monthString" as="xs:string"/>
     <xsl:param name="months.verbalized" as="xs:string+"/>
-    <xsl:variable name="result" select="$months.verbalized[matches($monthString, ., 'i')]!index-of($months.verbalized, .)" as="xs:integer*"/>
+    <xsl:variable name="monthString" select="replace($monthString, '^\p{Z}*([^\p{Z}]+)\p{Z}*$', '$1')" as="xs:string?"/>
+    <xsl:variable name="result" select="$months.verbalized[matches($monthString, ., 'i')] ! index-of($months.verbalized, .)" as="xs:integer*"/>
     <!--<xsl:variable name="result" select="index-of($months.verbalized, $monthString)" as="xs:integer*"/>-->
     <xsl:choose>
       <xsl:when test="count($result) = 1">
@@ -160,6 +167,7 @@
       </xsl:when>
       <xsl:otherwise>
         <xsl:message>[ERROR][els:getMonthNumFromVerbalizeMonth] Unable to get an integer representation of the month from the string '<xsl:value-of select="$monthString"/>' : <xsl:value-of select="count($result)"/> match.</xsl:message>
+        <!--<xsl:message>months.verbalized : <xsl:value-of select="$months.verbalized" separator="/"/></xsl:message>-->
       </xsl:otherwise>
     </xsl:choose>
   </xsl:function>
@@ -179,8 +187,6 @@
     <xsl:variable name="regJJMMAAAA" as="xs:string" select="concat('^\d\d', $sep, '\d\d', $sep, '\d\d\d\d$')"/>
     <xsl:variable name="regJJMMAA" as="xs:string" select="concat('^\d?\d', $sep, '\d?\d', $sep, '\d\d')"/>
     <xsl:variable name="regJMAAAA" as="xs:string" select="concat('^\d?\d', $sep, '\d?\d', $sep, '\d\d\d\d$')"/>
-   
-    
     <xsl:choose>
       <!--If $s is empty, we can't do anything : return the empty string-->
       <xsl:when test="empty($s)">
@@ -192,14 +198,14 @@
       </xsl:when>
       <!--The string $s format is correct "JJ/MM/AAAA" : convert it to "AAAA-MM-JJ" -->
       <xsl:when test="matches($s, $regJJMMAAAA)">
-        <xsl:if test="$debug">
+        <xsl:if test="$els:debug">
           <xsl:message>debug when $regJJMMAAAA</xsl:message>
         </xsl:if>
         <xsl:value-of select="concat($sToken[3], '-', $sToken[2], '-', $sToken[1])"/>
       </xsl:when>
       <!--the day or month is one digit-->
       <xsl:when test="matches($s,$regJMAAAA)">
-        <xsl:if test="$debug">
+        <xsl:if test="$els:debug">
           <xsl:message><xsl:value-of select="$debugHeader"></xsl:value-of> els:makeIsoDate()</xsl:message>
           <xsl:message>when $regJMAAAA</xsl:message>
         </xsl:if>
@@ -228,7 +234,7 @@
       <!--The string $s format day and month are on one digit and the year is on 2 digit "J/M/AA" : convert it to "AAAA-MM-JJ" (trying to guess the century)-->
       <!--ASSUME : if AA is later than current AA, we consider AA was in the last century-->
       <xsl:when test="matches($s, $regJJMMAA)">
-        <xsl:if test="$debug">
+        <xsl:if test="$els:debug">
           <xsl:message><xsl:value-of select="$debugHeader"/> els:makeIsoDate()</xsl:message>
           <xsl:message> when $regJJMMAA</xsl:message>
         </xsl:if>
@@ -259,7 +265,7 @@
         <xsl:variable name="AA_str" select="$sToken[3]" as="xs:string"/>
         <xsl:variable name="AAAA" select="if ($AA gt $current__AA) then (concat($currentAA__ -1, $AA_str))  else (concat($currentAA__, $AA_str))" as="xs:string"/>
         
-        <xsl:if test="$debug">
+        <xsl:if test="$els:debug">
           <xsl:message><xsl:value-of select="$debugHeader"/> els:makeIsoDate()</xsl:message>
           <xsl:message>currentAAAA <xsl:value-of select="$currentAAAA"/></xsl:message>
           <xsl:message>currentAA__ <xsl:value-of select="$currentAA__"/></xsl:message>
@@ -268,11 +274,8 @@
           <xsl:message>AA_str <xsl:value-of select="$AA"/></xsl:message>
           <xsl:message>AAAA <xsl:value-of select="$AAAA"/></xsl:message>
         </xsl:if>
- 
-        
         <xsl:value-of select="concat($AAAA, '-', $month, '-', $day)"/>
       </xsl:when>
-     
       <!--Unknown format : return the original string $s--> 
       <xsl:otherwise>
         <xsl:value-of select="$s"/>
@@ -307,7 +310,7 @@
   <xd:doc>1 arg signature of els:displayDate : default months list is $els:months.fr</xd:doc>
   <xsl:function name="els:displayDate" as="xs:string">
     <xsl:param name="date" as="xs:string"/>
-    <xsl:sequence select="els:displayDate($date, $els:months.fr)"/>
+    <xsl:sequence select="els:displayDate($date, $els:months.list.fr)"/>
   </xsl:function>
   
   <xd:doc>
@@ -339,7 +342,7 @@
   <xsl:function name="els:displayEvent.fr" as="xs:string?">
     <xsl:param name="date.from" as="xs:dateTime?"/>
     <xsl:param name="date.to" as="xs:dateTime?"/>
-    <xsl:sequence select="els:displayEvent($date.from, $date.to, $els:months.fr, 'du', 'au', 'le')"/>
+    <xsl:sequence select="els:displayEvent($date.from, $date.to, $els:months.list.fr, 'du', 'au', 'le')"/>
   </xsl:function>
   
   <xd:doc>
@@ -413,7 +416,8 @@
   <!--FIXME : fonction format-date() le fait déjà ?-->
   <xsl:function name="els:date-string-to-number-slash" as="xs:string?">
     <xsl:param name="dateVerbalized" as="xs:string"/>
-    <xsl:param name="shortMonth" as="xs:boolean"/>
+    <xsl:param name="months.regex" as="xs:string*"/>
+    <xsl:variable name="months.regex" select="if (empty($months.regex)) then $els:months.reg.fr else $months.regex" as="xs:string+"/>
     <xsl:choose>
       <xsl:when test="empty($dateVerbalized) or count(tokenize($dateVerbalized, $els:regAnySpace)) &lt; 3">
         <xsl:message>[ERROR][els:date-string-to-number-slash] Unable to get the date from '<xsl:value-of select="$dateVerbalized"/>'</xsl:message>
@@ -438,7 +442,7 @@
             <xsl:message>[ERROR][els:date-string-to-number-slash] Unable to get a day as digit from '<xsl:value-of select="$dateVerbalized"/>'</xsl:message>
           </xsl:when>
           <xsl:otherwise>
-            <xsl:variable name="month.as-digit" select="format-number(els:getMonthNumFromVerbalizeMonth($month, if ($shortMonth) then $els:monthsShort.fr else $els:months.fr ), '00')" as="xs:string"/>
+            <xsl:variable name="month.as-digit" select="format-number(els:getMonthNumFromVerbalizeMonth($month, $months.regex ), '00')" as="xs:string"/>
             <xsl:value-of select="string-join(($day.as-digit, $month.as-digit, $year), '/')"/>
           </xsl:otherwise>
         </xsl:choose>
@@ -446,10 +450,10 @@
     </xsl:choose>
   </xsl:function>
   
-  <xd:p>1 arg signature of els:date-string-to-number-slash() - Default $shortMonth = false()</xd:p>
+  <xd:p>1 arg signature of els:date-string-to-number-slash() - use $els:months.fr as regex</xd:p>
   <xsl:function name="els:date-string-to-number-slash" as="xs:string?">
     <xsl:param name="dateVerbalized" as="xs:string"/>
-    <xsl:sequence select="els:date-string-to-number-slash($dateVerbalized, false())"/>
+    <xsl:sequence select="els:date-string-to-number-slash($dateVerbalized, $els:months.reg.fr)"/>
   </xsl:function>
   
   <xd:doc>
