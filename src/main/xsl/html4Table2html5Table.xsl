@@ -12,8 +12,8 @@
   exclude-result-prefixes="#all" 
   version="3.0">
   
-  <xsl:import href="els-common.xsl"/>
-  <xsl:import href="css-parser.xsl"/>
+  <!--Required modules (need to be included with this XSLT)-->
+  <!--<xsl:import href="css-parser.xsl"/>-->
   
   <xd:doc scope="stylesheet">
     <xd:desc>

@@ -8,7 +8,8 @@
   exclude-result-prefixes="#all"
   version="3.0">
   
-  <xsl:import href="els-common_http.xsl"/>
+  <!--Required modules (need to be included with this XSLT)-->
+  <!--<xsl:import href="els-common_http.xsl"/>-->
   
   <xsl:param name="els-common_url-classifier:debug" as="xs:boolean" select="false()" />
   

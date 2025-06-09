@@ -12,7 +12,7 @@
     </xd:desc>
   </xd:doc>
 
-  <!--<xsl:import href="functx.xsl"/> already imported within modules-->
+  <xsl:import href="functx.xsl"/>
   <xsl:import href="els-common_constants.xsl"/>
   <xsl:import href="els-common_dates.xsl"/>
   <xsl:import href="els-common_strings.xsl"/>

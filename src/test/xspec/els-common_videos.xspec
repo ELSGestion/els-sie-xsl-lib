@@ -2,7 +2,7 @@
 <x:description xmlns:x="http://www.jenitennison.com/xslt/xspec"
   xmlns:els="http://www.lefebvre-sarrut.eu/ns/els"
   xmlns:html="http://www.w3.org/1999/xhtml"
-  stylesheet="../../main/xsl/els-common_videos.xsl">
+  stylesheet="_xspec.override-xslt/els-common_videos.xsl">
   
   <x:scenario label="isVideoUrl()">
     

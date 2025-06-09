@@ -13,8 +13,9 @@
       <xd:p>ELS-COMMON lib : module "STRINGS" utilities</xd:p>
     </xd:desc>
   </xd:doc>
-
-  <xsl:import href="els-common_constants.xsl"/>
+  
+  <!--Required modules (need to be included with this XSLT)-->
+  <!--<xsl:import href="els-common_constants.xsl"/>-->
   
   <xd:doc>
     <xd:desc>

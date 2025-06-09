@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<x:description xmlns:x="http://www.jenitennison.com/xslt/xspec" xmlns:els="http://www.lefebvre-sarrut.eu/ns/els" stylesheet="../../main/xsl/els-common_http.xsl">
-
+<x:description xmlns:x="http://www.jenitennison.com/xslt/xspec"
+  xmlns:els="http://www.lefebvre-sarrut.eu/ns/els"
+  stylesheet="../../main/xsl/els-common_http.xsl">
   
   <x:scenario label="URL Path (https)">
     <x:call function="els:http-get-path">

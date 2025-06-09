@@ -466,6 +466,11 @@
     <xsl:variable name="expanding-row" as="element()">
       <tr xmlns="http://www.w3.org/1999/xhtml">
         <xsl:copy-of select="xhtml2cals:expand-rowspans($source-row, $processed-row)"/>
+        <xsl:if test="count(xhtml2cals:expand-rowspans($source-row, $processed-row)) = 0">
+          <xsl:message select="serialize($source-row)"/>
+          <xsl:message select="serialize($processed-row)"/>
+          <xsl:message terminate="yes">VIDE</xsl:message>
+        </xsl:if>
       </tr>
     </xsl:variable>
     <!-- et dans la ligne ou les rowspans ont été expansés, on traite ensuite les colspans -->
@@ -518,7 +523,7 @@
       <xd:p>Expand a row by taking into acount the rowspans of the preceding row</xd:p>
     </xd:desc>
   </xd:doc>
-  <xsl:function name="xhtml2cals:expand-rowspans" as="item()+">
+  <xsl:function name="xhtml2cals:expand-rowspans" as="item()*">
     <xsl:param name="current-row" as="element()+"/>
     <xsl:param name="preceding-row" as="element()"/>
     <xsl:for-each select="$preceding-row/*">

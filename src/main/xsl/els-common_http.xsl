@@ -30,14 +30,12 @@
   <xsl:function name="els:http-get-param" as="xs:string?">
     <xsl:param name="url" as="xs:string" />
     <xsl:param name="param" as="xs:string" />
-    
     <xsl:variable name="query-string" as="xs:string" select="els:http-get-query-string($url)"/>   
     <xsl:variable name="params-sequence" select="tokenize($query-string,'&amp;')" ></xsl:variable>
     <xsl:variable name="required-param-string" select="$params-sequence[starts-with(.,$param)]" />
     <xsl:variable name="required-param-value" select="tokenize($required-param-string,'=')[2]"/>   
     <xsl:sequence select="$required-param-value" />
   </xsl:function>
- 
  
   <xd:doc>
     <xd:desc>
@@ -49,12 +47,10 @@
   </xd:doc>
   <xsl:function name="els:http-get-path" as="xs:string?">
     <xsl:param name="url" as="xs:string" />
-    
     <xsl:variable name="plain-url" select="tokenize($url,'(https?:)?//')[2]"/>
     <xsl:variable name="path-and-query" select="substring-after($plain-url,'/')" />
     <xsl:sequence select="tokenize($path-and-query,'\?')[1]" />
   </xsl:function>
- 
  
   <xd:doc>
     <xd:desc>
@@ -68,13 +64,10 @@
     <xsl:param name="url" as="xs:string"/>
     <xsl:variable name="query" select="tokenize(els:http-get-path($url), '/')[last()]"/>
     <xsl:variable name="filename" select="
-      if (matches($query, '^[\w,\s_-]+\.[A-Za-z]{3,4}$')) then
-      ($query)
-      else
-      ''"/>
+      if (matches($query, '^[\w,\s_-]+\.[A-Za-z]{3,4}$')) then $query
+      else ''"/>
     <xsl:sequence select="$filename"/>
   </xsl:function>
- 
  
   <xd:doc>
     <xd:desc>
@@ -86,12 +79,10 @@
   </xd:doc>
   <xsl:function name="els:http-get-host" as="xs:string?">
     <xsl:param name="url" as="xs:string" />
-    
     <xsl:variable name="plain-url" select="tokenize($url,'(https?:)?//')[2]"/>
     <xsl:variable name="host-and-port" select="tokenize($plain-url,'/')[1]"/>   
     <xsl:sequence select="tokenize($host-and-port,':')[1]" />
   </xsl:function>
-  
   
   <xd:doc>
     <xd:desc>
@@ -103,12 +94,10 @@
   </xd:doc>
   <xsl:function name="els:http-get-port" as="xs:string?">
     <xsl:param name="url" as="xs:string" />
-    
     <xsl:variable name="plain-url" select="tokenize($url,'(https?:)?//')[2]"/>
     <xsl:variable name="host-and-port" select="tokenize($plain-url,'/')[1]"/>
     <xsl:sequence select="tokenize($host-and-port,':')[2]" />
   </xsl:function>
-  
   
   <xd:doc>
     <xd:desc>

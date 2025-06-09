@@ -15,8 +15,9 @@
     </xd:desc>
   </xd:doc>
 
-  <xsl:import href="els-common_constants.xsl"/>
-  <xsl:import href="els-common_strings.xsl"/>
+  <!--Required modules (need to be included with this XSLT)-->
+  <!--<xsl:import href="els-common_constants.xsl"/>-->
+  <!--<xsl:import href="els-common_strings.xsl"/>-->
   
   <xd:doc>Get the full XML path of any node in an XML with position predicates([n])
     cf. http://www.xsltfunctions.com/xsl/functx_path-to-node-with-pos.html

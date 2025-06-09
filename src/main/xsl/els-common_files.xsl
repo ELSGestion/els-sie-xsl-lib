@@ -15,7 +15,8 @@
     </xd:desc>
   </xd:doc>
 
-  <xsl:import href="functx.xsl"/>
+  <!--Required modules (need to be included with this XSLT)-->
+  <!--<xsl:import href="functx.xsl"/>-->
  
   <xd:doc>
     <xd:desc>

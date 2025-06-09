@@ -13,9 +13,10 @@
     </xd:desc>
   </xd:doc>
   
-
+  <xsl:include href="../../main/xsl/els-common_url-classifier.xsl"/>
   
-  <xsl:import href="../../main/xsl/els-common_url-classifier.xsl"/>
+  <!--Required modules-->
+  <xsl:import href="../../main/xsl/els-common_http.xsl"/>
   
   <xsl:template match="*[@href]">
     <xsl:copy>

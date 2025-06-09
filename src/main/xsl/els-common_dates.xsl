@@ -4,6 +4,7 @@
   xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl"
   xmlns:xs="http://www.w3.org/2001/XMLSchema"
   xmlns:els="http://www.lefebvre-sarrut.eu/ns/els"
+  xmlns:els-common_date="http://www.lefebvre-sarrut.eu/ns/els/els-common_date.xsl"
   exclude-result-prefixes="#all"
   version="3.0"
   xml:lang="en">
@@ -13,11 +14,12 @@
       <xd:p>ELS-COMMON lib : module "DATES" utilities</xd:p>
     </xd:desc>
   </xd:doc>
-  
-  <xsl:param name="els:debug" as="xs:boolean" select="false()"/>
-  <xsl:variable name="debugHeader" as="xs:string" select="concat('[debug ',tokenize(static-base-uri(),'/')[last()],']')"/>
 
-  <xsl:import href="els-common_constants.xsl"/>
+  <!--Required modules (need to be included with this XSLT)-->
+  <!--<xsl:import href="els-common_constants.xsl"/>-->
+  
+  <xsl:param name="els-common_date:debug" as="xs:boolean" select="false()"/>
+  <xsl:variable name="debugHeader" as="xs:string" select="concat('[debug ',tokenize(static-base-uri(),'/')[last()],']')"/>
 
   <xd:doc>Variable for giving Month as regex in french language</xd:doc>
   <xsl:variable name="els:months.reg.fr" as="xs:string+"
@@ -198,14 +200,14 @@
       </xsl:when>
       <!--The string $s format is correct "JJ/MM/AAAA" : convert it to "AAAA-MM-JJ" -->
       <xsl:when test="matches($s, $regJJMMAAAA)">
-        <xsl:if test="$els:debug">
+        <xsl:if test="$els-common_date:debug">
           <xsl:message>debug when $regJJMMAAAA</xsl:message>
         </xsl:if>
         <xsl:value-of select="concat($sToken[3], '-', $sToken[2], '-', $sToken[1])"/>
       </xsl:when>
       <!--the day or month is one digit-->
       <xsl:when test="matches($s,$regJMAAAA)">
-        <xsl:if test="$els:debug">
+        <xsl:if test="$els-common_date:debug">
           <xsl:message><xsl:value-of select="$debugHeader"></xsl:value-of> els:makeIsoDate()</xsl:message>
           <xsl:message>when $regJMAAAA</xsl:message>
         </xsl:if>
@@ -234,7 +236,7 @@
       <!--The string $s format day and month are on one digit and the year is on 2 digit "J/M/AA" : convert it to "AAAA-MM-JJ" (trying to guess the century)-->
       <!--ASSUME : if AA is later than current AA, we consider AA was in the last century-->
       <xsl:when test="matches($s, $regJJMMAA)">
-        <xsl:if test="$els:debug">
+        <xsl:if test="$els-common_date:debug">
           <xsl:message><xsl:value-of select="$debugHeader"/> els:makeIsoDate()</xsl:message>
           <xsl:message> when $regJJMMAA</xsl:message>
         </xsl:if>
@@ -264,8 +266,7 @@
         <xsl:variable name="AA" select="xs:integer($sToken[3])" as="xs:integer"/>
         <xsl:variable name="AA_str" select="$sToken[3]" as="xs:string"/>
         <xsl:variable name="AAAA" select="if ($AA gt $current__AA) then (concat($currentAA__ -1, $AA_str))  else (concat($currentAA__, $AA_str))" as="xs:string"/>
-        
-        <xsl:if test="$els:debug">
+        <xsl:if test="$els-common_date:debug">
           <xsl:message><xsl:value-of select="$debugHeader"/> els:makeIsoDate()</xsl:message>
           <xsl:message>currentAAAA <xsl:value-of select="$currentAAAA"/></xsl:message>
           <xsl:message>currentAA__ <xsl:value-of select="$currentAA__"/></xsl:message>
