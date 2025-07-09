@@ -9,6 +9,8 @@
   <xd:doc scope="stylesheet">
     <xd:desc>
       <xd:p>Generic XSL functions/templates library used at ELS</xd:p>
+      <xd:p>This XSLT include all librairies at once so it's convenient to use them all
+        But you can also import each librairy separaltely and deal yoursef with dependencies between them
     </xd:desc>
   </xd:doc>
 
