@@ -2,7 +2,7 @@
 <x:description xmlns:x="http://www.jenitennison.com/xslt/xspec"
   xmlns:html="http://www.w3.org/1999/xhtml"
   xmlns:els="http://www.lefebvre-sarrut.eu/ns/els"
-  stylesheet="_xspec.override-xslt/els-common_audio.xsl">
+  stylesheet="../../main/xsl/els-common_audio.xsl">
   
   <x:scenario label="els:isAudioUrl">
     

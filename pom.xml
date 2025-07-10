@@ -14,7 +14,7 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <saxon.version>9.9.1.7</saxon.version>
-    <saxon.licence.version>12.3.2024</saxon.licence.version>
+    <saxon.license.version>12.3.2024</saxon.license.version>
   </properties>
 
   <scm>
@@ -85,6 +85,7 @@
           <saxonOptions>
             <xi>on</xi>
           </saxonOptions>
+          <!--<testDir>src/test/xspec.debug</testDir>-->
         </configuration>
         <dependencies>
           <dependency>
@@ -101,7 +102,7 @@
           <dependency>
             <groupId>extern.net.sf.saxon</groupId>
             <artifactId>saxonee-license</artifactId>
-            <version>${saxon.licence.version}</version>
+            <version>${saxon.license.version}</version>
           </dependency>
           <dependency>
             <groupId>extern.net.sf.saxon</groupId>

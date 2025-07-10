@@ -2,7 +2,7 @@
 <x:description 
   xmlns:x="http://www.jenitennison.com/xslt/xspec" 
   xmlns:els="http://www.lefebvre-sarrut.eu/ns/els"
-  stylesheet="_xspec.override-xslt/els-common_files.xsl"
+  stylesheet="../../main/xsl/els-common_files.xsl"
   xslt-version="3.0">
   
   <x:scenario label="els:getFileName (2 parameters)">
