@@ -1,18 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-  xmlns="http://relaxng.org/ns/structure/1.0"
-  xmlns:saxon="http://saxon.sf.net/"
   xmlns:xs="http://www.w3.org/2001/XMLSchema"
   xmlns:rng="http://relaxng.org/ns/structure/1.0"
   xmlns:els="http://www.lefebvre-sarrut.eu/ns/els"
   xmlns:xslLib="http://www.lefebvre-sarrut.eu/ns/els/xslLib"
-  xmlns:xf="http://www.lefebvre-sarrut.eu/ns/xmlfirst"
+  xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl"
   xmlns:fixMsvErrorWhenConvertingXSD2RNG="http://www.lefebvre-sarrut.eu/ns/els/xslLib/fixMsvErrorWhenConvertingXSD2RNG"
+  xmlns="http://relaxng.org/ns/structure/1.0"
   xpath-default-namespace="http://relaxng.org/ns/structure/1.0"
   exclude-result-prefixes="#all"
-  version="3.0">
+  version="3.0" 
+  xml:lang="en">
   
-  <xsl:import href="rng-common.xsl"/>
+  <xd:doc scope="stylesheet">
+    <xd:p>This XSLT is NOT standalone so you can deal with inclusions yourself (and avoid multiple inclusion of the same XSLT module)
+      You may also you the standalone version of this XSLT (without "no-inclusions" extension)
+    </xd:p>
+    <xd:desc>
+      <xd:p>MSV is a programm that can convert XSD to RNG model, this XSLT adapt the result of this conversion to make it correct</xd:p>
+    </xd:desc>
+  </xd:doc>
   
   <xsl:output indent="yes"/>
   

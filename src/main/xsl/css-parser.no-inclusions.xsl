@@ -1,14 +1,19 @@
-<xsl:stylesheet version="3.0"
-  xmlns:xsl="http://www.w3.org/1999/XSL/Transform" 
+<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" 
   xmlns:xs="http://www.w3.org/2001/XMLSchema"
   xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl"
   xmlns:functx="http://www.functx.com"
   xmlns:html="http://www.w3.org/1999/xhtml"
   xmlns:css="http://www.w3.org/1996/css"
-  exclude-result-prefixes="xs">
+  exclude-result-prefixes="#all"
+  version="3.0"
+  xml:lang="en">
   
   <xd:doc  scope="stylesheet">
     <xd:desc>
+      <xd:p>This XSLT is NOT standalone so you can deal with inclusions yourself (and avoid multiple inclusion of the same XSLT module)
+        You may also you the standalone version of this XSLT (without "no-inclusions" extension)
+      </xd:p>
       <xd:p>CSS parser by Grit Rolewskim heavily modified by ELS</xd:p>
       <xd:p>The xml css representation looks like this :
         <css:css xmlns:css="http://www.w3.org/1996/css">
@@ -55,8 +60,6 @@
       </xd:p>
     </xd:desc>
   </xd:doc>
-  
-  <xsl:import href="functx.xsl"/>
   
   <xsl:function name="css:parse-inline" as="element(css:css)">
     <xsl:param name="css:inline" as="xs:string*" />

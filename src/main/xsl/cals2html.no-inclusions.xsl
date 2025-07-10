@@ -11,10 +11,13 @@
   xpath-default-namespace="http://docs.oasis-open.org/ns/oasis-exchange/table"
   exclude-result-prefixes="#all"
   version="3.0"
-  >
+  xml:lang="en">
   
   <xd:doc scope="stylesheet">
     <xd:desc>
+      <xd:p>This XSLT is NOT standalone so you can deal with inclusions yourself (and avoid multiple inclusion of the same XSLT module)
+      You may also you the standalone version of this XSLT (without "no-inclusions" extension)
+      </xd:p>
       <xd:p>Convert CALS Table to HTML table</xd:p>
       <xd:p>Each cals:table will be converted to an html:div, then each cals:tgroup will be converted to an html:table</xd:p>
       <xd:p>/!\ Cals elements must be in cals namespace before proceding, other elements will be copied as is, 
@@ -24,12 +27,6 @@
       <xd:ul>table/@frame is applied on each tgroups (not the whole table)</xd:ul>
     </xd:desc>
   </xd:doc>
-  
-  <xsl:import href="els-common.xsl"/>
-  <xsl:import href="setXmlBase.xsl"/>
-  <xsl:import href="removeXmlBase.xsl"/>
-  <xsl:import href="setCalsTableNS.xsl"/>
-  <xsl:import href="normalizeCalsTable.xsl"/>
   
   <!--KEYS-->
   <xsl:key name="xslLib:cals2html.getGhostEntriesByRid" match="entry[@calstable:rid]" use="@calstable:rid"/>

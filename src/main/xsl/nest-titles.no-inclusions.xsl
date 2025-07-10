@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xsl:stylesheet 
-  xmlns:xsl="http://www.w3.org/1999/XSL/Transform" 
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" 
   xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl"
   xmlns:xs="http://www.w3.org/2001/XMLSchema"
   xmlns:saxon="http://saxon.sf.net/"
@@ -8,15 +7,17 @@
   xmlns:els="http://www.lefebvre-sarrut.eu/ns/els"
   xmlns:xslLib="http://www.lefebvre-sarrut.eu/ns/els/xslLib"
   exclude-result-prefixes="#all"
-  version="3.0">
+  version="3.0"
+  xml:lang="en">
   
   <xd:doc scope="stylesheet">
+    <xd:p>This XSLT is NOT standalone so you can deal with inclusions yourself (and avoid multiple inclusion of the same XSLT module)
+      You may also you the standalone version of this XSLT (without "no-inclusions" extension)
+    </xd:p>
     <xd:desc>
       <xd:p>When titles elements are flat, this XSLT nest them reccusrively by deep-level</xd:p>
     </xd:desc>
   </xd:doc>
-  
-  <xsl:import href="els-common.xsl"/>
   
   <!--===================================================-->  
   <!--INIT-->

@@ -5,12 +5,16 @@
   xmlns:els="http://www.lefebvre-sarrut.eu/ns/els"
   xmlns:html="http://www.w3.org/1999/xhtml"
   xmlns:functx="http://www.functx.com"
-  exclude-result-prefixes="#all"
   xmlns="http://www.w3.org/1999/xhtml"
-  version="3.0">
+  exclude-result-prefixes="#all"
+  version="3.0"
+  xml:lang="en">
   
   <xd:doc scope="stylesheet">
     <xd:desc>
+      <xd:p>This XSLT is NOT standalone so you can deal with inclusions yourself (and avoid multiple inclusion of the same XSLT module)
+        You may also you the standalone version of this XSLT (without "no-inclusions" extension)
+      </xd:p>
       <xd:p>Extraction logs from XML file which contains &lt;els:log&gt;</xd:p>
       <xd:p>This package defines several actions :</xd:p>
       <xd:ul>
@@ -24,8 +28,6 @@
     </xd:desc>
   </xd:doc>
 
-  <xsl:import href="functx.xsl"/>
- 
   <xsl:output encoding="UTF-8" method="xml" indent="yes"/>
  
   <xd:doc>

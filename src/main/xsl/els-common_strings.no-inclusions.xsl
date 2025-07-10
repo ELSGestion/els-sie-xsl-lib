@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xsl:stylesheet 
-  xmlns:xsl="http://www.w3.org/1999/XSL/Transform" 
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" 
   xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl"
   xmlns:xs="http://www.w3.org/2001/XMLSchema"
   xmlns:els="http://www.lefebvre-sarrut.eu/ns/els"
@@ -10,6 +9,9 @@
   
   <xd:doc scope="stylesheet">
     <xd:desc>
+      <xd:p>This XSLT is NOT standalone so you can deal with inclusions yourself (and avoid multiple inclusion of the same XSLT module)
+        You may also you the standalone version of this XSLT (without "no-inclusions" extension)
+      </xd:p>
       <xd:p>ELS-COMMON lib : module "STRINGS" utilities</xd:p>
     </xd:desc>
   </xd:doc>

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xsl:stylesheet 
-  xmlns:xsl="http://www.w3.org/1999/XSL/Transform" 
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" 
   xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl"
   xmlns:xs="http://www.w3.org/2001/XMLSchema"
   xmlns:functx="http://www.functx.com" 
@@ -11,13 +10,13 @@
   
   <xd:doc scope="stylesheet">
     <xd:desc>
+      <xd:p>This XSLT is NOT standalone so you can deal with inclusions yourself (and avoid multiple inclusion of the same XSLT module)
+        You may also you the standalone version of this XSLT (without "no-inclusions" extension)
+      </xd:p>
       <xd:p>ELS-COMMON lib : module "FILES" utilities</xd:p>
     </xd:desc>
   </xd:doc>
 
-  <!--Required modules (need to be included with this XSLT)-->
-  <!--<xsl:import href="functx.xsl"/>-->
- 
   <xd:doc>
     <xd:desc>
       <xd:p>Return the file name from an abolute or a relativ path</xd:p>

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xsl:stylesheet 
-  xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
   xmlns:xs="http://www.w3.org/2001/XMLSchema"
   xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl"
   xmlns:els="http://www.lefebvre-sarrut.eu/ns/els"
@@ -9,16 +8,20 @@
   xmlns:cals="http://docs.oasis-open.org/ns/oasis-exchange/table"
   xmlns:xhtml="http://www.w3.org/1999/xhtml"
   xmlns:css="http://www.w3.org/1996/css"
-  xpath-default-namespace="http://www.w3.org/1999/xhtml"
   xmlns="http://docs.oasis-open.org/ns/oasis-exchange/table"
+  xpath-default-namespace="http://www.w3.org/1999/xhtml"
   exclude-result-prefixes="#all" 
-  version="3.0">
+  version="3.0"
+  xml:lang="fr">
   
   <xd:doc scope="stylesheet">
     <xd:desc>
-      <xd:p xml:lang="fr">Cette feuille de style va traiter la conversion de tables xhtml en tables CALS.</xd:p>
-      <xd:p xml:lang="fr">Les tables xhtml à convertir sont supposées valides.</xd:p>
-      <xd:p xml:lang="fr">
+      <xd:p>This XSLT is NOT standalone so you can deal with inclusions yourself (and avoid multiple inclusion of the same XSLT module)
+        You may also you the standalone version of this XSLT (without "no-inclusions" extension)
+      </xd:p>
+      <xd:p >Cette feuille de style va traiter la conversion de tables xhtml en tables CALS.</xd:p>
+      <xd:p>Les tables xhtml à convertir sont supposées valides.</xd:p>
+      <xd:p>
         <xd:b>Note sur les tables (x)html:</xd:b> leur modèle de contenu à varié avec les specs W3C. <xd:ul>
           <xd:li><xd:pre>[xhtml 1.0] table ::= caption?, (colgroup*|col*), ((thead?, tfoot?, tbody+) | tr+)</xd:pre></xd:li>
           <xd:li><xd:pre>[xhtml 2.0] table ::= caption?, title?, summary?, (colgroup*|col*), ((thead?, tfoot?, tbody+) | tr+)</xd:pre></xd:li>
@@ -28,22 +31,18 @@
           <xd:li><xd:pre>[html 5.2] identique au modèle html 5.1</xd:pre></xd:li>
         </xd:ul>
       </xd:p>
-      <xd:p xml:lang="fr">En html 4.0 le contenu final est en fait <xd:i>(thead?, tfoot?, tbody+)</xd:i> 
+      <xd:p>En html 4.0 le contenu final est en fait <xd:i>(thead?, tfoot?, tbody+)</xd:i> 
         mais la minimisation de <xd:i>tbody</xd:i> impose un modèle de contenu modifié en xhtml.
         Le modèle xhtml 2.0 qui n'a pas eu de suite, ne sera que partiellement pris en compte ici.</xd:p>
-      <xd:p xml:lang="fr">On supposera que l'on n'a pas d'élément <xd:i>script</xd:i> et <xd:i>template</xd:i> 
+      <xd:p>On supposera que l'on n'a pas d'élément <xd:i>script</xd:i> et <xd:i>template</xd:i> 
         dans nos données et on va se placer dans le cadre d'un modèle compatible avec le maximum de cas :
         <xd:pre>table ::= (caption?, colgroup*, thead?, ((tbody* | tr+) &amp; tfoot?))</xd:pre></xd:p>
-      <xd:p xml:lang="fr">La structure des tableaux CALS résultant de la transformation est la suivante:
+      <xd:p>La structure des tableaux CALS résultant de la transformation est la suivante:
         <xd:pre>table ::= title? tgroup+ (ou tgroup ::= colspec*,spanspec*,thead?,tfoot?,tbody)</xd:pre>
         Le contenu des lignes des tableaux CALS sera limité à l'élément <xd:i>entry</xd:i> 
         (i.e. pas d'élément <xd:i>entrytbl</xd:i>)</xd:p>
     </xd:desc>
   </xd:doc>
-  
-  <xsl:import href="els-common.xsl"/>
-  <xsl:import href="html4Table2html5Table.xsl"/>
-  <xsl:import href="css-parser.xsl"/>
   
   <xsl:param name="xslLib:html2cals.debug" select="false()" as="xs:boolean"/>
   <!--Par défaut les log sont écrits à côté du xml-->
