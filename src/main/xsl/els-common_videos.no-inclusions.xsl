@@ -4,10 +4,16 @@
   xmlns:xs="http://www.w3.org/2001/XMLSchema"
   xmlns:els="http://www.lefebvre-sarrut.eu/ns/els"
   xmlns:html="http://www.w3.org/1999/xhtml"
+  xmlns:xslLib="http://www.lefebvre-sarrut.eu/ns/els/xslLib"
   xmlns="http://www.w3.org/1999/xhtml"
   exclude-result-prefixes="#all"
   version="3.0"
   xml:lang="en">
+  
+  <!--Static compilation check for all inclusions to be available (avoid xslt mode not load)-->
+  <xsl:variable name="check-available-inclusions">
+    <xsl:sequence select="$xslLib:els-common_http.available"/>
+  </xsl:variable>
   
   <xd:doc scope="stylesheet">
     <xd:desc>

@@ -13,6 +13,20 @@
   version="3.0"
   xml:lang="en">
   
+  <!--Static compilation check for all inclusions to be available (avoid xslt mode not load)-->
+  <xsl:variable name="xslLib:cals2html.no-inclusions.check-available-inclusions">
+    <xsl:sequence select="$xslLib:els-common_constants.available"/>
+    <xsl:sequence select="$xslLib:els-common_xml.no-inclusions.available"/>
+    <xsl:sequence select="$xslLib:els-common_strings.no-inclusions.available"/>
+    <xsl:sequence select="$xslLib:els-common_files.no-inclusions.available"/>
+    <!--<xsl:sequence select="$functx.available"/> only functions non need to check-->
+    <xsl:sequence select="$xslLib:setXmlBase.available"/>
+    <xsl:sequence select="$xslLib:removeXmlBase.available"/>
+    <xsl:sequence select="$xslLib:setCalsTableNS.available"/>
+    <xsl:sequence select="$xslLib:normalizeCalsTable.no-inclusions.available"/>
+    <xsl:sequence select="$calstable:normalize.available"/>
+  </xsl:variable>
+  
   <xd:doc scope="stylesheet">
     <xd:desc>
       <xd:p>This XSLT is NOT standalone so you can deal with inclusions yourself (and avoid multiple inclusion of the same XSLT module)
@@ -74,7 +88,7 @@
   </xsl:template>
   
   <!--==============================================================================================================================-->
-  <!-- DRIVER -->
+  <!-- MAIN -->
   <!--==============================================================================================================================-->
   
   <xsl:template match="/" mode="xslLib:cals2html">

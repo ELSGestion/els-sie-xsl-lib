@@ -1,13 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" 
-  xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl"
   xmlns:xs="http://www.w3.org/2001/XMLSchema"
-  xmlns:els="http://www.lefebvre-sarrut.eu/ns/els"
+  xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl"
   xmlns:html="http://www.w3.org/1999/xhtml"
+  xmlns:els="http://www.lefebvre-sarrut.eu/ns/els"
+  xmlns:xslLib="http://www.lefebvre-sarrut.eu/ns/els/xslLib"
   xmlns="http://www.w3.org/1999/xhtml"
   exclude-result-prefixes="#all"
   version="3.0"
   xml:lang="en">
+  
+  <!--Static compilation check for all inclusions to be available (avoid xslt mode not load)-->
+  <xsl:variable name="xslLib:els-common_social-network.no-inclusions.check-available-inclusions">
+    <xsl:sequence select="$xslLib:els-common_http.available"/>
+  </xsl:variable>
   
   <xd:doc scope="stylesheet">
     <xd:desc>

@@ -1,15 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xsl:stylesheet 
-  xmlns:xsl="http://www.w3.org/1999/XSL/Transform" 
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+  xmlns:xs="http://www.w3.org/2001/XMLSchema"
   xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl"
   xmlns:fn="http://www.w3.org/2005/xpath-functions"
-  xmlns:err="http://www.w3.org/2005/xqt-errors"
-  xmlns:xs="http://www.w3.org/2001/XMLSchema"
-  xmlns:saxon="http://saxon.sf.net/"
-  xmlns:functx="http://www.functx.com" 
   xmlns:xslLib="http://www.lefebvre-sarrut.eu/ns/els/xslLib"
   exclude-result-prefixes="#all"
-  version="3.0">
+  version="3.0"
+  xml:lang="en">
+  
+  <!--Variable that helps checking dependency to ensure this XSLT is loaded (especially usefull to test XSLT mode avaiable-->
+  <xsl:variable name="xslLib:anyXML2json.available" select="true()" static="true"/>
+  
+  <!--Static compilation check for all inclusions to be available (avoid xslt mode not load)-->
+  <xsl:variable name="xslLib:anyXML2json.check-available-inclusions">
+    <xsl:sequence select="$xslLib:xjson2json.available"/>
+  </xsl:variable>
   
   <xd:doc scope="stylesheet">
     <xd:desc>

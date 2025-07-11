@@ -24,8 +24,7 @@
   <xsl:import href="setXmlBase.xsl"/>
   <xsl:import href="removeXmlBase.xsl"/>
   <xsl:import href="setCalsTableNS.xsl"/>
-  <xsl:import href="normalizeCalsTable.xsl"/>
-  <!--<xsl:import href="normalizeCalsTable.no-inclusions.xsl"/>
-  <xsl:import href="normalize.xsl"/>-->
+  <xsl:import href="normalizeCalsTable.no-inclusions.xsl"/>
+  <xsl:import href="normalize.xsl"/>
   
  </xsl:stylesheet>

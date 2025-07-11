@@ -14,6 +14,17 @@
   version="3.0"
   xml:lang="fr">
   
+  <!--Static compilation check for all inclusions to be available (avoid xslt mode not load)-->
+  <xsl:variable name="xslLib:html2cals.no-inclusions.check-available-inclusions">
+    <xsl:sequence select="$xslLib:els-common_constants.available"/>
+    <xsl:sequence select="$xslLib:els-common_xml.no-inclusions.available"/>
+    <xsl:sequence select="$xslLib:els-common_strings.no-inclusions.available"/>
+    <xsl:sequence select="$xslLib:els-common_convert-cast.available"/>
+    <!--<xsl:sequence select="$functx.available"/> only functions non need to check-->
+    <xsl:sequence select="$xslLib:html4Table2html5Table.available"/>
+    <xsl:sequence select="$xslLib:css-parser.no-inclusions.available"/>
+  </xsl:variable>
+  
   <xd:doc scope="stylesheet">
     <xd:desc>
       <xd:p>This XSLT is NOT standalone so you can deal with inclusions yourself (and avoid multiple inclusion of the same XSLT module)

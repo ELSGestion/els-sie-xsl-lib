@@ -5,6 +5,9 @@
   xmlns:calstable="http://docs.oasis-open.org/ns/oasis-exchange/table" 
   version="2.0"
   exclude-result-prefixes="xs calstable">
+  
+  <!--Variable that helps checking dependency to ensure this XSLT is loaded (especially usefull to test XSLT mode avaiable-->
+  <xsl:variable name="calstable:normalize.available" select="true()" static="true"/>
 
   <!--  This stylesheet normalizes a CALS exchange model table using 
         an adaption of Andrew Welchs table normalization algorithm,

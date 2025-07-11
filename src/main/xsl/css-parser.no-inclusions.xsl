@@ -2,12 +2,16 @@
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" 
   xmlns:xs="http://www.w3.org/2001/XMLSchema"
   xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl"
+  xmlns:xslLib="http://www.lefebvre-sarrut.eu/ns/els/xslLib"
   xmlns:functx="http://www.functx.com"
   xmlns:html="http://www.w3.org/1999/xhtml"
   xmlns:css="http://www.w3.org/1996/css"
   exclude-result-prefixes="#all"
   version="3.0"
   xml:lang="en">
+  
+  <!--Variable that helps checking dependency to ensure this XSLT is loaded (especially usefull to test XSLT mode avaiable-->
+  <xsl:variable name="xslLib:css-parser.no-inclusions.available" select="true()" static="true"/>
   
   <xd:doc  scope="stylesheet">
     <xd:desc>

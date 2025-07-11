@@ -4,13 +4,21 @@
   xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl"
   xmlns:els="http://www.lefebvre-sarrut.eu/ns/els"
   xmlns:xslLib="http://www.lefebvre-sarrut.eu/ns/els/xslLib"
-  xmlns:html="http://www.w3.org/1999/xhtml"
   xmlns:css="http://www.w3.org/1996/css"
   xmlns="http://www.w3.org/1999/xhtml"
   xpath-default-namespace="http://www.w3.org/1999/xhtml"
   exclude-result-prefixes="#all" 
   version="3.0"
   xml:lang="en">
+  
+  <!--Variable that helps checking dependency to ensure this XSLT is loaded (especially usefull to test XSLT mode avaiable-->
+  <xsl:variable name="xslLib:html4Table2html5Table.available" select="true()" static="true"/>
+  
+  <!--Static compilation check for all inclusions to be available (avoid xslt mode not load)-->
+  <xsl:variable name="xslLib:html4Table2html5Table.no-inclusions.check-available-inclusions">
+    <xsl:sequence select="$xslLib:css-parser.no-inclusions.available"/>
+    <!--<xsl:sequence select="$functx.available"/> only functions non need to check-->
+  </xsl:variable>
   
   <xd:doc scope="stylesheet">
     <xd:desc>

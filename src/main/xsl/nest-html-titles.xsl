@@ -16,6 +16,6 @@
   <xsl:include href="nest-html-titles.no-inclusions.xsl"/>
   
   <!--Required inclusions for standalone usage-->
-  <xsl:import href="nest-titles.xsl"/>
+  <xsl:import href="nest-titles.no-inclusions.xsl"/>
 
 </xsl:stylesheet>

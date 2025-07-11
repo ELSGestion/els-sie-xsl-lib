@@ -11,6 +11,9 @@
   exclude-result-prefixes="#all"
   version="3.0">
   
+  <!--Variable that helps checking dependency to ensure this XSLT is loaded (especially usefull to test XSLT mode avaiable-->
+  <xsl:variable name="xslLib:xjson2json.available" select="true()" static="true"/>
+  
   <xd:doc scope="stylesheet">
     <xd:desc>
       <xd:p>This XSLT convert XJSON xml representation to text JSON</xd:p>

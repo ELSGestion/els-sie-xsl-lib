@@ -4,11 +4,25 @@
   xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl"
   xmlns:rng="http://relaxng.org/ns/structure/1.0"
   xmlns:els="http://www.lefebvre-sarrut.eu/ns/els"
+  xmlns:xslLib="http://www.lefebvre-sarrut.eu/ns/els/xslLib"
   xmlns="http://relaxng.org/ns/structure/1.0"
   xpath-default-namespace="http://relaxng.org/ns/structure/1.0"
   exclude-result-prefixes="#all"
   version="3.0"
   xml:lang="en">
+  
+  <!--Variable that helps checking dependency to ensure this XSLT is loaded (especially usefull to test XSLT mode avaiable-->
+  <xsl:variable name="xslLib:rng-common.no-inclusions.available" select="true()" static="true"/>
+  
+  <!--Static compilation check for all inclusions to be available (avoid xslt mode not load)-->
+  <xsl:variable name="xslLib:rng-common.no-inclusions.check-available-inclusions">
+    <xsl:sequence select="$xslLib:els-common_constants.available"/>
+    <xsl:sequence select="$xslLib:els-common_xml.no-inclusions.available"/>
+    <xsl:sequence select="$xslLib:els-common_strings.no-inclusions.available"/>
+  </xsl:variable>
+  
+  <!--Variable that helps checking dependency to ensure this XSLT is loaded (especially usefull to test XSLT mode avaiable-->
+  <xsl:variable name="xslLib:rng-common.available" select="true()" static="true"/>
   
   <xd:doc scope="stylesheet">
     <xd:p>This XSLT is NOT standalone so you can deal with inclusions yourself (and avoid multiple inclusion of the same XSLT module)

@@ -4,9 +4,13 @@
   xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl"
   xmlns:xs="http://www.w3.org/2001/XMLSchema"
   xmlns:els="http://www.lefebvre-sarrut.eu/ns/els"
+  xmlns:xslLib="http://www.lefebvre-sarrut.eu/ns/els/xslLib"
   exclude-result-prefixes="#all"
   version="3.0"
   xml:lang="en">
+  
+  <!--Variable that helps checking dependency to ensure this XSLT is loaded (especially usefull to test XSLT mode avaiable-->
+  <xsl:variable name="xslLib:els-common_convert-cast.available" select="true()" static="true"/>
   
   <xd:doc scope="stylesheet">
     <xd:desc>

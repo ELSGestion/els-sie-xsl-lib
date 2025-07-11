@@ -16,8 +16,8 @@
   <xsl:include href="els-common_compareXML.no-inclusions.xsl"/>
   
   <!--Required inclusions for standalone usage-->
-  <xsl:import href="els-common_xml.no-inclusions.xsl"/>
   <xsl:import href="els-common_constants.xsl"/>
+  <xsl:import href="els-common_xml.no-inclusions.xsl"/>
   <xsl:import href="els-common_strings.no-inclusions.xsl"/>
   
 </xsl:stylesheet>

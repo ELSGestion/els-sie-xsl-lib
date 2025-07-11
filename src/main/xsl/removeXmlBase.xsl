@@ -7,6 +7,9 @@
   exclude-result-prefixes="#all" 
   >
   
+  <!--Variable that helps checking dependency to ensure this XSLT is loaded (especially usefull to test XSLT mode avaiable-->
+  <xsl:variable name="xslLib:removeXmlBase.available" select="true()" static="true"/>
+  
   <xd:doc scope="stylesheet">
     <xd:desc>
       <xd:p>Remove xml:base attribute on the top level element of the document</xd:p>

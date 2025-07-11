@@ -13,6 +13,12 @@
   version="3.0"
   xml:lang="en">
   
+  <!--Static compilation check for all inclusions to be available (avoid xslt mode not load)-->
+  <xsl:variable name="xslLib:xvrl2xjson.no-inclusions.check-available-inclusions">
+    <xsl:sequence select="$xslLib:anyXML2json.available"/>
+    <xsl:sequence select="$xslLib:xjson2json.available"/>
+  </xsl:variable>
+  
   <xd:doc scope="stylesheet">
     <xd:p>This XSLT is NOT standalone so you can deal with inclusions yourself (and avoid multiple inclusion of the same XSLT module)
       You may also you the standalone version of this XSLT (without "no-inclusions" extension)

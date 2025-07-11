@@ -5,9 +5,17 @@
 	xmlns:saxon="http://saxon.sf.net/"
 	xmlns:functx="http://www.functx.com" 
 	xmlns:els="http://www.lefebvre-sarrut.eu/ns/els"
+	xmlns:xslLib="http://www.lefebvre-sarrut.eu/ns/els/xslLib"
 	exclude-result-prefixes="#all"
 	version="3.0"
 	xml:lang="en">
+  
+  <!--Static compilation check for all inclusions to be available (avoid xslt mode not load)-->
+  <xsl:variable name="xslLib:els-log.no-inclusions.check-available-inclusions">
+    <xsl:sequence select="$xslLib:els-common_constants.available"/>
+    <xsl:sequence select="$xslLib:els-common_xml.no-inclusions.available"/>
+    <xsl:sequence select="$xslLib:els-common_strings.no-inclusions.available"/>
+  </xsl:variable>
 	
   <xd:doc scope="stylesheet">
     <xd:desc>
