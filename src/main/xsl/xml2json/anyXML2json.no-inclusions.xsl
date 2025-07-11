@@ -13,6 +13,9 @@
   
   <xd:doc scope="stylesheet">
     <xd:desc>
+      <xd:p>This XSLT is NOT standalone so you can deal with inclusions yourself (and avoid multiple inclusion of the same XSLT module)
+        You may also you the standalone version of this XSLT (without "no-inclusions" extension)
+      </xd:p>
       <xd:p>This XSLT convert any XML structure to JSON</xd:p>
       <xd:p>It uses XSLT 3.0 xml-to-json($e) function, which need as $e a valid XJSON xml.</xd:p>
       <xd:p>As a first step this XSLT convert any XML to it XJSON representation, and then apply the xml-to-json() fonction</xd:p>
@@ -21,8 +24,6 @@
       <xd:p>Please override any templates in mode="xslLib:anyXML2xjson" of this XSLT so you get a valid XJSON representation</xd:p>
     </xd:desc>
   </xd:doc>
-  
-  <xsl:import href="xjson2json.xsl"/>
   
   <!--Default serialization option for json-->
   <xsl:param name="xslLib:anyXML2json.options" select="map{'indent':false()}" as="map(*)"/>

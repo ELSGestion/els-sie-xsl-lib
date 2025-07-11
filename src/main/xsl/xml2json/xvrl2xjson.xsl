@@ -16,6 +16,7 @@
   <xsl:include href="xvrl2xjson.no-inclusions.xsl"/>
   
   <!--Required inclusions for standalone usage-->
-  <xsl:import href="anyXML2json.xsl"/>
+  <xsl:import href="anyXML2json.no-inclusions.xsl"/>
+  <xsl:import href="xjson2json.xsl"/>
 
 </xsl:stylesheet>
