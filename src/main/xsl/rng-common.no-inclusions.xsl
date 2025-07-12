@@ -75,7 +75,7 @@
   <xsl:function name="rng:rootIsSingle" as="xs:boolean">
     <xsl:param name="grammar" as="element(rng:grammar)"/>
     <!-- in SRNG, each element is in a new define, attributes are expanded, so the start has only ref to elements-->
-    <xsl:value-of select="count($grammar/start//ref) = 1"/>
+    <xsl:sequence select="count($grammar/start//ref) = 1"/>
   </xsl:function>
   
   <xsl:function name="rng:getRootDefines" as="element(define)*">
