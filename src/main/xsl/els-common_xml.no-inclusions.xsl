@@ -295,18 +295,20 @@
 
   <xd:doc>
     <xd:desc>
-      <xd:p>Delete one class value in a class attribute of the element</xd:p>
+      <xd:p>Delete one class value or several values in the class attribute of an element</xd:p>
     </xd:desc>
     <xd:param name="e">[Element] the element</xd:param>
-    <xd:param name="classToRemove">[String] The class value to be removed</xd:param>
-    <xd:return>[Attribute]The same class attribute with one removed value</xd:return>
+    <xd:param name="classesToRemove">[String*] class values to be removed</xd:param>
+    <xd:return>[Attribute]The same class attribute with one removed value, empty sequence if no class remains</xd:return>
   </xd:doc>
-  <xsl:function name="els:removeOneClass" as="attribute(class)?">
+  <xsl:function name="els:removeClasses" as="attribute(class)?">
     <xsl:param name="e" as="element()"/>
-    <xsl:param name="classToRemove" as="xs:string"/>
+    <xsl:param name="classesToRemove" as="xs:string*"/>
     <xsl:choose>
-      <xsl:when test="els:hasClass($e, $classToRemove)">
-        <xsl:attribute name="class" select="string-join(tokenize($e/@class, '\s+')[. != $classToRemove], ' ')"/>
+      <xsl:when test="els:hasClass($e, $classesToRemove)">
+        <xsl:where-populated>
+          <xsl:attribute name="class" select="string-join(tokenize($e/@class, '\s+')[not(. = $classesToRemove)], ' ')"/>
+        </xsl:where-populated>
       </xsl:when>
       <xsl:otherwise>
         <xsl:copy-of select="$e/@class"/>
